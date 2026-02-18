@@ -1,0 +1,56 @@
+[
+    {
+        "id": "roy",
+        "name": "Roy",
+        "game": "The Binding Blade",
+        "class": "Lord",
+        "level": 1,
+        "hp": 18,
+        "str": 5,
+        "skl": 5,
+        "spd": 7,
+        "lck": 7,
+        "def": 5,
+        "res": 0,
+        "con": 6,
+        "mov": 5,
+        "growths": {
+            "hp": 80,
+            "str": 40,
+            "skl": 50,
+            "spd": 40,
+            "lck": 60,
+            "def": 25,
+            "res": 30
+        },
+        "skills": [],
+        "joinChapter": "Chapter 1"
+    },
+    {
+        "id": "marcus",
+        "name": "Marcus",
+        "game": "The Binding Blade",
+        "class": "Paladin",
+        "level": 1,
+        "hp": 32,
+        "str": 9,
+        "skl": 14,
+        "spd": 11,
+        "lck": 10,
+        "def": 9,
+        "res": 8,
+        "con": 11,
+        "mov": 8,
+        "growths": {
+            "hp": 60,
+            "str": 25,
+            "skl": 20,
+            "spd": 25,
+            "lck": 20,
+            "def": 15,
+            "res": 20
+        },
+        "skills": [],
+        "joinChapter": "Chapter 1"
+    }
+]
