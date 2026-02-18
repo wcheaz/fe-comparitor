@@ -1,4 +1,5 @@
 import { Unit, UnitStats } from '@/types/unit';
+import { normalizeUnit } from './normalization';
 
 // Cache for loaded units to avoid repeated file reading
 let unitsCache: Unit[] | null = null;
@@ -57,24 +58,35 @@ function transformJsonToUnit(rawUnit: any): Unit {
   const stats: UnitStats = {};
   const growths: UnitStats = {};
 
-  // Extract base stats
+  // Extract base stats - handle both direct properties and nested stats object
   const statKeys = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
   statKeys.forEach(key => {
     if (rawUnit[key] !== undefined) {
       stats[key] = rawUnit[key];
+    } else if (rawUnit.stats && rawUnit.stats[key] !== undefined) {
+      stats[key] = rawUnit.stats[key];
     }
   });
 
-  // Extract growth rates
+  // Extract growth rates - handle both nested growths object and direct growth properties
   if (rawUnit.growths) {
     Object.keys(rawUnit.growths).forEach(key => {
-      if (statKeys.includes(key) && rawUnit.growths[key] !== undefined) {
+      if (rawUnit.growths[key] !== undefined) {
         growths[key] = rawUnit.growths[key];
+      }
+    });
+  } else {
+    // Look for direct growth properties like str_growth, mag_growth, etc.
+    statKeys.forEach(key => {
+      const growthKey = `${key}_growth`;
+      if (rawUnit[growthKey] !== undefined) {
+        growths[key] = rawUnit[growthKey];
       }
     });
   }
 
-  return {
+  // Create base unit object
+  const unit: Unit = {
     id: rawUnit.id,
     name: rawUnit.name,
     game: rawUnit.game,
@@ -90,4 +102,7 @@ function transformJsonToUnit(rawUnit: any): Unit {
     affinity: rawUnit.affinity,
     maxStats: rawUnit.maxStats
   };
+
+  // Apply normalization to standardize stat keys and handle missing stats
+  return normalizeUnit(unit);
 }
