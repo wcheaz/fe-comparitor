@@ -1,0 +1,34 @@
+[
+    {
+        "id": "edelgard",
+        "name": "Edelgard",
+        "game": "Three Houses",
+        "class": "Noble",
+        "level": 1,
+        "hp": 29,
+        "str": 13,
+        "mag": 6,
+        "dex": 5,
+        "spd": 8,
+        "def": 6,
+        "res": 4,
+        "lck": 5,
+        "cha": 10,
+        "mov": 4,
+        "growths": {
+            "hp": 40,
+            "str": 55,
+            "mag": 45,
+            "dex": 45,
+            "spd": 40,
+            "def": 35,
+            "res": 35,
+            "lck": 30,
+            "cha": 60
+        },
+        "skills": [
+            "Imperial Lineage"
+        ],
+        "joinChapter": "Prologue"
+    }
+]
