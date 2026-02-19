@@ -21,48 +21,48 @@
 }
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 217.2 91.2% 98%; /* Light fe-blue background */
+  --foreground: 217.2 91.2% 10%; /* Dark fe-blue text for high contrast */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 217.2 91.2% 10%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 217.2 91.2% 59.8%; /* fe-gold-500 */
-  --primary-foreground: 222.2 84% 4.9%; /* Dark text for gold background */
-  --secondary: 217.2 91.2% 96%; /* Light gold background */
-  --secondary-foreground: 222.2 84% 4.9%; /* Dark text */
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 217.2 91.2% 59.8%; /* fe-gold-500 */
-  --accent-foreground: 222.2 84% 4.9%; /* Dark text */
+  --popover-foreground: 217.2 91.2% 10%;
+  --primary: 38 91.8% 50.6%; /* fe-gold-500 */
+  --primary-foreground: 0 0% 10%; /* Very dark text for gold background */
+  --secondary: 217.2 91.2% 95%; /* Light fe-blue background */
+  --secondary-foreground: 217.2 91.2% 10%; /* Dark text */
+  --muted: 217.2 32.6% 96%;
+  --muted-foreground: 217.2 32.6% 30%;
+  --accent: 38 91.8% 50.6%; /* fe-gold-500 */
+  --accent-foreground: 0 0% 10%; /* Very dark text for gold background */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 217.2 91.2% 59.8%; /* fe-gold-500 */
+  --border: 217.2 32.6% 90%;
+  --input: 217.2 32.6% 90%;
+  --ring: 38 91.8% 50.6%; /* fe-gold-500 */
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 217.2 32.6% 12%; /* Dark blue background */
-  --card-foreground: 210 40% 98%;
-  --popover: 217.2 32.6% 12%; /* Dark blue background */
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%; /* fe-gold-500 */
-  --primary-foreground: 222.2 84% 4.9%; /* Dark text for gold background */
-  --secondary: 217.2 32.6% 17.5%; /* Dark blue */
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%; /* Dark blue */
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 91.2% 59.8%; /* fe-gold-500 */
-  --accent-foreground: 222.2 84% 4.9%; /* Dark text */
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 217.2 91.2% 59.8%; /* fe-gold-500 */
+  --background: 217.2 91.2% 8%; /* Dark fe-blue background */
+  --foreground: 217.2 32.6% 95%; /* Light fe-blue text for high contrast */
+  --card: 217.2 91.2% 12%; /* Dark fe-blue card background */
+  --card-foreground: 217.2 32.6% 95%;
+  --popover: 217.2 91.2% 12%; /* Dark fe-blue popover background */
+  --popover-foreground: 217.2 32.6% 95%;
+  --primary: 38 91.8% 50.6%; /* fe-gold-500 */
+  --primary-foreground: 0 0% 10%; /* Very dark text for gold background */
+  --secondary: 217.2 91.2% 20%; /* Medium-dark fe-blue */
+  --secondary-foreground: 217.2 32.6% 95%;
+  --muted: 217.2 91.2% 18%; /* Dark muted fe-blue */
+  --muted-foreground: 217.2 32.6% 70%;
+  --accent: 38 91.8% 50.6%; /* fe-gold-500 */
+  --accent-foreground: 0 0% 10%; /* Very dark text for gold background */
+  --destructive: 0 62.8% 50%;
+  --destructive-foreground: 217.2 32.6% 95%;
+  --border: 217.2 91.2% 25%;
+  --input: 217.2 91.2% 25%;
+  --ring: 38 91.8% 50.6%; /* fe-gold-500 */
 }
 
 * {
@@ -72,4 +72,48 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+}
+
+/* Improved table styling for better contrast and visibility */
+@layer base {
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  thead {
+    background-color: hsl(var(--muted));
+  }
+  
+  th {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid hsl(var(--border));
+  }
+  
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  tr:hover {
+    background-color: hsl(var(--muted) / 0.5);
+  }
+  
+  /* Improved contrast for table text */
+  th, td {
+    color: hsl(var(--foreground));
+  }
+  
+  /* Ensure text-muted-foreground has proper contrast in tables */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
 }
