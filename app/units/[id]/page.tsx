@@ -40,7 +40,6 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
         <div className="lg:col-span-1 space-y-6">
           <UnitCard 
             unit={unitWithCalculatedStats} 
-            targetLevel={calculatedLevel}
             className="w-full"
           />
           

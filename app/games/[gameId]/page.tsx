@@ -63,7 +63,7 @@ export default async function GamePage({ params }: GamePageProps) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <UnitCard unit={unit} showStats={true} />
+                <UnitCard unit={unit} />
                 <div className="mt-4 text-center">
                   <Button asChild>
                     <a href={`/units/${unit.id}`}>

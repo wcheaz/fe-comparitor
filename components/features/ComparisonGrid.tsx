@@ -70,8 +70,6 @@ export function ComparisonGrid({
           <UnitCard
             key={unit.id}
             unit={unit}
-            targetLevel={targetLevel}
-            showStats={false} // Keep simplified, just show name and portrait
           />
         ))}
       </div>

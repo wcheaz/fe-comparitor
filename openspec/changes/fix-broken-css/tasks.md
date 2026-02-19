@@ -8,8 +8,8 @@
 
 - [x] 2.1 Refactor `app/comparator/page.tsx`'s layout container (`<div className="grid grid-cols-1 lg:grid-cols-4 gap-6">`) and main content area to handle the new horizontal layout.
 - [x] 2.2 Update `components/features/ComparisonGrid.tsx` to display specific statistics (like join chapter, growths, bases) aligned horizontally. 
-- [ ] 2.3 Move unit-specific details (like `JoinChapter`, `Class`, etc.) from individual vertical `UnitCard` components into horizontal side-by-side rows matching the `ComparisonGrid` style.
-- [ ] 2.4 Re-style `components/features/UnitCard.tsx` to just act as a headers for the units (Name, Portrait) rather than housing all details vertically.
+- [x] 2.3 Move unit-specific details (like `JoinChapter`, `Class`, etc.) from individual vertical `UnitCard` components into horizontal side-by-side rows matching the `ComparisonGrid` style.
+- [x] 2.4 Re-style `components/features/UnitCard.tsx` to just act as a headers for the units (Name, Portrait) rather than housing all details vertically.
 
 ## 3. Formatting Growths and Bases
 
