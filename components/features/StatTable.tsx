@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
 import { calculateAverageStats } from '@/lib/stats';
@@ -34,7 +34,10 @@ export function StatTable({
   showAverage = false, 
   className 
 }: StatTableProps) {
-  const averageStats = targetLevel ? calculateAverageStats(unit, targetLevel) : null;
+  // Memoize average stats calculation to avoid recalculation on re-renders
+  const averageStats = useMemo(() => {
+    return targetLevel ? calculateAverageStats(unit, targetLevel) : null;
+  }, [unit, targetLevel]);
   
   // Get all unique stat keys from stats, growths, and average stats
   const allStatKeys = new Set([

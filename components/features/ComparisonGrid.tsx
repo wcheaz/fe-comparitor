@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
 import { UnitCard } from './UnitCard';
@@ -22,6 +22,16 @@ export function ComparisonGrid({
   showAverage = false,
   className 
 }: ComparisonGridProps) {
+  // Memoize calculated stats for all units to avoid recalculation on re-renders
+  const calculatedStats = useMemo(() => {
+    if (!targetLevel) return {};
+    
+    return units.reduce((acc, unit) => {
+      acc[unit.id] = calculateAverageStats(unit, targetLevel);
+      return acc;
+    }, {} as Record<string, ReturnType<typeof calculateAverageStats>>);
+  }, [units, targetLevel]);
+
   if (units.length === 0) {
     return (
       <Card className={className}>
@@ -110,7 +120,7 @@ export function ComparisonGrid({
                         const baseValue = unit.stats[statKey] ?? '-';
                         const growthValue = unit.growths[statKey] ?? '-';
                         const averageValue = targetLevel 
-                          ? calculateAverageStats(unit, targetLevel)[statKey] ?? '-'
+                          ? calculatedStats[unit.id]?.[statKey] ?? '-'
                           : '-';
                         
                         return (

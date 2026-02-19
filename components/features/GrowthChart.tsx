@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
 import { 
@@ -45,23 +45,27 @@ const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7c7c', '#8dd1e1', '#d084d0'
 const CORE_STATS = ['hp', 'str', 'mag', 'skl', 'spd', 'def', 'res'];
 
 export function GrowthChart({ units, chartType = 'radar', className }: GrowthChartProps) {
-  // Prepare data for radar chart
-  const radarData = CORE_STATS.map(stat => ({
-    stat: STAT_LABELS[stat] || stat.toUpperCase(),
-    ...units.reduce((acc, unit, index) => {
-      acc[unit.name] = unit.growths[stat] || 0;
-      return acc;
-    }, {} as Record<string, number>)
-  }));
+  // Memoize radar data preparation to avoid recalculation on re-renders
+  const radarData = useMemo(() => {
+    return CORE_STATS.map(stat => ({
+      stat: STAT_LABELS[stat] || stat.toUpperCase(),
+      ...units.reduce((acc, unit, index) => {
+        acc[unit.name] = unit.growths[stat] || 0;
+        return acc;
+      }, {} as Record<string, number>)
+    }));
+  }, [units]);
 
-  // Prepare data for bar chart
-  const barData = units.map(unit => ({
-    name: unit.name,
-    ...CORE_STATS.reduce((acc, stat) => {
-      acc[STAT_LABELS[stat] || stat.toUpperCase()] = unit.growths[stat] || 0;
-      return acc;
-    }, {} as Record<string, number>)
-  }));
+  // Memoize bar data preparation to avoid recalculation on re-renders
+  const barData = useMemo(() => {
+    return units.map(unit => ({
+      name: unit.name,
+      ...CORE_STATS.reduce((acc, stat) => {
+        acc[STAT_LABELS[stat] || stat.toUpperCase()] = unit.growths[stat] || 0;
+        return acc;
+      }, {} as Record<string, number>)
+    }));
+  }, [units]);
 
   if (units.length === 0) {
     return (

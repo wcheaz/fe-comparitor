@@ -1,3 +1,1 @@
-# Ralph Tasks
-
-Add your tasks below using: `ralph --add-task "description"`
+/home/ncheaz/git/fe-comparator/openspec/changes/initialize-project/tasks.md

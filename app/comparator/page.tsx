@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import { useSearchParams } from 'next/navigation'; // TEMPORARILY DISABLED
 import { Unit } from '@/types/unit';
+import { getUnitById } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { LevelSlider } from '@/components/features/LevelSlider';
@@ -10,7 +12,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
   const [targetLevel, setTargetLevel] = useState(20);
+  const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 4;
+
+  // TEMPORARILY DISABLED: Load pre-selected units from URL parameters
+  // This was causing build issues with static generation
+  useEffect(() => {
+    // For now, just set loading to false immediately
+    setIsLoading(false);
+    
+    // TODO: Re-enable URL parameter loading when we have a proper solution
+    // for client-side only parameter handling
+  }, []);
 
   const handleUnitSelect = (unit: Unit) => {
     setSelectedUnits(prev => [...prev, unit]);

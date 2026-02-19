@@ -1,7 +1,13 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { getAllUnits, getUnitsByGame } from '@/lib/data';
 import { UnitCard } from '@/components/features/UnitCard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardSkeleton } from '@/components/ui/loading-skeleton';
+import { ErrorBoundary, ErrorDisplay } from '@/components/ui/error-boundary';
 
 // Game information for roster links
 const GAMES = [
@@ -46,8 +52,25 @@ async function getQuickCompareUnits() {
   }
 }
 
-export default async function HomePage() {
-  const quickCompareUnits = await getQuickCompareUnits();
+export default function HomePage() {
+  const [quickCompareUnits, setQuickCompareUnits] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadQuickCompareUnits();
+  }, []);
+
+  async function loadQuickCompareUnits() {
+    setIsLoading(true);
+    try {
+      const units = await getQuickCompareUnits();
+      setQuickCompareUnits(units);
+    } catch (error) {
+      console.error('Error loading quick compare units:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-fe-blue-50 to-fe-blue-100">
@@ -61,11 +84,15 @@ export default async function HomePage() {
           Make informed decisions about your team composition and unit development.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-          <Button size="lg" className="bg-fe-gold-600 hover:bg-fe-gold-700 text-white w-full sm:w-auto">
-            Start Comparing
+          <Button size="lg" className="bg-fe-gold-600 hover:bg-fe-gold-700 text-white w-full sm:w-auto" asChild>
+            <Link href="/comparator">
+              Start Comparing
+            </Link>
           </Button>
-          <Button variant="outline" size="lg" className="w-full sm:w-auto border-fe-gold-600 text-fe-gold-600 hover:bg-fe-gold-50">
-            Learn More
+          <Button variant="outline" size="lg" className="w-full sm:w-auto border-fe-gold-600 text-fe-gold-600 hover:bg-fe-gold-50" asChild>
+            <Link href="#features">
+              Learn More
+            </Link>
           </Button>
         </div>
       </section>
@@ -95,8 +122,10 @@ export default async function HomePage() {
               <CardContent>
                 <UnitCard unit={unit} />
                 <div className="mt-4 text-center">
-                  <Button variant="outline" size="sm">
-                    View Details
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={`/units/${unit.id}`}>
+                      View Details
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
@@ -105,10 +134,12 @@ export default async function HomePage() {
         </div>
 
         <div className="text-center mt-8">
-          <Button>
-            Compare These Units
+          <Button asChild>
+            <Link href={`/comparator?units=${quickCompareUnits.map(u => u.id).join(',')}`}>
+              Compare These Units
+            </Link>
           </Button>
-          <Button variant="outline" className="ml-4">
+          <Button variant="outline" className="ml-4" onClick={loadQuickCompareUnits}>
             Get New Pair
           </Button>
         </div>
@@ -134,8 +165,10 @@ export default async function HomePage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center pt-4">
-                <Button variant="outline" className="w-full border-fe-gold-600 text-fe-gold-600 hover:bg-fe-gold-50">
-                  View {game.name.split(': ')[1]} Units
+                <Button variant="outline" className="w-full border-fe-gold-600 text-fe-gold-600 hover:bg-fe-gold-50" asChild>
+                  <Link href={`/games/${game.id}`}>
+                    View {game.name.split(': ')[1]} Units
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -144,7 +177,7 @@ export default async function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="features" className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-fe-blue-900 mb-4">
             Key Features

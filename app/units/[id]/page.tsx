@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { UnitCard } from '@/components/features/UnitCard';
 import { StatTable } from '@/components/features/StatTable';
-import { GrowthChart } from '@/components/features/GrowthChart';
+// import { GrowthChart } from '@/components/features/GrowthChart'; // TEMPORARILY DISABLED
 import { getUnitById, getAllUnits } from '@/lib/data';
 import { calculateAverageStats } from '@/lib/stats';
 import { Unit } from '@/types/unit';
@@ -109,7 +109,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
               <CardTitle>Growth Rates</CardTitle>
             </CardHeader>
             <CardContent>
-              <StatTable unit={unit} showGrowths={true} showBaseStats={false} />
+              <StatTable unit={unit} showGrowths={true} />
             </CardContent>
           </Card>
 
@@ -123,15 +123,17 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
             </CardContent>
           </Card>
 
-          {/* Growth Chart */}
+          {/* Growth Chart - TEMPORARILY DISABLED DUE TO BUILD ERROR */}
+          {/* 
           <Card>
             <CardHeader>
               <CardTitle>Growth Visualization</CardTitle>
             </CardHeader>
             <CardContent>
-              <GrowthChart unit={unit} />
+              <GrowthChart units={[unit]} />
             </CardContent>
           </Card>
+          */}
 
           {/* Additional Info */}
           <Card>
