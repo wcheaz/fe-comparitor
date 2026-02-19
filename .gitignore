@@ -35,7 +35,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# openspec
-openspec/
-.agent/workflows/openspec-*.md
-AGENTS.md
