@@ -8,6 +8,18 @@ import { Unit, UnitStats } from '@/types/unit';
  * @param targetLevel - The target level to calculate stats at
  * @returns UnitStats object with calculated average stats
  */
+export function calculateAverageStatsAtLevel(unit: Unit, level: number): UnitStats {
+  return calculateAverageStats(unit, level);
+}
+
+/**
+ * Calculate average stats for a unit at a target level based on growth rates
+ * Formula: Base + (Growth * (TargetLevel - BaseLevel) / 100)
+ * 
+ * @param unit - The unit to calculate stats for
+ * @param targetLevel - The target level to calculate stats at
+ * @returns UnitStats object with calculated average stats
+ */
 export function calculateAverageStats(unit: Unit, targetLevel: number): UnitStats {
   const averageStats: UnitStats = {};
   const levelDiff = targetLevel - unit.level;
@@ -150,4 +162,28 @@ export function getStatRange(unit: Unit, targetLevel: number): {
   }
 
   return { minStats, maxStats };
+}
+
+/**
+ * Calculate the maximum potential level across all compared units
+ * 
+ * @param units - Array of units to compare
+ * @returns The maximum level among all units
+ */
+export function getMaxLevel(units: Unit[]): number {
+  if (units.length === 0) return 0;
+  
+  return Math.max(...units.map(unit => unit.level));
+}
+
+/**
+ * Calculate the minimum base level across all compared units
+ * 
+ * @param units - Array of units to compare
+ * @returns The minimum level among all units
+ */
+export function getMinLevel(units: Unit[]): number {
+  if (units.length === 0) return 0;
+  
+  return Math.min(...units.map(unit => unit.level));
 }

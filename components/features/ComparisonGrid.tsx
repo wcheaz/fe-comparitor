@@ -3,11 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
-import { calculateAverageStats } from '@/lib/stats';
+import { CombinedAverageStatsTable } from './CombinedAverageStatsTable';
+import { calculateAverageStats, getMinLevel, getMaxLevel } from '@/lib/stats';
 
 interface ComparisonGridProps {
   units: Unit[];
-  targetLevel?: number;
   showStats?: boolean;
   showGrowths?: boolean;
   showAverage?: boolean;
@@ -16,21 +16,20 @@ interface ComparisonGridProps {
 
 export function ComparisonGrid({ 
   units, 
-  targetLevel, 
   showStats = true,
   showGrowths = true,
   showAverage = false,
   className 
 }: ComparisonGridProps) {
-  // Memoize calculated stats for all units to avoid recalculation on re-renders
-  const calculatedStats = useMemo(() => {
-    if (!targetLevel) return {};
-    
-    return units.reduce((acc, unit) => {
-      acc[unit.id] = calculateAverageStats(unit, targetLevel);
-      return acc;
-    }, {} as Record<string, ReturnType<typeof calculateAverageStats>>);
-  }, [units, targetLevel]);
+  // Memoize level calculations for all units to avoid recalculation on re-renders
+  const { minLevel, maxLevel } = useMemo(() => {
+    return {
+      minLevel: getMinLevel(units),
+      maxLevel: getMaxLevel(units)
+    };
+  }, [units]);
+
+  
 
   if (units.length === 0) {
     return (
@@ -51,11 +50,6 @@ export function ComparisonGrid({
       <Card>
         <CardHeader>
           <CardTitle>Unit Comparison</CardTitle>
-          {targetLevel && (
-            <div className="text-sm text-muted-foreground">
-              Showing stats calculated at Level {targetLevel}
-            </div>
-          )}
         </CardHeader>
         <CardContent>
           <div className="text-sm text-muted-foreground">
@@ -262,49 +256,12 @@ export function ComparisonGrid({
         </Card>
       )}
 
-      {/* Average Stats at Target Level - Horizontal */}
-      {showAverage && targetLevel && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Average Stats at Level {targetLevel}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-2 font-medium">Stat</th>
-                    {units.map((unit) => (
-                      <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
-                        {unit.name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {getCommonStats(units).map((statKey) => (
-                    <tr key={`avg-${statKey}`} className="border-b hover:bg-muted/50">
-                      <td className="p-2 font-medium">
-                        {getStatLabel(statKey)}
-                      </td>
-                      {units.map((unit) => {
-                        const averageValue = calculatedStats[unit.id]?.[statKey] ?? '-';
-                        
-                        return (
-                          <td key={`avg-${statKey}-${unit.id}`} className="text-center p-2">
-                            <span className="font-medium text-fe-blue-600">
-                              {typeof averageValue === 'number' ? averageValue.toFixed(1) : averageValue}
-                            </span>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Combined Average Stats Table */}
+      {showAverage && (
+        <CombinedAverageStatsTable 
+          units={units}
+          maxLevel={maxLevel}
+        />
       )}
     </div>
   );

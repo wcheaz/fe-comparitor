@@ -6,12 +6,10 @@ import { Unit } from '@/types/unit';
 import { getUnitById } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
-import { LevelSlider } from '@/components/features/LevelSlider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
-  const [targetLevel, setTargetLevel] = useState(20);
   const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 4;
 
@@ -59,20 +57,13 @@ export default function ComparatorPage() {
               maxUnits={maxUnits}
             />
 
-            {/* Level Control */}
-            <LevelSlider
-              minLevel={1}
-              maxLevel={99}
-              currentLevel={targetLevel}
-              onLevelChange={setTargetLevel}
-            />
+            
           </div>
 
           {/* Main Content - Horizontal Comparison Grid */}
           <div className="xl:col-span-9">
             <ComparisonGrid
               units={selectedUnits}
-              targetLevel={targetLevel}
               showStats={true}
               showGrowths={true}
               showAverage={true}
@@ -94,9 +85,9 @@ export default function ComparatorPage() {
                   Filter by game or search for specific units.</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">2. Adjust Level</h3>
-                  <p>Use the level slider to see how units' stats would look at different levels. 
-                  This calculates averages based on growth rates.</p>
+                  <h3 className="font-semibold mb-2">2. View Progression</h3>
+                  <p>The combined stats table shows how each unit's stats progress from their 
+                  base level to the maximum level, including stat calculations based on growth rates.</p>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2">3. Analyze Results</h3>
