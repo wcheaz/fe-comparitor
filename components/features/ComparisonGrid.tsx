@@ -64,38 +64,80 @@ export function ComparisonGrid({
         </CardContent>
       </Card>
 
-      {/* Unit Cards Grid */}
+      {/* Unit Cards Grid - Simplified headers */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {units.map((unit) => (
           <UnitCard
             key={unit.id}
             unit={unit}
             targetLevel={targetLevel}
-            showStats={showStats}
+            showStats={false} // Keep simplified, just show name and portrait
           />
         ))}
       </div>
 
-      {/* Stat Tables Grid */}
-      {showStats && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-          {units.map((unit) => (
-            <StatTable
-              key={`stats-${unit.id}`}
-              unit={unit}
-              targetLevel={targetLevel}
-              showGrowths={showGrowths}
-              showAverage={showAverage}
-            />
-          ))}
-        </div>
-      )}
+      {/* Basic Unit Information - Horizontal */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Unit Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left p-2 font-medium">Detail</th>
+                  {units.map((unit) => (
+                    <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                      {unit.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Class</td>
+                  {units.map((unit) => (
+                    <td key={`class-${unit.id}`} className="text-center p-2">
+                      {unit.class}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Join Chapter</td>
+                  {units.map((unit) => (
+                    <td key={`join-${unit.id}`} className="text-center p-2">
+                      {unit.joinChapter}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Level</td>
+                  {units.map((unit) => (
+                    <td key={`level-${unit.id}`} className="text-center p-2">
+                      Lv. {unit.level}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Affinity</td>
+                  {units.map((unit) => (
+                    <td key={`affinity-${unit.id}`} className="text-center p-2">
+                      {unit.affinity || '-'}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Side-by-side Stat Comparison */}
-      {units.length > 1 && (
+      {/* Base Stats - Horizontal */}
+      {showStats && (
         <Card>
           <CardHeader>
-            <CardTitle>Side-by-Side Comparison</CardTitle>
+            <CardTitle>Base Stats</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
@@ -112,35 +154,149 @@ export function ComparisonGrid({
                 </thead>
                 <tbody>
                   {getCommonStats(units).map((statKey) => (
-                    <tr key={statKey} className="border-b hover:bg-muted/50">
+                    <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
                       <td className="p-2 font-medium">
                         {getStatLabel(statKey)}
                       </td>
                       {units.map((unit) => {
                         const baseValue = unit.stats[statKey] ?? '-';
-                        const growthValue = unit.growths[statKey] ?? '-';
-                        const averageValue = targetLevel 
-                          ? calculatedStats[unit.id]?.[statKey] ?? '-'
-                          : '-';
                         
                         return (
-                          <td key={`${statKey}-${unit.id}`} className="text-center p-2">
-                            <div className="space-y-1">
-                              <div className="text-sm">
-                                <span className="font-medium">Base: </span>
-                                {baseValue}
+                          <td key={`base-${statKey}-${unit.id}`} className="text-center p-2">
+                            <span className="font-medium">{baseValue}</span>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Growth Rates - Horizontal */}
+      {showStats && showGrowths && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Growth Rates</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left p-2 font-medium">Stat</th>
+                    {units.map((unit) => (
+                      <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                        {unit.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {getCommonStats(units).map((statKey) => (
+                    <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
+                      <td className="p-2 font-medium">
+                        {getStatLabel(statKey)}
+                      </td>
+                      {units.map((unit) => {
+                        const growthValue = unit.growths[statKey] ?? '-';
+                        
+                        return (
+                          <td key={`growth-${statKey}-${unit.id}`} className="text-center p-2">
+                            <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Supports - Horizontal */}
+      {units.some(unit => unit.supports && unit.supports.length > 0) && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Supports</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left p-2 font-medium">Support Partners</th>
+                    {units.map((unit) => (
+                      <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                        {unit.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Supports</td>
+                    {units.map((unit) => (
+                      <td key={`supports-${unit.id}`} className="text-center p-2">
+                        {unit.supports && unit.supports.length > 0 ? (
+                          <div className="space-y-1">
+                            {unit.supports.map((support, index) => (
+                              <div key={index} className="text-sm">
+                                {support}
                               </div>
-                              {showGrowths && growthValue !== '-' && (
-                                <div className="text-xs text-muted-foreground">
-                                  Growth: {growthValue}%
-                                </div>
-                              )}
-                              {showAverage && averageValue !== '-' && (
-                                <div className="text-xs text-fe-blue-600">
-                                  Avg: {typeof averageValue === 'number' ? averageValue.toFixed(1) : averageValue}
-                                </div>
-                              )}
-                            </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">None</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Average Stats at Target Level - Horizontal */}
+      {showAverage && targetLevel && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Average Stats at Level {targetLevel}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left p-2 font-medium">Stat</th>
+                    {units.map((unit) => (
+                      <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                        {unit.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {getCommonStats(units).map((statKey) => (
+                    <tr key={`avg-${statKey}`} className="border-b hover:bg-muted/50">
+                      <td className="p-2 font-medium">
+                        {getStatLabel(statKey)}
+                      </td>
+                      {units.map((unit) => {
+                        const averageValue = calculatedStats[unit.id]?.[statKey] ?? '-';
+                        
+                        return (
+                          <td key={`avg-${statKey}-${unit.id}`} className="text-center p-2">
+                            <span className="font-medium text-fe-blue-600">
+                              {typeof averageValue === 'number' ? averageValue.toFixed(1) : averageValue}
+                            </span>
                           </td>
                         );
                       })}
