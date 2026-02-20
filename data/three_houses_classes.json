@@ -15,18 +15,7 @@
             "cha": 5,
             "mov": 4
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "mag": 3,
-            "dex": 3,
-            "spd": 3,
-            "def": 3,
-            "res": 3,
-            "lck": 2,
-            "cha": 3,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "emperor",
             "great_lord"
@@ -67,7 +56,18 @@
             "cha": 8,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 3,
+            "dex": 3,
+            "spd": 3,
+            "def": 3,
+            "res": 3,
+            "lck": 2,
+            "cha": 3,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Crest",
@@ -108,7 +108,18 @@
             "cha": 7,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 3,
+            "dex": 3,
+            "spd": 3,
+            "def": 3,
+            "res": 3,
+            "lck": 2,
+            "cha": 3,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Crest"
@@ -149,18 +160,7 @@
             "cha": 3,
             "mov": 4
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 3,
-            "mag": 2,
-            "dex": 3,
-            "spd": 3,
-            "def": 2,
-            "res": 2,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "myrmidon",
             "soldier",
@@ -203,18 +203,7 @@
             "cha": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 3,
-            "mag": 1,
-            "dex": 5,
-            "spd": 5,
-            "def": 2,
-            "res": 2,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "swordmaster",
             "assassin"
@@ -255,7 +244,18 @@
             "cha": 5,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "+15 Crit",
@@ -296,7 +296,18 @@
             "cha": 4,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Lethality"
@@ -337,18 +348,7 @@
             "cha": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "mag": 1,
-            "dex": 3,
-            "spd": 3,
-            "def": 5,
-            "res": 2,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "cavalier",
             "armor_knight"
@@ -389,18 +389,7 @@
             "cha": 4,
             "mov": 6
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "mag": 1,
-            "dex": 4,
-            "spd": 3,
-            "def": 4,
-            "res": 3,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "paladin",
             "fortress_knight"
@@ -444,7 +433,18 @@
             "cha": 6,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse",
@@ -486,7 +486,18 @@
             "cha": 4,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse",
@@ -527,18 +538,7 @@
             "cha": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 12,
-            "str": 6,
-            "mag": 1,
-            "dex": 3,
-            "spd": 2,
-            "def": 5,
-            "res": 2,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "warrior",
             "grappler"
@@ -579,7 +579,18 @@
             "cha": 5,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Wrath"
@@ -620,7 +631,18 @@
             "cha": 6,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Fierce Iron Fist"
@@ -660,18 +682,7 @@
             "cha": 5,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 2,
-            "mag": 4,
-            "dex": 4,
-            "spd": 3,
-            "def": 2,
-            "res": 5,
-            "lck": 2,
-            "cha": 3,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "bishop",
             "holy_knight"
@@ -714,7 +725,18 @@
             "cha": 8,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Nosferatu"
@@ -755,7 +777,18 @@
             "cha": 7,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -796,18 +829,7 @@
             "cha": 4,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 1,
-            "mag": 6,
-            "dex": 5,
-            "spd": 4,
-            "def": 2,
-            "res": 6,
-            "lck": 2,
-            "cha": 3,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "warlock",
             "dark_knight"
@@ -848,7 +870,18 @@
             "cha": 7,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Fiendish Blow"
@@ -888,7 +921,18 @@
             "cha": 6,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -929,18 +973,7 @@
             "cha": 4,
             "mov": 6
         },
-        "promotionBonus": {
-            "hp": 6,
-            "str": 2,
-            "mag": 1,
-            "dex": 7,
-            "spd": 6,
-            "def": 2,
-            "res": 2,
-            "lck": 5,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "assassin",
             "trickster"
@@ -983,7 +1016,18 @@
             "cha": 6,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Steal"
@@ -1024,18 +1068,7 @@
             "cha": 5,
             "mov": 7
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 2,
-            "mag": 3,
-            "dex": 6,
-            "spd": 7,
-            "def": 3,
-            "res": 7,
-            "lck": 3,
-            "cha": 3,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "falcoknight"
         ],
@@ -1078,7 +1111,18 @@
             "cha": 8,
             "mov": 8
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "mag": 3,
+            "dex": 6,
+            "spd": 7,
+            "def": 3,
+            "res": 7,
+            "lck": 3,
+            "cha": 3,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Flying",
@@ -1120,18 +1164,7 @@
             "cha": 3,
             "mov": 4
         },
-        "promotionBonus": {
-            "hp": 14,
-            "str": 8,
-            "mag": 1,
-            "dex": 3,
-            "spd": 2,
-            "def": 10,
-            "res": 7,
-            "lck": 2,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "fortress_knight",
             "general"
@@ -1172,7 +1205,18 @@
             "cha": 5,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 2,
+            "dex": 3,
+            "spd": 3,
+            "def": 2,
+            "res": 2,
+            "lck": 2,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Wary Fighter"
@@ -1213,18 +1257,7 @@
             "cha": 4,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 4,
-            "mag": 1,
-            "dex": 7,
-            "spd": 6,
-            "def": 3,
-            "res": 3,
-            "lck": 3,
-            "cha": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "sniper",
             "bow_knight"
@@ -1265,7 +1298,18 @@
             "cha": 6,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 4,
+            "mag": 1,
+            "dex": 7,
+            "spd": 6,
+            "def": 3,
+            "res": 3,
+            "lck": 3,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "+20 Hit",
@@ -1306,7 +1350,18 @@
             "cha": 6,
             "mov": 8
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 4,
+            "mag": 1,
+            "dex": 7,
+            "spd": 6,
+            "def": 3,
+            "res": 3,
+            "lck": 3,
+            "cha": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"

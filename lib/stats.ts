@@ -264,16 +264,16 @@ export function generateProgressionArray(
     if (!isPromoted && !unit.isPromoted && internalLevel === 21 && currentClass?.promotesTo?.length > 0) {
       // Calculate stats at level 20 first (pre-promotion)
       const prePromotionStats: UnitStats = {};
-      Object.entries(unit.growths).forEach(([statKey, growthRate]) => {
-        if (growthRate !== undefined) {
-          const baseStat = unit.stats[statKey] || 0;
-          const levelDiff = 20 - unit.level;
-          const growthAmount = (growthRate * levelDiff) / 100;
-          let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
+      const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
+      allStatKeys.forEach(statKey => {
+        const growthRate = unit.growths[statKey] || 0;
+        const baseStat = unit.stats[statKey] || 0;
+        const levelDiff = 20 - unit.level;
+        const growthAmount = (growthRate * levelDiff) / 100;
+        let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
 
-          const prePromoCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-          prePromotionStats[statKey] = Math.min(calculatedStat, prePromoCap);
-        }
+        const prePromoCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+        prePromotionStats[statKey] = Math.min(calculatedStat, prePromoCap);
       });
 
       // Find the promoted class
@@ -284,9 +284,9 @@ export function generateProgressionArray(
         // Start with pre-promotion stats
         currentStats = { ...prePromotionStats };
 
-        // Apply promotion bonuses from the current unpromoted class
-        if (currentClass.promotionBonus) {
-          Object.entries(currentClass.promotionBonus).forEach(([statKey, bonus]) => {
+        // Apply promotion bonuses from the promoted class
+        if (promotedClass.promotionBonus) {
+          Object.entries(promotedClass.promotionBonus).forEach(([statKey, bonus]) => {
             if (bonus !== undefined) {
               currentStats[statKey] = (currentStats[statKey] || 0) + (bonus as number);
             }
@@ -314,35 +314,36 @@ export function generateProgressionArray(
     let promotionInfo: { className: string; hiddenModifiers: string[] } | undefined;
 
     // Apply growth rates
-    Object.entries(unit.growths).forEach(([statKey, growthRate]) => {
-      if (growthRate !== undefined) {
-        let finalStat: number;
+    // Apply growth rates
+    const allStatsForLevel = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
+    allStatsForLevel.forEach(statKey => {
+      const growthRate = unit.growths[statKey] || 0;
+      let finalStat: number;
 
-        if (promotedAtInternalLevel && internalLevel > promotedAtInternalLevel) {
-          // For post-promotion levels, start from the promoted stats
-          const postPromotionBase = currentStats[statKey] || 0;
-          const postPromotionLevels = internalLevel - 21;
-          const postPromotionGrowth = (growthRate * postPromotionLevels) / 100;
-          finalStat = Math.round((postPromotionBase + postPromotionGrowth) * 100) / 100;
-        } else {
-          // For pre-promotion levels OR prepromoted units, calculate based on effective levels
-          const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-          const baseStat = unit.stats[statKey] || 0;
-          const levelDiff = internalLevel - effectiveUnitLevel;
-          const growthAmount = (growthRate * levelDiff) / 100;
-          finalStat = Math.round((baseStat + growthAmount) * 100) / 100;
-        }
-
-        const cap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-        if (finalStat >= cap) {
-          finalStat = cap;
-          cappedStats[statKey] = true;
-        } else {
-          cappedStats[statKey] = false;
-        }
-
-        levelStats[statKey] = finalStat;
+      if (promotedAtInternalLevel && internalLevel >= promotedAtInternalLevel) {
+        // For post-promotion levels, start from the promoted stats
+        const postPromotionBase = currentStats[statKey] || 0;
+        const postPromotionLevels = internalLevel - 21;
+        const postPromotionGrowth = (growthRate * postPromotionLevels) / 100;
+        finalStat = Math.round((postPromotionBase + postPromotionGrowth) * 100) / 100;
+      } else {
+        // For pre-promotion levels OR prepromoted units, calculate based on effective levels
+        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
+        const baseStat = unit.stats[statKey] || 0;
+        const levelDiff = internalLevel - effectiveUnitLevel;
+        const growthAmount = (growthRate * levelDiff) / 100;
+        finalStat = Math.round((baseStat + growthAmount) * 100) / 100;
       }
+
+      const cap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+      if (finalStat >= cap) {
+        finalStat = cap;
+        cappedStats[statKey] = true;
+      } else {
+        cappedStats[statKey] = false;
+      }
+
+      levelStats[statKey] = finalStat;
     });
 
     // Add promotion info if this is a promotion level

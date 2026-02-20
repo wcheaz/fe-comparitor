@@ -215,6 +215,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       {/* Legend */}
       <div className="mt-4 text-xs text-gray-600">
         <div className="flex flex-wrap items-center gap-4">
+          <span className="font-semibold">
+            Legend:
+          </span>
           <div className="flex items-center space-x-1">
             <span className="text-blue-600">✨</span>
             <span>Promotion level</span>

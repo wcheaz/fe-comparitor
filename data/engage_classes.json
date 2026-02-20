@@ -15,18 +15,7 @@
             "bld": 0,
             "mov": 4
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "mag": 2,
-            "dex": 4,
-            "spd": 4,
-            "def": 4,
-            "res": 3,
-            "lck": 3,
-            "bld": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "divine_dragon"
         ],
@@ -67,7 +56,18 @@
             "bld": 2,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 2,
+            "dex": 4,
+            "spd": 4,
+            "def": 4,
+            "res": 3,
+            "lck": 3,
+            "bld": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Dragon",
@@ -107,18 +107,7 @@
             "bld": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 3,
-            "mag": 0,
-            "dex": 5,
-            "spd": 5,
-            "def": 3,
-            "res": 2,
-            "lck": 2,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "swordmaster",
             "hero"
@@ -157,7 +146,18 @@
             "bld": 4,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 0,
+            "dex": 5,
+            "spd": 5,
+            "def": 3,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Swordmaster",
@@ -197,7 +197,18 @@
             "bld": 6,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 6,
+            "mag": 0,
+            "dex": 3,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [],
         "weapons": [
@@ -236,18 +247,7 @@
             "bld": 5,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "mag": 0,
-            "dex": 4,
-            "spd": 3,
-            "def": 4,
-            "res": 2,
-            "lck": 2,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "paladin",
             "great_knight"
@@ -286,7 +286,18 @@
             "bld": 6,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 0,
+            "dex": 4,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -327,7 +338,18 @@
             "bld": 8,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 0,
+            "dex": 4,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -368,18 +390,7 @@
             "bld": 7,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 6,
-            "mag": 0,
-            "dex": 3,
-            "spd": 3,
-            "def": 4,
-            "res": 2,
-            "lck": 2,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "warrior",
             "hero"
@@ -418,7 +429,18 @@
             "bld": 8,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 10,
+            "str": 6,
+            "mag": 0,
+            "dex": 3,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [],
         "weapons": [
@@ -457,18 +479,7 @@
             "bld": 4,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 3,
-            "mag": 0,
-            "dex": 6,
-            "spd": 5,
-            "def": 3,
-            "res": 3,
-            "lck": 3,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "sniper",
             "bow_knight"
@@ -507,7 +518,18 @@
             "bld": 5,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 0,
+            "dex": 6,
+            "spd": 5,
+            "def": 3,
+            "res": 3,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "+15 Crit",
@@ -548,7 +570,18 @@
             "bld": 7,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 0,
+            "dex": 6,
+            "spd": 5,
+            "def": 3,
+            "res": 3,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -588,18 +621,7 @@
             "bld": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 1,
-            "mag": 4,
-            "dex": 4,
-            "spd": 3,
-            "def": 2,
-            "res": 5,
-            "lck": 2,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "sage",
             "mystery_knight"
@@ -640,7 +662,18 @@
             "bld": 4,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 1,
+            "mag": 4,
+            "dex": 4,
+            "spd": 3,
+            "def": 2,
+            "res": 5,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Cantrips"
@@ -681,7 +714,18 @@
             "bld": 7,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 1,
+            "mag": 4,
+            "dex": 4,
+            "spd": 3,
+            "def": 2,
+            "res": 5,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Horse"
@@ -721,18 +765,7 @@
             "bld": 4,
             "mov": 7
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 2,
-            "mag": 0,
-            "dex": 5,
-            "spd": 6,
-            "def": 3,
-            "res": 6,
-            "lck": 3,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "falcoknight"
         ],
@@ -775,7 +808,18 @@
             "bld": 5,
             "mov": 8
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "mag": 0,
+            "dex": 5,
+            "spd": 6,
+            "def": 3,
+            "res": 6,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Flying",
@@ -817,17 +861,7 @@
             "bld": 12,
             "mov": 4
         },
-        "promotionBonus": {
-            "hp": 14,
-            "str": 7,
-            "mag": 0,
-            "dex": 3,
-            "spd": 2,
-            "def": 8,
-            "res": 6,
-            "bld": 2,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "general"
         ],
@@ -865,7 +899,17 @@
             "bld": 14,
             "mov": 5
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 14,
+            "str": 7,
+            "mag": 0,
+            "dex": 3,
+            "spd": 2,
+            "def": 8,
+            "res": 6,
+            "bld": 2,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Pavise"
@@ -906,18 +950,7 @@
             "bld": 3,
             "mov": 5
         },
-        "promotionBonus": {
-            "hp": 8,
-            "str": 1,
-            "mag": 4,
-            "dex": 4,
-            "spd": 3,
-            "def": 2,
-            "res": 6,
-            "lck": 3,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "high_priest"
         ],
@@ -957,7 +990,18 @@
             "bld": 4,
             "mov": 6
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 8,
+            "str": 1,
+            "mag": 4,
+            "dex": 4,
+            "spd": 3,
+            "def": 2,
+            "res": 6,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Nosferatu",
@@ -998,18 +1042,7 @@
             "bld": 4,
             "mov": 6
         },
-        "promotionBonus": {
-            "hp": 6,
-            "str": 2,
-            "mag": 0,
-            "dex": 6,
-            "spd": 6,
-            "def": 2,
-            "res": 2,
-            "lck": 4,
-            "bld": 1,
-            "mov": 1
-        },
+        "promotionBonus": {},
         "promotesTo": [
             "rogue"
         ],
@@ -1050,7 +1083,18 @@
             "bld": 5,
             "mov": 7
         },
-        "promotionBonus": {},
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "mag": 0,
+            "dex": 6,
+            "spd": 6,
+            "def": 2,
+            "res": 2,
+            "lck": 4,
+            "bld": 1,
+            "mov": 1
+        },
         "promotesTo": [],
         "hiddenModifiers": [
             "Locktouch",
