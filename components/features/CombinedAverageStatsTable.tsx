@@ -81,12 +81,39 @@ export function CombinedAverageStatsTable({
               {Array.from({ length: maxLevel - minLevel + 1 }, (_, index) => {
                 const rowLevel = minLevel + index;
                 
+                // Calculate total stats for all units at this level to determine highlights
+                const unitTotalStats = units.map(unit => {
+                  if (rowLevel < unit.level) {
+                    return null; // Unit not available at this level
+                  }
+                  
+                  const averageStats = calculateAverageStats(unit, rowLevel);
+                  const totalStats = statKeys.reduce((sum, statKey) => {
+                    const statValue = averageStats[statKey] || 0;
+                    return sum + statValue;
+                  }, 0);
+                  
+                  return totalStats;
+                });
+                
+                // Determine which unit has the highest total stats for this level
+                const highlightIndices = unitTotalStats.map((totalStats, index) => {
+                  if (totalStats === null) return false;
+                  
+                  // Check if this is the highest value among all units
+                  return unitTotalStats.every((otherTotalStats, otherIndex) => {
+                    if (otherIndex === index) return true; // Skip self
+                    if (otherTotalStats === null) return true; // Other unit not available
+                    return totalStats > otherTotalStats;
+                  });
+                });
+                
                 return (
                   <tr key={`level-${rowLevel}`} className="border-b hover:bg-muted/50">
                     <td className="p-2 font-medium">
                       Level {rowLevel}
                     </td>
-                    {units.map((unit) => {
+                    {units.map((unit, unitIndex) => {
                       // Check if rowLevel < unit.level
                       if (rowLevel < unit.level) {
                         return (
@@ -106,7 +133,10 @@ export function CombinedAverageStatsTable({
                       }, 0);
                       
                       return (
-                        <td key={`unit-${unit.id}-level-${rowLevel}`} className="text-center p-2">
+                        <td 
+                          key={`unit-${unit.id}-level-${rowLevel}`} 
+                          className={`text-center p-2 ${highlightIndices[unitIndex] ? 'bg-green-500/20' : ''}`}
+                        >
                           <span className="font-medium text-fe-blue-600">
                             {totalStats.toFixed(1)}
                           </span>

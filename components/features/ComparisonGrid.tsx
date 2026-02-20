@@ -147,22 +147,29 @@ export function ComparisonGrid({
                       </tr>
                     </thead>
                     <tbody>
-                      {getCommonStats(units).map((statKey) => (
-                        <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
-                          <td className="p-2 font-medium">
-                            {getStatLabel(statKey)}
-                          </td>
-                          {units.map((unit) => {
-                            const baseValue = unit.stats[statKey] ?? '-';
+                      {getCommonStats(units).map((statKey) => {
+                        const highlightStats = getHighlightStats(units, statKey, 'base');
+                        
+                        return (
+                          <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
+                            <td className="p-2 font-medium">
+                              {getStatLabel(statKey)}
+                            </td>
+                            {units.map((unit, unitIndex) => {
+                              const baseValue = unit.stats[statKey] ?? '-';
 
-                            return (
-                              <td key={`base-${statKey}-${unit.id}`} className="text-center p-2">
-                                <span className="font-medium">{baseValue}</span>
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
+                              return (
+                                <td 
+                                  key={`base-${statKey}-${unit.id}`} 
+                                  className={`text-center p-2 ${highlightStats[unitIndex] ? 'bg-green-500/20' : ''}`}
+                                >
+                                  <span className="font-medium">{baseValue}</span>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -190,22 +197,29 @@ export function ComparisonGrid({
                         </tr>
                       </thead>
                       <tbody>
-                        {getCommonStats(units).map((statKey) => (
+                        {getCommonStats(units).map((statKey) => {
+                        const highlightStats = getHighlightStats(units, statKey, 'growth');
+                        
+                        return (
                           <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
                             <td className="p-2 font-medium">
                               {getStatLabel(statKey)}
                             </td>
-                            {units.map((unit) => {
+                            {units.map((unit, unitIndex) => {
                               const growthValue = unit.growths[statKey] ?? '-';
 
                               return (
-                                <td key={`growth-${statKey}-${unit.id}`} className="text-center p-2">
+                                <td 
+                                  key={`growth-${statKey}-${unit.id}`} 
+                                  className={`text-center p-2 ${highlightStats[unitIndex] ? 'bg-green-500/20' : ''}`}
+                                >
                                   <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
                                 </td>
                               );
                             })}
                           </tr>
-                        ))}
+                        );
+                      })}
                       </tbody>
                     </table>
                   </div>
