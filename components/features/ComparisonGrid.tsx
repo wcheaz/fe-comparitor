@@ -306,3 +306,35 @@ function getStatLabel(statKey: string): string {
 
   return labels[statKey] || statKey.toUpperCase();
 }
+
+function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'growth'): boolean[] {
+  return units.map((unit, index) => {
+    const currentValue = statType === 'base' 
+      ? unit.stats[statKey] 
+      : unit.growths[statKey];
+    
+    // If current value is undefined, no highlight
+    if (currentValue === undefined || currentValue === null) {
+      return false;
+    }
+
+    // Check if this value is strictly greater than all other units' values
+    const isHighest = units.every((otherUnit, otherIndex) => {
+      if (otherIndex === index) return true; // Skip comparing with self
+      
+      const otherValue = statType === 'base' 
+        ? otherUnit.stats[statKey] 
+        : otherUnit.growths[statKey];
+      
+      // If other value is undefined/null, current value is considered higher
+      if (otherValue === undefined || otherValue === null) {
+        return true;
+      }
+      
+      // Current value must be strictly greater than other value
+      return currentValue > otherValue;
+    });
+
+    return isHighest;
+  });
+}
