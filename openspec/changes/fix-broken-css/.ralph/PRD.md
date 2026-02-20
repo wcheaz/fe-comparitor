@@ -115,7 +115,7 @@ The Fire Emblem Unit Comparator currently displays unit stats and details (such 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 5.1 **Analyze Current Implementation**: In `ComparisonGrid.tsx` and `app/units/[id]/page.tsx`, the layout relies on a `<div className="space-y-6">` wrapper to stack major unit detail sections (Basic Information, Base Stats, Growth Rates, etc.) vertically. While the data inside the tables correctly compares units horizontally, the parent structural containers are stacked block-level elements, creating a single "long list".
+- - [ ] 6.1 **Analyze Persistent Issue**: The previous agent successfully applied the grid classes to `ComparisonGrid.tsx`, but the browser still renders everything vertically without styling. 
 ## Completed Tasks for Git Commit
 - [x] 1.1 Review `app/globals.css` and fix `text-*` and `bg-*` classes to ensure readability across the `fe-blue` and `fe-gold` theme. Make sure `--foreground` contrasts well with `--background`.
 - [x] 1.2 Modify `Card` component's default text coloring inside `app/globals.css` or the related tailwind classes to fix unreadable contrast issues in `UnitCard` and `StatTable`.
@@ -133,3 +133,6 @@ The Fire Emblem Unit Comparator currently displays unit stats and details (such 
 - [x] 4.5 In the rendering loop for each level row, check if `rowLevel < unit.level`. If true, render `-` for that unit's stats in that row.
 - [x] 4.6 If `rowLevel >= unit.level`, use `calculateAverageStats(unit, rowLevel)` to populate that unit's cell for that specific level.
 - [x] 4.7 Integrate the `<CombinedAverageStatsTable>` at the bottom of the `<ComparisonGrid>`, completely replacing the existing target level average display mechanism and the `LevelSlider.tsx` control.
+- [x] 5.1 **Analyze Current Implementation**: In `ComparisonGrid.tsx` and `app/units/[id]/page.tsx`, the layout relies on a `<div className="space-y-6">` wrapper to stack major unit detail sections (Basic Information, Base Stats, Growth Rates, etc.) vertically. While the data inside the tables correctly compares units horizontally, the parent structural containers are stacked block-level elements, creating a single "long list".
+- [x] 5.2 **Diagnose Why It's Not Working**: The CSS meant to output a "2 column grid" is missing at the container level. The `space-y-6` class inherently applies vertical block flow. The tables themselves rely on `overflow-x-auto` which requires specific handling in grid systems. The user expects the *stat tables themselves* (Base Stats vs Growth Rates) or the *unit details cards* to sit perfectly adjacent to each other on wider screens.
+- [x] 5.3 **Steps to Fix the CSS Styling**:
