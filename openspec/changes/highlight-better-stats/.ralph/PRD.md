@@ -49,9 +49,13 @@ The system SHALL visually highlight the superior stat value when comparing two u
 - **WHEN** Unit A's calculated stat is exactly equal to Unit B's corresponding stat
 - **THEN** neither Unit A's nor Unit B's stat cell SHALL have any highlight.
 
-#### Scenario: Missing stat
-- **WHEN** either Unit A or Unit B is missing the stat being compared (e.g., value is undefined or N/A)
-- **THEN** neither cell SHALL be highlighted.
+#### Scenario: Missing stat for one unit
+- **WHEN** one unit is missing the stat being compared (e.g., value is undefined or N/A) while the other has a value
+- **THEN** the unit with the valid value SHALL be highlighted as superior.
+
+#### Scenario: Stat is 0 or missing for BOTH units
+- **WHEN** the stat being compared has a value of `0` or is missing (`undefined`) for **both** Unit A and Unit B
+- **THEN** the entire stat row SHALL NOT be rendered in the respective table (e.g., hiding movement growths entirely, or hiding Skill for games that use Dex).
 
 
 
@@ -92,4 +96,8 @@ Currently, the `CombinedAverageStatsTable` and related comparison grids display 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 1.1 Create inline logic or a helper function to determine the highest numeric value among a set of stat values for a given row.
+- - [ ] 3.1 In `ComparisonGrid.tsx`, update the Base Stats table's `<td>` cells to apply a neutral highlight class (e.g., `bg-yellow-500/20` or `bg-slate-500/20`) if the units' stats are identical and non-zero.
+## Completed Tasks for Git Commit
+- [x] 1.1 Create inline logic or a helper function to determine the highest numeric value among a set of stat values for a given row.
+- [x] 2.1 In `ComparisonGrid.tsx`, update the Base Stats table's `<td>` cells to apply a highlight class (e.g., `bg-green-500/20`) if the unit's stat is the highest in that row.
+- [x] 2.2 Replicate this highlight logic for the Growth Rates table in `ComparisonGrid.tsx`.

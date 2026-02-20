@@ -3,14 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
-import { CombinedAverageStatsTable } from './CombinedAverageStatsTable';
-import { calculateAverageStats, getMinLevel, getMaxLevel } from '@/lib/stats';
+import { getMinLevel, getMaxLevel } from '@/lib/stats';
 
 interface ComparisonGridProps {
   units: Unit[];
   showStats?: boolean;
   showGrowths?: boolean;
-  showAverage?: boolean;
   className?: string;
 }
 
@@ -18,7 +16,6 @@ export function ComparisonGrid({
   units,
   showStats = true,
   showGrowths = true,
-  showAverage = false,
   className
 }: ComparisonGridProps) {
   // Memoize level calculations for all units to avoid recalculation on re-renders
@@ -147,7 +144,7 @@ export function ComparisonGrid({
                       </tr>
                     </thead>
                     <tbody>
-                      {getCommonStats(units).map((statKey) => {
+                      {getCommonGrowthStats(units).map((statKey) => {
                         const highlightStats = getHighlightStats(units, statKey, 'base');
                         
                         return (
@@ -157,11 +154,19 @@ export function ComparisonGrid({
                             </td>
                             {units.map((unit, unitIndex) => {
                               const baseValue = unit.stats[statKey] ?? '-';
+                              const highlight = highlightStats[unitIndex];
+
+                              let highlightClass = '';
+                              if (highlight.isHighest) {
+                                highlightClass = 'bg-green-500/20';
+                              } else if (highlight.isEqual) {
+                                highlightClass = 'bg-yellow-500/20';
+                              }
 
                               return (
                                 <td 
                                   key={`base-${statKey}-${unit.id}`} 
-                                  className={`text-center p-2 ${highlightStats[unitIndex] ? 'bg-green-500/20' : ''}`}
+                                  className={`text-center p-2 ${highlightClass}`}
                                 >
                                   <span className="font-medium">{baseValue}</span>
                                 </td>
@@ -197,7 +202,7 @@ export function ComparisonGrid({
                         </tr>
                       </thead>
                       <tbody>
-                        {getCommonStats(units).map((statKey) => {
+{getCommonBaseStats(units).map((statKey) => {
                         const highlightStats = getHighlightStats(units, statKey, 'growth');
                         
                         return (
@@ -207,11 +212,19 @@ export function ComparisonGrid({
                             </td>
                             {units.map((unit, unitIndex) => {
                               const growthValue = unit.growths[statKey] ?? '-';
+                              const highlight = highlightStats[unitIndex];
+
+                              let highlightClass = '';
+                              if (highlight.isHighest) {
+                                highlightClass = 'bg-green-500/20';
+                              } else if (highlight.isEqual) {
+                                highlightClass = 'bg-yellow-500/20';
+                              }
 
                               return (
                                 <td 
                                   key={`growth-${statKey}-${unit.id}`} 
-                                  className={`text-center p-2 ${highlightStats[unitIndex] ? 'bg-green-500/20' : ''}`}
+                                  className={`text-center p-2 ${highlightClass}`}
                                 >
                                   <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
                                 </td>
@@ -275,13 +288,7 @@ export function ComparisonGrid({
         </Card>
       )}
 
-      {/* Combined Average Stats Table */}
-      {showAverage && (
-        <CombinedAverageStatsTable
-          units={units}
-          maxLevel={maxLevel}
-        />
-      )}
+      
     </div>
   );
 }
@@ -299,6 +306,64 @@ function getCommonStats(units: Unit[]): string[] {
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
 
   return statOrder.filter(stat => statSet.has(stat));
+}
+
+function getCommonBaseStats(units: Unit[]): string[] {
+  if (units.length < 2) {
+    return getCommonStats(units);
+  }
+
+  const commonStats: string[] = [];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+
+  statOrder.forEach(statKey => {
+    // Check if at least one unit has this base stat
+    const hasValidStat = units.some(unit => 
+      unit.stats[statKey] !== undefined && unit.stats[statKey] !== null
+    );
+
+    // Check if both units don't have this base stat (filter out if both missing)
+    const bothMissing = units.every(unit => 
+      unit.stats[statKey] === undefined || unit.stats[statKey] === null
+    );
+
+    if (hasValidStat && !bothMissing) {
+      commonStats.push(statKey);
+    }
+  });
+
+  return commonStats;
+}
+
+function getCommonGrowthStats(units: Unit[]): string[] {
+  if (units.length < 2) {
+    return getCommonStats(units);
+  }
+
+  const commonStats: string[] = [];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+
+  statOrder.forEach(statKey => {
+    // Check if at least one unit has this growth stat (non-zero and non-missing)
+    const hasValidGrowth = units.some(unit => 
+      unit.growths[statKey] !== undefined && 
+      unit.growths[statKey] !== null && 
+      unit.growths[statKey] !== 0
+    );
+
+    // Check if both units have missing or 0 growth (filter out if both missing/zero)
+    const bothMissingOrZero = units.every(unit => 
+      unit.growths[statKey] === undefined || 
+      unit.growths[statKey] === null || 
+      unit.growths[statKey] === 0
+    );
+
+    if (hasValidGrowth && !bothMissingOrZero) {
+      commonStats.push(statKey);
+    }
+  });
+
+  return commonStats;
 }
 
 function getStatLabel(statKey: string): string {
@@ -321,7 +386,7 @@ function getStatLabel(statKey: string): string {
   return labels[statKey] || statKey.toUpperCase();
 }
 
-function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'growth'): boolean[] {
+function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'growth'): { isHighest: boolean; isEqual: boolean }[] {
   return units.map((unit, index) => {
     const currentValue = statType === 'base' 
       ? unit.stats[statKey] 
@@ -329,7 +394,7 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
     
     // If current value is undefined, no highlight
     if (currentValue === undefined || currentValue === null) {
-      return false;
+      return { isHighest: false, isEqual: false };
     }
 
     // Check if this value is strictly greater than all other units' values
@@ -349,6 +414,13 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
       return currentValue > otherValue;
     });
 
-    return isHighest;
+    // Check if all non-undefined values are equal
+    const allValues = units.map(u => 
+      statType === 'base' ? u.stats[statKey] : u.growths[statKey]
+    ).filter(val => val !== undefined && val !== null);
+    
+    const isEqual = allValues.length > 1 && allValues.every(val => val === currentValue) && currentValue !== 0;
+
+    return { isHighest, isEqual };
   });
 }
