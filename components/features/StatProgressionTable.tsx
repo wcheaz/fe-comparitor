@@ -10,9 +10,14 @@ interface StatProgressionTableProps {
 }
 
 interface ProgressionRow {
-  level: number;
+  internalLevel: number;
   displayLevel: string;
   stats: UnitStats[];
+  isPromotionLevel: boolean;
+  promotionInfo?: {
+    className: string;
+    hiddenModifiers: string[];
+  };
 }
 
 export function StatProgressionTable({ units }: StatProgressionTableProps) {
@@ -51,25 +56,39 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       !['mov', 'con', 'bld', 'cha'].includes(key)
     ).sort();
 
-    // Create rows for each level
+    // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
-    for (let level = minLevel; level <= maxLevel; level++) {
-      let displayLevel = level.toString();
+    const totalLevels = maxLevel - minLevel + 1;
+    
+    for (let i = 0; i < totalLevels; i++) {
+      const rowData: ProgressionRow = {
+        internalLevel: minLevel + i,
+        displayLevel: `Level ${minLevel + i}`,
+        stats: [],
+        isPromotionLevel: false
+      };
       
-      // Handle promotion display
-      if (level === 21 && !units.every(unit => unit.isPromoted)) {
-        displayLevel = "1 (Promoted)";
+      // Collect data for each unit at this level index
+      for (let unitIndex = 0; unitIndex < units.length; unitIndex++) {
+        const unitProgression = allProgressions[unitIndex];
+        const levelData = unitProgression[i];
+        
+        if (levelData) {
+          // Use the display level and promotion info from the first unit's progression
+          if (unitIndex === 0) {
+            rowData.displayLevel = levelData.displayLevel;
+            rowData.isPromotionLevel = levelData.isPromotionLevel;
+            rowData.promotionInfo = levelData.promotionInfo;
+          }
+          
+          rowData.stats.push(levelData.stats);
+        } else {
+          // Fallback for missing data
+          rowData.stats.push({});
+        }
       }
-
-      const statsForLevel = allProgressions.map(progression => 
-        progression[level - minLevel] || {}
-      );
-
-      rows.push({
-        level,
-        displayLevel,
-        stats: statsForLevel
-      });
+      
+      rows.push(rowData);
     }
 
     return { rows, statKeys: displayStats };
@@ -136,21 +155,29 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
           </thead>
           <tbody>
             {progressionData.rows.map((row, rowIndex) => (
-              <tr key={row.level} className="hover:bg-gray-50">
+              <tr key={row.internalLevel} className={`${row.isPromotionLevel ? 'bg-blue-50' : ''} hover:bg-gray-50`}>
                 <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
                   {row.displayLevel}
+                  {/* Show hidden modifiers on promotion level */}
+                  {row.promotionInfo?.hiddenModifiers && row.promotionInfo.hiddenModifiers.length > 0 && (
+                    <div className="text-xs text-blue-600">
+                      {row.promotionInfo.hiddenModifiers.join(', ')}
+                    </div>
+                  )}
                 </td>
                 {units.map((unit, unitIndex) => (
-                  <React.Fragment key={`${row.level}-${unit.id}`}>
+                  <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
                     {progressionData.statKeys.map(statKey => {
                       const unitStats = row.stats[unitIndex];
                       const statValue = unitStats[statKey];
-                      const shouldShowDash = row.level < unit.level;
+                      const shouldShowDash = row.internalLevel < unit.level;
                       
                       return (
                         <td 
-                          key={`${row.level}-${unit.id}-${statKey}`}
-                          className="border border-gray-300 px-2 py-1 text-center text-sm"
+                          key={`${row.internalLevel}-${unit.id}-${statKey}`}
+                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${
+                            row.isPromotionLevel ? 'bg-blue-100' : ''
+                          }`}
                         >
                           {shouldShowDash ? (
                             <span className="text-gray-400">-</span>
@@ -158,7 +185,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                             <span>
                               {statValue !== undefined ? Math.round(statValue) : '-'}
                               {/* Highlight promotion level */}
-                              {row.displayLevel === "1 (Promoted)" && (
+                              {row.isPromotionLevel && (
                                 <span className="ml-1 text-xs text-blue-600">✨</span>
                               )}
                             </span>
@@ -176,14 +203,22 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
       {/* Legend */}
       <div className="mt-4 text-xs text-gray-600">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-1">
             <span className="text-blue-600">✨</span>
             <span>Promotion level</span>
           </div>
           <div className="flex items-center space-x-1">
+            <span className="text-blue-600">+30 Crit, Flying, etc.</span>
+            <span>Hidden class modifiers</span>
+          </div>
+          <div className="flex items-center space-x-1">
             <span className="text-gray-400">-</span>
             <span>Unit not yet available at this level</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <div className="w-3 h-3 bg-blue-100 border border-blue-300"></div>
+            <span>Promotion level row</span>
           </div>
         </div>
       </div>
