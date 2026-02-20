@@ -104,7 +104,7 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Level</td>
                   {units.map((unit) => (
                     <td key={`level-${unit.id}`} className="text-center p-2">
-                      Lv. {unit.level}
+                      Lv. {unit.level}{unit.isPromoted ? ' (Promoted)' : ''}
                     </td>
                   ))}
                 </tr>
@@ -202,7 +202,7 @@ export function ComparisonGrid({
                         </tr>
                       </thead>
                       <tbody>
-{getCommonBaseStats(units).map((statKey) => {
+{getCommonGrowthStats(units).map((statKey) => {
                         const highlightStats = getHighlightStats(units, statKey, 'growth');
                         
                         return (

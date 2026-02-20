@@ -1,31 +1,8 @@
 {
-  "iterations": [
-    {
-      "iteration": 1,
-      "startedAt": "2026-02-20T18:36:58.528Z",
-      "endedAt": "2026-02-20T18:38:16.950Z",
-      "durationMs": 78337,
-      "agent": "opencode",
-      "model": "",
-      "toolsUsed": {},
-      "filesModified": [
-        "openspec/changes/highlight-better-stats/tasks.md",
-        "types/unit.ts",
-        "openspec/changes/highlight-better-stats/specs/promoted-status/",
-        ".ralph/ralph-tasks.md"
-      ],
-      "exitCode": 0,
-      "completionDetected": false,
-      "errors": [
-        "\u001b[91m\u001b[1mError: \u001b[0mSkill \"opsx-apply\" not found. Available skills: none"
-      ]
-    }
-  ],
-  "totalDurationMs": 78337,
+  "iterations": [],
+  "totalDurationMs": 0,
   "struggleIndicators": {
-    "repeatedErrors": {
-      "\u001b[91m\u001b[1mError: \u001b[0mSkill \"opsx-apply\" not found. Available skills: none": 1
-    },
+    "repeatedErrors": {},
     "noProgressIterations": 0,
     "shortIterations": 0
   }

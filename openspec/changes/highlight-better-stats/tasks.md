@@ -25,5 +25,10 @@
 ## 6. Promoted Status Distinctions
 
 - [x] 6.1 Update the `Unit` interface in `types/unit.ts` to include an optional boolean field `isPromoted?: boolean;`.
-- [ ] 6.2 Audit data files (`binding_blade_units.json`, `engage_units.json`, `three_houses_units.json`) and add `"isPromoted": true` to units that start in a promoted class (e.g., Marcus).
-- [ ] 6.3 In `ComparisonGrid.tsx`, under the "Unit Details" table, update the Level row to conditionally append `(Promoted)` if `unit.isPromoted` is true.
+- [x] 6.2 Audit data files (`binding_blade_units.json`, `engage_units.json`, `three_houses_units.json`) and add `"isPromoted": true` to units that start in a promoted class (e.g., Marcus).
+- [x] 6.3 In `ComparisonGrid.tsx`, under the "Unit Details" table, update the Level row to conditionally append `(Promoted)` if `unit.isPromoted` is true.
+
+## 7. Bug Fixes for Empty Growths and Promoted Status
+
+- [ ] 7.1 **Growth Rates Table Fix:** In `ComparisonGrid.tsx` (around line 205), change `{getCommonBaseStats(units).map((statKey) => {` to use `{getCommonGrowthStats(units).map((statKey) => {` for the Growth Rates table rendering. This will fix stats with 0% growths (like Move and Con) showing up.
+- [ ] 7.2 **Promoted Status Fix:** Investigate and fix why `isPromoted` is not displaying. Check if `isPromoted` was successfully added to `types/unit.ts`, and ensure that data fetching functions (like in `lib/data.ts`) or normalization logic are properly passing the `isPromoted` flag from the JSON to the frontend components.

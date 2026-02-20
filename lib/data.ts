@@ -100,7 +100,8 @@ function transformJsonToUnit(rawUnit: any): Unit {
     reclassOptions: rawUnit.reclassOptions || [],
     promotions: rawUnit.promotions || [],
     affinity: rawUnit.affinity,
-    maxStats: rawUnit.maxStats
+    maxStats: rawUnit.maxStats,
+    isPromoted: rawUnit.isPromoted || false
   };
 
   // Apply normalization to standardize stat keys and handle missing stats

@@ -41,6 +41,7 @@
         "res": 8,
         "con": 11,
         "mov": 8,
+        "isPromoted": true,
         "growths": {
             "hp": 60,
             "str": 25,

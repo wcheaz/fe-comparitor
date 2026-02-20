@@ -66,7 +66,6 @@ export default function ComparatorPage() {
               units={selectedUnits}
               showStats={true}
               showGrowths={true}
-              showAverage={true}
             />
           </div>
         </div>
