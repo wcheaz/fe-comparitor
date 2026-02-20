@@ -17,7 +17,7 @@ interface UnitDetailPageProps {
 
 export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
   const unit = await getUnitById(params.id);
-  
+
   if (!unit) {
     notFound();
   }
@@ -38,11 +38,11 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left Column - Unit Info */}
         <div className="lg:col-span-1 space-y-6">
-          <UnitCard 
-            unit={unitWithCalculatedStats} 
+          <UnitCard
+            unit={unitWithCalculatedStats}
             className="w-full"
           />
-          
+
           {/* Quick Actions */}
           <Card>
             <CardHeader>
@@ -93,9 +93,9 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
         {/* Right Column - Stats and Details */}
         <div className="lg:col-span-2 space-y-6">
           {/* Base Stats and Growth Rates - Side by Side */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="min-w-0">
-              <Card>
+          <div className="flex flex-col md:flex-row gap-6 w-full">
+            <div className="w-full md:w-1/2 min-w-0">
+              <Card className="h-full">
                 <CardHeader>
                   <CardTitle>Base Stats (Level {unit.level})</CardTitle>
                 </CardHeader>
@@ -105,8 +105,8 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
               </Card>
             </div>
 
-            <div className="min-w-0">
-              <Card>
+            <div className="w-full md:w-1/2 min-w-0">
+              <Card className="h-full">
                 <CardHeader>
                   <CardTitle>Growth Rates</CardTitle>
                 </CardHeader>
@@ -176,7 +176,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                   <h4 className="font-medium mb-2">Skills:</h4>
                   <div className="flex flex-wrap gap-2">
                     {unit.skills.map((skill, index) => (
-                      <span 
+                      <span
                         key={index}
                         className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm"
                       >
@@ -192,7 +192,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                   <h4 className="font-medium mb-2">Support Partners:</h4>
                   <div className="flex flex-wrap gap-2">
                     {unit.supports.map((support, index) => (
-                      <span 
+                      <span
                         key={index}
                         className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm"
                       >
@@ -208,7 +208,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                   <h4 className="font-medium mb-2">Reclass Options:</h4>
                   <div className="flex flex-wrap gap-2">
                     {unit.reclassOptions.map((option, index) => (
-                      <span 
+                      <span
                         key={index}
                         className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm"
                       >

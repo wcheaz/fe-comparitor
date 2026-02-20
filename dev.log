@@ -1,0 +1,11 @@
+
+> fire-emblem-unit-comparator@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 941ms
+ ✓ Compiled /comparator in 397ms (480 modules)
+ GET /comparator 200 in 488ms

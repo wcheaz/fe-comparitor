@@ -14,12 +14,12 @@ interface ComparisonGridProps {
   className?: string;
 }
 
-export function ComparisonGrid({ 
-  units, 
+export function ComparisonGrid({
+  units,
   showStats = true,
   showGrowths = true,
   showAverage = false,
-  className 
+  className
 }: ComparisonGridProps) {
   // Memoize level calculations for all units to avoid recalculation on re-renders
   const { minLevel, maxLevel } = useMemo(() => {
@@ -29,7 +29,7 @@ export function ComparisonGrid({
     };
   }, [units]);
 
-  
+
 
   if (units.length === 0) {
     return (
@@ -127,9 +127,9 @@ export function ComparisonGrid({
 
       {/* Base Stats and Growth Rates - Side by Side */}
       {showStats && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <div className="min-w-0">
-            <Card>
+        <div className="flex flex-col md:flex-row gap-6 w-full">
+          <div className="w-full md:w-1/2 min-w-0">
+            <Card className="h-full">
               <CardHeader>
                 <CardTitle>Base Stats</CardTitle>
               </CardHeader>
@@ -154,7 +154,7 @@ export function ComparisonGrid({
                           </td>
                           {units.map((unit) => {
                             const baseValue = unit.stats[statKey] ?? '-';
-                            
+
                             return (
                               <td key={`base-${statKey}-${unit.id}`} className="text-center p-2">
                                 <span className="font-medium">{baseValue}</span>
@@ -171,8 +171,8 @@ export function ComparisonGrid({
           </div>
 
           {showGrowths && (
-            <div className="min-w-0">
-              <Card>
+            <div className="w-full md:w-1/2 min-w-0">
+              <Card className="h-full">
                 <CardHeader>
                   <CardTitle>Growth Rates</CardTitle>
                 </CardHeader>
@@ -197,7 +197,7 @@ export function ComparisonGrid({
                             </td>
                             {units.map((unit) => {
                               const growthValue = unit.growths[statKey] ?? '-';
-                              
+
                               return (
                                 <td key={`growth-${statKey}-${unit.id}`} className="text-center p-2">
                                   <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
@@ -263,7 +263,7 @@ export function ComparisonGrid({
 
       {/* Combined Average Stats Table */}
       {showAverage && (
-        <CombinedAverageStatsTable 
+        <CombinedAverageStatsTable
           units={units}
           maxLevel={maxLevel}
         />
@@ -275,7 +275,7 @@ export function ComparisonGrid({
 // Helper functions
 function getCommonStats(units: Unit[]): string[] {
   const statSet = new Set<string>();
-  
+
   units.forEach(unit => {
     Object.keys(unit.stats).forEach(stat => statSet.add(stat));
     Object.keys(unit.growths).forEach(stat => statSet.add(stat));
@@ -283,7 +283,7 @@ function getCommonStats(units: Unit[]): string[] {
 
   // Return stats in a logical order
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
-  
+
   return statOrder.filter(stat => statSet.has(stat));
 }
 
@@ -303,6 +303,6 @@ function getStatLabel(statKey: string): string {
     mov: 'Mov',
     cha: 'Cha'
   };
-  
+
   return labels[statKey] || statKey.toUpperCase();
 }
