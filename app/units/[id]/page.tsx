@@ -92,25 +92,30 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
 
         {/* Right Column - Stats and Details */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Base Stats */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Base Stats (Level {unit.level})</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <StatTable unit={unit} showGrowths={false} />
-            </CardContent>
-          </Card>
+          {/* Base Stats and Growth Rates - Side by Side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="min-w-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Base Stats (Level {unit.level})</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <StatTable unit={unit} showGrowths={false} />
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Growth Rates */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Growth Rates</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <StatTable unit={unit} showGrowths={true} />
-            </CardContent>
-          </Card>
+            <div className="min-w-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Growth Rates</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <StatTable unit={unit} showGrowths={true} />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
 
           {/* Calculated Stats */}
           <Card>
