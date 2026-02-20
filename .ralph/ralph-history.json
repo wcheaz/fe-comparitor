@@ -17,9 +17,27 @@
       "exitCode": 0,
       "completionDetected": false,
       "errors": []
+    },
+    {
+      "iteration": 2,
+      "startedAt": "2026-02-20T18:04:19.067Z",
+      "endedAt": "2026-02-20T18:06:52.736Z",
+      "durationMs": 153585,
+      "agent": "opencode",
+      "model": "",
+      "toolsUsed": {},
+      "filesModified": [
+        ".ralph/ralph-tasks.md",
+        "components/features/CombinedAverageStatsTable.tsx",
+        "components/features/ComparisonGrid.tsx",
+        "openspec/changes/highlight-better-stats/tasks.md"
+      ],
+      "exitCode": 0,
+      "completionDetected": false,
+      "errors": []
     }
   ],
-  "totalDurationMs": 60475,
+  "totalDurationMs": 214060,
   "struggleIndicators": {
     "repeatedErrors": {},
     "noProgressIterations": 0,
