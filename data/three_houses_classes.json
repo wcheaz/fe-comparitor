@@ -38,7 +38,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "emperor",
@@ -90,7 +91,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "great_lord",
@@ -142,7 +144,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "commoner",
@@ -185,7 +188,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "myrmidon",
@@ -226,7 +230,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "swordmaster",
@@ -278,7 +283,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "assassin",
@@ -330,7 +336,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "soldier",
@@ -371,7 +378,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "cavalier",
@@ -394,9 +402,7 @@
             "paladin",
             "fortress_knight"
         ],
-        "hiddenModifiers": [
-            "Horse"
-        ],
+        "hiddenModifiers": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -415,7 +421,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Horse"
     },
     {
         "id": "paladin",
@@ -447,7 +454,6 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Horse",
             "Aegis"
         ],
         "weapons": [
@@ -468,7 +474,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Horse"
     },
     {
         "id": "fortress_knight",
@@ -500,7 +507,6 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Horse",
             "Pavise"
         ],
         "weapons": [
@@ -520,7 +526,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Horse"
     },
     {
         "id": "fighter",
@@ -561,7 +568,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "warrior",
@@ -613,7 +621,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "grappler",
@@ -664,7 +673,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "monk",
@@ -707,7 +717,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "bishop",
@@ -759,7 +770,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "holy_knight",
@@ -790,9 +802,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Horse"
-        ],
+        "hiddenModifiers": [],
         "weapons": [
             "Faith",
             "Lances"
@@ -811,7 +821,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Horse"
     },
     {
         "id": "mage",
@@ -852,7 +863,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "warlock",
@@ -903,7 +915,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "dark_knight",
@@ -934,9 +947,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Horse"
-        ],
+        "hiddenModifiers": [],
         "weapons": [
             "Reason",
             "Dark Magic"
@@ -955,7 +966,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Horse"
     },
     {
         "id": "thief",
@@ -998,7 +1010,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "trickster",
@@ -1050,7 +1063,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "pegasus_knight",
@@ -1072,9 +1086,7 @@
         "promotesTo": [
             "falcoknight"
         ],
-        "hiddenModifiers": [
-            "Flying"
-        ],
+        "hiddenModifiers": [],
         "weapons": [
             "Lances",
             "Faith"
@@ -1093,7 +1105,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Flying"
     },
     {
         "id": "falcoknight",
@@ -1125,7 +1138,6 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Flying",
             "Darting Blow"
         ],
         "weapons": [
@@ -1146,7 +1158,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Flying"
     },
     {
         "id": "armor_knight",
@@ -1187,7 +1200,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Armor"
     },
     {
         "id": "general",
@@ -1239,7 +1253,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Armor"
     },
     {
         "id": "archer",
@@ -1280,7 +1295,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 30
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "sniper",
@@ -1332,7 +1348,8 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Infantry"
     },
     {
         "id": "bow_knight",
@@ -1363,9 +1380,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Horse"
-        ],
+        "hiddenModifiers": [],
         "weapons": [
             "Bows"
         ],
@@ -1383,6 +1398,7 @@
             "bld": 20,
             "mov": 15,
             "cha": 40
-        }
+        },
+        "movementType": "Horse"
     }
 ]

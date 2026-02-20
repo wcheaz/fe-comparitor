@@ -223,7 +223,8 @@ function transformJsonToClass(rawClass: any): Class {
     weapons: rawClass.weapons || [],
     hiddenModifiers: rawClass.hiddenModifiers || [],
     gender: rawClass.gender,
-    maxStats: rawClass.maxStats
+    maxStats: rawClass.maxStats,
+    movementType: rawClass.movementType
   };
 
   return cls;

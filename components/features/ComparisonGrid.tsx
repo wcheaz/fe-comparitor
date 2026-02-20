@@ -107,6 +107,17 @@ export function ComparisonGrid({
                   ))}
                 </tr>
                 <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Movement Type</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    return (
+                      <td key={`movement-${unit.id}`} className="text-center p-2">
+                        {cls?.movementType || 'Infantry'}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Level</td>
                   {units.map((unit) => (
                     <td key={`level-${unit.id}`} className="text-center p-2">

@@ -57,6 +57,7 @@ export interface Class {
   hiddenModifiers: string[];
   gender?: 'M' | 'F';
   maxStats?: UnitStats;
+  movementType?: string;
 }
 
 export interface GameData {
