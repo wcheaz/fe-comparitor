@@ -22,6 +22,11 @@ Currently, the `CombinedAverageStatsTable` and related comparison grids display 
   - We will use Tailwind CSS utility classes to apply the visual highlight.
   - *Rationale:* The project is already styled with Tailwind. Applying a background color class (e.g., `bg-green-500/20` or a theme-specific success color) dynamically based on the comparison result is the most idiomatic React/Tailwind approach.
 
+- **Decision 3: Representing Promoted Status**
+  - We will add an optional `isPromoted?: boolean` field to the `Unit` interface in `types/unit.ts`.
+  - We will update the JSON data files (e.g., `data/binding_blade_units.json`) to include `"isPromoted": true` for prepromoted units like Marcus. If absent, it will default to `false`.
+  - In `ComparisonGrid.tsx`, the level display will check this flag. If `true`, it will append a visual indicator (e.g., "Lv. X (Promoted)").
+
 ## Risks / Trade-offs
 
 - **Risk:** The background color might clash with the existing text colors or zebra-striping in tables.

@@ -13,6 +13,7 @@ When comparing two units, it is not immediately obvious at a glance which unit h
 
 ### New Capabilities
 - `stat-highlighting`: Adds visual highlighting to the higher of two compared stats in the comparison grid.
+- `promoted-status`: Distinguishes between base and promoted classes in the unit details view.
 
 ### Modified Capabilities
 

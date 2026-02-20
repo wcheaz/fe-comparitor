@@ -32,6 +32,7 @@ export interface Unit {
   growths: UnitStats; // Growth rates
   maxStats?: UnitStats; // Optional caps
   skills?: string[];
+  isPromoted?: boolean; // Flag for units that start in a promoted class
 
   // New Advanced Features
   supports?: string[]; // List of unit IDs or Names this unit supports with

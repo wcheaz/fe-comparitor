@@ -19,6 +19,7 @@ When comparing two units, it is not immediately obvious at a glance which unit h
 
 ### New Capabilities
 - `stat-highlighting`: Adds visual highlighting to the higher of two compared stats in the comparison grid.
+- `promoted-status`: Distinguishes between base and promoted classes in the unit details view.
 
 ### Modified Capabilities
 
@@ -30,6 +31,20 @@ When comparing two units, it is not immediately obvious at a glance which unit h
 - CSS/Tailwind styling for the grid cells to apply the green highlight.
 
 ## Specifications
+
+promoted-status/spec.md
+## ADDED Requirements
+
+### Requirement: Promoted Status Display
+The system SHALL visually distinguish between base classes and promoted classes when displaying a unit's level.
+
+#### Scenario: Unit is promoted
+- **WHEN** a unit is flagged as being in a promoted class (`isPromoted: true` in data)
+- **THEN** their level display under "Unit Details" SHALL include an indicator that they are promoted (e.g., appended text or an icon).
+
+#### Scenario: Unit is in base class
+- **WHEN** a unit is not flagged as promoted (missing or `isPromoted: false`)
+- **THEN** their level display SHALL NOT include the promoted indicator.
 
 stat-highlighting/spec.md
 ## ADDED Requirements
@@ -85,6 +100,11 @@ Currently, the `CombinedAverageStatsTable` and related comparison grids display 
   - We will use Tailwind CSS utility classes to apply the visual highlight.
   - *Rationale:* The project is already styled with Tailwind. Applying a background color class (e.g., `bg-green-500/20` or a theme-specific success color) dynamically based on the comparison result is the most idiomatic React/Tailwind approach.
 
+- **Decision 3: Representing Promoted Status**
+  - We will add an optional `isPromoted?: boolean` field to the `Unit` interface in `types/unit.ts`.
+  - We will update the JSON data files (e.g., `data/binding_blade_units.json`) to include `"isPromoted": true` for prepromoted units like Marcus. If absent, it will default to `false`.
+  - In `ComparisonGrid.tsx`, the level display will check this flag. If `true`, it will append a visual indicator (e.g., "Lv. X (Promoted)").
+
 ## Risks / Trade-offs
 
 - **Risk:** The background color might clash with the existing text colors or zebra-striping in tables.
@@ -96,8 +116,14 @@ Currently, the `CombinedAverageStatsTable` and related comparison grids display 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 3.1 In `ComparisonGrid.tsx`, update the Base Stats table's `<td>` cells to apply a neutral highlight class (e.g., `bg-yellow-500/20` or `bg-slate-500/20`) if the units' stats are identical and non-zero.
+- - [ ] 6.1 Update the `Unit` interface in `types/unit.ts` to include an optional boolean field `isPromoted?: boolean;`.
 ## Completed Tasks for Git Commit
 - [x] 1.1 Create inline logic or a helper function to determine the highest numeric value among a set of stat values for a given row.
 - [x] 2.1 In `ComparisonGrid.tsx`, update the Base Stats table's `<td>` cells to apply a highlight class (e.g., `bg-green-500/20`) if the unit's stat is the highest in that row.
 - [x] 2.2 Replicate this highlight logic for the Growth Rates table in `ComparisonGrid.tsx`.
+- [x] 3.1 In `ComparisonGrid.tsx`, update the Base Stats table's `<td>` cells to apply a neutral highlight class (e.g., `bg-yellow-500/20` or `bg-slate-500/20`) if the units' stats are identical and non-zero.
+- [x] 3.2 Replicate this neutral highlight logic for the Growth Rates table in `ComparisonGrid.tsx` for identical stats.
+- [x] 4.1 Update the `getCommonStats` helper function in `ComparisonGrid.tsx` to handle base stats: filter out a stat key from the visible list if *both* units have a missing (`undefined`/`null`) value for that base stat.
+- [x] 4.2 Update the same helper (or create a new one specifically for growths) to filter out a stat key from the growths table if *both* units have a missing or `0` value for that growth rate (e.g., filtering out movement growths).
+- [x] 5.1 In `ComparisonGrid.tsx`, remove the rendering of the `CombinedAverageStatsTable` component and the `showAverage` prop logic.
+- [x] 5.2 Delete the `components/features/CombinedAverageStatsTable.tsx` file entirely.
