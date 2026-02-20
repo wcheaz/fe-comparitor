@@ -43,6 +43,7 @@ export interface Unit {
   baseWeaponRanks?: Record<string, string>; // Starting weapon ranks e.g. { Swords: "D", Lances: "E" }
   crests?: string[]; // Crests for Three Houses units
   dragonVein?: boolean; // Can use Dragon Veins (Fates)
+  prf?: string[]; // Preferred/Unique weapons only this unit can use
 }
 
 export interface Class {

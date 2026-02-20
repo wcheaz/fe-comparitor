@@ -89,11 +89,14 @@ export function ComparisonGrid({
               <tbody>
                 <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Class</td>
-                  {units.map((unit) => (
-                    <td key={`class-${unit.id}`} className="text-center p-2">
-                      {unit.class}
-                    </td>
-                  ))}
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    return (
+                      <td key={`class-${unit.id}`} className="text-center p-2">
+                        {cls ? cls.name : unit.class}
+                      </td>
+                    );
+                  })}
                 </tr>
                 <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Join Chapter</td>
@@ -135,24 +138,42 @@ export function ComparisonGrid({
                     })}
                   </tr>
                 )}
-                {units.some(u => u.crests && u.crests.length > 0) && (
+                {units.some(u => u.prf && u.prf.length > 0) && (
                   <tr className="border-b hover:bg-muted/50">
-                    <td className="p-2 font-medium">Crests</td>
+                    <td className="p-2 font-medium">Prf Weapons</td>
                     {units.map((unit) => (
-                      <td key={`crests-${unit.id}`} className="text-center p-2 text-sm">
-                        {unit.crests && unit.crests.length > 0 ? unit.crests.join(', ') : '-'}
+                      <td key={`prf-${unit.id}`} className="text-center p-2 text-sm">
+                        {unit.prf && unit.prf.length > 0 ? unit.prf.join(', ') : '-'}
                       </td>
                     ))}
                   </tr>
                 )}
-                {units.some(u => u.dragonVein !== undefined) && (
+                {units.some(u => (u.crests && u.crests.length > 0) || u.dragonVein) && (
                   <tr className="border-b hover:bg-muted/50">
-                    <td className="p-2 font-medium">Dragon Vein</td>
-                    {units.map((unit) => (
-                      <td key={`vein-${unit.id}`} className="text-center p-2">
-                        {unit.dragonVein ? 'Yes' : (unit.dragonVein === false ? 'No' : '-')}
-                      </td>
-                    ))}
+                    <td className="p-2 font-medium">Misc.</td>
+                    {units.map((unit) => {
+                      const miscItems = [];
+                      if (unit.crests && unit.crests.length > 0) {
+                        miscItems.push(`Crests: ${unit.crests.join(', ')}`);
+                      }
+                      if (unit.dragonVein) {
+                        miscItems.push('Dragon Vein');
+                      }
+
+                      return (
+                        <td key={`misc-${unit.id}`} className="text-center p-2 text-sm">
+                          {miscItems.length > 0 ? (
+                            <div className="space-y-1">
+                              {miscItems.map((item, i) => (
+                                <div key={i}>{item}</div>
+                              ))}
+                            </div>
+                          ) : (
+                            '-'
+                          )}
+                        </td>
+                      );
+                    })}
                   </tr>
                 )}
 
@@ -175,10 +196,31 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Class Modifiers</td>
                   {units.map((unit) => {
                     const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
-                    const modifiers = cls?.hiddenModifiers || [];
+
+                    const allModifiers: string[] = [];
+
+                    if (cls && cls.hiddenModifiers && cls.hiddenModifiers.length > 0) {
+                      allModifiers.push(...cls.hiddenModifiers.map(m => `${m} (${cls.name})`));
+                    }
+
+                    if (cls && cls.promotesTo) {
+                      cls.promotesTo.forEach(promoId => {
+                        const pCls = classes.find(c => c.id === promoId);
+                        if (pCls && pCls.hiddenModifiers && pCls.hiddenModifiers.length > 0) {
+                          allModifiers.push(...pCls.hiddenModifiers.map(m => `${m} (${pCls.name})`));
+                        }
+                      });
+                    }
+
                     return (
                       <td key={`modifiers-${unit.id}`} className="text-center p-2 text-sm">
-                        {modifiers.length > 0 ? modifiers.join(', ') : 'None'}
+                        {allModifiers.length > 0 ? (
+                          <div className="space-y-1">
+                            {allModifiers.map((mod, i) => (
+                              <div key={i}>{mod}</div>
+                            ))}
+                          </div>
+                        ) : 'None'}
                       </td>
                     );
                   })}

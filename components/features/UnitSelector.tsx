@@ -16,17 +16,17 @@ interface UnitSelectorProps {
 
 const GAME_OPTIONS = [
   { value: 'all', label: 'All Games' },
-  { value: 'Binding Blade', label: 'Fire Emblem: Binding Blade' },
+  { value: 'The Binding Blade', label: 'Fire Emblem: Binding Blade' },
   { value: 'Three Houses', label: 'Fire Emblem: Three Houses' },
   { value: 'Engage', label: 'Fire Emblem: Engage' }
 ];
 
-export function UnitSelector({ 
-  selectedUnits, 
-  onUnitSelect, 
-  onUnitRemove, 
+export function UnitSelector({
+  selectedUnits,
+  onUnitSelect,
+  onUnitRemove,
   maxUnits = 4,
-  className 
+  className
 }: UnitSelectorProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGame, setSelectedGame] = useState('all');
@@ -45,7 +45,7 @@ export function UnitSelector({
         setIsLoading(false);
       }
     }
-    
+
     loadUnits();
   }, []);
 
@@ -60,7 +60,7 @@ export function UnitSelector({
     // Filter by search term
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(unit => 
+      filtered = filtered.filter(unit =>
         unit.name.toLowerCase().includes(term) ||
         unit.class.toLowerCase().includes(term) ||
         unit.game.toLowerCase().includes(term)
@@ -68,7 +68,7 @@ export function UnitSelector({
     }
 
     // Remove already selected units
-    filtered = filtered.filter(unit => 
+    filtered = filtered.filter(unit =>
       !selectedUnits.some(selected => selected.id === unit.id)
     );
 
@@ -134,7 +134,7 @@ export function UnitSelector({
               className="w-full"
             />
           </div>
-          
+
           <div>
             <label className="text-sm font-medium mb-1 block">Filter by Game</label>
             <Select
@@ -151,18 +151,18 @@ export function UnitSelector({
           <h3 className="text-sm font-medium">
             Available Units ({filteredUnits.length})
           </h3>
-          
+
           {selectedUnits.length >= maxUnits && (
             <div className="text-sm text-muted-foreground">
               Maximum {maxUnits} units can be compared at once. Remove a unit to select another.
             </div>
           )}
-          
+
           <div className="max-h-60 overflow-y-auto space-y-1">
             {filteredUnits.length === 0 ? (
               <div className="text-sm text-muted-foreground text-center py-4">
-                {searchTerm || selectedGame !== 'all' 
-                  ? 'No units match your filters.' 
+                {searchTerm || selectedGame !== 'all'
+                  ? 'No units match your filters.'
                   : 'No units available.'
                 }
               </div>

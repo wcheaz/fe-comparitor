@@ -1,7 +1,7 @@
 [
     {
-        "id": "lord_m",
-        "name": "Lord (M)",
+        "id": "lord",
+        "name": "Lord",
         "type": "unpromoted",
         "baseStats": {
             "hp": 18,
@@ -16,7 +16,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [
-            "great_lord_m"
+            "great_lord"
         ],
         "hiddenModifiers": [],
         "weapons": [
@@ -40,48 +40,8 @@
         "gender": "M"
     },
     {
-        "id": "lord_f",
-        "name": "Lord (F)",
-        "type": "unpromoted",
-        "baseStats": {
-            "hp": 18,
-            "str": 5,
-            "skl": 5,
-            "spd": 7,
-            "lck": 7,
-            "def": 5,
-            "res": 0,
-            "con": 6,
-            "mov": 5
-        },
-        "promotionBonus": {},
-        "promotesTo": [
-            "great_lord_f"
-        ],
-        "hiddenModifiers": [],
-        "weapons": [
-            "Swords"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 20,
-            "mag": 20,
-            "skl": 20,
-            "dex": 20,
-            "spd": 20,
-            "lck": 30,
-            "def": 20,
-            "res": 20,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 30
-        },
-        "gender": "F"
-    },
-    {
-        "id": "great_lord_m",
-        "name": "Great Lord (M)",
+        "id": "great_lord",
+        "name": "Great Lord",
         "type": "promoted",
         "baseStats": {
             "hp": 26,
@@ -106,8 +66,7 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Lord",
-            "Sword of Seals"
+            "Lord"
         ],
         "weapons": [
             "Swords"
@@ -128,56 +87,6 @@
             "cha": 40
         },
         "gender": "M"
-    },
-    {
-        "id": "great_lord_f",
-        "name": "Great Lord (F)",
-        "type": "promoted",
-        "baseStats": {
-            "hp": 26,
-            "str": 8,
-            "skl": 8,
-            "spd": 10,
-            "lck": 9,
-            "def": 8,
-            "res": 2,
-            "con": 8,
-            "mov": 6
-        },
-        "promotionBonus": {
-            "hp": 4,
-            "str": 2,
-            "skl": 3,
-            "spd": 2,
-            "def": 2,
-            "res": 5,
-            "con": 2,
-            "mov": 1
-        },
-        "promotesTo": [],
-        "hiddenModifiers": [
-            "Lord",
-            "Sword of Seals"
-        ],
-        "weapons": [
-            "Swords"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 20,
-            "mag": 20,
-            "skl": 20,
-            "dex": 20,
-            "spd": 20,
-            "lck": 30,
-            "def": 20,
-            "res": 20,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 40
-        },
-        "gender": "F"
     },
     {
         "id": "mercenary_m",
@@ -462,7 +371,6 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Swordmaster",
             "+30 Crit"
         ],
         "weapons": [
@@ -512,7 +420,6 @@
         },
         "promotesTo": [],
         "hiddenModifiers": [
-            "Swordmaster",
             "+30 Crit"
         ],
         "weapons": [

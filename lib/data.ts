@@ -180,7 +180,8 @@ function transformJsonToUnit(rawUnit: any): Unit {
     gender: rawUnit.gender,
     baseWeaponRanks: rawUnit.baseWeaponRanks || {},
     crests: rawUnit.crests || [],
-    dragonVein: rawUnit.dragonVein || false
+    dragonVein: rawUnit.dragonVein || false,
+    prf: rawUnit.prf || []
   };
 
   // Apply normalization to standardize stat keys and handle missing stats
