@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit } from '@/types/unit';
-import { 
-  RadarChart, 
-  PolarGrid, 
-  PolarAngleAxis, 
+import {
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
   Legend,
@@ -33,10 +33,10 @@ const STAT_LABELS: Record<string, string> = {
   lck: 'Lck',
   def: 'Def',
   res: 'Res',
+  cha: 'Cha',
   con: 'Con',
   bld: 'Bld',
-  mov: 'Mov',
-  cha: 'Cha'
+  mov: 'Mov'
 };
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7c7c', '#8dd1e1', '#d084d0'];

@@ -33,12 +33,16 @@ export interface Unit {
   maxStats?: UnitStats; // Optional caps
   skills?: string[];
   isPromoted?: boolean; // Flag for units that start in a promoted class
+  gender?: 'M' | 'F';
 
   // New Advanced Features
   supports?: string[]; // List of unit IDs or Names this unit supports with
   reclassOptions?: string[]; // List of classes unit can reclass into
   promotions?: PromotionOption[]; // Branching promotion paths
   affinity?: string; // Support affinity (Fire, Thunder, etc.)
+  baseWeaponRanks?: Record<string, string>; // Starting weapon ranks e.g. { Swords: "D", Lances: "E" }
+  crests?: string[]; // Crests for Three Houses units
+  dragonVein?: boolean; // Can use Dragon Veins (Fates)
 }
 
 export interface Class {
@@ -48,7 +52,10 @@ export interface Class {
   baseStats: UnitStats;
   promotionBonus: UnitStats;
   promotesTo: string[];
+  weapons?: string[];
   hiddenModifiers: string[];
+  gender?: 'M' | 'F';
+  maxStats?: UnitStats;
 }
 
 export interface GameData {

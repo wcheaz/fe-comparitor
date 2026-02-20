@@ -1,34 +1,38 @@
 [
-  {
-    "id": "alear_m",
-    "name": "Alear (M)",
-    "game": "Engage",
-    "class": "Dragon Child",
-    "level": 1,
-    "hp": 22,
-    "str": 6,
-    "mag": 0,
-    "dex": 5,
-    "spd": 7,
-    "def": 5,
-    "res": 3,
-    "lck": 5,
-    "bld": 0,
-    "mov": 4,
-    "growths": {
-      "hp": 60,
-      "str": 35,
-      "mag": 20,
-      "dex": 45,
-      "spd": 50,
-      "def": 40,
-      "res": 25,
-      "lck": 30,
-      "bld": 5
-    },
-    "skills": [
-      "Divinely Inspiring"
-    ],
-    "joinChapter": "Chapter 1"
-  }
+    {
+        "id": "alear_m",
+        "name": "Alear (M)",
+        "game": "Engage",
+        "class": "Dragon Child",
+        "level": 1,
+        "hp": 22,
+        "str": 6,
+        "mag": 0,
+        "dex": 5,
+        "spd": 7,
+        "def": 5,
+        "res": 3,
+        "lck": 5,
+        "bld": 0,
+        "mov": 4,
+        "growths": {
+            "hp": 60,
+            "str": 35,
+            "mag": 20,
+            "dex": 45,
+            "spd": 50,
+            "def": 40,
+            "res": 25,
+            "lck": 30,
+            "bld": 5
+        },
+        "skills": [
+            "Divinely Inspiring"
+        ],
+        "joinChapter": "Chapter 1",
+        "baseWeaponRanks": {
+            "Swords": "B"
+        },
+        "dragonVein": false
+    }
 ]

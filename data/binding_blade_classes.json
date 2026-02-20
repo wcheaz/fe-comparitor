@@ -1,7 +1,7 @@
 [
     {
-        "id": "lord",
-        "name": "Lord",
+        "id": "lord_m",
+        "name": "Lord (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 18,
@@ -25,12 +25,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["lord_lord"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "master_lord_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "lord_lord",
-        "name": "Lord Lord",
+        "id": "lord_f",
+        "name": "Lord (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 5,
+            "spd": 7,
+            "lck": 7,
+            "def": 5,
+            "res": 0,
+            "con": 6,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "skl": 3,
+            "spd": 3,
+            "lck": 2,
+            "def": 3,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "master_lord_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "master_lord_m",
+        "name": "Lord Lord (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 26,
@@ -45,11 +116,74 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Lord", "Sword of Seals"]
+        "hiddenModifiers": [
+            "Lord",
+            "Sword of Seals"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 25,
+            "dex": 25,
+            "spd": 25,
+            "lck": 30,
+            "def": 25,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "mercenary",
-        "name": "Mercenary",
+        "id": "master_lord_f",
+        "name": "Lord Lord (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 8,
+            "skl": 8,
+            "spd": 10,
+            "lck": 9,
+            "def": 8,
+            "res": 2,
+            "con": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Lord",
+            "Sword of Seals"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "mercenary_m",
+        "name": "Mercenary (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 20,
@@ -73,12 +207,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["hero"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "hero_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "hero",
-        "name": "Hero",
+        "id": "mercenary_f",
+        "name": "Mercenary (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 6,
+            "skl": 8,
+            "spd": 7,
+            "lck": 5,
+            "def": 5,
+            "res": 0,
+            "con": 7,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "skl": 4,
+            "spd": 3,
+            "lck": 2,
+            "def": 3,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "hero_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "hero_m",
+        "name": "Hero (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 28,
@@ -93,11 +298,70 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Axes"]
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes",
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 30,
+            "dex": 30,
+            "spd": 26,
+            "lck": 30,
+            "def": 25,
+            "res": 22,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "myrmidon",
-        "name": "Myrmidon",
+        "id": "hero_f",
+        "name": "Hero (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 9,
+            "skl": 12,
+            "spd": 10,
+            "lck": 7,
+            "def": 8,
+            "res": 2,
+            "con": 9,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes",
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 30,
+            "dex": 30,
+            "spd": 26,
+            "lck": 30,
+            "def": 24,
+            "res": 24,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "myrmidon_m",
+        "name": "Myrmidon (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 18,
@@ -121,12 +385,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["swordmaster"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "swordmaster_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "swordmaster",
-        "name": "Swordmaster",
+        "id": "myrmidon_f",
+        "name": "Myrmidon (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 8,
+            "lck": 4,
+            "def": 3,
+            "res": 0,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "skl": 5,
+            "spd": 4,
+            "lck": 2,
+            "def": 2,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "swordmaster_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "swordmaster_m",
+        "name": "Swordmaster (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 24,
@@ -141,11 +476,74 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Swordmaster", "+30 Crit"]
+        "hiddenModifiers": [
+            "Swordmaster",
+            "+30 Crit"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 29,
+            "dex": 29,
+            "spd": 30,
+            "lck": 30,
+            "def": 22,
+            "res": 23,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "cavalier",
-        "name": "Cavalier",
+        "id": "swordmaster_f",
+        "name": "Swordmaster (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 7,
+            "skl": 12,
+            "spd": 12,
+            "lck": 6,
+            "def": 5,
+            "res": 3,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Swordmaster",
+            "+30 Crit"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 22,
+            "mag": 22,
+            "skl": 29,
+            "dex": 29,
+            "spd": 30,
+            "lck": 30,
+            "def": 22,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "cavalier_m",
+        "name": "Cavalier (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 20,
@@ -169,12 +567,91 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["paladin", "great_knight"],
-        "hiddenModifiers": ["Horse"]
+        "promotesTo": [
+            "paladin_m",
+            "great_knight_m"
+        ],
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "paladin",
-        "name": "Paladin",
+        "id": "cavalier_f",
+        "name": "Cavalier (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 7,
+            "skl": 6,
+            "spd": 6,
+            "lck": 5,
+            "def": 6,
+            "res": 2,
+            "con": 9,
+            "mov": 7
+        },
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "skl": 4,
+            "spd": 4,
+            "lck": 3,
+            "def": 4,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "paladin_f",
+            "great_knight_f"
+        ],
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "paladin_m",
+        "name": "Paladin (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 30,
@@ -189,11 +666,74 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Axes", "Lances"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 28,
+            "dex": 28,
+            "spd": 25,
+            "lck": 30,
+            "def": 25,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "great_knight",
-        "name": "Great Knight",
+        "id": "paladin_f",
+        "name": "Paladin (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 30,
+            "str": 11,
+            "skl": 10,
+            "spd": 10,
+            "lck": 8,
+            "def": 10,
+            "res": 5,
+            "con": 11,
+            "mov": 8
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 28,
+            "dex": 28,
+            "spd": 24,
+            "lck": 30,
+            "def": 24,
+            "res": 26,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "great_knight_m",
+        "name": "Great Knight (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 32,
@@ -208,11 +748,76 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Axes"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Axes",
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 28,
+            "mag": 28,
+            "skl": 24,
+            "dex": 24,
+            "spd": 24,
+            "lck": 30,
+            "def": 29,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "armor_knight",
-        "name": "Armor Knight",
+        "id": "great_knight_f",
+        "name": "Great Knight (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 32,
+            "str": 13,
+            "skl": 8,
+            "spd": 7,
+            "lck": 6,
+            "def": 12,
+            "res": 4,
+            "con": 13,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Axes",
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 28,
+            "mag": 28,
+            "skl": 24,
+            "dex": 24,
+            "spd": 24,
+            "lck": 30,
+            "def": 29,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "armor_knight_m",
+        "name": "Armor Knight (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 24,
@@ -236,12 +841,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["general"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "general_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "general",
-        "name": "General",
+        "id": "armor_knight_f",
+        "name": "Armor Knight (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 8,
+            "skl": 4,
+            "spd": 3,
+            "lck": 3,
+            "def": 10,
+            "res": 2,
+            "con": 12,
+            "mov": 4
+        },
+        "promotionBonus": {
+            "hp": 12,
+            "str": 6,
+            "skl": 4,
+            "spd": 2,
+            "lck": 2,
+            "def": 6,
+            "res": 4,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "general_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "general_m",
+        "name": "General (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 36,
@@ -256,11 +932,70 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": []
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances",
+            "Axes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 27,
+            "mag": 27,
+            "skl": 25,
+            "dex": 25,
+            "spd": 21,
+            "lck": 30,
+            "def": 30,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "archer",
-        "name": "Archer",
+        "id": "general_f",
+        "name": "General (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 36,
+            "str": 14,
+            "skl": 8,
+            "spd": 5,
+            "lck": 5,
+            "def": 16,
+            "res": 6,
+            "con": 14,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances",
+            "Axes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 25,
+            "dex": 25,
+            "spd": 22,
+            "lck": 30,
+            "def": 30,
+            "res": 26,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "archer_m",
+        "name": "Archer (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 18,
@@ -284,12 +1019,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["sniper"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "sniper_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "sniper",
-        "name": "Sniper",
+        "id": "archer_f",
+        "name": "Archer (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 5,
+            "lck": 5,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 4,
+            "skl": 6,
+            "spd": 4,
+            "lck": 3,
+            "def": 3,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "sniper_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "sniper_m",
+        "name": "Sniper (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 26,
@@ -304,11 +1110,72 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["+15 Crit"]
+        "hiddenModifiers": [
+            "+15 Crit"
+        ],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 30,
+            "dex": 30,
+            "spd": 29,
+            "lck": 30,
+            "def": 22,
+            "res": 23,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "pegasus_knight",
-        "name": "Pegasus Knight",
+        "id": "sniper_f",
+        "name": "Sniper (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 9,
+            "skl": 13,
+            "spd": 9,
+            "lck": 8,
+            "def": 6,
+            "res": 4,
+            "con": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "+15 Crit"
+        ],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 23,
+            "mag": 23,
+            "skl": 30,
+            "dex": 30,
+            "spd": 29,
+            "lck": 30,
+            "def": 21,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "pegasus_knight_f",
+        "name": "Pegasus Knight (F)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
@@ -332,12 +1199,36 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["falcoknight"],
-        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+        "promotesTo": [
+            "falcoknight_f"
+        ],
+        "hiddenModifiers": [
+            "Flying"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
     },
     {
-        "id": "falcoknight",
-        "name": "Falcon Knight",
+        "id": "falcoknight_f",
+        "name": "Falcon Knight (F)",
         "type": "promoted",
         "baseStats": {
             "hp": 24,
@@ -352,11 +1243,33 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+        "hiddenModifiers": [
+            "Flying"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 23,
+            "mag": 23,
+            "skl": 25,
+            "dex": 25,
+            "spd": 28,
+            "lck": 30,
+            "def": 24,
+            "res": 28,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
     },
     {
-        "id": "mage",
-        "name": "Mage",
+        "id": "mage_m",
+        "name": "Mage (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
@@ -380,12 +1293,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["sage"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "sage_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "sage",
-        "name": "Sage",
+        "id": "mage_f",
+        "name": "Mage (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 3,
+            "skl": 6,
+            "spd": 5,
+            "lck": 4,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "skl": 5,
+            "spd": 4,
+            "lck": 3,
+            "def": 2,
+            "res": 5,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "sage_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "sage_m",
+        "name": "Sage (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 24,
@@ -400,11 +1384,72 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Anima", "Light", "Staves"]
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima",
+            "Light",
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 28,
+            "mag": 28,
+            "skl": 30,
+            "dex": 30,
+            "spd": 25,
+            "lck": 30,
+            "def": 20,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "priest",
-        "name": "Priest",
+        "id": "sage_f",
+        "name": "Sage (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 5,
+            "skl": 11,
+            "spd": 9,
+            "lck": 7,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima",
+            "Light",
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 28,
+            "dex": 28,
+            "spd": 25,
+            "lck": 30,
+            "def": 20,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "priest_m",
+        "name": "Priest (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
@@ -428,12 +1473,83 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["bishop"],
-        "hiddenModifiers": ["Staves"]
+        "promotesTo": [
+            "bishop_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "bishop",
-        "name": "Bishop",
+        "id": "priest_f",
+        "name": "Priest (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 2,
+            "skl": 4,
+            "spd": 4,
+            "lck": 5,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "skl": 4,
+            "spd": 3,
+            "lck": 3,
+            "def": 2,
+            "res": 5,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "bishop_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "bishop_m",
+        "name": "Bishop (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 24,
@@ -448,11 +1564,76 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Staves", "+10 Magic", "+10 Resistance"]
+        "hiddenModifiers": [
+            "+10 Magic",
+            "+10 Resistance"
+        ],
+        "weapons": [
+            "Staves",
+            "Light"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 26,
+            "dex": 26,
+            "spd": 25,
+            "lck": 30,
+            "def": 22,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
     },
     {
-        "id": "thief",
-        "name": "Thief",
+        "id": "bishop_f",
+        "name": "Bishop (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 4,
+            "skl": 8,
+            "spd": 7,
+            "lck": 8,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "+10 Magic",
+            "+10 Resistance"
+        ],
+        "weapons": [
+            "Staves",
+            "Light"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 26,
+            "mag": 26,
+            "skl": 25,
+            "dex": 25,
+            "spd": 26,
+            "lck": 30,
+            "def": 21,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
+    },
+    {
+        "id": "thief_m",
+        "name": "Thief (M)",
         "type": "unpromoted",
         "baseStats": {
             "hp": 18,
@@ -476,12 +1657,87 @@
             "con": 2,
             "mov": 1
         },
-        "promotesTo": ["rogue"],
-        "hiddenModifiers": ["Locktouch"]
+        "promotesTo": [
+            "rogue_m"
+        ],
+        "hiddenModifiers": [
+            "Locktouch"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M"
     },
     {
-        "id": "rogue",
-        "name": "Rogue",
+        "id": "thief_f",
+        "name": "Thief (F)",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 4,
+            "skl": 8,
+            "spd": 8,
+            "lck": 7,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "skl": 6,
+            "spd": 6,
+            "lck": 4,
+            "def": 2,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [
+            "rogue_f"
+        ],
+        "hiddenModifiers": [
+            "Locktouch"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F"
+    },
+    {
+        "id": "rogue_m",
+        "name": "Rogue (M)",
         "type": "promoted",
         "baseStats": {
             "hp": 24,
@@ -496,6 +1752,69 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Locktouch", "+15 Avoid"]
+        "hiddenModifiers": [
+            "Locktouch",
+            "+15 Avoid"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M"
+    },
+    {
+        "id": "rogue_f",
+        "name": "Rogue (F)",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 6,
+            "skl": 14,
+            "spd": 14,
+            "lck": 11,
+            "def": 5,
+            "res": 3,
+            "con": 8,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Locktouch",
+            "+15 Avoid"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "F"
     }
 ]

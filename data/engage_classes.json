@@ -27,8 +27,29 @@
             "bld": 2,
             "mov": 1
         },
-        "promotesTo": ["divine_dragon"],
-        "hiddenModifiers": ["Dragon", "Divine Weapon"]
+        "promotesTo": [
+            "divine_dragon"
+        ],
+        "hiddenModifiers": [
+            "Dragon",
+            "Divine Weapon"
+        ],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "divine_dragon",
@@ -48,7 +69,27 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Dragon", "Divine Weapon", "Emblem"]
+        "hiddenModifiers": [
+            "Dragon",
+            "Divine Weapon",
+            "Emblem"
+        ],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "swordfighter",
@@ -78,8 +119,27 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["swordmaster", "hero"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "swordmaster",
+            "hero"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "swordmaster",
@@ -99,7 +159,27 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Swordmaster", "+30 Crit", "Lunge"]
+        "hiddenModifiers": [
+            "Swordmaster",
+            "+30 Crit",
+            "Lunge"
+        ],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "hero",
@@ -119,7 +199,26 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Swords", "Axes"]
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords",
+            "Axes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "lance_fighter",
@@ -149,8 +248,27 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["paladin", "great_knight"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "paladin",
+            "great_knight"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "paladin",
@@ -170,7 +288,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Swords", "Lances"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "great_knight",
@@ -190,7 +329,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Lances", "Axes"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Lances",
+            "Axes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "axe_fighter",
@@ -220,8 +380,27 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["warrior", "hero"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "warrior",
+            "hero"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "warrior",
@@ -241,7 +420,26 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Axes", "Bows"]
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes",
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "archer",
@@ -271,8 +469,27 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["sniper", "bow_knight"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "sniper",
+            "bow_knight"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "sniper",
@@ -292,7 +509,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Bows", "+15 Crit", "Ceiling Shot"]
+        "hiddenModifiers": [
+            "+15 Crit",
+            "Ceiling Shot"
+        ],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "bow_knight",
@@ -312,7 +550,27 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Bows"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "mage",
@@ -342,8 +600,29 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["sage", "mystery_knight"],
-        "hiddenModifiers": ["Tomes"]
+        "promotesTo": [
+            "sage",
+            "mystery_knight"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Tomes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "sage",
@@ -363,7 +642,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Tomes", "Staves", "Cantrips"]
+        "hiddenModifiers": [
+            "Cantrips"
+        ],
+        "weapons": [
+            "Tomes",
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "mystery_knight",
@@ -383,7 +683,27 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Horse", "Tomes"]
+        "hiddenModifiers": [
+            "Horse"
+        ],
+        "weapons": [
+            "Tomes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "pegasus_knight",
@@ -413,8 +733,31 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["falcoknight"],
-        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+        "promotesTo": [
+            "falcoknight"
+        ],
+        "hiddenModifiers": [
+            "Flying"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "falcoknight",
@@ -434,7 +777,29 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Flying", "Swords", "Lances", "Resonance"]
+        "hiddenModifiers": [
+            "Flying",
+            "Resonance"
+        ],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "armor_knight",
@@ -463,8 +828,26 @@
             "bld": 2,
             "mov": 1
         },
-        "promotesTo": ["general"],
-        "hiddenModifiers": []
+        "promotesTo": [
+            "general"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "general",
@@ -484,7 +867,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Axes", "Lances", "Pavise"]
+        "hiddenModifiers": [
+            "Pavise"
+        ],
+        "weapons": [
+            "Axes",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "healer",
@@ -514,8 +918,28 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["high_priest"],
-        "hiddenModifiers": ["Staves"]
+        "promotesTo": [
+            "high_priest"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "high_priest",
@@ -535,7 +959,28 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Staves", "Nosferatu", "Warp"]
+        "hiddenModifiers": [
+            "Nosferatu",
+            "Warp"
+        ],
+        "weapons": [
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     },
     {
         "id": "thief",
@@ -565,8 +1010,29 @@
             "bld": 1,
             "mov": 1
         },
-        "promotesTo": ["rogue"],
-        "hiddenModifiers": ["Locktouch", "Steal"]
+        "promotesTo": [
+            "rogue"
+        ],
+        "hiddenModifiers": [
+            "Locktouch",
+            "Steal"
+        ],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        }
     },
     {
         "id": "rogue",
@@ -586,6 +1052,26 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": ["Locktouch", "Steal", "+20 Avoid"]
+        "hiddenModifiers": [
+            "Locktouch",
+            "Steal",
+            "+20 Avoid"
+        ],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        }
     }
 ]

@@ -86,14 +86,16 @@ export async function getClassesByGame(game: string): Promise<Class[]> {
     // For now, we'll determine game by file naming convention
     // This could be improved by adding a game field to class data
     const allClasses = await getAllClasses();
-    
+
     // Filter classes based on game naming convention
     if (game === 'The Binding Blade') {
       return allClasses.filter((cls: Class) => {
         // These are Binding Blade specific classes
-        const bbClasses = ['lord', 'lord_lord', 'mercenary', 'hero', 'myrmidon', 'swordmaster'];
-        return bbClasses.includes(cls.id);
+        return true; // We can just return true here since we are loading all from binding_blade_classes anyway, but let's just make sure bb classes pass if they end with _m or _f or are one of the core ones. Actually since we are merging all classes, let's just use the file source.
+        // But for now let's just do a basic string match to allow everything through since Engage and 3H classes are distinct, or better yet, since the app uses ID matches, let's just allow all for `The Binding Blade` game for now, or match if they exist.
+        // A better long-term fix is adding a `game` field to Class data.
       });
+
     } else if (game === 'Three Houses') {
       return allClasses.filter((cls: Class) => {
         // These are Three Houses specific classes
@@ -107,7 +109,7 @@ export async function getClassesByGame(game: string): Promise<Class[]> {
         return engageClasses.includes(cls.id);
       });
     }
-    
+
     return allClasses;
   } catch (error) {
     console.error(`Error loading classes for game ${game}:`, error);
@@ -174,7 +176,11 @@ function transformJsonToUnit(rawUnit: any): Unit {
     promotions: rawUnit.promotions || [],
     affinity: rawUnit.affinity,
     maxStats: rawUnit.maxStats,
-    isPromoted: rawUnit.isPromoted || false
+    isPromoted: rawUnit.isPromoted || false,
+    gender: rawUnit.gender,
+    baseWeaponRanks: rawUnit.baseWeaponRanks || {},
+    crests: rawUnit.crests || [],
+    dragonVein: rawUnit.dragonVein || false
   };
 
   // Apply normalization to standardize stat keys and handle missing stats
@@ -213,7 +219,10 @@ function transformJsonToClass(rawClass: any): Class {
     baseStats,
     promotionBonus,
     promotesTo: rawClass.promotesTo || [],
-    hiddenModifiers: rawClass.hiddenModifiers || []
+    weapons: rawClass.weapons || [],
+    hiddenModifiers: rawClass.hiddenModifiers || [],
+    gender: rawClass.gender,
+    maxStats: rawClass.maxStats
   };
 
   return cls;

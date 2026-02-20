@@ -29,6 +29,27 @@
         "skills": [
             "Imperial Lineage"
         ],
-        "joinChapter": "Prologue"
+        "joinChapter": "Prologue",
+        "maxStats": {
+            "hp": 99,
+            "str": 80,
+            "mag": 80,
+            "dex": 80,
+            "spd": 80,
+            "lck": 80,
+            "def": 80,
+            "res": 80,
+            "cha": 99
+        },
+        "baseWeaponRanks": {
+            "Swords": "D",
+            "Axes": "D",
+            "Authority": "D",
+            "Heavy Armor": "D"
+        },
+        "crests": [
+            "Minor Crest of Seiros",
+            "Major Crest of Flames"
+        ]
     }
 ]

@@ -3,7 +3,7 @@
         "id": "roy",
         "name": "Roy",
         "game": "The Binding Blade",
-        "class": "Lord",
+        "class": "lord_m",
         "level": 1,
         "hp": 18,
         "str": 5,
@@ -24,13 +24,18 @@
             "res": 30
         },
         "skills": [],
-        "joinChapter": "Chapter 1"
+        "joinChapter": "Chapter 1",
+        "gender": "M",
+        "affinity": "Fire",
+        "baseWeaponRanks": {
+            "Swords": "D"
+        }
     },
     {
         "id": "marcus",
         "name": "Marcus",
         "game": "The Binding Blade",
-        "class": "Paladin",
+        "class": "paladin_m",
         "level": 1,
         "hp": 32,
         "str": 9,
@@ -52,6 +57,13 @@
             "res": 20
         },
         "skills": [],
-        "joinChapter": "Chapter 1"
+        "joinChapter": "Chapter 1",
+        "gender": "M",
+        "affinity": "Ice",
+        "baseWeaponRanks": {
+            "Swords": "A",
+            "Lances": "A",
+            "Axes": "A"
+        }
     }
 ]

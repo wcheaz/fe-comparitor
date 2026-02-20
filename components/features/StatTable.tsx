@@ -17,16 +17,16 @@ const STAT_LABELS: Record<string, string> = {
   lck: 'Lck',
   def: 'Def',
   res: 'Res',
+  cha: 'Cha',
   con: 'Con',
   bld: 'Bld',
-  mov: 'Mov',
-  cha: 'Cha'
+  mov: 'Mov'
 };
 
-export function StatTable({ 
-  unit, 
-  showGrowths = true, 
-  className 
+export function StatTable({
+  unit,
+  showGrowths = true,
+  className
 }: StatTableProps) {
   // Get all unique stat keys from stats and growths
   const allStatKeys = new Set([
@@ -34,7 +34,8 @@ export function StatTable({
     ...Object.keys(unit.growths)
   ]);
 
-  const statKeys = Array.from(allStatKeys).filter(key => key in STAT_LABELS);
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+  const statKeys = statOrder.filter(key => allStatKeys.has(key));
 
   return (
     <div className={`overflow-x-auto ${className}`}>
@@ -52,7 +53,7 @@ export function StatTable({
           {statKeys.map((statKey) => {
             const baseValue = unit.stats[statKey] ?? '-';
             const growthValue = unit.growths[statKey] ?? '-';
-            
+
             return (
               <tr key={statKey} className="border-b hover:bg-muted/50">
                 <td className="p-2 font-medium">

@@ -13,6 +13,7 @@ interface ProgressionRow {
   internalLevel: number;
   displayLevel: string;
   stats: UnitStats[];
+  cappedStats: Record<string, boolean>[];
   isPromotionLevel: boolean;
   promotionInfo?: {
     className: string;
@@ -37,11 +38,12 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
   const progressionData = useMemo(() => {
     if (units.length === 0) return { rows: [], statKeys: [] };
 
-    const minLevel = Math.min(...units.map(unit => unit.level));
-    const maxLevel = expandToLevel100 ? 100 : 40;
+    const getEffectiveLevel = (u: Unit) => u.isPromoted ? u.level + 20 : u.level;
+    const minLevel = Math.min(...units.map(getEffectiveLevel));
+    const maxLevel = Math.max(expandToLevel100 ? 100 : 40, ...units.map(getEffectiveLevel));
 
     // Generate progression arrays for all units
-    const allProgressions = units.map(unit => 
+    const allProgressions = units.map(unit =>
       generateProgressionArray(unit, minLevel, maxLevel, classes)
     );
 
@@ -51,43 +53,57 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       Object.keys(unit.stats).forEach(key => allStatKeys.add(key));
     });
 
-    // Remove movement and build/constitution from display stats
-    const displayStats = Array.from(allStatKeys).filter(key => 
-      !['mov', 'con', 'bld', 'cha'].includes(key)
-    ).sort();
+    // Define proper stat order and filter display stats
+    const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+    const displayStats = statOrder.filter(key =>
+      allStatKeys.has(key) && !['mov', 'con', 'bld', 'cha'].includes(key)
+    );
 
     // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
     const totalLevels = maxLevel - minLevel + 1;
-    
+
     for (let i = 0; i < totalLevels; i++) {
+      const currentInternalLevel = minLevel + i;
+      let displayLevel = `Level ${currentInternalLevel}`;
+      let isPromotionLevel = false;
+
+      if (currentInternalLevel === 20) {
+        displayLevel = `Level 20`;
+        isPromotionLevel = true;
+      } else if (currentInternalLevel === 21) {
+        displayLevel = "Level 1 (Promoted)";
+      } else if (currentInternalLevel > 21) {
+        displayLevel = `Level ${currentInternalLevel - 20} (Promoted)`;
+      }
+
       const rowData: ProgressionRow = {
-        internalLevel: minLevel + i,
-        displayLevel: `Level ${minLevel + i}`,
+        internalLevel: currentInternalLevel,
+        displayLevel,
         stats: [],
-        isPromotionLevel: false
+        cappedStats: [],
+        isPromotionLevel
       };
-      
+
       // Collect data for each unit at this level index
       for (let unitIndex = 0; unitIndex < units.length; unitIndex++) {
         const unitProgression = allProgressions[unitIndex];
         const levelData = unitProgression[i];
-        
+
         if (levelData) {
-          // Use the display level and promotion info from the first unit's progression
-          if (unitIndex === 0) {
-            rowData.displayLevel = levelData.displayLevel;
-            rowData.isPromotionLevel = levelData.isPromotionLevel;
+          if (levelData.promotionInfo && !rowData.promotionInfo) {
             rowData.promotionInfo = levelData.promotionInfo;
           }
-          
+
           rowData.stats.push(levelData.stats);
+          rowData.cappedStats.push(levelData.cappedStats);
         } else {
           // Fallback for missing data
           rowData.stats.push({});
+          rowData.cappedStats.push({});
         }
       }
-      
+
       rows.push(rowData);
     }
 
@@ -105,7 +121,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Stat Progression Table</h2>
+        <h2 className="text-xl font-semibold">Average Stats</h2>
         <div className="flex items-center space-x-2">
           <label className="flex items-center space-x-2">
             <input
@@ -127,8 +143,8 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 Level
               </th>
               {units.map((unit, unitIndex) => (
-                <th 
-                  key={unit.id} 
+                <th
+                  key={unit.id}
                   colSpan={progressionData.statKeys.length}
                   className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100"
                 >
@@ -142,7 +158,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
               {units.map((unit, unitIndex) => (
                 <React.Fragment key={unit.id}>
                   {progressionData.statKeys.map(statKey => (
-                    <th 
+                    <th
                       key={`${unit.id}-${statKey}`}
                       className="border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50"
                     >
@@ -158,26 +174,21 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
               <tr key={row.internalLevel} className={`${row.isPromotionLevel ? 'bg-blue-50' : ''} hover:bg-gray-50`}>
                 <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
                   {row.displayLevel}
-                  {/* Show hidden modifiers on promotion level */}
-                  {row.promotionInfo?.hiddenModifiers && row.promotionInfo.hiddenModifiers.length > 0 && (
-                    <div className="text-xs text-blue-600">
-                      {row.promotionInfo.hiddenModifiers.join(', ')}
-                    </div>
-                  )}
                 </td>
                 {units.map((unit, unitIndex) => (
                   <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
                     {progressionData.statKeys.map(statKey => {
                       const unitStats = row.stats[unitIndex];
+                      const unitCappedStats = row.cappedStats[unitIndex];
                       const statValue = unitStats[statKey];
-                      const shouldShowDash = row.internalLevel < unit.level;
-                      
+                      const isCapped = unitCappedStats?.[statKey];
+                      const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
+                      const shouldShowDash = row.internalLevel < effectiveUnitLevel;
+
                       return (
-                        <td 
+                        <td
                           key={`${row.internalLevel}-${unit.id}-${statKey}`}
-                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${
-                            row.isPromotionLevel ? 'bg-blue-100' : ''
-                          }`}
+                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${row.isPromotionLevel ? 'bg-blue-100' : ''} ${isCapped ? 'text-green-600 font-bold' : ''}`}
                         >
                           {shouldShowDash ? (
                             <span className="text-gray-400">-</span>
@@ -209,12 +220,12 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
             <span>Promotion level</span>
           </div>
           <div className="flex items-center space-x-1">
-            <span className="text-blue-600">+30 Crit, Flying, etc.</span>
-            <span>Hidden class modifiers</span>
-          </div>
-          <div className="flex items-center space-x-1">
             <span className="text-gray-400">-</span>
             <span>Unit not yet available at this level</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <span className="text-green-600 font-bold">20</span>
+            <span>Stat capped</span>
           </div>
           <div className="flex items-center space-x-1">
             <div className="w-3 h-3 bg-blue-100 border border-blue-300"></div>

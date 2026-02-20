@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Unit } from '@/types/unit';
+import { Unit, Class } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
+import { getAllClasses } from '@/lib/data';
 
 interface ComparisonGridProps {
   units: Unit[];
@@ -26,9 +27,11 @@ export function ComparisonGrid({
     };
   }, [units]);
 
+  const [classes, setClasses] = React.useState<Class[]>([]);
 
-
-  if (units.length === 0) {
+  React.useEffect(() => {
+    getAllClasses().then(setClasses).catch(console.error);
+  }, []); if (units.length === 0) {
     return (
       <Card className={className}>
         <CardContent className="p-8">
@@ -108,13 +111,103 @@ export function ComparisonGrid({
                     </td>
                   ))}
                 </tr>
+                {units.some(u => u.affinity) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Affinity</td>
+                    {units.map((unit) => (
+                      <td key={`affinity-${unit.id}`} className="text-center p-2">
+                        {unit.affinity || '-'}
+                      </td>
+                    ))}
+                  </tr>
+                )}
+                {units.some(u => u.baseWeaponRanks && Object.keys(u.baseWeaponRanks).length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Base Weapon Ranks</td>
+                    {units.map((unit) => {
+                      const ranks = unit.baseWeaponRanks || {};
+                      const entries = Object.entries(ranks);
+                      return (
+                        <td key={`ranks-${unit.id}`} className="text-center p-2 text-sm">
+                          {entries.length > 0 ? entries.map(([w, r]) => `${w}: ${r}`).join(', ') : '-'}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )}
+                {units.some(u => u.crests && u.crests.length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Crests</td>
+                    {units.map((unit) => (
+                      <td key={`crests-${unit.id}`} className="text-center p-2 text-sm">
+                        {unit.crests && unit.crests.length > 0 ? unit.crests.join(', ') : '-'}
+                      </td>
+                    ))}
+                  </tr>
+                )}
+                {units.some(u => u.dragonVein !== undefined) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Dragon Vein</td>
+                    {units.map((unit) => (
+                      <td key={`vein-${unit.id}`} className="text-center p-2">
+                        {unit.dragonVein ? 'Yes' : (unit.dragonVein === false ? 'No' : '-')}
+                      </td>
+                    ))}
+                  </tr>
+                )}
+
                 <tr className="border-b hover:bg-muted/50">
-                  <td className="p-2 font-medium">Affinity</td>
-                  {units.map((unit) => (
-                    <td key={`affinity-${unit.id}`} className="text-center p-2">
-                      {unit.affinity || '-'}
-                    </td>
-                  ))}
+                  <td className="p-2 font-medium">Promotes To</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const promotesToNames = (cls?.promotesTo || []).map(id => {
+                      const pCls = classes.find(c => c.id === id);
+                      return pCls ? pCls.name : id;
+                    });
+                    return (
+                      <td key={`promotes-${unit.id}`} className="text-center p-2 text-sm">
+                        {promotesToNames.length > 0 ? promotesToNames.join(', ') : 'None'}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Class Modifiers</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const modifiers = cls?.hiddenModifiers || [];
+                    return (
+                      <td key={`modifiers-${unit.id}`} className="text-center p-2 text-sm">
+                        {modifiers.length > 0 ? modifiers.join(', ') : 'None'}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Weapons</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const weapons = cls?.weapons || [];
+
+                    let weaponDisplay = 'None';
+                    if (unit.game === 'Three Houses') {
+                      const usesMagic = weapons.includes('Reason') || weapons.includes('Faith') || weapons.includes('Magic') || weapons.includes('Tomes') || weapons.includes('Staves') || weapons.includes('Dark Magic');
+                      const usesGauntlets = weapons.includes('Fists') || weapons.includes('Gauntlets');
+
+                      const parts = [];
+                      parts.push(`Magic: ${usesMagic ? 'Yes' : 'No'}`);
+                      parts.push(`Gauntlets: ${usesGauntlets ? 'Yes' : 'No'}`);
+                      weaponDisplay = parts.join(', ');
+                    } else if (weapons.length > 0) {
+                      weaponDisplay = weapons.join(', ');
+                    }
+
+                    return (
+                      <td key={`weapons-${unit.id}`} className="text-center p-2 text-sm">
+                        {weaponDisplay}
+                      </td>
+                    );
+                  })}
                 </tr>
               </tbody>
             </table>
@@ -303,7 +396,7 @@ function getCommonStats(units: Unit[]): string[] {
   });
 
   // Return stats in a logical order
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
 
   return statOrder.filter(stat => statSet.has(stat));
 }
@@ -314,7 +407,7 @@ function getCommonBaseStats(units: Unit[]): string[] {
   }
 
   const commonStats: string[] = [];
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
 
   statOrder.forEach(statKey => {
     // Check if at least one unit has this base stat (non-zero and non-missing)
@@ -347,7 +440,7 @@ function getCommonGrowthStats(units: Unit[]): string[] {
   }
 
   const commonStats: string[] = [];
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
 
   statOrder.forEach(statKey => {
     // Check if at least one unit has this growth stat (non-zero and non-missing)

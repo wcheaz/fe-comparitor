@@ -50,3 +50,19 @@ This document outlines the features implemented in the Fire Emblem Unit Comparat
   - Updated the `Unit` data model to include an `isPromoted` boolean flag.
   - Added `isPromoted: true` to prepromoted units in the `binding_blade_units.json` data file (like Marcus).
   - The "Unit Details" table now conditionally displays "(Promoted)" next to the unit's level if the flag is true.
+
+- **Stat Progression Refactoring & Enhancements (2026-02-20)**
+  - Updated `Unit Details` section to fetch and display the unit's intrinsic properties directly from class data tables:
+    - Lists potential `Promotes To` branching class paths.
+    - Explicitly details `Weapons` for individual classes rather than abstractly grouping them. Added special logic for Three Houses to describe `Magic: Yes/No` and `Gauntlets: Yes/No`.
+    - Explicitly lists `Class Modifiers` independently from weapons or generic descriptors.
+  - Revamped the "Stat Progression Table" heading to "Average Stats" instead.
+  - Re-ordered the statistical categories map (moved `Cha` from the end to between `Res` and `Con`) in:
+    - `StatProgressionTable.tsx`
+    - `StatTable.tsx`
+    - `ComparisonGrid.tsx`
+    - `GrowthChart.tsx`
+  - Overhauled average stat mathematical generation inside `lib/stats.ts`:
+    - Changed the `Average Stats` table layout to represent unpromoted levels from 1 to 20, visually indicating the "promotion threshold" level with a `✨` icon.
+    - Subsequent stats generate an additional 1 through 20 level mapping designated as `Level X (Promoted)` that incorporates physical class promotion bonuses across the array.
+    - Introduced actual math capping limitations `maxStats` for class limits and absolute unit limits. The `Average Stats` table tracks when the algorithm attempts to surpass these caps and halts their growth in the table cell while highlighting the cell green to denote it's been capped.
