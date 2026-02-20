@@ -144,9 +144,9 @@ export function ComparisonGrid({
                       </tr>
                     </thead>
                     <tbody>
-{getCommonBaseStats(units).map((statKey) => {
+                      {getCommonBaseStats(units).map((statKey) => {
                         const highlightStats = getHighlightStats(units, statKey, 'base');
-                        
+
                         return (
                           <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
                             <td className="p-2 font-medium">
@@ -164,8 +164,8 @@ export function ComparisonGrid({
                               }
 
                               return (
-                                <td 
-                                  key={`base-${statKey}-${unit.id}`} 
+                                <td
+                                  key={`base-${statKey}-${unit.id}`}
                                   className={`text-center p-2 ${highlightClass}`}
                                 >
                                   <span className="font-medium">{baseValue}</span>
@@ -202,37 +202,37 @@ export function ComparisonGrid({
                         </tr>
                       </thead>
                       <tbody>
-{getCommonGrowthStats(units).map((statKey) => {
-                        const highlightStats = getHighlightStats(units, statKey, 'growth');
-                        
-                        return (
-                          <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
-                            <td className="p-2 font-medium">
-                              {getStatLabel(statKey)}
-                            </td>
-                            {units.map((unit, unitIndex) => {
-                              const growthValue = unit.growths[statKey] ?? '-';
-                              const highlight = highlightStats[unitIndex];
+                        {getCommonGrowthStats(units).map((statKey) => {
+                          const highlightStats = getHighlightStats(units, statKey, 'growth');
 
-                              let highlightClass = '';
-                              if (highlight.isHighest) {
-                                highlightClass = 'bg-green-500/20';
-                              } else if (highlight.isEqual) {
-                                highlightClass = 'bg-yellow-500/20';
-                              }
+                          return (
+                            <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
+                              <td className="p-2 font-medium">
+                                {getStatLabel(statKey)}
+                              </td>
+                              {units.map((unit, unitIndex) => {
+                                const growthValue = unit.growths[statKey] ?? '-';
+                                const highlight = highlightStats[unitIndex];
 
-                              return (
-                                <td 
-                                  key={`growth-${statKey}-${unit.id}`} 
-                                  className={`text-center p-2 ${highlightClass}`}
-                                >
-                                  <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
-                                </td>
-                              );
-                            })}
-                          </tr>
-                        );
-                      })}
+                                let highlightClass = '';
+                                if (highlight.isHighest) {
+                                  highlightClass = 'bg-green-500/20';
+                                } else if (highlight.isEqual) {
+                                  highlightClass = 'bg-yellow-500/20';
+                                }
+
+                                return (
+                                  <td
+                                    key={`growth-${statKey}-${unit.id}`}
+                                    className={`text-center p-2 ${highlightClass}`}
+                                  >
+                                    <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -288,7 +288,7 @@ export function ComparisonGrid({
         </Card>
       )}
 
-      
+
     </div>
   );
 }
@@ -317,17 +317,23 @@ function getCommonBaseStats(units: Unit[]): string[] {
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
 
   statOrder.forEach(statKey => {
-    // Check if at least one unit has this base stat
-    const hasValidStat = units.some(unit => 
-      unit.stats[statKey] !== undefined && unit.stats[statKey] !== null
+    // Check if at least one unit has this base stat (non-zero and non-missing)
+    // We treat 0 as "missing" for base stats like Bld/Cha/Mag in older games
+    // Note: HP, Str, etc should never be naturally 0 base.
+    const hasValidStat = units.some(unit =>
+      unit.stats[statKey] !== undefined &&
+      unit.stats[statKey] !== null &&
+      unit.stats[statKey] !== 0
     );
 
-    // Check if both units don't have this base stat (filter out if both missing)
-    const bothMissing = units.every(unit => 
-      unit.stats[statKey] === undefined || unit.stats[statKey] === null
+    // Check if both units have missing or 0 base stat (filter out if both missing/zero)
+    const bothMissingOrZero = units.every(unit =>
+      unit.stats[statKey] === undefined ||
+      unit.stats[statKey] === null ||
+      unit.stats[statKey] === 0
     );
 
-    if (hasValidStat && !bothMissing) {
+    if (hasValidStat && !bothMissingOrZero) {
       commonStats.push(statKey);
     }
   });
@@ -345,16 +351,16 @@ function getCommonGrowthStats(units: Unit[]): string[] {
 
   statOrder.forEach(statKey => {
     // Check if at least one unit has this growth stat (non-zero and non-missing)
-    const hasValidGrowth = units.some(unit => 
-      unit.growths[statKey] !== undefined && 
-      unit.growths[statKey] !== null && 
+    const hasValidGrowth = units.some(unit =>
+      unit.growths[statKey] !== undefined &&
+      unit.growths[statKey] !== null &&
       unit.growths[statKey] !== 0
     );
 
     // Check if both units have missing or 0 growth (filter out if both missing/zero)
-    const bothMissingOrZero = units.every(unit => 
-      unit.growths[statKey] === undefined || 
-      unit.growths[statKey] === null || 
+    const bothMissingOrZero = units.every(unit =>
+      unit.growths[statKey] === undefined ||
+      unit.growths[statKey] === null ||
       unit.growths[statKey] === 0
     );
 
@@ -388,10 +394,10 @@ function getStatLabel(statKey: string): string {
 
 function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'growth'): { isHighest: boolean; isEqual: boolean }[] {
   return units.map((unit, index) => {
-    const currentValue = statType === 'base' 
-      ? unit.stats[statKey] 
+    const currentValue = statType === 'base'
+      ? unit.stats[statKey]
       : unit.growths[statKey];
-    
+
     // If current value is undefined, no highlight
     if (currentValue === undefined || currentValue === null) {
       return { isHighest: false, isEqual: false };
@@ -400,25 +406,25 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
     // Check if this value is strictly greater than all other units' values
     const isHighest = units.every((otherUnit, otherIndex) => {
       if (otherIndex === index) return true; // Skip comparing with self
-      
-      const otherValue = statType === 'base' 
-        ? otherUnit.stats[statKey] 
+
+      const otherValue = statType === 'base'
+        ? otherUnit.stats[statKey]
         : otherUnit.growths[statKey];
-      
+
       // If other value is undefined/null, current value is considered higher
       if (otherValue === undefined || otherValue === null) {
         return true;
       }
-      
+
       // Current value must be strictly greater than other value
       return currentValue > otherValue;
     });
 
     // Check if all non-undefined values are equal
-    const allValues = units.map(u => 
+    const allValues = units.map(u =>
       statType === 'base' ? u.stats[statKey] : u.growths[statKey]
     ).filter(val => val !== undefined && val !== null);
-    
+
     const isEqual = allValues.length > 1 && allValues.every(val => val === currentValue) && currentValue !== 0;
 
     return { isHighest, isEqual };

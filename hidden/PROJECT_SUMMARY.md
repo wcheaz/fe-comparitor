@@ -40,4 +40,13 @@ This document outlines the features implemented in the Fire Emblem Unit Comparat
 
 *Whenever a new change or feature is made to the project, please list it below for reference.*
 
-- (No recent changes logged yet)
+- **Stat Highlighting (2026-02-20)**
+  - Added visual highlighting in `ComparisonGrid.tsx` for the superior stat value (green `bg-green-500/20`) when comparing multiple units.
+  - Added a neutral highlight (yellow `bg-yellow-500/20`) when stat values are identical.
+  - Removed the `CombinedAverageStatsTable` component as it provided redundant/unnecessary information.
+  - Added filtering logic to ensure stats that don't exist for *both* units (e.g., `Bld` for older games, or `Mov` growth rates) are hidden entirely from the tables instead of displaying as 0.
+
+- **Promoted Status (2026-02-20)**
+  - Updated the `Unit` data model to include an `isPromoted` boolean flag.
+  - Added `isPromoted: true` to prepromoted units in the `binding_blade_units.json` data file (like Marcus).
+  - The "Unit Details" table now conditionally displays "(Promoted)" next to the unit's level if the flag is true.

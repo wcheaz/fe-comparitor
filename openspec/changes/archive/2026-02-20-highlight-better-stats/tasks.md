@@ -32,3 +32,7 @@
 
 - [x] 7.1 **Growth Rates Table Fix:** In `ComparisonGrid.tsx` (around line 205), change `{getCommonBaseStats(units).map((statKey) => {` to use `{getCommonGrowthStats(units).map((statKey) => {` for the Growth Rates table rendering. This will fix stats with 0% growths (like Move and Con) showing up.
 - [x] 7.2 **Promoted Status Fix:** Investigate and fix why `isPromoted` is not displaying. Check if `isPromoted` was successfully added to `types/unit.ts`, and ensure that data fetching functions (like in `lib/data.ts`) or normalization logic are properly passing the `isPromoted` flag from the JSON to the frontend components.
+
+## 8. Regression Fix: Extraneous Base Stats
+
+- [x] 8.1 Fix `getCommonBaseStats` in `ComparisonGrid.tsx` to ensure that base stats missing from both units (like Bld and Cha for older games) are correctly filtered out and not rendered in the Base Stats table.
