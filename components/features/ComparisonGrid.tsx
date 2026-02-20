@@ -144,7 +144,7 @@ export function ComparisonGrid({
                       </tr>
                     </thead>
                     <tbody>
-                      {getCommonGrowthStats(units).map((statKey) => {
+{getCommonBaseStats(units).map((statKey) => {
                         const highlightStats = getHighlightStats(units, statKey, 'base');
                         
                         return (

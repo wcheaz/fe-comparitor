@@ -160,7 +160,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                 </div>
                 <div>
                   <span className="font-medium">Base Level:</span>
-                  <span className="ml-2">{unit.level}</span>
+                  <span className="ml-2">Lv. {unit.level}{unit.isPromoted ? ' (Promoted)' : ''}</span>
                 </div>
               </div>
 
