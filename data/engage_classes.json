@@ -1,0 +1,591 @@
+[
+    {
+        "id": "dragon_child",
+        "name": "Dragon Child",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 22,
+            "str": 6,
+            "mag": 0,
+            "dex": 5,
+            "spd": 7,
+            "def": 5,
+            "res": 3,
+            "lck": 5,
+            "bld": 0,
+            "mov": 4
+        },
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 2,
+            "dex": 4,
+            "spd": 4,
+            "def": 4,
+            "res": 3,
+            "lck": 3,
+            "bld": 2,
+            "mov": 1
+        },
+        "promotesTo": ["divine_dragon"],
+        "hiddenModifiers": ["Dragon", "Divine Weapon"]
+    },
+    {
+        "id": "divine_dragon",
+        "name": "Divine Dragon",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 32,
+            "str": 10,
+            "mag": 2,
+            "dex": 9,
+            "spd": 11,
+            "def": 9,
+            "res": 6,
+            "lck": 8,
+            "bld": 2,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Dragon", "Divine Weapon", "Emblem"]
+    },
+    {
+        "id": "swordfighter",
+        "name": "Sword Fighter",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 5,
+            "mag": 0,
+            "dex": 7,
+            "spd": 8,
+            "def": 4,
+            "res": 2,
+            "lck": 4,
+            "bld": 3,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 0,
+            "dex": 5,
+            "spd": 5,
+            "def": 3,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["swordmaster", "hero"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "swordmaster",
+        "name": "Swordmaster",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 8,
+            "mag": 0,
+            "dex": 12,
+            "spd": 13,
+            "def": 7,
+            "res": 4,
+            "lck": 6,
+            "bld": 4,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Swordmaster", "+30 Crit", "Lunge"]
+    },
+    {
+        "id": "hero",
+        "name": "Hero",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 30,
+            "str": 10,
+            "mag": 0,
+            "dex": 10,
+            "spd": 10,
+            "def": 8,
+            "res": 4,
+            "lck": 6,
+            "bld": 6,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Swords", "Axes"]
+    },
+    {
+        "id": "lance_fighter",
+        "name": "Lance Fighter",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 22,
+            "str": 6,
+            "mag": 0,
+            "dex": 5,
+            "spd": 6,
+            "def": 6,
+            "res": 3,
+            "lck": 4,
+            "bld": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "mag": 0,
+            "dex": 4,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["paladin", "great_knight"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "paladin",
+        "name": "Paladin",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 32,
+            "str": 10,
+            "mag": 0,
+            "dex": 9,
+            "spd": 9,
+            "def": 10,
+            "res": 5,
+            "lck": 6,
+            "bld": 6,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Swords", "Lances"]
+    },
+    {
+        "id": "great_knight",
+        "name": "Great Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 34,
+            "str": 12,
+            "mag": 0,
+            "dex": 7,
+            "spd": 7,
+            "def": 12,
+            "res": 5,
+            "lck": 4,
+            "bld": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Lances", "Axes"]
+    },
+    {
+        "id": "axe_fighter",
+        "name": "Axe Fighter",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 8,
+            "mag": 0,
+            "dex": 4,
+            "spd": 4,
+            "def": 6,
+            "res": 2,
+            "lck": 3,
+            "bld": 7,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 10,
+            "str": 6,
+            "mag": 0,
+            "dex": 3,
+            "spd": 3,
+            "def": 4,
+            "res": 2,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["warrior", "hero"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "warrior",
+        "name": "Warrior",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 34,
+            "str": 14,
+            "mag": 0,
+            "dex": 7,
+            "spd": 7,
+            "def": 10,
+            "res": 4,
+            "lck": 5,
+            "bld": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Axes", "Bows"]
+    },
+    {
+        "id": "archer",
+        "name": "Archer",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 4,
+            "mag": 0,
+            "dex": 7,
+            "spd": 6,
+            "def": 3,
+            "res": 2,
+            "lck": 4,
+            "bld": 4,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "mag": 0,
+            "dex": 6,
+            "spd": 5,
+            "def": 3,
+            "res": 3,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["sniper", "bow_knight"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "sniper",
+        "name": "Sniper",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 7,
+            "mag": 0,
+            "dex": 13,
+            "spd": 11,
+            "def": 6,
+            "res": 5,
+            "lck": 7,
+            "bld": 5,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Bows", "+15 Crit", "Ceiling Shot"]
+    },
+    {
+        "id": "bow_knight",
+        "name": "Bow Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 9,
+            "mag": 0,
+            "dex": 11,
+            "spd": 9,
+            "def": 8,
+            "res": 5,
+            "lck": 6,
+            "bld": 7,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Bows"]
+    },
+    {
+        "id": "mage",
+        "name": "Mage",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 2,
+            "mag": 6,
+            "dex": 5,
+            "spd": 5,
+            "def": 2,
+            "res": 6,
+            "lck": 4,
+            "bld": 3,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 1,
+            "mag": 4,
+            "dex": 4,
+            "spd": 3,
+            "def": 2,
+            "res": 5,
+            "lck": 2,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["sage", "mystery_knight"],
+        "hiddenModifiers": ["Tomes"]
+    },
+    {
+        "id": "sage",
+        "name": "Sage",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 3,
+            "mag": 10,
+            "dex": 9,
+            "spd": 8,
+            "def": 4,
+            "res": 11,
+            "lck": 6,
+            "bld": 4,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Tomes", "Staves", "Cantrips"]
+    },
+    {
+        "id": "mystery_knight",
+        "name": "Mystery Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 5,
+            "mag": 8,
+            "dex": 8,
+            "spd": 7,
+            "def": 6,
+            "res": 8,
+            "lck": 5,
+            "bld": 7,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Tomes"]
+    },
+    {
+        "id": "pegasus_knight",
+        "name": "Pegasus Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 3,
+            "mag": 0,
+            "dex": 6,
+            "spd": 10,
+            "def": 4,
+            "res": 8,
+            "lck": 5,
+            "bld": 4,
+            "mov": 7
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "mag": 0,
+            "dex": 5,
+            "spd": 6,
+            "def": 3,
+            "res": 6,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["falcoknight"],
+        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+    },
+    {
+        "id": "falcoknight",
+        "name": "Falcon Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 5,
+            "mag": 0,
+            "dex": 11,
+            "spd": 16,
+            "def": 7,
+            "res": 14,
+            "lck": 8,
+            "bld": 5,
+            "mov": 8
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Flying", "Swords", "Lances", "Resonance"]
+    },
+    {
+        "id": "armor_knight",
+        "name": "Armor Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 9,
+            "mag": 0,
+            "dex": 3,
+            "spd": 2,
+            "def": 12,
+            "res": 4,
+            "lck": 3,
+            "bld": 12,
+            "mov": 4
+        },
+        "promotionBonus": {
+            "hp": 14,
+            "str": 7,
+            "mag": 0,
+            "dex": 3,
+            "spd": 2,
+            "def": 8,
+            "res": 6,
+            "bld": 2,
+            "mov": 1
+        },
+        "promotesTo": ["general"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "general",
+        "name": "General",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 40,
+            "str": 16,
+            "mag": 0,
+            "dex": 6,
+            "spd": 4,
+            "def": 20,
+            "res": 10,
+            "lck": 5,
+            "bld": 14,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Axes", "Lances", "Pavise"]
+    },
+    {
+        "id": "healer",
+        "name": "Healer",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 2,
+            "mag": 4,
+            "dex": 4,
+            "spd": 4,
+            "def": 2,
+            "res": 6,
+            "lck": 5,
+            "bld": 3,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 1,
+            "mag": 4,
+            "dex": 4,
+            "spd": 3,
+            "def": 2,
+            "res": 6,
+            "lck": 3,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["high_priest"],
+        "hiddenModifiers": ["Staves"]
+    },
+    {
+        "id": "high_priest",
+        "name": "High Priest",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 3,
+            "mag": 8,
+            "dex": 8,
+            "spd": 7,
+            "def": 4,
+            "res": 12,
+            "lck": 8,
+            "bld": 4,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Staves", "Nosferatu", "Warp"]
+    },
+    {
+        "id": "thief",
+        "name": "Thief",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 3,
+            "mag": 0,
+            "dex": 8,
+            "spd": 8,
+            "def": 3,
+            "res": 2,
+            "lck": 6,
+            "bld": 4,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "mag": 0,
+            "dex": 6,
+            "spd": 6,
+            "def": 2,
+            "res": 2,
+            "lck": 4,
+            "bld": 1,
+            "mov": 1
+        },
+        "promotesTo": ["rogue"],
+        "hiddenModifiers": ["Locktouch", "Steal"]
+    },
+    {
+        "id": "rogue",
+        "name": "Rogue",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 5,
+            "mag": 0,
+            "dex": 14,
+            "spd": 14,
+            "def": 5,
+            "res": 4,
+            "lck": 10,
+            "bld": 5,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Locktouch", "Steal", "+20 Avoid"]
+    }
+]

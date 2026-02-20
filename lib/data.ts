@@ -1,8 +1,9 @@
-import { Unit, UnitStats } from '@/types/unit';
+import { Unit, UnitStats, Class } from '@/types/unit';
 import { normalizeUnit } from './normalization';
 
 // Cache for loaded units to avoid repeated file reading
 let unitsCache: Unit[] | null = null;
+let classesCache: Class[] | null = null;
 
 export async function getAllUnits(): Promise<Unit[]> {
   if (unitsCache) {
@@ -49,6 +50,78 @@ export async function getUnitById(id: string): Promise<Unit | null> {
   } catch (error) {
     console.error(`Error loading unit with id ${id}:`, error);
     throw new Error(`Failed to load unit with id ${id}`);
+  }
+}
+
+export async function getAllClasses(): Promise<Class[]> {
+  if (classesCache) {
+    return classesCache;
+  }
+
+  try {
+    // Import all class JSON data files
+    const [bindingBladeClasses, threeHousesClasses, engageClasses] = await Promise.all([
+      import('@/data/binding_blade_classes.json').then(m => m.default),
+      import('@/data/three_houses_classes.json').then(m => m.default),
+      import('@/data/engage_classes.json').then(m => m.default)
+    ]);
+
+    // Transform and merge all classes
+    const allClasses = [
+      ...bindingBladeClasses.map(transformJsonToClass),
+      ...threeHousesClasses.map(transformJsonToClass),
+      ...engageClasses.map(transformJsonToClass)
+    ];
+
+    classesCache = allClasses;
+    return allClasses;
+  } catch (error) {
+    console.error('Error loading classes data:', error);
+    throw new Error('Failed to load classes data');
+  }
+}
+
+export async function getClassesByGame(game: string): Promise<Class[]> {
+  try {
+    // For now, we'll determine game by file naming convention
+    // This could be improved by adding a game field to class data
+    const allClasses = await getAllClasses();
+    
+    // Filter classes based on game naming convention
+    if (game === 'The Binding Blade') {
+      return allClasses.filter((cls: Class) => {
+        // These are Binding Blade specific classes
+        const bbClasses = ['lord', 'lord_lord', 'mercenary', 'hero', 'myrmidon', 'swordmaster'];
+        return bbClasses.includes(cls.id);
+      });
+    } else if (game === 'Three Houses') {
+      return allClasses.filter((cls: Class) => {
+        // These are Three Houses specific classes
+        const thClasses = ['noble', 'emperor', 'great_lord', 'commoner', 'myrmidon', 'swordmaster'];
+        return thClasses.includes(cls.id);
+      });
+    } else if (game === 'Engage') {
+      return allClasses.filter((cls: Class) => {
+        // These are Engage specific classes
+        const engageClasses = ['dragon_child', 'divine_dragon', 'swordfighter', 'swordmaster', 'hero'];
+        return engageClasses.includes(cls.id);
+      });
+    }
+    
+    return allClasses;
+  } catch (error) {
+    console.error(`Error loading classes for game ${game}:`, error);
+    throw new Error(`Failed to load classes for game ${game}`);
+  }
+}
+
+export async function getClassById(id: string): Promise<Class | null> {
+  try {
+    const allClasses = await getAllClasses();
+    return allClasses.find((cls: Class) => cls.id === id) ?? null;
+  } catch (error) {
+    console.error(`Error loading class with id ${id}:`, error);
+    throw new Error(`Failed to load class with id ${id}`);
   }
 }
 
@@ -106,4 +179,42 @@ function transformJsonToUnit(rawUnit: any): Unit {
 
   // Apply normalization to standardize stat keys and handle missing stats
   return normalizeUnit(unit);
+}
+
+// Helper function to transform raw JSON data to Class interface
+function transformJsonToClass(rawClass: any): Class {
+  // Transform class stats to UnitStats objects
+  const baseStats: UnitStats = {};
+  const promotionBonus: UnitStats = {};
+
+  // Extract base stats
+  if (rawClass.baseStats) {
+    Object.keys(rawClass.baseStats).forEach(key => {
+      if (rawClass.baseStats[key] !== undefined) {
+        baseStats[key] = rawClass.baseStats[key];
+      }
+    });
+  }
+
+  // Extract promotion bonus
+  if (rawClass.promotionBonus) {
+    Object.keys(rawClass.promotionBonus).forEach(key => {
+      if (rawClass.promotionBonus[key] !== undefined) {
+        promotionBonus[key] = rawClass.promotionBonus[key];
+      }
+    });
+  }
+
+  // Create class object
+  const cls: Class = {
+    id: rawClass.id,
+    name: rawClass.name,
+    type: rawClass.type || 'unpromoted',
+    baseStats,
+    promotionBonus,
+    promotesTo: rawClass.promotesTo || [],
+    hiddenModifiers: rawClass.hiddenModifiers || []
+  };
+
+  return cls;
 }

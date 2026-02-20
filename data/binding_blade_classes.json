@@ -1,0 +1,501 @@
+[
+    {
+        "id": "lord",
+        "name": "Lord",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 5,
+            "spd": 7,
+            "lck": 7,
+            "def": 5,
+            "res": 0,
+            "con": 6,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "skl": 3,
+            "spd": 3,
+            "lck": 2,
+            "def": 3,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["lord_lord"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "lord_lord",
+        "name": "Lord Lord",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 8,
+            "skl": 8,
+            "spd": 10,
+            "lck": 9,
+            "def": 8,
+            "res": 2,
+            "con": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Lord", "Sword of Seals"]
+    },
+    {
+        "id": "mercenary",
+        "name": "Mercenary",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 6,
+            "skl": 8,
+            "spd": 7,
+            "lck": 5,
+            "def": 5,
+            "res": 0,
+            "con": 7,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "skl": 4,
+            "spd": 3,
+            "lck": 2,
+            "def": 3,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["hero"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "hero",
+        "name": "Hero",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 9,
+            "skl": 12,
+            "spd": 10,
+            "lck": 7,
+            "def": 8,
+            "res": 2,
+            "con": 9,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Axes"]
+    },
+    {
+        "id": "myrmidon",
+        "name": "Myrmidon",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 8,
+            "lck": 4,
+            "def": 3,
+            "res": 0,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "skl": 5,
+            "spd": 4,
+            "lck": 2,
+            "def": 2,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["swordmaster"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "swordmaster",
+        "name": "Swordmaster",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 7,
+            "skl": 12,
+            "spd": 12,
+            "lck": 6,
+            "def": 5,
+            "res": 3,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Swordmaster", "+30 Crit"]
+    },
+    {
+        "id": "cavalier",
+        "name": "Cavalier",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 7,
+            "skl": 6,
+            "spd": 6,
+            "lck": 5,
+            "def": 6,
+            "res": 2,
+            "con": 9,
+            "mov": 7
+        },
+        "promotionBonus": {
+            "hp": 10,
+            "str": 4,
+            "skl": 4,
+            "spd": 4,
+            "lck": 3,
+            "def": 4,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["paladin", "great_knight"],
+        "hiddenModifiers": ["Horse"]
+    },
+    {
+        "id": "paladin",
+        "name": "Paladin",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 30,
+            "str": 11,
+            "skl": 10,
+            "spd": 10,
+            "lck": 8,
+            "def": 10,
+            "res": 5,
+            "con": 11,
+            "mov": 8
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Axes", "Lances"]
+    },
+    {
+        "id": "great_knight",
+        "name": "Great Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 32,
+            "str": 13,
+            "skl": 8,
+            "spd": 7,
+            "lck": 6,
+            "def": 12,
+            "res": 4,
+            "con": 13,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Horse", "Axes"]
+    },
+    {
+        "id": "armor_knight",
+        "name": "Armor Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 8,
+            "skl": 4,
+            "spd": 3,
+            "lck": 3,
+            "def": 10,
+            "res": 2,
+            "con": 12,
+            "mov": 4
+        },
+        "promotionBonus": {
+            "hp": 12,
+            "str": 6,
+            "skl": 4,
+            "spd": 2,
+            "lck": 2,
+            "def": 6,
+            "res": 4,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["general"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "general",
+        "name": "General",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 36,
+            "str": 14,
+            "skl": 8,
+            "spd": 5,
+            "lck": 5,
+            "def": 16,
+            "res": 6,
+            "con": 14,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "archer",
+        "name": "Archer",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 5,
+            "lck": 5,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 4,
+            "skl": 6,
+            "spd": 4,
+            "lck": 3,
+            "def": 3,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["sniper"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "sniper",
+        "name": "Sniper",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 9,
+            "skl": 13,
+            "spd": 9,
+            "lck": 8,
+            "def": 6,
+            "res": 4,
+            "con": 8,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["+15 Crit"]
+    },
+    {
+        "id": "pegasus_knight",
+        "name": "Pegasus Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 4,
+            "skl": 6,
+            "spd": 9,
+            "lck": 6,
+            "def": 4,
+            "res": 6,
+            "con": 6,
+            "mov": 7
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 3,
+            "skl": 5,
+            "spd": 5,
+            "lck": 3,
+            "def": 3,
+            "res": 5,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["falcoknight"],
+        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+    },
+    {
+        "id": "falcoknight",
+        "name": "Falcon Knight",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 7,
+            "skl": 11,
+            "spd": 14,
+            "lck": 9,
+            "def": 7,
+            "res": 11,
+            "con": 8,
+            "mov": 8
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Flying", "Swords", "Lances"]
+    },
+    {
+        "id": "mage",
+        "name": "Mage",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 3,
+            "skl": 6,
+            "spd": 5,
+            "lck": 4,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "skl": 5,
+            "spd": 4,
+            "lck": 3,
+            "def": 2,
+            "res": 5,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["sage"],
+        "hiddenModifiers": []
+    },
+    {
+        "id": "sage",
+        "name": "Sage",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 5,
+            "skl": 11,
+            "spd": 9,
+            "lck": 7,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Anima", "Light", "Staves"]
+    },
+    {
+        "id": "priest",
+        "name": "Priest",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 2,
+            "skl": 4,
+            "spd": 4,
+            "lck": 5,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 8,
+            "str": 2,
+            "skl": 4,
+            "spd": 3,
+            "lck": 3,
+            "def": 2,
+            "res": 5,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["bishop"],
+        "hiddenModifiers": ["Staves"]
+    },
+    {
+        "id": "bishop",
+        "name": "Bishop",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 4,
+            "skl": 8,
+            "spd": 7,
+            "lck": 8,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Staves", "+10 Magic", "+10 Resistance"]
+    },
+    {
+        "id": "thief",
+        "name": "Thief",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 4,
+            "skl": 8,
+            "spd": 8,
+            "lck": 7,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 6,
+            "str": 2,
+            "skl": 6,
+            "spd": 6,
+            "lck": 4,
+            "def": 2,
+            "res": 2,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": ["rogue"],
+        "hiddenModifiers": ["Locktouch"]
+    },
+    {
+        "id": "rogue",
+        "name": "Rogue",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 6,
+            "skl": 14,
+            "spd": 14,
+            "lck": 11,
+            "def": 5,
+            "res": 3,
+            "con": 8,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": ["Locktouch", "+15 Avoid"]
+    }
+]

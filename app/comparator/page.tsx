@@ -6,6 +6,7 @@ import { Unit } from '@/types/unit';
 import { getUnitById } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
+import { StatProgressionTable } from '@/components/features/StatProgressionTable';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
@@ -61,12 +62,24 @@ export default function ComparatorPage() {
           </div>
 
           {/* Main Content - Horizontal Comparison Grid */}
-          <div className="xl:col-span-9">
+          <div className="xl:col-span-9 space-y-6">
             <ComparisonGrid
               units={selectedUnits}
               showStats={true}
               showGrowths={true}
             />
+            
+            {/* Stat Progression Table */}
+            {selectedUnits.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Stat Progression</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <StatProgressionTable units={selectedUnits} />
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
 

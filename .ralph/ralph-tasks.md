@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/highlight-better-stats/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/stat-progression-table/tasks.md

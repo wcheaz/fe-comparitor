@@ -187,3 +187,97 @@ export function getMinLevel(units: Unit[]): number {
   
   return Math.min(...units.map(unit => unit.level));
 }
+
+/**
+ * Generate a progression array for a unit from a starting level to an ending level
+ * Handles promotion mechanics: Level 20 unpromoted -> Level 1 promoted
+ * 
+ * @param unit - The unit to generate progression for
+ * @param startLevel - The starting level (defaults to unit's base level)
+ * @param endLevel - The ending level
+ * @param classes - Optional array of class data for promotion mechanics
+ * @returns Array of UnitStats, where each index corresponds to a level
+ */
+export function generateProgressionArray(
+  unit: Unit, 
+  startLevel?: number, 
+  endLevel?: number,
+  classes?: any[]
+): UnitStats[] {
+  const actualStartLevel = startLevel || unit.level;
+  const actualEndLevel = endLevel || actualStartLevel + 20; // Default 20 levels
+  
+  const progression: UnitStats[] = [];
+  let currentStats = { ...unit.stats };
+  let isPromoted = unit.isPromoted || false;
+  let promotedAtLevel: number | null = null;
+  
+  // Find the unit's class data if classes are provided
+  let currentClass = classes?.find((cls: any) => cls.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
+  
+  for (let level = actualStartLevel; level <= actualEndLevel; level++) {
+    // Check if unit should promote at level 20 (if not already promoted)
+    if (!isPromoted && level === 20 && currentClass?.promotesTo?.length > 0) {
+      // Apply promotion bonuses
+      if (currentClass.promotionBonus) {
+        Object.entries(currentClass.promotionBonus).forEach(([statKey, bonus]) => {
+          currentStats[statKey] = (currentStats[statKey] || 0) + (bonus as number);
+        });
+      }
+      
+      // Floor stats to class base stats of the promoted class
+      const promotedClassId = currentClass.promotesTo[0];
+      const promotedClass = classes?.find((cls: any) => cls.id === promotedClassId);
+      
+      if (promotedClass && promotedClass.baseStats) {
+        Object.entries(promotedClass.baseStats).forEach(([statKey, classBase]) => {
+          if (currentStats[statKey] !== undefined && classBase !== undefined) {
+            currentStats[statKey] = Math.max(currentStats[statKey] || 0, classBase as number);
+          }
+        });
+      }
+      
+      isPromoted = true;
+      promotedAtLevel = level;
+      currentClass = promotedClass;
+    }
+    
+    // Calculate growth for this level
+    const statsWithGrowth = { ...currentStats };
+    const levelDiff = level - unit.level;
+    
+    // Apply growth rates
+    Object.entries(unit.growths).forEach(([statKey, growthRate]) => {
+      if (growthRate !== undefined) {
+        const baseStat = unit.stats[statKey] || 0;
+        let growthAmount = 0;
+        
+        if (promotedAtLevel && level > promotedAtLevel) {
+          // Calculate growth in two phases: pre-promotion and post-promotion
+          const prePromotionLevels = Math.min(20 - unit.level, 20 - unit.level);
+          const postPromotionLevels = level - 21;
+          
+          growthAmount = (growthRate * prePromotionLevels) / 100 + (growthRate * postPromotionLevels) / 100;
+        } else {
+          growthAmount = (growthRate * levelDiff) / 100;
+        }
+        
+        statsWithGrowth[statKey] = baseStat + growthAmount;
+        
+        // Apply promotion bonus if promoted
+        if (isPromoted && promotedAtLevel && level > promotedAtLevel) {
+          if (currentClass?.promotionBonus && currentClass.promotionBonus[statKey]) {
+            statsWithGrowth[statKey] += currentClass.promotionBonus[statKey] as number;
+          }
+        }
+        
+        // Round to 2 decimal places
+        statsWithGrowth[statKey] = Math.round(statsWithGrowth[statKey] * 100) / 100;
+      }
+    });
+    
+    progression.push(statsWithGrowth);
+  }
+  
+  return progression;
+}

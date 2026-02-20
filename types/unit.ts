@@ -41,6 +41,16 @@ export interface Unit {
   affinity?: string; // Support affinity (Fire, Thunder, etc.)
 }
 
+export interface Class {
+  id: string;
+  name: string;
+  type: 'unpromoted' | 'promoted';
+  baseStats: UnitStats;
+  promotionBonus: UnitStats;
+  promotesTo: string[];
+  hiddenModifiers: string[];
+}
+
 export interface GameData {
   id: string;
   name: string;

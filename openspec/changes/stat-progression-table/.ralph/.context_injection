@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 Create `<game>_classes.json` files for each supported game (e.g., `binding_blade_classes.json`) containing class bases, promotion bonuses, and hidden modifiers.
