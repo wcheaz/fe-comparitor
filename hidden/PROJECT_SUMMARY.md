@@ -78,3 +78,5 @@ This document outlines the features implemented in the Fire Emblem Unit Comparat
 - **Movement Types Modal (2026-02-22)**
   - Created `lib/movements.ts` to store movement definitions, abilities, and game-specific details.
   - Integrated the modal in `ComparisonGrid.tsx` to display movement details including game-specific perks (e.g., Canto in FE6 vs 3H, or Armored break immunity in Engage).
+  - Updated movement type definitions to separate intrinsic `Weaknesses` (e.g., armor-slaying vulnerabilities and terrain movement costs) from standard `Abilities`.
+  - Accurately defined the FE6 Canto mechanic in the modal to display its full range of actionable triggers (using a staff, item, trading, rescuing, dropping, talking, or visiting).

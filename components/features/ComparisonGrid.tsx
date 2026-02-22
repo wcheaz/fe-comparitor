@@ -9,6 +9,7 @@ import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
 import { getAffinityByName, calculateSupportBonuses } from '@/lib/affinities';
 import { getMovementByName } from '@/lib/movements';
+import { getWeaponByName } from '@/lib/weapons';
 
 interface ComparisonGridProps {
   units: Unit[];
@@ -41,6 +42,10 @@ export function ComparisonGrid({
   const [isMovementModalOpen, setIsMovementModalOpen] = useState(false);
   const [selectedMovement, setSelectedMovement] = useState<{ type: string, game: string } | null>(null);
 
+  // State for weapon modal
+  const [isWeaponModalOpen, setIsWeaponModalOpen] = useState(false);
+  const [selectedWeapon, setSelectedWeapon] = useState<string | null>(null);
+
   // Handle affinity info icon click
   const handleAffinityInfoClick = (affinityName: string) => {
     setSelectedAffinity(affinityName);
@@ -51,6 +56,12 @@ export function ComparisonGrid({
   const handleMovementInfoClick = (movementType: string, game: string) => {
     setSelectedMovement({ type: movementType, game });
     setIsMovementModalOpen(true);
+  };
+
+  // Handle weapon info icon click
+  const handleWeaponInfoClick = (weaponName: string) => {
+    setSelectedWeapon(weaponName);
+    setIsWeaponModalOpen(true);
   };
 
   // Render affinity details for modal
@@ -163,6 +174,66 @@ export function ComparisonGrid({
             <p className="border-l-4 border-primary pl-3 py-1 font-medium bg-primary/10 rounded-r text-primary-foreground">
               {gameDetail}
             </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // Render weapon details for modal
+  const renderWeaponDetails = () => {
+    if (!selectedWeapon) return null;
+
+    const weaponData = getWeaponByName(selectedWeapon);
+    if (!weaponData) {
+      return (
+        <div>
+          <h2 className="text-2xl font-bold">{selectedWeapon}</h2>
+          <p>Weapon data not found.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2">
+          <h2 className="text-2xl font-bold">{weaponData.name}</h2>
+          <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+            {weaponData.type} - {weaponData.rank}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 py-2">
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Mt</div>
+            <div className="font-bold">{weaponData.might}</div>
+          </div>
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Hit</div>
+            <div className="font-bold">{weaponData.hit}</div>
+          </div>
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Crit</div>
+            <div className="font-bold">{weaponData.crit}</div>
+          </div>
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Wt</div>
+            <div className="font-bold">{weaponData.weight}</div>
+          </div>
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Rng</div>
+            <div className="font-bold">{weaponData.range}</div>
+          </div>
+          <div className="bg-muted/50 p-2 rounded text-center">
+            <div className="text-xs text-muted-foreground font-medium mb-1">Uses</div>
+            <div className="font-bold">{weaponData.uses === Infinity ? '∞' : weaponData.uses ?? '-'}</div>
+          </div>
+        </div>
+
+        {weaponData.description && (
+          <div className="pt-2 border-t">
+            <h3 className="text-sm font-semibold mb-1">Description</h3>
+            <p className="text-sm text-muted-foreground">{weaponData.description}</p>
           </div>
         )}
       </div>
@@ -290,6 +361,31 @@ export function ComparisonGrid({
                             />
                           )}
                         </div>
+                      </td>
+                    ))}
+                  </tr>
+                )}
+                {units.some(u => u.prf && u.prf.length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Prf Weapons</td>
+                    {units.map((unit) => (
+                      <td key={`prf-${unit.id}`} className="text-center p-2 align-top">
+                        {unit.prf && unit.prf.length > 0 ? (
+                          <div className="flex flex-col items-center gap-2">
+                            {unit.prf.map((weaponName, idx) => (
+                              <div key={idx} className="flex items-center gap-1 text-sm bg-muted/30 px-2 py-1 rounded">
+                                <span>{weaponName}</span>
+                                <Info
+                                  className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors shrink-0"
+                                  aria-label={`View details about ${weaponName}`}
+                                  onClick={() => handleWeaponInfoClick(weaponName)}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">-</span>
+                        )}
                       </td>
                     ))}
                   </tr>
@@ -438,6 +534,16 @@ export function ComparisonGrid({
       >
         <div className="space-y-4">
           {renderMovementDetails()}
+        </div>
+      </Modal>
+
+      {/* Weapon Details Modal */}
+      <Modal
+        isOpen={isWeaponModalOpen}
+        onClose={() => setIsWeaponModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderWeaponDetails()}
         </div>
       </Modal>
 
