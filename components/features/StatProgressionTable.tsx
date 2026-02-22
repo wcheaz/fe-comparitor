@@ -55,9 +55,18 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
     // Define proper stat order and filter display stats
     const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
-    const displayStats = statOrder.filter(key =>
-      allStatKeys.has(key) && !['mov', 'con', 'bld', 'cha'].includes(key)
-    );
+    const displayStats = statOrder.filter(key => {
+      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'cha'].includes(key)) return false;
+
+      // Filter out stats that are 0 or missing for all units (like Mag or Dex in older games)
+      const isEveryUnitMissingOrZero = units.every(unit =>
+        unit.stats[key] === undefined ||
+        unit.stats[key] === null ||
+        unit.stats[key] === 0
+      );
+
+      return !isEveryUnitMissingOrZero;
+    });
 
     // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
@@ -146,7 +155,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 <th
                   key={unit.id}
                   colSpan={progressionData.statKeys.length}
-                  className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100"
+                  className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
                 >
                   {unit.name}
                 </th>
@@ -157,10 +166,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
               </th>
               {units.map((unit, unitIndex) => (
                 <React.Fragment key={unit.id}>
-                  {progressionData.statKeys.map(statKey => (
+                  {progressionData.statKeys.map((statKey, statIndex) => (
                     <th
                       key={`${unit.id}-${statKey}`}
-                      className="border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50"
+                      className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
                     >
                       {statKey.toUpperCase()}
                     </th>
@@ -177,24 +186,57 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 </td>
                 {units.map((unit, unitIndex) => (
                   <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
-                    {progressionData.statKeys.map(statKey => {
+                    {progressionData.statKeys.map((statKey, statIndex) => {
                       const unitStats = row.stats[unitIndex];
                       const unitCappedStats = row.cappedStats[unitIndex];
-                      const statValue = unitStats[statKey];
+                      const rawStatValue = unitStats[statKey];
+                      const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
                       const isCapped = unitCappedStats?.[statKey];
                       const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
                       const shouldShowDash = row.internalLevel < effectiveUnitLevel;
 
+                      let isHighest = false;
+                      let isEqual = false;
+
+                      if (!shouldShowDash && statValue !== undefined) {
+                        isHighest = units.every((otherUnit, otherIndex) => {
+                          if (otherIndex === unitIndex) return true;
+                          const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
+                          if (row.internalLevel < otherEffectiveLv) return true;
+                          const otherRaw = row.stats[otherIndex]?.[statKey];
+                          if (otherRaw === undefined || otherRaw === null) return true;
+                          return statValue > Math.round(otherRaw);
+                        });
+
+                        const allValidValues = units.map((u, i) => {
+                          const eLv = u.isPromoted ? u.level + 20 : u.level;
+                          if (row.internalLevel < eLv) return null;
+                          const rv = row.stats[i]?.[statKey];
+                          return rv !== undefined && rv !== null ? Math.round(rv) : null;
+                        }).filter(v => v !== null) as number[];
+
+                        isEqual = allValidValues.length > 1 && allValidValues.every(v => v === statValue) && statValue !== 0;
+                      }
+
+                      let highlightClass = '';
+                      if (isHighest) {
+                        highlightClass = 'bg-green-500/20';
+                      } else if (isEqual) {
+                        highlightClass = 'bg-yellow-500/20';
+                      }
+
+                      const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
+
                       return (
                         <td
                           key={`${row.internalLevel}-${unit.id}-${statKey}`}
-                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${row.isPromotionLevel ? 'bg-blue-100' : ''} ${isCapped ? 'text-green-600 font-bold' : ''}`}
+                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
                         >
                           {shouldShowDash ? (
                             <span className="text-gray-400">-</span>
                           ) : (
                             <span>
-                              {statValue !== undefined ? Math.round(statValue) : '-'}
+                              {statValue !== undefined ? statValue : '-'}
                               {/* Highlight promotion level */}
                               {row.isPromotionLevel && (
                                 <span className="ml-1 text-xs text-blue-600">✨</span>
