@@ -1,5 +1,5 @@
 import { getAllUnits, getUnitsByGame, getUnitById } from '@/lib/data';
-import { units } from '@/data/units';
+// Removed non-existent units import
 
 // Mock the data to avoid importing actual data files in tests
 jest.mock('@/data/units', () => ({
@@ -29,17 +29,17 @@ jest.mock('@/data/units', () => ({
 
 describe('Data Service', () => {
   describe('getAllUnits', () => {
-    it('should return all units from the data', () => {
-      const result = getAllUnits();
+    it('should return all units from the data', async () => {
+      const result = await getAllUnits();
       expect(result).toHaveLength(2);
       expect(result[0].name).toBe('Marth');
       expect(result[1].name).toBe('Ike');
     });
 
-    it('should return units with correct structure', () => {
-      const result = getAllUnits();
+    it('should return units with correct structure', async () => {
+      const result = await getAllUnits();
       const marth = result.find(u => u.id === 'marth');
-      
+
       expect(marth).toBeDefined();
       expect(marth).toHaveProperty('id');
       expect(marth).toHaveProperty('name');
@@ -51,38 +51,38 @@ describe('Data Service', () => {
   });
 
   describe('getUnitsByGame', () => {
-    it('should return units for a specific game', () => {
-      const result = getUnitsByGame('shadow-dragon');
+    it('should return units for a specific game', async () => {
+      const result = await getUnitsByGame('shadow-dragon');
       expect(result).toHaveLength(1);
       expect(result[0].name).toBe('Marth');
     });
 
-    it('should return empty array for non-existent game', () => {
-      const result = getUnitsByGame('non-existent-game');
+    it('should return empty array for non-existent game', async () => {
+      const result = await getUnitsByGame('non-existent-game');
       expect(result).toHaveLength(0);
     });
 
-    it('should be case insensitive', () => {
-      const result1 = getUnitsByGame('shadow-dragon');
-      const result2 = getUnitsByGame('Shadow-Dragon');
+    it('should be case insensitive', async () => {
+      const result1 = await getUnitsByGame('shadow-dragon');
+      const result2 = await getUnitsByGame('Shadow-Dragon');
       expect(result1).toEqual(result2);
     });
   });
 
   describe('getUnitById', () => {
-    it('should return the correct unit by id', () => {
-      const result = getUnitById('marth');
+    it('should return the correct unit by id', async () => {
+      const result = await getUnitById('marth');
       expect(result).toBeDefined();
       expect(result!.name).toBe('Marth');
     });
 
-    it('should return null for non-existent id', () => {
-      const result = getUnitById('non-existent-id');
+    it('should return null for non-existent id', async () => {
+      const result = await getUnitById('non-existent-id');
       expect(result).toBeNull();
     });
 
-    it('should be case sensitive for id', () => {
-      const result = getUnitById('Marth');
+    it('should be case sensitive for id', async () => {
+      const result = await getUnitById('Marth');
       expect(result).toBeNull();
     });
   });

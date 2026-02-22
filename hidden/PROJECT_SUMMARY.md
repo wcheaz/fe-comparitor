@@ -66,3 +66,15 @@ This document outlines the features implemented in the Fire Emblem Unit Comparat
     - Changed the `Average Stats` table layout to represent unpromoted levels from 1 to 20, visually indicating the "promotion threshold" level with a `✨` icon.
     - Subsequent stats generate an additional 1 through 20 level mapping designated as `Level X (Promoted)` that incorporates physical class promotion bonuses across the array.
     - Introduced actual math capping limitations `maxStats` for class limits and absolute unit limits. The `Average Stats` table tracks when the algorithm attempts to surpass these caps and halts their growth in the table cell while highlighting the cell green to denote it's been capped.
+
+- **Reusable Modal & Affinity Details Refactor (2026-02-22)**
+  - Added a new, flexible `<Modal>` UI component in `components/ui/modal.tsx` designed to pop up supplementary information without navigating away from the main view.
+  - The modal specifically only closes when the explicit "X" close button is clicked (no backdrop click dismissal) to allow side-by-side comparison of data.
+  - Formatted `global.css` to distinctly style `.modal-backdrop` and `.modal-content`.
+  - Completely refactored `lib/affinities.ts` to utilize a per-game dynamic bonus structure (`AffinityBonusesByGame`) over flat statically assigned bonuses.
+  - Removed incorrect rock-paper-scissors advantage descriptions from affinities.
+  - Rebuilt the Support Bonuses display in `ComparisonGrid.tsx` to utilize `calculateSupportBonuses`, which accurately computes expected game stats based on C/B/A/S support levels instead of arbitrarily hardcoding bonuses.
+
+- **Movement Types Modal (2026-02-22)**
+  - Created `lib/movements.ts` to store movement definitions, abilities, and game-specific details.
+  - Integrated the modal in `ComparisonGrid.tsx` to display movement details including game-specific perks (e.g., Canto in FE6 vs 3H, or Armored break immunity in Engage).

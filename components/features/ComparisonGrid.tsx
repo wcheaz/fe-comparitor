@@ -7,7 +7,8 @@ import { getMinLevel, getMaxLevel } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
-import { getAffinityByName } from '@/lib/affinities';
+import { getAffinityByName, calculateSupportBonuses } from '@/lib/affinities';
+import { getMovementByName } from '@/lib/movements';
 
 interface ComparisonGridProps {
   units: Unit[];
@@ -31,15 +32,25 @@ export function ComparisonGrid({
   }, [units]);
 
   const [classes, setClasses] = React.useState<Class[]>([]);
-  
+
   // State for affinity modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAffinity, setSelectedAffinity] = useState<string | null>(null);
+
+  // State for movement modal
+  const [isMovementModalOpen, setIsMovementModalOpen] = useState(false);
+  const [selectedMovement, setSelectedMovement] = useState<{ type: string, game: string } | null>(null);
 
   // Handle affinity info icon click
   const handleAffinityInfoClick = (affinityName: string) => {
     setSelectedAffinity(affinityName);
     setIsModalOpen(true);
+  };
+
+  // Handle movement info icon click
+  const handleMovementInfoClick = (movementType: string, game: string) => {
+    setSelectedMovement({ type: movementType, game });
+    setIsMovementModalOpen(true);
   };
 
   // Render affinity details for modal
@@ -49,7 +60,7 @@ export function ComparisonGrid({
     }
 
     const affinityData = getAffinityByName(selectedAffinity);
-    
+
     if (!affinityData) {
       return (
         <div>
@@ -59,52 +70,102 @@ export function ComparisonGrid({
       );
     }
 
+    const gameName = 'Binding Blade'; // Or pass it down if dynamic
+    const supportLevels: Array<'C' | 'B' | 'A'> = ['C', 'B', 'A'];
+
     return (
       <>
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">{affinityData.name} Affinity</h2>
-          <span className="px-3 py-1 bg-muted rounded-full text-sm font-medium">
-            {affinityData.element}
-          </span>
         </div>
-        
-        <div className="space-y-3">
+
+        <div className="space-y-4">
           <div>
             <h3 className="text-lg font-semibold mb-2">Description</h3>
             <p className="text-muted-foreground">{affinityData.description}</p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-2">Stat Bonuses</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries(affinityData.statBonuses).map(([stat, bonus]) => (
-                <div key={stat} className="flex justify-between p-2 bg-muted rounded">
-                  <span className="font-medium capitalize">{stat}</span>
-                  <span className="text-green-600 font-medium">+{bonus}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
             <h3 className="text-lg font-semibold mb-3">Support Bonuses</h3>
+            <p className="text-sm text-muted-foreground mb-3">
+              These bonuses are added per support level when fighting near the supported partner, and any fractional values are rounded down in-game.
+            </p>
             <div className="space-y-3">
-              {Object.entries(affinityData.supportBonuses).map(([level, bonuses]) => (
-                <div key={level} className="border-l-4 border-primary pl-3">
-                  <h4 className="font-semibold text-primary">{level} Support</h4>
-                  <ul className="mt-1 space-y-1">
-                    {bonuses.map((bonus, index) => (
-                      <li key={index} className="text-sm text-muted-foreground">
-                        • {bonus}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              {supportLevels.map(level => {
+                const bonuses = calculateSupportBonuses(affinityData, gameName, level);
+                if (bonuses.length === 0) return null;
+
+                return (
+                  <div key={level} className="border-l-4 border-primary pl-3">
+                    <h4 className="font-semibold text-primary">{level} Support</h4>
+                    <ul className="mt-1 space-x-2 flex flex-wrap">
+                      {bonuses.map((bonus, index) => (
+                        <li key={index} className="text-sm text-muted-foreground inline-flex items-center after:content-[','] last:after:content-none pr-1">
+                          {bonus}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </>
+    );
+  };
+
+  // Render movement details for modal
+  const renderMovementDetails = () => {
+    if (!selectedMovement) return null;
+
+    const movementData = getMovementByName(selectedMovement.type);
+    if (!movementData) {
+      return (
+        <div>
+          <h2 className="text-2xl font-bold">{selectedMovement.type} Movement</h2>
+          <p>Movement data not found.</p>
+        </div>
+      );
+    }
+
+    const { game } = selectedMovement;
+    const gameDetail = movementData.gameSpecificDetails?.[game];
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2">
+          <h2 className="text-2xl font-bold">{movementData.name} Movement</h2>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold mb-1">Description</h3>
+          <p className="text-muted-foreground">{movementData.description}</p>
+        </div>
+
+        {movementData.abilities && (
+          <div>
+            <h3 className="text-lg font-semibold mb-1">Abilities</h3>
+            <p className="text-muted-foreground">{movementData.abilities}</p>
+          </div>
+        )}
+
+        {movementData.weaknesses && (
+          <div>
+            <h3 className="text-lg font-semibold mb-1">Weaknesses</h3>
+            <p className="text-muted-foreground">{movementData.weaknesses}</p>
+          </div>
+        )}
+
+        {gameDetail && (
+          <div className="mt-4 pt-4 border-t">
+            <h3 className="text-lg font-semibold mb-2">Game Specific Bonuses</h3>
+            <p className="border-l-4 border-primary pl-3 py-1 font-medium bg-primary/10 rounded-r text-primary-foreground">
+              {gameDetail}
+            </p>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -121,7 +182,7 @@ export function ComparisonGrid({
             <p>Select units to compare their stats and growth rates.</p>
           </div>
         </CardContent>
-</Card>
+      </Card>
     );
   }
 
@@ -191,9 +252,17 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Movement Type</td>
                   {units.map((unit) => {
                     const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const movType = cls?.movementType || 'Infantry';
                     return (
                       <td key={`movement-${unit.id}`} className="text-center p-2">
-                        {cls?.movementType || 'Infantry'}
+                        <div className="flex items-center justify-center gap-1">
+                          {movType}
+                          <Info
+                            className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+                            aria-label={`View details about ${movType} movement`}
+                            onClick={() => handleMovementInfoClick(movType, unit.game)}
+                          />
+                        </div>
                       </td>
                     );
                   })}
@@ -214,7 +283,7 @@ export function ComparisonGrid({
                         <div className="flex items-center justify-center gap-1">
                           {unit.affinity || '-'}
                           {unit.affinity && (
-                            <Info 
+                            <Info
                               className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
                               aria-label={`View details about ${unit.affinity} affinity`}
                               onClick={() => handleAffinityInfoClick(unit.affinity!)}
@@ -359,6 +428,16 @@ export function ComparisonGrid({
       >
         <div className="space-y-4">
           {renderAffinityDetails()}
+        </div>
+      </Modal>
+
+      {/* Movement Details Modal */}
+      <Modal
+        isOpen={isMovementModalOpen}
+        onClose={() => setIsMovementModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderMovementDetails()}
         </div>
       </Modal>
 

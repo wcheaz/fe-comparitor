@@ -19,7 +19,7 @@ export default function ComparatorPage() {
   useEffect(() => {
     // For now, just set loading to false immediately
     setIsLoading(false);
-    
+
     // TODO: Re-enable URL parameter loading when we have a proper solution
     // for client-side only parameter handling
   }, []);
@@ -41,7 +41,7 @@ export default function ComparatorPage() {
             Unit Comparator
           </h1>
           <p className="text-lg text-fe-blue-700 max-w-2xl mx-auto">
-            Compare up to 4 units side-by-side. Select units, adjust the target level, 
+            Compare up to 4 units side-by-side. Select units, adjust the target level,
             and see detailed statistics and growth rates.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function ComparatorPage() {
               maxUnits={maxUnits}
             />
 
-            
+
           </div>
 
           {/* Main Content - Horizontal Comparison Grid */}
@@ -68,7 +68,7 @@ export default function ComparatorPage() {
               showStats={true}
               showGrowths={true}
             />
-            
+
             {/* Stat Progression Table */}
             {selectedUnits.length > 0 && (
               <Card>
@@ -93,18 +93,18 @@ export default function ComparatorPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-fe-blue-700">
                 <div>
                   <h3 className="font-semibold mb-2">1. Select Units</h3>
-                  <p>Use the unit selector to choose up to 4 units to compare. 
-                  Filter by game or search for specific units.</p>
+                  <p>Use the unit selector to choose up to 4 units to compare.
+                    Filter by game or search for specific units.</p>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2">2. View Progression</h3>
-                  <p>The combined stats table shows how each unit's stats progress from their 
-                  base level to the maximum level, including stat calculations based on growth rates.</p>
+                  <p>The combined stats table shows how each unit&apos;s stats progress from their
+                    base level to the maximum level, including stat calculations based on growth rates.</p>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2">3. Analyze Results</h3>
-                  <p>View base stats, growth rates, and calculated averages. 
-                  Compare units side-by-side to find the best fit for your team.</p>
+                  <p>View base stats, growth rates, and calculated averages.
+                    Compare units side-by-side to find the best fit for your team.</p>
                 </div>
               </div>
             </CardContent>

@@ -1,162 +1,189 @@
-// FE6 (Binding Blade) Affinity data structure
+export type SupportLevel = 'C' | 'B' | 'A' | 'S';
+
+export interface AffinityBonus {
+  attack: number;
+  defense: number;
+  hit: number;
+  avoid: number;
+  critical: number;
+  dodge: number; // Also known as Critical Avoid
+}
+
+export interface AffinityBonusesByGame {
+  'GBA'?: AffinityBonus;
+  'Path of Radiance'?: AffinityBonus;
+  'Radiant Dawn'?: AffinityBonus;
+}
+
 export interface AffinityData {
   id: string;
   name: string;
-  element: string;
   description: string;
-  statBonuses: {
-    attack?: number;
-    defense?: number;
-    hit?: number;
-    avoid?: number;
-    critical?: number;
-    avoidCritical?: number;
-  };
-  supportBonuses: {
-    levelC: string[];
-    levelB: string[];
-    levelA: string[];
-    levelS: string[];
-  };
+  bonuses: AffinityBonusesByGame;
 }
 
-export const FE6_AFFINITIES: AffinityData[] = [
+// GBA Bonus definitions (Fire Emblem 6, 7, 8)
+const GBA_BONUSES: Record<string, AffinityBonus> = {
+  Fire: { attack: 0.5, defense: 0, hit: 2.5, avoid: 2.5, critical: 2.5, dodge: 0 },
+  Thunder: { attack: 0, defense: 0.5, hit: 0, avoid: 2.5, critical: 2.5, dodge: 2.5 },
+  Wind: { attack: 0.5, defense: 0, hit: 2.5, avoid: 0, critical: 2.5, dodge: 2.5 },
+  Ice: { attack: 0, defense: 0.5, hit: 2.5, avoid: 2.5, critical: 0, dodge: 2.5 },
+  Dark: { attack: 0, defense: 0, hit: 2.5, avoid: 2.5, critical: 2.5, dodge: 2.5 },
+  Light: { attack: 0.5, defense: 0.5, hit: 2.5, avoid: 0, critical: 2.5, dodge: 0 },
+  Anima: { attack: 0.5, defense: 0.5, hit: 0, avoid: 2.5, critical: 0, dodge: 2.5 },
+};
+
+// Path of Radiance Bonus definitions (Fire Emblem 9)
+const POR_BONUSES: Record<string, AffinityBonus> = {
+  Fire: { attack: 0.5, defense: 0, hit: 2.5, avoid: 0, critical: 0, dodge: 0 },
+  Thunder: { attack: 0, defense: 0.5, hit: 0, avoid: 2.5, critical: 0, dodge: 0 },
+  Wind: { attack: 0, defense: 0, hit: 2.5, avoid: 2.5, critical: 0, dodge: 0 },
+  Ice: { attack: 0, defense: 0.5, hit: 2.5, avoid: 0, critical: 0, dodge: 0 },
+  Dark: { attack: 0.5, defense: 0, hit: 0, avoid: 2.5, critical: 0, dodge: 0 },
+  Light: { attack: 0, defense: 0.5, hit: 2.5, avoid: 0, critical: 0, dodge: 0 },
+  Water: { attack: 0.5, defense: 0.5, hit: 0, avoid: 0, critical: 0, dodge: 0 },
+  Earth: { attack: 0, defense: 0, hit: 0, avoid: 5.0, critical: 0, dodge: 0 },
+  Heaven: { attack: 0, defense: 0, hit: 5.0, avoid: 0, critical: 0, dodge: 0 },
+};
+
+export const AFFINITIES: AffinityData[] = [
   {
     id: 'fire',
     name: 'Fire',
-    element: 'Anima',
-    description: 'A passionate affinity that boosts offensive capabilities. Strong against Wind, weak against Thunder.',
-    statBonuses: {
-      attack: 1,
-      critical: 5,
-    },
-    supportBonuses: {
-      levelC: ['Attack +1', 'Critical +5'],
-      levelB: ['Attack +1', 'Critical +10', 'Hit +5'],
-      levelA: ['Attack +2', 'Critical +15', 'Hit +10'],
-      levelS: ['Attack +3', 'Critical +20', 'Hit +15', 'Avoid +5'],
-    },
+    description: 'A passionate affinity that boosts offensive capabilities.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Fire'],
+      'Path of Radiance': POR_BONUSES['Fire'],
+    }
   },
   {
     id: 'thunder',
     name: 'Thunder',
-    element: 'Anima',
-    description: 'A dynamic affinity that provides balanced bonuses. Strong against Fire, weak against Wind.',
-    statBonuses: {
-      attack: 1,
-      hit: 5,
-    },
-    supportBonuses: {
-      levelC: ['Attack +1', 'Hit +5'],
-      levelB: ['Attack +1', 'Hit +10', 'Avoid +5'],
-      levelA: ['Attack +2', 'Hit +15', 'Avoid +10'],
-      levelS: ['Attack +2', 'Hit +20', 'Avoid +15', 'Critical +5'],
-    },
+    description: 'A dynamic affinity that provides balanced bonuses.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Thunder'],
+      'Path of Radiance': POR_BONUSES['Thunder'],
+    }
   },
   {
     id: 'wind',
     name: 'Wind',
-    element: 'Anima',
-    description: 'A swift affinity that enhances accuracy and evasion. Strong against Thunder, weak against Fire.',
-    statBonuses: {
-      avoid: 5,
-      avoidCritical: 5,
-    },
-    supportBonuses: {
-      levelC: ['Avoid +5', 'Avoid Critical +5'],
-      levelB: ['Avoid +10', 'Avoid Critical +10', 'Hit +5'],
-      levelA: ['Avoid +15', 'Avoid Critical +15', 'Hit +10'],
-      levelS: ['Avoid +20', 'Avoid Critical +20', 'Hit +15', 'Attack +1'],
-    },
-  },
-  {
-    id: 'light',
-    name: 'Light',
-    element: 'Light',
-    description: 'A divine affinity that provides defensive bonuses. Effective against Dark affinities.',
-    statBonuses: {
-      defense: 1,
-      avoidCritical: 10,
-    },
-    supportBonuses: {
-      levelC: ['Defense +1', 'Avoid Critical +10'],
-      levelB: ['Defense +1', 'Avoid Critical +15', 'Avoid +5'],
-      levelA: ['Defense +2', 'Avoid Critical +20', 'Avoid +10'],
-      levelS: ['Defense +3', 'Avoid Critical +25', 'Avoid +15', 'Hit +5'],
-    },
-  },
-  {
-    id: 'dark',
-    name: 'Dark',
-    element: 'Dark',
-    description: 'A mysterious affinity that focuses on critical hits. Strong against Light affinities.',
-    statBonuses: {
-      critical: 10,
-      attack: 1,
-    },
-    supportBonuses: {
-      levelC: ['Critical +10', 'Attack +1'],
-      levelB: ['Critical +15', 'Attack +1', 'Hit +5'],
-      levelA: ['Critical +20', 'Attack +2', 'Hit +10'],
-      levelS: ['Critical +25', 'Attack +3', 'Hit +15', 'Defense +1'],
-    },
+    description: 'A swift affinity that enhances accuracy and evasion.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Wind'],
+      'Path of Radiance': POR_BONUSES['Wind'],
+    }
   },
   {
     id: 'ice',
     name: 'Ice',
-    element: 'Anima',
-    description: 'A cold affinity that boosts defensive capabilities. Provides balanced defensive bonuses.',
-    statBonuses: {
-      defense: 1,
-      avoid: 5,
-    },
-    supportBonuses: {
-      levelC: ['Defense +1', 'Avoid +5'],
-      levelB: ['Defense +1', 'Avoid +10', 'Hit +5'],
-      levelA: ['Defense +2', 'Avoid +15', 'Hit +10'],
-      levelS: ['Defense +3', 'Avoid +20', 'Hit +15', 'Critical +5'],
-    },
+    description: 'A cold affinity that boosts defensive capabilities.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Ice'],
+      'Path of Radiance': POR_BONUSES['Ice'],
+    }
+  },
+  {
+    id: 'dark',
+    name: 'Dark',
+    description: 'A mysterious affinity that focuses on critical hits and evasion.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Dark'],
+      'Path of Radiance': POR_BONUSES['Dark'],
+    }
+  },
+  {
+    id: 'light',
+    name: 'Light',
+    description: 'A divine affinity that provides defensive bonuses.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Light'],
+      'Path of Radiance': POR_BONUSES['Light'],
+    }
+  },
+  {
+    id: 'anima',
+    name: 'Anima',
+    description: 'A robust affinity that provides a wide range of reliable bonuses.',
+    bonuses: {
+      'GBA': GBA_BONUSES['Anima'],
+    }
+  },
+  {
+    id: 'water',
+    name: 'Water',
+    description: 'A flowing affinity balancing both offense and defense evenly.',
+    bonuses: {
+      'Path of Radiance': POR_BONUSES['Water'],
+    }
+  },
+  {
+    id: 'earth',
+    name: 'Earth',
+    description: 'A grounded affinity that heavily enhances evasion.',
+    bonuses: {
+      'Path of Radiance': POR_BONUSES['Earth'],
+    }
   },
   {
     id: 'heaven',
     name: 'Heaven',
-    element: 'Anima',
-    description: 'A sacred affinity that provides excellent all-around bonuses. Considered the most balanced affinity.',
-    statBonuses: {
-      attack: 1,
-      defense: 1,
-      hit: 3,
-      avoid: 3,
-    },
-    supportBonuses: {
-      levelC: ['Attack +1', 'Defense +1'],
-      levelB: ['Attack +1', 'Defense +1', 'Hit +3', 'Avoid +3'],
-      levelA: ['Attack +2', 'Defense +2', 'Hit +6', 'Avoid +6'],
-      levelS: ['Attack +3', 'Defense +3', 'Hit +10', 'Avoid +10', 'Critical +10'],
-    },
+    description: 'A sacred affinity that focuses purely on maximizing accuracy.',
+    bonuses: {
+      'Path of Radiance': POR_BONUSES['Heaven'],
+    }
   },
 ];
 
-// Helper function to get affinity by ID
 export function getAffinityById(id: string): AffinityData | undefined {
-  return FE6_AFFINITIES.find(affinity => affinity.id === id);
+  return AFFINITIES.find(affinity => affinity.id === id);
 }
 
-// Helper function to get affinity by name
 export function getAffinityByName(name: string): AffinityData | undefined {
-  return FE6_AFFINITIES.find(affinity => 
-    affinity.name.toLowerCase() === name.toLowerCase()
+  // Catch potential misspellings or localizations like "Lightning" for "Light"
+  const normalizedName = name.toLowerCase() === 'lightning' ? 'light' : name.toLowerCase();
+  return AFFINITIES.find(affinity =>
+    affinity.name.toLowerCase() === normalizedName
   );
 }
 
-// Helper function to get all affinity names
 export function getAffinityNames(): string[] {
-  return FE6_AFFINITIES.map(affinity => affinity.name);
+  return AFFINITIES.map(affinity => affinity.name);
 }
 
-// Helper function to get affinities by element
-export function getAffinitiesByElement(element: string): AffinityData[] {
-  return FE6_AFFINITIES.filter(affinity => 
-    affinity.element.toLowerCase() === element.toLowerCase()
-  );
+/**
+ * Helper to calculate string representation of support bonuses for a given level
+ * (Level C = 1x multiplier, B = 2x, A = 3x, S = 4x)
+ */
+export function calculateSupportBonuses(affinity: AffinityData, game: string, level: SupportLevel): string[] {
+  const gameKey = game.includes('Three Houses') ? undefined :
+    (game.includes('Binding Blade') || game.includes('Blazing Blade') || game.includes('Sacred Stones')) ? 'GBA' :
+      game.includes('Path of Radiance') ? 'Path of Radiance' : undefined;
+
+  if (!gameKey) return [];
+
+  const baseBonuses = affinity.bonuses[gameKey as keyof AffinityBonusesByGame];
+  if (!baseBonuses) return [];
+
+  const multiplierMap: Record<SupportLevel, number> = {
+    'C': 1,
+    'B': 2,
+    'A': 3,
+    'S': 4 // Note: GBA/PoR rarely have S-supports giving extra multiplier in same way but keeping for flexibility
+  };
+
+  const mult = multiplierMap[level];
+  const items: string[] = [];
+
+  // Floor the totals (for rendering individual halves, usually we render them as 0.5 per support and then 
+  // round down in game, but when summarizing a single affinity's contribution, showing decimals is fine or multiplying it.
+  // Standard wiki format shows the *total per support rank*, we will show mathematically exact multiplier).
+  if (baseBonuses.attack) items.push(`Attack +${(baseBonuses.attack * mult).toFixed(1).replace('.0', '')}`);
+  if (baseBonuses.defense) items.push(`Defense +${(baseBonuses.defense * mult).toFixed(1).replace('.0', '')}`);
+  if (baseBonuses.hit) items.push(`Hit +${(baseBonuses.hit * mult).toFixed(1).replace('.0', '')}`);
+  if (baseBonuses.avoid) items.push(`Avoid +${(baseBonuses.avoid * mult).toFixed(1).replace('.0', '')}`);
+  if (baseBonuses.critical) items.push(`Critical +${(baseBonuses.critical * mult).toFixed(1).replace('.0', '')}`);
+  if (baseBonuses.dodge) items.push(`Dodge +${(baseBonuses.dodge * mult).toFixed(1).replace('.0', '')}`);
+
+  return items;
 }
