@@ -1,0 +1,12 @@
+## Current Task
+- - [ ] 3.1 Define FE6 affinity data structure containing names and stat bonus details.
+## Completed Tasks for Git Commit
+- [x] 1.1 Add `.modal-backdrop` styles to `app/global.css` for fixed full-screen overlay (darkened background, high z-index).
+- [x] 1.2 Add `.modal-content` styles to `app/global.css` for the centered modal container (distinct background color, padding, max-width, border-radius).
+- [x] 1.3 Add modal close button styles to `app/global.css` (positioning in top right, clear icon/text, no background/border).
+- [x] 2.1 Create `components/ui/modal.tsx`.
+- [x] 2.2 Define component props: `isOpen` (boolean), `onClose` (function), and `children` (ReactNode).
+- [x] 2.3 Implement conditional rendering based on the `isOpen` prop.
+- [x] 2.4 Render the backdrop `div` and the modal content `div` within it.
+- [x] 2.5 Add an "x" `<button>` inside the modal content that calls `onClose` when clicked.
+- [x] 2.6 IMPORTANT: Ensure no `onClick` handler is placed on the backdrop (or explicitly ignore clicks) to prevent backdrop click dismissal.

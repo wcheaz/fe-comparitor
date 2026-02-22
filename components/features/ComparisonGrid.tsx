@@ -1,10 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
+import { Info } from 'lucide-react';
+import { Modal } from '@/components/ui/modal';
+import { getAffinityByName } from '@/lib/affinities';
 
 interface ComparisonGridProps {
   units: Unit[];
@@ -28,10 +31,22 @@ export function ComparisonGrid({
   }, [units]);
 
   const [classes, setClasses] = React.useState<Class[]>([]);
+  
+  // State for affinity modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAffinity, setSelectedAffinity] = useState<string | null>(null);
+
+  // Handle affinity info icon click
+  const handleAffinityInfoClick = (affinityName: string) => {
+    setSelectedAffinity(affinityName);
+    setIsModalOpen(true);
+  };
 
   React.useEffect(() => {
     getAllClasses().then(setClasses).catch(console.error);
-  }, []); if (units.length === 0) {
+  }, []);
+
+  if (units.length === 0) {
     return (
       <Card className={className}>
         <CardContent className="p-8">
@@ -40,7 +55,7 @@ export function ComparisonGrid({
             <p>Select units to compare their stats and growth rates.</p>
           </div>
         </CardContent>
-      </Card>
+</Card>
     );
   }
 
@@ -130,7 +145,315 @@ export function ComparisonGrid({
                     <td className="p-2 font-medium">Affinity</td>
                     {units.map((unit) => (
                       <td key={`affinity-${unit.id}`} className="text-center p-2">
-                        {unit.affinity || '-'}
+                        <div className="flex items-center justify-center gap-1">
+                          {unit.affinity || '-'}
+                          {unit.affinity && (
+                            <Info 
+                              className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+                              aria-label={`View details about ${unit.affinity} affinity`}
+                              onClick={() => handleAffinityInfoClick(unit.affinity!)}
+                            />
+                          )}
+                        </div>
+                      </td>
+                    ))}
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Base Stats and Growth Rates - Side by Side */}
+      {showStats && (
+        <div className="flex flex-col md:flex-row gap-6 w-full">
+          <div className="w-full md:w-1/2 min-w-0">
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle>Base Stats</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left p-2 font-medium">Stat</th>
+                        {units.map((unit) => (
+                          <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                            {unit.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getCommonBaseStats(units).map((statKey) => {
+                        const highlightStats = getHighlightStats(units, statKey, 'base');
+
+                        return (
+                          <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
+                            <td className="p-2 font-medium">
+                              {getStatLabel(statKey)}
+                            </td>
+                            {units.map((unit, unitIndex) => {
+                              const baseValue = unit.stats[statKey] ?? '-';
+                              const highlight = highlightStats[unitIndex];
+
+                              let highlightClass = '';
+                              if (highlight.isHighest) {
+                                highlightClass = 'bg-green-500/20';
+                              } else if (highlight.isEqual) {
+                                highlightClass = 'bg-yellow-500/20';
+                              }
+
+                              return (
+                                <td
+                                  key={`base-${statKey}-${unit.id}`}
+                                  className={`text-center p-2 ${highlightClass}`}
+                                >
+                                  <span className="font-medium">{baseValue}</span>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {showGrowths && (
+            <div className="w-full md:w-1/2 min-w-0">
+              <Card className="h-full">
+                <CardHeader>
+                  <CardTitle>Growth Rates</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="text-left p-2 font-medium">Stat</th>
+                          {units.map((unit) => (
+                            <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                              {unit.name}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getCommonGrowthStats(units).map((statKey) => {
+                          const highlightStats = getHighlightStats(units, statKey, 'growth');
+
+                          return (
+                            <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
+                              <td className="p-2 font-medium">
+                                {getStatLabel(statKey)}
+                              </td>
+                              {units.map((unit, unitIndex) => {
+                                const growthValue = unit.growths[statKey] ?? '-';
+                                const highlight = highlightStats[unitIndex];
+
+                                let highlightClass = '';
+                                if (highlight.isHighest) {
+                                  highlightClass = 'bg-green-500/20';
+                                } else if (highlight.isEqual) {
+                                  highlightClass = 'bg-yellow-500/20';
+                                }
+
+                                return (
+                                  <td
+                                    key={`growth-${statKey}-${unit.id}`}
+                                    className={`text-center p-2 ${highlightClass}`}
+                                  >
+                                    <span className="font-medium">{growthValue}{growthValue !== '-' ? '%' : ''}</span>
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Affinity Details Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {selectedAffinity && (() => {
+            const affinityData = getAffinityByName(selectedAffinity);
+            if (!affinityData) {
+              return (
+                <div>
+                  <h2 className="text-2xl font-bold">{selectedAffinity} Affinity</h2>
+                  <p>Affinity data not found.</p>
+                </div>
+              );
+            }
+
+            return (
+              <>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold">{affinityData.name} Affinity</h2>
+                  <span className="px-3 py-1 bg-muted rounded-full text-sm font-medium">
+                    {affinityData.element}
+                  </span>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Description</h3>
+                    <p className="text-muted-foreground">{affinityData.description}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Stat Bonuses</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {Object.entries(affinityData.statBonuses).map(([stat, bonus]) => (
+                        <div key={stat} className="flex justify-between p-2 bg-muted rounded">
+                          <span className="font-medium capitalize">{stat}</span>
+                          <span className="text-green-600 font-medium">+{bonus}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Support Bonuses</h3>
+                    <div className="space-y-3">
+                      {Object.entries(affinityData.supportBonuses).map(([level, bonuses]) => (
+                        <div key={level} className="border-l-4 border-primary pl-3">
+                          <h4 className="font-semibold text-primary">{level} Support</h4>
+                          <ul className="mt-1 space-y-1">
+                            {bonuses.map((bonus, index) => (
+                              <li key={index} className="text-sm text-muted-foreground">
+                                • {bonus}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      </Modal>
+
+    </div>
+  );
+}
+
+  return (
+    <div className={`space-y-6 ${className}`}>
+      {/* Header */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Unit Comparison</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-sm text-muted-foreground">
+            Comparing {units.length} unit{units.length !== 1 ? 's' : ''}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Unit Cards Grid - Simplified headers */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {units.map((unit) => (
+          <UnitCard
+            key={unit.id}
+            unit={unit}
+          />
+        ))}
+      </div>
+
+      {/* Basic Unit Information - Horizontal */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Unit Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left p-2 font-medium">Detail</th>
+                  {units.map((unit) => (
+                    <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
+                      {unit.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Class</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    return (
+                      <td key={`class-${unit.id}`} className="text-center p-2">
+                        {cls ? cls.name : unit.class}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Join Chapter</td>
+                  {units.map((unit) => (
+                    <td key={`join-${unit.id}`} className="text-center p-2">
+                      {unit.joinChapter}
+                    </td>
+                  ))}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Movement Type</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    return (
+                      <td key={`movement-${unit.id}`} className="text-center p-2">
+                        {cls?.movementType || 'Infantry'}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Level</td>
+                  {units.map((unit) => (
+                    <td key={`level-${unit.id}`} className="text-center p-2">
+                      Lv. {unit.level}{unit.isPromoted ? ' (Promoted)' : ''}
+                    </td>
+                  ))}
+                </tr>
+                {units.some(u => u.affinity) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium">Affinity</td>
+                    {units.map((unit) => (
+                      <td key={`affinity-${unit.id}`} className="text-center p-2">
+                        <div className="flex items-center justify-center gap-1">
+                          {unit.affinity || '-'}
+                          {unit.affinity && (
+                            <Info 
+                              className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+                              aria-label={`View details about ${unit.affinity} affinity`}
+                              onClick={() => handleAffinityInfoClick(unit.affinity!)}
+                            />
+                          )}
+                        </div>
                       </td>
                     ))}
                   </tr>
@@ -430,10 +753,27 @@ export function ComparisonGrid({
                 </tbody>
               </table>
             </div>
-          </CardContent>
+</CardContent>
         </Card>
       )}
-
+      
+      {/* Affinity Details Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {selectedAffinity && (
+            <>
+              <h2 className="text-2xl font-bold">{selectedAffinity} Affinity</h2>
+              <div className="space-y-2">
+                <p>Affinity details will be displayed here.</p>
+                {/* More content will be added in the next task */}
+              </div>
+            </>
+          )}
+        </div>
+      </Modal>
 
     </div>
   );

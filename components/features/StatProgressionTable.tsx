@@ -199,15 +199,6 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                       let isEqual = false;
 
                       if (!shouldShowDash && statValue !== undefined) {
-                        isHighest = units.every((otherUnit, otherIndex) => {
-                          if (otherIndex === unitIndex) return true;
-                          const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
-                          if (row.internalLevel < otherEffectiveLv) return true;
-                          const otherRaw = row.stats[otherIndex]?.[statKey];
-                          if (otherRaw === undefined || otherRaw === null) return true;
-                          return statValue > Math.round(otherRaw);
-                        });
-
                         const allValidValues = units.map((u, i) => {
                           const eLv = u.isPromoted ? u.level + 20 : u.level;
                           if (row.internalLevel < eLv) return null;
@@ -215,7 +206,18 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                           return rv !== undefined && rv !== null ? Math.round(rv) : null;
                         }).filter(v => v !== null) as number[];
 
-                        isEqual = allValidValues.length > 1 && allValidValues.every(v => v === statValue) && statValue !== 0;
+                        if (allValidValues.length > 1) {
+                          isHighest = units.every((otherUnit, otherIndex) => {
+                            if (otherIndex === unitIndex) return true;
+                            const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
+                            if (row.internalLevel < otherEffectiveLv) return true;
+                            const otherRaw = row.stats[otherIndex]?.[statKey];
+                            if (otherRaw === undefined || otherRaw === null) return true;
+                            return statValue > Math.round(otherRaw);
+                          });
+
+                          isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
+                        }
                       }
 
                       let highlightClass = '';
