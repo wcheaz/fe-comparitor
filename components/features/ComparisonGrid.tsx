@@ -390,6 +390,27 @@ export function ComparisonGrid({
                     ))}
                   </tr>
                 )}
+                {units.some(u => u.baseWeaponRanks && Object.keys(u.baseWeaponRanks).length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Weapon Ranks</td>
+                    {units.map((unit) => (
+                      <td key={`rank-${unit.id}`} className="text-center p-2 align-top">
+                        {unit.baseWeaponRanks && Object.keys(unit.baseWeaponRanks).length > 0 ? (
+                          <div className="flex flex-col items-center gap-1">
+                            {Object.entries(unit.baseWeaponRanks).map(([weaponType, rank]) => (
+                              <div key={weaponType} className="flex items-center gap-1 text-sm bg-muted/20 px-2 py-0.5 rounded">
+                                <span className="text-muted-foreground">{weaponType}:</span>
+                                <span className="font-semibold">{rank}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">-</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -424,10 +445,14 @@ export function ComparisonGrid({
                         return (
                           <tr key={`base-${statKey}`} className="border-b hover:bg-muted/50">
                             <td className="p-2 font-medium">
-                              {getStatLabel(statKey)}
+                              {getStatLabel(statKey, units)}
                             </td>
                             {units.map((unit, unitIndex) => {
-                              const baseValue = unit.stats[statKey] ?? '-';
+                              let baseValue = unit.stats[statKey] ?? '-';
+                              if (statKey === 'skl' && baseValue === '-') {
+                                baseValue = unit.stats['dex'] ?? '-';
+                              }
+
                               const highlight = highlightStats[unitIndex];
 
                               let highlightClass = '';
@@ -482,10 +507,14 @@ export function ComparisonGrid({
                           return (
                             <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
                               <td className="p-2 font-medium">
-                                {getStatLabel(statKey)}
+                                {getStatLabel(statKey, units)}
                               </td>
                               {units.map((unit, unitIndex) => {
-                                const growthValue = unit.growths[statKey] ?? '-';
+                                let growthValue = unit.growths[statKey] ?? '-';
+                                if (statKey === 'skl' && growthValue === '-') {
+                                  growthValue = unit.growths['dex'] ?? '-';
+                                }
+
                                 const highlight = highlightStats[unitIndex];
 
                                 let highlightClass = '';
@@ -563,7 +592,11 @@ function getCommonStats(units: Unit[]): string[] {
   // Return stats in a logical order
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
 
-  return statOrder.filter(stat => statSet.has(stat));
+  let common = statOrder.filter(stat => statSet.has(stat));
+  if (statSet.has('skl') && statSet.has('dex')) {
+    common = common.filter(c => c !== 'dex');
+  }
+  return common;
 }
 
 function getCommonBaseStats(units: Unit[]): string[] {
@@ -585,7 +618,14 @@ function getCommonBaseStats(units: Unit[]): string[] {
     }
   });
 
-  return commonStats;
+  let common = commonStats;
+  const hasSkl = units.some(unit => unit.stats['skl'] !== undefined && unit.stats['skl'] !== null);
+  const hasDex = units.some(unit => unit.stats['dex'] !== undefined && unit.stats['dex'] !== null);
+  if (hasSkl && hasDex) {
+    common = common.filter((c: string) => c !== 'dex');
+  }
+
+  return common;
 }
 
 function getCommonGrowthStats(units: Unit[]): string[] {
@@ -607,16 +647,22 @@ function getCommonGrowthStats(units: Unit[]): string[] {
     }
   });
 
-  return commonStats;
+  let common = commonStats;
+  const hasSkl = units.some(unit => unit.growths['skl'] !== undefined && unit.growths['skl'] !== null);
+  const hasDex = units.some(unit => unit.growths['dex'] !== undefined && unit.growths['dex'] !== null);
+  if (hasSkl && hasDex) {
+    common = common.filter((c: string) => c !== 'dex');
+  }
+
+  return common;
 }
 
-function getStatLabel(statKey: string): string {
+function getStatLabel(statKey: string, units?: Unit[]): string {
   const labels: Record<string, string> = {
     hp: 'HP',
     str: 'Str',
     mag: 'Mag',
     skl: 'Skl',
-    dex: 'Dex',
     spd: 'Spd',
     lck: 'Lck',
     def: 'Def',
@@ -628,14 +674,42 @@ function getStatLabel(statKey: string): string {
     cha: 'Cha'
   };
 
+  if (statKey === 'skl' && units) {
+    const hasDex = units.some(u =>
+      (u.stats && u.stats.dex !== undefined) ||
+      (u.growths && u.growths.dex !== undefined)
+    );
+    const hasSkl = units.some(u =>
+      (u.stats && u.stats.skl !== undefined) ||
+      (u.growths && u.growths.skl !== undefined)
+    );
+    if (hasDex && hasSkl) return 'Skl/Dex';
+    if (hasDex) return 'Dex';
+    return 'Skl';
+  }
+
+  if (statKey === 'str' && units) {
+    const hasMag = units.some(u =>
+      (u.stats && u.stats.mag !== undefined) ||
+      (u.growths && u.growths.mag !== undefined)
+    );
+    if (!hasMag) {
+      return 'Str/Mag';
+    }
+  }
+
   return labels[statKey] || statKey.toUpperCase();
 }
 
 function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'growth'): { isHighest: boolean; isEqual: boolean }[] {
   return units.map((unit, index) => {
-    const currentValue = statType === 'base'
+    let currentValue = statType === 'base'
       ? unit.stats[statKey]
       : unit.growths[statKey];
+
+    if (statKey === 'skl' && (currentValue === undefined || currentValue === null)) {
+      currentValue = statType === 'base' ? unit.stats['dex'] : unit.growths['dex'];
+    }
 
     // If current value is undefined, no highlight
     if (currentValue === undefined || currentValue === null) {
@@ -646,13 +720,17 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
     const isHighest = units.every((otherUnit, otherIndex) => {
       if (otherIndex === index) return true; // Skip comparing with self
 
-      const otherValue = statType === 'base'
+      let otherValue = statType === 'base'
         ? otherUnit.stats[statKey]
         : otherUnit.growths[statKey];
 
-      // If other value is undefined/null, current value is considered higher
+      if (statKey === 'skl' && (otherValue === undefined || otherValue === null)) {
+        otherValue = statType === 'base' ? otherUnit.stats['dex'] : otherUnit.growths['dex'];
+      }
+
+      // If other value is undefined/null, do not highlight as higher
       if (otherValue === undefined || otherValue === null) {
-        return true;
+        return false;
       }
 
       // Current value must be strictly greater than other value
@@ -660,9 +738,13 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
     });
 
     // Check if all non-undefined values are equal
-    const allValues = units.map(u =>
-      statType === 'base' ? u.stats[statKey] : u.growths[statKey]
-    ).filter(val => val !== undefined && val !== null);
+    const allValues = units.map(u => {
+      let val = statType === 'base' ? u.stats[statKey] : u.growths[statKey];
+      if (statKey === 'skl' && (val === undefined || val === null)) {
+        val = statType === 'base' ? u.stats['dex'] : u.growths['dex'];
+      }
+      return val;
+    }).filter(val => val !== undefined && val !== null);
 
     const isEqual = allValues.length > 1 && allValues.every(val => val === currentValue) && currentValue !== 0;
 

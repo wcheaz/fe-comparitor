@@ -36,7 +36,18 @@ export function StatTable({
   ]);
 
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
-  const statKeys = statOrder.filter(key => allStatKeys.has(key));
+
+  // Create a base set of keys to display
+  let statKeys = statOrder.filter(key => allStatKeys.has(key));
+
+  // If both skl and dex exist, we only want to show one combined row
+  const hasSkl = allStatKeys.has('skl');
+  const hasDex = allStatKeys.has('dex');
+
+  if (hasSkl && hasDex) {
+    // Keep 'skl' as the representative key for the combined row, remove 'dex'
+    statKeys = statKeys.filter(key => key !== 'dex');
+  }
 
   return (
     <div className={`overflow-x-auto ${className}`}>
@@ -52,13 +63,27 @@ export function StatTable({
         </thead>
         <tbody>
           {statKeys.map((statKey) => {
-            const baseValue = unit.stats[statKey] ?? '-';
-            const growthValue = unit.growths[statKey] ?? '-';
+            // For combined skl/dex row, we need to pull from either stat
+            let baseValue = unit.stats[statKey] ?? '-';
+            let growthValue = unit.growths[statKey] ?? '-';
+
+            if (statKey === 'skl' && hasDex && !allStatKeys.has('skl')) {
+              // If it's a dex-only unit but we're processing 'skl' as the representative key
+              baseValue = unit.stats['dex'] ?? '-';
+              growthValue = unit.growths['dex'] ?? '-';
+            } else if (statKey === 'skl' && hasSkl && hasDex && (unit.stats['skl'] === undefined || unit.stats['skl'] === null)) {
+              // If it's the combined row, but this specific unit only has dex
+              baseValue = unit.stats['dex'] ?? '-';
+              growthValue = unit.growths['dex'] ?? '-';
+            }
 
             return (
               <tr key={statKey} className="border-b hover:bg-muted/50">
                 <td className="p-2 font-medium">
-                  {STAT_LABELS[statKey] || statKey.toUpperCase()}
+                  {statKey === 'str' && !allStatKeys.has('mag') ? 'Str/Mag' :
+                    statKey === 'skl' && hasDex ? (hasSkl ? 'Skl/Dex' : 'Dex') :
+                      statKey === 'skl' ? 'Skl' :
+                        (STAT_LABELS[statKey] || statKey.toUpperCase())}
                 </td>
                 <td className="text-right p-2">{baseValue}</td>
                 {showGrowths && (

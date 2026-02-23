@@ -55,8 +55,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
     // Define proper stat order and filter display stats
     const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
-    const displayStats = statOrder.filter(key => {
-      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'aid', 'cha'].includes(key)) return false;
+    let displayStats = statOrder.filter(key => {
+      // Exclude stats that typically don't progress or aren't relevant
+      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'aid'].includes(key)) return false;
 
       // Filter out stats that are missing for all units
       const isEveryUnitMissing = units.every(unit =>
@@ -66,6 +67,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
       return !isEveryUnitMissing;
     });
+
+    if (displayStats.includes('skl') && displayStats.includes('dex')) {
+      displayStats = displayStats.filter(c => c !== 'dex');
+    }
 
     // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
@@ -170,7 +175,15 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                       key={`${unit.id}-${statKey}`}
                       className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
                     >
-                      {statKey.toUpperCase()}
+                      {statKey === 'str' && !progressionData.statKeys.includes('mag') ? 'STR/MAG' :
+                        statKey === 'skl' ? (() => {
+                          const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
+                          const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
+                          if (hasDex && hasSkl) return 'SKL/DEX';
+                          if (hasDex) return 'DEX';
+                          return 'SKL';
+                        })() :
+                          statKey.toUpperCase()}
                     </th>
                   ))}
                 </React.Fragment>
@@ -188,9 +201,19 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                     {progressionData.statKeys.map((statKey, statIndex) => {
                       const unitStats = row.stats[unitIndex];
                       const unitCappedStats = row.cappedStats[unitIndex];
-                      const rawStatValue = unitStats[statKey];
+
+                      let rawStatValue = unitStats[statKey];
+                      if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
+                        rawStatValue = unitStats['dex'];
+                      }
+
                       const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
-                      const isCapped = unitCappedStats?.[statKey];
+
+                      let isCapped = unitCappedStats?.[statKey];
+                      if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
+                        isCapped = unitCappedStats?.['dex'];
+                      }
+
                       const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
                       const shouldShowDash = row.internalLevel < effectiveUnitLevel;
 
@@ -201,7 +224,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                         const allValidValues = units.map((u, i) => {
                           const eLv = u.isPromoted ? u.level + 20 : u.level;
                           if (row.internalLevel < eLv) return null;
-                          const rv = row.stats[i]?.[statKey];
+                          let rv = row.stats[i]?.[statKey];
+                          if (statKey === 'skl' && (rv === undefined || rv === null)) {
+                            rv = row.stats[i]?.['dex'];
+                          }
                           return rv !== undefined && rv !== null ? Math.round(rv) : null;
                         }).filter(v => v !== null) as number[];
 
@@ -210,8 +236,11 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                             if (otherIndex === unitIndex) return true;
                             const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
                             if (row.internalLevel < otherEffectiveLv) return true;
-                            const otherRaw = row.stats[otherIndex]?.[statKey];
-                            if (otherRaw === undefined || otherRaw === null) return true;
+                            let otherRaw = row.stats[otherIndex]?.[statKey];
+                            if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
+                              otherRaw = row.stats[otherIndex]?.['dex'];
+                            }
+                            if (otherRaw === undefined || otherRaw === null) return false;
                             return statValue > Math.round(otherRaw);
                           });
 

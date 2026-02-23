@@ -250,7 +250,6 @@
         "class": "priest_f",
         "level": 2,
         "hp": 16,
-        "str": 1,
         "skl": 6,
         "spd": 8,
         "lck": 8,
@@ -260,12 +259,12 @@
         "mov": 5,
         "growths": {
             "hp": 45,
-            "str": 50,
             "skl": 30,
             "spd": 20,
             "lck": 70,
             "def": 5,
-            "res": 60
+            "res": 60,
+            "mag": 50
         },
         "skills": [],
         "joinChapter": "Chapter 2",
@@ -275,7 +274,8 @@
             "Staves": "E"
         },
         "prf": [],
-        "aid": 3
+        "aid": 3,
+        "mag": 1
     },
     {
         "id": "dieck",
@@ -454,7 +454,6 @@
         "class": "mage_m",
         "level": 1,
         "hp": 16,
-        "str": 4,
         "skl": 5,
         "spd": 6,
         "lck": 5,
@@ -464,12 +463,12 @@
         "mov": 5,
         "growths": {
             "hp": 50,
-            "str": 40,
             "skl": 50,
             "spd": 50,
             "lck": 35,
             "def": 15,
-            "res": 30
+            "res": 30,
+            "mag": 40
         },
         "skills": [],
         "joinChapter": "Chapter 3",
@@ -479,7 +478,8 @@
             "Anima": "D"
         },
         "prf": [],
-        "aid": 3
+        "aid": 3,
+        "mag": 4
     },
     {
         "id": "clarine",
@@ -488,7 +488,6 @@
         "class": "troubadour_f",
         "level": 1,
         "hp": 15,
-        "str": 2,
         "skl": 5,
         "spd": 9,
         "lck": 8,
@@ -498,12 +497,12 @@
         "mov": 7,
         "growths": {
             "hp": 40,
-            "str": 30,
             "skl": 40,
             "spd": 50,
             "lck": 65,
             "def": 10,
-            "res": 40
+            "res": 40,
+            "mag": 30
         },
         "skills": [],
         "joinChapter": "Chapter 4",
@@ -513,7 +512,8 @@
             "Staves": "D"
         },
         "prf": [],
-        "aid": 15
+        "aid": 15,
+        "mag": 2
     },
     {
         "id": "rutger",
@@ -556,7 +556,6 @@
         "class": "priest_m",
         "level": 5,
         "hp": 20,
-        "str": 4,
         "skl": 6,
         "spd": 10,
         "lck": 2,
@@ -566,12 +565,12 @@
         "mov": 5,
         "growths": {
             "hp": 60,
-            "str": 40,
             "skl": 45,
             "spd": 45,
             "lck": 15,
             "def": 15,
-            "res": 50
+            "res": 50,
+            "mag": 40
         },
         "skills": [],
         "joinChapter": "Chapter 6",
@@ -581,7 +580,8 @@
             "Staves": "C"
         },
         "prf": [],
-        "aid": 5
+        "aid": 5,
+        "mag": 4
     },
     {
         "id": "dorothy",
@@ -799,7 +799,6 @@
         "class": "mage_f",
         "level": 1,
         "hp": 16,
-        "str": 5,
         "skl": 5,
         "spd": 4,
         "lck": 4,
@@ -809,12 +808,12 @@
         "mov": 5,
         "growths": {
             "hp": 45,
-            "str": 75,
             "skl": 20,
             "spd": 35,
             "lck": 50,
             "def": 10,
-            "res": 35
+            "res": 35,
+            "mag": 75
         },
         "skills": [],
         "joinChapter": "Chapter 8",
@@ -824,7 +823,8 @@
             "Anima": "C"
         },
         "prf": [],
-        "aid": 3
+        "aid": 3,
+        "mag": 5
     },
     {
         "id": "gwendolyn",
@@ -1276,7 +1276,6 @@
         "class": "shaman_m",
         "level": 12,
         "hp": 23,
-        "str": 12,
         "skl": 9,
         "spd": 9,
         "lck": 6,
@@ -1286,12 +1285,12 @@
         "mov": 5,
         "growths": {
             "hp": 55,
-            "str": 45,
             "skl": 55,
             "spd": 40,
             "lck": 15,
             "def": 15,
-            "res": 35
+            "res": 35,
+            "mag": 45
         },
         "skills": [],
         "joinChapter": "Chapter 12",
@@ -1301,7 +1300,8 @@
             "Dark": "C"
         },
         "prf": [],
-        "aid": 3
+        "aid": 3,
+        "mag": 12
     },
     {
         "id": "cath",
@@ -1415,7 +1415,6 @@
         "class": "valkyrie_f",
         "level": 1,
         "hp": 30,
-        "str": 11,
         "skl": 7,
         "spd": 10,
         "lck": 10,
@@ -1425,12 +1424,12 @@
         "mov": 8,
         "growths": {
             "hp": 60,
-            "str": 35,
             "skl": 45,
             "spd": 25,
             "lck": 25,
             "def": 20,
-            "res": 25
+            "res": 25,
+            "mag": 35
         },
         "skills": [],
         "joinChapter": "Chapter 13",
@@ -1442,7 +1441,8 @@
         },
         "isPromoted": true,
         "prf": [],
-        "aid": 14
+        "aid": 14,
+        "mag": 11
     },
     {
         "id": "sophia",
@@ -1451,7 +1451,6 @@
         "class": "shaman_f",
         "level": 1,
         "hp": 15,
-        "str": 6,
         "skl": 2,
         "spd": 4,
         "lck": 3,
@@ -1461,12 +1460,12 @@
         "mov": 5,
         "growths": {
             "hp": 60,
-            "str": 55,
             "skl": 40,
             "spd": 30,
             "lck": 20,
             "def": 20,
-            "res": 55
+            "res": 55,
+            "mag": 55
         },
         "skills": [],
         "joinChapter": "Chapter 14",
@@ -1476,7 +1475,8 @@
             "Dark": "C"
         },
         "prf": [],
-        "aid": 2
+        "aid": 2,
+        "mag": 6
     },
     {
         "id": "igrene",
@@ -1589,7 +1589,6 @@
         "class": "mage_m",
         "level": 15,
         "hp": 26,
-        "str": 13,
         "skl": 11,
         "spd": 12,
         "lck": 10,
@@ -1599,12 +1598,12 @@
         "mov": 5,
         "growths": {
             "hp": 75,
-            "str": 30,
             "skl": 30,
             "spd": 45,
             "lck": 25,
             "def": 20,
-            "res": 15
+            "res": 15,
+            "mag": 30
         },
         "skills": [],
         "joinChapter": "Chapter 16",
@@ -1614,7 +1613,8 @@
             "Anima": "C"
         },
         "prf": [],
-        "aid": 6
+        "aid": 6,
+        "mag": 13
     },
     {
         "id": "zeiss",
@@ -1693,7 +1693,6 @@
         "class": "druid_f",
         "level": 18,
         "hp": 25,
-        "str": 21,
         "skl": 20,
         "spd": 16,
         "lck": 15,
@@ -1703,12 +1702,12 @@
         "mov": 6,
         "growths": {
             "hp": 25,
-            "str": 15,
             "skl": 15,
             "spd": 15,
             "lck": 5,
             "def": 15,
-            "res": 20
+            "res": 20,
+            "mag": 15
         },
         "skills": [],
         "joinChapter": "Chapter 19",
@@ -1720,7 +1719,8 @@
         },
         "isPromoted": true,
         "prf": [],
-        "aid": 3
+        "aid": 3,
+        "mag": 21
     },
     {
         "id": "dayan",
@@ -1801,7 +1801,6 @@
         "class": "bishop_m",
         "level": 20,
         "hp": 35,
-        "str": 19,
         "skl": 18,
         "spd": 14,
         "lck": 11,
@@ -1811,12 +1810,12 @@
         "mov": 6,
         "growths": {
             "hp": 20,
-            "str": 30,
             "skl": 15,
             "spd": 10,
             "lck": 20,
             "def": 10,
-            "res": 20
+            "res": 20,
+            "mag": 30
         },
         "skills": [],
         "joinChapter": "Chapter 21",
@@ -1828,7 +1827,8 @@
         },
         "isPromoted": true,
         "prf": [],
-        "aid": 5
+        "aid": 5,
+        "mag": 19
     },
     {
         "id": "karel",

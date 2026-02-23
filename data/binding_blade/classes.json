@@ -1197,14 +1197,14 @@
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
-            "str": 3,
             "skl": 6,
             "spd": 5,
             "lck": 4,
             "def": 2,
             "res": 6,
             "con": 5,
-            "mov": 5
+            "mov": 5,
+            "mag": 3
         },
         "promotionBonus": {},
         "promotesTo": [
@@ -1238,14 +1238,14 @@
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
-            "str": 3,
             "skl": 6,
             "spd": 5,
             "lck": 4,
             "def": 2,
             "res": 6,
             "con": 5,
-            "mov": 5
+            "mov": 5,
+            "mag": 3
         },
         "promotionBonus": {},
         "promotesTo": [
@@ -1279,14 +1279,14 @@
         "type": "promoted",
         "baseStats": {
             "hp": 24,
-            "str": 5,
             "skl": 11,
             "spd": 9,
             "lck": 7,
             "def": 4,
             "res": 11,
             "con": 7,
-            "mov": 6
+            "mov": 6,
+            "mag": 5
         },
         "promotionBonus": {
             "hp": 4,
@@ -1329,14 +1329,14 @@
         "type": "promoted",
         "baseStats": {
             "hp": 24,
-            "str": 5,
             "skl": 11,
             "spd": 9,
             "lck": 7,
             "def": 4,
             "res": 11,
             "con": 7,
-            "mov": 6
+            "mov": 6,
+            "mag": 5
         },
         "promotionBonus": {
             "hp": 3,
@@ -1379,14 +1379,14 @@
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
-            "str": 2,
             "skl": 4,
             "spd": 4,
             "lck": 5,
             "def": 2,
             "res": 6,
             "con": 5,
-            "mov": 5
+            "mov": 5,
+            "mag": 2
         },
         "promotionBonus": {},
         "promotesTo": [
@@ -1420,14 +1420,14 @@
         "type": "unpromoted",
         "baseStats": {
             "hp": 16,
-            "str": 2,
             "skl": 4,
             "spd": 4,
             "lck": 5,
             "def": 2,
             "res": 6,
             "con": 5,
-            "mov": 5
+            "mov": 5,
+            "mag": 2
         },
         "promotionBonus": {},
         "promotesTo": [
@@ -1461,14 +1461,14 @@
         "type": "promoted",
         "baseStats": {
             "hp": 24,
-            "str": 4,
             "skl": 8,
             "spd": 7,
             "lck": 8,
             "def": 4,
             "res": 11,
             "con": 7,
-            "mov": 6
+            "mov": 6,
+            "mag": 4
         },
         "promotionBonus": {
             "hp": 3,
@@ -1513,14 +1513,14 @@
         "type": "promoted",
         "baseStats": {
             "hp": 24,
-            "str": 4,
             "skl": 8,
             "spd": 7,
             "lck": 8,
             "def": 4,
             "res": 11,
             "con": 7,
-            "mov": 6
+            "mov": 6,
+            "mag": 4
         },
         "promotionBonus": {
             "hp": 3,
