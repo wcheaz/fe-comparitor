@@ -20,7 +20,8 @@ const STAT_LABELS: Record<string, string> = {
   cha: 'Cha',
   con: 'Con',
   bld: 'Bld',
-  mov: 'Mov'
+  mov: 'Mov',
+  aid: 'Aid'
 };
 
 export function StatTable({
@@ -34,7 +35,7 @@ export function StatTable({
     ...Object.keys(unit.growths)
   ]);
 
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
   const statKeys = statOrder.filter(key => allStatKeys.has(key));
 
   return (

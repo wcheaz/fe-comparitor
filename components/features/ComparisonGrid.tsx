@@ -561,7 +561,7 @@ function getCommonStats(units: Unit[]): string[] {
   });
 
   // Return stats in a logical order
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
 
   return statOrder.filter(stat => statSet.has(stat));
 }
@@ -572,26 +572,15 @@ function getCommonBaseStats(units: Unit[]): string[] {
   }
 
   const commonStats: string[] = [];
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
 
   statOrder.forEach(statKey => {
-    // Check if at least one unit has this base stat (non-zero and non-missing)
-    // We treat 0 as "missing" for base stats like Bld/Cha/Mag in older games
-    // Note: HP, Str, etc should never be naturally 0 base.
     const hasValidStat = units.some(unit =>
       unit.stats[statKey] !== undefined &&
-      unit.stats[statKey] !== null &&
-      unit.stats[statKey] !== 0
+      unit.stats[statKey] !== null
     );
 
-    // Check if both units have missing or 0 base stat (filter out if both missing/zero)
-    const bothMissingOrZero = units.every(unit =>
-      unit.stats[statKey] === undefined ||
-      unit.stats[statKey] === null ||
-      unit.stats[statKey] === 0
-    );
-
-    if (hasValidStat && !bothMissingOrZero) {
+    if (hasValidStat) {
       commonStats.push(statKey);
     }
   });
@@ -605,24 +594,15 @@ function getCommonGrowthStats(units: Unit[]): string[] {
   }
 
   const commonStats: string[] = [];
-  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+  const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
 
   statOrder.forEach(statKey => {
-    // Check if at least one unit has this growth stat (non-zero and non-missing)
     const hasValidGrowth = units.some(unit =>
       unit.growths[statKey] !== undefined &&
-      unit.growths[statKey] !== null &&
-      unit.growths[statKey] !== 0
+      unit.growths[statKey] !== null
     );
 
-    // Check if both units have missing or 0 growth (filter out if both missing/zero)
-    const bothMissingOrZero = units.every(unit =>
-      unit.growths[statKey] === undefined ||
-      unit.growths[statKey] === null ||
-      unit.growths[statKey] === 0
-    );
-
-    if (hasValidGrowth && !bothMissingOrZero) {
+    if (hasValidGrowth) {
       commonStats.push(statKey);
     }
   });
@@ -644,6 +624,7 @@ function getStatLabel(statKey: string): string {
     con: 'Con',
     bld: 'Bld',
     mov: 'Mov',
+    aid: 'Aid',
     cha: 'Cha'
   };
 

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const filepath = './data/binding_blade_units.json';
+const filepath = './data/binding_blade/units.json';
 const data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
 
 data.forEach(unit => {

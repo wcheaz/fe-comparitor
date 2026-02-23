@@ -33,7 +33,8 @@
         "prf": [
             "Rapier",
             "Binding Blade"
-        ]
+        ],
+        "aid": 5
     },
     {
         "id": "marcus",
@@ -69,7 +70,8 @@
             "Axes": "E"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 14
     },
     {
         "id": "allen",
@@ -103,7 +105,8 @@
             "Swords": "E",
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "lance",
@@ -137,7 +140,8 @@
             "Swords": "E",
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "wolt",
@@ -170,7 +174,8 @@
         "baseWeaponRanks": {
             "Bows": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "bors",
@@ -203,7 +208,8 @@
         "baseWeaponRanks": {
             "Lances": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 13
     },
     {
         "id": "merlinus",
@@ -234,7 +240,8 @@
         "gender": "M",
         "affinity": "Dark",
         "baseWeaponRanks": {},
-        "prf": []
+        "prf": [],
+        "aid": 24
     },
     {
         "id": "ellen",
@@ -267,7 +274,8 @@
         "baseWeaponRanks": {
             "Staves": "E"
         },
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "dieck",
@@ -300,7 +308,8 @@
         "baseWeaponRanks": {
             "Swords": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 12
     },
     {
         "id": "wade",
@@ -333,7 +342,8 @@
         "baseWeaponRanks": {
             "Axes": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 12
     },
     {
         "id": "lot",
@@ -366,7 +376,8 @@
         "baseWeaponRanks": {
             "Axes": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 11
     },
     {
         "id": "shanna",
@@ -399,7 +410,8 @@
         "baseWeaponRanks": {
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "chad",
@@ -432,7 +444,8 @@
         "baseWeaponRanks": {
             "Swords": "E"
         },
-        "prf": []
+        "prf": [],
+        "aid": 4
     },
     {
         "id": "lugh",
@@ -465,7 +478,8 @@
         "baseWeaponRanks": {
             "Anima": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "clarine",
@@ -498,7 +512,8 @@
         "baseWeaponRanks": {
             "Staves": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "rutger",
@@ -531,7 +546,8 @@
         "baseWeaponRanks": {
             "Swords": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "saul",
@@ -564,7 +580,8 @@
         "baseWeaponRanks": {
             "Staves": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 5
     },
     {
         "id": "dorothy",
@@ -597,7 +614,8 @@
         "baseWeaponRanks": {
             "Bows": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "sue",
@@ -630,7 +648,8 @@
         "baseWeaponRanks": {
             "Bows": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "jerrot",
@@ -666,7 +685,8 @@
             "Axes": "D"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 14
     },
     {
         "id": "treck",
@@ -700,7 +720,8 @@
             "Swords": "E",
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "noah",
@@ -734,7 +755,8 @@
             "Swords": "C",
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "astolfo",
@@ -767,7 +789,8 @@
         "baseWeaponRanks": {
             "Swords": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 7
     },
     {
         "id": "lilina",
@@ -800,7 +823,8 @@
         "baseWeaponRanks": {
             "Anima": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "gwendolyn",
@@ -833,7 +857,8 @@
         "baseWeaponRanks": {
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 9
     },
     {
         "id": "barth",
@@ -866,7 +891,8 @@
         "baseWeaponRanks": {
             "Lances": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "ojier",
@@ -899,7 +925,8 @@
         "baseWeaponRanks": {
             "Swords": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 7
     },
     {
         "id": "fir",
@@ -932,7 +959,8 @@
         "baseWeaponRanks": {
             "Swords": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 4
     },
     {
         "id": "sin",
@@ -965,7 +993,8 @@
         "baseWeaponRanks": {
             "Bows": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 18
     },
     {
         "id": "gonzales",
@@ -998,7 +1027,8 @@
         "baseWeaponRanks": {
             "Axes": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 14
     },
     {
         "id": "geese",
@@ -1031,7 +1061,8 @@
         "baseWeaponRanks": {
             "Axes": "B"
         },
-        "prf": []
+        "prf": [],
+        "aid": 10
     },
     {
         "id": "klein",
@@ -1065,7 +1096,8 @@
             "Bows": "A"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "thea",
@@ -1098,7 +1130,8 @@
         "baseWeaponRanks": {
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "larum",
@@ -1129,7 +1162,8 @@
         "gender": "F",
         "affinity": "Thunder",
         "baseWeaponRanks": {},
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "echidna",
@@ -1164,7 +1198,8 @@
             "Axes": "B"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 8
     },
     {
         "id": "elffin",
@@ -1195,7 +1230,8 @@
         "gender": "M",
         "affinity": "Light",
         "baseWeaponRanks": {},
-        "prf": []
+        "prf": [],
+        "aid": 5
     },
     {
         "id": "bartre",
@@ -1230,7 +1266,8 @@
             "Bows": "D"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 13
     },
     {
         "id": "raigh",
@@ -1263,7 +1300,8 @@
         "baseWeaponRanks": {
             "Dark": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "cath",
@@ -1296,7 +1334,8 @@
         "baseWeaponRanks": {
             "Swords": "E"
         },
-        "prf": []
+        "prf": [],
+        "aid": 4
     },
     {
         "id": "melady",
@@ -1329,7 +1368,8 @@
         "baseWeaponRanks": {
             "Lances": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 11
     },
     {
         "id": "perceval",
@@ -1365,7 +1405,8 @@
             "Axes": "C"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 13
     },
     {
         "id": "cecilia",
@@ -1400,7 +1441,8 @@
             "Staves": "C"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 14
     },
     {
         "id": "sophia",
@@ -1433,7 +1475,8 @@
         "baseWeaponRanks": {
             "Dark": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 2
     },
     {
         "id": "igrene",
@@ -1467,7 +1510,8 @@
             "Bows": "B"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "garret",
@@ -1501,7 +1545,8 @@
             "Axes": "C"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 12
     },
     {
         "id": "fae",
@@ -1534,7 +1579,8 @@
         "baseWeaponRanks": {},
         "prf": [
             "Divinestone"
-        ]
+        ],
+        "aid": 0
     },
     {
         "id": "hugh",
@@ -1567,7 +1613,8 @@
         "baseWeaponRanks": {
             "Anima": "C"
         },
-        "prf": []
+        "prf": [],
+        "aid": 6
     },
     {
         "id": "zeiss",
@@ -1600,7 +1647,8 @@
         "baseWeaponRanks": {
             "Lances": "D"
         },
-        "prf": []
+        "prf": [],
+        "aid": 15
     },
     {
         "id": "douglas",
@@ -1635,7 +1683,8 @@
             "Axes": "A"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "niime",
@@ -1670,7 +1719,8 @@
             "Staves": "A"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 3
     },
     {
         "id": "dayan",
@@ -1705,7 +1755,8 @@
             "Bows": "A"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 16
     },
     {
         "id": "juno",
@@ -1740,7 +1791,8 @@
             "Lances": "C"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 13
     },
     {
         "id": "yoder",
@@ -1775,7 +1827,8 @@
             "Staves": "A"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 5
     },
     {
         "id": "karel",
@@ -1809,6 +1862,7 @@
             "Swords": "S"
         },
         "isPromoted": true,
-        "prf": []
+        "prf": [],
+        "aid": 8
     }
 ]

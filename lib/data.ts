@@ -12,17 +12,19 @@ export async function getAllUnits(): Promise<Unit[]> {
 
   try {
     // Import all JSON data files
-    const [bindingBladeUnits, threeHousesUnits, engageUnits] = await Promise.all([
-      import('@/data/binding_blade_units.json').then(m => m.default),
-      import('@/data/three_houses_units.json').then(m => m.default),
-      import('@/data/engage_units.json').then(m => m.default)
+    const [bindingBladeUnits, threeHousesUnits, engageUnits, blazingBladeUnits] = await Promise.all([
+      import('@/data/binding_blade/units.json').then(m => m.default),
+      import('@/data/three_houses/units.json').then(m => m.default),
+      import('@/data/engage/units.json').then(m => m.default),
+      import('@/data/blazing_blade/units.json').then(m => m.default).catch(() => []) // Handle case where file might not exist yet during testing
     ]);
 
     // Transform and merge all units
     const allUnits = [
       ...bindingBladeUnits.map(transformJsonToUnit),
       ...threeHousesUnits.map(transformJsonToUnit),
-      ...engageUnits.map(transformJsonToUnit)
+      ...engageUnits.map(transformJsonToUnit),
+      ...blazingBladeUnits.map(transformJsonToUnit)
     ];
 
     unitsCache = allUnits;
@@ -36,7 +38,7 @@ export async function getAllUnits(): Promise<Unit[]> {
 export async function getUnitsByGame(game: string): Promise<Unit[]> {
   try {
     const allUnits = await getAllUnits();
-    return allUnits.filter((unit: Unit) => unit.game === game);
+    return allUnits.filter((unit: Unit) => unit.game.toLowerCase() === game.toLowerCase());
   } catch (error) {
     console.error(`Error loading units for game ${game}:`, error);
     throw new Error(`Failed to load units for game ${game}`);
@@ -60,17 +62,19 @@ export async function getAllClasses(): Promise<Class[]> {
 
   try {
     // Import all class JSON data files
-    const [bindingBladeClasses, threeHousesClasses, engageClasses] = await Promise.all([
-      import('@/data/binding_blade_classes.json').then(m => m.default),
-      import('@/data/three_houses_classes.json').then(m => m.default),
-      import('@/data/engage_classes.json').then(m => m.default)
+    const [bindingBladeClasses, threeHousesClasses, engageClasses, blazingBladeClasses] = await Promise.all([
+      import('@/data/binding_blade/classes.json').then(m => m.default),
+      import('@/data/three_houses/classes.json').then(m => m.default),
+      import('@/data/engage/classes.json').then(m => m.default),
+      import('@/data/blazing_blade/classes.json').then(m => m.default).catch(() => [])
     ]);
 
     // Transform and merge all classes
     const allClasses = [
       ...bindingBladeClasses.map(transformJsonToClass),
       ...threeHousesClasses.map(transformJsonToClass),
-      ...engageClasses.map(transformJsonToClass)
+      ...engageClasses.map(transformJsonToClass),
+      ...blazingBladeClasses.map(transformJsonToClass)
     ];
 
     classesCache = allClasses;
@@ -96,6 +100,10 @@ export async function getClassesByGame(game: string): Promise<Class[]> {
         // A better long-term fix is adding a `game` field to Class data.
       });
 
+    } else if (game === 'The Blazing Blade') {
+      return allClasses.filter((cls: Class) => {
+        return true;
+      });
     } else if (game === 'Three Houses') {
       return allClasses.filter((cls: Class) => {
         // These are Three Houses specific classes
@@ -134,7 +142,7 @@ function transformJsonToUnit(rawUnit: any): Unit {
   const growths: UnitStats = {};
 
   // Extract base stats - handle both direct properties and nested stats object
-  const statKeys = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'cha'];
+  const statKeys = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'con', 'bld', 'mov', 'aid', 'cha'];
   statKeys.forEach(key => {
     if (rawUnit[key] !== undefined) {
       stats[key] = rawUnit[key];

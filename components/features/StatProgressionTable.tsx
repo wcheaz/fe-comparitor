@@ -54,18 +54,17 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
     });
 
     // Define proper stat order and filter display stats
-    const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov'];
+    const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
     const displayStats = statOrder.filter(key => {
-      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'cha'].includes(key)) return false;
+      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'aid', 'cha'].includes(key)) return false;
 
-      // Filter out stats that are 0 or missing for all units (like Mag or Dex in older games)
-      const isEveryUnitMissingOrZero = units.every(unit =>
+      // Filter out stats that are missing for all units
+      const isEveryUnitMissing = units.every(unit =>
         unit.stats[key] === undefined ||
-        unit.stats[key] === null ||
-        unit.stats[key] === 0
+        unit.stats[key] === null
       );
 
-      return !isEveryUnitMissingOrZero;
+      return !isEveryUnitMissing;
     });
 
     // Create rows by aligning progression data from all units

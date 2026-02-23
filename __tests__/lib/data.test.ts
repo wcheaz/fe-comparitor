@@ -2,30 +2,39 @@ import { getAllUnits, getUnitsByGame, getUnitById } from '@/lib/data';
 // Removed non-existent units import
 
 // Mock the data to avoid importing actual data files in tests
-jest.mock('@/data/units', () => ({
-  units: [
-    {
-      id: 'marth',
-      name: 'Marth',
-      game: 'shadow-dragon',
-      class: 'Lord',
-      joinChapter: 'Prologue',
-      level: 1,
-      stats: { hp: 18, str: 5, skl: 5, spd: 7, lck: 7, def: 4, res: 2 },
-      growths: { hp: 80, str: 40, skl: 50, spd: 60, lck: 50, def: 30, res: 20 }
-    },
-    {
-      id: 'ike',
-      name: 'Ike',
-      game: 'path-of-radiance',
-      class: 'Ranger',
-      joinChapter: 'Chapter 1',
-      level: 1,
-      stats: { hp: 20, str: 7, skl: 6, spd: 6, lck: 5, def: 5, res: 2 },
-      growths: { hp: 85, str: 60, skl: 45, spd: 45, lck: 40, def: 40, res: 25 }
-    }
-  ]
-}));
+jest.mock('@/data/binding_blade/units.json', () => [
+  {
+    id: 'marth',
+    name: 'Marth',
+    game: 'shadow-dragon',
+    class: 'Lord',
+    joinChapter: 'Prologue',
+    level: 1,
+    stats: { hp: 18, str: 5, skl: 5, spd: 7, lck: 7, def: 4, res: 2 },
+    growths: { hp: 80, str: 40, skl: 50, spd: 60, lck: 50, def: 30, res: 20 }
+  }
+], { virtual: true });
+
+jest.mock('@/data/three_houses/units.json', () => [
+  {
+    id: 'ike',
+    name: 'Ike',
+    game: 'path-of-radiance',
+    class: 'Ranger',
+    joinChapter: 'Chapter 1',
+    level: 1,
+    stats: { hp: 20, str: 7, skl: 6, spd: 6, lck: 5, def: 5, res: 2 },
+    growths: { hp: 85, str: 60, skl: 45, spd: 45, lck: 40, def: 40, res: 25 }
+  }
+], { virtual: true });
+
+jest.mock('@/data/engage/units.json', () => [], { virtual: true });
+jest.mock('@/data/blazing_blade/units.json', () => [], { virtual: true });
+
+jest.mock('@/data/binding_blade/classes.json', () => [], { virtual: true });
+jest.mock('@/data/three_houses/classes.json', () => [], { virtual: true });
+jest.mock('@/data/engage/classes.json', () => [], { virtual: true });
+jest.mock('@/data/blazing_blade/classes.json', () => [], { virtual: true });
 
 describe('Data Service', () => {
   describe('getAllUnits', () => {

@@ -11,6 +11,7 @@ export interface UnitStats {
   con?: number; // Constitution (GBA)
   bld?: number; // Build (Engage)
   mov?: number;
+  aid?: number; // Rescue Aid (GBA)
   cha?: number; // Charm (3H)
   [key: string]: number | undefined; // Flexible for future games
 }

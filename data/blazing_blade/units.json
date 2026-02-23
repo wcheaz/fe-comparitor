@@ -1,0 +1,158 @@
+[
+    {
+        "id": "eliwood",
+        "name": "Eliwood",
+        "game": "The Blazing Blade",
+        "class": "lord_eliwood",
+        "joinChapter": "Prologue",
+        "level": 1,
+        "gender": "male",
+        "affinity": "Anima",
+        "isPromoted": false,
+        "stats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 5,
+            "spd": 7,
+            "lck": 7,
+            "def": 5,
+            "res": 0,
+            "con": 7,
+            "mov": 5,
+            "aid": 6
+        },
+        "growths": {
+            "hp": 80,
+            "str": 45,
+            "skl": 50,
+            "spd": 40,
+            "lck": 45,
+            "def": 30,
+            "res": 35
+        },
+        "baseWeaponRanks": {
+            "sword": "C"
+        },
+        "promotions": [
+            "knight_lord"
+        ],
+        "prf": []
+    },
+    {
+        "id": "hector",
+        "name": "Hector",
+        "game": "The Blazing Blade",
+        "class": "lord_hector",
+        "joinChapter": "Chapter 11",
+        "level": 1,
+        "gender": "male",
+        "affinity": "Thunder",
+        "isPromoted": false,
+        "stats": {
+            "hp": 19,
+            "str": 7,
+            "skl": 4,
+            "spd": 5,
+            "lck": 3,
+            "def": 8,
+            "res": 0,
+            "con": 13,
+            "mov": 5,
+            "aid": 12
+        },
+        "growths": {
+            "hp": 90,
+            "str": 60,
+            "skl": 45,
+            "spd": 35,
+            "lck": 30,
+            "def": 50,
+            "res": 25
+        },
+        "baseWeaponRanks": {
+            "axe": "C"
+        },
+        "promotions": [
+            "great_lord_hector"
+        ],
+        "prf": []
+    },
+    {
+        "id": "lyn",
+        "name": "Lyn",
+        "game": "The Blazing Blade",
+        "class": "lord_lyn",
+        "joinChapter": "Prologue",
+        "level": 1,
+        "gender": "female",
+        "affinity": "Wind",
+        "isPromoted": false,
+        "stats": {
+            "hp": 16,
+            "str": 4,
+            "skl": 7,
+            "spd": 9,
+            "lck": 5,
+            "def": 2,
+            "res": 0,
+            "con": 5,
+            "mov": 5,
+            "aid": 4
+        },
+        "growths": {
+            "hp": 70,
+            "str": 40,
+            "skl": 60,
+            "spd": 60,
+            "lck": 55,
+            "def": 20,
+            "res": 30
+        },
+        "baseWeaponRanks": {
+            "sword": "D"
+        },
+        "promotions": [
+            "blade_lord"
+        ],
+        "prf": []
+    },
+    {
+        "id": "marcus_fe7",
+        "name": "Marcus (FE7)",
+        "game": "The Blazing Blade",
+        "class": "paladin",
+        "joinChapter": "Chapter 11",
+        "level": 1,
+        "gender": "male",
+        "affinity": "Ice",
+        "isPromoted": true,
+        "stats": {
+            "hp": 31,
+            "str": 15,
+            "skl": 15,
+            "spd": 11,
+            "lck": 8,
+            "def": 10,
+            "res": 8,
+            "con": 11,
+            "mov": 8,
+            "aid": 14
+        },
+        "growths": {
+            "hp": 65,
+            "str": 30,
+            "skl": 50,
+            "spd": 25,
+            "lck": 30,
+            "def": 15,
+            "res": 35
+        },
+        "baseWeaponRanks": {
+            "sword": "A",
+            "lance": "A",
+            "axe": "B"
+        },
+        "promotions": [],
+        "prf": []
+    }
+]

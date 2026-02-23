@@ -29,6 +29,7 @@ const DEFAULT_NORMALIZATION_CONFIG: StatNormalizationConfig = {
     'con': ['con', 'CON', 'constitution', 'Constitution'],
     'bld': ['bld', 'BLD', 'build', 'Build'],
     'mov': ['mov', 'MOV', 'movement', 'Movement', 'move_range'],
+    'aid': ['aid', 'AID'],
     'cha': ['cha', 'CHA', 'charm', 'Charm']
   },
   defaultValues: {
@@ -44,6 +45,7 @@ const DEFAULT_NORMALIZATION_CONFIG: StatNormalizationConfig = {
     'con': 0,
     'bld': 0,
     'mov': 0,
+    'aid': 0,
     'cha': 0
   },
   displayNames: {
@@ -59,6 +61,7 @@ const DEFAULT_NORMALIZATION_CONFIG: StatNormalizationConfig = {
     'con': 'Constitution',
     'bld': 'Build',
     'mov': 'Movement',
+    'aid': 'Aid',
     'cha': 'Charm'
   }
 };
@@ -73,14 +76,14 @@ const DEFAULT_NORMALIZATION_CONFIG: StatNormalizationConfig = {
 export function normalizeStatKey(key: string, config: StatNormalizationConfig = DEFAULT_NORMALIZATION_CONFIG): string {
   // Convert to lowercase for case-insensitive matching
   const normalizedKey = key.toLowerCase();
-  
+
   // Find the matching standard key
   for (const [standardKey, variants] of Object.entries(config.statVariants)) {
     if (variants.some(variant => variant.toLowerCase() === normalizedKey)) {
       return standardKey;
     }
   }
-  
+
   // If no match found, return the original key
   return key;
 }
@@ -94,7 +97,7 @@ export function normalizeStatKey(key: string, config: StatNormalizationConfig = 
  */
 export function normalizeStats(stats: UnitStats, config: StatNormalizationConfig = DEFAULT_NORMALIZATION_CONFIG): UnitStats {
   const normalizedStats: UnitStats = {};
-  
+
   // Process each stat in the input
   for (const [key, value] of Object.entries(stats)) {
     const normalizedKey = normalizeStatKey(key, config);
@@ -103,14 +106,14 @@ export function normalizeStats(stats: UnitStats, config: StatNormalizationConfig
       normalizedStats[normalizedKey] = Number(value);
     }
   }
-  
-  // Fill in missing stats with default values
-  for (const [statKey, defaultValue] of Object.entries(config.defaultValues)) {
-    if (normalizedStats[statKey] === undefined) {
-      normalizedStats[statKey] = defaultValue;
-    }
-  }
-  
+
+  // Fill in missing stats with default values removed to prevent irrelevant stats from showing up
+  // for (const [statKey, defaultValue] of Object.entries(config.defaultValues)) {
+  //   if (normalizedStats[statKey] === undefined) {
+  //     normalizedStats[statKey] = defaultValue;
+  //   }
+  // }
+
   return normalizedStats;
 }
 
