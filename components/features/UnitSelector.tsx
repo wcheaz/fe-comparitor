@@ -3,8 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectProps } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Unit } from '@/types/unit';
-import { getAllUnits } from '@/lib/data';
+import { Unit, Class } from '@/types/unit';
+import { getAllUnits, getAllClasses } from '@/lib/data';
 
 interface UnitSelectorProps {
   selectedUnits: Unit[];
@@ -32,22 +32,24 @@ export function UnitSelector({
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGame, setSelectedGame] = useState('all');
   const [allUnits, setAllUnits] = useState<Unit[]>([]);
+  const [allClasses, setAllClasses] = useState<Class[]>([]);
   const [filteredUnits, setFilteredUnits] = useState<Unit[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function loadUnits() {
+    async function loadData() {
       try {
-        const units = await getAllUnits();
+        const [units, classes] = await Promise.all([getAllUnits(), getAllClasses()]);
         setAllUnits(units);
+        setAllClasses(classes);
         setIsLoading(false);
       } catch (error) {
-        console.error('Failed to load units:', error);
+        console.error('Failed to load data:', error);
         setIsLoading(false);
       }
     }
 
-    loadUnits();
+    loadData();
   }, []);
 
   useEffect(() => {
@@ -61,11 +63,15 @@ export function UnitSelector({
     // Filter by search term
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(unit =>
-        unit.name.toLowerCase().includes(term) ||
-        unit.class.toLowerCase().includes(term) ||
-        unit.game.toLowerCase().includes(term)
-      );
+      filtered = filtered.filter(unit => {
+        const cls = allClasses.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || allClasses.find(c => c.name === unit.class);
+        const displayClassName = cls ? cls.name : unit.class;
+        return (
+          unit.name.toLowerCase().includes(term) ||
+          displayClassName.toLowerCase().includes(term) ||
+          unit.game.toLowerCase().includes(term)
+        );
+      });
     }
 
     // Remove already selected units
@@ -77,7 +83,7 @@ export function UnitSelector({
     filtered.sort((a, b) => a.name.localeCompare(b.name));
 
     setFilteredUnits(filtered);
-  }, [allUnits, searchTerm, selectedGame, selectedUnits]);
+  }, [allUnits, allClasses, searchTerm, selectedGame, selectedUnits]);
 
   const handleUnitSelect = (unit: Unit) => {
     if (selectedUnits.length < maxUnits) {
@@ -168,26 +174,30 @@ export function UnitSelector({
                 }
               </div>
             ) : (
-              filteredUnits.map((unit) => (
-                <button
-                  key={unit.id}
-                  onClick={() => handleUnitSelect(unit)}
-                  disabled={selectedUnits.length >= maxUnits}
-                  className="w-full p-3 text-left border rounded-lg hover:bg-muted/50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <div className="font-medium">{unit.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {unit.class} • {unit.game}
+              filteredUnits.map((unit) => {
+                const cls = allClasses.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || allClasses.find(c => c.name === unit.class);
+                const displayClassName = cls ? cls.name : unit.class;
+                return (
+                  <button
+                    key={unit.id}
+                    onClick={() => handleUnitSelect(unit)}
+                    disabled={selectedUnits.length >= maxUnits}
+                    className="w-full p-3 text-left border rounded-lg hover:bg-muted/50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <div className="font-medium">{unit.name}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {displayClassName} • {unit.game}
+                        </div>
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Lv. {unit.level}
                       </div>
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Lv. {unit.level}
-                    </div>
-                  </div>
-                </button>
-              ))
+                  </button>
+                );
+              })
             )}
           </div>
         </div>

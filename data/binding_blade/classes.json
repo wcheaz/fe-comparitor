@@ -689,7 +689,7 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Infantry"
     },
     {
         "id": "great_knight_f",
@@ -740,7 +740,7 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Infantry"
     },
     {
         "id": "armor_knight_m",
@@ -781,7 +781,7 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Armored"
     },
     {
         "id": "armor_knight_f",
@@ -822,7 +822,7 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Armored"
     },
     {
         "id": "general_m",
@@ -871,7 +871,7 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Armored"
     },
     {
         "id": "general_f",
@@ -920,7 +920,7 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Armored"
     },
     {
         "id": "archer_m",
@@ -1144,7 +1144,7 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Flying"
+        "movementType": "Infantry"
     },
     {
         "id": "falcoknight_f",
@@ -1193,7 +1193,7 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Flying"
+        "movementType": "Infantry"
     },
     {
         "id": "mage_m",
@@ -1798,7 +1798,7 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Flying"
+        "movementType": "Wyvern"
     },
     {
         "id": "wyvern_rider_f",
@@ -1837,7 +1837,7 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Flying"
+        "movementType": "Wyvern"
     },
     {
         "id": "wyvern_lord_m",
@@ -1884,7 +1884,7 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Flying"
+        "movementType": "Wyvern"
     },
     {
         "id": "wyvern_lord_f",
@@ -1931,7 +1931,7 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Flying"
+        "movementType": "Wyvern"
     },
     {
         "id": "fighter_m",
@@ -2540,7 +2540,7 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Cavalry"
+        "movementType": "Infantry"
     },
     {
         "id": "valkyrie_f",

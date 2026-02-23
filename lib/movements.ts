@@ -52,12 +52,6 @@ export const movementTypes: Record<string, MovementData> = {
             'Three Houses': '(Three Houses) Canto: May use remaining movement after any action, including attacking.',
         }
     },
-    'Dragon': {
-        name: 'Dragon',
-        description: 'Manaketes and large reptilian creatures.',
-        weaknesses: 'Weak to dragon-slaying weapons.',
-        gameSpecificDetails: {}
-    }
 };
 
 export function getMovementByName(movementType: string): MovementData | undefined {
