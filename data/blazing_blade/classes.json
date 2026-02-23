@@ -4,7 +4,7 @@
         "name": "Lord",
         "type": "unpromoted",
         "gender": "male",
-        "movementType": "infantry",
+        "movementType": "Infantry",
         "weapons": [
             "Sword"
         ],
@@ -37,7 +37,7 @@
         "name": "Lord",
         "type": "unpromoted",
         "gender": "male",
-        "movementType": "infantry",
+        "movementType": "Infantry",
         "weapons": [
             "Axe"
         ],
@@ -70,7 +70,7 @@
         "name": "Lord",
         "type": "unpromoted",
         "gender": "female",
-        "movementType": "infantry",
+        "movementType": "Infantry",
         "weapons": [
             "Sword"
         ],
@@ -103,7 +103,7 @@
         "name": "Knight Lord",
         "type": "promoted",
         "gender": "male",
-        "movementType": "cavalry_gba",
+        "movementType": "Cavalry",
         "weapons": [
             "Sword",
             "Lance"
@@ -135,7 +135,7 @@
         "name": "Great Lord",
         "type": "promoted",
         "gender": "male",
-        "movementType": "infantry",
+        "movementType": "Infantry",
         "weapons": [
             "Axe",
             "Sword"
@@ -167,7 +167,7 @@
         "name": "Blade Lord",
         "type": "promoted",
         "gender": "female",
-        "movementType": "infantry",
+        "movementType": "Infantry",
         "weapons": [
             "Sword",
             "Bow"
@@ -199,7 +199,7 @@
         "name": "Paladin",
         "type": "promoted",
         "gender": "male",
-        "movementType": "cavalry_gba",
+        "movementType": "Cavalry",
         "weapons": [
             "Sword",
             "Lance",

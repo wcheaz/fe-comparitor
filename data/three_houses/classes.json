@@ -422,7 +422,7 @@
             "mov": 15,
             "cha": 30
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "paladin",
@@ -475,7 +475,7 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "fortress_knight",
@@ -527,7 +527,7 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "fighter",
@@ -822,7 +822,7 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "mage",
@@ -967,7 +967,7 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "thief",
@@ -1201,7 +1201,7 @@
             "mov": 15,
             "cha": 30
         },
-        "movementType": "Armor"
+        "movementType": "Armored"
     },
     {
         "id": "general",
@@ -1254,7 +1254,7 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Armor"
+        "movementType": "Armored"
     },
     {
         "id": "archer",
@@ -1399,6 +1399,6 @@
             "mov": 15,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     }
 ]

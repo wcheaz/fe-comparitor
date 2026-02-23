@@ -232,7 +232,8 @@ function transformJsonToClass(rawClass: any): Class {
     hiddenModifiers: rawClass.hiddenModifiers || [],
     gender: rawClass.gender,
     maxStats: rawClass.maxStats,
-    movementType: rawClass.movementType
+    movementType: rawClass.movementType,
+    description: rawClass.description
   };
 
   return cls;

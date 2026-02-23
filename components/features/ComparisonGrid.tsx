@@ -42,6 +42,10 @@ export function ComparisonGrid({
   const [isMovementModalOpen, setIsMovementModalOpen] = useState(false);
   const [selectedMovement, setSelectedMovement] = useState<{ type: string, game: string } | null>(null);
 
+  // State for class modal
+  const [isClassModalOpen, setIsClassModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState<Class | null>(null);
+
   // State for weapon modal
   const [isWeaponModalOpen, setIsWeaponModalOpen] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState<string | null>(null);
@@ -56,6 +60,12 @@ export function ComparisonGrid({
   const handleMovementInfoClick = (movementType: string, game: string) => {
     setSelectedMovement({ type: movementType, game });
     setIsMovementModalOpen(true);
+  };
+
+  // Handle class info click
+  const handleClassInfoClick = (cls: Class) => {
+    setSelectedClass(cls);
+    setIsClassModalOpen(true);
   };
 
   // Handle weapon info icon click
@@ -175,6 +185,28 @@ export function ComparisonGrid({
               {gameDetail}
             </p>
           </div>
+        )}
+      </div>
+    );
+  };
+
+  // Render class details for modal
+  const renderClassDetails = () => {
+    if (!selectedClass) return null;
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2">
+          <h2 className="text-2xl font-bold">{selectedClass.name}</h2>
+        </div>
+
+        {selectedClass.description ? (
+          <div>
+            <h3 className="text-lg font-semibold mb-1">Description & Special Qualities</h3>
+            <p className="text-muted-foreground">{selectedClass.description}</p>
+          </div>
+        ) : (
+          <p className="text-muted-foreground">No special qualities or description available for this class.</p>
         )}
       </div>
     );
@@ -304,9 +336,19 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Class</td>
                   {units.map((unit) => {
                     const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const displayName = cls ? cls.name : unit.class;
                     return (
                       <td key={`class-${unit.id}`} className="text-center p-2">
-                        {cls ? cls.name : unit.class}
+                        <div className="flex items-center justify-center gap-1">
+                          {displayName}
+                          {cls && (
+                            <Info
+                              className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+                              aria-label={`View details about ${displayName} class`}
+                              onClick={() => handleClassInfoClick(cls)}
+                            />
+                          )}
+                        </div>
                       </td>
                     );
                   })}
@@ -563,6 +605,16 @@ export function ComparisonGrid({
       >
         <div className="space-y-4">
           {renderMovementDetails()}
+        </div>
+      </Modal>
+
+      {/* Class Details Modal */}
+      <Modal
+        isOpen={isClassModalOpen}
+        onClose={() => setIsClassModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderClassDetails()}
         </div>
       </Modal>
 

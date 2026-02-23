@@ -38,7 +38,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Defeat results in Game Over. Can Seize."
     },
     {
         "id": "great_lord",
@@ -88,7 +89,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Defeat results in Game Over. Can Seize."
     },
     {
         "id": "mercenary_m",
@@ -400,7 +402,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Has an innate +30% critical hit rate bonus."
     },
     {
         "id": "swordmaster_f",
@@ -450,7 +453,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Has an innate +30% critical hit rate bonus."
     },
     {
         "id": "cavalier_m",
@@ -493,7 +497,7 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "cavalier_f",
@@ -536,7 +540,7 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "paladin_m",
@@ -585,7 +589,7 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "paladin_f",
@@ -634,7 +638,7 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "great_knight_m",
@@ -685,7 +689,7 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "great_knight_f",
@@ -736,7 +740,7 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "armor_knight_m",
@@ -1230,7 +1234,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "mage_f",
@@ -1271,7 +1276,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "sage_m",
@@ -1321,7 +1327,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "sage_f",
@@ -1371,7 +1378,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "priest_m",
@@ -1505,7 +1513,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "bishop_f",
@@ -1557,7 +1566,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "thief_m",
@@ -1600,7 +1610,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Can pick locks, steal items, and have increased vision in Fog of War."
     },
     {
         "id": "thief_f",
@@ -1643,7 +1654,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Can pick locks, steal items, and have increased vision in Fog of War."
     },
     {
         "id": "rogue_m",
@@ -2176,7 +2188,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry",
+        "description": "Can cross rivers."
     },
     {
         "id": "nomad_f",
@@ -2215,7 +2228,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry",
+        "description": "Can cross rivers."
     },
     {
         "id": "nomad_trooper_m",
@@ -2262,7 +2276,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry",
+        "description": "Can cross rivers."
     },
     {
         "id": "nomad_trooper_f",
@@ -2309,7 +2324,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry",
+        "description": "Can cross rivers."
     },
     {
         "id": "shaman_m",
@@ -2348,7 +2364,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "shaman_f",
@@ -2387,7 +2404,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "druid_m",
@@ -2434,7 +2452,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "druid_f",
@@ -2481,7 +2500,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
     },
     {
         "id": "troubadour_f",
@@ -2520,7 +2540,7 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "valkyrie_f",
@@ -2567,7 +2587,7 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Horse"
+        "movementType": "Cavalry"
     },
     {
         "id": "dancer_f",
@@ -2680,6 +2700,7 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "description": "Weapons treat enemy defense as 0."
     }
 ]

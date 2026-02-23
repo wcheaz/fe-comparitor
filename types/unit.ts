@@ -59,6 +59,7 @@ export interface Class {
   gender?: 'M' | 'F';
   maxStats?: UnitStats;
   movementType?: string;
+  description?: string;
 }
 
 export interface GameData {

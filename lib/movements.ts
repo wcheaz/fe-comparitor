@@ -13,16 +13,16 @@ export const movementTypes: Record<string, MovementData> = {
         weaknesses: 'Standard terrain penalties (e.g., 2 movement cost for forests, 3 cost for sand/deserts). Cannot cross peaks or deep water.',
         gameSpecificDetails: {}
     },
-    'Armor': {
-        name: 'Armor',
+    'Armored': {
+        name: 'Armored',
         description: 'Heavily armored foot soldiers.',
         weaknesses: 'Weak to armor-slaying/heavy weapons. Severe movement penalties on rough terrain (e.g., 3 movement cost for forests).',
         gameSpecificDetails: {
             'Engage': '(Engage) Immune to being broken in combat.',
         }
     },
-    'Horse': {
-        name: 'Horse',
+    'Cavalry': {
+        name: 'Cavalry',
         description: 'Mounted units on horseback.',
         abilities: 'High movement range on flat terrain.',
         weaknesses: 'Weak to horse-slaying/cavalry weapons. High movement penalties on rough terrain (e.g., 3 movement cost for forests). Cannot cross mountains.',
