@@ -1,0 +1,1300 @@
+[
+  {
+    "id": "eirika",
+    "name": "Eirika",
+    "game": "The Sacred Stones",
+    "class": "lord",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Light",
+    "isPromoted": false,
+    "stats": {
+      "hp": 16,
+      "str": 4,
+      "skl": 8,
+      "spd": 9,
+      "lck": 5,
+      "def": 3,
+      "res": 1,
+      "con": 5,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 70,
+      "str": 40,
+      "skl": 60,
+      "spd": 60,
+      "lck": 60,
+      "def": 30,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "sword": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "seth",
+    "name": "Seth",
+    "game": "The Sacred Stones",
+    "class": "paladin",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Anima",
+    "isPromoted": true,
+    "stats": {
+      "hp": 30,
+      "str": 14,
+      "skl": 13,
+      "spd": 12,
+      "lck": 13,
+      "def": 11,
+      "res": 8,
+      "con": 11,
+      "mov": 8
+    },
+    "growths": {
+      "hp": 90,
+      "str": 50,
+      "skl": 45,
+      "spd": 45,
+      "lck": 25,
+      "def": 40,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "sword": "A",
+      "lance": "A"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "franz",
+    "name": "Franz",
+    "game": "The Sacred Stones",
+    "class": "cavalier",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Light",
+    "isPromoted": false,
+    "stats": {
+      "hp": 20,
+      "str": 7,
+      "skl": 5,
+      "spd": 7,
+      "lck": 2,
+      "def": 6,
+      "res": 1,
+      "con": 9,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 80,
+      "str": 40,
+      "skl": 40,
+      "spd": 50,
+      "lck": 40,
+      "def": 25,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "sword": "E",
+      "lance": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "gilliam",
+    "name": "Gilliam",
+    "game": "The Sacred Stones",
+    "class": "knight",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 4,
+    "gender": "male",
+    "affinity": "Thunder",
+    "isPromoted": false,
+    "stats": {
+      "hp": 25,
+      "str": 9,
+      "skl": 6,
+      "spd": 3,
+      "lck": 3,
+      "def": 9,
+      "res": 3,
+      "con": 14,
+      "mov": 4
+    },
+    "growths": {
+      "hp": 90,
+      "str": 45,
+      "skl": 35,
+      "spd": 30,
+      "lck": 30,
+      "def": 55,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "lance": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "vanessa",
+    "name": "Vanessa",
+    "game": "The Sacred Stones",
+    "class": "pegasus_knight",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Anima",
+    "isPromoted": false,
+    "stats": {
+      "hp": 17,
+      "str": 5,
+      "skl": 7,
+      "spd": 11,
+      "lck": 4,
+      "def": 6,
+      "res": 5,
+      "con": 5,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 50,
+      "str": 35,
+      "skl": 55,
+      "spd": 60,
+      "lck": 50,
+      "def": 20,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "lance": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "moulder",
+    "name": "Moulder",
+    "game": "The Sacred Stones",
+    "class": "priest",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 3,
+    "gender": "male",
+    "affinity": "Anima",
+    "isPromoted": false,
+    "stats": {
+      "hp": 20,
+      "str": 4,
+      "skl": 6,
+      "spd": 9,
+      "lck": 1,
+      "def": 2,
+      "res": 5,
+      "con": 9,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 70,
+      "str": 40,
+      "skl": 50,
+      "spd": 40,
+      "lck": 20,
+      "def": 25,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "staff": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "ross",
+    "name": "Ross",
+    "game": "The Sacred Stones",
+    "class": "journeyman",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 15,
+      "str": 5,
+      "skl": 2,
+      "spd": 3,
+      "lck": 8,
+      "def": 3,
+      "res": 0,
+      "con": 8,
+      "mov": 4
+    },
+    "growths": {
+      "hp": 70,
+      "str": 50,
+      "skl": 35,
+      "spd": 30,
+      "lck": 40,
+      "def": 25,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "axe": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "garcia",
+    "name": "Garcia",
+    "game": "The Sacred Stones",
+    "class": "fighter",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 4,
+    "gender": "male",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 28,
+      "str": 8,
+      "skl": 7,
+      "spd": 7,
+      "lck": 3,
+      "def": 5,
+      "res": 1,
+      "con": 14,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 80,
+      "str": 65,
+      "skl": 40,
+      "spd": 20,
+      "lck": 40,
+      "def": 25,
+      "res": 15
+    },
+    "baseWeaponRanks": {
+      "axe": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "neimi",
+    "name": "Neimi",
+    "game": "The Sacred Stones",
+    "class": "archer",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 17,
+      "str": 4,
+      "skl": 5,
+      "spd": 6,
+      "lck": 4,
+      "def": 3,
+      "res": 2,
+      "con": 5,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 55,
+      "str": 45,
+      "skl": 50,
+      "spd": 60,
+      "lck": 50,
+      "def": 15,
+      "res": 35
+    },
+    "baseWeaponRanks": {
+      "bow": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "colm",
+    "name": "Colm",
+    "game": "The Sacred Stones",
+    "class": "thief",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 2,
+    "gender": "male",
+    "affinity": "Light",
+    "isPromoted": false,
+    "stats": {
+      "hp": 18,
+      "str": 4,
+      "skl": 4,
+      "spd": 10,
+      "lck": 8,
+      "def": 3,
+      "res": 1,
+      "con": 6,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 75,
+      "str": 40,
+      "skl": 40,
+      "spd": 65,
+      "lck": 45,
+      "def": 25,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "sword": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "artur",
+    "name": "Artur",
+    "game": "The Sacred Stones",
+    "class": "monk",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 2,
+    "gender": "male",
+    "affinity": "Ice",
+    "isPromoted": false,
+    "stats": {
+      "hp": 19,
+      "str": 6,
+      "skl": 6,
+      "spd": 8,
+      "lck": 2,
+      "def": 2,
+      "res": 6,
+      "con": 6,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 55,
+      "str": 50,
+      "skl": 50,
+      "spd": 40,
+      "lck": 25,
+      "def": 15,
+      "res": 55
+    },
+    "baseWeaponRanks": {
+      "light": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "lute",
+    "name": "Lute",
+    "game": "The Sacred Stones",
+    "class": "mage",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Anima",
+    "isPromoted": false,
+    "stats": {
+      "hp": 17,
+      "str": 6,
+      "skl": 6,
+      "spd": 7,
+      "lck": 8,
+      "def": 3,
+      "res": 5,
+      "con": 3,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 45,
+      "str": 65,
+      "skl": 30,
+      "spd": 45,
+      "lck": 45,
+      "def": 15,
+      "res": 40
+    },
+    "baseWeaponRanks": {
+      "anima": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "natasha",
+    "name": "Natasha",
+    "game": "The Sacred Stones",
+    "class": "cleric",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Ice",
+    "isPromoted": false,
+    "stats": {
+      "hp": 18,
+      "str": 2,
+      "skl": 4,
+      "spd": 8,
+      "lck": 6,
+      "def": 2,
+      "res": 6,
+      "con": 4,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 50,
+      "str": 60,
+      "skl": 25,
+      "spd": 40,
+      "lck": 60,
+      "def": 15,
+      "res": 55
+    },
+    "baseWeaponRanks": {
+      "staff": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "joshua",
+    "name": "Joshua",
+    "game": "The Sacred Stones",
+    "class": "myrmidon",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 5,
+    "gender": "male",
+    "affinity": "Wind",
+    "isPromoted": false,
+    "stats": {
+      "hp": 24,
+      "str": 8,
+      "skl": 13,
+      "spd": 14,
+      "lck": 7,
+      "def": 5,
+      "res": 2,
+      "con": 8,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 80,
+      "str": 35,
+      "skl": 55,
+      "spd": 55,
+      "lck": 30,
+      "def": 20,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "sword": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "ephraim",
+    "name": "Ephraim",
+    "game": "The Sacred Stones",
+    "class": "lord",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 4,
+    "gender": "male",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 23,
+      "str": 8,
+      "skl": 9,
+      "spd": 11,
+      "lck": 8,
+      "def": 7,
+      "res": 2,
+      "con": 8,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 80,
+      "str": 55,
+      "skl": 55,
+      "spd": 45,
+      "lck": 50,
+      "def": 35,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "lance": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "forde",
+    "name": "Forde",
+    "game": "The Sacred Stones",
+    "class": "cavalier",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 6,
+    "gender": "male",
+    "affinity": "Wind",
+    "isPromoted": false,
+    "stats": {
+      "hp": 24,
+      "str": 7,
+      "skl": 8,
+      "spd": 8,
+      "lck": 7,
+      "def": 8,
+      "res": 2,
+      "con": 9,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 85,
+      "str": 40,
+      "skl": 50,
+      "spd": 45,
+      "lck": 35,
+      "def": 20,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "sword": "D",
+      "lance": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "kyle",
+    "name": "Kyle",
+    "game": "The Sacred Stones",
+    "class": "cavalier",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 5,
+    "gender": "male",
+    "affinity": "Ice",
+    "isPromoted": false,
+    "stats": {
+      "hp": 25,
+      "str": 9,
+      "skl": 6,
+      "spd": 7,
+      "lck": 6,
+      "def": 9,
+      "res": 1,
+      "con": 10,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 90,
+      "str": 50,
+      "skl": 40,
+      "spd": 40,
+      "lck": 20,
+      "def": 25,
+      "res": 20
+    },
+    "baseWeaponRanks": {
+      "sword": "D",
+      "lance": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "orson",
+    "name": "Orson",
+    "game": "The Sacred Stones",
+    "class": "paladin",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 3,
+    "gender": "male",
+    "affinity": "Dark",
+    "isPromoted": true,
+    "stats": {
+      "hp": 34,
+      "str": 15,
+      "skl": 13,
+      "spd": 11,
+      "lck": 4,
+      "def": 13,
+      "res": 7,
+      "con": 12,
+      "mov": 8
+    },
+    "growths": {
+      "hp": 80,
+      "str": 55,
+      "skl": 45,
+      "spd": 40,
+      "lck": 25,
+      "def": 45,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "sword": "A",
+      "lance": "A"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "tana",
+    "name": "Tana",
+    "game": "The Sacred Stones",
+    "class": "pegasus_knight",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 4,
+    "gender": "female",
+    "affinity": "Wind",
+    "isPromoted": false,
+    "stats": {
+      "hp": 20,
+      "str": 7,
+      "skl": 9,
+      "spd": 13,
+      "lck": 8,
+      "def": 6,
+      "res": 7,
+      "con": 5,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 65,
+      "str": 45,
+      "skl": 40,
+      "spd": 65,
+      "lck": 60,
+      "def": 20,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "lance": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "amelia",
+    "name": "Amelia",
+    "game": "The Sacred Stones",
+    "class": "recruit",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Thunder",
+    "isPromoted": false,
+    "stats": {
+      "hp": 16,
+      "str": 4,
+      "skl": 3,
+      "spd": 4,
+      "lck": 6,
+      "def": 2,
+      "res": 3,
+      "con": 6,
+      "mov": 4
+    },
+    "growths": {
+      "hp": 60,
+      "str": 35,
+      "skl": 40,
+      "spd": 40,
+      "lck": 50,
+      "def": 30,
+      "res": 15
+    },
+    "baseWeaponRanks": {
+      "lance": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "innes",
+    "name": "Innes",
+    "game": "The Sacred Stones",
+    "class": "sniper",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Ice",
+    "isPromoted": true,
+    "stats": {
+      "hp": 31,
+      "str": 14,
+      "skl": 13,
+      "spd": 15,
+      "lck": 14,
+      "def": 10,
+      "res": 9,
+      "con": 9,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 75,
+      "str": 40,
+      "skl": 40,
+      "spd": 45,
+      "lck": 45,
+      "def": 20,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "bow": "A"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "gerik",
+    "name": "Gerik",
+    "game": "The Sacred Stones",
+    "class": "mercenary",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 10,
+    "gender": "male",
+    "affinity": "Thunder",
+    "isPromoted": false,
+    "stats": {
+      "hp": 32,
+      "str": 14,
+      "skl": 13,
+      "spd": 13,
+      "lck": 8,
+      "def": 10,
+      "res": 4,
+      "con": 13,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 90,
+      "str": 45,
+      "skl": 40,
+      "spd": 30,
+      "lck": 30,
+      "def": 35,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "sword": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "tethys",
+    "name": "Tethys",
+    "game": "The Sacred Stones",
+    "class": "dancer",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 18,
+      "str": 1,
+      "skl": 2,
+      "spd": 12,
+      "lck": 10,
+      "def": 5,
+      "res": 4,
+      "con": 5,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 85,
+      "str": 5,
+      "skl": 10,
+      "spd": 70,
+      "lck": 80,
+      "def": 30,
+      "res": 75
+    },
+    "baseWeaponRanks": {},
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "marisa",
+    "name": "Marisa",
+    "game": "The Sacred Stones",
+    "class": "myrmidon",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 5,
+    "gender": "female",
+    "affinity": "Ice",
+    "isPromoted": false,
+    "stats": {
+      "hp": 23,
+      "str": 7,
+      "skl": 12,
+      "spd": 13,
+      "lck": 9,
+      "def": 4,
+      "res": 3,
+      "con": 5,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 75,
+      "str": 30,
+      "skl": 55,
+      "spd": 60,
+      "lck": 50,
+      "def": 15,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "sword": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "l_arachel",
+    "name": "L'Arachel",
+    "game": "The Sacred Stones",
+    "class": "troubadour",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 3,
+    "gender": "female",
+    "affinity": "Light",
+    "isPromoted": false,
+    "stats": {
+      "hp": 18,
+      "str": 6,
+      "skl": 6,
+      "spd": 10,
+      "lck": 12,
+      "def": 5,
+      "res": 8,
+      "con": 5,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 45,
+      "str": 50,
+      "skl": 45,
+      "spd": 45,
+      "lck": 65,
+      "def": 15,
+      "res": 50
+    },
+    "baseWeaponRanks": {
+      "staff": "D"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "dozla",
+    "name": "Dozla",
+    "game": "The Sacred Stones",
+    "class": "berserker",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Thunder",
+    "isPromoted": true,
+    "stats": {
+      "hp": 43,
+      "str": 16,
+      "skl": 11,
+      "spd": 9,
+      "lck": 4,
+      "def": 11,
+      "res": 6,
+      "con": 16,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 85,
+      "str": 50,
+      "skl": 35,
+      "spd": 40,
+      "lck": 30,
+      "def": 30,
+      "res": 25
+    },
+    "baseWeaponRanks": {
+      "axe": "B"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "saleh",
+    "name": "Saleh",
+    "game": "The Sacred Stones",
+    "class": "sage",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Wind",
+    "isPromoted": true,
+    "stats": {
+      "hp": 30,
+      "str": 16,
+      "skl": 18,
+      "spd": 14,
+      "lck": 11,
+      "def": 8,
+      "res": 13,
+      "con": 8,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 50,
+      "str": 30,
+      "skl": 25,
+      "spd": 40,
+      "lck": 40,
+      "def": 30,
+      "res": 35
+    },
+    "baseWeaponRanks": {
+      "anima": "A",
+      "light": "B",
+      "staff": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "ewan",
+    "name": "Ewan",
+    "game": "The Sacred Stones",
+    "class": "pupil",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Light",
+    "isPromoted": false,
+    "stats": {
+      "hp": 15,
+      "str": 3,
+      "skl": 2,
+      "spd": 5,
+      "lck": 5,
+      "def": 0,
+      "res": 3,
+      "con": 5,
+      "mov": 4
+    },
+    "growths": {
+      "hp": 50,
+      "str": 45,
+      "skl": 40,
+      "spd": 35,
+      "lck": 50,
+      "def": 15,
+      "res": 40
+    },
+    "baseWeaponRanks": {
+      "anima": "E"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "cormag",
+    "name": "Cormag",
+    "game": "The Sacred Stones",
+    "class": "wyvern_rider",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 9,
+    "gender": "male",
+    "affinity": "Fire",
+    "isPromoted": false,
+    "stats": {
+      "hp": 30,
+      "str": 14,
+      "skl": 9,
+      "spd": 10,
+      "lck": 4,
+      "def": 12,
+      "res": 2,
+      "con": 11,
+      "mov": 7
+    },
+    "growths": {
+      "hp": 85,
+      "str": 55,
+      "skl": 40,
+      "spd": 45,
+      "lck": 35,
+      "def": 25,
+      "res": 15
+    },
+    "baseWeaponRanks": {
+      "lance": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "rennac",
+    "name": "Rennac",
+    "game": "The Sacred Stones",
+    "class": "rogue",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "male",
+    "affinity": "Dark",
+    "isPromoted": true,
+    "stats": {
+      "hp": 28,
+      "str": 10,
+      "skl": 16,
+      "spd": 17,
+      "lck": 5,
+      "def": 9,
+      "res": 11,
+      "con": 7,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 65,
+      "str": 25,
+      "skl": 45,
+      "spd": 60,
+      "lck": 25,
+      "def": 25,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "sword": "B"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "duessel",
+    "name": "Duessel",
+    "game": "The Sacred Stones",
+    "class": "great_knight",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 8,
+    "gender": "male",
+    "affinity": "Anima",
+    "isPromoted": true,
+    "stats": {
+      "hp": 41,
+      "str": 17,
+      "skl": 12,
+      "spd": 12,
+      "lck": 8,
+      "def": 17,
+      "res": 9,
+      "con": 15,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 85,
+      "str": 55,
+      "skl": 40,
+      "spd": 30,
+      "lck": 20,
+      "def": 45,
+      "res": 30
+    },
+    "baseWeaponRanks": {
+      "sword": "A",
+      "lance": "A",
+      "axe": "A"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "knoll",
+    "name": "Knoll",
+    "game": "The Sacred Stones",
+    "class": "shaman",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 10,
+    "gender": "male",
+    "affinity": "Dark",
+    "isPromoted": false,
+    "stats": {
+      "hp": 22,
+      "str": 13,
+      "skl": 9,
+      "spd": 8,
+      "lck": 0,
+      "def": 2,
+      "res": 10,
+      "con": 7,
+      "mov": 5
+    },
+    "growths": {
+      "hp": 70,
+      "str": 50,
+      "skl": 40,
+      "spd": 35,
+      "lck": 20,
+      "def": 10,
+      "res": 45
+    },
+    "baseWeaponRanks": {
+      "dark": "C"
+    },
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "myrrh",
+    "name": "Myrrh",
+    "game": "The Sacred Stones",
+    "class": "manakete",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Wind",
+    "isPromoted": false,
+    "stats": {
+      "hp": 15,
+      "str": 3,
+      "skl": 1,
+      "spd": 5,
+      "lck": 3,
+      "def": 2,
+      "res": 7,
+      "con": 5,
+      "mov": 6
+    },
+    "growths": {
+      "hp": 130,
+      "str": 90,
+      "skl": 85,
+      "spd": 65,
+      "lck": 30,
+      "def": 150,
+      "res": 30
+    },
+    "baseWeaponRanks": {},
+    "promotions": [],
+    "prf": []
+  },
+  {
+    "id": "syrene",
+    "name": "Syrene",
+    "game": "The Sacred Stones",
+    "class": "falcoknight",
+    "joinChapter": [
+      "1"
+    ],
+    "level": 1,
+    "gender": "female",
+    "affinity": "Thunder",
+    "isPromoted": true,
+    "stats": {
+      "hp": 27,
+      "str": 12,
+      "skl": 13,
+      "spd": 15,
+      "lck": 12,
+      "def": 10,
+      "res": 12,
+      "con": 7,
+      "mov": 8
+    },
+    "growths": {
+      "hp": 70,
+      "str": 40,
+      "skl": 50,
+      "spd": 60,
+      "lck": 30,
+      "def": 20,
+      "res": 50
+    },
+    "baseWeaponRanks": {
+      "sword": "C",
+      "lance": "A"
+    },
+    "promotions": [],
+    "prf": []
+  }
+]

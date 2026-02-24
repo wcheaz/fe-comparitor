@@ -1,0 +1,416 @@
+{
+  "Eirika": {
+    "hp": 70,
+    "strengthMagic": 40,
+    "skill": 60,
+    "speed": 60,
+    "luck": 60,
+    "defense": 30,
+    "resistance": 30
+  },
+  "Seth": {
+    "hp": 90,
+    "strengthMagic": 50,
+    "skill": 45,
+    "speed": 45,
+    "luck": 25,
+    "defense": 40,
+    "resistance": 30
+  },
+  "Franz": {
+    "hp": 80,
+    "strengthMagic": 40,
+    "skill": 40,
+    "speed": 50,
+    "luck": 40,
+    "defense": 25,
+    "resistance": 20
+  },
+  "Gilliam": {
+    "hp": 90,
+    "strengthMagic": 45,
+    "skill": 35,
+    "speed": 30,
+    "luck": 30,
+    "defense": 55,
+    "resistance": 20
+  },
+  "Moulder": {
+    "hp": 70,
+    "strengthMagic": 40,
+    "skill": 50,
+    "speed": 40,
+    "luck": 20,
+    "defense": 25,
+    "resistance": 25
+  },
+  "Vanessa": {
+    "hp": 50,
+    "strengthMagic": 35,
+    "skill": 55,
+    "speed": 60,
+    "luck": 50,
+    "defense": 20,
+    "resistance": 30
+  },
+  "Ross": {
+    "hp": 70,
+    "strengthMagic": 50,
+    "skill": 35,
+    "speed": 30,
+    "luck": 40,
+    "defense": 25,
+    "resistance": 20
+  },
+  "Garcia": {
+    "hp": 80,
+    "strengthMagic": 65,
+    "skill": 40,
+    "speed": 20,
+    "luck": 40,
+    "defense": 25,
+    "resistance": 15
+  },
+  "Neimi": {
+    "hp": 55,
+    "strengthMagic": 45,
+    "skill": 50,
+    "speed": 60,
+    "luck": 50,
+    "defense": 15,
+    "resistance": 35
+  },
+  "Colm": {
+    "hp": 75,
+    "strengthMagic": 40,
+    "skill": 40,
+    "speed": 65,
+    "luck": 45,
+    "defense": 25,
+    "resistance": 20
+  },
+  "Artur": {
+    "hp": 55,
+    "strengthMagic": 50,
+    "skill": 50,
+    "speed": 40,
+    "luck": 25,
+    "defense": 15,
+    "resistance": 55
+  },
+  "Lute": {
+    "hp": 45,
+    "strengthMagic": 65,
+    "skill": 30,
+    "speed": 45,
+    "luck": 45,
+    "defense": 15,
+    "resistance": 40
+  },
+  "Natasha": {
+    "hp": 50,
+    "strengthMagic": 60,
+    "skill": 25,
+    "speed": 40,
+    "luck": 60,
+    "defense": 15,
+    "resistance": 55
+  },
+  "Joshua": {
+    "hp": 80,
+    "strengthMagic": 35,
+    "skill": 55,
+    "speed": 55,
+    "luck": 30,
+    "defense": 20,
+    "resistance": 20
+  },
+  "Ephraim": {
+    "hp": 80,
+    "strengthMagic": 55,
+    "skill": 55,
+    "speed": 45,
+    "luck": 50,
+    "defense": 35,
+    "resistance": 25
+  },
+  "Forde": {
+    "hp": 85,
+    "strengthMagic": 40,
+    "skill": 50,
+    "speed": 45,
+    "luck": 35,
+    "defense": 20,
+    "resistance": 25
+  },
+  "Kyle": {
+    "hp": 90,
+    "strengthMagic": 50,
+    "skill": 40,
+    "speed": 40,
+    "luck": 20,
+    "defense": 25,
+    "resistance": 20
+  },
+  "Tana": {
+    "hp": 65,
+    "strengthMagic": 45,
+    "skill": 40,
+    "speed": 65,
+    "luck": 60,
+    "defense": 20,
+    "resistance": 25
+  },
+  "Amelia": {
+    "hp": 60,
+    "strengthMagic": 35,
+    "skill": 40,
+    "speed": 40,
+    "luck": 50,
+    "defense": 30,
+    "resistance": 15
+  },
+  "Innes": {
+    "hp": 75,
+    "strengthMagic": 40,
+    "skill": 40,
+    "speed": 45,
+    "luck": 45,
+    "defense": 20,
+    "resistance": 25
+  },
+  "Gerik": {
+    "hp": 90,
+    "strengthMagic": 45,
+    "skill": 40,
+    "speed": 30,
+    "luck": 30,
+    "defense": 35,
+    "resistance": 25
+  },
+  "Tethys": {
+    "hp": 85,
+    "strengthMagic": 5,
+    "skill": 10,
+    "speed": 70,
+    "luck": 80,
+    "defense": 30,
+    "resistance": 75
+  },
+  "Marisa": {
+    "hp": 75,
+    "strengthMagic": 30,
+    "skill": 55,
+    "speed": 60,
+    "luck": 50,
+    "defense": 15,
+    "resistance": 25
+  },
+  "L'Arachel": {
+    "hp": 45,
+    "strengthMagic": 50,
+    "skill": 45,
+    "speed": 45,
+    "luck": 65,
+    "defense": 15,
+    "resistance": 50
+  },
+  "Dozla": {
+    "hp": 85,
+    "strengthMagic": 50,
+    "skill": 35,
+    "speed": 40,
+    "luck": 30,
+    "defense": 30,
+    "resistance": 25
+  },
+  "Saleh": {
+    "hp": 50,
+    "strengthMagic": 30,
+    "skill": 25,
+    "speed": 40,
+    "luck": 40,
+    "defense": 30,
+    "resistance": 35
+  },
+  "Ewan": {
+    "hp": 50,
+    "strengthMagic": 45,
+    "skill": 40,
+    "speed": 35,
+    "luck": 50,
+    "defense": 15,
+    "resistance": 40
+  },
+  "Cormag": {
+    "hp": 85,
+    "strengthMagic": 55,
+    "skill": 40,
+    "speed": 45,
+    "luck": 35,
+    "defense": 25,
+    "resistance": 15
+  },
+  "Rennac": {
+    "hp": 65,
+    "strengthMagic": 25,
+    "skill": 45,
+    "speed": 60,
+    "luck": 25,
+    "defense": 25,
+    "resistance": 30
+  },
+  "Duessel": {
+    "hp": 85,
+    "strengthMagic": 55,
+    "skill": 40,
+    "speed": 30,
+    "luck": 20,
+    "defense": 45,
+    "resistance": 30
+  },
+  "Knoll": {
+    "hp": 70,
+    "strengthMagic": 50,
+    "skill": 40,
+    "speed": 35,
+    "luck": 20,
+    "defense": 10,
+    "resistance": 45
+  },
+  "Myrrh": {
+    "hp": 130,
+    "strengthMagic": 90,
+    "skill": 85,
+    "speed": 65,
+    "luck": 30,
+    "defense": 150,
+    "resistance": 30
+  },
+  "Syrene": {
+    "hp": 70,
+    "strengthMagic": 40,
+    "skill": 50,
+    "speed": 60,
+    "luck": 30,
+    "defense": 20,
+    "resistance": 50
+  },
+  "Caellach": {
+    "hp": 85,
+    "strengthMagic": 50,
+    "skill": 45,
+    "speed": 45,
+    "luck": 20,
+    "defense": 30,
+    "resistance": 20
+  },
+  "Orson": {
+    "hp": 80,
+    "strengthMagic": 55,
+    "skill": 45,
+    "speed": 40,
+    "luck": 25,
+    "defense": 45,
+    "resistance": 30
+  },
+  "Riev": {
+    "hp": 75,
+    "strengthMagic": 45,
+    "skill": 50,
+    "speed": 40,
+    "luck": 15,
+    "defense": 20,
+    "resistance": 45
+  },
+  "Ismaire": {
+    "hp": 75,
+    "strengthMagic": 30,
+    "skill": 60,
+    "speed": 55,
+    "luck": 30,
+    "defense": 20,
+    "resistance": 25
+  },
+  "Selena": {
+    "hp": 85,
+    "strengthMagic": 40,
+    "skill": 55,
+    "speed": 40,
+    "luck": 25,
+    "defense": 20,
+    "resistance": 30
+  },
+  "Glen": {
+    "hp": 85,
+    "strengthMagic": 45,
+    "skill": 50,
+    "speed": 45,
+    "luck": 20,
+    "defense": 35,
+    "resistance": 40
+  },
+  "Hayden": {
+    "hp": 70,
+    "strengthMagic": 40,
+    "skill": 45,
+    "speed": 45,
+    "luck": 40,
+    "defense": 25,
+    "resistance": 25
+  },
+  "Valter": {
+    "hp": 80,
+    "strengthMagic": 40,
+    "skill": 55,
+    "speed": 50,
+    "luck": 15,
+    "defense": 20,
+    "resistance": 20
+  },
+  "Fado": {
+    "hp": 85,
+    "strengthMagic": 55,
+    "skill": 40,
+    "speed": 30,
+    "luck": 25,
+    "defense": 45,
+    "resistance": 25
+  },
+  "Lyon": {
+    "hp": 85,
+    "strengthMagic": 50,
+    "skill": 55,
+    "speed": 55,
+    "luck": 30,
+    "defense": 45,
+    "resistance": 55
+  },
+  "Knoll's Phantom": {
+    "hp": 0,
+    "strengthMagic": 50,
+    "skill": 50,
+    "speed": 40,
+    "luck": 55,
+    "defense": 0,
+    "resistance": 0
+  },
+  "Ewan's Phantom": {
+    "hp": 0,
+    "strengthMagic": 70,
+    "skill": 40,
+    "speed": 20,
+    "luck": 40,
+    "defense": 0,
+    "resistance": 0
+  },
+  "Lyon's Phantom": {
+    "hp": 0,
+    "strengthMagic": 60,
+    "skill": 45,
+    "speed": 30,
+    "luck": 60,
+    "defense": 0,
+    "resistance": 0
+  }
+}

@@ -1,9 +1,9 @@
 ## 1. Data Implementation
 
-- [ ] 1.1 Scrape and compile FE8 playable character names from [Fire Emblem Wiki: List of characters in Fire Emblem: The Sacred Stones](https://fireemblemwiki.org/wiki/List_of_characters_in_Fire_Emblem:_The_Sacred_Stones).
-- [ ] 1.2 Scrape and compile FE8 unit base stats from [Serenes Forest: Base Stats](https://serenesforest.net/the-sacred-stones/characters/base-stats/).
-- [ ] 1.3 Scrape and compile FE8 unit growth rates from [Serenes Forest: Growth Rates](https://serenesforest.net/the-sacred-stones/characters/growth-rates/).
-- [ ] 1.4 Validate compiled unit data against sources and merge into `data/sacred_stones/units.json`.
+- [x] 1.1 Scrape and compile FE8 playable character names from [Fire Emblem Wiki: List of characters in Fire Emblem: The Sacred Stones](https://fireemblemwiki.org/wiki/List_of_characters_in_Fire_Emblem:_The_Sacred_Stones).
+- [x] 1.2 Scrape and compile FE8 unit base stats from [Serenes Forest: Base Stats](https://serenesforest.net/the-sacred-stones/characters/base-stats/).
+- [x] 1.3 Scrape and compile FE8 unit growth rates from [Serenes Forest: Growth Rates](https://serenesforest.net/the-sacred-stones/characters/growth-rates/).
+- [x] 1.4 Validate compiled unit data against sources and merge into `data/sacred_stones/units.json`.
 - [ ] 1.5 Scrape and compile FE8 class promotion gains from [Serenes Forest: Promotion Gains](https://serenesforest.net/the-sacred-stones/classes/promotion-gains/).
 - [ ] 1.6 Scrape and compile FE8 class maximum stats from [Serenes Forest: Maximum Stats](https://serenesforest.net/the-sacred-stones/classes/maximum-stats/).
 - [ ] 1.7 Validate compiled class data against sources and format as `data/sacred_stones/classes.json`, ensuring `promotesTo` correctly maps branching tiers completely (e.g., Trainee to Tier 1, then Tier 1 to Tier 2 choices).

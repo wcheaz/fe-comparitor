@@ -1,0 +1,137 @@
+# Product Requirements Document
+
+*Generated from OpenSpec artifacts*
+
+## Proposal
+
+## Why
+
+Fire Emblem: The Sacred Stones introduces branching promotion paths and unique "Trainee" units that can promote multiple times. Adding support for these flexible promotion trees is crucial for accurately representing FE8 and lays the groundwork for later games with more complex class systems (e.g., Awakening, Fates). It expands the app's supported titles to encompass the entire Game Boy Advance era.
+
+## What Changes
+
+- Add unit base data for all playable characters in Fire Emblem: The Sacred Stones to `data/sacred_stones/units.json`.
+- Add class data (base stats, promo gains, movement types, etc.) to `data/sacred_stones/classes.json`.
+- Enhance the class/promotion tracking infrastructure across the app to support an arbitrary number of recursive promotion tiers (Tier 0 -> Tier 1 -> Tier 2 -> etc.) instead of hardcoded singular promotions.
+- Update stat calculators and UI components to seamlessly handle branching choices and multi-tier progressions.
+
+## Capabilities
+
+### New Capabilities
+- `multi-tier-promotions`: Infrastructure and UI support for arbitrary depth in class promotion trees and branching promotion choices.
+- `sacred-stones-data`: Integration of unit and class data specifically for Fire Emblem: The Sacred Stones.
+
+### Modified Capabilities
+- `stat-progression`: Update the average stat calculations to smoothly factor in branching paths and an arbitrary amount of promotions/recets. 
+
+## Impact
+
+- `lib/stats.ts`: Heavy refactoring required to handle recursive stat calculation when a unit passes through multiple tiers of promotion bonuses.
+- `components/features/StatProgressionTable.tsx`: UI will need to handle distinct display states when multiple branching promotions occur, allowing users to potentially select which path a character progressed down.
+- Data parser layers may need tweaking to flexibly read an unbounded chain of `promotesTo` properties.
+
+## Specifications
+
+multi-tier-promotions/spec.md
+## ADDED Requirements
+
+### Requirement: Arbitrary Promotion Tiers
+The system SHALL support an unbounded number of class promotion tiers, resolving paths recursively via the `promotesTo` class property.
+
+#### Scenario: Unit belongs to a 3-tier promotion class (Trainee)
+- **WHEN** a unit starts in a tiered class (e.g., "Trainee") that promotes to a Basic class, which then promotes to an Advanced class
+- **THEN** the system tracks and calculates cumulative stat progression across all 3 tiers natively without hardcoded Trainee exceptions.
+
+### Requirement: Branching Promotion Path Selection
+The system SHALL provide a UI mechanism to select which class a unit promotes into when multiple valid `promotesTo` options exist for their current class.
+
+#### Scenario: Unit has branching promotion choices
+- **WHEN** a unit reaches a promotion level and their current class has multiple entries in its `promotesTo` array (e.g., Cavalier -> Paladin or Great Knight)
+- **THEN** the user is prompted or allowed to select the desired promotion branch.
+- **THEN** the stat calculator applies the specific promotion bonuses and class caps of the user-selected branch.
+
+sacred-stones-data/spec.md
+## ADDED Requirements
+
+### Requirement: Sacred Stones Unit Data
+The system SHALL include complete base unit data for all playable characters in Fire Emblem: The Sacred Stones.
+
+#### Scenario: User selects a Sacred Stones unit
+- **WHEN** the user opens the unit selector and browses or searches
+- **THEN** characters from Fire Emblem: The Sacred Stones are available with their accurate base stats, growth rates, and starting equipment/classes.
+
+### Requirement: Sacred Stones Class Data
+The system SHALL include class data for all classes present in Fire Emblem: The Sacred Stones, fully mapping out the branching promotion trees.
+
+#### Scenario: System resolves Sacred Stones class trees
+- **WHEN** the system loads a Sacred Stones unit
+- **THEN** it successfully identifies their class and recursively maps all available branching promotion options (e.g., Recruit -> Cavalier/Knight -> Paladin/Great Knight/General) with accurate bases and promo gains.
+
+stat-progression-table/spec.md
+## MODIFIED Requirements
+
+### Requirement: Promotion Mechanics Integration
+The table SHALL account for unit promotions across an arbitrary number of branching promotion tiers by resetting the displayed level counter to 1 for each new tier, while maintaining internal cumulative progression.
+
+#### Scenario: Unit crosses level 20 unpromoted
+- **WHEN** a row is generated for a standard unit passing unpromoted level 20
+- **THEN** the row label indicates "Level 1 (Promoted)" instead of "Level 21".
+
+#### Scenario: Unit crosses into a subsequent promotion tier
+- **WHEN** a unit promotes from one tier to the next (e.g., Trainee -> Tier 1, or Tier 1 -> Tier 2)
+- **THEN** the row label resets to 1 to reflect the new class tier instead of continuing the previous tier's level mapping.
+
+### Requirement: Accurate Promotion Stat Adjustments
+The system SHALL apply appropriate statistical bonuses when a unit promotes, according to their new class data defined in the game's class data file, accumulating stat adjustments accurately across all traversed promotion tiers.
+
+#### Scenario: Unit receives promotion bonuses
+- **WHEN** a unit's progression crosses their promotion level
+- **THEN** their stats are increased by the class's specified promotion bonuses.
+
+#### Scenario: Unit stats are floored by class bases
+- **WHEN** a unit's stats upon promotion are lower than the new class's base stats
+- **THEN** their stats are raised exactly to match the class base stats.
+
+#### Scenario: Unit benefits from hidden class modifiers
+- **WHEN** a unit promotes into a class with hidden bonuses (e.g., Swordmaster +30 Crit, Flying)
+- **THEN** the system accounts for and displays these modifiers in their progression or detailed breakdown.
+
+#### Scenario: Unit receives multiple distinct promotion bonuses
+- **WHEN** a unit traverses multiple independent promotion tiers (e.g., Trainee -> Tier 1 -> Tier 2)
+- **THEN** the system correctly applies and accumulates the promotion bonuses for each distinct transition independently.
+
+
+
+## Design
+
+## Context
+
+Fire Emblem: The Sacred Stones (FE8) introduces branching promotions and "Trainee" classes (Ross, Amelia, Ewan) that can promote multiple times (e.g., Journeyman -> Fighter -> Warrior). Certain other Fire Emblem games also feature more than two tiers of classes (e.g., Radiant Dawn, Echoes: Shadows of Valentia). The current application architecture assumes a strict unpromoted -> promoted (2-tier) pipeline. To fully support FE8 and future-proof the application, the system must handle multi-tier, branching promotion paths dynamically.
+
+## Goals / Non-Goals
+
+**Goals:**
+- Eliminate any special-casing for "Trainees" or specific class tiers.
+- Enable class data to recursively define promotions via `promotesTo`, supporting an arbitrary number of promotion tiers.
+- Update the stat progression math to resolve stats correctly as a unit traverses multiple class tiers.
+- Allow the UI to present branching promotion choices to the user at each viable promotion level.
+
+**Non-Goals:**
+- Modifying the underlying combat or skill systems; this is strictly focused on stat progression and class pathing.
+- Implementing automatic "best path" calculators.
+
+## Decisions
+
+- **Recursive Promotion Resolution:** The `promotesTo` array in `Class` data will be the sole source of truth for the promotion tree. A unit's starting class defines base stats and growths. When promoting, we simply look up the chosen class in `promotesTo`, apply its `promotionBonus`, and set it as the new active class. This seamlessly supports N-tiers of promotion without any tier-specific logic.
+- **Path Selection State:** Since units may have branching promotions at multiple tiers (e.g., Trainee branches to Basic, Basic branches to Advanced), the UI state must change from tracking a simple `isPromoted` or `promotionLevel` to tracking an array of `PromotionEvent` objects containing `{ level, selectedClassId }`.
+- **Level Resets:** For games where level resets to 1 upon promotion (like GBA games), the stat calculator will reset the internal level counter while tracking cumulative stats across the full 1-40 (or 1-60+) progression grid.
+
+## Risks / Trade-offs
+
+- **Risk: Increased complexity in `StatProgressionTable.tsx`** -> **Mitigation:** Isolate the promotion path selection into a dedicated sub-component that emits a cleaned array of chosen classes and levels to the main table.
+- **Risk: Infinite promotion loops in data** -> **Mitigation:** Ensure data formatting guidelines (like `FORMATTING.md`) strictly forbid cyclic `promotesTo` references.
+
+## Current Task Context
+
+## Current Task
+- - [ ] 1.1 Scrape and compile FE8 playable character names from [Fire Emblem Wiki: List of characters in Fire Emblem: The Sacred Stones](https://fireemblemwiki.org/wiki/List_of_characters_in_Fire_Emblem:_The_Sacred_Stones).

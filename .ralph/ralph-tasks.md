@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/add-modal-component/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/add-sacred-stones-data/tasks.md
