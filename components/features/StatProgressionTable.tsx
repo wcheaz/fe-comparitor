@@ -14,6 +14,23 @@ function hasBranchingPromotions(classObj: Class | undefined): boolean {
 }
 
 /**
+ * Helper function to get promotion options with their display names
+ */
+function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Array<{ id: string, name: string }> {
+  if (!classObj || !classObj.promotesTo || classObj.promotesTo.length === 0) {
+    return [];
+  }
+  
+  return classObj.promotesTo.map(classId => {
+    const targetClass = classes.find(c => c.id === classId);
+    return {
+      id: classId,
+      name: targetClass?.name || classId
+    };
+  });
+}
+
+/**
  * Helper function to get the current class of a unit at a specific point in their promotion path
  */
 function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: PromotionEvent[]): Class | undefined {
