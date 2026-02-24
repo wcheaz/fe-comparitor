@@ -226,5 +226,139 @@ describe('Stat Progression Logic', () => {
         expect(level22Stats.hp).toBeGreaterThanOrEqual(30);
       }
     });
+
+    // Task 4.1: Validate generateProgressionArray accuracy for a standard 1-tier unit (Seth)
+    it('should handle 1-tier promoted units correctly (Seth - Paladin)', () => {
+      // Load real Sacred Stones data for Seth
+      const sethUnit: Unit = {
+        id: 'seth',
+        name: 'Seth',
+        game: 'The Sacred Stones',
+        class: 'paladin',
+        joinChapter: ['1'],
+        level: 1,
+        gender: 'M',
+        affinity: 'Anima',
+        isPromoted: true,
+        stats: {
+          hp: 30,
+          str: 14,
+          skl: 13,
+          spd: 12,
+          lck: 13,
+          def: 11,
+          res: 8,
+          con: 11,
+          mov: 8
+        },
+        growths: {
+          hp: 90,
+          str: 50,
+          skl: 45,
+          spd: 45,
+          lck: 25,
+          def: 40,
+          res: 30
+        },
+        maxStats: {
+          hp: 60,
+          str: 25,
+          skl: 26,
+          spd: 24,
+          def: 25,
+          res: 25,
+          con: 25,
+          mov: 15
+        }
+      };
+
+      // Seth's Paladin class data
+      const paladinClass: Class = {
+        id: 'paladin_m',
+        name: 'Paladin',
+        game: 'The Sacred Stones',
+        type: 'promoted',
+        baseStats: {
+          hp: 23,
+          str: 7,
+          skl: 4,
+          spd: 7,
+          def: 8,
+          res: 3,
+          con: 11,
+          mov: 8
+        },
+        promotionBonus: {},
+        promotesTo: [],
+        hiddenModifiers: [],
+        weapons: ['Sword', 'Lance', 'Axe'],
+        maxStats: {
+          hp: 60,
+          str: 25,
+          skl: 26,
+          spd: 24,
+          def: 25,
+          res: 25,
+          con: 25,
+          mov: 15,
+          lck: 30
+        },
+        gender: 'M',
+        movementType: 'Cavalry'
+      };
+
+      const testClasses = [paladinClass];
+      const progression = generateProgressionArray(sethUnit, 1, 20, testClasses, []);
+
+      // Test 1: Should generate correct number of levels
+      expect(progression).toHaveLength(20);
+
+      // Test 2: No promotion levels (since Seth is already promoted)
+      const hasPromotionLevels = progression.some(level => level.isPromotionLevel);
+      expect(hasPromotionLevels).toBe(false);
+
+      // Test 3: All display levels should be standard (no tier indicators)
+      const hasTierIndicators = progression.some(level => level.displayLevel.includes('Tier'));
+      expect(hasTierIndicators).toBe(false);
+
+      // Test 4: First and last levels should have valid stats
+      const firstLevel = progression[0];
+      const lastLevel = progression[progression.length - 1];
+      
+      expect(firstLevel.stats.hp).toBeDefined();
+      expect(lastLevel.stats.hp).toBeDefined();
+      expect(firstLevel.stats.hp).toBeGreaterThan(0);
+      expect(lastLevel.stats.hp).toBeGreaterThan(0);
+
+      // Test 5: Stats should not decrease as levels increase
+      for (let i = 1; i < progression.length; i++) {
+        const current = progression[i];
+        const previous = progression[i - 1];
+        
+        if (current.stats.hp && previous.stats.hp) {
+          expect(current.stats.hp).toBeGreaterThanOrEqual(previous.stats.hp);
+        }
+      }
+
+      // Test 6: Internal levels should be sequential
+      for (let i = 0; i < progression.length; i++) {
+        expect(progression[i].internalLevel).toBe(i + 1);
+      }
+
+      // Test 7: Stats should not exceed class maximums
+      for (const level of progression) {
+        for (const [stat, value] of Object.entries(level.stats)) {
+          if (stat === 'lck') continue; // Luck not in paladin maxStats
+          if (paladinClass.maxStats && paladinClass.maxStats[stat] && value) {
+            expect(value).toBeLessThanOrEqual(paladinClass.maxStats[stat]);
+          }
+        }
+      }
+
+      // Test 8: Display levels should be correct format
+      expect(firstLevel.displayLevel).toBe('Level 1');
+      expect(progression[1].displayLevel).toBe('Level 2');
+      expect(progression[19].displayLevel).toBe('Level 20');
+    });
   });
 });
