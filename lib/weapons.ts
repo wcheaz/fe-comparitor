@@ -13,10 +13,11 @@ export interface Weapon {
     statBonuses?: Record<string, number>;
 }
 
-// Initial database of weapons, focusing on PRF weapons from Binding Blade.
-// Stats are based on their Fire Emblem 6 implementation.
+// Initial database of weapons, focusing on PRF weapons from Binding Blade and The Sacred Stones.
+// Stats are based on their Fire Emblem 6 and 8 implementations.
 const WEAPONS: Record<string, Weapon> = {
-    "Rapier": {
+    // FE6 - Binding Blade PRF Weapons
+    "Rapier (FE6)": {
         name: "Rapier",
         type: "Sword",
         rank: "Prf",
@@ -28,6 +29,61 @@ const WEAPONS: Record<string, Weapon> = {
         range: "1",
         description: "Roy exclusively. Effective against armored and cavalry units.",
         effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    // FE8 - The Sacred Stones PRF Weapons
+    "Rapier": {
+        name: "Rapier",
+        type: "Sword",
+        rank: "Prf",
+        uses: 30,
+        weight: 4,
+        might: 8,
+        hit: 100,
+        crit: 5,
+        range: "1",
+        description: "Eirika exclusively. Effective against armored and cavalry units.",
+        effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    "Reginleif": {
+        name: "Reginleif",
+        type: "Lance",
+        rank: "Prf",
+        uses: 30,
+        weight: 6,
+        might: 10,
+        hit: 95,
+        crit: 5,
+        range: "1",
+        description: "Ephraim exclusively. Effective against armored and cavalry units.",
+        effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    "Siegmund": {
+        name: "Siegmund",
+        type: "Lance",
+        rank: "Prf",
+        uses: 50,
+        weight: 12,
+        might: 15,
+        hit: 90,
+        crit: 0,
+        range: "1",
+        description: "Ephraim exclusively."
+    },
+    "Audhulma": {
+        name: "Audhulma",
+        type: "Lance",
+        rank: "Prf",
+        uses: 30,
+        weight: 10,
+        might: 20,
+        hit: 95,
+        crit: 10,
+        range: "1-2",
+        description: "Ephraim exclusively. Sacred Twin of lightning. Grants Def/Res +5 when equipped.",
+        statBonuses: {
+            def: 5,
+            res: 5
+        }
     },
     "Binding Blade": {
         name: "Binding Blade",
@@ -44,6 +100,73 @@ const WEAPONS: Record<string, Weapon> = {
         statBonuses: {
             def: 5,
             res: 5
+        }
+    },
+    "Excalibur": {
+        name: "Excalibur",
+        type: "Anima",
+        rank: "Prf",
+        uses: 30,
+        weight: 3,
+        might: 14,
+        hit: 100,
+        crit: 15,
+        range: "1-2",
+        description: "Lute exclusively. Effective against flying units.",
+        effectiveAgainst: ["Flying"]
+    },
+    "Ivaldi": {
+        name: "Ivaldi",
+        type: "Anima",
+        rank: "Prf",
+        uses: 30,
+        weight: 8,
+        might: 16,
+        hit: 100,
+        crit: 10,
+        range: "1-2",
+        description: "Saleh exclusively. Sacred Twin of wind. Grants Res +10 when equipped.",
+        statBonuses: {
+            res: 10
+        }
+    },
+    "Naglfar": {
+        name: "Naglfar",
+        type: "Dark",
+        rank: "Prf",
+        uses: 10,
+        weight: 18,
+        might: 20,
+        hit: 80,
+        crit: 5,
+        range: "1-2",
+        description: "Lyon exclusively."
+    },
+    "Latona": {
+        name: "Latona",
+        type: "Staff",
+        rank: "Prf",
+        uses: 10,
+        weight: 1,
+        might: 0,
+        hit: 100,
+        crit: 0,
+        range: "1",
+        description: "Natasha exclusively. Restores HP to all allies by 20."
+    },
+    "Vidofnir": {
+        name: "Vidofnir",
+        type: "Lance",
+        rank: "Prf",
+        uses: 30,
+        weight: 10,
+        might: 18,
+        hit: 95,
+        crit: 10,
+        range: "1-2",
+        description: "Tana exclusively. Sacred Twin of wind. Grants Spd +10 when equipped.",
+        statBonuses: {
+            spd: 10
         }
     },
     "Eckesachs": {

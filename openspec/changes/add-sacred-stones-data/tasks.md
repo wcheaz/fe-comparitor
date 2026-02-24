@@ -4,10 +4,10 @@
 - [x] 1.2 Scrape and compile FE8 unit base stats from [Serenes Forest: Base Stats](https://serenesforest.net/the-sacred-stones/characters/base-stats/).
 - [x] 1.3 Scrape and compile FE8 unit growth rates from [Serenes Forest: Growth Rates](https://serenesforest.net/the-sacred-stones/characters/growth-rates/).
 - [x] 1.4 Validate compiled unit data against sources and merge into `data/sacred_stones/units.json`.
-- [ ] 1.5 Scrape and compile FE8 class promotion gains from [Serenes Forest: Promotion Gains](https://serenesforest.net/the-sacred-stones/classes/promotion-gains/).
-- [ ] 1.6 Scrape and compile FE8 class maximum stats from [Serenes Forest: Maximum Stats](https://serenesforest.net/the-sacred-stones/classes/maximum-stats/).
-- [ ] 1.7 Validate compiled class data against sources and format as `data/sacred_stones/classes.json`, ensuring `promotesTo` correctly maps branching tiers completely (e.g., Trainee to Tier 1, then Tier 1 to Tier 2 choices).
-- [ ] 1.8 Map FE8-specific PRF weapons (e.g., Rapier, Reginleif) into `lib/weapons.ts` or relevant item data stores.
+- [x] 1.5 Scrape and compile FE8 class promotion gains from [Serenes Forest: Promotion Gains](https://serenesforest.net/the-sacred-stones/classes/promotion-gains/).
+- [x] 1.6 Scrape and compile FE8 class maximum stats from [Serenes Forest: Maximum Stats](https://serenesforest.net/the-sacred-stones/classes/maximum-stats/).
+- [x] 1.7 Validate compiled class data against sources and format as `data/sacred_stones/classes.json`, ensuring `promotesTo` correctly maps branching tiers completely (e.g., Trainee to Tier 1, then Tier 1 to Tier 2 choices).
+- [x] 1.8 Map FE8-specific PRF weapons (e.g., Rapier, Reginleif) into `lib/weapons.ts` or relevant item data stores.
 
 ## 2. Infrastructure Updates
 
