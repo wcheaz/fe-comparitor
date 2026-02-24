@@ -26,6 +26,6 @@
 ## 4. Verification & Polish
 
 - [x] 4.1 Write a test script or use the `dev/` directory to validate `generateProgressionArray` accuracy for a standard 1-tier unit (e.g., Seth) to ensure no regressions.
-- [ ] 4.2 Write a test script to validate average stat generation accuracy for a standard 2-tier branching unit (e.g., Eirika, Franz), checking math against expected values.
+- [x] 4.2 Write a test script to validate average stat generation accuracy for a standard 2-tier branching unit (e.g., Eirika, Franz), checking math against expected values.
 - [ ] 4.3 Write a test script to validate average stat generation accuracy for a 3-tier branching unit (e.g., Ross, Amelia, Ewan), verifying cumulative stats across all 3 class stages.
 - [ ] 4.4 Run `openspec archive change add-sacred-stones-data` once all tasks are complete and verified.
