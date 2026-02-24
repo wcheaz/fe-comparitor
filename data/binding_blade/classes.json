@@ -473,8 +473,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [
-            "paladin_m",
-            "great_knight_m"
+            "paladin_m"
         ],
         "hiddenModifiers": [],
         "weapons": [
@@ -516,8 +515,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [
-            "paladin_f",
-            "great_knight_f"
+            "paladin_f"
         ],
         "hiddenModifiers": [],
         "weapons": [
@@ -639,108 +637,6 @@
         },
         "gender": "F",
         "movementType": "Cavalry"
-    },
-    {
-        "id": "great_knight_m",
-        "name": "Great Knight",
-        "type": "promoted",
-        "baseStats": {
-            "hp": 32,
-            "str": 13,
-            "skl": 8,
-            "spd": 7,
-            "lck": 6,
-            "def": 12,
-            "res": 4,
-            "con": 13,
-            "mov": 7
-        },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "skl": 4,
-            "spd": 4,
-            "lck": 3,
-            "def": 4,
-            "res": 3,
-            "con": 2,
-            "mov": 1
-        },
-        "promotesTo": [],
-        "hiddenModifiers": [],
-        "weapons": [
-            "Axes",
-            "Swords",
-            "Lances"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 28,
-            "mag": 28,
-            "skl": 24,
-            "dex": 24,
-            "spd": 24,
-            "lck": 30,
-            "def": 29,
-            "res": 25,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 40
-        },
-        "gender": "M",
-        "movementType": "Infantry"
-    },
-    {
-        "id": "great_knight_f",
-        "name": "Great Knight",
-        "type": "promoted",
-        "baseStats": {
-            "hp": 32,
-            "str": 13,
-            "skl": 8,
-            "spd": 7,
-            "lck": 6,
-            "def": 12,
-            "res": 4,
-            "con": 13,
-            "mov": 7
-        },
-        "promotionBonus": {
-            "hp": 10,
-            "str": 4,
-            "skl": 4,
-            "spd": 4,
-            "lck": 3,
-            "def": 4,
-            "res": 3,
-            "con": 2,
-            "mov": 1
-        },
-        "promotesTo": [],
-        "hiddenModifiers": [],
-        "weapons": [
-            "Axes",
-            "Swords",
-            "Lances"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 28,
-            "mag": 28,
-            "skl": 24,
-            "dex": 24,
-            "spd": 24,
-            "lck": 30,
-            "def": 29,
-            "res": 25,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 40
-        },
-        "gender": "F",
-        "movementType": "Infantry"
     },
     {
         "id": "armor_knight_m",
@@ -1585,9 +1481,7 @@
             "mov": 6
         },
         "promotionBonus": {},
-        "promotesTo": [
-            "rogue_m"
-        ],
+        "promotesTo": [],
         "hiddenModifiers": [
             "Locktouch"
         ],
@@ -1629,9 +1523,7 @@
             "mov": 6
         },
         "promotionBonus": {},
-        "promotesTo": [
-            "rogue_f"
-        ],
+        "promotesTo": [],
         "hiddenModifiers": [
             "Locktouch"
         ],
@@ -1656,110 +1548,6 @@
         "gender": "F",
         "movementType": "Infantry",
         "description": "Can pick locks, steal items, and have increased vision in Fog of War."
-    },
-    {
-        "id": "rogue_m",
-        "name": "Rogue",
-        "type": "promoted",
-        "baseStats": {
-            "hp": 24,
-            "str": 6,
-            "skl": 14,
-            "spd": 14,
-            "lck": 11,
-            "def": 5,
-            "res": 3,
-            "con": 8,
-            "mov": 7
-        },
-        "promotionBonus": {
-            "hp": 6,
-            "str": 2,
-            "skl": 6,
-            "spd": 6,
-            "lck": 4,
-            "def": 2,
-            "res": 2,
-            "con": 2,
-            "mov": 1
-        },
-        "promotesTo": [],
-        "hiddenModifiers": [
-            "Locktouch",
-            "+15 Avoid"
-        ],
-        "weapons": [
-            "Swords"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 20,
-            "mag": 20,
-            "skl": 30,
-            "dex": 30,
-            "spd": 30,
-            "lck": 30,
-            "def": 20,
-            "res": 20,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 40
-        },
-        "gender": "M",
-        "movementType": "Infantry"
-    },
-    {
-        "id": "rogue_f",
-        "name": "Rogue",
-        "type": "promoted",
-        "baseStats": {
-            "hp": 24,
-            "str": 6,
-            "skl": 14,
-            "spd": 14,
-            "lck": 11,
-            "def": 5,
-            "res": 3,
-            "con": 8,
-            "mov": 7
-        },
-        "promotionBonus": {
-            "hp": 6,
-            "str": 2,
-            "skl": 6,
-            "spd": 6,
-            "lck": 4,
-            "def": 2,
-            "res": 2,
-            "con": 2,
-            "mov": 1
-        },
-        "promotesTo": [],
-        "hiddenModifiers": [
-            "Locktouch",
-            "+15 Avoid"
-        ],
-        "weapons": [
-            "Swords"
-        ],
-        "maxStats": {
-            "hp": 60,
-            "str": 20,
-            "mag": 20,
-            "skl": 30,
-            "dex": 30,
-            "spd": 30,
-            "lck": 30,
-            "def": 20,
-            "res": 20,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 40
-        },
-        "gender": "F",
-        "movementType": "Infantry"
     },
     {
         "id": "wyvern_rider_m",

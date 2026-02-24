@@ -50,6 +50,10 @@ export function ComparisonGrid({
   const [isWeaponModalOpen, setIsWeaponModalOpen] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState<string | null>(null);
 
+  // State for promotion modal
+  const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false);
+  const [selectedPromotionClass, setSelectedPromotionClass] = useState<Class | null>(null);
+
   // Handle affinity info icon click
   const handleAffinityInfoClick = (affinityName: string) => {
     setSelectedAffinity(affinityName);
@@ -72,6 +76,15 @@ export function ComparisonGrid({
   const handleWeaponInfoClick = (weaponName: string) => {
     setSelectedWeapon(weaponName);
     setIsWeaponModalOpen(true);
+  };
+
+  // Handle promotion info icon click
+  const handlePromotionInfoClick = (promotionString: string, game: string) => {
+    const promoClass = classes.find(c => (c.id === promotionString || c.name === promotionString) && c.game === game);
+    if (promoClass) {
+      setSelectedPromotionClass(promoClass);
+      setIsPromotionModalOpen(true);
+    }
   };
 
   // Render affinity details for modal
@@ -272,6 +285,82 @@ export function ComparisonGrid({
     );
   };
 
+  // Render promotion details for modal
+  const renderPromotionDetails = () => {
+    if (!selectedPromotionClass) return null;
+
+    const promoClass = selectedPromotionClass;
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2">
+          <h2 className="text-2xl font-bold">{promoClass.name} Promotion Details</h2>
+        </div>
+
+        <div className="pt-2">
+          <h3 className="text-lg font-semibold mb-2">Promotion Bonuses</h3>
+          <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+            {Object.entries(promoClass.promotionBonus).map(([statKey, value]) => {
+              if (value === undefined) return null;
+
+              let label = statKey.toUpperCase();
+              if (statKey !== 'hp') {
+                label = statKey.charAt(0).toUpperCase() + statKey.slice(1);
+              }
+              if (statKey === 'mov') label = 'Mov';
+              if (statKey === 'con') label = 'Con';
+              if (statKey === 'bld') label = 'Bld';
+              if (statKey === 'res') label = 'Res';
+              if (statKey === 'def') label = 'Def';
+              if (statKey === 'lck') label = 'Lck';
+              if (statKey === 'spd') label = 'Spd';
+              if (statKey === 'skl') label = 'Skl';
+              if (statKey === 'dex') label = 'Dex';
+              if (statKey === 'str') label = 'Str';
+              if (statKey === 'mag') label = 'Mag';
+
+              return (
+                <div key={statKey} className="bg-muted/50 p-2 rounded text-center">
+                  <div className="text-xs text-muted-foreground font-medium mb-1">{label}</div>
+                  <div className="font-bold">{(value as number) > 0 ? `+${value}` : value}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="pt-4 border-t">
+          <h3 className="text-lg font-semibold mb-1">Movement Type</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+              {promoClass.movementType || 'Infantry'}
+            </span>
+          </div>
+        </div>
+
+        {promoClass.weapons && promoClass.weapons.length > 0 && (
+          <div className="pt-2">
+            <h3 className="text-lg font-semibold mb-1">Weapons</h3>
+            <div className="flex flex-wrap gap-2">
+              {promoClass.weapons.map(weapon => (
+                <span key={weapon} className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                  {weapon}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {promoClass.description && (
+          <div className="pt-4 border-t">
+            <h3 className="text-lg font-semibold mb-1">Description & Special Qualities</h3>
+            <p className="text-muted-foreground">{promoClass.description}</p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   React.useEffect(() => {
     getAllClasses().then(setClasses).catch(console.error);
   }, []);
@@ -335,7 +424,7 @@ export function ComparisonGrid({
                 <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Class</td>
                   {units.map((unit) => {
-                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
                     const displayName = cls ? cls.name : unit.class;
                     return (
                       <td key={`class-${unit.id}`} className="text-center p-2">
@@ -364,7 +453,7 @@ export function ComparisonGrid({
                 <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Movement Type</td>
                   {units.map((unit) => {
-                    const cls = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_')) || classes.find(c => c.name === unit.class);
+                    const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
                     const movType = cls?.movementType || 'Infantry';
                     return (
                       <td key={`movement-${unit.id}`} className="text-center p-2">
@@ -388,6 +477,44 @@ export function ComparisonGrid({
                     </td>
                   ))}
                 </tr>
+                {units.some(u => {
+                  const cls = classes.find(c => (c.id === u.class.toLowerCase().replace(/\s+/g, '_') || c.name === u.class) && c.game === u.game);
+                  return cls && cls.promotesTo && cls.promotesTo.length > 0;
+                }) && (
+                    <tr className="border-b hover:bg-muted/50">
+                      <td className="p-2 font-medium align-top">Promotion Options</td>
+                      {units.map((unit) => {
+                        const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
+                        const promotesTo = cls?.promotesTo || [];
+                        return (
+                          <td key={`promo-${unit.id}`} className="text-center p-2 align-top">
+                            {promotesTo.length > 0 ? (
+                              <div className="flex flex-col items-center gap-2">
+                                {promotesTo.map((promoId) => {
+                                  const promoCls = classes.find(c => (c.id === promoId || c.name === promoId) && c.game === unit.game);
+                                  const displayName = promoCls ? promoCls.name : promoId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                                  return (
+                                    <div key={promoId} className="flex items-center gap-1 text-sm bg-muted/30 px-2 py-1 rounded">
+                                      <span>{displayName}</span>
+                                      {promoCls && (
+                                        <Info
+                                          className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors shrink-0"
+                                          aria-label={`View details about ${displayName} promotion`}
+                                          onClick={() => handlePromotionInfoClick(promoId, unit.game)}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            ) : (
+                              <span className="text-muted-foreground">-</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  )}
                 {units.some(u => u.affinity) && (
                   <tr className="border-b hover:bg-muted/50">
                     <td className="p-2 font-medium">Affinity</td>
@@ -625,6 +752,16 @@ export function ComparisonGrid({
       >
         <div className="space-y-4">
           {renderWeaponDetails()}
+        </div>
+      </Modal>
+
+      {/* Promotion Details Modal */}
+      <Modal
+        isOpen={isPromotionModalOpen}
+        onClose={() => setIsPromotionModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderPromotionDetails()}
         </div>
       </Modal>
 

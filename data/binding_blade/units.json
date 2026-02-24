@@ -75,7 +75,7 @@
     },
     {
         "id": "allen",
-        "name": "Allen",
+        "name": "Alen",
         "game": "The Binding Blade",
         "class": "cavalier_m",
         "level": 1,
@@ -245,7 +245,7 @@
     },
     {
         "id": "ellen",
-        "name": "Ellen",
+        "name": "Elen",
         "game": "The Binding Blade",
         "class": "priest_f",
         "level": 2,
@@ -313,7 +313,7 @@
     },
     {
         "id": "wade",
-        "name": "Wade",
+        "name": "Ward",
         "game": "The Binding Blade",
         "class": "fighter_m",
         "level": 2,
@@ -653,7 +653,7 @@
     },
     {
         "id": "jerrot",
-        "name": "Jerrot",
+        "name": "Zelot",
         "game": "The Binding Blade",
         "class": "paladin_m",
         "level": 1,
@@ -690,7 +690,7 @@
     },
     {
         "id": "treck",
-        "name": "Treck",
+        "name": "Trec",
         "game": "The Binding Blade",
         "class": "cavalier_m",
         "level": 4,
@@ -862,7 +862,7 @@
     },
     {
         "id": "barth",
-        "name": "Barth",
+        "name": "Barthe",
         "game": "The Binding Blade",
         "class": "armor_knight_m",
         "level": 9,
@@ -896,7 +896,7 @@
     },
     {
         "id": "ojier",
-        "name": "Ojier",
+        "name": "Ogier",
         "game": "The Binding Blade",
         "class": "mercenary_m",
         "level": 3,
@@ -998,7 +998,7 @@
     },
     {
         "id": "gonzales",
-        "name": "Gonzales",
+        "name": "Gonzalez",
         "game": "The Binding Blade",
         "class": "brigand_m",
         "level": 5,

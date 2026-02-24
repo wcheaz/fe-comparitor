@@ -23,7 +23,10 @@ interface ProgressionRow {
 
 export function StatProgressionTable({ units }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
+  const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
   const [classes, setClasses] = useState<Class[]>([]);
+  const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
+  const [hasInitializedStats, setHasInitializedStats] = useState(false);
 
   // Load classes data
   React.useEffect(() => {
@@ -120,6 +123,12 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       rows.push(rowData);
     }
 
+    // Initialize visible stats once when progression data first loads
+    if (!hasInitializedStats && displayStats.length > 0) {
+      setVisibleStats(new Set(displayStats));
+      setHasInitializedStats(true);
+    }
+
     return { rows, statKeys: displayStats };
   }, [units, expandToLevel100, classes]);
 
@@ -131,11 +140,77 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
     );
   }
 
+  const toggleStatVisibility = (statKey: string) => {
+    setVisibleStats(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(statKey)) {
+        newSet.delete(statKey);
+      } else {
+        newSet.add(statKey);
+      }
+      return newSet;
+    });
+  };
+
+  const getVisibleStatKeys = () => {
+    return progressionData.statKeys.filter(key => visibleStats.has(key));
+  };
+
+  const activeStatKeys = getVisibleStatKeys();
+
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Average Stats</h2>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl font-semibold">Average Stats</h2>
+          {progressionData.statKeys.length > 0 && (
+            <div className="flex flex-wrap gap-2 items-center">
+              <span className="text-sm text-gray-600 font-medium mr-1">Visible Stats:</span>
+              {progressionData.statKeys.map((statKey) => {
+                let label = statKey.toUpperCase();
+                if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
+                  label = 'STR/MAG';
+                } else if (statKey === 'skl') {
+                  const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
+                  const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
+                  if (hasDex && hasSkl) label = 'SKL/DEX';
+                  else if (hasDex) label = 'DEX';
+                }
+
+                const isActive = visibleStats.has(statKey);
+                return (
+                  <button
+                    key={`toggle-${statKey}`}
+                    onClick={() => toggleStatVisibility(statKey)}
+                    className={`px-2 py-1 text-xs rounded-full border transition-colors ${isActive
+                      ? 'bg-blue-100 border-blue-300 text-blue-800 hover:bg-blue-200'
+                      : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100'
+                      }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center space-x-6 shrink-0">
+          <div className="flex items-center space-x-2 bg-gray-100 p-1 rounded-md">
+            <button
+              onClick={() => setGroupBy('stat')}
+              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors ${groupBy === 'stat' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                }`}
+            >
+              Group By Stat
+            </button>
+            <button
+              onClick={() => setGroupBy('unit')}
+              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors ${groupBy === 'unit' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                }`}
+            >
+              Group By Unit
+            </button>
+          </div>
           <label className="flex items-center space-x-2">
             <input
               type="checkbox"
@@ -151,44 +226,96 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900">
-                Level
-              </th>
-              {units.map((unit, unitIndex) => (
-                <th
-                  key={unit.id}
-                  colSpan={progressionData.statKeys.length}
-                  className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
-                >
-                  {unit.name}
-                </th>
-              ))}
-            </tr>
-            <tr className="bg-gray-50">
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900">
-              </th>
-              {units.map((unit, unitIndex) => (
-                <React.Fragment key={unit.id}>
-                  {progressionData.statKeys.map((statKey, statIndex) => (
+            {groupBy === 'stat' ? (
+              // --- STAT GROUPING ---
+              <>
+                <tr className="bg-gray-50">
+                  <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900" rowSpan={2}>
+                    Level
+                  </th>
+                  {activeStatKeys.map((statKey) => {
+                    let statLabel = statKey.toUpperCase();
+                    if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
+                      statLabel = 'STR/MAG';
+                    } else if (statKey === 'skl') {
+                      const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
+                      const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
+                      if (hasDex && hasSkl) statLabel = 'SKL/DEX';
+                      else if (hasDex) statLabel = 'DEX';
+                    }
+
+                    return (
+                      <th
+                        key={`header-${statKey}`}
+                        colSpan={units.length}
+                        className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
+                      >
+                        {statLabel}
+                      </th>
+                    );
+                  })}
+                </tr>
+                <tr className="bg-gray-50">
+                  {activeStatKeys.map((statKey, statIndex) => (
+                    <React.Fragment key={`subheader-${statKey}`}>
+                      {units.map((unit, unitIndex) => (
+                        <th
+                          key={`${statKey}-${unit.id}`}
+                          className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 truncate max-w-[80px] ${unitIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                          title={unit.name}
+                        >
+                          {unit.name}
+                        </th>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </tr>
+              </>
+            ) : (
+              // --- UNIT GROUPING ---
+              <>
+                <tr className="bg-gray-50">
+                  <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900" rowSpan={2}>
+                    Level
+                  </th>
+                  {units.map((unit, unitIndex) => (
                     <th
-                      key={`${unit.id}-${statKey}`}
-                      className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                      key={`header-unit-${unit.id}`}
+                      colSpan={activeStatKeys.length}
+                      className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
                     >
-                      {statKey === 'str' && !progressionData.statKeys.includes('mag') ? 'STR/MAG' :
-                        statKey === 'skl' ? (() => {
-                          const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
-                          const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
-                          if (hasDex && hasSkl) return 'SKL/DEX';
-                          if (hasDex) return 'DEX';
-                          return 'SKL';
-                        })() :
-                          statKey.toUpperCase()}
+                      {unit.name}
                     </th>
                   ))}
-                </React.Fragment>
-              ))}
-            </tr>
+                </tr>
+                <tr className="bg-gray-50">
+                  {units.map((unit, unitIndex) => (
+                    <React.Fragment key={`subheader-unit-${unit.id}`}>
+                      {activeStatKeys.map((statKey, statIndex) => {
+                        let statLabel = statKey.toUpperCase();
+                        if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
+                          statLabel = 'STR/MAG';
+                        } else if (statKey === 'skl') {
+                          const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
+                          const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
+                          if (hasDex && hasSkl) statLabel = 'SKL/DEX';
+                          else if (hasDex) statLabel = 'DEX';
+                        }
+
+                        return (
+                          <th
+                            key={`${unit.id}-${statKey}`}
+                            className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                          >
+                            {statLabel}
+                          </th>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))}
+                </tr>
+              </>
+            )}
           </thead>
           <tbody>
             {progressionData.rows.map((row, rowIndex) => (
@@ -196,88 +323,175 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
                   {row.displayLevel}
                 </td>
-                {units.map((unit, unitIndex) => (
-                  <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
-                    {progressionData.statKeys.map((statKey, statIndex) => {
-                      const unitStats = row.stats[unitIndex];
-                      const unitCappedStats = row.cappedStats[unitIndex];
+                {groupBy === 'stat' ? (
+                  // --- STAT GROUPING BODY ---
+                  activeStatKeys.map((statKey, statIndex) => (
+                    <React.Fragment key={`${row.internalLevel}-${statKey}`}>
+                      {units.map((unit, unitIndex) => {
+                        const unitStats = row.stats[unitIndex];
+                        const unitCappedStats = row.cappedStats[unitIndex];
 
-                      let rawStatValue = unitStats[statKey];
-                      if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
-                        rawStatValue = unitStats['dex'];
-                      }
-
-                      const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
-
-                      let isCapped = unitCappedStats?.[statKey];
-                      if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
-                        isCapped = unitCappedStats?.['dex'];
-                      }
-
-                      const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-                      const shouldShowDash = row.internalLevel < effectiveUnitLevel;
-
-                      let isHighest = false;
-                      let isEqual = false;
-
-                      if (!shouldShowDash && statValue !== undefined) {
-                        const allValidValues = units.map((u, i) => {
-                          const eLv = u.isPromoted ? u.level + 20 : u.level;
-                          if (row.internalLevel < eLv) return null;
-                          let rv = row.stats[i]?.[statKey];
-                          if (statKey === 'skl' && (rv === undefined || rv === null)) {
-                            rv = row.stats[i]?.['dex'];
-                          }
-                          return rv !== undefined && rv !== null ? Math.round(rv) : null;
-                        }).filter(v => v !== null) as number[];
-
-                        if (allValidValues.length > 1) {
-                          isHighest = units.every((otherUnit, otherIndex) => {
-                            if (otherIndex === unitIndex) return true;
-                            const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
-                            if (row.internalLevel < otherEffectiveLv) return true;
-                            let otherRaw = row.stats[otherIndex]?.[statKey];
-                            if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
-                              otherRaw = row.stats[otherIndex]?.['dex'];
-                            }
-                            if (otherRaw === undefined || otherRaw === null) return false;
-                            return statValue > Math.round(otherRaw);
-                          });
-
-                          isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
+                        let rawStatValue = unitStats[statKey];
+                        if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
+                          rawStatValue = unitStats['dex'];
                         }
-                      }
 
-                      let highlightClass = '';
-                      if (isHighest) {
-                        highlightClass = 'bg-green-500/20';
-                      } else if (isEqual) {
-                        highlightClass = 'bg-yellow-500/20';
-                      }
+                        const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
 
-                      const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
+                        let isCapped = unitCappedStats?.[statKey];
+                        if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
+                          isCapped = unitCappedStats?.['dex'];
+                        }
 
-                      return (
-                        <td
-                          key={`${row.internalLevel}-${unit.id}-${statKey}`}
-                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
-                        >
-                          {shouldShowDash ? (
-                            <span className="text-gray-400">-</span>
-                          ) : (
-                            <span>
-                              {statValue !== undefined ? statValue : '-'}
-                              {/* Highlight promotion level */}
-                              {row.isPromotionLevel && (
-                                <span className="ml-1 text-xs text-blue-600">✨</span>
-                              )}
-                            </span>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </React.Fragment>
-                ))}
+                        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
+                        const shouldShowDash = row.internalLevel < effectiveUnitLevel;
+
+                        let isHighest = false;
+                        let isEqual = false;
+
+                        if (!shouldShowDash && statValue !== undefined) {
+                          const allValidValues = units.map((u, i) => {
+                            const eLv = u.isPromoted ? u.level + 20 : u.level;
+                            if (row.internalLevel < eLv) return null;
+                            let rv = row.stats[i]?.[statKey];
+                            if (statKey === 'skl' && (rv === undefined || rv === null)) {
+                              rv = row.stats[i]?.['dex'];
+                            }
+                            return rv !== undefined && rv !== null ? Math.round(rv) : null;
+                          }).filter(v => v !== null) as number[];
+
+                          if (allValidValues.length > 1) {
+                            isHighest = units.every((otherUnit, otherIndex) => {
+                              if (otherIndex === unitIndex) return true;
+                              const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
+                              if (row.internalLevel < otherEffectiveLv) return true;
+                              let otherRaw = row.stats[otherIndex]?.[statKey];
+                              if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
+                                otherRaw = row.stats[otherIndex]?.['dex'];
+                              }
+                              if (otherRaw === undefined || otherRaw === null) return false;
+                              return statValue > Math.round(otherRaw);
+                            });
+
+                            isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
+                          }
+                        }
+
+                        let highlightClass = '';
+                        if (isHighest) {
+                          highlightClass = 'bg-green-500/20';
+                        } else if (isEqual) {
+                          highlightClass = 'bg-yellow-500/20';
+                        }
+
+                        const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
+
+                        return (
+                          <td
+                            key={`${row.internalLevel}-${statKey}-${unit.id}`}
+                            className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${unitIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                          >
+                            {shouldShowDash ? (
+                              <span className="text-gray-400">-</span>
+                            ) : (
+                              <span>
+                                {statValue !== undefined ? statValue : '-'}
+                                {/* Highlight promotion level */}
+                                {row.isPromotionLevel && (
+                                  <span className="ml-1 text-xs text-blue-600">✨</span>
+                                )}
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))
+                ) : (
+                  // --- UNIT GROUPING BODY ---
+                  units.map((unit, unitIndex) => (
+                    <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
+                      {activeStatKeys.map((statKey, statIndex) => {
+                        const unitStats = row.stats[unitIndex];
+                        const unitCappedStats = row.cappedStats[unitIndex];
+
+                        let rawStatValue = unitStats[statKey];
+                        if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
+                          rawStatValue = unitStats['dex'];
+                        }
+
+                        const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
+
+                        let isCapped = unitCappedStats?.[statKey];
+                        if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
+                          isCapped = unitCappedStats?.['dex'];
+                        }
+
+                        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
+                        const shouldShowDash = row.internalLevel < effectiveUnitLevel;
+
+                        let isHighest = false;
+                        let isEqual = false;
+
+                        if (!shouldShowDash && statValue !== undefined) {
+                          const allValidValues = units.map((u, i) => {
+                            const eLv = u.isPromoted ? u.level + 20 : u.level;
+                            if (row.internalLevel < eLv) return null;
+                            let rv = row.stats[i]?.[statKey];
+                            if (statKey === 'skl' && (rv === undefined || rv === null)) {
+                              rv = row.stats[i]?.['dex'];
+                            }
+                            return rv !== undefined && rv !== null ? Math.round(rv) : null;
+                          }).filter(v => v !== null) as number[];
+
+                          if (allValidValues.length > 1) {
+                            isHighest = units.every((otherUnit, otherIndex) => {
+                              if (otherIndex === unitIndex) return true;
+                              const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
+                              if (row.internalLevel < otherEffectiveLv) return true;
+                              let otherRaw = row.stats[otherIndex]?.[statKey];
+                              if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
+                                otherRaw = row.stats[otherIndex]?.['dex'];
+                              }
+                              if (otherRaw === undefined || otherRaw === null) return false;
+                              return statValue > Math.round(otherRaw);
+                            });
+
+                            isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
+                          }
+                        }
+
+                        let highlightClass = '';
+                        if (isHighest) {
+                          highlightClass = 'bg-green-500/20';
+                        } else if (isEqual) {
+                          highlightClass = 'bg-yellow-500/20';
+                        }
+
+                        const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
+
+                        return (
+                          <td
+                            key={`${row.internalLevel}-${unit.id}-${statKey}`}
+                            className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                          >
+                            {shouldShowDash ? (
+                              <span className="text-gray-400">-</span>
+                            ) : (
+                              <span>
+                                {statValue !== undefined ? statValue : '-'}
+                                {/* Highlight promotion level */}
+                                {row.isPromotionLevel && (
+                                  <span className="ml-1 text-xs text-blue-600">✨</span>
+                                )}
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))
+                )}
               </tr>
             ))}
           </tbody>

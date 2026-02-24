@@ -50,6 +50,7 @@ export interface Unit {
 export interface Class {
   id: string;
   name: string;
+  game: string;
   type: 'unpromoted' | 'promoted';
   baseStats: UnitStats;
   promotionBonus: UnitStats;

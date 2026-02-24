@@ -71,10 +71,10 @@ export async function getAllClasses(): Promise<Class[]> {
 
     // Transform and merge all classes
     const allClasses = [
-      ...bindingBladeClasses.map(transformJsonToClass),
-      ...threeHousesClasses.map(transformJsonToClass),
-      ...engageClasses.map(transformJsonToClass),
-      ...blazingBladeClasses.map(transformJsonToClass)
+      ...bindingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Binding Blade')),
+      ...threeHousesClasses.map((c: any) => transformJsonToClass(c, 'Three Houses')),
+      ...engageClasses.map((c: any) => transformJsonToClass(c, 'Engage')),
+      ...blazingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Blazing Blade'))
     ];
 
     classesCache = allClasses;
@@ -91,32 +91,8 @@ export async function getClassesByGame(game: string): Promise<Class[]> {
     // This could be improved by adding a game field to class data
     const allClasses = await getAllClasses();
 
-    // Filter classes based on game naming convention
-    if (game === 'The Binding Blade') {
-      return allClasses.filter((cls: Class) => {
-        // These are Binding Blade specific classes
-        return true; // We can just return true here since we are loading all from binding_blade_classes anyway, but let's just make sure bb classes pass if they end with _m or _f or are one of the core ones. Actually since we are merging all classes, let's just use the file source.
-        // But for now let's just do a basic string match to allow everything through since Engage and 3H classes are distinct, or better yet, since the app uses ID matches, let's just allow all for `The Binding Blade` game for now, or match if they exist.
-        // A better long-term fix is adding a `game` field to Class data.
-      });
-
-    } else if (game === 'The Blazing Blade') {
-      return allClasses.filter((cls: Class) => {
-        return true;
-      });
-    } else if (game === 'Three Houses') {
-      return allClasses.filter((cls: Class) => {
-        // These are Three Houses specific classes
-        const thClasses = ['noble', 'emperor', 'great_lord', 'commoner', 'myrmidon', 'swordmaster'];
-        return thClasses.includes(cls.id);
-      });
-    } else if (game === 'Engage') {
-      return allClasses.filter((cls: Class) => {
-        // These are Engage specific classes
-        const engageClasses = ['dragon_child', 'divine_dragon', 'swordfighter', 'swordmaster', 'hero'];
-        return engageClasses.includes(cls.id);
-      });
-    }
+    // Filter classes based on game field
+    return allClasses.filter((cls: Class) => cls.game === game);
 
     return allClasses;
   } catch (error) {
@@ -197,7 +173,7 @@ function transformJsonToUnit(rawUnit: any): Unit {
 }
 
 // Helper function to transform raw JSON data to Class interface
-function transformJsonToClass(rawClass: any): Class {
+function transformJsonToClass(rawClass: any, game: string): Class {
   // Transform class stats to UnitStats objects
   const baseStats: UnitStats = {};
   const promotionBonus: UnitStats = {};
@@ -224,6 +200,7 @@ function transformJsonToClass(rawClass: any): Class {
   const cls: Class = {
     id: rawClass.id,
     name: rawClass.name,
+    game: rawClass.game || game,
     type: rawClass.type || 'unpromoted',
     baseStats,
     promotionBonus,

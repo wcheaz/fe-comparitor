@@ -226,5 +226,1312 @@
             "con": 25
         },
         "promotesTo": []
+    },
+    {
+        "id": "cavalier",
+        "name": "Cavalier",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 7,
+            "skl": 6,
+            "spd": 6,
+            "lck": 5,
+            "def": 6,
+            "res": 2,
+            "con": 9,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "paladin"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Cavalry"
+    },
+    {
+        "id": "archer",
+        "name": "Archer",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 5,
+            "lck": 5,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "sniper"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "fighter",
+        "name": "Fighter",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 5,
+            "skl": 2,
+            "spd": 4,
+            "def": 2,
+            "res": 0,
+            "lck": 0,
+            "mov": 5,
+            "con": 11
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "warrior"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "mage",
+        "name": "Mage",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "skl": 6,
+            "spd": 5,
+            "lck": 4,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5,
+            "mag": 3
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "sage"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
+    },
+    {
+        "id": "nomad",
+        "name": "Nomad",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 4,
+            "skl": 4,
+            "spd": 5,
+            "def": 4,
+            "res": 0,
+            "lck": 0,
+            "mov": 7,
+            "con": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "nomad_trooper_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Bows"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Cavalry",
+        "description": "Can cross rivers."
+    },
+    {
+        "id": "thief",
+        "name": "Thief",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 4,
+            "skl": 8,
+            "spd": 8,
+            "lck": 7,
+            "def": 3,
+            "res": 1,
+            "con": 6,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Locktouch"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry",
+        "description": "Can pick locks, steal items, and have increased vision in Fog of War."
+    },
+    {
+        "id": "bard",
+        "name": "Bard",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 14,
+            "str": 1,
+            "skl": 1,
+            "spd": 12,
+            "def": 1,
+            "res": 1,
+            "lck": 0,
+            "mov": 5,
+            "con": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Play"
+        ],
+        "weapons": [],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 10,
+            "skl": 10,
+            "spd": 30,
+            "def": 10,
+            "res": 10,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 40
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "myrmidon",
+        "name": "Myrmidon",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 5,
+            "skl": 7,
+            "spd": 8,
+            "lck": 4,
+            "def": 3,
+            "res": 0,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "swordmaster"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "mercenary",
+        "name": "Mercenary",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 6,
+            "skl": 8,
+            "spd": 7,
+            "lck": 5,
+            "def": 5,
+            "res": 0,
+            "con": 7,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "hero"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "shaman",
+        "name": "Shaman",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "mag": 2,
+            "skl": 1,
+            "spd": 2,
+            "def": 2,
+            "res": 4,
+            "lck": 0,
+            "mov": 5,
+            "con": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "druid_m"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Dark"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "mag": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
+    },
+    {
+        "id": "pirate",
+        "name": "Pirate",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 4,
+            "skl": 2,
+            "spd": 6,
+            "def": 3,
+            "res": 0,
+            "lck": 0,
+            "mov": 5,
+            "con": 10
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "berserker"
+        ],
+        "hiddenModifiers": [
+            "Water Walk"
+        ],
+        "weapons": [
+            "Axes"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "wyvern_rider",
+        "name": "Wyvern Rider",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 20,
+            "str": 7,
+            "skl": 5,
+            "spd": 5,
+            "def": 8,
+            "res": 0,
+            "lck": 0,
+            "mov": 7,
+            "con": 9
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "wyvern_lord"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Wyvern"
+    },
+    {
+        "id": "berserker",
+        "name": "Berserker",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 7,
+            "skl": 7,
+            "spd": 8,
+            "def": 6,
+            "res": 0,
+            "lck": 0,
+            "mov": 6,
+            "con": 13
+        },
+        "promotionBonus": {
+            "hp": 4,
+            "str": 1,
+            "skl": 1,
+            "spd": 1,
+            "def": 2,
+            "res": 2,
+            "con": 3,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Peak Walk",
+            "Water Walk",
+            "+30 Crit"
+        ],
+        "weapons": [
+            "Axes"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "skl": 24,
+            "spd": 28,
+            "def": 22,
+            "res": 24,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 40
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "warrior",
+        "name": "Warrior",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 8,
+            "skl": 5,
+            "spd": 6,
+            "def": 5,
+            "res": 0,
+            "lck": 0,
+            "mov": 6,
+            "con": 13
+        },
+        "promotionBonus": {
+            "hp": 3,
+            "str": 1,
+            "skl": 2,
+            "spd": 0,
+            "def": 3,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes",
+            "Bows"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "skl": 26,
+            "spd": 24,
+            "def": 28,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 40
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "general",
+        "name": "General",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 36,
+            "str": 14,
+            "skl": 8,
+            "spd": 5,
+            "lck": 5,
+            "def": 16,
+            "res": 6,
+            "con": 14,
+            "mov": 5
+        },
+        "promotionBonus": {
+            "hp": 4,
+            "str": 2,
+            "skl": 2,
+            "spd": 3,
+            "def": 2,
+            "res": 3,
+            "con": 2,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances",
+            "Axes"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 27,
+            "mag": 27,
+            "skl": 25,
+            "dex": 25,
+            "spd": 21,
+            "lck": 30,
+            "def": 30,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Armored"
+    },
+    {
+        "id": "sage",
+        "name": "Sage",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "skl": 11,
+            "spd": 9,
+            "lck": 7,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6,
+            "mag": 5
+        },
+        "promotionBonus": {
+            "hp": 4,
+            "str": 1,
+            "skl": 0,
+            "spd": 0,
+            "def": 3,
+            "res": 3,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima",
+            "Light",
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 28,
+            "mag": 28,
+            "skl": 30,
+            "dex": 30,
+            "spd": 25,
+            "lck": 30,
+            "def": 20,
+            "res": 25,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
+    },
+    {
+        "id": "sniper",
+        "name": "Sniper",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 9,
+            "skl": 13,
+            "spd": 9,
+            "lck": 8,
+            "def": 6,
+            "res": 4,
+            "con": 8,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 3,
+            "str": 1,
+            "skl": 2,
+            "spd": 2,
+            "def": 2,
+            "res": 3,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "+15 Crit"
+        ],
+        "weapons": [
+            "Bows"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 30,
+            "dex": 30,
+            "spd": 29,
+            "lck": 30,
+            "def": 22,
+            "res": 23,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "swordmaster",
+        "name": "Swordmaster",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 7,
+            "skl": 12,
+            "spd": 12,
+            "lck": 6,
+            "def": 5,
+            "res": 3,
+            "con": 7,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 5,
+            "str": 2,
+            "skl": 0,
+            "spd": 0,
+            "def": 2,
+            "res": 1,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "+30 Crit"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 24,
+            "mag": 24,
+            "skl": 29,
+            "dex": 29,
+            "spd": 30,
+            "lck": 30,
+            "def": 22,
+            "res": 23,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry",
+        "description": "Has an innate +30% critical hit rate bonus."
+    },
+    {
+        "id": "hero",
+        "name": "Hero",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 28,
+            "str": 9,
+            "skl": 12,
+            "spd": 10,
+            "lck": 7,
+            "def": 8,
+            "res": 2,
+            "con": 9,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 4,
+            "str": 0,
+            "skl": 2,
+            "spd": 2,
+            "def": 2,
+            "res": 2,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Axes",
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 30,
+            "dex": 30,
+            "spd": 26,
+            "lck": 30,
+            "def": 25,
+            "res": 22,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "wyvern_lord",
+        "name": "Wyvern Lord",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 30,
+            "str": 12,
+            "skl": 10,
+            "spd": 8,
+            "def": 13,
+            "res": 2,
+            "lck": 0,
+            "mov": 8,
+            "con": 10
+        },
+        "promotionBonus": {
+            "hp": 5,
+            "str": 2,
+            "skl": 2,
+            "spd": 2,
+            "def": 2,
+            "res": 1,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances",
+            "Swords"
+        ],
+        "gender": "M",
+        "maxStats": {
+            "hp": 60,
+            "str": 26,
+            "skl": 26,
+            "spd": 23,
+            "def": 30,
+            "res": 22,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 40
+        },
+        "movementType": "Wyvern"
+    },
+    {
+        "id": "bishop",
+        "name": "Bishop",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 24,
+            "skl": 8,
+            "spd": 7,
+            "lck": 8,
+            "def": 4,
+            "res": 11,
+            "con": 7,
+            "mov": 6,
+            "mag": 4
+        },
+        "promotionBonus": {
+            "hp": 3,
+            "str": 2,
+            "skl": 1,
+            "spd": 0,
+            "def": 3,
+            "res": 2,
+            "con": 1,
+            "mov": 1
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "+10 Magic",
+            "+10 Resistance"
+        ],
+        "weapons": [
+            "Staves",
+            "Light"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 25,
+            "mag": 25,
+            "skl": 26,
+            "dex": 26,
+            "spd": 25,
+            "lck": 30,
+            "def": 22,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry",
+        "description": "Does not face terrain penalties from sand."
+    },
+    {
+        "id": "pegasus_knight",
+        "name": "Pegasus Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "str": 4,
+            "skl": 6,
+            "spd": 9,
+            "lck": 6,
+            "def": 4,
+            "res": 6,
+            "con": 6,
+            "mov": 7
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "falcoknight_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Swords",
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "cleric",
+        "name": "Priest",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 16,
+            "skl": 4,
+            "spd": 4,
+            "lck": 5,
+            "def": 2,
+            "res": 6,
+            "con": 5,
+            "mov": 5,
+            "mag": 2
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "bishop"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "F",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "monk",
+        "name": "Monk",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 18,
+            "str": 1,
+            "mag": 1,
+            "skl": 1,
+            "spd": 2,
+            "lck": 0,
+            "def": 1,
+            "res": 4,
+            "con": 5,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "bishop"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Light"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "knight",
+        "name": "Armor Knight",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 24,
+            "str": 8,
+            "skl": 4,
+            "spd": 3,
+            "lck": 3,
+            "def": 10,
+            "res": 2,
+            "con": 12,
+            "mov": 4
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "general"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Lances"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Armored"
+    },
+    {
+        "id": "transporter",
+        "name": "Transporter",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 15,
+            "str": 0,
+            "mag": 0,
+            "skl": 0,
+            "spd": 0,
+            "lck": 0,
+            "def": 3,
+            "res": 0,
+            "con": 25,
+            "mov": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 20,
+            "dex": 20,
+            "spd": 20,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 25,
+            "bld": 20,
+            "mov": 15,
+            "cha": 30
+        },
+        "gender": "M",
+        "movementType": "Armored"
+    },
+    {
+        "id": "troubadour",
+        "name": "Troubadour",
+        "type": "unpromoted",
+        "baseStats": {
+            "hp": 15,
+            "mag": 1,
+            "skl": 1,
+            "spd": 3,
+            "def": 2,
+            "res": 5,
+            "lck": 0,
+            "mov": 7,
+            "con": 5
+        },
+        "promotionBonus": {},
+        "promotesTo": [
+            "valkyrie_f"
+        ],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Staves"
+        ],
+        "gender": "F",
+        "maxStats": {
+            "hp": 60,
+            "mag": 20,
+            "skl": 20,
+            "spd": 20,
+            "def": 20,
+            "res": 20,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 30
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "dancer",
+        "name": "Dancer",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 14,
+            "str": 1,
+            "skl": 1,
+            "spd": 12,
+            "def": 1,
+            "res": 1,
+            "lck": 0,
+            "mov": 5,
+            "con": 4
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Dance"
+        ],
+        "weapons": [],
+        "gender": "F",
+        "maxStats": {
+            "hp": 60,
+            "str": 10,
+            "skl": 10,
+            "spd": 30,
+            "def": 10,
+            "res": 10,
+            "lck": 30,
+            "mov": 15,
+            "con": 20,
+            "bld": 20,
+            "cha": 40
+        },
+        "movementType": "Infantry"
+    },
+    {
+        "id": "assassin",
+        "name": "Assassin",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 26,
+            "str": 6,
+            "mag": 6,
+            "skl": 11,
+            "spd": 11,
+            "lck": 0,
+            "def": 4,
+            "res": 2,
+            "con": 6,
+            "mov": 6
+        },
+        "promotionBonus": {
+            "hp": 3,
+            "str": 1,
+            "skl": 0,
+            "spd": 0,
+            "def": 2,
+            "res": 2,
+            "con": 0,
+            "mov": 0
+        },
+        "promotesTo": [],
+        "hiddenModifiers": [
+            "Silencer",
+            "+15 Crit"
+        ],
+        "weapons": [
+            "Swords"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 20,
+            "mag": 20,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 20,
+            "res": 20,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry"
+    },
+    {
+        "id": "archsage",
+        "name": "Archsage",
+        "type": "promoted",
+        "baseStats": {
+            "hp": 40,
+            "str": 15,
+            "mag": 15,
+            "skl": 15,
+            "spd": 15,
+            "lck": 15,
+            "def": 15,
+            "res": 15,
+            "con": 9,
+            "mov": 6
+        },
+        "promotionBonus": {},
+        "promotesTo": [],
+        "hiddenModifiers": [],
+        "weapons": [
+            "Anima",
+            "Light",
+            "Dark",
+            "Staves"
+        ],
+        "maxStats": {
+            "hp": 60,
+            "str": 30,
+            "mag": 30,
+            "skl": 30,
+            "dex": 30,
+            "spd": 30,
+            "lck": 30,
+            "def": 30,
+            "res": 30,
+            "con": 20,
+            "bld": 20,
+            "mov": 15,
+            "cha": 40
+        },
+        "gender": "M",
+        "movementType": "Infantry"
     }
 ]

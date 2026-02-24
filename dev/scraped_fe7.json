@@ -1,0 +1,1158 @@
+{
+    "bases": {
+        "Lyn": {
+            "class": "Lord",
+            "level": 4,
+            "stats": {
+                "hp": 18,
+                "str": 5,
+                "skl": 10,
+                "spd": 11,
+                "lck": 5,
+                "def": 2,
+                "res": 0,
+                "con": 5,
+                "mov": 5
+            },
+            "affinity": "Wind",
+            "ranks_str": "C"
+        },
+        "Sain": {
+            "class": "Cavalier",
+            "level": 4,
+            "stats": {
+                "hp": 22,
+                "str": 9,
+                "skl": 5,
+                "spd": 7,
+                "lck": 5,
+                "def": 7,
+                "res": 0,
+                "con": 9,
+                "mov": 7
+            },
+            "affinity": "Wind",
+            "ranks_str": "D,  D"
+        },
+        "Kent": {
+            "class": "Cavalier",
+            "level": 5,
+            "stats": {
+                "hp": 23,
+                "str": 8,
+                "skl": 7,
+                "spd": 8,
+                "lck": 4,
+                "def": 6,
+                "res": 1,
+                "con": 9,
+                "mov": 7
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "D,  D"
+        },
+        "Florina": {
+            "class": "Pegasus Knight",
+            "level": 3,
+            "stats": {
+                "hp": 18,
+                "str": 6,
+                "skl": 8,
+                "spd": 9,
+                "lck": 8,
+                "def": 4,
+                "res": 5,
+                "con": 4,
+                "mov": 7
+            },
+            "affinity": "AffinLight",
+            "ranks_str": "D"
+        },
+        "Wil": {
+            "class": "Archer",
+            "level": 4,
+            "stats": {
+                "hp": 21,
+                "str": 6,
+                "skl": 5,
+                "spd": 6,
+                "lck": 7,
+                "def": 5,
+                "res": 1,
+                "con": 6,
+                "mov": 5
+            },
+            "affinity": "Wind",
+            "ranks_str": "D"
+        },
+        "Dorcas": {
+            "class": "Fighter",
+            "level": 3,
+            "stats": {
+                "hp": 30,
+                "str": 7,
+                "skl": 7,
+                "spd": 6,
+                "lck": 3,
+                "def": 3,
+                "res": 0,
+                "con": 14,
+                "mov": 5
+            },
+            "affinity": "Fire",
+            "ranks_str": "C"
+        },
+        "Serra": {
+            "class": "Cleric",
+            "level": 1,
+            "stats": {
+                "hp": 17,
+                "str": 2,
+                "skl": 5,
+                "spd": 8,
+                "lck": 6,
+                "def": 2,
+                "res": 5,
+                "con": 4,
+                "mov": 5
+            },
+            "affinity": "Thunder",
+            "ranks_str": "D"
+        },
+        "Erk": {
+            "class": "Mage",
+            "level": 1,
+            "stats": {
+                "hp": 17,
+                "str": 5,
+                "skl": 6,
+                "spd": 7,
+                "lck": 3,
+                "def": 2,
+                "res": 4,
+                "con": 5,
+                "mov": 5
+            },
+            "affinity": "Thunder",
+            "ranks_str": "D"
+        },
+        "Rath": {
+            "class": "Nomad",
+            "level": 9,
+            "stats": {
+                "hp": 27,
+                "str": 9,
+                "skl": 10,
+                "spd": 11,
+                "lck": 5,
+                "def": 8,
+                "res": 2,
+                "con": 7,
+                "mov": 7
+            },
+            "affinity": "AffinDark",
+            "ranks_str": "B"
+        },
+        "Matthew": {
+            "class": "Thief",
+            "level": 2,
+            "stats": {
+                "hp": 18,
+                "str": 4,
+                "skl": 4,
+                "spd": 11,
+                "lck": 2,
+                "def": 3,
+                "res": 0,
+                "con": 7,
+                "mov": 6
+            },
+            "affinity": "Wind",
+            "ranks_str": "D"
+        },
+        "Nils": {
+            "class": "Bard",
+            "level": 1,
+            "stats": {
+                "hp": 14,
+                "str": 0,
+                "skl": 0,
+                "spd": 12,
+                "lck": 10,
+                "def": 5,
+                "res": 4,
+                "con": 3,
+                "mov": 5
+            },
+            "affinity": "Ice",
+            "ranks_str": "\u2013"
+        },
+        "Lucius": {
+            "class": "Monk",
+            "level": 3,
+            "stats": {
+                "hp": 18,
+                "str": 7,
+                "skl": 6,
+                "spd": 10,
+                "lck": 2,
+                "def": 1,
+                "res": 6,
+                "con": 6,
+                "mov": 5
+            },
+            "affinity": "AffinLight",
+            "ranks_str": "D"
+        },
+        "Wallace *": {
+            "class": "Knight",
+            "level": 12,
+            "stats": {
+                "hp": 30,
+                "str": 13,
+                "skl": 7,
+                "spd": 5,
+                "lck": 10,
+                "def": 15,
+                "res": 2,
+                "con": 13,
+                "mov": 4
+            },
+            "affinity": "Thunder",
+            "ranks_str": "A"
+        },
+        "Eliwood": {
+            "class": "Lord",
+            "level": 1,
+            "stats": {
+                "hp": 18,
+                "str": 5,
+                "skl": 5,
+                "spd": 7,
+                "lck": 7,
+                "def": 5,
+                "res": 0,
+                "con": 7,
+                "mov": 5
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "C"
+        },
+        "Lowen": {
+            "class": "Cavalier",
+            "level": 2,
+            "stats": {
+                "hp": 23,
+                "str": 7,
+                "skl": 5,
+                "spd": 7,
+                "lck": 3,
+                "def": 7,
+                "res": 0,
+                "con": 10,
+                "mov": 7
+            },
+            "affinity": "Fire",
+            "ranks_str": "D,  D"
+        },
+        "Marcus": {
+            "class": "Paladin",
+            "level": 1,
+            "stats": {
+                "hp": 31,
+                "str": 15,
+                "skl": 15,
+                "spd": 11,
+                "lck": 8,
+                "def": 10,
+                "res": 8,
+                "con": 11,
+                "mov": 8
+            },
+            "affinity": "Ice",
+            "ranks_str": "A,  A,  B"
+        },
+        "Rebecca": {
+            "class": "Archer",
+            "level": 1,
+            "stats": {
+                "hp": 17,
+                "str": 4,
+                "skl": 5,
+                "spd": 6,
+                "lck": 4,
+                "def": 3,
+                "res": 1,
+                "con": 5,
+                "mov": 5
+            },
+            "affinity": "Fire",
+            "ranks_str": "D"
+        },
+        "Bartre": {
+            "class": "Fighter",
+            "level": 2,
+            "stats": {
+                "hp": 29,
+                "str": 9,
+                "skl": 5,
+                "spd": 3,
+                "lck": 4,
+                "def": 4,
+                "res": 0,
+                "con": 13,
+                "mov": 5
+            },
+            "affinity": "Thunder",
+            "ranks_str": "D"
+        },
+        "Hector": {
+            "class": "Lord",
+            "level": 1,
+            "stats": {
+                "hp": 19,
+                "str": 7,
+                "skl": 4,
+                "spd": 5,
+                "lck": 3,
+                "def": 8,
+                "res": 0,
+                "con": 13,
+                "mov": 5
+            },
+            "affinity": "Thunder",
+            "ranks_str": "C"
+        },
+        "Oswin": {
+            "class": "Knight",
+            "level": 9,
+            "stats": {
+                "hp": 28,
+                "str": 13,
+                "skl": 9,
+                "spd": 5,
+                "lck": 3,
+                "def": 13,
+                "res": 3,
+                "con": 14,
+                "mov": 4
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "B"
+        },
+        "Guy": {
+            "class": "Myrmidon",
+            "level": 3,
+            "stats": {
+                "hp": 21,
+                "str": 6,
+                "skl": 11,
+                "spd": 11,
+                "lck": 5,
+                "def": 5,
+                "res": 0,
+                "con": 5,
+                "mov": 5
+            },
+            "affinity": "Fire",
+            "ranks_str": "C"
+        },
+        "Merlinus": {
+            "class": "Transporter",
+            "level": 5,
+            "stats": {
+                "hp": 18,
+                "str": 0,
+                "skl": 4,
+                "spd": 5,
+                "lck": 12,
+                "def": 5,
+                "res": 2,
+                "con": 25,
+                "mov": 0
+            },
+            "affinity": "AffinDark",
+            "ranks_str": "\u2013"
+        },
+        "Priscilla": {
+            "class": "Troubadour",
+            "level": 3,
+            "stats": {
+                "hp": 16,
+                "str": 6,
+                "skl": 6,
+                "spd": 8,
+                "lck": 7,
+                "def": 3,
+                "res": 6,
+                "con": 4,
+                "mov": 7
+            },
+            "affinity": "Wind",
+            "ranks_str": "C"
+        },
+        "Raven": {
+            "class": "Mercenary",
+            "level": 5,
+            "stats": {
+                "hp": 25,
+                "str": 8,
+                "skl": 11,
+                "spd": 13,
+                "lck": 2,
+                "def": 5,
+                "res": 1,
+                "con": 8,
+                "mov": 5
+            },
+            "affinity": "Ice",
+            "ranks_str": "C"
+        },
+        "Canas": {
+            "class": "Shaman",
+            "level": 8,
+            "stats": {
+                "hp": 21,
+                "str": 10,
+                "skl": 9,
+                "spd": 8,
+                "lck": 7,
+                "def": 5,
+                "res": 8,
+                "con": 7,
+                "mov": 5
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "B"
+        },
+        "Dart": {
+            "class": "Pirate",
+            "level": 8,
+            "stats": {
+                "hp": 34,
+                "str": 12,
+                "skl": 8,
+                "spd": 8,
+                "lck": 3,
+                "def": 6,
+                "res": 1,
+                "con": 10,
+                "mov": 5
+            },
+            "affinity": "Fire",
+            "ranks_str": "B"
+        },
+        "Fiora": {
+            "class": "Pegasus Knight",
+            "level": 7,
+            "stats": {
+                "hp": 21,
+                "str": 8,
+                "skl": 11,
+                "spd": 13,
+                "lck": 6,
+                "def": 6,
+                "res": 7,
+                "con": 5,
+                "mov": 7
+            },
+            "affinity": "Wind",
+            "ranks_str": "C"
+        },
+        "Legault": {
+            "class": "Thief",
+            "level": 12,
+            "stats": {
+                "hp": 26,
+                "str": 8,
+                "skl": 11,
+                "spd": 15,
+                "lck": 10,
+                "def": 8,
+                "res": 3,
+                "con": 9,
+                "mov": 6
+            },
+            "affinity": "Ice",
+            "ranks_str": "C"
+        },
+        "Ninian": {
+            "class": "Dancer",
+            "level": 1,
+            "stats": {
+                "hp": 14,
+                "str": 0,
+                "skl": 0,
+                "spd": 12,
+                "lck": 10,
+                "def": 5,
+                "res": 4,
+                "con": 4,
+                "mov": 5
+            },
+            "affinity": "Ice",
+            "ranks_str": "\u2013"
+        },
+        "Isadora": {
+            "class": "Paladin",
+            "level": 1,
+            "stats": {
+                "hp": 28,
+                "str": 13,
+                "skl": 12,
+                "spd": 16,
+                "lck": 10,
+                "def": 8,
+                "res": 6,
+                "con": 6,
+                "mov": 8
+            },
+            "affinity": "AffinDark",
+            "ranks_str": "A,  B,  D"
+        },
+        "Heath": {
+            "class": "Wyvern Rider",
+            "level": 7,
+            "stats": {
+                "hp": 28,
+                "str": 11,
+                "skl": 8,
+                "spd": 7,
+                "lck": 7,
+                "def": 10,
+                "res": 1,
+                "con": 9,
+                "mov": 7
+            },
+            "affinity": "Thunder",
+            "ranks_str": "B"
+        },
+        "Hawkeye": {
+            "class": "Berserker",
+            "level": 4,
+            "stats": {
+                "hp": 50,
+                "str": 18,
+                "skl": 14,
+                "spd": 11,
+                "lck": 13,
+                "def": 14,
+                "res": 10,
+                "con": 16,
+                "mov": 6
+            },
+            "affinity": "Wind",
+            "ranks_str": "A"
+        },
+        "Geitz": {
+            "class": "Warrior",
+            "level": 3,
+            "stats": {
+                "hp": 40,
+                "str": 17,
+                "skl": 12,
+                "spd": 13,
+                "lck": 10,
+                "def": 11,
+                "res": 3,
+                "con": 13,
+                "mov": 6
+            },
+            "affinity": "Thunder",
+            "ranks_str": "B,  B"
+        },
+        "Wallace": {
+            "class": "General",
+            "level": 1,
+            "stats": {
+                "hp": 34,
+                "str": 16,
+                "skl": 9,
+                "spd": 8,
+                "lck": 10,
+                "def": 19,
+                "res": 5,
+                "con": 15,
+                "mov": 5
+            },
+            "affinity": "Thunder",
+            "ranks_str": "A,  E"
+        },
+        "Farina": {
+            "class": "Pegasus Knight",
+            "level": 12,
+            "stats": {
+                "hp": 24,
+                "str": 10,
+                "skl": 13,
+                "spd": 14,
+                "lck": 10,
+                "def": 10,
+                "res": 12,
+                "con": 5,
+                "mov": 7
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "A"
+        },
+        "Pent": {
+            "class": "Sage",
+            "level": 6,
+            "stats": {
+                "hp": 33,
+                "str": 18,
+                "skl": 21,
+                "spd": 17,
+                "lck": 14,
+                "def": 11,
+                "res": 16,
+                "con": 8,
+                "mov": 6
+            },
+            "affinity": "Ice",
+            "ranks_str": "A,  A"
+        },
+        "Louise": {
+            "class": "Sniper",
+            "level": 4,
+            "stats": {
+                "hp": 28,
+                "str": 12,
+                "skl": 14,
+                "spd": 17,
+                "lck": 16,
+                "def": 9,
+                "res": 12,
+                "con": 6,
+                "mov": 6
+            },
+            "affinity": "AffinLight",
+            "ranks_str": "A"
+        },
+        "Karel": {
+            "class": "Swordmaster",
+            "level": 8,
+            "stats": {
+                "hp": 31,
+                "str": 16,
+                "skl": 23,
+                "spd": 20,
+                "lck": 15,
+                "def": 13,
+                "res": 12,
+                "con": 9,
+                "mov": 6
+            },
+            "affinity": "AffinLight",
+            "ranks_str": "A"
+        },
+        "Harken": {
+            "class": "Hero",
+            "level": 8,
+            "stats": {
+                "hp": 38,
+                "str": 21,
+                "skl": 20,
+                "spd": 17,
+                "lck": 12,
+                "def": 15,
+                "res": 10,
+                "con": 11,
+                "mov": 6
+            },
+            "affinity": "Fire",
+            "ranks_str": "B,  B"
+        },
+        "Nino": {
+            "class": "Mage",
+            "level": 5,
+            "stats": {
+                "hp": 19,
+                "str": 7,
+                "skl": 8,
+                "spd": 11,
+                "lck": 10,
+                "def": 4,
+                "res": 7,
+                "con": 3,
+                "mov": 5
+            },
+            "affinity": "Fire",
+            "ranks_str": "C"
+        },
+        "Jaffar": {
+            "class": "Assassin",
+            "level": 13,
+            "stats": {
+                "hp": 34,
+                "str": 19,
+                "skl": 25,
+                "spd": 24,
+                "lck": 10,
+                "def": 15,
+                "res": 11,
+                "con": 8,
+                "mov": 6
+            },
+            "affinity": "Ice",
+            "ranks_str": "A"
+        },
+        "Vaida": {
+            "class": "Wyvern Lord",
+            "level": 9,
+            "stats": {
+                "hp": 43,
+                "str": 20,
+                "skl": 19,
+                "spd": 13,
+                "lck": 11,
+                "def": 21,
+                "res": 6,
+                "con": 12,
+                "mov": 8
+            },
+            "affinity": "Fire",
+            "ranks_str": "A,  A"
+        },
+        "Karla": {
+            "class": "Swordmaster",
+            "level": 5,
+            "stats": {
+                "hp": 29,
+                "str": 14,
+                "skl": 21,
+                "spd": 18,
+                "lck": 16,
+                "def": 11,
+                "res": 12,
+                "con": 7,
+                "mov": 6
+            },
+            "affinity": "AffinDark",
+            "ranks_str": "A"
+        },
+        "Renault": {
+            "class": "Bishop",
+            "level": 16,
+            "stats": {
+                "hp": 43,
+                "str": 12,
+                "skl": 22,
+                "spd": 20,
+                "lck": 10,
+                "def": 15,
+                "res": 18,
+                "con": 9,
+                "mov": 6
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "A,  A"
+        },
+        "Athos": {
+            "class": "Archsage",
+            "level": 20,
+            "stats": {
+                "hp": 40,
+                "str": 30,
+                "skl": 24,
+                "spd": 20,
+                "lck": 25,
+                "def": 20,
+                "res": 28,
+                "con": 9,
+                "mov": 6
+            },
+            "affinity": "AffinAnima",
+            "ranks_str": "S  S  S  S"
+        }
+    },
+    "growths": {
+        "Eliwood": {
+            "hp": 80,
+            "str": 45,
+            "skl": 50,
+            "spd": 40,
+            "lck": 45,
+            "def": 30,
+            "res": 35
+        },
+        "Lyn": {
+            "hp": 70,
+            "str": 40,
+            "skl": 60,
+            "spd": 60,
+            "lck": 55,
+            "def": 20,
+            "res": 30
+        },
+        "Hector": {
+            "hp": 90,
+            "str": 60,
+            "skl": 45,
+            "spd": 35,
+            "lck": 30,
+            "def": 50,
+            "res": 25
+        },
+        "Sain": {
+            "hp": 80,
+            "str": 60,
+            "skl": 35,
+            "spd": 40,
+            "lck": 35,
+            "def": 20,
+            "res": 20
+        },
+        "Kent": {
+            "hp": 85,
+            "str": 40,
+            "skl": 50,
+            "spd": 45,
+            "lck": 20,
+            "def": 25,
+            "res": 25
+        },
+        "Florina": {
+            "hp": 60,
+            "str": 40,
+            "skl": 50,
+            "spd": 55,
+            "lck": 50,
+            "def": 15,
+            "res": 35
+        },
+        "Wil": {
+            "hp": 75,
+            "str": 50,
+            "skl": 50,
+            "spd": 40,
+            "lck": 40,
+            "def": 20,
+            "res": 25
+        },
+        "Dorcas": {
+            "hp": 80,
+            "str": 60,
+            "skl": 40,
+            "spd": 20,
+            "lck": 45,
+            "def": 25,
+            "res": 15
+        },
+        "Serra": {
+            "hp": 50,
+            "str": 50,
+            "skl": 30,
+            "spd": 40,
+            "lck": 60,
+            "def": 15,
+            "res": 55
+        },
+        "Erk": {
+            "hp": 65,
+            "str": 40,
+            "skl": 40,
+            "spd": 50,
+            "lck": 30,
+            "def": 20,
+            "res": 40
+        },
+        "Rath": {
+            "hp": 80,
+            "str": 50,
+            "skl": 40,
+            "spd": 50,
+            "lck": 30,
+            "def": 10,
+            "res": 25
+        },
+        "Matthew": {
+            "hp": 75,
+            "str": 30,
+            "skl": 40,
+            "spd": 70,
+            "lck": 50,
+            "def": 25,
+            "res": 20
+        },
+        "Wallace": {
+            "hp": 70,
+            "str": 45,
+            "skl": 40,
+            "spd": 20,
+            "lck": 30,
+            "def": 35,
+            "res": 35
+        },
+        "Lowen": {
+            "hp": 90,
+            "str": 30,
+            "skl": 30,
+            "spd": 30,
+            "lck": 50,
+            "def": 40,
+            "res": 30
+        },
+        "Rebecca": {
+            "hp": 60,
+            "str": 40,
+            "skl": 50,
+            "spd": 60,
+            "lck": 50,
+            "def": 15,
+            "res": 30
+        },
+        "Marcus": {
+            "hp": 65,
+            "str": 30,
+            "skl": 50,
+            "spd": 25,
+            "lck": 30,
+            "def": 15,
+            "res": 35
+        },
+        "Bartre": {
+            "hp": 85,
+            "str": 50,
+            "skl": 35,
+            "spd": 40,
+            "lck": 30,
+            "def": 30,
+            "res": 25
+        },
+        "Oswin": {
+            "hp": 90,
+            "str": 40,
+            "skl": 30,
+            "spd": 30,
+            "lck": 35,
+            "def": 55,
+            "res": 30
+        },
+        "Guy": {
+            "hp": 75,
+            "str": 30,
+            "skl": 50,
+            "spd": 70,
+            "lck": 45,
+            "def": 15,
+            "res": 25
+        },
+        "Merlinus": {
+            "hp": 120,
+            "str": 0,
+            "skl": 90,
+            "spd": 90,
+            "lck": 100,
+            "def": 30,
+            "res": 15
+        },
+        "Priscilla": {
+            "hp": 45,
+            "str": 40,
+            "skl": 50,
+            "spd": 40,
+            "lck": 65,
+            "def": 15,
+            "res": 50
+        },
+        "Raven": {
+            "hp": 85,
+            "str": 55,
+            "skl": 40,
+            "spd": 45,
+            "lck": 35,
+            "def": 25,
+            "res": 15
+        },
+        "Lucius": {
+            "hp": 55,
+            "str": 60,
+            "skl": 50,
+            "spd": 40,
+            "lck": 20,
+            "def": 10,
+            "res": 60
+        },
+        "Canas": {
+            "hp": 70,
+            "str": 45,
+            "skl": 40,
+            "spd": 35,
+            "lck": 25,
+            "def": 25,
+            "res": 45
+        },
+        "Dart": {
+            "hp": 70,
+            "str": 65,
+            "skl": 20,
+            "spd": 60,
+            "lck": 35,
+            "def": 20,
+            "res": 15
+        },
+        "Fiora": {
+            "hp": 70,
+            "str": 35,
+            "skl": 60,
+            "spd": 50,
+            "lck": 30,
+            "def": 20,
+            "res": 50
+        },
+        "Legault": {
+            "hp": 60,
+            "str": 25,
+            "skl": 45,
+            "spd": 60,
+            "lck": 60,
+            "def": 25,
+            "res": 25
+        },
+        "Nils/Ninian": {
+            "hp": 85,
+            "str": 5,
+            "skl": 5,
+            "spd": 70,
+            "lck": 80,
+            "def": 30,
+            "res": 70
+        },
+        "Isadora": {
+            "hp": 75,
+            "str": 30,
+            "skl": 35,
+            "spd": 50,
+            "lck": 45,
+            "def": 20,
+            "res": 25
+        },
+        "Heath": {
+            "hp": 80,
+            "str": 50,
+            "skl": 50,
+            "spd": 45,
+            "lck": 20,
+            "def": 30,
+            "res": 20
+        },
+        "Hawkeye": {
+            "hp": 50,
+            "str": 40,
+            "skl": 30,
+            "spd": 25,
+            "lck": 40,
+            "def": 20,
+            "res": 35
+        },
+        "Geitz": {
+            "hp": 85,
+            "str": 50,
+            "skl": 30,
+            "spd": 40,
+            "lck": 40,
+            "def": 20,
+            "res": 20
+        },
+        "Farina": {
+            "hp": 75,
+            "str": 50,
+            "skl": 40,
+            "spd": 45,
+            "lck": 45,
+            "def": 25,
+            "res": 30
+        },
+        "Pent": {
+            "hp": 50,
+            "str": 30,
+            "skl": 20,
+            "spd": 40,
+            "lck": 40,
+            "def": 30,
+            "res": 35
+        },
+        "Louise": {
+            "hp": 60,
+            "str": 40,
+            "skl": 40,
+            "spd": 40,
+            "lck": 30,
+            "def": 20,
+            "res": 30
+        },
+        "Karel": {
+            "hp": 70,
+            "str": 30,
+            "skl": 50,
+            "spd": 50,
+            "lck": 30,
+            "def": 10,
+            "res": 15
+        },
+        "Harken": {
+            "hp": 80,
+            "str": 35,
+            "skl": 30,
+            "spd": 40,
+            "lck": 20,
+            "def": 30,
+            "res": 25
+        },
+        "Nino": {
+            "hp": 55,
+            "str": 50,
+            "skl": 55,
+            "spd": 60,
+            "lck": 45,
+            "def": 15,
+            "res": 50
+        },
+        "Jaffar": {
+            "hp": 65,
+            "str": 15,
+            "skl": 40,
+            "spd": 35,
+            "lck": 20,
+            "def": 30,
+            "res": 30
+        },
+        "Vaida": {
+            "hp": 60,
+            "str": 45,
+            "skl": 25,
+            "spd": 40,
+            "lck": 30,
+            "def": 25,
+            "res": 15
+        },
+        "Karla": {
+            "hp": 60,
+            "str": 25,
+            "skl": 45,
+            "spd": 55,
+            "lck": 40,
+            "def": 10,
+            "res": 20
+        },
+        "Renault": {
+            "hp": 60,
+            "str": 40,
+            "skl": 30,
+            "spd": 35,
+            "lck": 15,
+            "def": 20,
+            "res": 40
+        },
+        "Athos": {
+            "hp": 0,
+            "str": 0,
+            "skl": 0,
+            "spd": 0,
+            "lck": 0,
+            "def": 0,
+            "res": 0
+        }
+    }
+}

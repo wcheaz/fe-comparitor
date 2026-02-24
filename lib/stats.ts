@@ -301,11 +301,11 @@ export function generateProgressionArray(
             }
           });
         }
-      }
 
-      isPromoted = true;
-      promotedAtInternalLevel = internalLevel;
-      currentClass = promotedClass;
+        isPromoted = true;
+        promotedAtInternalLevel = internalLevel;
+        currentClass = promotedClass;
+      }
     }
 
     // Calculate stats for this level
