@@ -5,6 +5,27 @@ import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
 import { generateProgressionArray } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 
+/**
+ * Helper function to detect if a class has branching promotion options
+ */
+function hasBranchingPromotions(classObj: Class | undefined): boolean {
+  if (!classObj) return false;
+  return (classObj.promotesTo?.length ?? 0) > 1;
+}
+
+/**
+ * Helper function to get the current class of a unit at a specific point in their promotion path
+ */
+function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: PromotionEvent[]): Class | undefined {
+  if (promotionEvents.length === 0) {
+    return classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
+  }
+  
+  // Find the most recent promotion event
+  const latestEvent = promotionEvents[promotionEvents.length - 1];
+  return classes.find(c => c.id === latestEvent.selectedClassId);
+}
+
 interface StatProgressionTableProps {
   units: Unit[];
 }
