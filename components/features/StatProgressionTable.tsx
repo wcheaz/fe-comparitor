@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Unit, UnitStats, Class } from '@/types/unit';
+import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
 import { generateProgressionArray } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 
@@ -26,7 +26,7 @@ interface ProgressionRow {
 export function StatProgressionTable({ units }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
-  const [promotionLevels, setPromotionLevels] = useState<Record<string, number>>({});
+  const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
   const [hasInitializedStats, setHasInitializedStats] = useState(false);
@@ -50,7 +50,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
     // Generate progression arrays for all units
     const allProgressions = units.map(unit =>
-      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionLevels[unit.id] ?? 20)
+      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents[unit.id] ?? [])
     );
 
     // Get all stat keys from all units
@@ -155,7 +155,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
     }
 
     return { rows, statKeys: displayStats, allProgressions };
-  }, [units, expandToLevel100, classes, promotionLevels]);
+  }, [units, expandToLevel100, classes, promotionEvents]);
 
   if (units.length === 0) {
     return (
@@ -251,24 +251,37 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       {/* Per-Unit Promotion Configs */}
       <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion Levels:</span>
-        {units.map(unit => (
-          <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
-            <label htmlFor={`promo-${unit.id}`} className="text-sm text-gray-700">{unit.name}:</label>
-            <select
-              id={`promo-${unit.id}`}
-              value={promotionLevels[unit.id] ?? 20}
-              disabled={unit.isPromoted || (classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'))?.type === 'promoted')}
-              onChange={(e) => setPromotionLevels(prev => ({ ...prev, [unit.id]: Number(e.target.value) }))}
-              className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
-            >
-              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                .filter(level => level >= Math.max(10, unit.level))
-                .map(level => (
-                  <option key={level} value={level}>{level}</option>
-                ))}
-            </select>
-          </div>
-        ))}
+        {units.map(unit => {
+          const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
+          const canPromote = !unit.isPromoted && unitClass?.type !== 'promoted' && (unitClass?.promotesTo?.length ?? 0) > 0;
+          
+          return (
+            <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
+              <label htmlFor={`promo-${unit.id}`} className="text-sm text-gray-700">{unit.name}:</label>
+              <select
+                id={`promo-${unit.id}`}
+                value={(promotionEvents[unit.id]?.[0]?.level) ?? 20}
+                disabled={!canPromote}
+                onChange={(e) => {
+                  const level = Number(e.target.value);
+                  // For now, create a simple promotion event with the first available class
+                  const firstPromotionClass = (unitClass?.promotesTo?.[0]) || '';
+                  setPromotionEvents(prev => ({
+                    ...prev,
+                    [unit.id]: [{ level, selectedClassId: firstPromotionClass }]
+                  }));
+                }}
+                className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+              >
+                {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                  .filter(level => level >= Math.max(10, unit.level))
+                  .map(level => (
+                    <option key={level} value={level}>{level}</option>
+                  ))}
+              </select>
+            </div>
+          );
+        })}
       </div>
 
       <div className="overflow-x-auto">

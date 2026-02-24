@@ -18,7 +18,7 @@
 
 ## 3. UI Updates
 
-- [ ] 3.1 Update the state in `components/features/StatProgressionTable.tsx` from `promotionLevels` to an array-based or nested object state capable of tracking multiple `PromotionEvent`s per unit.
+- [x] 3.1 Update the state in `components/features/StatProgressionTable.tsx` from `promotionLevels` to an array-based or nested object state capable of tracking multiple `PromotionEvent`s per unit.
 - [ ] 3.2 Add a new helper function or sub-component in `StatProgressionTable.tsx` to detect when a unit's current active class has `promotesTo.length > 1`. 
 - [ ] 3.3 Render a dropdown `<select>` UI element for branching choices dynamically, allowing the user to select their desired promotion path (e.g., choice between Paladin or Great Knight).
 - [ ] 3.4 Update the `generateProgressionArray` mapping logic in the table rendering code to correctly handle the new `generateProgressionArray` function signature and properly label row headers (e.g., "Level 1 (Tier 2)").
