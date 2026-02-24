@@ -446,7 +446,9 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Join Chapter</td>
                   {units.map((unit) => (
                     <td key={`join-${unit.id}`} className="text-center p-2">
-                      {unit.joinChapter}
+                      {Array.isArray(unit.joinChapter)
+                        ? unit.joinChapter.join(', ')
+                        : unit.joinChapter}
                     </td>
                   ))}
                 </tr>

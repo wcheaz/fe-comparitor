@@ -156,7 +156,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                 </div>
                 <div>
                   <span className="font-medium">Joins:</span>
-                  <span className="ml-2">{unit.joinChapter}</span>
+                  <span className="ml-2">{Array.isArray(unit.joinChapter) ? unit.joinChapter.join(', ') : unit.joinChapter}</span>
                 </div>
                 <div>
                   <span className="font-medium">Base Level:</span>

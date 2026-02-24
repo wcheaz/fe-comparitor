@@ -27,7 +27,7 @@ export interface Unit {
   name: string;
   game: string;
   class: string;
-  joinChapter: string;
+  joinChapter: string | string[];
   level: number; // Base level
   stats: UnitStats; // Base stats (includes HP)
   growths: UnitStats; // Growth rates

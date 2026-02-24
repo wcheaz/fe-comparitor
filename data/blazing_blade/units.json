@@ -4,10 +4,13 @@
         "name": "Eliwood",
         "game": "The Blazing Blade",
         "class": "lord_eliwood",
-        "joinChapter": "Chapter 11",
+        "joinChapter": [
+            "11E",
+            "12H"
+        ],
         "level": 1,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 18,
@@ -43,7 +46,10 @@
         "name": "Hector",
         "game": "The Blazing Blade",
         "class": "lord_hector",
-        "joinChapter": "Chapter 12",
+        "joinChapter": [
+            "12E",
+            "11H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Thunder",
@@ -82,7 +88,11 @@
         "name": "Lyn",
         "game": "The Blazing Blade",
         "class": "lord_lyn",
-        "joinChapter": "Prologue",
+        "joinChapter": [
+            "Prologue",
+            "15E",
+            "16H"
+        ],
         "level": 1,
         "gender": "female",
         "affinity": "Wind",
@@ -121,7 +131,10 @@
         "name": "Marcus (FE7)",
         "game": "The Blazing Blade",
         "class": "paladin_m",
-        "joinChapter": "Chapter 11",
+        "joinChapter": [
+            "11E",
+            "12H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Ice",
@@ -160,7 +173,11 @@
         "name": "Sain",
         "game": "The Blazing Blade",
         "class": "cavalier_m",
-        "joinChapter": "Chapter 1",
+        "joinChapter": [
+            "1 (Lyn)",
+            "15E",
+            "16H"
+        ],
         "level": 4,
         "gender": "male",
         "affinity": "Wind",
@@ -195,10 +212,14 @@
         "name": "Kent",
         "game": "The Blazing Blade",
         "class": "cavalier_m",
-        "joinChapter": "Chapter 1",
+        "joinChapter": [
+            "1 (Lyn)",
+            "15E",
+            "16H"
+        ],
         "level": 5,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 23,
@@ -230,10 +251,14 @@
         "name": "Florina",
         "game": "The Blazing Blade",
         "class": "pegasus_knight",
-        "joinChapter": "Chapter 3",
+        "joinChapter": [
+            "3 (Lyn)",
+            "15E",
+            "16H"
+        ],
         "level": 3,
         "gender": "male",
-        "affinity": "AffinLight",
+        "affinity": "Light",
         "isPromoted": false,
         "stats": {
             "hp": 18,
@@ -265,7 +290,11 @@
         "name": "Wil",
         "game": "The Blazing Blade",
         "class": "archer_m",
-        "joinChapter": "Chapter 3",
+        "joinChapter": [
+            "3 (Lyn)",
+            "15E",
+            "16H"
+        ],
         "level": 4,
         "gender": "male",
         "affinity": "Wind",
@@ -300,7 +329,11 @@
         "name": "Dorcas",
         "game": "The Blazing Blade",
         "class": "fighter",
-        "joinChapter": "Chapter 4",
+        "joinChapter": [
+            "4 (Lyn)",
+            "11E",
+            "12H"
+        ],
         "level": 3,
         "gender": "male",
         "affinity": "Fire",
@@ -335,7 +368,11 @@
         "name": "Serra",
         "game": "The Blazing Blade",
         "class": "cleric",
-        "joinChapter": "Chapter 5",
+        "joinChapter": [
+            "5 (Lyn)",
+            "13E",
+            "12H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Thunder",
@@ -370,7 +407,11 @@
         "name": "Erk",
         "game": "The Blazing Blade",
         "class": "mage_m",
-        "joinChapter": "Chapter 5",
+        "joinChapter": [
+            "5 (Lyn)",
+            "14E",
+            "14H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Thunder",
@@ -405,10 +446,14 @@
         "name": "Rath",
         "game": "The Blazing Blade",
         "class": "nomad_m",
-        "joinChapter": "Chapter 6",
+        "joinChapter": [
+            "6 (Lyn)",
+            "21E",
+            "22H"
+        ],
         "level": 9,
         "gender": "male",
-        "affinity": "AffinDark",
+        "affinity": "Dark",
         "isPromoted": false,
         "stats": {
             "hp": 27,
@@ -440,7 +485,11 @@
         "name": "Matthew",
         "game": "The Blazing Blade",
         "class": "thief_m",
-        "joinChapter": "Chapter 6",
+        "joinChapter": [
+            "6 (Lyn)",
+            "13E",
+            "11H"
+        ],
         "level": 2,
         "gender": "male",
         "affinity": "Wind",
@@ -475,7 +524,11 @@
         "name": "Nils",
         "game": "The Blazing Blade",
         "class": "bard",
-        "joinChapter": "Chapter 7",
+        "joinChapter": [
+            "7 (Lyn)",
+            "28E",
+            "30H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Ice",
@@ -510,10 +563,14 @@
         "name": "Lucius",
         "game": "The Blazing Blade",
         "class": "monk",
-        "joinChapter": "Chapter 7",
+        "joinChapter": [
+            "7 (Lyn)",
+            "16E",
+            "17H"
+        ],
         "level": 3,
         "gender": "male",
-        "affinity": "AffinLight",
+        "affinity": "Light",
         "isPromoted": false,
         "stats": {
             "hp": 18,
@@ -545,7 +602,9 @@
         "name": "Wallace *",
         "game": "The Blazing Blade",
         "class": "knight_m",
-        "joinChapter": "Chapter 23 (E) / 24 (H)",
+        "joinChapter": [
+            "9 (Lyn)"
+        ],
         "level": 12,
         "gender": "male",
         "affinity": "Thunder",
@@ -572,7 +631,10 @@
         "name": "Lowen",
         "game": "The Blazing Blade",
         "class": "cavalier_m",
-        "joinChapter": "Chapter 11",
+        "joinChapter": [
+            "11E",
+            "12H"
+        ],
         "level": 2,
         "gender": "male",
         "affinity": "Fire",
@@ -607,7 +669,10 @@
         "name": "Rebecca",
         "game": "The Blazing Blade",
         "class": "archer_f",
-        "joinChapter": "Chapter 11",
+        "joinChapter": [
+            "11E",
+            "12H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Fire",
@@ -642,7 +707,10 @@
         "name": "Bartre (FE7)",
         "game": "The Blazing Blade",
         "class": "fighter",
-        "joinChapter": "Chapter 11",
+        "joinChapter": [
+            "11E",
+            "12H"
+        ],
         "level": 2,
         "gender": "male",
         "affinity": "Thunder",
@@ -677,10 +745,13 @@
         "name": "Oswin",
         "game": "The Blazing Blade",
         "class": "knight_m",
-        "joinChapter": "Chapter 12",
+        "joinChapter": [
+            "12E",
+            "12H"
+        ],
         "level": 9,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 28,
@@ -712,7 +783,10 @@
         "name": "Guy",
         "game": "The Blazing Blade",
         "class": "myrmidon_m",
-        "joinChapter": "Chapter 13",
+        "joinChapter": [
+            "13E",
+            "13H"
+        ],
         "level": 3,
         "gender": "male",
         "affinity": "Fire",
@@ -747,10 +821,13 @@
         "name": "Merlinus (FE7)",
         "game": "The Blazing Blade",
         "class": "transporter_tent",
-        "joinChapter": "14/16",
+        "joinChapter": [
+            "14E",
+            "16H"
+        ],
         "level": 5,
         "gender": "male",
-        "affinity": "AffinDark",
+        "affinity": "Dark",
         "isPromoted": false,
         "stats": {
             "hp": 18,
@@ -782,7 +859,10 @@
         "name": "Priscilla",
         "game": "The Blazing Blade",
         "class": "troubadour",
-        "joinChapter": "14/15",
+        "joinChapter": [
+            "14E",
+            "15H"
+        ],
         "level": 3,
         "gender": "male",
         "affinity": "Wind",
@@ -817,7 +897,10 @@
         "name": "Raven",
         "game": "The Blazing Blade",
         "class": "mercenary_m",
-        "joinChapter": "Chapter 16",
+        "joinChapter": [
+            "16E",
+            "17H"
+        ],
         "level": 5,
         "gender": "male",
         "affinity": "Ice",
@@ -852,10 +935,13 @@
         "name": "Canas",
         "game": "The Blazing Blade",
         "class": "shaman_m",
-        "joinChapter": "Chapter 16x",
+        "joinChapter": [
+            "16xE",
+            "17xH"
+        ],
         "level": 8,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 21,
@@ -887,7 +973,10 @@
         "name": "Dart",
         "game": "The Blazing Blade",
         "class": "pirate",
-        "joinChapter": "Chapter 18",
+        "joinChapter": [
+            "18E",
+            "19H"
+        ],
         "level": 8,
         "gender": "male",
         "affinity": "Fire",
@@ -922,7 +1011,10 @@
         "name": "Fiora",
         "game": "The Blazing Blade",
         "class": "pegasus_knight",
-        "joinChapter": "Chapter 18",
+        "joinChapter": [
+            "18E",
+            "19H"
+        ],
         "level": 7,
         "gender": "male",
         "affinity": "Wind",
@@ -957,7 +1049,10 @@
         "name": "Legault",
         "game": "The Blazing Blade",
         "class": "thief_m",
-        "joinChapter": "Chapter 19",
+        "joinChapter": [
+            "19E",
+            "20H"
+        ],
         "level": 12,
         "gender": "male",
         "affinity": "Ice",
@@ -992,7 +1087,10 @@
         "name": "Ninian",
         "game": "The Blazing Blade",
         "class": "dancer",
-        "joinChapter": "Chapter 20",
+        "joinChapter": [
+            "20E",
+            "21H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Ice",
@@ -1027,10 +1125,13 @@
         "name": "Isadora",
         "game": "The Blazing Blade",
         "class": "paladin_f",
-        "joinChapter": "Chapter 21",
+        "joinChapter": [
+            "21E",
+            "22H"
+        ],
         "level": 1,
         "gender": "male",
-        "affinity": "AffinDark",
+        "affinity": "Dark",
         "isPromoted": true,
         "stats": {
             "hp": 28,
@@ -1062,7 +1163,10 @@
         "name": "Heath",
         "game": "The Blazing Blade",
         "class": "wyvern_rider_m",
-        "joinChapter": "Chapter 21",
+        "joinChapter": [
+            "21E",
+            "22H"
+        ],
         "level": 7,
         "gender": "male",
         "affinity": "Thunder",
@@ -1097,7 +1201,10 @@
         "name": "Hawkeye",
         "game": "The Blazing Blade",
         "class": "berserker",
-        "joinChapter": "Chapter 22",
+        "joinChapter": [
+            "22E",
+            "23H"
+        ],
         "level": 4,
         "gender": "male",
         "affinity": "Wind",
@@ -1132,7 +1239,10 @@
         "name": "Geitz",
         "game": "The Blazing Blade",
         "class": "warrior",
-        "joinChapter": "23A",
+        "joinChapter": [
+            "23E",
+            "24H"
+        ],
         "level": 3,
         "gender": "male",
         "affinity": "Thunder",
@@ -1167,7 +1277,10 @@
         "name": "Wallace",
         "game": "The Blazing Blade",
         "class": "general_m",
-        "joinChapter": "Chapter 9",
+        "joinChapter": [
+            "23E",
+            "24H"
+        ],
         "level": 1,
         "gender": "male",
         "affinity": "Thunder",
@@ -1202,10 +1315,12 @@
         "name": "Farina",
         "game": "The Blazing Blade",
         "class": "pegasus_knight",
-        "joinChapter": "Chapter 25H",
+        "joinChapter": [
+            "25H"
+        ],
         "level": 12,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 24,
@@ -1237,7 +1352,10 @@
         "name": "Pent",
         "game": "The Blazing Blade",
         "class": "sage_m",
-        "joinChapter": "Chapter 24",
+        "joinChapter": [
+            "24E",
+            "26H"
+        ],
         "level": 6,
         "gender": "male",
         "affinity": "Ice",
@@ -1272,10 +1390,13 @@
         "name": "Louise",
         "game": "The Blazing Blade",
         "class": "sniper_f",
-        "joinChapter": "Chapter 24",
+        "joinChapter": [
+            "24E",
+            "26H"
+        ],
         "level": 4,
         "gender": "male",
-        "affinity": "AffinLight",
+        "affinity": "Light",
         "isPromoted": true,
         "stats": {
             "hp": 28,
@@ -1307,10 +1428,13 @@
         "name": "Karel (FE7)",
         "game": "The Blazing Blade",
         "class": "swordmaster_m",
-        "joinChapter": "25A/B",
+        "joinChapter": [
+            "25E",
+            "27H"
+        ],
         "level": 8,
         "gender": "male",
-        "affinity": "AffinLight",
+        "affinity": "Light",
         "isPromoted": true,
         "stats": {
             "hp": 31,
@@ -1342,7 +1466,10 @@
         "name": "Harken",
         "game": "The Blazing Blade",
         "class": "hero_m",
-        "joinChapter": "25A/B",
+        "joinChapter": [
+            "25E",
+            "27H"
+        ],
         "level": 8,
         "gender": "male",
         "affinity": "Fire",
@@ -1377,7 +1504,10 @@
         "name": "Nino",
         "game": "The Blazing Blade",
         "class": "mage_f",
-        "joinChapter": "Chapter 26",
+        "joinChapter": [
+            "26E",
+            "28H"
+        ],
         "level": 5,
         "gender": "male",
         "affinity": "Fire",
@@ -1412,7 +1542,10 @@
         "name": "Jaffar",
         "game": "The Blazing Blade",
         "class": "assassin",
-        "joinChapter": "26x/27",
+        "joinChapter": [
+            "26xE",
+            "28xH"
+        ],
         "level": 13,
         "gender": "male",
         "affinity": "Ice",
@@ -1447,7 +1580,10 @@
         "name": "Vaida",
         "game": "The Blazing Blade",
         "class": "wyvern_lord_f",
-        "joinChapter": "Chapter 27",
+        "joinChapter": [
+            "27E",
+            "29H"
+        ],
         "level": 9,
         "gender": "male",
         "affinity": "Fire",
@@ -1482,10 +1618,12 @@
         "name": "Karla",
         "game": "The Blazing Blade",
         "class": "swordmaster_f",
-        "joinChapter": "\u2013",
+        "joinChapter": [
+            "31xH"
+        ],
         "level": 5,
         "gender": "male",
-        "affinity": "AffinDark",
+        "affinity": "Dark",
         "isPromoted": true,
         "stats": {
             "hp": 29,
@@ -1517,10 +1655,13 @@
         "name": "Renault",
         "game": "The Blazing Blade",
         "class": "bishop_m",
-        "joinChapter": "Chapter 30",
+        "joinChapter": [
+            "30E",
+            "32H"
+        ],
         "level": 16,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": true,
         "stats": {
             "hp": 43,
@@ -1552,10 +1693,12 @@
         "name": "Athos",
         "game": "The Blazing Blade",
         "class": "archsage",
-        "joinChapter": "F",
+        "joinChapter": [
+            "Final"
+        ],
         "level": 20,
         "gender": "male",
-        "affinity": "AffinAnima",
+        "affinity": "Anima",
         "isPromoted": false,
         "stats": {
             "hp": 40,

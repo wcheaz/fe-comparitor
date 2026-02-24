@@ -150,7 +150,7 @@ function transformJsonToUnit(rawUnit: any): Unit {
     name: rawUnit.name,
     game: rawUnit.game,
     class: rawUnit.class,
-    joinChapter: rawUnit.joinChapter || '',
+    joinChapter: rawUnit.joinChapter || '',  // supports string or string[]
     level: rawUnit.level || 1,
     stats,
     growths,
