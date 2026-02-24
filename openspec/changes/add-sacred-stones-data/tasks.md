@@ -11,7 +11,7 @@
 
 ## 2. Infrastructure Updates
 
-- [ ] 2.1 Update `types/unit.ts` to include a new `PromotionEvent` interface (or similar) to track `{ level: number, selectedClassId: string }` instead of a flat `promotionLevels: Record<string, number>`.
+- [x] 2.1 Update `types/unit.ts` to include a new `PromotionEvent` interface (or similar) to track `{ level: number, selectedClassId: string }` instead of a flat `promotionLevels: Record<string, number>`.
 - [ ] 2.2 Refactor `generateProgressionArray` in `lib/stats.ts` to accept an array of `PromotionEvent`s instead of a single `promotionLevel` property.
 - [ ] 2.3 Update the `generateProgressionArray` loop to recursively look up the `Class` object based on the latest `PromotionEvent.selectedClassId`, applying its `promotionBonus` and adjusting `maxStats` caps at the exact level the promotion occurs.
 - [ ] 2.4 Ensure the internal `level` counter in `generateProgressionArray` resets to 1 upon every valid `PromotionEvent` hit, while continuing to iterate up to the global max row index (e.g., 40).
