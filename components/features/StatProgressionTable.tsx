@@ -14,7 +14,9 @@ interface ProgressionRow {
   displayLevel: string;
   stats: UnitStats[];
   cappedStats: Record<string, boolean>[];
+  unitSkipped: boolean[];
   isPromotionLevel: boolean;
+  isSkipped?: boolean;
   promotionInfo?: {
     className: string;
     hiddenModifiers: string[];
@@ -24,6 +26,7 @@ interface ProgressionRow {
 export function StatProgressionTable({ units }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
+  const [promotionLevels, setPromotionLevels] = useState<Record<string, number>>({});
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
   const [hasInitializedStats, setHasInitializedStats] = useState(false);
@@ -39,15 +42,15 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
 
   // Calculate progression data
   const progressionData = useMemo(() => {
-    if (units.length === 0) return { rows: [], statKeys: [] };
+    if (units.length === 0) return { rows: [], statKeys: [] as string[], allProgressions: [] };
 
-    const getEffectiveLevel = (u: Unit) => u.isPromoted ? u.level + 20 : u.level;
-    const minLevel = Math.min(...units.map(getEffectiveLevel));
-    const maxLevel = Math.max(expandToLevel100 ? 100 : 40, ...units.map(getEffectiveLevel));
+    // Standard absolute level bounds (unlike before with virtual mapped offsets)
+    const minLevel = 1;
+    const maxLevel = expandToLevel100 ? 100 : 40;
 
     // Generate progression arrays for all units
     const allProgressions = units.map(unit =>
-      generateProgressionArray(unit, minLevel, maxLevel, classes)
+      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionLevels[unit.id] ?? 20)
     );
 
     // Get all stat keys from all units
@@ -82,15 +85,16 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
     for (let i = 0; i < totalLevels; i++) {
       const currentInternalLevel = minLevel + i;
       let displayLevel = `Level ${currentInternalLevel}`;
+
+      // We will only highlight the global row as a "promotion level" if at least one unit promotes at this absolute row index.
       let isPromotionLevel = false;
 
-      if (currentInternalLevel === 20) {
-        displayLevel = `Level 20`;
-        isPromotionLevel = true;
-      } else if (currentInternalLevel === 21) {
-        displayLevel = "Level 1 (Promoted)";
-      } else if (currentInternalLevel > 21) {
-        displayLevel = `Level ${currentInternalLevel - 20} (Promoted)`;
+      if (currentInternalLevel > 20) {
+        if (currentInternalLevel === 21) {
+          displayLevel = "Level 1 (Promoted)";
+        } else {
+          displayLevel = `Level ${currentInternalLevel - 20} (Promoted)`;
+        }
       }
 
       const rowData: ProgressionRow = {
@@ -98,17 +102,36 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
         displayLevel,
         stats: [],
         cappedStats: [],
-        isPromotionLevel
+        unitSkipped: [],
+        isPromotionLevel: false
       };
+
+      let allUnitsShowDash = true;
 
       // Collect data for each unit at this level index
       for (let unitIndex = 0; unitIndex < units.length; unitIndex++) {
+        const unit = units[unitIndex];
         const unitProgression = allProgressions[unitIndex];
         const levelData = unitProgression[i];
 
+        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
+        const isUnitSkipped = levelData?.isSkipped ?? false;
+        rowData.unitSkipped.push(isUnitSkipped);
+
+        if (!(isUnitSkipped || currentInternalLevel < effectiveUnitLevel)) {
+          allUnitsShowDash = false;
+        }
+
         if (levelData) {
+          if (levelData.isPromotionLevel) {
+            rowData.isPromotionLevel = true;
+          }
           if (levelData.promotionInfo && !rowData.promotionInfo) {
             rowData.promotionInfo = levelData.promotionInfo;
+          }
+
+          if (levelData.isSkipped) {
+            rowData.isSkipped = true; // Mark global row if ANY unit considers this a skipped virtual offset
           }
 
           rowData.stats.push(levelData.stats);
@@ -120,7 +143,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
         }
       }
 
-      rows.push(rowData);
+      if (!allUnitsShowDash) {
+        rows.push(rowData);
+      }
     }
 
     // Initialize visible stats once when progression data first loads
@@ -129,8 +154,8 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       setHasInitializedStats(true);
     }
 
-    return { rows, statKeys: displayStats };
-  }, [units, expandToLevel100, classes]);
+    return { rows, statKeys: displayStats, allProgressions };
+  }, [units, expandToLevel100, classes, promotionLevels]);
 
   if (units.length === 0) {
     return (
@@ -221,6 +246,29 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
             <span className="text-sm text-gray-700">Expand to Level 100</span>
           </label>
         </div>
+      </div>
+
+      {/* Per-Unit Promotion Configs */}
+      <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
+        <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion Levels:</span>
+        {units.map(unit => (
+          <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
+            <label htmlFor={`promo-${unit.id}`} className="text-sm text-gray-700">{unit.name}:</label>
+            <select
+              id={`promo-${unit.id}`}
+              value={promotionLevels[unit.id] ?? 20}
+              disabled={unit.isPromoted || (classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'))?.type === 'promoted')}
+              onChange={(e) => setPromotionLevels(prev => ({ ...prev, [unit.id]: Number(e.target.value) }))}
+              className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+            >
+              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                .filter(level => level >= Math.max(10, unit.level))
+                .map(level => (
+                  <option key={level} value={level}>{level}</option>
+                ))}
+            </select>
+          </div>
+        ))}
       </div>
 
       <div className="overflow-x-auto">
@@ -343,8 +391,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                           isCapped = unitCappedStats?.['dex'];
                         }
 
+                        const isUnitSkipped = row.unitSkipped[unitIndex];
                         const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-                        const shouldShowDash = row.internalLevel < effectiveUnitLevel;
+                        const shouldShowDash = isUnitSkipped || row.internalLevel < effectiveUnitLevel;
 
                         let isHighest = false;
                         let isEqual = false;
@@ -427,8 +476,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                           isCapped = unitCappedStats?.['dex'];
                         }
 
+                        const isUnitSkipped = row.unitSkipped[unitIndex];
                         const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-                        const shouldShowDash = row.internalLevel < effectiveUnitLevel;
+                        const shouldShowDash = isUnitSkipped || row.internalLevel < effectiveUnitLevel;
 
                         let isHighest = false;
                         let isEqual = false;

@@ -6,6 +6,7 @@ const mockClasses: Class[] = [
   {
     id: 'mercenary',
     name: 'Mercenary',
+    game: 'test_game',
     type: 'unpromoted',
     baseStats: { hp: 20, str: 6, skl: 8, spd: 7, lck: 5, def: 5, res: 0, con: 7, mov: 5 },
     promotionBonus: { hp: 8, str: 3, skl: 4, spd: 3, lck: 2, def: 3, res: 2, con: 2, mov: 1 },
@@ -15,6 +16,7 @@ const mockClasses: Class[] = [
   {
     id: 'hero',
     name: 'Hero',
+    game: 'test_game',
     type: 'promoted',
     baseStats: { hp: 28, str: 9, skl: 12, spd: 10, lck: 7, def: 8, res: 2, con: 9, mov: 6 },
     promotionBonus: {},
@@ -24,6 +26,7 @@ const mockClasses: Class[] = [
   {
     id: 'paladin',
     name: 'Paladin',
+    game: 'test_game',
     type: 'promoted',
     baseStats: { hp: 30, str: 11, skl: 10, spd: 10, lck: 8, def: 10, res: 5, con: 11, mov: 8 },
     promotionBonus: {},

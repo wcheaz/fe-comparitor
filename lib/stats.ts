@@ -196,13 +196,15 @@ export function getMinLevel(units: Unit[]): number {
  * @param startLevel - The starting level (defaults to unit's base level)
  * @param endLevel - The ending level
  * @param classes - Optional array of class data for promotion mechanics
+ * @param promotionLevel - The level at which the unit promotes
  * @returns Array of progression data, including stats and display level info
  */
 export function generateProgressionArray(
   unit: Unit,
   startLevel?: number,
   endLevel?: number,
-  classes?: any[]
+  classes?: any[],
+  promotionLevel: number = 20
 ): Array<{
   stats: UnitStats;
   displayLevel: string;
@@ -213,6 +215,7 @@ export function generateProgressionArray(
     hiddenModifiers: string[];
   };
   cappedStats: Record<string, boolean>;
+  isSkipped?: boolean;
 }> {
   const actualStartLevel = startLevel || unit.level;
   const actualEndLevel = endLevel || actualStartLevel + 20; // Default 20 levels
@@ -227,6 +230,7 @@ export function generateProgressionArray(
       hiddenModifiers: string[];
     };
     cappedStats: Record<string, boolean>;
+    isSkipped?: boolean;
   }> = [];
 
   let currentStats = { ...unit.stats };
@@ -247,28 +251,34 @@ export function generateProgressionArray(
   for (let internalLevel = actualStartLevel; internalLevel <= actualEndLevel; internalLevel++) {
     let displayLevel: string;
     let isPromotionLevel = false;
+    let isSkipped = false;
 
-    // Handle promotion display logic
-    if (internalLevel === 20) {
-      displayLevel = `Level 20`;
-      isPromotionLevel = true;
-    } else if (internalLevel === 21) {
-      displayLevel = "Level 1 (Promoted)";
-    } else if (internalLevel > 21) {
-      displayLevel = `Level ${internalLevel - 20} (Promoted)`;
-    } else {
+    // We align rows to a standard 1-20 unpromoted, 21+ promoted scale across ALL units.
+    if (internalLevel <= 20) {
       displayLevel = `Level ${internalLevel}`;
+      // If the unit promotes early (e.g., at 15), then levels 16-20 don't exist for them unpromoted.
+      // However, if the unit was ALREADY a pre-promote we show dashes until they "join" at their effective level in the UI.
+      if (!unit.isPromoted && internalLevel > promotionLevel) {
+        isSkipped = true;
+      }
+      if (internalLevel === promotionLevel && !unit.isPromoted) {
+        isPromotionLevel = true;
+      }
+    } else {
+      displayLevel = `Level ${internalLevel - 20} (Promoted)`;
     }
 
-    // Check if unit should promote at internal level 21 (if not already promoted)
+    // Check if unit should promote at this internal level + 1 (meaning we are transitioning into the first promoted level)
+    // In our new standardized paradigm, the first promoted level is ALWAYS row 21. 
+    // We do the promotion stat swap right AT 21.
     if (!isPromoted && !unit.isPromoted && internalLevel === 21 && currentClass?.promotesTo?.length > 0) {
-      // Calculate stats at level 20 first (pre-promotion)
+      // Calculate stats at promotion level first (pre-promotion)
       const prePromotionStats: UnitStats = {};
       const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
       allStatKeys.forEach(statKey => {
         const growthRate = unit.growths[statKey] || 0;
         const baseStat = unit.stats[statKey] || 0;
-        const levelDiff = 20 - unit.level;
+        const levelDiff = promotionLevel - unit.level;
         const growthAmount = (growthRate * levelDiff) / 100;
         let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
 
@@ -328,9 +338,13 @@ export function generateProgressionArray(
         finalStat = Math.round((postPromotionBase + postPromotionGrowth) * 100) / 100;
       } else {
         // For pre-promotion levels OR prepromoted units, calculate based on effective levels
+        // If it's a prepromote, their "Level 1" is row 21
         const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
         const baseStat = unit.stats[statKey] || 0;
-        const levelDiff = internalLevel - effectiveUnitLevel;
+        // If we skip the level, logic will trace baseStat, but UI will hide it
+        const levelDiff = internalLevel > promotionLevel && !unit.isPromoted && internalLevel <= 20
+          ? promotionLevel - effectiveUnitLevel
+          : internalLevel - effectiveUnitLevel;
         const growthAmount = (growthRate * levelDiff) / 100;
         finalStat = Math.round((baseStat + growthAmount) * 100) / 100;
       }
@@ -349,7 +363,7 @@ export function generateProgressionArray(
     // Add promotion info if this is a promotion level
     if (isPromotionLevel && currentClass) {
       let classToDisplay = currentClass;
-      if (internalLevel === 20 && !isPromoted && !unit.isPromoted && currentClass.promotesTo?.length > 0) {
+      if (internalLevel === promotionLevel && !isPromoted && !unit.isPromoted && currentClass.promotesTo?.length > 0) {
         const promotedClass = classes?.find((cls: any) => cls.id === currentClass.promotesTo[0]);
         if (promotedClass) classToDisplay = promotedClass;
       }
@@ -366,7 +380,8 @@ export function generateProgressionArray(
       internalLevel,
       isPromotionLevel,
       promotionInfo,
-      cappedStats
+      cappedStats,
+      isSkipped
     });
   }
 
