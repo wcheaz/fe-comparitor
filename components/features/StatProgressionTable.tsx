@@ -292,6 +292,8 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
         {units.map(unit => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
           const canPromote = !unit.isPromoted && unitClass?.type !== 'promoted' && (unitClass?.promotesTo?.length ?? 0) > 0;
+          const hasBranchingOptions = hasBranchingPromotions(unitClass);
+          const promotionOptions = getPromotionOptions(unitClass, classes);
           
           return (
             <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
@@ -302,11 +304,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 disabled={!canPromote}
                 onChange={(e) => {
                   const level = Number(e.target.value);
-                  // For now, create a simple promotion event with the first available class
-                  const firstPromotionClass = (unitClass?.promotesTo?.[0]) || '';
+                  const currentSelectedClassId = promotionEvents[unit.id]?.[0]?.selectedClassId || unitClass?.promotesTo?.[0] || '';
                   setPromotionEvents(prev => ({
                     ...prev,
-                    [unit.id]: [{ level, selectedClassId: firstPromotionClass }]
+                    [unit.id]: [{ level, selectedClassId: currentSelectedClassId }]
                   }));
                 }}
                 className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
@@ -317,6 +318,29 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                     <option key={level} value={level}>{level}</option>
                   ))}
               </select>
+              
+              {hasBranchingOptions && promotionOptions.length > 0 && (
+                <select
+                  id={`promo-class-${unit.id}`}
+                  value={promotionEvents[unit.id]?.[0]?.selectedClassId || promotionOptions[0]?.id || ''}
+                  disabled={!canPromote}
+                  onChange={(e) => {
+                    const selectedClassId = e.target.value;
+                    const currentLevel = promotionEvents[unit.id]?.[0]?.level || 20;
+                    setPromotionEvents(prev => ({
+                      ...prev,
+                      [unit.id]: [{ level: currentLevel, selectedClassId }]
+                    }));
+                  }}
+                  className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+                >
+                  {promotionOptions.map(option => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           );
         })}
