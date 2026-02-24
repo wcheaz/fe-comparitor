@@ -1,4 +1,4 @@
-import { Unit, UnitStats } from '@/types/unit';
+import { Unit, UnitStats, PromotionEvent } from '@/types/unit';
 
 /**
  * Calculate average stats for a unit at a target level based on growth rates
@@ -190,13 +190,13 @@ export function getMinLevel(units: Unit[]): number {
 
 /**
  * Generate a progression array for a unit from a starting level to an ending level
- * Handles promotion mechanics: Level 20 unpromoted -> Level 1 promoted
+ * Handles multi-tier promotion mechanics with branching paths
  * 
  * @param unit - The unit to generate progression for
  * @param startLevel - The starting level (defaults to unit's base level)
  * @param endLevel - The ending level
  * @param classes - Optional array of class data for promotion mechanics
- * @param promotionLevel - The level at which the unit promotes
+ * @param promotionEvents - Array of promotion events defining the promotion path
  * @returns Array of progression data, including stats and display level info
  */
 export function generateProgressionArray(
@@ -204,7 +204,7 @@ export function generateProgressionArray(
   startLevel?: number,
   endLevel?: number,
   classes?: any[],
-  promotionLevel: number = 20
+  promotionEvents: PromotionEvent[] = []
 ): Array<{
   stats: UnitStats;
   displayLevel: string;
@@ -234,51 +234,86 @@ export function generateProgressionArray(
   }> = [];
 
   let currentStats = { ...unit.stats };
-  let isPromoted = unit.isPromoted || false;
   let promotedAtInternalLevel: number | null = null;
 
   // Find the unit's class data if classes are provided
   let currentClass = classes?.find((cls: any) => cls.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
 
   // If the unit is already promoted, find its promoted class
-  if (isPromoted && currentClass?.type === 'unpromoted') {
+  if (unit.isPromoted && currentClass?.type === 'unpromoted') {
     // Try to find the promoted version
     currentClass = classes?.find((cls: any) =>
       currentClass?.promotesTo?.includes(cls.id) && cls.type === 'promoted'
     );
   }
 
+  // Helper function to find promotion event for a given level
+  const findPromotionEvent = (level: number): PromotionEvent | undefined => {
+    return promotionEvents.find(event => event.level === level);
+  };
+
+  // Helper function to get promotion level (fallback to 20 for backward compatibility)
+  const getPromotionLevel = (level: number): number => {
+    const promotionEvent = findPromotionEvent(level);
+    return promotionEvent?.level || 20; // Default to 20 if no promotion event found
+  };
+
+  // Helper function to calculate display level and tier for multi-tier promotions
+  const getDisplayInfo = (level: number) => {
+    // Find all promotion events that have occurred before this level
+    const pastPromotions = promotionEvents.filter(event => event.level < level);
+    const tier = pastPromotions.length + 1; // +1 for starting tier
+    
+    // Find the most recent promotion before this level
+    const lastPromotion = pastPromotions[pastPromotions.length - 1];
+    const segmentStartLevel = lastPromotion ? lastPromotion.level : unit.level;
+    const displayLevelNum = level - segmentStartLevel;
+    
+    return {
+      tier,
+      displayLevel: displayLevelNum,
+      segmentStartLevel
+    };
+  };
+
   for (let internalLevel = actualStartLevel; internalLevel <= actualEndLevel; internalLevel++) {
     let displayLevel: string;
     let isPromotionLevel = false;
     let isSkipped = false;
 
-    // We align rows to a standard 1-20 unpromoted, 21+ promoted scale across ALL units.
-    if (internalLevel <= 20) {
-      displayLevel = `Level ${internalLevel}`;
-      // If the unit promotes early (e.g., at 15), then levels 16-20 don't exist for them unpromoted.
-      // However, if the unit was ALREADY a pre-promote we show dashes until they "join" at their effective level in the UI.
-      if (!unit.isPromoted && internalLevel > promotionLevel) {
+    // Calculate display level and tier for multi-tier promotions
+    const displayInfo = getDisplayInfo(internalLevel);
+    const currentPromotionLevel = getPromotionLevel(internalLevel);
+    
+    if (displayInfo.tier === 1) {
+      displayLevel = `Level ${displayInfo.displayLevel}`;
+      // If the unit promotes early, levels after promotion don't exist for them in this tier
+      if (!unit.isPromoted && internalLevel > currentPromotionLevel) {
         isSkipped = true;
       }
-      if (internalLevel === promotionLevel && !unit.isPromoted) {
+      if (internalLevel === currentPromotionLevel && !unit.isPromoted) {
         isPromotionLevel = true;
       }
     } else {
-      displayLevel = `Level ${internalLevel - 20} (Promoted)`;
+      displayLevel = `Level ${displayInfo.displayLevel} (Tier ${displayInfo.tier})`;
     }
 
-    // Check if unit should promote at this internal level + 1 (meaning we are transitioning into the first promoted level)
-    // In our new standardized paradigm, the first promoted level is ALWAYS row 21. 
-    // We do the promotion stat swap right AT 21.
-    if (!isPromoted && !unit.isPromoted && internalLevel === 21 && currentClass?.promotesTo?.length > 0) {
+    // Check if unit should promote at this internal level based on promotion events
+    const currentPromotionEvent = findPromotionEvent(internalLevel);
+    // Allow promotion if: there's a promotion event at this level AND the unit isn't already promoted at this exact level
+    const shouldPromote = currentPromotionEvent && 
+                         currentClass?.promotesTo?.length > 0 && 
+                         (promotedAtInternalLevel === null || internalLevel > promotedAtInternalLevel);
+    
+    if (shouldPromote) {
       // Calculate stats at promotion level first (pre-promotion)
       const prePromotionStats: UnitStats = {};
       const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
       allStatKeys.forEach(statKey => {
         const growthRate = unit.growths[statKey] || 0;
         const baseStat = unit.stats[statKey] || 0;
-        const levelDiff = promotionLevel - unit.level;
+        const currentPromotionLevel = getPromotionLevel(internalLevel);
+        const levelDiff = currentPromotionLevel - unit.level;
         const growthAmount = (growthRate * levelDiff) / 100;
         let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
 
@@ -286,9 +321,17 @@ export function generateProgressionArray(
         prePromotionStats[statKey] = Math.min(calculatedStat, prePromoCap);
       });
 
-      // Find the promoted class
-      const promotedClassId = currentClass.promotesTo[0];
-      const promotedClass = classes?.find((cls: any) => cls.id === promotedClassId);
+      // Find the promoted class based on the promotion event
+      let promotedClass = classes?.find((cls: any) => cls.id === currentPromotionEvent.selectedClassId);
+      
+      // Validate that the selected class is a valid promotion option
+      if (!promotedClass || !currentClass?.promotesTo?.includes(currentPromotionEvent.selectedClassId)) {
+        // Fallback to the first promotion option if the selected one is invalid
+        const fallbackClassId = currentClass?.promotesTo?.[0];
+        if (fallbackClassId) {
+          promotedClass = classes?.find((cls: any) => cls.id === fallbackClassId);
+        }
+      }
 
       if (promotedClass) {
         // Start with pre-promotion stats
@@ -312,7 +355,6 @@ export function generateProgressionArray(
           });
         }
 
-        isPromoted = true;
         promotedAtInternalLevel = internalLevel;
         currentClass = promotedClass;
       }
@@ -330,24 +372,23 @@ export function generateProgressionArray(
       const growthRate = unit.growths[statKey] || 0;
       let finalStat: number;
 
-      if (promotedAtInternalLevel && internalLevel >= promotedAtInternalLevel) {
-        // For post-promotion levels, start from the promoted stats
-        const postPromotionBase = currentStats[statKey] || 0;
-        const postPromotionLevels = internalLevel - 21;
-        const postPromotionGrowth = (growthRate * postPromotionLevels) / 100;
-        finalStat = Math.round((postPromotionBase + postPromotionGrowth) * 100) / 100;
+      const displayInfo = getDisplayInfo(internalLevel);
+      let levelBase: number;
+      let baseStatValue: number;
+
+      if (displayInfo.tier === 1) {
+        // First tier: use unit's base stats and level
+        levelBase = unit.level;
+        baseStatValue = unit.stats[statKey] || 0;
       } else {
-        // For pre-promotion levels OR prepromoted units, calculate based on effective levels
-        // If it's a prepromote, their "Level 1" is row 21
-        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-        const baseStat = unit.stats[statKey] || 0;
-        // If we skip the level, logic will trace baseStat, but UI will hide it
-        const levelDiff = internalLevel > promotionLevel && !unit.isPromoted && internalLevel <= 20
-          ? promotionLevel - effectiveUnitLevel
-          : internalLevel - effectiveUnitLevel;
-        const growthAmount = (growthRate * levelDiff) / 100;
-        finalStat = Math.round((baseStat + growthAmount) * 100) / 100;
+        // Subsequent tiers: start from promoted stats and promotion level
+        levelBase = displayInfo.segmentStartLevel;
+        baseStatValue = currentStats[statKey] || 0;
       }
+
+      const levelDiff = internalLevel - levelBase;
+      const growthAmount = (growthRate * levelDiff) / 100;
+      finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
 
       const cap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
       if (finalStat >= cap) {
@@ -363,7 +404,8 @@ export function generateProgressionArray(
     // Add promotion info if this is a promotion level
     if (isPromotionLevel && currentClass) {
       let classToDisplay = currentClass;
-      if (internalLevel === promotionLevel && !isPromoted && !unit.isPromoted && currentClass.promotesTo?.length > 0) {
+      const currentPromotionLevel = getPromotionLevel(internalLevel);
+      if (internalLevel === currentPromotionLevel && !unit.isPromoted && currentClass.promotesTo?.length > 0) {
         const promotedClass = classes?.find((cls: any) => cls.id === currentClass.promotesTo[0]);
         if (promotedClass) classToDisplay = promotedClass;
       }

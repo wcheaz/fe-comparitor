@@ -54,11 +54,32 @@
       "exitCode": 0,
       "completionDetected": false,
       "errors": []
+    },
+    {
+      "iteration": 4,
+      "startedAt": "2026-02-24T22:29:10.497Z",
+      "endedAt": "2026-02-24T22:36:33.433Z",
+      "durationMs": 442792,
+      "agent": "opencode",
+      "model": "",
+      "toolsUsed": {},
+      "filesModified": [
+        "lib/stats.ts",
+        "openspec/changes/add-sacred-stones-data/tasks.md",
+        ".ralph/ralph-tasks.md"
+      ],
+      "exitCode": 0,
+      "completionDetected": false,
+      "errors": [
+        "Type error: Argument of type 'number' is not assignable to parameter of type 'PromotionEvent[]'."
+      ]
     }
   ],
-  "totalDurationMs": 1560269,
+  "totalDurationMs": 2003061,
   "struggleIndicators": {
-    "repeatedErrors": {},
+    "repeatedErrors": {
+      "Type error: Argument of type 'number' is not assignable to parameter of type 'PromotionEvent[]'.": 1
+    },
     "noProgressIterations": 0,
     "shortIterations": 0
   }
