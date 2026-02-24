@@ -127,17 +127,13 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       // We will only highlight the global row as a "promotion level" if at least one unit promotes at this absolute row index.
       let isPromotionLevel = false;
 
-      if (currentInternalLevel > 20) {
-        if (currentInternalLevel === 21) {
-          displayLevel = "Level 1 (Promoted)";
-        } else {
-          displayLevel = `Level ${currentInternalLevel - 20} (Promoted)`;
-        }
-      }
+      let rowDisplayLevel = `Level ${currentInternalLevel}`;
+      let rowIsPromotionLevel = false;
+      let rowPromotionInfo: { className: string; hiddenModifiers: string[] } | undefined;
 
       const rowData: ProgressionRow = {
         internalLevel: currentInternalLevel,
-        displayLevel,
+        displayLevel: rowDisplayLevel,
         stats: [],
         cappedStats: [],
         unitSkipped: [],
@@ -161,10 +157,16 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
         }
 
         if (levelData) {
+          // Use displayLevel from progression data for the first unit
+          if (unitIndex === 0 && levelData.displayLevel) {
+            rowDisplayLevel = levelData.displayLevel;
+          }
           if (levelData.isPromotionLevel) {
+            rowIsPromotionLevel = true;
             rowData.isPromotionLevel = true;
           }
-          if (levelData.promotionInfo && !rowData.promotionInfo) {
+          if (levelData.promotionInfo && !rowPromotionInfo) {
+            rowPromotionInfo = levelData.promotionInfo;
             rowData.promotionInfo = levelData.promotionInfo;
           }
 
@@ -180,6 +182,9 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
           rowData.cappedStats.push({});
         }
       }
+
+      // Update the row display level with the tier information
+      rowData.displayLevel = rowDisplayLevel;
 
       if (!allUnitsShowDash) {
         rows.push(rowData);
