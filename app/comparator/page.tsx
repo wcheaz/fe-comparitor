@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import { useSearchParams } from 'next/navigation'; // TEMPORARILY DISABLED
-import { Unit } from '@/types/unit';
+import { Unit, PromotionEvent } from '@/types/unit';
 import { getUnitById } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
+  const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 4;
 
@@ -65,6 +66,7 @@ export default function ComparatorPage() {
           <div className="xl:col-span-9 space-y-6">
             <ComparisonGrid
               units={selectedUnits}
+              promotionEvents={promotionEvents}
               showStats={true}
               showGrowths={true}
             />
@@ -76,7 +78,7 @@ export default function ComparatorPage() {
                   <CardTitle>Stat Progression</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <StatProgressionTable units={selectedUnits} />
+                  <StatProgressionTable units={selectedUnits} promotionEvents={promotionEvents} onPromotionEventsChange={setPromotionEvents} />
                 </CardContent>
               </Card>
             )}

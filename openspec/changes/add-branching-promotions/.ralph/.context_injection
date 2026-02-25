@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 In `app/comparator/page.tsx`, add state: `const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});` (import `PromotionEvent` from `@/types/unit`)

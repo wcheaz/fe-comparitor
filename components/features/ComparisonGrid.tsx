@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Unit, Class } from '@/types/unit';
+import { Unit, Class, PromotionEvent } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
@@ -13,6 +13,7 @@ import { getWeaponByName } from '@/lib/weapons';
 
 interface ComparisonGridProps {
   units: Unit[];
+  promotionEvents?: Record<string, PromotionEvent[]>;
   showStats?: boolean;
   showGrowths?: boolean;
   className?: string;
@@ -20,6 +21,7 @@ interface ComparisonGridProps {
 
 export function ComparisonGrid({
   units,
+  promotionEvents,
   showStats = true,
   showGrowths = true,
   className
@@ -488,6 +490,7 @@ export function ComparisonGrid({
                       {units.map((unit) => {
                         const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
                         const promotesTo = cls?.promotesTo || [];
+                        const selectedClassId = promotionEvents?.[unit.id]?.[0]?.selectedClassId || promotesTo[0];
                         return (
                           <td key={`promo-${unit.id}`} className="text-center p-2 align-top">
                             {promotesTo.length > 0 ? (
@@ -495,9 +498,13 @@ export function ComparisonGrid({
                                 {promotesTo.map((promoId) => {
                                   const promoCls = classes.find(c => (c.id === promoId || c.name === promoId) && c.game === unit.game);
                                   const displayName = promoCls ? promoCls.name : promoId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                                  const isSelected = promoId === selectedClassId;
                                   return (
-                                    <div key={promoId} className="flex items-center gap-1 text-sm bg-muted/30 px-2 py-1 rounded">
-                                      <span>{displayName}</span>
+                                    <div key={promoId} className={`flex items-center gap-1 text-sm px-2 py-1 rounded ${isSelected ? 'bg-blue-100 border border-blue-300' : 'bg-muted/30'}`}>
+                                      {isSelected && (
+                                        <span className="text-blue-600 font-bold">✓</span>
+                                      )}
+                                      <span className={isSelected ? 'font-bold text-blue-800' : ''}>{displayName}</span>
                                       {promoCls && (
                                         <Info
                                           className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors shrink-0"

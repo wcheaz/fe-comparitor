@@ -45,6 +45,8 @@ function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: Promotio
 
 interface StatProgressionTableProps {
   units: Unit[];
+  promotionEvents: Record<string, PromotionEvent[]>;
+  onPromotionEventsChange: (events: Record<string, PromotionEvent[]>) => void;
 }
 
 interface ProgressionRow {
@@ -61,10 +63,9 @@ interface ProgressionRow {
   };
 }
 
-export function StatProgressionTable({ units }: StatProgressionTableProps) {
+export function StatProgressionTable({ units, promotionEvents, onPromotionEventsChange }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
-  const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
   const [hasInitializedStats, setHasInitializedStats] = useState(false);
@@ -296,7 +297,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
       <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion Levels:</span>
         {units.map(unit => {
-          const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
+          const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
           const canPromote = !unit.isPromoted && unitClass?.type !== 'promoted' && (unitClass?.promotesTo?.length ?? 0) > 0;
           const hasBranchingOptions = hasBranchingPromotions(unitClass);
           const promotionOptions = getPromotionOptions(unitClass, classes);
@@ -311,10 +312,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                 onChange={(e) => {
                   const level = Number(e.target.value);
                   const currentSelectedClassId = promotionEvents[unit.id]?.[0]?.selectedClassId || unitClass?.promotesTo?.[0] || '';
-                  setPromotionEvents(prev => ({
-                    ...prev,
+                  onPromotionEventsChange({
+                    ...promotionEvents,
                     [unit.id]: [{ level, selectedClassId: currentSelectedClassId }]
-                  }));
+                  });
                 }}
                 className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
               >
@@ -333,10 +334,10 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                   onChange={(e) => {
                     const selectedClassId = e.target.value;
                     const currentLevel = promotionEvents[unit.id]?.[0]?.level || 20;
-                    setPromotionEvents(prev => ({
-                      ...prev,
+                    onPromotionEventsChange({
+                      ...promotionEvents,
                       [unit.id]: [{ level: currentLevel, selectedClassId }]
-                    }));
+                    });
                   }}
                   className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
                 >

@@ -1,5 +1,5 @@
 import { generateProgressionArray } from '@/lib/stats';
-import { Unit, UnitStats, Class } from '@/types/unit';
+import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
 
 // Mock test data
 const mockClasses: Class[] = [
@@ -359,6 +359,80 @@ describe('Stat Progression Logic', () => {
       expect(firstLevel.displayLevel).toBe('Level 1');
       expect(progression[1].displayLevel).toBe('Level 2');
       expect(progression[19].displayLevel).toBe('Level 20');
+    });
+
+    // Task 5.1: Test that generateProgressionArray uses the selected promotion class correctly
+    it('should use the selected promotion class when branching promotions are available', () => {
+      // Create a mock unit with branching promotion options
+      const cavalierUnit: Unit = {
+        id: 'test-cavalier',
+        name: 'Test Cavalier',
+        game: 'The Sacred Stones',
+        class: 'cavalier',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2 },
+        growths: { hp: 70, str: 45, skl: 40, spd: 50, lck: 35, def: 30, res: 20 },
+        isPromoted: false
+      };
+
+      // Create mock classes with branching promotions
+      const branchingClasses: Class[] = [
+        {
+          id: 'cavalier',
+          name: 'Cavalier',
+          game: 'The Sacred Stones',
+          type: 'unpromoted',
+          baseStats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2, con: 8, mov: 7 },
+          promotionBonus: { hp: 10, str: 4, skl: 3, spd: 3, lck: 2, def: 4, res: 3, con: 2, mov: 1 },
+          promotesTo: ['paladin', 'great_knight'], // Branching promotion options
+          hiddenModifiers: []
+        },
+        {
+          id: 'paladin',
+          name: 'Paladin',
+          game: 'The Sacred Stones',
+          type: 'promoted',
+          baseStats: { hp: 30, str: 10, skl: 10, spd: 11, lck: 7, def: 10, res: 5, con: 10, mov: 8 },
+          promotionBonus: {},
+          promotesTo: [],
+          hiddenModifiers: ['Horse', 'Swords', 'Lances']
+        },
+        {
+          id: 'great_knight',
+          name: 'Great Knight',
+          game: 'The Sacred Stones',
+          type: 'promoted',
+          baseStats: { hp: 32, str: 12, skl: 8, spd: 7, lck: 7, def: 12, res: 8, con: 12, mov: 6 },
+          promotionBonus: {},
+          promotesTo: [],
+          hiddenModifiers: ['Horse', 'Swords', 'Axes', 'Lances']
+        }
+      ];
+
+      // Test selecting Ranger (second option)
+      const promotionEvents: PromotionEvent[] = [
+        { level: 20, selectedClassId: 'great_knight' }
+      ];
+
+      const progression = generateProgressionArray(cavalierUnit, 1, 25, branchingClasses, promotionEvents);
+
+      // Find the promotion level
+      const promotionLevel = progression.find(level => level.isPromotionLevel);
+      
+      expect(promotionLevel).toBeDefined();
+      expect(promotionLevel?.promotionInfo?.className).toBe('Great Knight');
+      expect(promotionLevel?.promotionInfo?.className).not.toBe('Paladin');
+
+      // Test that post-promotion levels use the correct class stats
+      const postPromotionLevel = progression.find(level => level.displayLevel.includes('Tier') && level.stats.str !== undefined);
+      expect(postPromotionLevel).toBeDefined();
+      
+      // Great Knight has higher base STR (12) than Paladin (10)
+      // So if Great Knight is selected, STR should be higher
+      if (postPromotionLevel?.stats.str) {
+        expect(postPromotionLevel.stats.str).toBeGreaterThanOrEqual(11); // Should be at least the Great Knight base
+      }
     });
   });
 });
