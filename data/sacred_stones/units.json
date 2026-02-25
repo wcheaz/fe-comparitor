@@ -3,9 +3,9 @@
     "id": "eirika",
     "name": "Eirika",
     "game": "The Sacred Stones",
-    "class": "lord",
+    "class": "lord_eirika",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -34,16 +34,31 @@
     "baseWeaponRanks": {
       "sword": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Great Lord",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 2,
+          "spd": 1,
+          "def": 3,
+          "res": 5,
+          "con": 2,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "seth",
     "name": "Seth",
     "game": "The Sacred Stones",
-    "class": "paladin",
+    "class": "paladin_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -80,9 +95,9 @@
     "id": "franz",
     "name": "Franz",
     "game": "The Sacred Stones",
-    "class": "cavalier",
+    "class": "cavalier_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -112,16 +127,45 @@
       "sword": "E",
       "lance": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Paladin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Great Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 2,
+          "res": 1,
+          "con": 0,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "gilliam",
     "name": "Gilliam",
     "game": "The Sacred Stones",
-    "class": "knight",
+    "class": "knight_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 4,
     "gender": "male",
@@ -150,7 +194,36 @@
     "baseWeaponRanks": {
       "lance": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "General",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 2,
+          "spd": 3,
+          "def": 2,
+          "res": 3,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Great Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 2,
+          "res": 1,
+          "con": 0,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -159,7 +232,7 @@
     "game": "The Sacred Stones",
     "class": "pegasus_knight",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -188,7 +261,36 @@
     "baseWeaponRanks": {
       "lance": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Falcon Knight",
+        "promoGains": {
+          "hp": 5,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 2,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Wyvern Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 1,
+          "res": 1,
+          "con": 4,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -197,7 +299,7 @@
     "game": "The Sacred Stones",
     "class": "priest",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 3,
     "gender": "male",
@@ -226,7 +328,36 @@
     "baseWeaponRanks": {
       "staff": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Bishop",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 3,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Sage",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 0,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -235,7 +366,7 @@
     "game": "The Sacred Stones",
     "class": "journeyman",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -264,7 +395,50 @@
     "baseWeaponRanks": {
       "axe": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Fighter",
+        "promoGains": {
+          "hp": 2,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 0,
+          "res": 1,
+          "con": 3,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Pirate",
+        "promoGains": {
+          "hp": 2,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 1,
+          "def": 1,
+          "res": 0,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Journeyman",
+        "promoGains": {
+          "hp": 2,
+          "str": 0,
+          "mag": 0,
+          "skl": 2,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 0,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -273,7 +447,7 @@
     "game": "The Sacred Stones",
     "class": "fighter",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 4,
     "gender": "male",
@@ -302,16 +476,45 @@
     "baseWeaponRanks": {
       "axe": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Warrior",
+        "promoGains": {
+          "hp": 3,
+          "str": 1,
+          "mag": 1,
+          "skl": 2,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 3,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Hero",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 2,
+          "spd": 2,
+          "def": 2,
+          "res": 2,
+          "con": 3,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "neimi",
     "name": "Neimi",
     "game": "The Sacred Stones",
-    "class": "archer",
+    "class": "archer_f",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -340,7 +543,36 @@
     "baseWeaponRanks": {
       "bow": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Sniper",
+        "promoGains": {
+          "hp": 4,
+          "str": 3,
+          "mag": 3,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Ranger",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 1,
+          "def": 3,
+          "res": 3,
+          "con": 2,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -349,7 +581,7 @@
     "game": "The Sacred Stones",
     "class": "thief",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 2,
     "gender": "male",
@@ -378,7 +610,36 @@
     "baseWeaponRanks": {
       "sword": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Assassin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Rogue",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 0
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -387,7 +648,7 @@
     "game": "The Sacred Stones",
     "class": "monk",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 2,
     "gender": "male",
@@ -416,16 +677,45 @@
     "baseWeaponRanks": {
       "light": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Bishop",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 3,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Sage",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 0,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "lute",
     "name": "Lute",
     "game": "The Sacred Stones",
-    "class": "mage",
+    "class": "mage_f",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -454,7 +744,36 @@
     "baseWeaponRanks": {
       "anima": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Sage",
+        "promoGains": {
+          "hp": 3,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Mage Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -463,7 +782,7 @@
     "game": "The Sacred Stones",
     "class": "cleric",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -492,16 +811,45 @@
     "baseWeaponRanks": {
       "staff": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Bishop",
+        "promoGains": {
+          "hp": 3,
+          "str": 1,
+          "mag": 1,
+          "skl": 2,
+          "spd": 1,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Valkyrie",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "joshua",
     "name": "Joshua",
     "game": "The Sacred Stones",
-    "class": "myrmidon",
+    "class": "myrmidon_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 5,
     "gender": "male",
@@ -530,16 +878,45 @@
     "baseWeaponRanks": {
       "sword": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Swordmaster",
+        "promoGains": {
+          "hp": 5,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 0,
+          "def": 2,
+          "res": 1,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Assassin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "ephraim",
     "name": "Ephraim",
     "game": "The Sacred Stones",
-    "class": "lord",
+    "class": "lord_ephraim",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 4,
     "gender": "male",
@@ -568,16 +945,31 @@
     "baseWeaponRanks": {
       "lance": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Great Lord",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 3,
+          "spd": 2,
+          "def": 2,
+          "res": 5,
+          "con": 2,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "forde",
     "name": "Forde",
     "game": "The Sacred Stones",
-    "class": "cavalier",
+    "class": "cavalier_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 6,
     "gender": "male",
@@ -607,16 +999,45 @@
       "sword": "D",
       "lance": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Paladin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Great Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 2,
+          "res": 1,
+          "con": 0,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "kyle",
     "name": "Kyle",
     "game": "The Sacred Stones",
-    "class": "cavalier",
+    "class": "cavalier_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 5,
     "gender": "male",
@@ -646,16 +1067,45 @@
       "sword": "D",
       "lance": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Paladin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Great Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 2,
+          "res": 1,
+          "con": 0,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "orson",
     "name": "Orson",
     "game": "The Sacred Stones",
-    "class": "paladin",
+    "class": "paladin_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 3,
     "gender": "male",
@@ -694,7 +1144,7 @@
     "game": "The Sacred Stones",
     "class": "pegasus_knight",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 4,
     "gender": "female",
@@ -723,7 +1173,36 @@
     "baseWeaponRanks": {
       "lance": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Falcon Knight",
+        "promoGains": {
+          "hp": 5,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 2,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Wyvern Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 2,
+          "def": 1,
+          "res": 1,
+          "con": 4,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -732,7 +1211,7 @@
     "game": "The Sacred Stones",
     "class": "recruit",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -761,16 +1240,59 @@
     "baseWeaponRanks": {
       "lance": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Cavalier",
+        "promoGains": {
+          "hp": 1,
+          "str": 0,
+          "mag": 0,
+          "skl": 2,
+          "spd": 2,
+          "def": 0,
+          "res": 2,
+          "con": 3,
+          "mov": 3
+        }
+      },
+      {
+        "class": "Knight",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 0,
+          "con": 4,
+          "mov": 0
+        }
+      },
+      {
+        "class": "Recruit",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 0,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "innes",
     "name": "Innes",
     "game": "The Sacred Stones",
-    "class": "sniper",
+    "class": "sniper_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -806,9 +1328,9 @@
     "id": "gerik",
     "name": "Gerik",
     "game": "The Sacred Stones",
-    "class": "mercenary",
+    "class": "mercenary_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 10,
     "gender": "male",
@@ -837,7 +1359,36 @@
     "baseWeaponRanks": {
       "sword": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Hero",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 2,
+          "spd": 2,
+          "def": 2,
+          "res": 2,
+          "con": 3,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Ranger",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 1,
+          "def": 3,
+          "res": 3,
+          "con": 2,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -846,7 +1397,7 @@
     "game": "The Sacred Stones",
     "class": "dancer",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -880,9 +1431,9 @@
     "id": "marisa",
     "name": "Marisa",
     "game": "The Sacred Stones",
-    "class": "myrmidon",
+    "class": "myrmidon_f",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 5,
     "gender": "female",
@@ -911,7 +1462,36 @@
     "baseWeaponRanks": {
       "sword": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Swordmaster",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 1,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Assassin",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 1,
+          "def": 2,
+          "res": 1,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -920,7 +1500,7 @@
     "game": "The Sacred Stones",
     "class": "troubadour",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 3,
     "gender": "female",
@@ -949,7 +1529,36 @@
     "baseWeaponRanks": {
       "staff": "D"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Valkyrie",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Mage Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 2,
+          "mag": 2,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -958,7 +1567,7 @@
     "game": "The Sacred Stones",
     "class": "berserker",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -994,9 +1603,9 @@
     "id": "saleh",
     "name": "Saleh",
     "game": "The Sacred Stones",
-    "class": "sage",
+    "class": "sage_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -1027,7 +1636,36 @@
       "light": "B",
       "staff": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Sage",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 0,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Mage Knight",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 2,
+          "mov": 2
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -1036,7 +1674,7 @@
     "game": "The Sacred Stones",
     "class": "pupil",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -1065,7 +1703,50 @@
     "baseWeaponRanks": {
       "anima": "E"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Sage",
+        "promoGains": {
+          "hp": 4,
+          "str": 1,
+          "mag": 1,
+          "skl": 0,
+          "spd": 0,
+          "def": 3,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Shaman",
+        "promoGains": {
+          "hp": 1,
+          "str": 2,
+          "mag": 2,
+          "skl": 0,
+          "spd": 1,
+          "def": 1,
+          "res": 2,
+          "con": 2,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Pupil",
+        "promoGains": {
+          "hp": 2,
+          "str": 1,
+          "mag": 1,
+          "skl": 1,
+          "spd": 0,
+          "def": 2,
+          "res": 2,
+          "con": 0,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -1074,7 +1755,7 @@
     "game": "The Sacred Stones",
     "class": "wyvern_rider",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 9,
     "gender": "male",
@@ -1103,7 +1784,36 @@
     "baseWeaponRanks": {
       "lance": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Wyvern Lord",
+        "promoGains": {
+          "hp": 4,
+          "str": 2,
+          "mag": 2,
+          "skl": 2,
+          "spd": 0,
+          "def": 2,
+          "res": 0,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Wyvern Knight",
+        "promoGains": {
+          "hp": 3,
+          "str": 1,
+          "mag": 1,
+          "skl": 2,
+          "spd": 3,
+          "def": 0,
+          "res": 1,
+          "con": 0,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
@@ -1112,7 +1822,7 @@
     "game": "The Sacred Stones",
     "class": "rogue",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "male",
@@ -1148,9 +1858,9 @@
     "id": "duessel",
     "name": "Duessel",
     "game": "The Sacred Stones",
-    "class": "great_knight",
+    "class": "great_knight_m",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 8,
     "gender": "male",
@@ -1190,7 +1900,7 @@
     "game": "The Sacred Stones",
     "class": "shaman",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 10,
     "gender": "male",
@@ -1219,16 +1929,45 @@
     "baseWeaponRanks": {
       "dark": "C"
     },
-    "promotions": [],
+    "promotions": [
+      {
+        "class": "Druid",
+        "promoGains": {
+          "hp": 4,
+          "str": 0,
+          "mag": 0,
+          "skl": 0,
+          "spd": 3,
+          "def": 2,
+          "res": 2,
+          "con": 1,
+          "mov": 1
+        }
+      },
+      {
+        "class": "Summoner",
+        "promoGains": {
+          "hp": 3,
+          "str": 0,
+          "mag": 0,
+          "skl": 1,
+          "spd": 3,
+          "def": 1,
+          "res": 3,
+          "con": 1,
+          "mov": 1
+        }
+      }
+    ],
     "prf": []
   },
   {
     "id": "myrrh",
     "name": "Myrrh",
     "game": "The Sacred Stones",
-    "class": "manakete",
+    "class": "manakete_f",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",
@@ -1264,7 +2003,7 @@
     "game": "The Sacred Stones",
     "class": "falcoknight",
     "joinChapter": [
-      "1"
+      "Chapter 1"
     ],
     "level": 1,
     "gender": "female",

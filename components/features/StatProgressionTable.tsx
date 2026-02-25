@@ -20,7 +20,7 @@ function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Arr
   if (!classObj || !classObj.promotesTo || classObj.promotesTo.length === 0) {
     return [];
   }
-  
+
   return classObj.promotesTo.map(classId => {
     const targetClass = classes.find(c => c.id === classId);
     return {
@@ -37,7 +37,7 @@ function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: Promotio
   if (promotionEvents.length === 0) {
     return classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
   }
-  
+
   // Find the most recent promotion event
   const latestEvent = promotionEvents[promotionEvents.length - 1];
   return classes.find(c => c.id === latestEvent.selectedClassId);
@@ -148,11 +148,12 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
         const unitProgression = allProgressions[unitIndex];
         const levelData = unitProgression[i];
 
-        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
         const isUnitSkipped = levelData?.isSkipped ?? false;
         rowData.unitSkipped.push(isUnitSkipped);
 
-        if (!(isUnitSkipped || currentInternalLevel < effectiveUnitLevel)) {
+        // A unit has valid data for this row if it's not marked skipped
+        // and we've reached at least their starting level.
+        if (!(isUnitSkipped || currentInternalLevel < unit.level)) {
           allUnitsShowDash = false;
         }
 
@@ -299,7 +300,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
           const canPromote = !unit.isPromoted && unitClass?.type !== 'promoted' && (unitClass?.promotesTo?.length ?? 0) > 0;
           const hasBranchingOptions = hasBranchingPromotions(unitClass);
           const promotionOptions = getPromotionOptions(unitClass, classes);
-          
+
           return (
             <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
               <label htmlFor={`promo-${unit.id}`} className="text-sm text-gray-700">{unit.name}:</label>
@@ -323,7 +324,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                     <option key={level} value={level}>{level}</option>
                   ))}
               </select>
-              
+
               {hasBranchingOptions && promotionOptions.length > 0 && (
                 <select
                   id={`promo-class-${unit.id}`}
@@ -557,8 +558,7 @@ export function StatProgressionTable({ units }: StatProgressionTableProps) {
                         }
 
                         const isUnitSkipped = row.unitSkipped[unitIndex];
-                        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-                        const shouldShowDash = isUnitSkipped || row.internalLevel < effectiveUnitLevel;
+                        const shouldShowDash = isUnitSkipped || row.internalLevel < unit.level;
 
                         let isHighest = false;
                         let isEqual = false;
