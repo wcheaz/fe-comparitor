@@ -27,6 +27,11 @@ export interface PromotionEvent {
   selectedClassId: string;
 }
 
+export interface PromotionEvent {
+  level: number;
+  selectedClassId: string;
+}
+
 export interface Unit {
   id: string;
   name: string;

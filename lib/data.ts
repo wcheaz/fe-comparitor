@@ -12,11 +12,12 @@ export async function getAllUnits(): Promise<Unit[]> {
 
   try {
     // Import all JSON data files
-    const [bindingBladeUnits, threeHousesUnits, engageUnits, blazingBladeUnits] = await Promise.all([
+    const [bindingBladeUnits, threeHousesUnits, engageUnits, blazingBladeUnits, sacredStonesUnits] = await Promise.all([
       import('@/data/binding_blade/units.json').then(m => m.default),
       import('@/data/three_houses/units.json').then(m => m.default),
       import('@/data/engage/units.json').then(m => m.default),
-      import('@/data/blazing_blade/units.json').then(m => m.default).catch(() => []) // Handle case where file might not exist yet during testing
+      import('@/data/blazing_blade/units.json').then(m => m.default).catch(() => []),
+      import('@/data/sacred_stones/units.json').then(m => m.default).catch(() => [])
     ]);
 
     // Transform and merge all units
@@ -24,7 +25,8 @@ export async function getAllUnits(): Promise<Unit[]> {
       ...bindingBladeUnits.map(transformJsonToUnit),
       ...threeHousesUnits.map(transformJsonToUnit),
       ...engageUnits.map(transformJsonToUnit),
-      ...blazingBladeUnits.map(transformJsonToUnit)
+      ...blazingBladeUnits.map(transformJsonToUnit),
+      ...sacredStonesUnits.map(transformJsonToUnit)
     ];
 
     unitsCache = allUnits;
@@ -62,11 +64,12 @@ export async function getAllClasses(): Promise<Class[]> {
 
   try {
     // Import all class JSON data files
-    const [bindingBladeClasses, threeHousesClasses, engageClasses, blazingBladeClasses] = await Promise.all([
+    const [bindingBladeClasses, threeHousesClasses, engageClasses, blazingBladeClasses, sacredStonesClasses] = await Promise.all([
       import('@/data/binding_blade/classes.json').then(m => m.default),
       import('@/data/three_houses/classes.json').then(m => m.default),
       import('@/data/engage/classes.json').then(m => m.default),
-      import('@/data/blazing_blade/classes.json').then(m => m.default).catch(() => [])
+      import('@/data/blazing_blade/classes.json').then(m => m.default).catch(() => []),
+      import('@/data/sacred_stones/classes.json').then(m => m.default).catch(() => [])
     ]);
 
     // Transform and merge all classes
@@ -74,7 +77,8 @@ export async function getAllClasses(): Promise<Class[]> {
       ...bindingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Binding Blade')),
       ...threeHousesClasses.map((c: any) => transformJsonToClass(c, 'Three Houses')),
       ...engageClasses.map((c: any) => transformJsonToClass(c, 'Engage')),
-      ...blazingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Blazing Blade'))
+      ...blazingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Blazing Blade')),
+      ...sacredStonesClasses.map((c: any) => transformJsonToClass(c, 'The Sacred Stones'))
     ];
 
     classesCache = allClasses;

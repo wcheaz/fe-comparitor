@@ -18,6 +18,7 @@ const GAME_OPTIONS = [
   { value: 'all', label: 'All Games' },
   { value: 'The Binding Blade', label: 'Fire Emblem: Binding Blade' },
   { value: 'The Blazing Blade', label: 'Fire Emblem: Blazing Blade' },
+  { value: 'The Sacred Stones', label: 'Fire Emblem: The Sacred Stones' },
   { value: 'Three Houses', label: 'Fire Emblem: Three Houses' },
   { value: 'Engage', label: 'Fire Emblem: Engage' }
 ];
