@@ -210,7 +210,7 @@ function transformJsonToClass(rawClass: any, game: string): Class {
     promotionBonus,
     promotesTo: rawClass.promotesTo || [],
     weapons: rawClass.weapons || [],
-    hiddenModifiers: rawClass.hiddenModifiers || [],
+    classAbilities: rawClass.classAbilities || rawClass.hiddenModifiers || [],
     gender: rawClass.gender,
     maxStats: rawClass.maxStats,
     movementType: rawClass.movementType,

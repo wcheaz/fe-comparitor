@@ -212,7 +212,7 @@ export function generateProgressionArray(
   isPromotionLevel: boolean;
   promotionInfo?: {
     className: string;
-    hiddenModifiers: string[];
+    classAbilities: string[];
   };
   cappedStats: Record<string, boolean>;
   isSkipped?: boolean;
@@ -309,7 +309,7 @@ export function generateProgressionArray(
           if (promotedClass) {
             promotionInfo = {
               className: promotedClass.name,
-              hiddenModifiers: promotedClass.hiddenModifiers || []
+              classAbilities: promotedClass.classAbilities || []
             };
           }
         }

@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 In `types/unit.ts`, rename `hiddenModifiers: string[]` to `classAbilities: string[]` on the `Class` interface

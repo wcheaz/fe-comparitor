@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/add-branching-promotions/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/class-abilities-field/tasks.md

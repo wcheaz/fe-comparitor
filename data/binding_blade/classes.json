@@ -18,7 +18,7 @@
         "promotesTo": [
             "great_lord"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords"
         ],
@@ -67,7 +67,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Lord"
         ],
         "weapons": [
@@ -111,7 +111,7 @@
         "promotesTo": [
             "hero_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords"
         ],
@@ -152,7 +152,7 @@
         "promotesTo": [
             "hero_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords"
         ],
@@ -200,7 +200,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Axes",
             "Swords"
@@ -249,7 +249,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Axes",
             "Swords"
@@ -291,7 +291,7 @@
         "promotesTo": [
             "swordmaster_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords"
         ],
@@ -332,7 +332,7 @@
         "promotesTo": [
             "swordmaster_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords"
         ],
@@ -380,7 +380,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+30 Crit"
         ],
         "weapons": [
@@ -431,7 +431,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+30 Crit"
         ],
         "weapons": [
@@ -475,7 +475,7 @@
         "promotesTo": [
             "paladin_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -517,7 +517,7 @@
         "promotesTo": [
             "paladin_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -566,7 +566,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -615,7 +615,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -657,7 +657,7 @@
         "promotesTo": [
             "general_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances"
         ],
@@ -698,7 +698,7 @@
         "promotesTo": [
             "general_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances"
         ],
@@ -746,7 +746,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances",
             "Axes"
@@ -795,7 +795,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances",
             "Axes"
@@ -837,7 +837,7 @@
         "promotesTo": [
             "sniper_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows"
         ],
@@ -878,7 +878,7 @@
         "promotesTo": [
             "sniper_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows"
         ],
@@ -926,7 +926,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+15 Crit"
         ],
         "weapons": [
@@ -976,7 +976,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+15 Crit"
         ],
         "weapons": [
@@ -1019,7 +1019,7 @@
         "promotesTo": [
             "falcoknight_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -1068,7 +1068,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -1110,7 +1110,7 @@
         "promotesTo": [
             "sage_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Anima"
         ],
@@ -1152,7 +1152,7 @@
         "promotesTo": [
             "sage_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Anima"
         ],
@@ -1201,7 +1201,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Anima",
             "Light",
@@ -1252,7 +1252,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Anima",
             "Light",
@@ -1296,7 +1296,7 @@
         "promotesTo": [
             "bishop_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Staves"
         ],
@@ -1337,7 +1337,7 @@
         "promotesTo": [
             "bishop_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Staves"
         ],
@@ -1385,7 +1385,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+10 Magic",
             "+10 Resistance"
         ],
@@ -1438,7 +1438,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+10 Magic",
             "+10 Resistance"
         ],
@@ -1482,27 +1482,13 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Locktouch"
+        "classAbilities": [
+            "Locktouch",
+            "Steal"
         ],
         "weapons": [
             "Swords"
         ],
-        "maxStats": {
-            "hp": 60,
-            "str": 20,
-            "mag": 20,
-            "skl": 20,
-            "dex": 20,
-            "spd": 20,
-            "lck": 30,
-            "def": 20,
-            "res": 20,
-            "con": 20,
-            "bld": 20,
-            "mov": 15,
-            "cha": 30
-        },
         "gender": "M",
         "movementType": "Infantry",
         "description": "Can pick locks, steal items, and have increased vision in Fog of War."
@@ -1524,8 +1510,9 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Locktouch"
+        "classAbilities": [
+            "Locktouch",
+            "Steal"
         ],
         "weapons": [
             "Swords"
@@ -1568,7 +1555,7 @@
         "promotesTo": [
             "wyvern_lord_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances"
         ],
@@ -1607,7 +1594,7 @@
         "promotesTo": [
             "wyvern_lord_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances"
         ],
@@ -1653,7 +1640,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances",
             "Swords"
@@ -1700,7 +1687,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances",
             "Swords"
@@ -1740,7 +1727,7 @@
         "promotesTo": [
             "warrior_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Axes"
         ],
@@ -1786,7 +1773,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Axes",
             "Bows"
@@ -1826,8 +1813,8 @@
         "promotesTo": [
             "berserker_m"
         ],
-        "hiddenModifiers": [
-            "Peak Walk"
+        "classAbilities": [
+            "Mountain Walk"
         ],
         "weapons": [
             "Axes"
@@ -1867,7 +1854,7 @@
         "promotesTo": [
             "berserker_m"
         ],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Water Walk"
         ],
         "weapons": [
@@ -1915,10 +1902,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
-            "Peak Walk",
-            "Water Walk",
-            "+30 Crit"
+        "classAbilities": [
+            "+30 Crit",
+            "Water Walk"
         ],
         "weapons": [
             "Axes"
@@ -1958,7 +1944,7 @@
         "promotesTo": [
             "nomad_trooper_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows"
         ],
@@ -1998,7 +1984,7 @@
         "promotesTo": [
             "nomad_trooper_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows"
         ],
@@ -2045,7 +2031,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows",
             "Swords"
@@ -2093,7 +2079,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows",
             "Swords"
@@ -2134,7 +2120,7 @@
         "promotesTo": [
             "druid_m"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Dark"
         ],
@@ -2174,7 +2160,7 @@
         "promotesTo": [
             "druid_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Dark"
         ],
@@ -2221,7 +2207,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Dark",
             "Staves"
@@ -2269,7 +2255,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Dark",
             "Staves"
@@ -2310,7 +2296,7 @@
         "promotesTo": [
             "valkyrie_f"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Staves"
         ],
@@ -2356,7 +2342,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Light",
             "Staves"
@@ -2394,7 +2380,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Dance"
         ],
         "weapons": [],
@@ -2431,7 +2417,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Play"
         ],
         "weapons": [],
@@ -2468,7 +2454,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Dragon"
         ],
         "weapons": [
