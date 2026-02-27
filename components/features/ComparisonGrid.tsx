@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class, PromotionEvent } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
+import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import { Info } from 'lucide-react';
@@ -10,6 +11,7 @@ import { Modal } from '@/components/ui/modal';
 import { getAffinityByName, calculateSupportBonuses } from '@/lib/affinities';
 import { getMovementByName } from '@/lib/movements';
 import { getWeaponByName } from '@/lib/weapons';
+import { cn } from '@/lib/utils';
 
 interface ComparisonGridProps {
   units: Unit[];
@@ -331,6 +333,36 @@ export function ComparisonGrid({
           </div>
         </div>
 
+        {promoClass.classAbilities && promoClass.classAbilities.length > 0 && (
+          <div className="pt-2">
+            <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
+            <div className="flex flex-wrap gap-2">
+              {promoClass.classAbilities.map((ability, index) => {
+                let variant: 'default' | 'stat' | 'weapon' = 'default';
+                if (ability.startsWith('+')) {
+                  variant = 'stat';
+                } else if (['Swords', 'Lances', 'Axes', 'Bows', 'Light', 'Dark', 'Anima', 'Staves'].includes(ability)) {
+                  variant = 'weapon';
+                }
+
+                return (
+                  <span
+                    key={index}
+                    className={cn(
+                      "inline-flex items-center justify-center rounded-full text-xs font-medium border h-6 py-1 px-2",
+                      variant === 'stat' && "bg-fe-blue-100 text-fe-blue-900 border-fe-blue-300",
+                      variant === 'weapon' && "bg-fe-green-100 text-fe-blue-900 border-fe-green-300",
+                      variant === 'default' && "bg-fe-gold-100 text-fe-blue-900 border-fe-gold-300"
+                    )}
+                  >
+                    {ability}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <div className="pt-4 border-t">
           <h3 className="text-lg font-semibold mb-1">Movement Type</h3>
           <div className="flex flex-wrap gap-2">
@@ -481,6 +513,23 @@ export function ComparisonGrid({
                     </td>
                   ))}
                 </tr>
+                {/* Class Abilities Row */}
+                {units.some(unit => {
+                  const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
+                  return cls && cls.classAbilities && cls.classAbilities.length > 0;
+                }) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Class Abilities</td>
+                    {units.map((unit) => (
+                      <td key={`abilities-${unit.id}`} className="text-center p-2 align-top">
+                        <ClassAbilitiesRow 
+                          unit={unit} 
+                          classes={classes} 
+                        />
+                      </td>
+                    ))}
+                  </tr>
+                )}
                 {units.some(u => {
                   const cls = classes.find(c => (c.id === u.class.toLowerCase().replace(/\s+/g, '_') || c.name === u.class) && c.game === u.game);
                   return cls && cls.promotesTo && cls.promotesTo.length > 0;

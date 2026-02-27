@@ -11,7 +11,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 20, str: 6, skl: 8, spd: 7, lck: 5, def: 5, res: 0, con: 7, mov: 5 },
     promotionBonus: { hp: 8, str: 3, skl: 4, spd: 3, lck: 2, def: 3, res: 2, con: 2, mov: 1 },
     promotesTo: ['hero'],
-    hiddenModifiers: []
+    classAbilities: []
   },
   {
     id: 'hero',
@@ -21,7 +21,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 28, str: 9, skl: 12, spd: 10, lck: 7, def: 8, res: 2, con: 9, mov: 6 },
     promotionBonus: {},
     promotesTo: [],
-    hiddenModifiers: ['Axes']
+    classAbilities: ['Axes']
   },
   {
     id: 'paladin',
@@ -31,7 +31,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 30, str: 11, skl: 10, spd: 10, lck: 8, def: 10, res: 5, con: 11, mov: 8 },
     promotionBonus: {},
     promotesTo: [],
-    hiddenModifiers: ['Horse', 'Axes', 'Lances']
+    classAbilities: ['Horse', 'Axes', 'Lances']
   }
 ];
 
@@ -152,8 +152,8 @@ describe('Stat Progression Logic', () => {
       // Hero class has HP base of 28
       expect(afterPromotionStats.hp).toBeGreaterThanOrEqual(28);
 
-      // Check that hidden modifiers are included on the promotion level row
-      expect(beforePromotion.promotionInfo?.hiddenModifiers).toContain('Axes');
+      // Check that class abilities are included on the promotion level row
+      expect(beforePromotion.promotionInfo?.classAbilities).toContain('Axes');
     });
 
     // Task 5.4: Verify that Pre-promoted units start their display properly without throwing errors
@@ -290,7 +290,7 @@ describe('Stat Progression Logic', () => {
         },
         promotionBonus: {},
         promotesTo: [],
-        hiddenModifiers: [],
+        classAbilities: [],
         weapons: ['Sword', 'Lance', 'Axe'],
         maxStats: {
           hp: 60,
@@ -386,7 +386,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2, con: 8, mov: 7 },
           promotionBonus: { hp: 10, str: 4, skl: 3, spd: 3, lck: 2, def: 4, res: 3, con: 2, mov: 1 },
           promotesTo: ['paladin', 'great_knight'], // Branching promotion options
-          hiddenModifiers: []
+          classAbilities: []
         },
         {
           id: 'paladin',
@@ -396,7 +396,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 30, str: 10, skl: 10, spd: 11, lck: 7, def: 10, res: 5, con: 10, mov: 8 },
           promotionBonus: {},
           promotesTo: [],
-          hiddenModifiers: ['Horse', 'Swords', 'Lances']
+          classAbilities: ['Horse', 'Swords', 'Lances']
         },
         {
           id: 'great_knight',
@@ -406,7 +406,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 32, str: 12, skl: 8, spd: 7, lck: 7, def: 12, res: 8, con: 12, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
-          hiddenModifiers: ['Horse', 'Swords', 'Axes', 'Lances']
+          classAbilities: ['Horse', 'Swords', 'Axes', 'Lances']
         }
       ];
 

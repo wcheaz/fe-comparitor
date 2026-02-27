@@ -59,7 +59,7 @@ interface ProgressionRow {
   isSkipped?: boolean;
   promotionInfo?: {
     className: string;
-    hiddenModifiers: string[];
+    classAbilities: string[];
   };
 }
 
@@ -130,7 +130,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
 
       let rowDisplayLevel = `Level ${currentInternalLevel}`;
       let rowIsPromotionLevel = false;
-      let rowPromotionInfo: { className: string; hiddenModifiers: string[] } | undefined;
+      let rowPromotionInfo: { className: string; classAbilities: string[] } | undefined;
 
       const rowData: ProgressionRow = {
         internalLevel: currentInternalLevel,

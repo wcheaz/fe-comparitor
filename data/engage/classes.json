@@ -19,7 +19,7 @@
         "promotesTo": [
             "divine_dragon"
         ],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Dragon",
             "Divine Weapon"
         ],
@@ -70,7 +70,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Dragon",
             "Divine Weapon",
             "Emblem"
@@ -114,7 +114,7 @@
             "swordmaster",
             "hero"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -162,7 +162,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Swordmaster",
             "+30 Crit",
             "Lunge"
@@ -214,7 +214,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Axes"
@@ -257,7 +257,7 @@
             "paladin",
             "great_knight"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -305,7 +305,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -356,7 +356,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Lances",
             "Axes"
@@ -399,7 +399,7 @@
             "warrior",
             "hero"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -447,7 +447,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Axes",
             "Bows"
@@ -490,7 +490,7 @@
             "sniper",
             "bow_knight"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -538,7 +538,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "+15 Crit",
             "Ceiling Shot"
         ],
@@ -591,7 +591,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Bows"
         ],
@@ -633,7 +633,7 @@
             "sage",
             "mystery_knight"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Tomes"
         ],
@@ -683,7 +683,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Cantrips"
         ],
         "weapons": [
@@ -736,7 +736,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Tomes"
         ],
@@ -777,7 +777,7 @@
         "promotesTo": [
             "falcoknight"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -828,7 +828,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Resonance"
         ],
         "weapons": [
@@ -872,7 +872,7 @@
         "promotesTo": [
             "general"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -919,7 +919,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Pavise"
         ],
         "weapons": [
@@ -963,7 +963,7 @@
         "promotesTo": [
             "high_priest"
         ],
-        "hiddenModifiers": [],
+        "classAbilities": [],
         "weapons": [
             "Staves"
         ],
@@ -1013,7 +1013,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Nosferatu",
             "Warp"
         ],
@@ -1057,7 +1057,7 @@
         "promotesTo": [
             "rogue"
         ],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Locktouch",
             "Steal"
         ],
@@ -1108,7 +1108,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "hiddenModifiers": [
+        "classAbilities": [
             "Locktouch",
             "Steal",
             "+20 Avoid"

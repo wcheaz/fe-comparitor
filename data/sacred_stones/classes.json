@@ -171,7 +171,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "+15 Crit"
+    ],
     "weapons": [
       "Lance"
     ],
@@ -389,7 +391,8 @@
       "rogue"
     ],
     "classAbilities": [
-      "Locktouch"
+      "Locktouch",
+      "Steal"
     ],
     "weapons": [
       "Sword"
@@ -724,7 +727,9 @@
       "sage_m",
       "pupil_3"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "All Magic Types"
+    ],
     "weapons": [
       "Anima"
     ],
@@ -768,7 +773,9 @@
       "mov": 6
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Anima",
       "Dark",
@@ -1086,7 +1093,9 @@
       "hero_m",
       "journeyman_3"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "+15 Crit"
+    ],
     "weapons": [
       "Axe"
     ],
@@ -1130,7 +1139,9 @@
       "mov": 6
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "+15 Crit"
+    ],
     "weapons": [
       "Axe"
     ],
@@ -1434,7 +1445,9 @@
       "mov": 8
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Sword",
       "Lance",
@@ -1480,7 +1493,9 @@
       "mov": 8
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Sword",
       "Lance",
@@ -1526,7 +1541,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Sword",
       "Axe"
@@ -1571,7 +1588,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Sword",
       "Axe"
@@ -1616,7 +1635,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Great Shield"
+    ],
     "weapons": [
       "Lance",
       "Axe",
@@ -1662,7 +1683,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Great Shield"
+    ],
     "weapons": [
       "Lance",
       "Axe",
@@ -1757,6 +1780,7 @@
     },
     "promotesTo": [],
     "classAbilities": [
+      "Pick",
       "Steal"
     ],
     "weapons": [
@@ -1984,7 +2008,9 @@
       "mov": 6
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Sure Strike"
+    ],
     "weapons": [
       "Bow"
     ],
@@ -2028,7 +2054,9 @@
       "mov": 6
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Sure Strike"
+    ],
     "weapons": [
       "Bow"
     ],
@@ -2072,7 +2100,9 @@
       "mov": 8
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Bow",
       "Sword"
@@ -2117,7 +2147,9 @@
       "mov": 8
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Bow",
       "Sword"
@@ -2162,7 +2194,9 @@
       "mov": 7
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Sword",
       "Lance"
@@ -2295,17 +2329,19 @@
     "name": "Mage Knight",
     "type": "promoted",
     "baseStats": {
-      "hp": 16,
-      "str": 1,
-      "skl": 2,
-      "spd": 3,
-      "def": 3,
-      "res": 3,
-      "con": 6,
+      "hp": 20,
+      "str": 5,
+      "skl": 4,
+      "spd": 4,
+      "def": 5,
+      "res": 5,
+      "con": 7,
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Staff",
       "Anima"
@@ -2340,17 +2376,19 @@
     "name": "Mage Knight",
     "type": "promoted",
     "baseStats": {
-      "hp": 16,
-      "str": 1,
-      "skl": 3,
-      "spd": 2,
-      "def": 2,
-      "res": 4,
-      "con": 3,
+      "hp": 19,
+      "str": 4,
+      "skl": 6,
+      "spd": 5,
+      "def": 3,
+      "res": 6,
+      "con": 4,
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Canto"
+    ],
     "weapons": [
       "Staff",
       "Anima"
@@ -2441,7 +2479,9 @@
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Summon"
+    ],
     "weapons": [
       "Staff",
       "Dark"
@@ -2477,16 +2517,18 @@
     "type": "promoted",
     "baseStats": {
       "hp": 18,
-      "str": 1,
-      "skl": 6,
-      "spd": 9,
-      "def": 2,
+      "str": 2,
+      "skl": 3,
+      "spd": 4,
+      "def": 4,
       "res": 5,
       "con": 9,
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Slayer"
+    ],
     "weapons": [
       "Staff",
       "Light"
@@ -2523,15 +2565,17 @@
     "baseStats": {
       "hp": 16,
       "str": 2,
-      "skl": 4,
-      "spd": 8,
-      "def": 0,
+      "skl": 5,
+      "spd": 4,
+      "def": 2,
       "res": 6,
       "con": 4,
       "mov": 5
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Slayer"
+    ],
     "weapons": [
       "Staff",
       "Light"
@@ -2759,7 +2803,10 @@
       "mov": 7
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Pierce",
+      "Canto"
+    ],
     "weapons": [
       "Lance"
     ],
@@ -2803,7 +2850,10 @@
       "mov": 7
     },
     "promotesTo": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Pierce",
+      "Canto"
+    ],
     "weapons": [
       "Lance"
     ],
@@ -2848,7 +2898,7 @@
     },
     "promotesTo": [],
     "classAbilities": [
-      "Play"
+      "Dance"
     ],
     "weapons": [],
     "maxStats": {

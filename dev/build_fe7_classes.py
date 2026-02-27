@@ -49,8 +49,8 @@ expected_classes = {
     "cavalier_f": {"name": "Cavalier", "weapons": ["Swords", "Lances"], "promotesTo": ["paladin_f"], "movementType": "Cavalry"},
     "knight_m": {"name": "Knight", "weapons": ["Lances"], "promotesTo": ["general_m"], "movementType": "Armored"},
     "knight_f": {"name": "Knight", "weapons": ["Lances"], "promotesTo": ["general_f"], "movementType": "Armored"},
-    "thief_m": {"name": "Thief", "weapons": ["Swords"], "promotesTo": ["assassin"], "hiddenModifiers": ["Locktouch"]},
-    "thief_f": {"name": "Thief", "weapons": ["Swords"], "promotesTo": ["assassin"], "hiddenModifiers": ["Locktouch"]},
+    "thief_m": {"name": "Thief", "weapons": ["Swords"], "promotesTo": ["assassin"], "classAbilities": ["Locktouch"]},
+    "thief_f": {"name": "Thief", "weapons": ["Swords"], "promotesTo": ["assassin"], "classAbilities": ["Locktouch"]},
     "mercenary_m": {"name": "Mercenary", "weapons": ["Swords"], "promotesTo": ["hero_m"]},
     "mercenary_f": {"name": "Mercenary", "weapons": ["Swords"], "promotesTo": ["hero_f"]},
     "myrmidon_m": {"name": "Myrmidon", "weapons": ["Swords"], "promotesTo": ["swordmaster_m"]},
@@ -60,9 +60,9 @@ expected_classes = {
     "nomad_m": {"name": "Nomad", "weapons": ["Bows"], "promotesTo": ["nomadic_trooper_m"], "movementType": "Cavalry"},
     "nomad_f": {"name": "Nomad", "weapons": ["Bows"], "promotesTo": ["nomadic_trooper_f"], "movementType": "Cavalry"},
     "fighter": {"name": "Fighter", "weapons": ["Axes"], "promotesTo": ["warrior"]},
-    "brigand": {"name": "Brigand", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "hiddenModifiers": ["Peak Walk"]},
-    "pirate": {"name": "Pirate", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "hiddenModifiers": ["Water Walk"]},
-    "corsair": {"name": "Corsair", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "hiddenModifiers": ["Water Walk"]},
+    "brigand": {"name": "Brigand", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "classAbilities": ["Peak Walk"]},
+    "pirate": {"name": "Pirate", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "classAbilities": ["Water Walk"]},
+    "corsair": {"name": "Corsair", "weapons": ["Axes"], "promotesTo": ["berserker"], "movementType": "Infantry", "classAbilities": ["Water Walk"]},
     "pegasus_knight": {"name": "Pegasus Knight", "weapons": ["Lances"], "promotesTo": ["falcon_knight"], "movementType": "Flying"},
     "wyvern_rider_m": {"name": "Wyvern Rider", "weapons": ["Lances"], "promotesTo": ["wyvern_lord_m"], "movementType": "Wyvern"},
     "wyvern_rider_f": {"name": "Wyvern Rider", "weapons": ["Lances"], "promotesTo": ["wyvern_lord_f"], "movementType": "Wyvern"},
@@ -76,8 +76,8 @@ expected_classes = {
     "soldier": {"name": "Soldier", "weapons": ["Lances"], "promotesTo": []},
     
     # Dancers / Bards
-    "dancer": {"name": "Dancer", "weapons": [], "promotesTo": [], "hiddenModifiers": ["Play"]},
-    "bard": {"name": "Bard", "weapons": [], "promotesTo": [], "hiddenModifiers": ["Play"]},
+    "dancer": {"name": "Dancer", "weapons": [], "promotesTo": [], "classAbilities": ["Play"]},
+    "bard": {"name": "Bard", "weapons": [], "promotesTo": [], "classAbilities": ["Play"]},
 
     # Promoted
     "knight_lord": {"name": "Knight Lord", "weapons": ["Sword", "Lance"], "movementType": "Cavalry", "type": "promoted"},
@@ -89,15 +89,15 @@ expected_classes = {
     "general_f": {"name": "General", "weapons": ["Lance", "Axe", "Sword"], "movementType": "Armored", "type": "promoted"},
     "hero_m": {"name": "Hero", "weapons": ["Sword", "Axe"], "type": "promoted"},
     "hero_f": {"name": "Hero", "weapons": ["Sword", "Axe"], "type": "promoted"},
-    "swordmaster_m": {"name": "Swordmaster", "weapons": ["Sword"], "hiddenModifiers": ["+15 Crit"], "type": "promoted"},
-    "swordmaster_f": {"name": "Swordmaster", "weapons": ["Sword"], "hiddenModifiers": ["+15 Crit"], "type": "promoted"},
-    "assassin": {"name": "Assassin", "weapons": ["Sword"], "hiddenModifiers": ["Silencer", "Locktouch", "Steal"], "type": "promoted"},
+    "swordmaster_m": {"name": "Swordmaster", "weapons": ["Sword"], "classAbilities": ["+15 Crit"], "type": "promoted"},
+    "swordmaster_f": {"name": "Swordmaster", "weapons": ["Sword"], "classAbilities": ["+15 Crit"], "type": "promoted"},
+    "assassin": {"name": "Assassin", "weapons": ["Sword"], "classAbilities": ["Silencer", "Locktouch", "Steal"], "type": "promoted"},
     "sniper_m": {"name": "Sniper", "weapons": ["Bow"], "type": "promoted"},
     "sniper_f": {"name": "Sniper", "weapons": ["Bow"], "type": "promoted"},
     "nomadic_trooper_m": {"name": "Nomadic Trooper", "weapons": ["Bow", "Sword"], "movementType": "Cavalry", "type": "promoted"},
     "nomadic_trooper_f": {"name": "Nomadic Trooper", "weapons": ["Bow", "Sword"], "movementType": "Cavalry", "type": "promoted"},
     "warrior": {"name": "Warrior", "weapons": ["Axe", "Bow"], "type": "promoted"},
-    "berserker": {"name": "Berserker", "weapons": ["Axe"], "hiddenModifiers": ["+15 Crit", "Peak Walk", "Water Walk"], "type": "promoted"},
+    "berserker": {"name": "Berserker", "weapons": ["Axe"], "classAbilities": ["+15 Crit", "Peak Walk", "Water Walk"], "type": "promoted"},
     "falcon_knight": {"name": "Falcon Knight", "weapons": ["Lance", "Sword"], "movementType": "Flying", "type": "promoted"},
     "wyvern_lord_m": {"name": "Wyvern Lord", "weapons": ["Lance", "Sword"], "movementType": "Wyvern", "type": "promoted"},
     "wyvern_lord_f": {"name": "Wyvern Lord", "weapons": ["Lance", "Sword"], "movementType": "Wyvern", "type": "promoted"},
@@ -168,7 +168,7 @@ for c_id, conf in expected_classes.items():
     else:
         c_obj["promotesTo"] = []
         
-    c_obj["hiddenModifiers"] = conf.get("hiddenModifiers", [])
+    c_obj["classAbilities"] = conf.get("hiddenModifiers", [])
     c_obj["weapons"] = conf.get("weapons", [])
     
     c_obj["maxStats"] = m
