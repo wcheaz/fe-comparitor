@@ -6,7 +6,7 @@ The system SHALL display a modal detailing the specific stat bonuses provided by
 #### Scenario: Opening the support bonuses modal
 - **WHEN** the user clicks on a support partner pill in the Unit Details table
 - **THEN** a modal opens.
-- **AND** the modal displays the specific bonuses (e.g., Attack, Defense, Hit, Avoid, Crit, Dodge) gained at each support level (C, B, A, S).
+- **AND** the modal displays the specific bonuses (e.g., Attack, Defense, Hit, Avoid, Crit, Dodge) gained at each support level (C, B, A).
 
 ### Requirement: Accurate Support Calculations
 The system SHALL accurately calculate the displayed support bonuses based on the specific game's mechanics and the affinities or specific paired bonuses of the units involved.
