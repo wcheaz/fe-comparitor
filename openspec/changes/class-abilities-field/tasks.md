@@ -1,29 +1,29 @@
 ## 1. TypeScript Interface & Data Layer
 
-- [ ] 1.1 In `types/unit.ts`, rename `hiddenModifiers: string[]` to `classAbilities: string[]` on the `Class` interface
-- [ ] 1.2 In `lib/data.ts` (`transformJsonToClass`), update the field mapping to: `classAbilities: rawClass.classAbilities || rawClass.hiddenModifiers || []`
-- [ ] 1.3 In `lib/stats.ts`, rename the `hiddenModifiers` field to `classAbilities` in the `ProgressionRow` promotion info type definition and all internal references
+- [x] 1.1 In `types/unit.ts`, rename `hiddenModifiers: string[]` to `classAbilities: string[]` on the `Class` interface
+- [x] 1.2 In `lib/data.ts` (`transformJsonToClass`), update the field mapping to: `classAbilities: rawClass.classAbilities || rawClass.hiddenModifiers || []`
+- [x] 1.3 In `lib/stats.ts`, rename the `hiddenModifiers` field to `classAbilities` in the `ProgressionRow` promotion info type definition and all internal references
 
 ## 2. JSON Data Migration — FE6 (Binding Blade)
 
-- [ ] 2.1 Rename `hiddenModifiers` → `classAbilities` in all entries of `data/binding_blade/classes.json`
-- [ ] 2.2 Set `classAbilities: ["+30 Crit"]` for Swordmaster (M and F variants)
-- [ ] 2.3 Set `classAbilities: ["+15 Crit"]` for Sniper (M and F variants)
-- [ ] 2.4 Set `classAbilities: ["+30 Crit", "Water Walk"]` for Berserker
-- [ ] 2.5 Set `classAbilities: ["Locktouch", "Steal"]` for Thief (M and F variants)
-- [ ] 2.6 Set `classAbilities: ["Silencer", "Locktouch", "Steal"]` for Assassin
-- [ ] 2.7 Set `classAbilities: ["Water Walk"]` for Pirate
-- [ ] 2.8 Set `classAbilities: ["Mountain Walk"]` for Brigand
-- [ ] 2.9 Set `classAbilities: ["Dance"]` for Dancer and `["Play"]` for Bard
+- [x] 2.1 Rename `hiddenModifiers` → `classAbilities` in all entries of `data/binding_blade/classes.json`
+- [x] 2.2 Set `classAbilities: ["+30 Crit"]` for Swordmaster (M and F variants)
+- [x] 2.3 Set `classAbilities: ["+15 Crit"]` for Sniper (M and F variants)
+- [x] 2.4 Set `classAbilities: ["+30 Crit", "Water Walk"]` for Berserker
+- [x] 2.5 Set `classAbilities: ["Locktouch", "Steal"]` for Thief (M and F variants)
+- [x] 2.6 Set `classAbilities: ["Silencer", "Locktouch", "Steal"]` for Assassin (not applicable - Assassin doesn't exist in FE6)
+- [x] 2.7 Set `classAbilities: ["Water Walk"]` for Pirate
+- [x] 2.8 Set `classAbilities: ["Mountain Walk"]` for Brigand
+- [x] 2.9 Set `classAbilities: ["Dance"]` for Dancer and `["Play"]` for Bard
 
 ## 3. JSON Data Migration — FE7 (Blazing Sword)
 
-- [ ] 3.1 Rename `hiddenModifiers` → `classAbilities` in all entries of `data/blazing_blade/classes.json`
-- [ ] 3.2 Set `classAbilities: ["+15 Crit"]` for Swordmaster (M and F variants)
-- [ ] 3.3 Set `classAbilities: ["+15 Crit"]` for Sniper (M and F variants)
-- [ ] 3.4 Set `classAbilities: ["+15 Crit", "Water Walk"]` for Berserker
-- [ ] 3.5 Set `classAbilities: ["Locktouch", "Steal"]` for Thief (M and F variants)
-- [ ] 3.6 Set `classAbilities: ["Silencer", "Locktouch", "Steal"]` for Assassin
+- [x] 3.1 Rename `hiddenModifiers` → `classAbilities` in all entries of `data/blazing_blade/classes.json`
+- [x] 3.2 Set `classAbilities: ["+15 Crit"]` for Swordmaster (M and F variants)
+- [x] 3.3 Set `classAbilities: ["+15 Crit"]` for Sniper (M and F variants)
+- [x] 3.4 Set `classAbilities: ["+15 Crit", "Water Walk"]` for Berserker
+- [x] 3.5 Set `classAbilities: ["Locktouch", "Steal"]` for Thief (M and F variants)
+- [/] 3.6 Set `classAbilities: ["Silencer", "Locktouch", "Steal"]` for Assassin
 - [ ] 3.7 Set `classAbilities: ["Water Walk"]` for Pirate and Corsair
 - [ ] 3.8 Set `classAbilities: ["Mountain Walk"]` for Brigand
 - [ ] 3.9 Set `classAbilities: ["Dance"]` for Dancer and `["Play"]` for Bard
