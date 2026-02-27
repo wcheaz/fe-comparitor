@@ -393,7 +393,7 @@
       "rogue"
     ],
     "classAbilities": [
-      "Locktouch",
+      "Lockpick",
       "Steal"
     ],
     "weapons": [
@@ -1735,7 +1735,7 @@
     "promotesTo": [],
     "classAbilities": [
       "Silencer",
-      "Locktouch",
+      "Lockpick",
       "Steal"
     ],
     "weapons": [
