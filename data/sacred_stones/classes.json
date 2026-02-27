@@ -127,7 +127,9 @@
       "paladin_f",
       "recruit_3"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "+15 Crit"
+    ],
     "weapons": [
       "Lance"
     ],
