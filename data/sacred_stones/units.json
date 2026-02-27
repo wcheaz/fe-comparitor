@@ -50,7 +50,17 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Ephraim",
+      "Seth",
+      "Saleh",
+      "L&#39;Arachel",
+      "Tana",
+      "Innes",
+      "Forde",
+      "L'Arachel"
+    ]
   },
   {
     "id": "seth",
@@ -89,7 +99,14 @@
       "lance": "A"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Franz",
+      "Garcia",
+      "Natasha",
+      "Cormag"
+    ]
   },
   {
     "id": "franz",
@@ -157,7 +174,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Seth",
+      "Gilliam",
+      "Forde",
+      "Amelia",
+      "Natasha"
+    ]
   },
   {
     "id": "gilliam",
@@ -224,7 +248,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Garcia",
+      "Franz",
+      "Syrene",
+      "Moulder",
+      "Neimi"
+    ]
   },
   {
     "id": "vanessa",
@@ -291,7 +322,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Moulder",
+      "Syrene",
+      "Lute",
+      "Forde",
+      "Innes"
+    ]
   },
   {
     "id": "moulder",
@@ -358,7 +396,13 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Gilliam",
+      "Vanessa",
+      "Colm",
+      "Syrene"
+    ]
   },
   {
     "id": "ross",
@@ -439,7 +483,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Garcia",
+      "Lute",
+      "Amelia",
+      "Ewan",
+      "Gerik"
+    ]
   },
   {
     "id": "garcia",
@@ -506,7 +557,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Seth",
+      "Gilliam",
+      "Ross",
+      "Neimi",
+      "Dozla"
+    ]
   },
   {
     "id": "neimi",
@@ -573,7 +631,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Gilliam",
+      "Colm",
+      "Garcia",
+      "Amelia",
+      "Artur"
+    ]
   },
   {
     "id": "colm",
@@ -640,7 +705,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Moulder",
+      "Neimi",
+      "Marisa",
+      "Rennac",
+      "Kyle"
+    ]
   },
   {
     "id": "artur",
@@ -707,7 +779,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Neimi",
+      "Lute",
+      "Cormag",
+      "Tethys",
+      "Joshua"
+    ]
   },
   {
     "id": "lute",
@@ -774,7 +853,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Vanessa",
+      "Ross",
+      "Artur",
+      "Knoll",
+      "Kyle"
+    ]
   },
   {
     "id": "natasha",
@@ -841,7 +927,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Seth",
+      "Franz",
+      "Joshua",
+      "Knoll",
+      "Cormag"
+    ]
   },
   {
     "id": "joshua",
@@ -908,7 +1001,16 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Innes",
+      "Natasha",
+      "Artur",
+      "Gerik",
+      "Marisa",
+      "L'Arachel",
+      "L&#39;Arachel"
+    ]
   },
   {
     "id": "ephraim",
@@ -961,7 +1063,17 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Kyle",
+      "Forde",
+      "Myrrh",
+      "L&#39;Arachel",
+      "Duessel",
+      "Tana",
+      "L'Arachel"
+    ]
   },
   {
     "id": "forde",
@@ -1029,7 +1141,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Franz",
+      "Vanessa",
+      "Ephraim",
+      "Kyle"
+    ]
   },
   {
     "id": "kyle",
@@ -1097,7 +1216,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Colm",
+      "Lute",
+      "Ephraim",
+      "Forde",
+      "Syrene"
+    ]
   },
   {
     "id": "orson",
@@ -1136,7 +1262,8 @@
       "lance": "A"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": []
   },
   {
     "id": "tana",
@@ -1203,7 +1330,15 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Innes",
+      "Cormag",
+      "Ephraim",
+      "Marisa",
+      "Syrene"
+    ]
   },
   {
     "id": "amelia",
@@ -1284,7 +1419,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Franz",
+      "Ross",
+      "Neimi",
+      "Duessel",
+      "Ewan"
+    ]
   },
   {
     "id": "innes",
@@ -1322,7 +1464,16 @@
       "bow": "A"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Vanessa",
+      "Gerik",
+      "Tana",
+      "Joshua",
+      "L&#39;Arachel",
+      "L'Arachel"
+    ]
   },
   {
     "id": "gerik",
@@ -1389,7 +1540,15 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Ross",
+      "Innes",
+      "Tethys",
+      "Marisa",
+      "Saleh",
+      "Joshua"
+    ]
   },
   {
     "id": "tethys",
@@ -1425,7 +1584,14 @@
     },
     "baseWeaponRanks": {},
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Artur",
+      "Gerik",
+      "Ewan",
+      "Marisa",
+      "Rennac"
+    ]
   },
   {
     "id": "marisa",
@@ -1492,7 +1658,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Colm",
+      "Gerik",
+      "Tethys",
+      "Tana",
+      "Joshua"
+    ]
   },
   {
     "id": "l_arachel",
@@ -1559,7 +1732,15 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Dozla",
+      "Rennac",
+      "Joshua",
+      "Eirika",
+      "Ephraim",
+      "Innes"
+    ]
   },
   {
     "id": "dozla",
@@ -1597,7 +1778,15 @@
       "axe": "B"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Garcia",
+      "Ewan",
+      "L'Arachel",
+      "L&#39;Arachel",
+      "Myrrh",
+      "Rennac"
+    ]
   },
   {
     "id": "saleh",
@@ -1666,7 +1855,13 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Eirika",
+      "Gerik",
+      "Myrrh",
+      "Ewan"
+    ]
   },
   {
     "id": "ewan",
@@ -1747,7 +1942,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Ross",
+      "Amelia",
+      "Tethys",
+      "Saleh",
+      "Dozla"
+    ]
   },
   {
     "id": "cormag",
@@ -1814,7 +2016,14 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Seth",
+      "Natasha",
+      "Duessel",
+      "Tana",
+      "Artur"
+    ]
   },
   {
     "id": "rennac",
@@ -1852,7 +2061,14 @@
       "sword": "B"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Colm",
+      "Tethys",
+      "L'Arachel",
+      "Dozla",
+      "L&#39;Arachel"
+    ]
   },
   {
     "id": "duessel",
@@ -1892,7 +2108,13 @@
       "axe": "A"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Cormag",
+      "Ephraim",
+      "Amelia",
+      "Knoll"
+    ]
   },
   {
     "id": "knoll",
@@ -1959,7 +2181,12 @@
         }
       }
     ],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Lute",
+      "Natasha",
+      "Duessel"
+    ]
   },
   {
     "id": "myrrh",
@@ -1995,7 +2222,12 @@
     },
     "baseWeaponRanks": {},
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Ephraim",
+      "Saleh",
+      "Dozla"
+    ]
   },
   {
     "id": "syrene",
@@ -2034,6 +2266,13 @@
       "lance": "A"
     },
     "promotions": [],
-    "prf": []
+    "prf": [],
+    "supports": [
+      "Gilliam",
+      "Moulder",
+      "Vanessa",
+      "Kyle",
+      "Tana"
+    ]
   }
 ]

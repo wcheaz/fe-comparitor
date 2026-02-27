@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/class-abilities-field/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/add-unit-supports/tasks.md

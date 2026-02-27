@@ -5,6 +5,7 @@ import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import AbilityPill from '@/components/ui/AbilityPill';
+import SupportPill from '@/components/ui/SupportPill';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import { Info } from 'lucide-react';
@@ -59,6 +60,11 @@ export function ComparisonGrid({
   const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false);
   const [selectedPromotionClass, setSelectedPromotionClass] = useState<Class | null>(null);
 
+  // State for support bonuses modal
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+  const [selectedSupportPartner, setSelectedSupportPartner] = useState<string | null>(null);
+  const [selectedSupportUnit, setSelectedSupportUnit] = useState<Unit | null>(null);
+
   // Handle affinity info icon click
   const handleAffinityInfoClick = (affinityName: string) => {
     setSelectedAffinity(affinityName);
@@ -90,6 +96,31 @@ export function ComparisonGrid({
       setSelectedPromotionClass(promoClass);
       setIsPromotionModalOpen(true);
     }
+  };
+
+  // Handle support partner click
+  const handleSupportPartnerClick = (partnerName: string, currentUnit: Unit) => {
+    setSelectedSupportPartner(partnerName);
+    setSelectedSupportUnit(currentUnit);
+    setIsSupportModalOpen(true);
+  };
+
+  // Find partner unit by name (simplified lookup - in production this would use proper data loading)
+  const findPartnerUnit = (partnerName: string, game: string): Unit | null => {
+    // This is a simplified lookup. In a real implementation, we would load all units
+    // and find the matching one by name and game. For now, we'll create a mock unit.
+    const mockPartner: Unit = {
+      id: partnerName.toLowerCase().replace(/\s+/g, '_'),
+      name: partnerName,
+      game: game,
+      class: 'Unknown',
+      joinChapter: 'Unknown',
+      level: 1,
+      stats: {},
+      growths: {},
+      affinity: 'Fire' // Default affinity - should be loaded from actual data
+    };
+    return mockPartner;
   };
 
   // Render affinity details for modal
@@ -381,6 +412,96 @@ export function ComparisonGrid({
     );
   };
 
+  // Calculate combined support bonuses for two units
+  const calculateCombinedSupportBonuses = (unit1: Unit, unit2: Unit, level: 'C' | 'B' | 'A' | 'S') => {
+    const affinity1 = getAffinityByName(unit1.affinity || 'Fire');
+    const affinity2 = getAffinityByName(unit2.affinity || 'Fire');
+    
+    if (!affinity1 || !affinity2) return [];
+    
+    const gameKey = unit1.game.includes('Binding Blade') || unit1.game.includes('Blazing Blade') || unit1.game.includes('Sacred Stones') ? 'GBA' :
+                   unit1.game.includes('Path of Radiance') ? 'Path of Radiance' : null;
+    
+    if (!gameKey) return [];
+    
+    const bonuses1 = affinity1.bonuses[gameKey as keyof typeof affinity1.bonuses];
+    const bonuses2 = affinity2.bonuses[gameKey as keyof typeof affinity2.bonuses];
+    
+    if (!bonuses1 || !bonuses2) return [];
+    
+    const multiplierMap = { 'C': 1, 'B': 2, 'A': 3, 'S': 4 };
+    const mult = multiplierMap[level];
+    
+    const combinedBonuses: string[] = [];
+    
+    // Combine both affinities' bonuses
+    const totalAttack = (bonuses1.attack + bonuses2.attack) * mult;
+    const totalDefense = (bonuses1.defense + bonuses2.defense) * mult;
+    const totalHit = (bonuses1.hit + bonuses2.hit) * mult;
+    const totalAvoid = (bonuses1.avoid + bonuses2.avoid) * mult;
+    const totalCritical = (bonuses1.critical + bonuses2.critical) * mult;
+    const totalDodge = (bonuses1.dodge + bonuses2.dodge) * mult;
+    
+    if (totalAttack > 0) combinedBonuses.push(`Attack +${totalAttack.toFixed(1).replace('.0', '')}`);
+    if (totalDefense > 0) combinedBonuses.push(`Defense +${totalDefense.toFixed(1).replace('.0', '')}`);
+    if (totalHit > 0) combinedBonuses.push(`Hit +${totalHit.toFixed(1).replace('.0', '')}`);
+    if (totalAvoid > 0) combinedBonuses.push(`Avoid +${totalAvoid.toFixed(1).replace('.0', '')}`);
+    if (totalCritical > 0) combinedBonuses.push(`Critical +${totalCritical.toFixed(1).replace('.0', '')}`);
+    if (totalDodge > 0) combinedBonuses.push(`Dodge +${totalDodge.toFixed(1).replace('.0', '')}`);
+    
+    return combinedBonuses;
+  };
+
+  // Render support bonuses modal content
+  const renderSupportBonusesModal = () => {
+    if (!selectedSupportUnit || !selectedSupportPartner) return null;
+    
+    const partnerUnit = findPartnerUnit(selectedSupportPartner, selectedSupportUnit.game);
+    if (!partnerUnit) return null;
+    
+    const supportLevels: Array<'C' | 'B' | 'A' | 'S'> = ['C', 'B', 'A', 'S'];
+    
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2">
+          <h2 className="text-2xl font-bold">Support Bonuses</h2>
+        </div>
+        
+        <div className="text-sm text-muted-foreground">
+          <p><strong>{selectedSupportUnit.name}</strong> + <strong>{selectedSupportPartner}</strong></p>
+          <p>Affinities: {selectedSupportUnit.affinity || 'None'} + {partnerUnit.affinity || 'None'}</p>
+        </div>
+        
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold">Combined Support Bonuses</h3>
+          <p className="text-sm text-muted-foreground">
+            These bonuses are applied to both units when fighting near each other.
+          </p>
+          
+          <div className="grid gap-3">
+            {supportLevels.map(level => {
+              const bonuses = calculateCombinedSupportBonuses(selectedSupportUnit, partnerUnit, level);
+              if (bonuses.length === 0) return null;
+              
+              return (
+                <div key={level} className="border-l-4 border-primary pl-3">
+                  <h4 className="font-semibold text-primary">{level} Support</h4>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {bonuses.map((bonus, index) => (
+                      <span key={index} className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                        {bonus}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   React.useEffect(() => {
     getAllClasses().then(setClasses).catch(console.error);
   }, []);
@@ -624,6 +745,29 @@ export function ComparisonGrid({
                     ))}
                   </tr>
                 )}
+                {units.some(u => u.supports && u.supports.length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Supports</td>
+                    {units.map((unit) => (
+                      <td key={`supports-${unit.id}`} className="text-center p-2 align-top">
+                        {unit.supports && unit.supports.length > 0 ? (
+                          <div className="flex flex-col items-center gap-2">
+                            {unit.supports.map((partnerName, idx) => (
+                              <SupportPill
+                                key={idx}
+                                partnerName={partnerName}
+                                game={unit.game}
+                                onPartnerClick={(partnerName) => handleSupportPartnerClick(partnerName, unit)}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">-</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -806,6 +950,16 @@ export function ComparisonGrid({
       >
         <div className="space-y-4">
           {renderPromotionDetails()}
+        </div>
+      </Modal>
+
+      {/* Support Bonuses Modal */}
+      <Modal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderSupportBonusesModal()}
         </div>
       </Modal>
 

@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] Create `components/ui/SupportPill.tsx` based on `AbilityPill.tsx`. It needs to display the supporting unit's name and an affinity icon.
