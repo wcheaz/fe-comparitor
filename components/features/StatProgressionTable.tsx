@@ -229,9 +229,9 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
   const activeStatKeys = getVisibleStatKeys();
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex flex-col gap-2">
+    <div className="w-full min-w-0 overflow-hidden">
+      <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
+        <div className="flex flex-col gap-2 min-w-0">
           <h2 className="text-xl font-semibold">Average Stats</h2>
           {progressionData.statKeys.length > 0 && (
             <div className="flex flex-wrap gap-2 items-center">
@@ -264,24 +264,24 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
             </div>
           )}
         </div>
-        <div className="flex items-center space-x-6 shrink-0">
+        <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-2 bg-gray-100 p-1 rounded-md">
             <button
               onClick={() => setGroupBy('stat')}
-              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors ${groupBy === 'stat' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors whitespace-nowrap ${groupBy === 'stat' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
                 }`}
             >
               Group By Stat
             </button>
             <button
               onClick={() => setGroupBy('unit')}
-              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors ${groupBy === 'unit' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
+              className={`px-3 py-1 text-xs font-medium rounded-sm transition-colors whitespace-nowrap ${groupBy === 'unit' ? 'bg-white shadow text-gray-900' : 'text-gray-500 hover:text-gray-700'
                 }`}
             >
               Group By Unit
             </button>
           </div>
-          <label className="flex items-center space-x-2">
+          <label className="flex items-center space-x-2 whitespace-nowrap">
             <input
               type="checkbox"
               checked={expandToLevel100}
