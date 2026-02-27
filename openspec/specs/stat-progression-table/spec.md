@@ -30,7 +30,7 @@ The table SHALL account for unit promotions by resetting the displayed level cou
 - **THEN** the row label indicates "Level 1 (Promoted)" instead of "Level 21".
 
 ### Requirement: Accurate Promotion Stat Adjustments
-The system SHALL apply appropriate statistical bonuses when a unit promotes, according to their new class data defined in the game's class data file.
+The system SHALL apply appropriate statistical bonuses when a unit promotes, according to their new class data defined in the game's class data file. The new class data used MUST correspond to the promotion path selected by the user, or the default first class if no selection is made.
 
 #### Scenario: Unit receives promotion bonuses
 - **WHEN** a unit's progression crosses their promotion level
