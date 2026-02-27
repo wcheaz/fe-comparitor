@@ -39,7 +39,10 @@
         "promotions": [
             "knight_lord"
         ],
-        "prf": []
+        "prf": [
+            "Rapier (FE7)",
+            "Durandal"
+        ]
     },
     {
         "id": "hector",
@@ -81,7 +84,10 @@
         "promotions": [
             "great_lord_hector"
         ],
-        "prf": []
+        "prf": [
+            "Wolf Beil",
+            "Armads"
+        ]
     },
     {
         "id": "lyn",
@@ -119,12 +125,16 @@
             "res": 30
         },
         "baseWeaponRanks": {
-            "sword": "D"
+            "sword": "C"
         },
         "promotions": [
             "blade_lord"
         ],
-        "prf": []
+        "prf": [
+            "Mani Katti",
+            "Sol Katti",
+            "Wo Dao (FE7)"
+        ]
     },
     {
         "id": "marcus_fe7",
@@ -203,7 +213,10 @@
             "def": 20,
             "res": 20
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "D",
+            "lance": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -242,7 +255,10 @@
             "def": 25,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "D",
+            "lance": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -281,7 +297,9 @@
             "def": 15,
             "res": 35
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -320,7 +338,9 @@
             "def": 20,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "bow": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -359,7 +379,9 @@
             "def": 25,
             "res": 15
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "axe": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -398,7 +420,9 @@
             "def": 15,
             "res": 55
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "staff": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -437,7 +461,9 @@
             "def": 20,
             "res": 40
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "anima": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -476,7 +502,9 @@
             "def": 10,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "bow": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -515,7 +543,9 @@
             "def": 25,
             "res": 20
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -593,7 +623,9 @@
             "def": 10,
             "res": 60
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "light": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -622,7 +654,9 @@
             "aid": 12
         },
         "growths": {},
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -660,7 +694,10 @@
             "def": 40,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "D",
+            "lance": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -698,7 +735,9 @@
             "def": 15,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "bow": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -736,7 +775,9 @@
             "def": 30,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "axe": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -774,7 +815,9 @@
             "def": 55,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -812,9 +855,13 @@
             "def": 15,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "C"
+        },
         "promotions": [],
-        "prf": []
+        "prf": [
+            "Wo Dao (FE7)"
+        ]
     },
     {
         "id": "merlinus_fe7",
@@ -888,7 +935,9 @@
             "def": 15,
             "res": 50
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "staff": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -926,7 +975,9 @@
             "def": 25,
             "res": 15
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -964,7 +1015,9 @@
             "def": 25,
             "res": 45
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "dark": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1002,7 +1055,9 @@
             "def": 20,
             "res": 15
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "axe": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1040,7 +1095,9 @@
             "def": 20,
             "res": 50
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1078,7 +1135,9 @@
             "def": 25,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1154,7 +1213,11 @@
             "def": 20,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "A",
+            "lance": "B",
+            "axe": "D"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1192,7 +1255,9 @@
             "def": 30,
             "res": 20
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1230,7 +1295,9 @@
             "def": 20,
             "res": 35
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "axe": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1268,7 +1335,10 @@
             "def": 20,
             "res": 20
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "axe": "B",
+            "bow": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1306,7 +1376,10 @@
             "def": 35,
             "res": 35
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "A",
+            "axe": "E"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1343,7 +1416,9 @@
             "def": 25,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "lance": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1381,7 +1456,10 @@
             "def": 30,
             "res": 35
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "staff": "A",
+            "anima": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1419,7 +1497,9 @@
             "def": 20,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "bow": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1457,9 +1537,13 @@
             "def": 10,
             "res": 15
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "A"
+        },
         "promotions": [],
-        "prf": []
+        "prf": [
+            "Wo Dao (FE7)"
+        ]
     },
     {
         "id": "harken",
@@ -1495,7 +1579,10 @@
             "def": 30,
             "res": 25
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "B",
+            "axe": "B"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1533,7 +1620,9 @@
             "def": 15,
             "res": 50
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "anima": "C"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1571,7 +1660,9 @@
             "def": 30,
             "res": 30
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1609,7 +1700,10 @@
             "def": 25,
             "res": 15
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "A",
+            "lance": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1646,9 +1740,13 @@
             "def": 10,
             "res": 20
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "sword": "A"
+        },
         "promotions": [],
-        "prf": []
+        "prf": [
+            "Wo Dao (FE7)"
+        ]
     },
     {
         "id": "renault",
@@ -1684,7 +1782,10 @@
             "def": 20,
             "res": 40
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "staff": "A",
+            "light": "A"
+        },
         "promotions": [],
         "prf": []
     },
@@ -1721,8 +1822,15 @@
             "def": 0,
             "res": 0
         },
-        "baseWeaponRanks": {},
+        "baseWeaponRanks": {
+            "staff": "S",
+            "anima": "S",
+            "light": "S",
+            "dark": "S"
+        },
         "promotions": [],
-        "prf": []
+        "prf": [
+            "Forblaze"
+        ]
     }
 ]

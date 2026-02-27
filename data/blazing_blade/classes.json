@@ -125,7 +125,9 @@
         "promotesTo": [
             "paladin_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -162,7 +164,9 @@
         "promotesTo": [
             "paladin_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -565,7 +569,9 @@
         "promotesTo": [
             "nomadic_trooper_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows"
         ],
@@ -601,7 +607,9 @@
         "promotesTo": [
             "nomadic_trooper_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows"
         ],
@@ -787,7 +795,9 @@
         "promotesTo": [
             "falcon_knight"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances"
         ],
@@ -823,7 +833,9 @@
         "promotesTo": [
             "wyvern_lord_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances"
         ],
@@ -859,7 +871,9 @@
         "promotesTo": [
             "wyvern_lord_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances"
         ],
@@ -1111,7 +1125,9 @@
         "promotesTo": [
             "valkyrie"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Staves"
         ],
@@ -1258,7 +1274,9 @@
             "mov": 2
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Sword",
             "Lance"
@@ -1391,7 +1409,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Sword",
             "Lance",
@@ -1436,7 +1456,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Sword",
             "Lance",
@@ -1658,7 +1680,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bow",
             "Sword"
@@ -1702,7 +1726,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bow",
             "Sword"
@@ -1836,7 +1862,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lance",
             "Sword"
@@ -1880,7 +1908,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lance",
             "Sword"
@@ -1924,7 +1954,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lance",
             "Sword"
@@ -2233,7 +2265,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Anima",
             "Staff"

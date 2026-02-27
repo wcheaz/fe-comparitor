@@ -182,6 +182,134 @@ const WEAPONS: Record<string, Weapon> = {
         description: "Zephiel exclusively."
         // no specific effect in FE6 besides animations and stats
     },
+    // FE7 - The Blazing Blade PRF Weapons
+    "Rapier (FE7)": {
+        name: "Rapier",
+        type: "Sword",
+        rank: "Prf",
+        uses: 40,
+        weight: 5,
+        might: 7,
+        hit: 95,
+        crit: 10,
+        range: "1",
+        description: "Eliwood exclusively. Effective against armored and cavalry units.",
+        effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    "Mani Katti": {
+        name: "Mani Katti",
+        type: "Sword",
+        rank: "Prf",
+        uses: 45,
+        weight: 3,
+        might: 8,
+        hit: 80,
+        crit: 20,
+        range: "1",
+        description: "Lyn exclusively. Effective against armored and cavalry units.",
+        effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    "Sol Katti": {
+        name: "Sol Katti",
+        type: "Sword",
+        rank: "Prf",
+        uses: 30,
+        weight: 14,
+        might: 12,
+        hit: 95,
+        crit: 25,
+        range: "1",
+        description: "Lyn exclusively. Grants Res +5 when equipped. Effective against dragons.",
+        effectiveAgainst: ["Dragon"],
+        statBonuses: {
+            res: 5
+        }
+    },
+    "Durandal": {
+        name: "Durandal",
+        type: "Sword",
+        rank: "Prf",
+        uses: 20,
+        weight: 16,
+        might: 17,
+        hit: 90,
+        crit: 0,
+        range: "1",
+        description: "Eliwood exclusively. Grants Str +5 when equipped. Effective against dragons.",
+        effectiveAgainst: ["Dragon"],
+        statBonuses: {
+            str: 5
+        }
+    },
+    "Wolf Beil": {
+        name: "Wolf Beil",
+        type: "Axe",
+        rank: "Prf",
+        uses: 30,
+        weight: 10,
+        might: 10,
+        hit: 75,
+        crit: 5,
+        range: "1",
+        description: "Hector exclusively. Effective against armored and cavalry units.",
+        effectiveAgainst: ["Armored", "Cavalry"]
+    },
+    "Armads": {
+        name: "Armads",
+        type: "Axe",
+        rank: "Prf",
+        uses: 25,
+        weight: 18,
+        might: 18,
+        hit: 85,
+        crit: 0,
+        range: "1",
+        description: "Hector exclusively. Grants Def +5 when equipped. Effective against dragons.",
+        effectiveAgainst: ["Dragon"],
+        statBonuses: {
+            def: 5
+        }
+    },
+    "Forblaze": {
+        name: "Forblaze",
+        type: "Anima",
+        rank: "Prf",
+        uses: 20,
+        weight: 11,
+        might: 14,
+        hit: 85,
+        crit: 5,
+        range: "1-2",
+        description: "Athos exclusively. Grants Lck +5 when equipped. Effective against dragons.",
+        effectiveAgainst: ["Dragon"],
+        statBonuses: {
+            lck: 5
+        }
+    },
+    "Wo Dao (FE6)": {
+        name: "Wo Dao",
+        type: "Sword",
+        rank: "D",
+        uses: 20,
+        weight: 5,
+        might: 8,
+        hit: 75,
+        crit: 40,
+        range: "1",
+        description: "Myrmidon and Swordmaster exclusive."
+    },
+    "Wo Dao (FE7)": {
+        name: "Wo Dao",
+        type: "Sword",
+        rank: "D",
+        uses: 20,
+        weight: 5,
+        might: 8,
+        hit: 75,
+        crit: 35,
+        range: "1",
+        description: "Myrmidon, Swordmaster, and Blade Lord (Lyn) exclusive."
+    },
     // Add more as needed
 };
 

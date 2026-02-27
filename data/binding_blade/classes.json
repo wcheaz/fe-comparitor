@@ -475,7 +475,9 @@
         "promotesTo": [
             "paladin_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -517,7 +519,9 @@
         "promotesTo": [
             "paladin_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -566,7 +570,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -615,7 +621,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Swords",
             "Lances"
@@ -1555,7 +1563,9 @@
         "promotesTo": [
             "wyvern_lord_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances"
         ],
@@ -1594,7 +1604,9 @@
         "promotesTo": [
             "wyvern_lord_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances"
         ],
@@ -1640,7 +1652,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances",
             "Swords"
@@ -1687,7 +1701,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Lances",
             "Swords"
@@ -1944,7 +1960,9 @@
         "promotesTo": [
             "nomad_trooper_m"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows"
         ],
@@ -1984,7 +2002,9 @@
         "promotesTo": [
             "nomad_trooper_f"
         ],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows"
         ],
@@ -2031,7 +2051,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows",
             "Swords"
@@ -2079,7 +2101,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Bows",
             "Swords"
@@ -2342,7 +2366,9 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classAbilities": [
+            "Canto"
+        ],
         "weapons": [
             "Light",
             "Staves"

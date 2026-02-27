@@ -546,7 +546,9 @@
         "baseWeaponRanks": {
             "Swords": "C"
         },
-        "prf": [],
+        "prf": [
+            "Wo Dao (FE6)"
+        ],
         "aid": 6
     },
     {
@@ -959,7 +961,9 @@
         "baseWeaponRanks": {
             "Swords": "D"
         },
-        "prf": [],
+        "prf": [
+            "Wo Dao (FE6)"
+        ],
         "aid": 4
     },
     {
@@ -1862,7 +1866,9 @@
             "Swords": "S"
         },
         "isPromoted": true,
-        "prf": [],
+        "prf": [
+            "Wo Dao (FE6)"
+        ],
         "aid": 8
     }
 ]
