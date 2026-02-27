@@ -168,7 +168,7 @@ for c_id, conf in expected_classes.items():
     else:
         c_obj["promotesTo"] = []
         
-    c_obj["classAbilities"] = conf.get("hiddenModifiers", [])
+    c_obj["classAbilities"] = conf.get("classAbilities", [])
     c_obj["weapons"] = conf.get("weapons", [])
     
     c_obj["maxStats"] = m
