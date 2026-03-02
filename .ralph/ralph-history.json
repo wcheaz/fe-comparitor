@@ -54,14 +54,30 @@
       "errors": [
         "\u001b[91m\u001b[1mError: \u001b[0mNo changes to apply: oldString and newString are identical."
       ]
+    },
+    {
+      "iteration": 4,
+      "startedAt": "2026-03-02T22:45:43.155Z",
+      "endedAt": "2026-03-02T22:46:43.903Z",
+      "durationMs": 60540,
+      "agent": "opencode",
+      "model": "",
+      "toolsUsed": {},
+      "filesModified": [],
+      "exitCode": 0,
+      "completionDetected": false,
+      "errors": [
+        "\u001b[91m\u001b[1mError: \u001b[0mFile not found: /home/ncheaz/git/fe-comparator/openspec/changes/multi-tier-promotions/specs/spec.md"
+      ]
     }
   ],
-  "totalDurationMs": 1675163,
+  "totalDurationMs": 1735703,
   "struggleIndicators": {
     "repeatedErrors": {
-      "\u001b[91m\u001b[1mError: \u001b[0mNo changes to apply: oldString and newString are identical.": 1
+      "\u001b[91m\u001b[1mError: \u001b[0mNo changes to apply: oldString and newString are identical.": 1,
+      "\u001b[91m\u001b[1mError: \u001b[0mFile not found: /home/ncheaz/git/fe-comparator/openspec/changes/multi-tier-promo": 1
     },
-    "noProgressIterations": 0,
+    "noProgressIterations": 1,
     "shortIterations": 0
   }
 }
