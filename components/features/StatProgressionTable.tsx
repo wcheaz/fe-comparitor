@@ -334,7 +334,8 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
               const lastEvent = events[events.length - 1];
               return classes.find(c => c.id === lastEvent.selectedClassId);
             }
-            return unitClass;
+            // Return the default promoted class currently displayed in the UI
+            return classes.find(c => c.id === unitClass?.promotesTo?.[0]);
           };
           
           const finalTierClass = getFinalTierClass();
@@ -364,7 +365,16 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                       disabled={!canAddPromotionTier}
                       onChange={(e) => {
                         const level = Number(e.target.value);
-                        const updatedEvents = [...(promotionEvents[unit.id] || [])];
+                        let updatedEvents = [...(promotionEvents[unit.id] || [])];
+                        
+                        // If promotionEvents is empty, seed it with the default Tier 1 event
+                        if (updatedEvents.length === 0) {
+                          updatedEvents = [{ 
+                            level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
+                            selectedClassId: unitClass?.promotesTo?.[0] || '' 
+                          }];
+                        }
+                        
                         if (eventIndex < updatedEvents.length) {
                           updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
                         } else {
@@ -395,7 +405,16 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         disabled={!canAddPromotionTier}
                         onChange={(e) => {
                           const selectedClassId = e.target.value;
-                          const updatedEvents = [...(promotionEvents[unit.id] || [])];
+                          let updatedEvents = [...(promotionEvents[unit.id] || [])];
+                          
+                          // If promotionEvents is empty, seed it with the default Tier 1 event
+                          if (updatedEvents.length === 0) {
+                            updatedEvents = [{ 
+                              level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
+                              selectedClassId: unitClass?.promotesTo?.[0] || '' 
+                            }];
+                          }
+                          
                           if (eventIndex < updatedEvents.length) {
                             updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
                           } else {
@@ -429,15 +448,14 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                   {onAddPromotionEvent && (
                     <button
                       onClick={() => {
-                        let currentEvents = promotionEvents[unit.id] || [];
+                        let currentEvents = [...(promotionEvents[unit.id] || [])];
                         let lastEvent = currentEvents[currentEvents.length - 1];
                         let lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId);
                         
-                        // Handle edge case where promotionEvents[unit.id] is undefined
+                        // If promotionEvents is empty, seed it with the default Tier 1 event
                         if (currentEvents.length === 0) {
-                          // Create fallback state using the unit's base class promotion
                           const fallbackEvent = {
-                            level: 20,
+                            level: isTraineeClass(unitClass?.id || '') ? 10 : 20,
                             selectedClassId: unitClass?.promotesTo?.[0] || ''
                           };
                           currentEvents = [fallbackEvent];
@@ -451,7 +469,13 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                             level: isTraineeClass(lastSelectedClass?.id || '') ? 10 : 20, // Default promotion level for additional tiers
                             selectedClassId: lastSelectedClass.promotesTo[0] // Default to first promotion option
                           };
-                          onAddPromotionEvent(unit.id, newEvent);
+                          
+                          // Push the new event and save the full array
+                          currentEvents.push(newEvent);
+                          onPromotionEventsChange({
+                            ...promotionEvents,
+                            [unit.id]: currentEvents
+                          });
                         }
                       }}
                       disabled={!canAddPromotionTier}
@@ -466,9 +490,13 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                   {onRemovePromotionEvent && (
                     <button
                       onClick={() => {
-                        const currentEvents = promotionEvents[unit.id] || [];
+                        const currentEvents = [...(promotionEvents[unit.id] || [])];
                         if (currentEvents.length > 1) {
-                          onRemovePromotionEvent(unit.id);
+                          currentEvents.pop(); // Remove the last element
+                          onPromotionEventsChange({
+                            ...promotionEvents,
+                            [unit.id]: currentEvents
+                          });
                         }
                       }}
                       disabled={!canAddPromotionTier || (promotionEvents[unit.id]?.length || 0) <= 1}
