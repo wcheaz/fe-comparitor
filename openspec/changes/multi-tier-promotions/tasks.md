@@ -21,7 +21,7 @@
 
 ## 5. Bug Fix: Trainee Forced Promotions
 - [x] 5.1 In `StatProgressionTable.tsx`, define a constant list or helper function (e.g., `isTraineeClass`) to identify FE8 trainee class IDs (`recruit`, `recruit_2`, `pupil`, `pupil_2`, `journeyman`, `journeyman_2`).
-- [ ] 5.2 Within the `.map()` for `promotionEvents` (around line 323), resolve the `currentTierClass` for the dropdown row. For tier 1 (`eventIndex === 0`), this is the unit's base class. For tier 2+, it's the class from `promotionEvents[unit.id][eventIndex - 1].selectedClassId`.
+- [x] 5.2 Within the `.map()` for `promotionEvents` (around line 323), resolve the `currentTierClass` for the dropdown row. For tier 1 (`eventIndex === 0`), this is the unit's base class. For tier 2+, it's the class from `promotionEvents[unit.id][eventIndex - 1].selectedClassId`.
 - [ ] 5.3 Implement conditional logic for the level `<select>` (around line 346): if `isTraineeClass(currentTierClass)`, only render an `<option value={10}>10</option>`. Otherwise, render the standard 10-20 mapped array.
 - [ ] 5.4 When adding new promotion tiers to trainees via the `onPromotionEventsChange` handlers, default the new event's `level` property to `10` instead of `20` if the prior class is a trainee class.
 
