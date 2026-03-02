@@ -326,9 +326,19 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion Levels:</span>
         {units.map(unit => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
-          const canPromote = !unit.isPromoted && unitClass?.type !== 'promoted' && (unitClass?.promotesTo?.length ?? 0) > 0;
-          const hasBranchingOptions = hasBranchingPromotions(unitClass);
-          const promotionOptions = getPromotionOptions(unitClass, classes);
+          
+          // Dynamic check for final tier class promotion capability
+          const getFinalTierClass = () => {
+            const events = promotionEvents[unit.id] || [];
+            if (events.length > 0) {
+              const lastEvent = events[events.length - 1];
+              return classes.find(c => c.id === lastEvent.selectedClassId);
+            }
+            return unitClass;
+          };
+          
+          const finalTierClass = getFinalTierClass();
+          const canAddPromotionTier = (finalTierClass?.promotesTo?.length ?? 0) > 0;
 
           return (
             <div key={`promo-${unit.id}`} className="flex flex-col space-y-2">
@@ -351,7 +361,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                     <select
                       id={`promo-${unit.id}-${eventIndex}`}
                       value={event.level}
-                      disabled={!canPromote}
+                      disabled={!canAddPromotionTier}
                       onChange={(e) => {
                         const level = Number(e.target.value);
                         const updatedEvents = [...(promotionEvents[unit.id] || [])];
@@ -366,26 +376,33 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         });
                       }}
                       className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
-                    >
-                      {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                        .filter(level => level >= Math.max(10, unit.level))
-                        .map(level => (
-                          <option key={level} value={level}>{level}</option>
-                        ))}
-                    </select>
+                      >
+                        {isTraineeClass(currentTierClass?.id || '') ? (
+                          <option value={10}>10</option>
+                        ) : (
+                          [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                            .filter(level => level >= Math.max(10, unit.level))
+                            .map(level => (
+                              <option key={level} value={level}>{level}</option>
+                            ))
+                        )}
+                      </select>
 
                     {tierHasBranchingOptions && tierPromotionOptions.length > 0 && (
                       <select
                         id={`promo-class-${unit.id}-${eventIndex}`}
                         value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
-                        disabled={!canPromote}
+                        disabled={!canAddPromotionTier}
                         onChange={(e) => {
                           const selectedClassId = e.target.value;
                           const updatedEvents = [...(promotionEvents[unit.id] || [])];
                           if (eventIndex < updatedEvents.length) {
                             updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
                           } else {
-                            updatedEvents.push({ level: 20, selectedClassId });
+                            updatedEvents.push({ 
+                              level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
+                              selectedClassId 
+                            });
                           }
                           onPromotionEventsChange({
                             ...promotionEvents,
@@ -406,26 +423,38 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
               })}
               
               {/* Add + and - buttons for promotion tier management */}
-              {(onAddPromotionEvent || onRemovePromotionEvent) && canPromote && (
+              {(onAddPromotionEvent || onRemovePromotionEvent) && canAddPromotionTier && (
                 <div className="flex items-center space-x-2 ml-6">
                   {/* Add button */}
                   {onAddPromotionEvent && (
                     <button
                       onClick={() => {
-                        const currentEvents = promotionEvents[unit.id] || [];
-                        const lastEvent = currentEvents[currentEvents.length - 1];
-                        const lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId);
+                        let currentEvents = promotionEvents[unit.id] || [];
+                        let lastEvent = currentEvents[currentEvents.length - 1];
+                        let lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId);
+                        
+                        // Handle edge case where promotionEvents[unit.id] is undefined
+                        if (currentEvents.length === 0) {
+                          // Create fallback state using the unit's base class promotion
+                          const fallbackEvent = {
+                            level: 20,
+                            selectedClassId: unitClass?.promotesTo?.[0] || ''
+                          };
+                          currentEvents = [fallbackEvent];
+                          lastEvent = fallbackEvent;
+                          lastSelectedClass = classes.find(c => c.id === fallbackEvent.selectedClassId);
+                        }
                         
                         // Check if the last selected class can promote further
                         if (lastSelectedClass?.promotesTo && lastSelectedClass.promotesTo.length > 0) {
                           const newEvent: PromotionEvent = {
-                            level: 20, // Default promotion level for additional tiers
+                            level: isTraineeClass(lastSelectedClass?.id || '') ? 10 : 20, // Default promotion level for additional tiers
                             selectedClassId: lastSelectedClass.promotesTo[0] // Default to first promotion option
                           };
                           onAddPromotionEvent(unit.id, newEvent);
                         }
                       }}
-                      disabled={!canPromote}
+                      disabled={!canAddPromotionTier}
                       className="w-6 h-6 rounded-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-green-500"
                       title="Add promotion tier"
                     >
@@ -442,7 +471,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           onRemovePromotionEvent(unit.id);
                         }
                       }}
-                      disabled={!canPromote || (promotionEvents[unit.id]?.length || 0) <= 1}
+                      disabled={!canAddPromotionTier || (promotionEvents[unit.id]?.length || 0) <= 1}
                       className="w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-red-500"
                       title="Remove promotion tier"
                     >
