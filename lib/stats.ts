@@ -221,6 +221,10 @@ export function generateProgressionArray(
   const actualStartLevel = startLevel || 1;
   const actualEndLevel = endLevel || 40;
 
+  // Calculate trainee offset - if startLevel is negative, we're dealing with trainee levels
+  const hasTraineeLevels = actualStartLevel < 0;
+  const traineeOffset = hasTraineeLevels ? actualStartLevel : 0;
+
   // Find the unit's class data
   let baseClass = classes?.find((cls: any) => cls.id === unit.class.toLowerCase().replace(/\s+/g, '_') && cls.game === unit.game);
 
@@ -231,65 +235,84 @@ export function generateProgressionArray(
     );
   }
 
-  // Determine promotion level and target class
-  let promoLevel = 20;
-  let promoTargetId = baseClass?.promotesTo?.[0];
-
-  if (promotionEvents.length > 0) {
-    promoLevel = promotionEvents[0].level;
-    promoTargetId = promotionEvents[0].selectedClassId || promoTargetId;
+  // Determine promotion levels and target classes for multi-tier promotions
+  const promoLevels: number[] = [];
+  const promoTargetIds: string[] = [];
+  
+  // Default to single promotion at level 20 if no promotion events
+  if (promotionEvents.length === 0) {
+    promoLevels.push(20);
+    promoTargetIds.push(baseClass?.promotesTo?.[0] || '');
+  } else {
+    // Iterate through all promotion events
+    promotionEvents.forEach((event, index) => {
+      promoLevels.push(event.level);
+      promoTargetIds.push(event.selectedClassId || 
+        (index === 0 ? baseClass?.promotesTo?.[0] || '' : ''));
+    });
   }
 
-  // Pre-calculate promoted baseline stats
-  let promotedStats: UnitStats | null = null;
-  let promotedClass: any = null;
+  // Pre-calculate promoted baseline stats for multi-tier promotions
+  const promotedStats: UnitStats[] = [];
+  const promotedClasses: any[] = [];
 
   if (!unit.isPromoted && baseClass?.promotesTo?.length > 0) {
-    // Calculate stats right at promotion level
-    const levelDiff = promoLevel - unit.level;
-    const prePromoStats: UnitStats = {};
+    let currentStats: UnitStats = { ...unit.stats };
+    
+    // Process each promotion event sequentially
+    for (let i = 0; i < promoLevels.length; i++) {
+      const promoLevel = promoLevels[i];
+      const promoTargetId = promoTargetIds[i];
+      
+      // Calculate stats right at promotion level
+      const levelDiff = i === 0 ? promoLevel - unit.level : 20; // Subsequent promotions are after 20 levels
+      const prePromoStats: UnitStats = {};
 
-    // Growth to promotion
-    const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
-    allStatKeys.forEach(statKey => {
-      const growthRate = unit.growths[statKey] || 0;
-      const baseStat = unit.stats[statKey] || 0;
-      const growthAmount = (growthRate * levelDiff) / 100;
-      let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
-      const prePromoCap = unit.maxStats?.[statKey] ?? baseClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-      prePromoStats[statKey] = Math.min(calculatedStat, prePromoCap);
-    });
+      // Growth to promotion
+      const allStatKeys = Array.from(new Set([...Object.keys(currentStats), ...Object.keys(unit.growths)]));
+      allStatKeys.forEach(statKey => {
+        const growthRate = unit.growths[statKey] || 0;
+        const baseStat = currentStats[statKey] || 0;
+        const growthAmount = (growthRate * levelDiff) / 100;
+        let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
+        const prePromoCap = unit.maxStats?.[statKey] ?? baseClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+        prePromoStats[statKey] = Math.min(calculatedStat, prePromoCap);
+      });
 
-    // Apply promotion bonuses
-    promotedClass = classes?.find((cls: any) => cls.id === promoTargetId && cls.game === unit.game);
-    if (!promotedClass && baseClass.promotesTo?.[0]) {
-      promotedClass = classes?.find((cls: any) => cls.id === baseClass.promotesTo[0] && cls.game === unit.game);
-    }
-
-    if (promotedClass) {
-      promotedStats = { ...prePromoStats };
-      if (promotedClass.promotionBonus) {
-        Object.entries(promotedClass.promotionBonus).forEach(([statKey, bonus]) => {
-          if (bonus !== undefined) {
-            promotedStats![statKey] = (promotedStats![statKey] || 0) + (bonus as number);
-          }
-        });
+      // Apply promotion bonuses
+      let promotedClass = classes?.find((cls: any) => cls.id === promoTargetId && cls.game === unit.game);
+      if (!promotedClass && i === 0 && baseClass.promotesTo?.[0]) {
+        promotedClass = classes?.find((cls: any) => cls.id === baseClass.promotesTo[0] && cls.game === unit.game);
       }
-      if (promotedClass.baseStats) {
-        Object.entries(promotedClass.baseStats).forEach(([statKey, classBase]) => {
-          if (promotedStats![statKey] !== undefined && classBase !== undefined) {
-            promotedStats![statKey] = Math.max(promotedStats![statKey] || 0, classBase as number);
-          }
-        });
+
+      if (promotedClass) {
+        const newPromotedStats: UnitStats = { ...prePromoStats };
+        if (promotedClass.promotionBonus) {
+          Object.entries(promotedClass.promotionBonus).forEach(([statKey, bonus]) => {
+            if (bonus !== undefined) {
+              newPromotedStats[statKey] = (newPromotedStats[statKey] || 0) + (bonus as number);
+            }
+          });
+        }
+        if (promotedClass.baseStats) {
+          Object.entries(promotedClass.baseStats).forEach(([statKey, classBase]) => {
+            if (newPromotedStats[statKey] !== undefined && classBase !== undefined) {
+              newPromotedStats[statKey] = Math.max(newPromotedStats[statKey] || 0, classBase as number);
+            }
+          });
+        }
+        
+        promotedStats.push(newPromotedStats);
+        promotedClasses.push(promotedClass);
+        currentStats = newPromotedStats; // Use these stats for the next promotion
       }
     }
   }
 
   for (let internalLevel = actualStartLevel; internalLevel <= actualEndLevel; internalLevel++) {
-    const tier = Math.floor((internalLevel - 1) / 20) + 1;
-    const displayLevelNum = ((internalLevel - 1) % 20) + 1;
-
-    let displayLevel = tier === 1 ? `Level ${displayLevelNum}` : `Level ${displayLevelNum} (Tier ${tier})`;
+    let tier: number;
+    let displayLevelNum: number;
+    let displayLevel: string;
     let isPromotionLevel = false;
     let isSkipped = false;
     let currentClass = baseClass;
@@ -297,29 +320,82 @@ export function generateProgressionArray(
     let levelDiff = 0;
     let promotionInfo = undefined;
 
-    if (tier === 1) {
+    // Handle trainee levels (negative levels)
+    if (internalLevel < 0) {
+      tier = 0; // Trainee tier
+      displayLevelNum = internalLevel; // Show actual negative number
+      displayLevel = `Level ${displayLevelNum} (Trainee)`;
+    } else {
+      // Standard level calculation (1-based)
+      tier = Math.floor((internalLevel - 1) / 20) + 1;
+      displayLevelNum = ((internalLevel - 1) % 20) + 1;
+      
+      if (tier === 1) {
+        displayLevel = `Level ${displayLevelNum}`;
+      } else {
+        displayLevel = `Level ${displayLevelNum} (Tier ${tier})`;
+      }
+    }
+
+    // Handle tier-specific logic
+    if (tier === 0) {
+      // Trainee tier (negative levels)
+      if (unit.isPromoted) {
+        isSkipped = true; // Promoted units don't have trainee levels
+      } else {
+        // For trainee levels, calculate level difference from the trainee start
+        // Trainee units use the negative levels as their progression
+        levelDiff = internalLevel - traineeOffset;
+        
+        // Trainee units can't promote until they reach positive levels
+        // So all trainee levels are valid stat calculation levels
+      }
+    } else if (tier === 1) {
       if (unit.isPromoted) {
         isSkipped = true;
       } else {
-        if (displayLevelNum < unit.level || displayLevelNum > promoLevel) {
-          isSkipped = true;
+        if (hasTraineeLevels) {
+          // For units that came from trainee levels, adjust the level comparison
+          const adjustedBaseLevel = Math.max(1, unit.level);
+          // For multi-tier promotions, check against the first promotion level
+          const firstPromoLevel = promoLevels.length > 0 ? promoLevels[0] : 20;
+          if (displayLevelNum < adjustedBaseLevel || displayLevelNum > firstPromoLevel) {
+            isSkipped = true;
+          }
+        } else {
+          // Standard units
+          const firstPromoLevel = promoLevels.length > 0 ? promoLevels[0] : 20;
+          if (displayLevelNum < unit.level || displayLevelNum > firstPromoLevel) {
+            isSkipped = true;
+          }
         }
-        if (displayLevelNum === promoLevel && baseClass?.promotesTo?.length > 0) {
+        
+        // Check if this level matches any promotion level
+        const currentPromoIndex = promoLevels.findIndex(level => level === displayLevelNum);
+        if (currentPromoIndex >= 0 && baseClass?.promotesTo?.length > 0) {
           isPromotionLevel = true;
-          if (promotedClass) {
+          if (promotedClasses[currentPromoIndex]) {
             promotionInfo = {
-              className: promotedClass.name,
-              classAbilities: promotedClass.classAbilities || []
+              className: promotedClasses[currentPromoIndex].name,
+              classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
             };
           }
         }
-        levelDiff = displayLevelNum - unit.level;
+        
+        // Calculate level difference
+        if (hasTraineeLevels) {
+          // For trainee units, the base level calculation needs to account for trainee progression
+          const traineeLevelsCount = Math.abs(traineeOffset);
+          levelDiff = displayLevelNum - 1 + traineeLevelsCount;
+        } else {
+          levelDiff = displayLevelNum - unit.level;
+        }
       }
     } else if (tier === 2) {
       if (!unit.isPromoted) {
-        // Promoted from Tier 1
-        currentClass = promotedClass || baseClass;
-        baseStatForCalc = promotedStats || unit.stats;
+        // Promoted from Tier 1 - use first promotion stats and class
+        currentClass = promotedClasses[0] || baseClass;
+        baseStatForCalc = promotedStats[0] || unit.stats;
         levelDiff = displayLevelNum - 1; // Level 1 (Tier 2) is the baseline 0 level-ups
 
         // If they can't promote, skip Tier 2
@@ -336,7 +412,50 @@ export function generateProgressionArray(
         levelDiff = displayLevelNum - unit.level;
       }
     } else {
-      isSkipped = true; // Tier 3 not fully supported, skip for now
+      // Handle tier 3+ progression
+      const hasInfiniteLeveling = unit.maxLevel === "infinite";
+      
+      if (hasInfiniteLeveling) {
+        // For infinite leveling, allow continuous progression through all tiers
+        // The stat calculation continues using the last known promoted class stats
+        const lastPromotionIndex = Math.max(0, promotedClasses.length - 1);
+        currentClass = promotedClasses[lastPromotionIndex] || baseClass;
+        baseStatForCalc = promotedStats[lastPromotionIndex] || unit.stats;
+        
+        // Calculate level difference for continuous leveling
+        // For tiers beyond 2, we accumulate the level differences from previous tiers
+        const previousTiersLevels = (tier - 2) * 20; // 20 levels per previous tier
+        levelDiff = displayLevelNum - 1 + previousTiersLevels;
+        
+        // Don't skip tiers for infinite leveling
+        isSkipped = false;
+      } else {
+        // Standard behavior: skip tiers 3+ if not infinite leveling
+        isSkipped = true;
+      }
+    }
+
+    // Check maxLevel constraints
+    if (!isSkipped && unit.maxLevel !== undefined && unit.maxLevel !== "infinite") {
+      const maxLevelCap = unit.maxLevel as number;
+      
+      // Calculate the effective level considering trainee offsets
+      let effectiveLevel: number;
+      if (tier === 0) {
+        // For trainee levels, they don't count toward the max level cap
+        effectiveLevel = 0;
+      } else if (hasTraineeLevels) {
+        // For units with trainee levels, account for the trainee progression
+        const traineeLevelsCount = Math.abs(traineeOffset);
+        effectiveLevel = internalLevel + traineeLevelsCount;
+      } else {
+        effectiveLevel = internalLevel;
+      }
+      
+      // If the effective level exceeds maxLevel, skip this row
+      if (effectiveLevel > maxLevelCap) {
+        isSkipped = true;
+      }
     }
 
     const levelStats: UnitStats = {};

@@ -33,6 +33,29 @@ export default function ComparatorPage() {
     setSelectedUnits(prev => prev.filter(unit => unit.id !== unitId));
   };
 
+  const handlePromotionEventsChange = (newEvents: Record<string, PromotionEvent[]>) => {
+    setPromotionEvents(newEvents);
+  };
+
+  // Utility functions for push/pop operations
+  const addPromotionEvent = (unitId: string, event: PromotionEvent) => {
+    setPromotionEvents(prev => ({
+      ...prev,
+      [unitId]: [...(prev[unitId] || []), event]
+    }));
+  };
+
+  const removePromotionEvent = (unitId: string) => {
+    setPromotionEvents(prev => {
+      const currentEvents = prev[unitId] || [];
+      if (currentEvents.length <= 1) return prev; // Don't remove if only one or none
+      return {
+        ...prev,
+        [unitId]: currentEvents.slice(0, -1) // Remove last event
+      };
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-fe-blue-50 to-fe-blue-100">
       <div className="container mx-auto px-4 py-8">
@@ -78,7 +101,13 @@ export default function ComparatorPage() {
                   <CardTitle>Stat Progression</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <StatProgressionTable units={selectedUnits} promotionEvents={promotionEvents} onPromotionEventsChange={setPromotionEvents} />
+                  <StatProgressionTable 
+                  units={selectedUnits} 
+                  promotionEvents={promotionEvents} 
+                  onPromotionEventsChange={handlePromotionEventsChange}
+                  onAddPromotionEvent={addPromotionEvent}
+                  onRemovePromotionEvent={removePromotionEvent}
+                />
                 </CardContent>
               </Card>
             )}

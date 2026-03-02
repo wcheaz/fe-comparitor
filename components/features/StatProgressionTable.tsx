@@ -47,6 +47,8 @@ interface StatProgressionTableProps {
   units: Unit[];
   promotionEvents: Record<string, PromotionEvent[]>;
   onPromotionEventsChange: (events: Record<string, PromotionEvent[]>) => void;
+  onAddPromotionEvent?: (unitId: string, event: PromotionEvent) => void;
+  onRemovePromotionEvent?: (unitId: string) => void;
 }
 
 interface ProgressionRow {
@@ -63,7 +65,7 @@ interface ProgressionRow {
   };
 }
 
-export function StatProgressionTable({ units, promotionEvents, onPromotionEventsChange }: StatProgressionTableProps) {
+export function StatProgressionTable({ units, promotionEvents, onPromotionEventsChange, onAddPromotionEvent, onRemovePromotionEvent }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
   const [classes, setClasses] = useState<Class[]>([]);
@@ -83,9 +85,20 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
   const progressionData = useMemo(() => {
     if (units.length === 0) return { rows: [], statKeys: [] as string[], allProgressions: [] };
 
-    // Standard absolute level bounds (unlike before with virtual mapped offsets)
-    const minLevel = 1;
-    const maxLevel = expandToLevel100 ? 100 : 40;
+    // Calculate dynamic level boundaries based on units
+    const minLevel = Math.min(...units.map(unit => {
+      // For trainee units, we need to start at negative levels
+      // Check if the unit has promotion events that suggest it's a trainee
+      const hasTraineeLevels = promotionEvents[unit.id] && 
+        promotionEvents[unit.id].length > 0 && 
+        promotionEvents[unit.id][0].level > 20;
+      return hasTraineeLevels ? -10 : unit.level;
+    }), 1);
+    
+    const maxLevelFromUnits = Math.max(...units.map(unit => 
+      unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40)
+    ), 40);
+    const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnits, 100) : maxLevelFromUnits;
 
     // Generate progression arrays for all units
     const allProgressions = units.map(unit =>
@@ -153,8 +166,8 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
         rowData.unitSkipped.push(isUnitSkipped);
 
         // A unit has valid data for this row if it's not marked skipped
-        // and we've reached at least their starting level.
-        if (!(isUnitSkipped || currentInternalLevel < unit.level)) {
+        // The progression data's isSkipped flag already handles trainee level logic
+        if (!isUnitSkipped) {
           allUnitsShowDash = false;
         }
 
@@ -303,50 +316,115 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
           const promotionOptions = getPromotionOptions(unitClass, classes);
 
           return (
-            <div key={`promo-${unit.id}`} className="flex items-center space-x-2">
-              <label htmlFor={`promo-${unit.id}`} className="text-sm text-gray-700">{unit.name}:</label>
-              <select
-                id={`promo-${unit.id}`}
-                value={(promotionEvents[unit.id]?.[0]?.level) ?? 20}
-                disabled={!canPromote}
-                onChange={(e) => {
-                  const level = Number(e.target.value);
-                  const currentSelectedClassId = promotionEvents[unit.id]?.[0]?.selectedClassId || unitClass?.promotesTo?.[0] || '';
-                  onPromotionEventsChange({
-                    ...promotionEvents,
-                    [unit.id]: [{ level, selectedClassId: currentSelectedClassId }]
-                  });
-                }}
-                className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
-              >
-                {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                  .filter(level => level >= Math.max(10, unit.level))
-                  .map(level => (
-                    <option key={level} value={level}>{level}</option>
-                  ))}
-              </select>
+            <div key={`promo-${unit.id}`} className="flex flex-col space-y-2">
+              <label className="text-sm font-semibold text-gray-700">{unit.name}:</label>
+              
+              {/* Map through promotion events for this unit */}
+              {(promotionEvents[unit.id] || [{ level: 20, selectedClassId: unitClass?.promotesTo?.[0] || '' }]).map((event, eventIndex) => (
+                <div key={`promo-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
+                  <span className="text-xs text-gray-500">Tier {eventIndex + 1}:</span>
+                  
+                  <select
+                    id={`promo-${unit.id}-${eventIndex}`}
+                    value={event.level}
+                    disabled={!canPromote}
+                    onChange={(e) => {
+                      const level = Number(e.target.value);
+                      const updatedEvents = [...(promotionEvents[unit.id] || [])];
+                      if (eventIndex < updatedEvents.length) {
+                        updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
+                      } else {
+                        updatedEvents.push({ level, selectedClassId: unitClass?.promotesTo?.[0] || '' });
+                      }
+                      onPromotionEventsChange({
+                        ...promotionEvents,
+                        [unit.id]: updatedEvents
+                      });
+                    }}
+                    className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+                  >
+                    {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                      .filter(level => level >= Math.max(10, unit.level))
+                      .map(level => (
+                        <option key={level} value={level}>{level}</option>
+                      ))}
+                  </select>
 
-              {hasBranchingOptions && promotionOptions.length > 0 && (
-                <select
-                  id={`promo-class-${unit.id}`}
-                  value={promotionEvents[unit.id]?.[0]?.selectedClassId || promotionOptions[0]?.id || ''}
-                  disabled={!canPromote}
-                  onChange={(e) => {
-                    const selectedClassId = e.target.value;
-                    const currentLevel = promotionEvents[unit.id]?.[0]?.level || 20;
-                    onPromotionEventsChange({
-                      ...promotionEvents,
-                      [unit.id]: [{ level: currentLevel, selectedClassId }]
-                    });
-                  }}
-                  className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
-                >
-                  {promotionOptions.map(option => (
-                    <option key={option.id} value={option.id}>
-                      {option.name}
-                    </option>
-                  ))}
-                </select>
+                  {hasBranchingOptions && promotionOptions.length > 0 && (
+                    <select
+                      id={`promo-class-${unit.id}-${eventIndex}`}
+                      value={event.selectedClassId || promotionOptions[0]?.id || ''}
+                      disabled={!canPromote}
+                      onChange={(e) => {
+                        const selectedClassId = e.target.value;
+                        const updatedEvents = [...(promotionEvents[unit.id] || [])];
+                        if (eventIndex < updatedEvents.length) {
+                          updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
+                        } else {
+                          updatedEvents.push({ level: 20, selectedClassId });
+                        }
+                        onPromotionEventsChange({
+                          ...promotionEvents,
+                          [unit.id]: updatedEvents
+                        });
+                      }}
+                      className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+                    >
+                      {promotionOptions.map(option => (
+                        <option key={option.id} value={option.id}>
+                          {option.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              ))}
+              
+              {/* Add + and - buttons for promotion tier management */}
+              {(onAddPromotionEvent || onRemovePromotionEvent) && canPromote && (
+                <div className="flex items-center space-x-2 ml-6">
+                  {/* Add button */}
+                  {onAddPromotionEvent && (
+                    <button
+                      onClick={() => {
+                        const currentEvents = promotionEvents[unit.id] || [];
+                        const lastEvent = currentEvents[currentEvents.length - 1];
+                        const lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId);
+                        
+                        // Check if the last selected class can promote further
+                        if (lastSelectedClass?.promotesTo && lastSelectedClass.promotesTo.length > 0) {
+                          const newEvent: PromotionEvent = {
+                            level: 20, // Default promotion level for additional tiers
+                            selectedClassId: lastSelectedClass.promotesTo[0] // Default to first promotion option
+                          };
+                          onAddPromotionEvent(unit.id, newEvent);
+                        }
+                      }}
+                      disabled={!canPromote}
+                      className="w-6 h-6 rounded-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-green-500"
+                      title="Add promotion tier"
+                    >
+                      +
+                    </button>
+                  )}
+                  
+                  {/* Remove button */}
+                  {onRemovePromotionEvent && (
+                    <button
+                      onClick={() => {
+                        const currentEvents = promotionEvents[unit.id] || [];
+                        if (currentEvents.length > 1) {
+                          onRemovePromotionEvent(unit.id);
+                        }
+                      }}
+                      disabled={!canPromote || (promotionEvents[unit.id]?.length || 0) <= 1}
+                      className="w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-red-500"
+                      title="Remove promotion tier"
+                    >
+                      -
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           );
@@ -474,8 +552,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         }
 
                         const isUnitSkipped = row.unitSkipped[unitIndex];
-                        const effectiveUnitLevel = unit.isPromoted ? unit.level + 20 : unit.level;
-                        const shouldShowDash = isUnitSkipped || row.internalLevel < effectiveUnitLevel;
+                        const shouldShowDash = isUnitSkipped;
 
                         let isHighest = false;
                         let isEqual = false;
