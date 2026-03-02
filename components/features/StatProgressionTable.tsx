@@ -31,6 +31,21 @@ function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Arr
 }
 
 /**
+ * Helper function to check if a class is an FE8 trainee class
+ */
+function isTraineeClass(classId: string): boolean {
+  const traineeClassIds = [
+    'recruit',
+    'recruit_2', 
+    'pupil',
+    'pupil_2',
+    'journeyman',
+    'journeyman_2'
+  ];
+  return traineeClassIds.includes(classId);
+}
+
+/**
  * Helper function to get the current class of a unit at a specific point in their promotion path
  */
 function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: PromotionEvent[]): Class | undefined {
