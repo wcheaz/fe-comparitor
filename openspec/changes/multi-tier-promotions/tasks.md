@@ -25,16 +25,16 @@
 - [ ] 5.3 Implement conditional logic for the level `<select>` (around line 346): if `isTraineeClass(currentTierClass)`, only render an `<option value={10}>10</option>`. Otherwise, render the standard 10-20 mapped array.
 - [ ] 5.4 When adding new promotion tiers to trainees via the `onPromotionEventsChange` handlers, default the new event's `level` property to `10` instead of `20` if the prior class is a trainee class.
 
-## 6. Bug Fix: Unclickable Plus Button
-- [ ] 6.1 In `StatProgressionTable.tsx` (around line 390 in the `+` button `onClick` handler), handle the edge case where `promotionEvents[unit.id]` is `undefined` (which occurs before the user has manually changed a dropdown option).
-- [ ] 6.2 When undefined, dynamically construct the fallback state of `[ { level: 20, selectedClassId: <firstBaseClassPromotion> } ]` to ensure `currentEvents` is populated.
-- [ ] 6.3 Use the last element of this fallback array to identify the `lastSelectedClass`, so the logic correctly evaluates `lastSelectedClass.promotesTo` to permit appending a new tier.
+## 6. Bug Fix: Unclickable Plus Button & Dropdowns Freezing
+- [ ] 6.1 **Diagnose**: When `promotionEvents[unit.id]` is undefined, the `+` button calls `onAddPromotionEvent` with ONLY the new Tier 2 event. This sets state to `[Tier 2]`, overriding Tier 1 and hiding the `+` button. Similarly, dropdown `onChange` handlers fail to properly scaffold Tier 1.
+- [ ] 6.2 **Fix Dropdowns**: In `StatProgressionTable.tsx`'s level and class `<select onChanges>`, if `promotionEvents[unit.id]` is undefined/empty, explicitly seed `updatedEvents` with `[{ level: 20, selectedClassId: unitClass?.promotesTo?.[0] }]` before applying the user's new change.
+- [ ] 6.3 **Fix `+` Button**: In the `+` button `onClick`, replace `onAddPromotionEvent` entirely. Instead, seed `currentEvents` with the fallback Tier 1 event if empty. Then push the new Tier 2+ event. Finally, use `onPromotionEventsChange` to save the full array (`[Tier 1, Tier 2]`).
+- [ ] 6.4 **Fix `-` Button**: In the `-` button `onClick`, replace `onRemovePromotionEvent`. If `events.length > 1`, pop the last element and call `onPromotionEventsChange` directly. Ensure `page.tsx`'s supplementary add/remove functions are no longer needed.
 
-## 7. Bug Fix: Extraneous +/- Buttons
-- [ ] 7.1 In `StatProgressionTable.tsx` (around line 384), remove the static `canPromote` boolean that solely checks the unit's base class to determine if the `+` and `-` buttons should render.
-- [ ] 7.2 Implement a dynamic check to identify the actual final class in the active promotion sequence (from either the `promotionEvents[unit.id]` array or the base class if no events exist).
-- [ ] 7.3 Only render or enable the `+` `<button>` if this currently active *final tier class* has a valid `promotesTo` array with length > 0.
-- [ ] 7.4 Maintain the logic that disables the `-` `<button>` if the unit lacks the capability to promote at all, or if `promotionEvents[unit.id]` has a length of 1 or 0.
+## 7. Bug Fix: Extraneous +/- Buttons for Non-Multi-Promoters
+- [ ] 7.1 **Diagnose**: `getFinalTierClass()` currently returns `unitClass` when `events.length === 0`. Since Roy can promote once, `unitClass.promotesTo.length > 0` is true, so `canAddPromotionTier` is true. But the default UI already *shows* his only promotion, which CANNOT promote further.
+- [ ] 7.2 **Fix**: In `StatProgressionTable.tsx` (around line 337), change the fallback return of `getFinalTierClass()` to be the default *promoted* class currently displayed: `return classes.find(c => c.id === unitClass?.promotesTo?.[0])`.
+- [ ] 7.3 **Test**: Verify that units with only 1 promotion tier (like Roy or Neimi) no longer display the `+` or `-` buttons under their name, while multi-tier units (Amelia, Ross) correctly show them.
 
 ## 8. Bug Fix: Dynamic Promotion Options per Tier
 - [ ] 8.1 In `StatProgressionTable.tsx` (inside the `promotionEvents` `.map()` block around line 323), calculate the starting class for *each specific tier iteration* (`eventIndex`).
