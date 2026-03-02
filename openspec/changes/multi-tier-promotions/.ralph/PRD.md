@@ -1,0 +1,160 @@
+# Product Requirements Document
+
+*Generated from OpenSpec artifacts*
+
+## Proposal
+
+## Why
+Some units in Fire Emblem, such as the FE8 Trainees or characters in games with reclassing, can promote or reclass multiple times, resetting their levels. The current table doesn't fully support dynamically adding these multiple promotion tiers or handling the unique level ranges (like trainee levels or varying max level caps) associated with these mechanics, which leads to incorrect stat representations and broken table layouts.
+
+## What Changes
+- Add a dynamically appearing "+" button in the "promotion levels" section to allow users to add another promotion level, provided the unit has an "extra promotion" available.
+- Add a corresponding "-" button to remove the latest promotion/reclass option.
+- Introduce a new "Max Level" data field for units.
+- **BREAKING**: Stats for units that exceed their specific "Max Level" will now display as "-", matching the behavior for levels beneath their base.
+- Specifically insert 10 rows at the top of the table for FE8 Trainee units to represent their 10 "trainee" levels (levels -10 to 0) before they are forced to promote.
+- Reformat the table's level column to dynamically handle "infinite" growth without resetting levels on promotion, while keeping the level 21 "promoted level 1" format for standard GBA-style units.
+- Dynamically scale the table's default maximum level based on the highest max level of the currently selected units (e.g., expanding up to 60 for FE10 units, or sticking to 40 for standard/infinite growth).
+
+## Capabilities
+
+### New Capabilities
+- `unit-level-caps`: Data model and business logic handling for individual unit maximum levels, infinite growth, and trainee-specific negative levels.
+
+### Modified Capabilities
+- `branching-promotions`: Requirements for the UI mechanics regarding how the user adds ("+") or removes ("-") sequential multi-tier promotion events depending on class availability.
+- `stat-progression-table`: Requirements for dynamic default table length scaling, handling negative trainee rows, and rendering "-" for levels exceeding a unit's cap.
+
+## Impact
+- **Data**: Requires updating unit schemas and JSON files across all supported games to include `maxLevel` and handling for infinite growth flags.
+- **UI**: Significant changes to `StatProgressionTable.tsx` to handle dynamic row generation (negative rows, variable table endpoints) and the "Promotion Levels" configuration UI.
+- **Logic**: Modifications to `lib/stats.ts` to respect `maxLevel`, Trainee negative levels, and infinite level formatting when generating the stat progression array.
+
+## Specifications
+
+branching-promotions/spec.md
+## MODIFIED Requirements
+
+### Requirement: Multi-Tier Promotion Support
+The system SHALL support and track sequential promotion events for units that can promote multiple times or reclass linearly.
+
+#### Scenario: Unit promotes through multiple tiers
+- **WHEN** a unit promotes from a base class to an advanced class, and then to a third-tier class
+- **THEN** the system tracks the selected class for each level threshold and applies the appropriate sequence of class bases and promotion bonuses.
+
+#### Scenario: System provides UI to append multi-tier promotions
+- **WHEN** the user is viewing the "Promotion Levels" section for a unit
+- **AND** the currently selected class for their latest promotion event has valid entries in its `promotesTo` array
+- **THEN** the system renders a "+" button that, when clicked, adds a new sequential promotion event to the unit's timeline.
+
+#### Scenario: System provides UI to remove multi-tier promotions
+- **WHEN** a unit has more than one promotion event configured
+- **THEN** the system renders a "-" button next to the "+" button that, when clicked, removes the most recently added promotion event from the unit's timeline.
+
+stat-progression-table/spec.md
+## MODIFIED Requirements
+
+### Requirement: Table Range and Base Level Padding
+The table SHALL span from the lowest base level or trainee offset of the selected units up to the highest calculated `maxLevel` across all selected units (or level 40 by default if no `maxLevel` caps are found), padding out-of-bounds units with `-`.
+
+#### Scenario: Units with mismatched base levels
+- **WHEN** Unit A has base level 1 and Unit B has base level 5
+- **THEN** the table begins at level 1, and rows 1-4 display `-` for Unit B's stats.
+- **THEN** at level 5, Unit B's stats begin to display.
+
+#### Scenario: Unit with Trainee negative offset levels
+- **WHEN** Unit A is a Trainee with 10 offset levels (conceptually -10 to 0) and Unit B is a standard unit with base level 1
+- **THEN** the table begins at the offset equivalent of -10.
+- **AND** rows -10 through 0 display `-` for Unit B's stats while Unit A's trainee stats are calculated.
+
+#### Scenario: Unit exceeds their max level
+- **WHEN** the current table row level exceeds the specific `maxLevel` defined for a unit
+- **THEN** that unit's stat cells render as `-` for all subsequent rows, indicating they cannot grow further.
+
+### Requirement: Table Range Expansion
+The table SHALL provide a toggle to expand the displayed levels up to level 100, or adapt to infinite scrolling if an infinite `maxLevel` flag is present.
+
+#### Scenario: User wants to see extended levels
+- **WHEN** the user clicks the "Expand to Level 100" toggle
+- **THEN** the table generates and displays rows up to effective level 100.
+
+#### Scenario: Unit has infinite level cap
+- **WHEN** a selected unit has a `maxLevel` set to "infinite"
+- **THEN** the table's upper bound is uncapped or set to a high visual limit (e.g., 100) regardless of the standard default.
+
+### Requirement: Promotion Mechanics Integration
+The table SHALL account for unit promotions by resetting the displayed level counter to 1 while maintaining internal cumulative progression, unless the unit's game mechanics dictate continuous leveling.
+
+#### Scenario: Unit crosses level 20 unpromoted
+- **WHEN** a row is generated for a standard unit passing unpromoted level 20
+- **THEN** the row label indicates "Level 1 (Promoted)" instead of "Level 21".
+
+#### Scenario: Unit has infinite sequential leveling
+- **WHEN** a row is generated for a unit from a game that does not reset levels on promotion/reclass (e.g., infinite growth mechanics)
+- **THEN** the row label continues sequentially (e.g., "Level 21") without appending "(Promoted)".
+
+unit-level-caps/spec.md
+## ADDED Requirements
+
+### Requirement: Maximum Level Tracking
+The system SHALL support tracking and utilizing a unit-specific maximum level cap derived from game data.
+#### Scenario: Unit with standard level cap
+- **WHEN** a standard unpromoted unit (e.g., Roy) is loaded
+- **THEN** their `maxLevel` is implicitly or explicitly set to 20.
+#### Scenario: Unit with extended level cap
+- **WHEN** a special unit (e.g., FE10 unit with 3 tiers) is loaded
+- **THEN** their cumulative `maxLevel` represents their absolute maximum achievable level across all tiers (e.g., 60).
+
+### Requirement: Trainee Level Representation
+The system SHALL support and calculate stats for units starting at "negative" relative levels to represent pre-base classes (Trainees).
+#### Scenario: Trainee unit loads
+- **WHEN** an FE8 Trainee (e.g., Amelia) is loaded
+- **THEN** the system calculates their initial 10 levels as levels -10 to 0 (or equivalent internal offset) before they reach standard level 1.
+
+### Requirement: Infinite Leveling Flag
+The system SHALL support a flag indicating a unit or game allows for infinite leveling/reclassing loops.
+#### Scenario: Game with infinite leveling
+- **WHEN** a unit from a game with infinite reclassing (e.g., FE13/FE14) is processed
+- **THEN** the system ignores absolute max level caps and allows the level counter to scale indefinitely up to the table's visual rendering limit.
+
+
+
+## Design
+
+## Context
+Currently, the `StatProgressionTable` generates levels and stats assuming a standard 1-20 unpromoted to 1-20 promoted flow. When a unit can promote multiple times (e.g., FE8 Trainees like Amelia, or multiple reclassing tiers) or has unique level constraints (infinite growth, higher level caps), the table bounds, level counting, and stat progression algorithms break. We need to introduce multi-tier promotion tracking and flexible level bounding to support these mechanics.
+
+## Goals / Non-Goals
+
+**Goals:**
+- Refactor the UI to dynamically add and remove multiple promotion events for a single unit.
+- Properly map negative/offset levels for Trainee units (e.g., levels -10 to 0).
+- Support variable unit maximum levels (`maxLevel`), stopping stat calculations and rendering `-` when exceeded.
+
+**Non-Goals:**
+- Supporting infinite, arbitrary horizontal reclassing (FE11+ style) - this design focuses on linear or branching forward promotion/class advancements.
+- Generating table rows infinitely; the table should still cap at a reasonable maximum visual bound based on the selected units.
+
+## Decisions
+
+1. **`PromotionEvent` UI Management**: 
+   - The "Promotion Levels" UI in `StatProgressionTable` will change from a static pair of inputs to a dynamic list.
+   - We will add `+` and `-` buttons that trigger handlers to append/pop elements from the `promotionEvents` array explicitly for units whose class trees support it.
+   
+2. **Trainee Level Virtualization**: 
+   - Instead of breaking the 1-indexed level paradigm, we will represent Trainee levels conceptually in the table as starting below the standard tier structure (e.g., using `Level X (Trainee)` strings). The `generateProgressionArray` function will be updated to handle pre-base offset math.
+
+3. **`maxLevel` Property**: 
+   - We will introduce a `maxLevel?: number | "infinite"` property to the `Unit` data schema. 
+   - The stat generation loop will halt stat accumulation if the internal counter exceeds this value, emitting a flag that forces the UI to render `-`.
+   - The overall table's rendering bounds will query all selected units' `maxLevel`s to determine how far down to render rows by default.
+
+## Risks / Trade-offs
+
+- **[Risk]** Clunky UI with too many promotion dropdowns. → **Mitigation**: Only show the `+` button if the *currently active class* in the unit's final promotion event has an available `promotesTo` array.
+- **[Risk]** Stat generation logic `generateProgressionArray` becoming overly complex and breaking existing unit calculations. → **Mitigation**: Ensure backward compatibility. Units without `maxLevel` default to the standard 40/20 caps. Standard FE7/FE6 calculations should pass cleanly through the updated loops if `promotionEvents` length is 1.
+
+## Current Task Context
+
+## Current Task
+- - [ ] 1.1 Update the `Unit` interface in `types/unit.ts` (around line 44) to include `maxLevel?: number | "infinite"`.

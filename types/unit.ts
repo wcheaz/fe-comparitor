@@ -41,6 +41,7 @@ export interface Unit {
   level: number; // Base level
   stats: UnitStats; // Base stats (includes HP)
   growths: UnitStats; // Growth rates
+  maxLevel?: number | "infinite"; // Maximum level cap for this unit
   maxStats?: UnitStats; // Optional caps
   skills?: string[];
   isPromoted?: boolean; // Flag for units that start in a promoted class

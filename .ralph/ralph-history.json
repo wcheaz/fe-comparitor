@@ -1,0 +1,28 @@
+{
+  "iterations": [
+    {
+      "iteration": 1,
+      "startedAt": "2026-03-02T22:17:43.693Z",
+      "endedAt": "2026-03-02T22:18:27.058Z",
+      "durationMs": 43154,
+      "agent": "opencode",
+      "model": "",
+      "toolsUsed": {},
+      "filesModified": [
+        ".ralph/ralph-tasks.md",
+        "openspec/changes/multi-tier-promotions/tasks.md",
+        "types/unit.ts",
+        "openspec/changes/multi-tier-promotions/.ralph/"
+      ],
+      "exitCode": 0,
+      "completionDetected": false,
+      "errors": []
+    }
+  ],
+  "totalDurationMs": 43154,
+  "struggleIndicators": {
+    "repeatedErrors": {},
+    "noProgressIterations": 0,
+    "shortIterations": 0
+  }
+}

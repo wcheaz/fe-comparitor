@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 Update the `Unit` interface in `types/unit.ts` (around line 44) to include `maxLevel?: number | "infinite"`.
