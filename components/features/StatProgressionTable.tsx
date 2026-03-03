@@ -22,7 +22,7 @@ function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Arr
   }
 
   return classObj.promotesTo.map(classId => {
-    const targetClass = classes.find(c => c.id === classId);
+    const targetClass = classes.find(c => c.id === classId && c.game === classObj.game);
     return {
       id: classId,
       name: targetClass?.name || classId
@@ -50,12 +50,12 @@ function isTraineeClass(classId: string): boolean {
  */
 function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: PromotionEvent[]): Class | undefined {
   if (promotionEvents.length === 0) {
-    return classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_'));
+    return classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
   }
 
   // Find the most recent promotion event
   const latestEvent = promotionEvents[promotionEvents.length - 1];
-  return classes.find(c => c.id === latestEvent.selectedClassId);
+  return classes.find(c => c.id === latestEvent.selectedClassId && c.game === unit.game);
 }
 
 interface StatProgressionTableProps {
@@ -331,10 +331,10 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
             const events = promotionEvents[unit.id] || [];
             if (events.length > 0) {
               const lastEvent = events[events.length - 1];
-              return classes.find(c => c.id === lastEvent.selectedClassId);
+              return classes.find(c => c.id === lastEvent.selectedClassId && c.game === unit.game);
             }
             // Return the default promoted class currently displayed in the UI
-            return classes.find(c => c.id === unitClass?.promotesTo?.[0]);
+            return classes.find(c => c.id === unitClass?.promotesTo?.[0] && c.game === unit.game);
           };
           
           const finalTierClass = getFinalTierClass();
@@ -356,7 +356,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                 // Resolve the currentTierClass for the dropdown row
                 const currentTierClass = eventIndex === 0 
                   ? unitClass 
-                  : classes.find(c => c.id === promotionEvents[unit.id][eventIndex - 1]?.selectedClassId);
+                  : classes.find(c => c.id === promotionEvents[unit.id][eventIndex - 1]?.selectedClassId && c.game === unit.game);
                 
                 const tierHasBranchingOptions = hasBranchingPromotions(currentTierClass);
                 const tierPromotionOptions = getPromotionOptions(currentTierClass, classes);
@@ -459,7 +459,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                       onClick={() => {
                         let currentEvents = [...(promotionEvents[unit.id] || [])];
                         let lastEvent = currentEvents[currentEvents.length - 1];
-                        let lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId);
+                        let lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId && c.game === unit.game);
                         
                         // If promotionEvents is empty, seed it with the default Tier 1 event
                         if (currentEvents.length === 0) {
@@ -469,7 +469,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           };
                           currentEvents = [fallbackEvent];
                           lastEvent = fallbackEvent;
-                          lastSelectedClass = classes.find(c => c.id === fallbackEvent.selectedClassId);
+                          lastSelectedClass = classes.find(c => c.id === fallbackEvent.selectedClassId && c.game === unit.game);
                         }
                         
                         // Check if the last selected class can promote further

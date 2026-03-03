@@ -327,8 +327,15 @@ export function generateProgressionArray(
       displayLevel = `Level ${displayLevelNum} (Trainee)`;
     } else {
       // Standard level calculation (1-based)
-      tier = Math.floor((internalLevel - 1) / 20) + 1;
-      displayLevelNum = ((internalLevel - 1) % 20) + 1;
+      // For trainee units, adjust the tier calculation to account for negative offset levels
+      let adjustedInternalLevel = internalLevel;
+      if (hasTraineeLevels) {
+        // Add the trainee offset to properly calculate tiers for trainee units
+        adjustedInternalLevel = internalLevel + Math.abs(traineeOffset);
+      }
+      
+      tier = Math.floor((adjustedInternalLevel - 1) / 20) + 1;
+      displayLevelNum = ((adjustedInternalLevel - 1) % 20) + 1;
       
       if (tier === 1) {
         displayLevel = `Level ${displayLevelNum}`;
@@ -396,7 +403,14 @@ export function generateProgressionArray(
         // Promoted from Tier 1 - use first promotion stats and class
         currentClass = promotedClasses[0] || baseClass;
         baseStatForCalc = promotedStats[0] || unit.stats;
-        levelDiff = displayLevelNum - 1; // Level 1 (Tier 2) is the baseline 0 level-ups
+        
+        // For trainee units, account for trainee levels in level difference calculation
+        if (hasTraineeLevels) {
+          const traineeLevelsCount = Math.abs(traineeOffset);
+          levelDiff = displayLevelNum - 1 + traineeLevelsCount;
+        } else {
+          levelDiff = displayLevelNum - 1; // Level 1 (Tier 2) is the baseline 0 level-ups
+        }
 
         // If they can't promote, skip Tier 2
         if (!baseClass?.promotesTo?.length) {
@@ -426,6 +440,12 @@ export function generateProgressionArray(
         // For tiers beyond 2, we accumulate the level differences from previous tiers
         const previousTiersLevels = (tier - 2) * 20; // 20 levels per previous tier
         levelDiff = displayLevelNum - 1 + previousTiersLevels;
+        
+        // For trainee units, add the trainee levels count to the level difference
+        if (hasTraineeLevels) {
+          const traineeLevelsCount = Math.abs(traineeOffset);
+          levelDiff += traineeLevelsCount;
+        }
         
         // Don't skip tiers for infinite leveling
         isSkipped = false;

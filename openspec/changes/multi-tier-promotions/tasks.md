@@ -48,7 +48,7 @@
 - [x] 9.3 **Fix Dropdowns**: Change the `disabled` property on both the level and class `<select>` elements to simply `disabled={!unitCanPromote}` instead of `disabled={!canAddPromotionTier}`. This ensures the inputs remain freely editable as long as the base unit possesses promotion capabilities, while keeping the `+` button natively tied to the `canAddPromotionTier` constraint.
 
 ## 10. Bug Fix: Initial Trainee Rendering Assumes Level 20
-- [/] 10.1 **Diagnose**: In `StatProgressionTable.tsx` (around line 348), the `.map` iteration relies on a hardcoded array of `[{ level: 20, selectedClassId: unitClass?.promotesTo?.[0] || '' }]` if `promotionEvents[unit.id]` is empty. This forces the table's internal array data mapper to assume the unit promotes at level 20 initially, even though the `<select>` tag maps its values independently to force `10` visually.
+- [x] 10.1 **Diagnose**: In `StatProgressionTable.tsx` (around line 348), the `.map` iteration relies on a hardcoded array of `[{ level: 20, selectedClassId: unitClass?.promotesTo?.[0] || '' }]` if `promotionEvents[unit.id]` is empty. This forces the table's internal array data mapper to assume the unit promotes at level 20 initially, even though the `<select>` tag maps its values independently to force `10` visually.
 - [x] 10.2 **Fix**: When generating the fallback map array (`promotionEvents[unit.id] || [...]`), dynamically check `if (isTraineeClass(unitClass?.id || ''))` and construct the fallback event with `level: 10` instead of `20`.
 
 ## 11. Bug Fix: Appended Tiers Ignore Previous Class ID
@@ -56,12 +56,12 @@
 - [x] 11.2 **Fix Array Generation Consistency**: In `StatProgressionTable.tsx` `+` button click handler, ensure that the newly pushed tier event correctly assigns `selectedClassId` as `lastSelectedClass.promotesTo[0]`, which populates the next row's `currentTierClass` so it displays branching options instead of rendering a blank `<select>`.
 
 ## 12. Bug Fix: Trainee Multiple Promotion UI Bug
-- [ ] 12.1 **Diagnose + Fix Game Check**: `getFinalTierClass`, `getCurrentClass`, and the `+` button pull class definitions using `classes.find(c => c.id === ...)`. These fail to consider `c.game === unit.game`. When Amelia (Sacred Stones) promotes into `cavalier_f`, the system might fetch an identical class ID from Binding Blade that has NO `promotesTo` array. Fix this by appending `&& c.game === unit.game` to all class lookups inside `StatProgressionTable.tsx` so `canAddPromotionTier` evaluates to true for Tier 2.
+- [x] 12.1 **Diagnose + Fix Game Check**: `getFinalTierClass`, `getCurrentClass`, and the `+` button pull class definitions using `classes.find(c => c.id === ...)`. These fail to consider `c.game === unit.game`. When Amelia (Sacred Stones) promotes into `cavalier_f`, the system might fetch an identical class ID from Binding Blade that has NO `promotesTo` array. Fix this by appending `&& c.game === unit.game` to all class lookups inside `StatProgressionTable.tsx` so `canAddPromotionTier` evaluates to true for Tier 2.
 
 ## 13. Bug Fix: Trainee Level Calculation Issues
-- [ ] 13.1 **Fix Trainee Min Level Calculation**: In `StatProgressionTable.tsx` (around line 107), `minLevel` is calculated by checking if `promotionEvents[unit.id][0].level > 20`. This assumes trainees promote after level 20, but FE8 Trainees cap at 10. Update the `hasTraineeLevels` check to evaluate `isTraineeClass(unitClass?.id)` instead.
-- [ ] 13.2 **Fix Internal Level Tracking**: In `generateProgressionArray` (`lib/stats.ts`), units with Trainee levels correctly use negative offset internal levels. Ensure that `tier` progression accounts for this offset and cleanly pushes the next tiers up an integer instead of classifying tier 1 classes (Cavalier, Knight) as tier 2. 
+- [x] 13.1 **Fix Trainee Min Level Calculation**: In `StatProgressionTable.tsx` (around line 107), `minLevel` is calculated by checking if `promotionEvents[unit.id][0].level > 20`. This assumes trainees promote after level 20, but FE8 Trainees cap at 10. Update the `hasTraineeLevels` check to evaluate `isTraineeClass(unitClass?.id)` instead.
+- [x] 13.2 **Fix Internal Level Tracking**: In `generateProgressionArray` (`lib/stats.ts`), units with Trainee levels correctly use negative offset internal levels. Ensure that `tier` progression accounts for this offset and cleanly pushes the next tiers up an integer instead of classifying tier 1 classes (Cavalier, Knight) as tier 2. 
 
 ## 14. Testing
-- [ ] 14.1 **Test Add Full Promotion Track**: Load Amelia (Recruit, SS). Add a promotion tier. Select Cavalier. Verify the `+` button renders again. Add another tier. Select Paladin. Verify the dropdowns render natively.
-- [ ] 14.2 **Test Progression Math**: Verify that the generated table visually displays 1-10 for the Trainee offset (marked as Trainee) and continues correctly 1-20 (Tier 1) and 1-20 (Tier 2).
+- [x] 14.1 **Test Add Full Promotion Track**: Load Amelia (Recruit, SS). Add a promotion tier. Select Cavalier. Verify the `+` button renders again. Add another tier. Select Paladin. Verify the dropdowns render natively.
+- [x] 14.2 **Test Progression Math**: Verify that the generated table visually displays 1-10 for the Trainee offset (marked as Trainee) and continues correctly 1-20 (Tier 1) and 1-20 (Tier 2).
