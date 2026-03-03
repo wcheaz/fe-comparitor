@@ -36,7 +36,7 @@ function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Arr
 function isTraineeClass(classId: string): boolean {
   const traineeClassIds = [
     'recruit',
-    'recruit_2', 
+    'recruit_2',
     'pupil',
     'pupil_2',
     'journeyman',
@@ -108,8 +108,8 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
       const hasTraineeLevels = isTraineeClass(unitClass?.id || '');
       return hasTraineeLevels ? -10 : unit.level;
     }), 1);
-    
-    const maxLevelFromUnits = Math.max(...units.map(unit => 
+
+    const maxLevelFromUnits = Math.max(...units.map(unit =>
       unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40)
     ), 40);
     const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnits, 100) : maxLevelFromUnits;
@@ -325,7 +325,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion Levels:</span>
         {units.map(unit => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
-          
+
           // Dynamic check for final tier class promotion capability
           const getFinalTierClass = () => {
             const events = promotionEvents[unit.id] || [];
@@ -336,62 +336,62 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
             // Return the default promoted class currently displayed in the UI
             return classes.find(c => c.id === unitClass?.promotesTo?.[0] && c.game === unit.game);
           };
-          
+
           const finalTierClass = getFinalTierClass();
           const canAddPromotionTier = (finalTierClass?.promotesTo?.length ?? 0) > 0;
 
           // Check if the unit can promote at all
           const unitCanPromote = (unitClass?.promotesTo?.length ?? 0) > 0;
-          
+
           return (
             <div key={`promo-${unit.id}`} className="flex flex-col space-y-2">
               <label className="text-sm font-semibold text-gray-700">{unit.name}:</label>
-              
+
               {/* Map through promotion events for this unit - only if unit can promote */}
               {unitCanPromote ? (
-                (promotionEvents[unit.id] || [{ 
-                  level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
-                  selectedClassId: unitClass?.promotesTo?.[0] || '' 
+                (promotionEvents[unit.id] || [{
+                  level: isTraineeClass(unitClass?.id || '') ? 10 : 20,
+                  selectedClassId: unitClass?.promotesTo?.[0] || ''
                 }]).map((event, eventIndex) => {
-                // Resolve the currentTierClass for the dropdown row
-                const currentTierClass = eventIndex === 0 
-                  ? unitClass 
-                  : classes.find(c => c.id === promotionEvents[unit.id][eventIndex - 1]?.selectedClassId && c.game === unit.game);
-                
-                const tierHasBranchingOptions = hasBranchingPromotions(currentTierClass);
-                const tierPromotionOptions = getPromotionOptions(currentTierClass, classes);
-                
-                return (
-                  <div key={`promo-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
-                    <span className="text-xs text-gray-500">Tier {eventIndex + 1}:</span>
-                    
-                    <select
-                      id={`promo-${unit.id}-${eventIndex}`}
-                      value={event.level}
-                      disabled={!unitCanPromote}
-                      onChange={(e) => {
-                        const level = Number(e.target.value);
-                        let updatedEvents = [...(promotionEvents[unit.id] || [])];
-                        
-                        // If promotionEvents is empty, seed it with the default Tier 1 event
-                        if (updatedEvents.length === 0) {
-                          updatedEvents = [{ 
-                            level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
-                            selectedClassId: unitClass?.promotesTo?.[0] || '' 
-                          }];
-                        }
-                        
-                        if (eventIndex < updatedEvents.length) {
-                          updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
-                        } else {
-                          updatedEvents.push({ level, selectedClassId: unitClass?.promotesTo?.[0] || '' });
-                        }
-                        onPromotionEventsChange({
-                          ...promotionEvents,
-                          [unit.id]: updatedEvents
-                        });
-                      }}
-                      className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+                  // Resolve the currentTierClass for the dropdown row
+                  const currentTierClass = eventIndex === 0
+                    ? unitClass
+                    : classes.find(c => c.id === promotionEvents[unit.id][eventIndex - 1]?.selectedClassId && c.game === unit.game);
+
+                  const tierHasBranchingOptions = hasBranchingPromotions(currentTierClass);
+                  const tierPromotionOptions = getPromotionOptions(currentTierClass, classes);
+
+                  return (
+                    <div key={`promo-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
+                      <span className="text-xs text-gray-500">Tier {eventIndex + 1}:</span>
+
+                      <select
+                        id={`promo-${unit.id}-${eventIndex}`}
+                        value={event.level}
+                        disabled={!unitCanPromote}
+                        onChange={(e) => {
+                          const level = Number(e.target.value);
+                          let updatedEvents = [...(promotionEvents[unit.id] || [])];
+
+                          // If promotionEvents is empty, seed it with the default Tier 1 event
+                          if (updatedEvents.length === 0) {
+                            updatedEvents = [{
+                              level: isTraineeClass(unitClass?.id || '') ? 10 : 20,
+                              selectedClassId: unitClass?.promotesTo?.[0] || ''
+                            }];
+                          }
+
+                          if (eventIndex < updatedEvents.length) {
+                            updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
+                          } else {
+                            updatedEvents.push({ level, selectedClassId: unitClass?.promotesTo?.[0] || '' });
+                          }
+                          onPromotionEventsChange({
+                            ...promotionEvents,
+                            [unit.id]: updatedEvents
+                          });
+                        }}
+                        className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
                       >
                         {isTraineeClass(currentTierClass?.id || '') ? (
                           <option value={10}>10</option>
@@ -404,52 +404,52 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         )}
                       </select>
 
-                    {tierHasBranchingOptions && tierPromotionOptions.length > 0 && (
-<select
-                         id={`promo-class-${unit.id}-${eventIndex}`}
-                         value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
-                         disabled={!unitCanPromote}
-                        onChange={(e) => {
-                          const selectedClassId = e.target.value;
-                          let updatedEvents = [...(promotionEvents[unit.id] || [])];
-                          
-                           // If promotionEvents is empty, seed it with the default Tier 1 event
-                           if (updatedEvents.length === 0) {
-                             updatedEvents = [{ 
-                               level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
-                               selectedClassId: unitClass?.promotesTo?.[0] || '' 
-                             }];
-                           }
-                          
-                          if (eventIndex < updatedEvents.length) {
-                            updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
-                          } else {
-                            updatedEvents.push({ 
-                              level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
-                              selectedClassId 
+                      {tierHasBranchingOptions && tierPromotionOptions.length > 0 && (
+                        <select
+                          id={`promo-class-${unit.id}-${eventIndex}`}
+                          value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
+                          disabled={!unitCanPromote}
+                          onChange={(e) => {
+                            const selectedClassId = e.target.value;
+                            let updatedEvents = [...(promotionEvents[unit.id] || [])];
+
+                            // If promotionEvents is empty, seed it with the default Tier 1 event
+                            if (updatedEvents.length === 0) {
+                              updatedEvents = [{
+                                level: isTraineeClass(unitClass?.id || '') ? 10 : 20,
+                                selectedClassId: unitClass?.promotesTo?.[0] || ''
+                              }];
+                            }
+
+                            if (eventIndex < updatedEvents.length) {
+                              updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
+                            } else {
+                              updatedEvents.push({
+                                level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20,
+                                selectedClassId
+                              });
+                            }
+                            onPromotionEventsChange({
+                              ...promotionEvents,
+                              [unit.id]: updatedEvents
                             });
-                          }
-                          onPromotionEventsChange({
-                            ...promotionEvents,
-                            [unit.id]: updatedEvents
-                          });
-                        }}
-                        className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
-                      >
-                        {tierPromotionOptions.map(option => (
-                          <option key={option.id} value={option.id}>
-                            {option.name}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
-                );
-              })
+                          }}
+                          className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:bg-gray-100"
+                        >
+                          {tierPromotionOptions.map(option => (
+                            <option key={option.id} value={option.id}>
+                              {option.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  );
+                })
               ) : (
                 <span className="text-gray-400 text-sm ml-2">Cannot promote</span>
               )}
-              
+
               {/* Add + and - buttons for promotion tier management */}
               {(onAddPromotionEvent || onRemovePromotionEvent) && canAddPromotionTier && (
                 <div className="flex items-center space-x-2 ml-6">
@@ -460,7 +460,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         let currentEvents = [...(promotionEvents[unit.id] || [])];
                         let lastEvent = currentEvents[currentEvents.length - 1];
                         let lastSelectedClass = classes.find(c => c.id === lastEvent?.selectedClassId && c.game === unit.game);
-                        
+
                         // If promotionEvents is empty, seed it with the default Tier 1 event
                         if (currentEvents.length === 0) {
                           const fallbackEvent = {
@@ -471,14 +471,14 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           lastEvent = fallbackEvent;
                           lastSelectedClass = classes.find(c => c.id === fallbackEvent.selectedClassId && c.game === unit.game);
                         }
-                        
+
                         // Check if the last selected class can promote further
                         if (lastSelectedClass?.promotesTo && lastSelectedClass.promotesTo.length > 0) {
                           const newEvent: PromotionEvent = {
                             level: isTraineeClass(lastSelectedClass?.id || '') ? 10 : 20, // Default promotion level for additional tiers
                             selectedClassId: lastSelectedClass.promotesTo[0] // Default to first promotion option
                           };
-                          
+
                           // Push the new event and save the full array
                           currentEvents.push(newEvent);
                           onPromotionEventsChange({
@@ -494,7 +494,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                       +
                     </button>
                   )}
-                  
+
                   {/* Remove button */}
                   {onRemovePromotionEvent && (
                     <button

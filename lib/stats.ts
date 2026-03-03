@@ -221,9 +221,13 @@ export function generateProgressionArray(
   const actualStartLevel = startLevel || 1;
   const actualEndLevel = endLevel || 40;
 
-  // Calculate trainee offset - if startLevel is negative, we're dealing with trainee levels
-  const hasTraineeLevels = actualStartLevel < 0;
-  const traineeOffset = hasTraineeLevels ? actualStartLevel : 0;
+  // Determine if this specific unit is a trainee
+  const isTrainee = ['recruit', 'recruit_2', 'pupil', 'pupil_2', 'journeyman', 'journeyman_2'].includes(
+    unit.class.toLowerCase().replace(/\s+/g, '_')
+  );
+  // Trainees start at internalLevel -9 (10 trainee levels: -9 to 0)
+  const hasTraineeLevels = isTrainee;
+  const traineeOffset = hasTraineeLevels ? -9 : 0;
 
   // Find the unit's class data
   let baseClass = classes?.find((cls: any) => cls.id === unit.class.toLowerCase().replace(/\s+/g, '_') && cls.game === unit.game);
@@ -238,7 +242,7 @@ export function generateProgressionArray(
   // Determine promotion levels and target classes for multi-tier promotions
   const promoLevels: number[] = [];
   const promoTargetIds: string[] = [];
-  
+
   // Default to single promotion at level 20 if no promotion events
   if (promotionEvents.length === 0) {
     promoLevels.push(20);
@@ -247,7 +251,7 @@ export function generateProgressionArray(
     // Iterate through all promotion events
     promotionEvents.forEach((event, index) => {
       promoLevels.push(event.level);
-      promoTargetIds.push(event.selectedClassId || 
+      promoTargetIds.push(event.selectedClassId ||
         (index === 0 ? baseClass?.promotesTo?.[0] || '' : ''));
     });
   }
@@ -258,14 +262,14 @@ export function generateProgressionArray(
 
   if (!unit.isPromoted && baseClass?.promotesTo?.length > 0) {
     let currentStats: UnitStats = { ...unit.stats };
-    
+
     // Process each promotion event sequentially
     for (let i = 0; i < promoLevels.length; i++) {
       const promoLevel = promoLevels[i];
       const promoTargetId = promoTargetIds[i];
-      
+
       // Calculate stats right at promotion level
-      const levelDiff = i === 0 ? promoLevel - unit.level : 20; // Subsequent promotions are after 20 levels
+      const levelDiff = i === 0 ? Math.max(0, promoLevel - unit.level) : Math.max(0, promoLevel - 1); // Subsequent promotions grow from level 1
       const prePromoStats: UnitStats = {};
 
       // Growth to promotion
@@ -301,7 +305,7 @@ export function generateProgressionArray(
             }
           });
         }
-        
+
         promotedStats.push(newPromotedStats);
         promotedClasses.push(promotedClass);
         currentStats = newPromotedStats; // Use these stats for the next promotion
@@ -320,23 +324,16 @@ export function generateProgressionArray(
     let levelDiff = 0;
     let promotionInfo = undefined;
 
-    // Handle trainee levels (negative levels)
-    if (internalLevel < 0) {
+    // Handle trainee levels (negative levels and 0)
+    if (internalLevel <= 0) {
       tier = 0; // Trainee tier
-      displayLevelNum = internalLevel; // Show actual negative number
+      displayLevelNum = internalLevel + 10; // -9 becomes 1, 0 becomes 10
       displayLevel = `Level ${displayLevelNum} (Trainee)`;
     } else {
       // Standard level calculation (1-based)
-      // For trainee units, adjust the tier calculation to account for negative offset levels
-      let adjustedInternalLevel = internalLevel;
-      if (hasTraineeLevels) {
-        // Add the trainee offset to properly calculate tiers for trainee units
-        adjustedInternalLevel = internalLevel + Math.abs(traineeOffset);
-      }
-      
-      tier = Math.floor((adjustedInternalLevel - 1) / 20) + 1;
-      displayLevelNum = ((adjustedInternalLevel - 1) % 20) + 1;
-      
+      tier = Math.floor((internalLevel - 1) / 20) + 1;
+      displayLevelNum = ((internalLevel - 1) % 20) + 1;
+
       if (tier === 1) {
         displayLevel = `Level ${displayLevelNum}`;
       } else {
@@ -346,75 +343,80 @@ export function generateProgressionArray(
 
     // Handle tier-specific logic
     if (tier === 0) {
-      // Trainee tier (negative levels)
-      if (unit.isPromoted) {
-        isSkipped = true; // Promoted units don't have trainee levels
+      if (!isTrainee || unit.isPromoted) {
+        isSkipped = true; // Standard units do not have trainee rows
       } else {
-        // For trainee levels, calculate level difference from the trainee start
-        // Trainee units use the negative levels as their progression
-        levelDiff = internalLevel - traineeOffset;
-        
-        // Trainee units can't promote until they reach positive levels
-        // So all trainee levels are valid stat calculation levels
+        levelDiff = displayLevelNum - unit.level;
+        if (displayLevelNum < unit.level || displayLevelNum > (promoLevels[0] || 10)) {
+          isSkipped = true;
+        }
       }
     } else if (tier === 1) {
       if (unit.isPromoted) {
         isSkipped = true;
       } else {
-        if (hasTraineeLevels) {
-          // For units that came from trainee levels, adjust the level comparison
-          const adjustedBaseLevel = Math.max(1, unit.level);
-          // For multi-tier promotions, check against the first promotion level
-          const firstPromoLevel = promoLevels.length > 0 ? promoLevels[0] : 20;
-          if (displayLevelNum < adjustedBaseLevel || displayLevelNum > firstPromoLevel) {
+        if (isTrainee) {
+          currentClass = promotedClasses[0] || baseClass;
+          baseStatForCalc = promotedStats[0] || unit.stats;
+
+          const targetPromoLevel = promoLevels[1] || 20;
+          if (displayLevelNum < 1 || displayLevelNum > targetPromoLevel) {
             isSkipped = true;
           }
+
+          levelDiff = displayLevelNum - 1;
+
+          const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 1 && lvl === displayLevelNum);
+          if (currentPromoIndex >= 0 && currentClass?.promotesTo?.length > 0) {
+            isPromotionLevel = true;
+            if (promotedClasses[currentPromoIndex]) {
+              promotionInfo = {
+                className: promotedClasses[currentPromoIndex].name,
+                classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
+              };
+            }
+          }
         } else {
-          // Standard units
-          const firstPromoLevel = promoLevels.length > 0 ? promoLevels[0] : 20;
-          if (displayLevelNum < unit.level || displayLevelNum > firstPromoLevel) {
+          currentClass = baseClass;
+          baseStatForCalc = unit.stats;
+
+          const targetPromoLevel = promoLevels[0] || 20;
+          if (displayLevelNum < unit.level || displayLevelNum > targetPromoLevel) {
             isSkipped = true;
           }
-        }
-        
-        // Check if this level matches any promotion level
-        const currentPromoIndex = promoLevels.findIndex(level => level === displayLevelNum);
-        if (currentPromoIndex >= 0 && baseClass?.promotesTo?.length > 0) {
-          isPromotionLevel = true;
-          if (promotedClasses[currentPromoIndex]) {
-            promotionInfo = {
-              className: promotedClasses[currentPromoIndex].name,
-              classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
-            };
-          }
-        }
-        
-        // Calculate level difference
-        if (hasTraineeLevels) {
-          // For trainee units, the base level calculation needs to account for trainee progression
-          const traineeLevelsCount = Math.abs(traineeOffset);
-          levelDiff = displayLevelNum - 1 + traineeLevelsCount;
-        } else {
           levelDiff = displayLevelNum - unit.level;
+
+          const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 0 && lvl === displayLevelNum);
+          if (currentPromoIndex >= 0 && baseClass?.promotesTo?.length > 0) {
+            isPromotionLevel = true;
+            if (promotedClasses[currentPromoIndex]) {
+              promotionInfo = {
+                className: promotedClasses[currentPromoIndex].name,
+                classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
+              };
+            }
+          }
         }
       }
     } else if (tier === 2) {
       if (!unit.isPromoted) {
-        // Promoted from Tier 1 - use first promotion stats and class
-        currentClass = promotedClasses[0] || baseClass;
-        baseStatForCalc = promotedStats[0] || unit.stats;
-        
-        // For trainee units, account for trainee levels in level difference calculation
-        if (hasTraineeLevels) {
-          const traineeLevelsCount = Math.abs(traineeOffset);
-          levelDiff = displayLevelNum - 1 + traineeLevelsCount;
-        } else {
-          levelDiff = displayLevelNum - 1; // Level 1 (Tier 2) is the baseline 0 level-ups
-        }
+        if (isTrainee) {
+          currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
+          baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
+          levelDiff = displayLevelNum - 1;
 
-        // If they can't promote, skip Tier 2
-        if (!baseClass?.promotesTo?.length) {
-          isSkipped = true;
+          if (!promotedClasses[0]?.promotesTo?.length) {
+            isSkipped = true;
+          }
+        } else {
+          currentClass = promotedClasses[0] || baseClass;
+          baseStatForCalc = promotedStats[0] || unit.stats;
+
+          levelDiff = displayLevelNum - 1;
+
+          if (!baseClass?.promotesTo?.length) {
+            isSkipped = true;
+          }
         }
       } else {
         // Pre-promoted unit starts in Tier 2
@@ -428,25 +430,25 @@ export function generateProgressionArray(
     } else {
       // Handle tier 3+ progression
       const hasInfiniteLeveling = unit.maxLevel === "infinite";
-      
+
       if (hasInfiniteLeveling) {
         // For infinite leveling, allow continuous progression through all tiers
         // The stat calculation continues using the last known promoted class stats
         const lastPromotionIndex = Math.max(0, promotedClasses.length - 1);
         currentClass = promotedClasses[lastPromotionIndex] || baseClass;
         baseStatForCalc = promotedStats[lastPromotionIndex] || unit.stats;
-        
+
         // Calculate level difference for continuous leveling
         // For tiers beyond 2, we accumulate the level differences from previous tiers
         const previousTiersLevels = (tier - 2) * 20; // 20 levels per previous tier
         levelDiff = displayLevelNum - 1 + previousTiersLevels;
-        
+
         // For trainee units, add the trainee levels count to the level difference
         if (hasTraineeLevels) {
-          const traineeLevelsCount = Math.abs(traineeOffset);
-          levelDiff += traineeLevelsCount;
+          const traineeLevelsGained = Math.max(0, (promoLevels[0] || 10) - unit.level);
+          levelDiff += traineeLevelsGained;
         }
-        
+
         // Don't skip tiers for infinite leveling
         isSkipped = false;
       } else {
@@ -458,7 +460,7 @@ export function generateProgressionArray(
     // Check maxLevel constraints
     if (!isSkipped && unit.maxLevel !== undefined && unit.maxLevel !== "infinite") {
       const maxLevelCap = unit.maxLevel as number;
-      
+
       // Calculate the effective level considering trainee offsets
       let effectiveLevel: number;
       if (tier === 0) {
@@ -471,7 +473,7 @@ export function generateProgressionArray(
       } else {
         effectiveLevel = internalLevel;
       }
-      
+
       // If the effective level exceeds maxLevel, skip this row
       if (effectiveLevel > maxLevelCap) {
         isSkipped = true;
