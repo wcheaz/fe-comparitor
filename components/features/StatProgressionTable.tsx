@@ -103,10 +103,9 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
     // Calculate dynamic level boundaries based on units
     const minLevel = Math.min(...units.map(unit => {
       // For trainee units, we need to start at negative levels
-      // Check if the unit has promotion events that suggest it's a trainee
-      const hasTraineeLevels = promotionEvents[unit.id] && 
-        promotionEvents[unit.id].length > 0 && 
-        promotionEvents[unit.id][0].level > 20;
+      // Check if the unit's base class is a trainee class
+      const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
+      const hasTraineeLevels = isTraineeClass(unitClass?.id || '');
       return hasTraineeLevels ? -10 : unit.level;
     }), 1);
     
@@ -341,12 +340,19 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
           const finalTierClass = getFinalTierClass();
           const canAddPromotionTier = (finalTierClass?.promotesTo?.length ?? 0) > 0;
 
+          // Check if the unit can promote at all
+          const unitCanPromote = (unitClass?.promotesTo?.length ?? 0) > 0;
+          
           return (
             <div key={`promo-${unit.id}`} className="flex flex-col space-y-2">
               <label className="text-sm font-semibold text-gray-700">{unit.name}:</label>
               
-              {/* Map through promotion events for this unit */}
-              {(promotionEvents[unit.id] || [{ level: 20, selectedClassId: unitClass?.promotesTo?.[0] || '' }]).map((event, eventIndex) => {
+              {/* Map through promotion events for this unit - only if unit can promote */}
+              {unitCanPromote ? (
+                (promotionEvents[unit.id] || [{ 
+                  level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
+                  selectedClassId: unitClass?.promotesTo?.[0] || '' 
+                }]).map((event, eventIndex) => {
                 // Resolve the currentTierClass for the dropdown row
                 const currentTierClass = eventIndex === 0 
                   ? unitClass 
@@ -362,7 +368,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                     <select
                       id={`promo-${unit.id}-${eventIndex}`}
                       value={event.level}
-                      disabled={!canAddPromotionTier}
+                      disabled={!unitCanPromote}
                       onChange={(e) => {
                         const level = Number(e.target.value);
                         let updatedEvents = [...(promotionEvents[unit.id] || [])];
@@ -370,7 +376,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                         // If promotionEvents is empty, seed it with the default Tier 1 event
                         if (updatedEvents.length === 0) {
                           updatedEvents = [{ 
-                            level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
+                            level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
                             selectedClassId: unitClass?.promotesTo?.[0] || '' 
                           }];
                         }
@@ -399,21 +405,21 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                       </select>
 
                     {tierHasBranchingOptions && tierPromotionOptions.length > 0 && (
-                      <select
-                        id={`promo-class-${unit.id}-${eventIndex}`}
-                        value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
-                        disabled={!canAddPromotionTier}
+<select
+                         id={`promo-class-${unit.id}-${eventIndex}`}
+                         value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
+                         disabled={!unitCanPromote}
                         onChange={(e) => {
                           const selectedClassId = e.target.value;
                           let updatedEvents = [...(promotionEvents[unit.id] || [])];
                           
-                          // If promotionEvents is empty, seed it with the default Tier 1 event
-                          if (updatedEvents.length === 0) {
-                            updatedEvents = [{ 
-                              level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20, 
-                              selectedClassId: unitClass?.promotesTo?.[0] || '' 
-                            }];
-                          }
+                           // If promotionEvents is empty, seed it with the default Tier 1 event
+                           if (updatedEvents.length === 0) {
+                             updatedEvents = [{ 
+                               level: isTraineeClass(unitClass?.id || '') ? 10 : 20, 
+                               selectedClassId: unitClass?.promotesTo?.[0] || '' 
+                             }];
+                           }
                           
                           if (eventIndex < updatedEvents.length) {
                             updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
@@ -439,7 +445,10 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                     )}
                   </div>
                 );
-              })}
+              })
+              ) : (
+                <span className="text-gray-400 text-sm ml-2">Cannot promote</span>
+              )}
               
               {/* Add + and - buttons for promotion tier management */}
               {(onAddPromotionEvent || onRemovePromotionEvent) && canAddPromotionTier && (
