@@ -528,7 +528,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           });
                         }
                       }}
-                      disabled={!canAddPromotionTier || (promotionEvents[unit.id]?.length || 0) <= 1}
+                      disabled={(promotionEvents[unit.id]?.length || 0) <= 1}
                       className="w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-red-500"
                       title="Remove promotion tier"
                     >
