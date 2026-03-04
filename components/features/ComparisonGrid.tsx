@@ -722,7 +722,7 @@ export function ComparisonGrid({
                           <div className="flex flex-col items-center gap-1">
                             {Object.entries(unit.baseWeaponRanks).map(([weaponType, rank]) => (
                               <div key={weaponType} className="flex items-center gap-1 text-sm bg-muted/20 px-2 py-0.5 rounded">
-                                <span className="text-muted-foreground">{weaponType}:</span>
+                                <span className="text-muted-foreground">{weaponType.charAt(0).toUpperCase() + weaponType.slice(1)}:</span>
                                 <span className="font-semibold">{rank}</span>
                               </div>
                             ))}
