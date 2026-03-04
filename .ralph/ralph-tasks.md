@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/fix-amelia-promotions/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/dynamic-promotion-options/tasks.md

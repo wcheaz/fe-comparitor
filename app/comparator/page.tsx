@@ -2,22 +2,27 @@
 
 import React, { useState, useEffect } from 'react';
 // import { useSearchParams } from 'next/navigation'; // TEMPORARILY DISABLED
-import { Unit, PromotionEvent } from '@/types/unit';
-import { getUnitById } from '@/lib/data';
+import { Unit, PromotionEvent, Class } from '@/types/unit';
+import { getUnitById, getAllClasses } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { StatProgressionTable } from '@/components/features/StatProgressionTable';
+import { PromotionPathPlanner } from '@/components/features/PromotionPathPlanner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
   const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
+  const [classes, setClasses] = useState<Class[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 4;
 
   // TEMPORARILY DISABLED: Load pre-selected units from URL parameters
   // This was causing build issues with static generation
   useEffect(() => {
+    // Load classes data
+    getAllClasses().then(setClasses).catch(console.error);
+    
     // For now, just set loading to false immediately
     setIsLoading(false);
 
@@ -54,6 +59,25 @@ export default function ComparatorPage() {
         [unitId]: currentEvents.slice(0, -1) // Remove last event
       };
     });
+  };
+
+  // Handler for individual unit promotion changes
+  const handleUnit1PromotionChange = (events: PromotionEvent[]) => {
+    if (selectedUnits[0]) {
+      setPromotionEvents(prev => ({
+        ...prev,
+        [selectedUnits[0].id]: events
+      }));
+    }
+  };
+
+  const handleUnit2PromotionChange = (events: PromotionEvent[]) => {
+    if (selectedUnits[1]) {
+      setPromotionEvents(prev => ({
+        ...prev,
+        [selectedUnits[1].id]: events
+      }));
+    }
   };
 
   return (
@@ -93,6 +117,39 @@ export default function ComparatorPage() {
               showStats={true}
               showGrowths={true}
             />
+
+            {/* Promotion Path Planners */}
+            {selectedUnits.length >= 2 && (
+              <div className="grid grid-cols-2 gap-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Promotion Path</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PromotionPathPlanner
+                      unit={selectedUnits[0]}
+                      promotionEvents={promotionEvents[selectedUnits[0].id] || []}
+                      classes={classes}
+                      onPromotionChange={handleUnit1PromotionChange}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Promotion Path</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PromotionPathPlanner
+                      unit={selectedUnits[1]}
+                      promotionEvents={promotionEvents[selectedUnits[1].id] || []}
+                      classes={classes}
+                      onPromotionChange={handleUnit2PromotionChange}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            )}
 
             {/* Stat Progression Table */}
             {selectedUnits.length > 0 && (

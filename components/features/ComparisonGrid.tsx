@@ -626,49 +626,7 @@ export function ComparisonGrid({
                       ))}
                     </tr>
                   )}
-                {units.some(u => {
-                  const cls = classes.find(c => (c.id === u.class.toLowerCase().replace(/\s+/g, '_') || c.name === u.class) && c.game === u.game);
-                  return cls && cls.promotesTo && cls.promotesTo.length > 0;
-                }) && (
-                    <tr className="border-b hover:bg-muted/50">
-                      <td className="p-2 font-medium align-top">Promotion Options</td>
-                      {units.map((unit) => {
-                        const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
-                        const promotesTo = cls?.promotesTo || [];
-                        const selectedClassId = promotionEvents?.[unit.id]?.[0]?.selectedClassId || promotesTo[0];
-                        return (
-                          <td key={`promo-${unit.id}`} className="text-center p-2 align-top">
-                            {promotesTo.length > 0 ? (
-                              <div className="flex flex-col items-center gap-2">
-                                {promotesTo.map((promoId) => {
-                                  const promoCls = classes.find(c => (c.id === promoId || c.name === promoId) && c.game === unit.game);
-                                  const displayName = promoCls ? promoCls.name : promoId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                                  const isSelected = promoId === selectedClassId;
-                                  return (
-                                    <div key={promoId} className={`flex items-center gap-1 text-sm px-2 py-1 rounded ${isSelected ? 'bg-blue-100 border border-blue-300' : 'bg-muted/30'}`}>
-                                      {isSelected && (
-                                        <span className="text-blue-600 font-bold">✓</span>
-                                      )}
-                                      <span className={isSelected ? 'font-bold text-blue-800' : ''}>{displayName}</span>
-                                      {promoCls && (
-                                        <Info
-                                          className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors shrink-0"
-                                          aria-label={`View details about ${displayName} promotion`}
-                                          onClick={() => handlePromotionInfoClick(promoId, unit.game)}
-                                        />
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            ) : (
-                              <span className="text-muted-foreground">-</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  )}
+                
                 {units.some(u => u.affinity) && (
                   <tr className="border-b hover:bg-muted/50">
                     <td className="p-2 font-medium">Affinity</td>
