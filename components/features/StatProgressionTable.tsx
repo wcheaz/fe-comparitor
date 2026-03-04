@@ -471,10 +471,10 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
               )}
 
               {/* Add + and - buttons for promotion tier management */}
-              {(onAddPromotionEvent || onRemovePromotionEvent) && canAddPromotionTier && (
+              {(onAddPromotionEvent || onRemovePromotionEvent) && (
                 <div className="flex items-center space-x-2 ml-6">
                   {/* Add button */}
-                  {onAddPromotionEvent && (
+                  {onAddPromotionEvent && canAddPromotionTier && (
                     <button
                       onClick={() => {
                         let currentEvents = [...(promotionEvents[unit.id] || [])];
@@ -516,7 +516,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                   )}
 
                   {/* Remove button */}
-                  {onRemovePromotionEvent && (
+                  {onRemovePromotionEvent && (promotionEvents[unit.id]?.length || 0) > 1 && (
                     <button
                       onClick={() => {
                         const currentEvents = [...(promotionEvents[unit.id] || [])];

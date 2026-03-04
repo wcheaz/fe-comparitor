@@ -368,17 +368,16 @@ export function generateProgressionArray(
       } else {
         if (isTrainee) {
           currentClass = promotedClasses[0] || baseClass;
-          baseStatForCalc = unit.stats;
+          // Fix: For trainees in Tier 1, use promoted stats from Level 10 as base
+          baseStatForCalc = promotedStats[0] || unit.stats;
 
           const targetPromoLevel = promoLevels[1] || 20;
           if (displayLevelNum < 1 || displayLevelNum > targetPromoLevel) {
             isSkipped = true;
           }
 
-          // For trainees in Tier 1, calculate growth from base stats
-          // Trainees should start fresh with base class progression, not continue trainee growth
-          // So levelDiff should be the full levels from 1 to displayLevelNum
-          levelDiff = displayLevelNum;
+          // Fix: For trainees in Tier 1, calculate growth from Level 1 (not Level 0)
+          levelDiff = displayLevelNum - 1;
 
           // Fix: For trainees in Tier 1, check for the correct promotion index
           // Tier 1 trainees should check for promotion level at index 1 (Tier 1 -> Tier 2)
@@ -434,6 +433,11 @@ export function generateProgressionArray(
             if (!promotedClasses[0]?.promotesTo?.length) {
               isSkipped = true;
             }
+            
+            // Additional validation: Ensure we have valid promoted stats for Tier 2
+            if (!promotedStats[1] && promotionEvents.length >= 2) {
+              isSkipped = true;
+            }
           }
 
           // Add promotion level detection for Tier 2 (Tier 2 -> Tier 3 transition)
@@ -459,6 +463,11 @@ export function generateProgressionArray(
             levelDiff = displayLevelNum - 1;
 
             if (!baseClass?.promotesTo?.length) {
+              isSkipped = true;
+            }
+            
+            // Additional validation: Ensure we have valid promoted stats for Tier 2
+            if (!promotedStats[0] && promotionEvents.length >= 2) {
               isSkipped = true;
             }
           }
