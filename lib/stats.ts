@@ -368,18 +368,17 @@ export function generateProgressionArray(
       } else {
         if (isTrainee) {
           currentClass = promotedClasses[0] || baseClass;
-          baseStatForCalc = promotedStats[0] || unit.stats;
+          baseStatForCalc = unit.stats;
 
           const targetPromoLevel = promoLevels[1] || 20;
           if (displayLevelNum < 1 || displayLevelNum > targetPromoLevel) {
             isSkipped = true;
           }
 
-          // For trainees in Tier 1, calculate growth from their promoted stats at Level 10
-          // Since they already grew 10 levels in Tier 0, we need to avoid double-counting
-          // The baseStatForCalc already includes Level 10 stats + promotion bonuses
-          // So levelDiff should just be the additional levels in Tier 1 (starting from 0)
-          levelDiff = displayLevelNum - 1;
+          // For trainees in Tier 1, calculate growth from base stats
+          // Trainees should start fresh with base class progression, not continue trainee growth
+          // So levelDiff should be the full levels from 1 to displayLevelNum
+          levelDiff = displayLevelNum;
 
           // Fix: For trainees in Tier 1, check for the correct promotion index
           // Tier 1 trainees should check for promotion level at index 1 (Tier 1 -> Tier 2)
