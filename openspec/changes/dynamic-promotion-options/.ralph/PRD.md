@@ -119,4 +119,19 @@ We need to break this functionality out into its own dedicated UI section where 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 1.1 Create file `components/features/PromotionOptionsDisplay.tsx`.
+- - [ ] 3.1 Create file `components/ui/ClassPill.tsx`.
+## Completed Tasks for Git Commit
+- [x] 1.1 Create file `components/features/PromotionOptionsDisplay.tsx`.
+- [x] 1.2 Import React, `useState`, `useEffect`. Import `Unit`, `Class` interfaces and `getAllClasses` from `@/lib/data`.
+- [x] 1.3 Import UI primitives: `Card`, `CardContent`, `CardHeader`, `CardTitle` from `@/components/ui/card`.
+- [x] 1.4 Define interface `PromotionOptionsDisplayProps` with property `unit` (`Unit | null`).
+- [x] 1.5 Create and export the `PromotionOptionsDisplay` functional component. Check `if (!unit) return null;`.
+- [x] 1.6 Return a basic `<Card>` container wrapping a `<CardHeader>` with `<CardTitle>Promotion Options - {unit.name}</CardTitle>` and an empty `<CardContent>`.
+- [x] 2.1 In `PromotionOptionsDisplay.tsx`, add a `useState` for `classes` and a `useEffect` to fetch all classes using `getAllClasses()`.
+- [x] 2.2 Create a recursive helper function `getPromotionTree(classId: string, visited = new Set<string>())` that finds the class in the loaded array for `unit.game`. 
+- [x] 2.3 Inside the helper, if the class has a `promotesTo` array (length > 0) and the `classId` isn't in `visited` (to prevent infinite loops), map over its IDs and recursively call `getPromotionTree` on each, returning a nested node structure (e.g., `{ cls: Class, promotions: [...] }`).
+- [x] 2.4 Use `useMemo` to invoke `getPromotionTree` starting from `unit.classId` (or `unit.class`) whenever the `classes` state or `unit` changes.
+- [x] 5.1 Delete the previous `components/features/PromotionPathPlanner.tsx` file if it exists.
+- [x] 5.2 Open `app/comparator/page.tsx` and import `PromotionOptionsDisplay` instead of the planner.
+- [x] 5.3 Replace the mapped `<PromotionPathPlanner>` instances below the `<ComparisonGrid>` with `<PromotionOptionsDisplay unit={unit} />`.
+- [x] 5.4 Open `components/features/ComparisonGrid.tsx`. Locate and completely delete the inline "Promotion Options" `<TableRow>` so it is removed from the unit details table.

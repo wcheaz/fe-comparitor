@@ -2,14 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Unit, Class } from '@/types/unit';
 import { getAllClasses } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import ClassPill from '@/components/ui/ClassPill';
 
 interface PromotionOptionsDisplayProps {
   unit: Unit | null;
 }
 
 interface ClassNode {
-  id: string;
-  name: string;
+  cls: Class;
   promotions: ClassNode[];
 }
 
@@ -17,11 +17,11 @@ interface ClassNode {
 const ClassNodeComponent: React.FC<{ node: ClassNode }> = ({ node }) => {
   return (
     <li className="ml-4">
-      <div className="font-medium text-fe-blue-800">{node.name}</div>
+      <ClassPill cls={node.cls} />
       {node.promotions.length > 0 && (
-        <ul className="mt-2 space-y-2 list-disc">
-          {node.promotions.map((promotionNode) => (
-            <ClassNodeComponent key={promotionNode.id} node={promotionNode} />
+        <ul className="ml-6 mt-2 space-y-2 border-l-2 border-fe-blue-200 pl-4">
+          {node.promotions.map((promotionNode, index) => (
+            <ClassNodeComponent key={`${promotionNode.cls.id}-${index}`} node={promotionNode} />
           ))}
         </ul>
       )}
@@ -60,8 +60,7 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
 
     // Build the node
     const node: ClassNode = {
-      id: currentClass.id,
-      name: currentClass.name,
+      cls: currentClass,
       promotions: []
     };
 
