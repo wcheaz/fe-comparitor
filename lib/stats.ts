@@ -357,7 +357,7 @@ export function generateProgressionArray(
         if (displayLevelNum < unit.level || displayLevelNum > (promoLevels[0] || 10)) {
           isSkipped = true;
         }
-        
+
         // Set isPromotionLevel for trainee forced promotion level (Level 10)
         if (displayLevelNum === 10 && !isSkipped) {
           isPromotionLevel = true;
@@ -442,13 +442,13 @@ export function generateProgressionArray(
             if (!promotedClasses[0]?.promotesTo?.length) {
               isSkipped = true;
             }
-            
+
             // Fix: Skip Tier 2 if we don't have valid promoted stats for the second promotion
             // This ensures the second promotion event is properly configured
             if (!promotedStats[1] || !promotedClasses[1]) {
               isSkipped = true;
             }
-            
+
             // Fix: Skip Tier 2 if the second promotion event doesn't have a valid target class
             // This validates that the second promotion event is properly configured
             if (promotionEvents[1] && !promotionEvents[1].selectedClassId && !baseClass?.promotesTo?.[1]) {
@@ -468,32 +468,20 @@ export function generateProgressionArray(
             }
           }
         } else {
-          // Fix: Skip Tier 2 levels until user explicitly adds a second promotion event
-          // Non-trainees need at least 2 promotion events to reach Tier 2
-          if (promotionEvents.length < 2) {
+          currentClass = promotedClasses[0] || baseClass;
+          baseStatForCalc = promotedStats[0] || unit.stats;
+
+          levelDiff = displayLevelNum - 1;
+
+          // Fix: Skip Tier 2 if the base class cannot promote
+          if (!baseClass?.promotesTo?.length) {
             isSkipped = true;
-          } else {
-            currentClass = promotedClasses[0] || baseClass;
-            baseStatForCalc = promotedStats[0] || unit.stats;
+          }
 
-            levelDiff = displayLevelNum - 1;
-
-            // Fix: Skip Tier 2 if the base class cannot promote
-            if (!baseClass?.promotesTo?.length) {
-              isSkipped = true;
-            }
-            
-            // Fix: Skip Tier 2 if we don't have valid promoted stats for the first promotion
-            // This ensures the first promotion event is properly configured
-            if (!promotedStats[0] || !promotedClasses[0]) {
-              isSkipped = true;
-            }
-            
-            // Fix: Skip Tier 2 if the second promotion event doesn't have a valid target class
-            // This validates that the second promotion event is properly configured
-            if (promotionEvents[1] && !promotionEvents[1].selectedClassId && !baseClass?.promotesTo?.[1]) {
-              isSkipped = true;
-            }
+          // Fix: Skip Tier 2 if we don't have valid promoted stats for the first promotion
+          // This ensures the first promotion event is properly configured
+          if (!promotedStats[0] || !promotedClasses[0]) {
+            isSkipped = true;
           }
         }
       } else {

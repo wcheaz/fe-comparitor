@@ -344,19 +344,19 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
           };
 
           const finalTierClass = getFinalTierClass();
-          
+
           // Verify that canAddPromotionTier properly evaluates to true when the final tier class has valid promotion targets
           const canAddPromotionTier = (() => {
             // Ensure finalTierClass exists and has valid promotesTo array
             if (!finalTierClass || !finalTierClass.promotesTo || finalTierClass.promotesTo.length === 0) {
               return false;
             }
-            
+
             // Verify that the promotion targets are valid classes that exist in the game
-            const validPromotionTargets = finalTierClass.promotesTo.filter(classId => 
+            const validPromotionTargets = finalTierClass.promotesTo.filter(classId =>
               classes.some(c => c.id === classId && c.game === finalTierClass.game)
             );
-            
+
             return validPromotionTargets.length > 0;
           })();
 
@@ -655,7 +655,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           rawStatValue = unitStats['dex'];
                         }
 
-                        const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
+                        const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
 
                         let isCapped = unitCappedStats?.[statKey];
                         if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
@@ -676,7 +676,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                             if (statKey === 'skl' && (rv === undefined || rv === null)) {
                               rv = row.stats[i]?.['dex'];
                             }
-                            return rv !== undefined && rv !== null ? Math.round(rv) : null;
+                            return rv !== undefined && rv !== null ? Number(rv.toFixed(2)) : null;
                           }).filter(v => v !== null) as number[];
 
                           if (allValidValues.length > 1) {
@@ -689,7 +689,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                                 otherRaw = row.stats[otherIndex]?.['dex'];
                               }
                               if (otherRaw === undefined || otherRaw === null) return false;
-                              return statValue > Math.round(otherRaw);
+                              return statValue > Number(otherRaw.toFixed(2));
                             });
 
                             isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
@@ -739,7 +739,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           rawStatValue = unitStats['dex'];
                         }
 
-                        const statValue = rawStatValue !== undefined ? Math.round(rawStatValue) : undefined;
+                        const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
 
                         let isCapped = unitCappedStats?.[statKey];
                         if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
@@ -760,7 +760,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                             if (statKey === 'skl' && (rv === undefined || rv === null)) {
                               rv = row.stats[i]?.['dex'];
                             }
-                            return rv !== undefined && rv !== null ? Math.round(rv) : null;
+                            return rv !== undefined && rv !== null ? Number(rv.toFixed(2)) : null;
                           }).filter(v => v !== null) as number[];
 
                           if (allValidValues.length > 1) {
@@ -773,7 +773,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                                 otherRaw = row.stats[otherIndex]?.['dex'];
                               }
                               if (otherRaw === undefined || otherRaw === null) return false;
-                              return statValue > Math.round(otherRaw);
+                              return statValue > Number(otherRaw.toFixed(2));
                             });
 
                             isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
