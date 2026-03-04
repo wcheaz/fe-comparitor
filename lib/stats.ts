@@ -350,6 +350,17 @@ export function generateProgressionArray(
         if (displayLevelNum < unit.level || displayLevelNum > (promoLevels[0] || 10)) {
           isSkipped = true;
         }
+        
+        // Set isPromotionLevel for trainee forced promotion level (Level 10)
+        if (displayLevelNum === 10 && !isSkipped) {
+          isPromotionLevel = true;
+          if (promotedClasses[0]) {
+            promotionInfo = {
+              className: promotedClasses[0].name,
+              classAbilities: promotedClasses[0].classAbilities || []
+            };
+          }
+        }
       }
     } else if (tier === 1) {
       if (unit.isPromoted) {
@@ -364,15 +375,22 @@ export function generateProgressionArray(
             isSkipped = true;
           }
 
+          // For trainees in Tier 1, calculate growth from their promoted stats at Level 10
+          // Since they already grew 10 levels in Tier 0, we need to avoid double-counting
+          // The baseStatForCalc already includes Level 10 stats + promotion bonuses
+          // So levelDiff should just be the additional levels in Tier 1 (starting from 0)
           levelDiff = displayLevelNum - 1;
 
+          // Fix: For trainees in Tier 1, check for the correct promotion index
+          // Tier 1 trainees should check for promotion level at index 1 (Tier 1 -> Tier 2)
           const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 1 && lvl === displayLevelNum);
           if (currentPromoIndex >= 0 && currentClass?.promotesTo?.length > 0) {
             isPromotionLevel = true;
-            if (promotedClasses[currentPromoIndex]) {
+            // Use the promoted class at index 1 for Tier 1 -> Tier 2 transition
+            if (promotedClasses[1]) {
               promotionInfo = {
-                className: promotedClasses[currentPromoIndex].name,
-                classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
+                className: promotedClasses[1].name,
+                classAbilities: promotedClasses[1].classAbilities || []
               };
             }
           }
@@ -401,12 +419,28 @@ export function generateProgressionArray(
     } else if (tier === 2) {
       if (!unit.isPromoted) {
         if (isTrainee) {
+          // Fix: Ensure proper Tier 2 transition for trainees
+          // Use the second promoted class (Tier 2) if available, otherwise fall back
           currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
           baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
           levelDiff = displayLevelNum - 1;
 
+          // Check if the first promoted class can promote to Tier 2
+          // If not, this tier should be skipped
           if (!promotedClasses[0]?.promotesTo?.length) {
             isSkipped = true;
+          }
+
+          // Add promotion level detection for Tier 2 (Tier 2 -> Tier 3 transition)
+          const tier2PromoIndex = promoLevels.findIndex((lvl, i) => i === 2 && lvl === displayLevelNum);
+          if (tier2PromoIndex >= 0 && currentClass?.promotesTo?.length > 0) {
+            isPromotionLevel = true;
+            if (promotedClasses[tier2PromoIndex]) {
+              promotionInfo = {
+                className: promotedClasses[tier2PromoIndex].name,
+                classAbilities: promotedClasses[tier2PromoIndex].classAbilities || []
+              };
+            }
           }
         } else {
           currentClass = promotedClasses[0] || baseClass;

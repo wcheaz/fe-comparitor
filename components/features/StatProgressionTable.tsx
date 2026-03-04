@@ -333,12 +333,32 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
               const lastEvent = events[events.length - 1];
               return classes.find(c => c.id === lastEvent.selectedClassId && c.game === unit.game);
             }
-            // Return the default promoted class currently displayed in the UI
+            // For trainees with no events yet, we need to consider their base class's promotion target
+            // as the current final tier class to check if it can promote further
+            if (isTraineeClass(unitClass?.id || '')) {
+              const basePromotionTarget = classes.find(c => c.id === unitClass?.promotesTo?.[0] && c.game === unit.game);
+              return basePromotionTarget;
+            }
+            // For non-trainees, return the default promoted class
             return classes.find(c => c.id === unitClass?.promotesTo?.[0] && c.game === unit.game);
           };
 
           const finalTierClass = getFinalTierClass();
-          const canAddPromotionTier = (finalTierClass?.promotesTo?.length ?? 0) > 0;
+          
+          // Verify that canAddPromotionTier properly evaluates to true when the final tier class has valid promotion targets
+          const canAddPromotionTier = (() => {
+            // Ensure finalTierClass exists and has valid promotesTo array
+            if (!finalTierClass || !finalTierClass.promotesTo || finalTierClass.promotesTo.length === 0) {
+              return false;
+            }
+            
+            // Verify that the promotion targets are valid classes that exist in the game
+            const validPromotionTargets = finalTierClass.promotesTo.filter(classId => 
+              classes.some(c => c.id === classId && c.game === finalTierClass.game)
+            );
+            
+            return validPromotionTargets.length > 0;
+          })();
 
           // Check if the unit can promote at all
           const unitCanPromote = (unitClass?.promotesTo?.length ?? 0) > 0;

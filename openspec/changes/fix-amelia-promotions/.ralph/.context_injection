@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 Fix the `getFinalTierClass` utility inside the unit mapping loop to correctly identify the latest selected class even for trainee units that have already undergone a promotion.
