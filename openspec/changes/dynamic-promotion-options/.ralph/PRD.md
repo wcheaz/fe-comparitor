@@ -119,4 +119,4 @@ We need to break this functionality out into its own dedicated UI section where 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 1.1 Create file `components/features/PromotionPathPlanner.tsx`.
+- - [ ] 1.1 Create file `components/features/PromotionOptionsDisplay.tsx`.

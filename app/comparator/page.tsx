@@ -7,7 +7,7 @@ import { getUnitById, getAllClasses } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { StatProgressionTable } from '@/components/features/StatProgressionTable';
-import { PromotionPathPlanner } from '@/components/features/PromotionPathPlanner';
+import { PromotionOptionsDisplay } from '@/components/features/PromotionOptionsDisplay';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
@@ -118,27 +118,11 @@ export default function ComparatorPage() {
               showGrowths={true}
             />
 
-            {/* Promotion Path Planners */}
+            {/* Promotion Options Display */}
             {selectedUnits.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
                 {selectedUnits.map((unit) => (
-                  <Card key={`promo-planner-${unit.id}`}>
-                    <CardHeader>
-                      <CardTitle>Promotion Path - {unit.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <PromotionPathPlanner
-                        unit={unit}
-                        promotionEvents={promotionEvents[unit.id] || []}
-                        onPromotionChange={(events) => {
-                          setPromotionEvents(prev => ({
-                            ...prev,
-                            [unit.id]: events
-                          }));
-                        }}
-                      />
-                    </CardContent>
-                  </Card>
+                  <PromotionOptionsDisplay key={`promo-display-${unit.id}`} unit={unit} />
                 ))}
               </div>
             )}
