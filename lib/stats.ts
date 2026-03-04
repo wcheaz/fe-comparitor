@@ -418,16 +418,22 @@ export function generateProgressionArray(
     } else if (tier === 2) {
       if (!unit.isPromoted) {
         if (isTrainee) {
-          // Fix: Ensure proper Tier 2 transition for trainees
-          // Use the second promoted class (Tier 2) if available, otherwise fall back
-          currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
-          baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
-          levelDiff = displayLevelNum - 1;
-
-          // Check if the first promoted class can promote to Tier 2
-          // If not, this tier should be skipped
-          if (!promotedClasses[0]?.promotesTo?.length) {
+          // Fix: Skip Tier 2 levels until user explicitly adds a second promotion event
+          // Trainees need at least 2 promotion events to reach Tier 2
+          if (promotionEvents.length < 2) {
             isSkipped = true;
+          } else {
+            // Fix: Ensure proper Tier 2 transition for trainees
+            // Use the second promoted class (Tier 2) if available, otherwise fall back
+            currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
+            baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
+            levelDiff = displayLevelNum - 1;
+
+            // Check if the first promoted class can promote to Tier 2
+            // If not, this tier should be skipped
+            if (!promotedClasses[0]?.promotesTo?.length) {
+              isSkipped = true;
+            }
           }
 
           // Add promotion level detection for Tier 2 (Tier 2 -> Tier 3 transition)
@@ -442,13 +448,19 @@ export function generateProgressionArray(
             }
           }
         } else {
-          currentClass = promotedClasses[0] || baseClass;
-          baseStatForCalc = promotedStats[0] || unit.stats;
-
-          levelDiff = displayLevelNum - 1;
-
-          if (!baseClass?.promotesTo?.length) {
+          // Fix: Skip Tier 2 levels until user explicitly adds a second promotion event
+          // Non-trainees need at least 2 promotion events to reach Tier 2
+          if (promotionEvents.length < 2) {
             isSkipped = true;
+          } else {
+            currentClass = promotedClasses[0] || baseClass;
+            baseStatForCalc = promotedStats[0] || unit.stats;
+
+            levelDiff = displayLevelNum - 1;
+
+            if (!baseClass?.promotesTo?.length) {
+              isSkipped = true;
+            }
           }
         }
       } else {
