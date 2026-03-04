@@ -24,7 +24,7 @@ The system SHALL support and track sequential promotion events for units that ca
 
 #### Scenario: System provides UI to append multi-tier promotions
 - **WHEN** the user is viewing the "Promotion Levels" section for a unit
-- **AND** the currently selected class for their latest promotion event has valid entries in its `promotesTo` array
+- **AND** the currently selected class for their latest promotion event has valid entries in its `promotesTo` array (including resolving the target class of trainee promotions)
 - **THEN** the system renders a "+" button that, when clicked, adds a new sequential promotion event to the unit's timeline.
 
 #### Scenario: System provides UI to remove multi-tier promotions

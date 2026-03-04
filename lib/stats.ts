@@ -269,7 +269,14 @@ export function generateProgressionArray(
       const promoTargetId = promoTargetIds[i];
 
       // Calculate stats right at promotion level
-      const levelDiff = i === 0 ? Math.max(0, promoLevel - unit.level) : Math.max(0, promoLevel - 1); // Subsequent promotions grow from level 1
+      let levelDiff: number;
+      if (isTrainee && i === 0) {
+        // For trainees' first promotion, always calculate from Level 1 to Level 10
+        levelDiff = Math.max(0, 10 - unit.level);
+      } else {
+        // Standard calculation: first promotion uses unit.level, subsequent promotions use Level 1
+        levelDiff = i === 0 ? Math.max(0, promoLevel - unit.level) : Math.max(0, promoLevel - 1);
+      }
       const prePromoStats: UnitStats = {};
 
       // Growth to promotion
@@ -368,7 +375,7 @@ export function generateProgressionArray(
       } else {
         if (isTrainee) {
           currentClass = promotedClasses[0] || baseClass;
-          // Fix: For trainees in Tier 1, use promoted stats from Level 10 as base
+          // For trainees in Tier 1, use promoted stats from Level 10 as base
           baseStatForCalc = promotedStats[0] || unit.stats;
 
           const targetPromoLevel = promoLevels[1] || 20;
@@ -376,7 +383,9 @@ export function generateProgressionArray(
             isSkipped = true;
           }
 
-          // Fix: For trainees in Tier 1, calculate growth from Level 1 (not Level 0)
+          // Fix: For trainees in Tier 1, calculate growth from Level 1 with correct offset
+          // The stats should be calculated from the promoted base stats (Level 10 trainee + promotion bonuses)
+          // and then grow from Level 1 to current level in the new class
           levelDiff = displayLevelNum - 1;
 
           // Fix: For trainees in Tier 1, check for the correct promotion index
@@ -428,14 +437,21 @@ export function generateProgressionArray(
             baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
             levelDiff = displayLevelNum - 1;
 
-            // Check if the first promoted class can promote to Tier 2
-            // If not, this tier should be skipped
+            // Fix: Skip Tier 2 if the first promotion doesn't lead to a promotable class
+            // The first promoted class must have promotesTo options to reach Tier 2
             if (!promotedClasses[0]?.promotesTo?.length) {
               isSkipped = true;
             }
             
-            // Additional validation: Ensure we have valid promoted stats for Tier 2
-            if (!promotedStats[1] && promotionEvents.length >= 2) {
+            // Fix: Skip Tier 2 if we don't have valid promoted stats for the second promotion
+            // This ensures the second promotion event is properly configured
+            if (!promotedStats[1] || !promotedClasses[1]) {
+              isSkipped = true;
+            }
+            
+            // Fix: Skip Tier 2 if the second promotion event doesn't have a valid target class
+            // This validates that the second promotion event is properly configured
+            if (promotionEvents[1] && !promotionEvents[1].selectedClassId && !baseClass?.promotesTo?.[1]) {
               isSkipped = true;
             }
           }
@@ -462,12 +478,20 @@ export function generateProgressionArray(
 
             levelDiff = displayLevelNum - 1;
 
+            // Fix: Skip Tier 2 if the base class cannot promote
             if (!baseClass?.promotesTo?.length) {
               isSkipped = true;
             }
             
-            // Additional validation: Ensure we have valid promoted stats for Tier 2
-            if (!promotedStats[0] && promotionEvents.length >= 2) {
+            // Fix: Skip Tier 2 if we don't have valid promoted stats for the first promotion
+            // This ensures the first promotion event is properly configured
+            if (!promotedStats[0] || !promotedClasses[0]) {
+              isSkipped = true;
+            }
+            
+            // Fix: Skip Tier 2 if the second promotion event doesn't have a valid target class
+            // This validates that the second promotion event is properly configured
+            if (promotionEvents[1] && !promotionEvents[1].selectedClassId && !baseClass?.promotesTo?.[1]) {
               isSkipped = true;
             }
           }

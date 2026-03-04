@@ -516,7 +516,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                   )}
 
                   {/* Remove button */}
-                  {onRemovePromotionEvent && (promotionEvents[unit.id]?.length || 0) > 1 && (
+                  {onRemovePromotionEvent && (promotionEvents[unit.id]?.length || 0) > 0 && (
                     <button
                       onClick={() => {
                         const currentEvents = [...(promotionEvents[unit.id] || [])];
