@@ -22,7 +22,7 @@ export default function ComparatorPage() {
   useEffect(() => {
     // Load classes data
     getAllClasses().then(setClasses).catch(console.error);
-    
+
     // For now, just set loading to false immediately
     setIsLoading(false);
 
@@ -119,35 +119,27 @@ export default function ComparatorPage() {
             />
 
             {/* Promotion Path Planners */}
-            {selectedUnits.length >= 2 && (
-              <div className="grid grid-cols-2 gap-8">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Promotion Path</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <PromotionPathPlanner
-                      unit={selectedUnits[0]}
-                      promotionEvents={promotionEvents[selectedUnits[0].id] || []}
-                      classes={classes}
-                      onPromotionChange={handleUnit1PromotionChange}
-                    />
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Promotion Path</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <PromotionPathPlanner
-                      unit={selectedUnits[1]}
-                      promotionEvents={promotionEvents[selectedUnits[1].id] || []}
-                      classes={classes}
-                      onPromotionChange={handleUnit2PromotionChange}
-                    />
-                  </CardContent>
-                </Card>
+            {selectedUnits.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
+                {selectedUnits.map((unit) => (
+                  <Card key={`promo-planner-${unit.id}`}>
+                    <CardHeader>
+                      <CardTitle>Promotion Path - {unit.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <PromotionPathPlanner
+                        unit={unit}
+                        promotionEvents={promotionEvents[unit.id] || []}
+                        onPromotionChange={(events) => {
+                          setPromotionEvents(prev => ({
+                            ...prev,
+                            [unit.id]: events
+                          }));
+                        }}
+                      />
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             )}
 
@@ -158,13 +150,13 @@ export default function ComparatorPage() {
                   <CardTitle>Stat Progression</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <StatProgressionTable 
-                  units={selectedUnits} 
-                  promotionEvents={promotionEvents} 
-                  onPromotionEventsChange={handlePromotionEventsChange}
-                  onAddPromotionEvent={addPromotionEvent}
-                  onRemovePromotionEvent={removePromotionEvent}
-                />
+                  <StatProgressionTable
+                    units={selectedUnits}
+                    promotionEvents={promotionEvents}
+                    onPromotionEventsChange={handlePromotionEventsChange}
+                    onAddPromotionEvent={addPromotionEvent}
+                    onRemovePromotionEvent={removePromotionEvent}
+                  />
                 </CardContent>
               </Card>
             )}
