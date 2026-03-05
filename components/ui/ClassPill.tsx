@@ -6,7 +6,7 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 import { Class } from "@/types/unit";
 
-const classPillVariants = "inline-flex items-center gap-1 rounded-full px-2 py-1 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer text-xs font-medium";
+const classPillVariants = "inline-flex items-center gap-1 rounded-full px-3 py-1.5 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer text-sm font-medium";
 
 export interface ClassPillProps {
     cls: Class;
@@ -81,10 +81,7 @@ const ClassPill: React.FC<ClassPillProps> = ({
                             </div>
                         )}
                         
-                        <div>
-                            <h4 className="text-sm font-semibold text-fe-blue-800">Game</h4>
-                            <p className="text-xs text-fe-blue-700">{cls.game}</p>
-                        </div>
+                        
                     </div>
                 </div>
             </Modal>

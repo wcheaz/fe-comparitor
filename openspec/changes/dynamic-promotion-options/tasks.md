@@ -39,3 +39,10 @@
 - [x] 5.3 Replace the mapped `<PromotionPathPlanner>` instances below the `<ComparisonGrid>` with `<PromotionOptionsDisplay unit={unit} />`.
 - [x] 5.4 Open `components/features/ComparisonGrid.tsx`. Locate and completely delete the inline "Promotion Options" `<TableRow>` so it is removed from the unit details table.
 - [x] 5.5 Verify `npm run dev` renders a static, nested list using interactive `ClassPill` components for every tier of promotion for the selected units.
+
+## 6. Edit `ClassPill` Look
+
+- [ ] 6.1 Open `components/ui/ClassPill.tsx`.
+- [ ] 6.2 Increase the size of the pill to make it more visible and easier to read (e.g., using `px-3 py-1.5 text-sm` instead of smaller sizes).
+- [ ] 6.3 Inside the `<Modal>` section of `ClassPill.tsx`, locate and remove any elements displaying the `game` property (e.g. `<p className="text-xs text-muted-foreground">Game: {game}</p>`).
+- [ ] 6.4 Save changes and verify the pill looks appropriately larger and the modal no longer shows the game name.

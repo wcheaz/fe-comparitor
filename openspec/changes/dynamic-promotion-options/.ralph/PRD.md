@@ -119,7 +119,7 @@ We need to break this functionality out into its own dedicated UI section where 
 ## Current Task Context
 
 ## Current Task
-- - [ ] 3.1 Create file `components/ui/ClassPill.tsx`.
+- - [ ] 6.1 Open `components/ui/ClassPill.tsx`.
 ## Completed Tasks for Git Commit
 - [x] 1.1 Create file `components/features/PromotionOptionsDisplay.tsx`.
 - [x] 1.2 Import React, `useState`, `useEffect`. Import `Unit`, `Class` interfaces and `getAllClasses` from `@/lib/data`.
@@ -131,7 +131,20 @@ We need to break this functionality out into its own dedicated UI section where 
 - [x] 2.2 Create a recursive helper function `getPromotionTree(classId: string, visited = new Set<string>())` that finds the class in the loaded array for `unit.game`. 
 - [x] 2.3 Inside the helper, if the class has a `promotesTo` array (length > 0) and the `classId` isn't in `visited` (to prevent infinite loops), map over its IDs and recursively call `getPromotionTree` on each, returning a nested node structure (e.g., `{ cls: Class, promotions: [...] }`).
 - [x] 2.4 Use `useMemo` to invoke `getPromotionTree` starting from `unit.classId` (or `unit.class`) whenever the `classes` state or `unit` changes.
+- [x] 3.1 Create file `components/ui/ClassPill.tsx`.
+- [x] 3.2 Import React, `useState`, `Modal` from `@/components/ui/modal`, `Info` from `lucide-react`, and `Class` interface.
+- [x] 3.3 Define `ClassPillProps` accepting a `cls` (Class) object.
+- [x] 3.4 Implement a clickable pill styling (e.g. `inline-flex items-center gap-1 rounded-full px-2 py-1 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer text-xs font-medium`).
+- [x] 3.5 Inside `ClassPill`, maintain `isModalOpen` state. Clicking the pill sets it to true.
+- [x] 3.6 Render `<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>` containing details about the class (e.g., Weapons, Class Modifiers, Movement Type, Description).
+- [x] 3.7 Ensure the pill renders `{cls.name}` alongside a small `<Info className="w-3 h-3 opacity-60" />` icon, mirroring `SupportPill` styling.
+- [x] 4.1 In `PromotionOptionsDisplay.tsx`, import `ClassPill`.
+- [x] 4.2 Define a recursive rendering component `ClassNode({ node })` to display the tree.
+- [x] 4.3 For each `node` in the tree, render a `<ClassPill cls={node.cls} />`. If it has `promotions` (children), render a nested `<ul className="ml-6 mt-2 space-y-2 border-l-2 border-fe-blue-200 pl-4">` containing the mapped children nodes wrapped in `<li>` tags.
+- [x] 4.4 Inside the main `PromotionOptionsDisplay` component's `<CardContent>`, render the `ClassNode` starting with the root tree returned from `useMemo`. 
+- [x] 4.5 Ensure the UI gracefully handles units that cannot promote (e.g., display "No promotion options available").
 - [x] 5.1 Delete the previous `components/features/PromotionPathPlanner.tsx` file if it exists.
 - [x] 5.2 Open `app/comparator/page.tsx` and import `PromotionOptionsDisplay` instead of the planner.
 - [x] 5.3 Replace the mapped `<PromotionPathPlanner>` instances below the `<ComparisonGrid>` with `<PromotionOptionsDisplay unit={unit} />`.
 - [x] 5.4 Open `components/features/ComparisonGrid.tsx`. Locate and completely delete the inline "Promotion Options" `<TableRow>` so it is removed from the unit details table.
+- [x] 5.5 Verify `npm run dev` renders a static, nested list using interactive `ClassPill` components for every tier of promotion for the selected units.
