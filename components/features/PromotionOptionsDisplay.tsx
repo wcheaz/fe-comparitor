@@ -84,8 +84,6 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
 
   if (!unit) return null;
 
-  if (!unit) return null;
-
   return (
     <Card>
       <CardHeader>

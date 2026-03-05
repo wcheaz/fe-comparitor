@@ -46,3 +46,10 @@
 - [x] 6.2 Increase the size of the pill to make it more visible and easier to read (e.g., using `px-3 py-1.5 text-sm` instead of smaller sizes).
 - [x] 6.3 Inside the `<Modal>` section of `ClassPill.tsx`, locate and remove any elements displaying the `game` property (e.g. `<p className="text-xs text-muted-foreground">Game: {game}</p>`).
 - [x] 6.4 Save changes and verify the pill looks appropriately larger and the modal no longer shows the game name.
+
+## 7. Enlarge `ClassPill` Modal
+
+- [ ] 7.1 Open `components/ui/ClassPill.tsx`.
+- [ ] 7.2 The current `<Modal>` content uses a small `space-y-3` div. Replace the container div inside the `<Modal>` tags with `<div className="space-y-4 min-w-[300px] sm:min-w-[400px]">` to guarantee it has a larger minimum width and spacing, similar to the affinity modals.
+- [ ] 7.3 Also wrap the title header inside a border div for consistency: `<div className="flex items-center justify-between border-b pb-2">`. 
+- [ ] 7.4 Save changes and verify the opened modal is appropriately sized and scaled.
