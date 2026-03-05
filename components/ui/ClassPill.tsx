@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 import { Class } from "@/types/unit";
+import AbilityPill from '@/components/ui/AbilityPill';
 
-const classPillVariants = "inline-flex items-center gap-1 rounded-full px-3 py-1.5 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer text-sm font-medium";
+const classPillVariants = "inline-flex items-center gap-1 rounded-full text-xs font-semibold px-2.5 py-1 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer transition-colors duration-200";
 
 export interface ClassPillProps {
     cls: Class;
@@ -71,8 +72,16 @@ const ClassPill: React.FC<ClassPillProps> = ({
                         
                         {cls.classAbilities && cls.classAbilities.length > 0 && (
                             <div>
-                                <h4 className="text-sm font-semibold text-fe-blue-800">Class Modifiers</h4>
-                                <p className="text-sm text-fe-blue-700">{cls.classAbilities.join(', ')}</p>
+                                <h4 className="text-sm font-semibold text-fe-blue-800">Class Abilities</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {cls.classAbilities.map((ability, index) => (
+                                        <AbilityPill
+                                            key={index}
+                                            ability={ability}
+                                            game={cls.game}
+                                        />
+                                    ))}
+                                </div>
                             </div>
                         )}
                         
