@@ -79,8 +79,8 @@
 
 ## 11. Make Modals Occupy Middle Third
 
-- [ ] 11.1 Open `components/ui/modal.tsx` or the main CSS file (`app/globals.css`) where the modal content is defined.
-- [ ] 11.2 Update the `.modal-content` CSS class (or Tailwind utility classes applied to the modal container) so that it takes up one third of the screen width (`w-1/3` or `width: 33.33vw;`) and is centered. 
-- [ ] 11.3 Ensure the content also handles smaller screens gracefully (e.g., `w-11/12 md:w-1/3` so mobile remains usable).
-- [ ] 11.4 By default, this sizing will apply to all Modals across the application (Affinity, Weapon, Support, Class, and Ability pills) since they wrap the same base `<Modal>`.
-- [ ] 11.5 Re-test both the ClassPill modal and its nested AbilityPill to verify the updated layout.
+- [x] 11.1 Open `components/ui/modal.tsx` or the main CSS file (`app/globals.css`) where the modal content is defined.
+- [x] 11.2 Update the `.modal-content` CSS class (or Tailwind utility classes applied to the modal container) so that it takes up one third of the screen width (`w-1/3` or `width: 33.33vw;`) and is centered. 
+- [x] 11.3 Ensure the content also handles smaller screens gracefully (e.g., `w-11/12 md:w-1/3` so mobile remains usable).
+- [x] 11.4 By default, this sizing will apply to all Modals across the application (Affinity, Weapon, Support, Class, and Ability pills) since they wrap the same base `<Modal>`.
+- [x] 11.5 Re-test both the ClassPill modal and its nested AbilityPill to verify the updated layout.
