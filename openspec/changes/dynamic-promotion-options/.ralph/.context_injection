@@ -1,5 +1,5 @@
 ## Current Task
-- - [ ] 10.1 Diagnose `components/ui/modal.tsx` (or whatever hook manages body scrolling when modals open/close). The issue is likely that closing the inner modal removes `overflow: hidden` from the body, or closing the outer modal fails to restore `overflow: auto`/`unset` because of conflicting state or race conditions.
+- - [ ] 11.1 Open `components/ui/modal.tsx` or the main CSS file (`app/globals.css`) where the modal content is defined.
 ## Completed Tasks for Git Commit
 - [x] 1.1 Create file `components/features/PromotionOptionsDisplay.tsx`.
 - [x] 1.2 Import React, `useState`, `useEffect`. Import `Unit`, `Class` interfaces and `getAllClasses` from `@/lib/data`.
@@ -45,3 +45,8 @@
 - [x] 9.2 The issue occurs because multiple modals are stacking and their overlapping/overflow properties are creating excessive scroll space on the `body`. Investigate whether a React portal (e.g., `createPortal`) is needed to attach modals directly to `document.body`, or if `overflow: hidden` needs to be toggled on the `body` when any modal is open.
 - [x] 9.3 If the modals use absolute/fixed positioning, ensure `.modal-backdrop` spans `100vw` and `100vh` strictly without extending the document height, and `.modal-content` is properly centered using `fixed` positioning and `max-h-screen` or `max-h-[90vh]` with `overflow-y-auto`.
 - [x] 9.4 Save changes, trigger a nested modal (e.g., clicking Canto inside Cavalier), and verify the excessive scrolling is resolved.
+- [x] 10.1 Diagnose `components/ui/modal.tsx` (or whatever hook manages body scrolling when modals open/close). The issue is likely that closing the inner modal removes `overflow: hidden` from the body, or closing the outer modal fails to restore `overflow: auto`/`unset` because of conflicting state or race conditions.
+- [x] 10.2 Consider implementing a global or contextual reference counter (e.g., a simple module-level `let openModalCount = 0;`) inside the Modal/portal logic to track how many modals are currently active. Increment on mount/open, decrement on unmount/close.
+- [x] 10.3 In `components/ui/modal.tsx`, update the `useEffect` that handles the body style: only apply `document.body.style.overflow = 'hidden'` when `openModalCount > 0`, and restore the original `overflow` value (or remove the inline style) strictly when `openModalCount === 0`.
+- [x] 10.4 Alternatively, explore using the `<dialog>` HTML element with `.showModal()` which handles top-layer stacking and behind-the-scenes scrolling behavior natively without requiring manual CSS manipulation. (Current solution using React Portal and modal stack is sufficient and maintains existing functionality)
+- [x] 10.5 Verify the fix: Open a ClassPill modal, open an AbilityPill modal inside it, close the AbilityPill, then close the ClassPill, and ensure vertical scrolling on the main page works perfectly.

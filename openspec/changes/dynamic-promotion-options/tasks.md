@@ -76,3 +76,11 @@
 - [x] 10.3 In `components/ui/modal.tsx`, update the `useEffect` that handles the body style: only apply `document.body.style.overflow = 'hidden'` when `openModalCount > 0`, and restore the original `overflow` value (or remove the inline style) strictly when `openModalCount === 0`.
 - [x] 10.4 Alternatively, explore using the `<dialog>` HTML element with `.showModal()` which handles top-layer stacking and behind-the-scenes scrolling behavior natively without requiring manual CSS manipulation. (Current solution using React Portal and modal stack is sufficient and maintains existing functionality)
 - [x] 10.5 Verify the fix: Open a ClassPill modal, open an AbilityPill modal inside it, close the AbilityPill, then close the ClassPill, and ensure vertical scrolling on the main page works perfectly.
+
+## 11. Make Modals Occupy Middle Third
+
+- [ ] 11.1 Open `components/ui/modal.tsx` or the main CSS file (`app/globals.css`) where the modal content is defined.
+- [ ] 11.2 Update the `.modal-content` CSS class (or Tailwind utility classes applied to the modal container) so that it takes up one third of the screen width (`w-1/3` or `width: 33.33vw;`) and is centered. 
+- [ ] 11.3 Ensure the content also handles smaller screens gracefully (e.g., `w-11/12 md:w-1/3` so mobile remains usable).
+- [ ] 11.4 By default, this sizing will apply to all Modals across the application (Affinity, Weapon, Support, Class, and Ability pills) since they wrap the same base `<Modal>`.
+- [ ] 11.5 Re-test both the ClassPill modal and its nested AbilityPill to verify the updated layout.
