@@ -6,6 +6,7 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 import { Class } from "@/types/unit";
 import AbilityPill from '@/components/ui/AbilityPill';
+import MovementTypePill from '@/components/ui/MovementTypePill';
 
 const classPillVariants = "inline-flex items-center gap-1 rounded-full text-xs font-semibold px-2.5 py-1 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer transition-colors duration-200";
 
@@ -66,7 +67,7 @@ const ClassPill: React.FC<ClassPillProps> = ({
                         {cls.movementType && (
                             <div>
                                 <h3 className="text-lg font-semibold mb-2 text-foreground">Movement Type</h3>
-                                <p className="text-sm text-fe-blue-700">{cls.movementType}</p>
+                                <MovementTypePill movementType={cls.movementType} game={cls.game} />
                             </div>
                         )}
                         

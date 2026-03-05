@@ -6,6 +6,9 @@ import { StatTable } from './StatTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import AbilityPill from '@/components/ui/AbilityPill';
 import SupportPill from '@/components/ui/SupportPill';
+import ClassPill from '@/components/ui/ClassPill';
+import MovementTypePill from '@/components/ui/MovementTypePill';
+import AffinityPill from '@/components/ui/AffinityPill';
 import { getMinLevel, getMaxLevel } from '@/lib/stats';
 import { getAllClasses, getAllUnits } from '@/lib/data';
 import { Info } from 'lucide-react';
@@ -555,19 +558,13 @@ export function ComparisonGrid({
                   <td className="p-2 font-medium">Class</td>
                   {units.map((unit) => {
                     const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
-                    const displayName = cls ? cls.name : unit.class;
                     return (
                       <td key={`class-${unit.id}`} className="text-center p-2">
-                        <div className="flex items-center justify-center gap-1">
-                          {displayName}
-                          {cls && (
-                            <Info
-                              className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
-                              aria-label={`View details about ${displayName} class`}
-                              onClick={() => handleClassInfoClick(cls)}
-                            />
-                          )}
-                        </div>
+                        {cls ? (
+                          <ClassPill cls={cls} />
+                        ) : (
+                          <span>{unit.class}</span>
+                        )}
                       </td>
                     );
                   })}
@@ -589,14 +586,7 @@ export function ComparisonGrid({
                     const movType = cls?.movementType || 'Infantry';
                     return (
                       <td key={`movement-${unit.id}`} className="text-center p-2">
-                        <div className="flex items-center justify-center gap-1">
-                          {movType}
-                          <Info
-                            className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
-                            aria-label={`View details about ${movType} movement`}
-                            onClick={() => handleMovementInfoClick(movType, unit.game)}
-                          />
-                        </div>
+                        <MovementTypePill movementType={movType} game={unit.game} />
                       </td>
                     );
                   })}
@@ -632,16 +622,11 @@ export function ComparisonGrid({
                     <td className="p-2 font-medium">Affinity</td>
                     {units.map((unit) => (
                       <td key={`affinity-${unit.id}`} className="text-center p-2">
-                        <div className="flex items-center justify-center gap-1">
-                          {unit.affinity || '-'}
-                          {unit.affinity && (
-                            <Info
-                              className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
-                              aria-label={`View details about ${unit.affinity} affinity`}
-                              onClick={() => handleAffinityInfoClick(unit.affinity!)}
-                            />
-                          )}
-                        </div>
+                        {unit.affinity ? (
+                          <AffinityPill affinityName={unit.affinity} game={unit.game} />
+                        ) : (
+                          <span>-</span>
+                        )}
                       </td>
                     ))}
                   </tr>
