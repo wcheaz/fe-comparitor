@@ -1,18 +1,23 @@
 ## 1. Pill Components Creation
 
 - [x] 1.1 Create `components/ui/AffinityPill.tsx` to display affinity icon and name.
+- [ ] 1.2 Format `components/ui/AffinityPill.tsx`:
   - Setup a `cva` definition mapping affinity variants to their respective global CSS classes (e.g., `fire: "pill-variant-affinity-fire"`, `ice: "pill-variant-affinity-ice"`, etc.).
   - Apply the `.pill-base` CSS class within the cva base string.
   - Add the lucide-react `<Info className="w-3 h-3 opacity-60" />` icon inside the pill span when clickable.
   - Implement a `<Modal>` pop-up component when clicked.
+  - Add a `<div className="flex items-center justify-between border-b pb-2">` wrapping the title (and optional subtitle) to create a horizontal separator line (similar to `ClassPill` and `SupportPill`).
   - Format the modal title with `.pill-modal-title`.
   - Format the modal subtitle/body with `.pill-modal-text`.
   - List the detailed stat bonuses in the modal body, using `.pill-modal-label` for label titles.
-- [x] 1.2 Create `components/ui/MovementTypePill.tsx` to display movement type icon and name.
+
+- [x] 1.3 Create `components/ui/MovementTypePill.tsx` to display movement type icon and name.
+- [ ] 1.4 Format `components/ui/MovementTypePill.tsx`:
   - Setup a `cva` definition mapping movement type variants to their global CSS classes (e.g., `infantry: "pill-variant-movement-infantry"`, `armored: "pill-variant-movement-armored"`, etc.).
   - Apply the `.pill-base` CSS class within the cva base string.
   - Include the `<Info className="w-3 h-3 opacity-60" />` icon (like `ClassPill.tsx` line 42).
   - Implement a `<Modal>` pop-up component when clicked containing terrain interaction descriptions.
+  - Add a `<div className="flex items-center justify-between border-b pb-2">` wrapping the title (and optional subtitle) to create a horizontal separator line.
   - Format the modal title with `.pill-modal-title`.
   - Format the modal text describing terrain interactions with `.pill-modal-text`.
 
