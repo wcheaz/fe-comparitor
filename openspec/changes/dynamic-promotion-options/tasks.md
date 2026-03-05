@@ -47,16 +47,17 @@
 - [x] 6.3 Inside the `<Modal>` section of `ClassPill.tsx`, locate and remove any elements displaying the `game` property (e.g. `<p className="text-xs text-muted-foreground">Game: {game}</p>`).
 - [x] 6.4 Save changes and verify the pill looks appropriately larger and the modal no longer shows the game name.
 
-## 7. Enlarge `ClassPill` Modal
+## 7. Enlarge & Style `ClassPill` Modal
 
-- [x] 7.1 Open `components/ui/ClassPill.tsx`.
-- [x] 7.2 The current `<Modal>` content uses a small `space-y-3` div. Replace the container div inside the `<Modal>` tags with `<div className="space-y-4 min-w-[300px] sm:min-w-[400px]">` to guarantee it has a larger minimum width and spacing, similar to the affinity modals.
-- [x] 7.3 Also wrap the title header inside a border div for consistency: `<div className="flex items-center justify-between border-b pb-2">`. 
-- [x] 7.4 Save changes and verify the opened modal is appropriately sized and scaled.
+- [ ] 7.1 Open `components/ui/ClassPill.tsx`.
+- [ ] 7.2 Replace the container inside `<Modal>` with `<div className="space-y-4 min-w-[300px] sm:min-w-[400px]">` to guarantee a larger width like the affinity modals.
+- [ ] 7.3 Change the Class Name header to use `<h2 className="text-2xl font-bold text-foreground">` so it appears large, black/dark, and formatted like a main title. Wrap it in a border div if needed (`<div className="flex items-center justify-between border-b pb-2">`).
+- [ ] 7.4 Change the category subtitles (e.g., Weapon type, Movement type, Class Type) to use `<h3 className="text-lg font-semibold mb-2 text-foreground">` so they are distinct, large, and black/dark but smaller than the main title.
+- [ ] 7.5 Save changes and verify the opened modal has appropriately large text, clear category dividers, and an expanded overall size.
 
 ## 8. Refine `ClassPill` Style & Abilities
 
-- [ ] 8.1 In `components/ui/ClassPill.tsx`, change the pill's background/text colors and font sizing to closely match standard affinity pills (e.g., using a combination of `text-xs font-semibold px-2.5 py-1 rounded-full` with colors resembling the standard UI themes, like `bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300`).
+- [ ] 8.1 In `components/ui/ClassPill.tsx`, change the pill itself to use styling matching standard pills (e.g., `text-xs font-semibold px-2.5 py-1 rounded-full bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300`).
 - [ ] 8.2 Import `AbilityPill` from `@/components/ui/AbilityPill` in `ClassPill.tsx`.
-- [ ] 8.3 Inside the `ClassPill` modal's render function, check if the class has any `classAbilities`. If `cls.classAbilities && cls.classAbilities.length > 0`, map over them and render `<AbilityPill>` components to display the skill information, similar to how it works in `ComparisonGrid.tsx`.
-- [ ] 8.4 Start the dev server and verify the updated pill style matches expectations and the new `<AbilityPill>` renders inside the `<Modal>`.
+- [ ] 8.3 Inside the `ClassPill` modal's render function, check if the class has `classAbilities`. If `cls.classAbilities?.length > 0`, render an `<AbilityPill>` component for each to display the skill information.
+- [ ] 8.4 Verify the updated pill style matches expectations and the new `<AbilityPill>` renders inside the `<Modal>`.
