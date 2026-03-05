@@ -8,16 +8,16 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
 const movementTypePillVariants = cva(
-    "inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
+    "pill-base inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
     {
         variants: {
             variant: {
-                default: "bg-fe-blue-100 text-fe-blue-900 border-fe-blue-300 hover:bg-fe-blue-200",
-                infantry: "bg-green-100 text-fe-blue-900 border-green-300 hover:bg-green-200",
-                armored: "bg-gray-100 text-fe-blue-900 border-gray-300 hover:bg-gray-200",
-                cavalry: "bg-amber-100 text-fe-blue-900 border-amber-300 hover:bg-amber-200",
-                flying: "bg-sky-100 text-fe-blue-900 border-sky-300 hover:bg-sky-200",
-                wyvern: "bg-purple-100 text-fe-blue-900 border-purple-300 hover:bg-purple-200",
+                default: "pill-variant-movement-default",
+                infantry: "pill-variant-movement-infantry",
+                armored: "pill-variant-movement-armored",
+                cavalry: "pill-variant-movement-cavalry",
+                flying: "pill-variant-movement-flying",
+                wyvern: "pill-variant-movement-wyvern",
             },
             size: {
                 default: "h-6 py-1 px-2",
@@ -75,8 +75,9 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
         <>
             <span
                 className={cn(
-                    movementTypePillVariants({ variant: finalVariant, size, className }),
-                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default'
+                    movementTypePillVariants({ variant: finalVariant, size }),
+                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default',
+                    className
                 )}
                 onClick={isClickable ? handleClick : undefined}
                 role={isClickable ? 'button' : undefined}
@@ -93,17 +94,17 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="space-y-3">
-                        <h3 className="text-lg font-bold text-fe-blue-900">
+                        <h3 className="pill-modal-title">
                             {movementData!.name} Movement
                         </h3>
-                        <p className="text-sm text-fe-blue-700">
+                        <p className="pill-modal-text">
                             {movementData!.description}
                         </p>
                         
                         {movementData!.abilities && (
                             <div>
-                                <h4 className="font-semibold text-fe-blue-900">Abilities</h4>
-                                <p className="text-sm text-fe-blue-700">
+                                <h4 className="pill-modal-label">Abilities</h4>
+                                <p className="pill-modal-text">
                                     {movementData!.abilities}
                                 </p>
                             </div>
@@ -111,8 +112,8 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
                         
                         {movementData!.weaknesses && (
                             <div>
-                                <h4 className="font-semibold text-fe-blue-900">Terrain Interactions</h4>
-                                <p className="text-sm text-fe-blue-700">
+                                <h4 className="pill-modal-label">Terrain Interactions</h4>
+                                <p className="pill-modal-text">
                                     {movementData!.weaknesses}
                                 </p>
                             </div>
@@ -120,8 +121,8 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
                         
                         {game && movementData!.gameSpecificDetails?.[game] && (
                             <div className="mt-3 pt-3 border-t border-fe-blue-200">
-                                <h4 className="font-semibold text-fe-blue-900">Game Specific Details</h4>
-                                <p className="text-sm text-fe-blue-700 bg-fe-blue-50 p-2 rounded">
+                                <h4 className="pill-modal-label">Game Specific Details</h4>
+                                <p className="pill-modal-text bg-fe-blue-50 p-2 rounded">
                                     {movementData!.gameSpecificDetails[game]}
                                 </p>
                             </div>

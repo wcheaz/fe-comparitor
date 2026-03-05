@@ -8,21 +8,21 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
 const affinityPillVariants = cva(
-    "inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
+    "pill-base inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
     {
         variants: {
             variant: {
-                default: "bg-fe-purple-100 text-fe-blue-900 border-fe-purple-300 hover:bg-fe-purple-200",
-                fire: "bg-red-100 text-fe-blue-900 border-red-300 hover:bg-red-200",
-                thunder: "bg-blue-100 text-fe-blue-900 border-blue-300 hover:bg-blue-200",
-                wind: "bg-green-100 text-fe-blue-900 border-green-300 hover:bg-green-200",
-                ice: "bg-cyan-100 text-fe-blue-900 border-cyan-300 hover:bg-cyan-200",
-                dark: "bg-gray-100 text-fe-blue-900 border-gray-300 hover:bg-gray-200",
-                light: "bg-yellow-100 text-fe-blue-900 border-yellow-300 hover:bg-yellow-200",
-                anima: "bg-purple-100 text-fe-blue-900 border-purple-300 hover:bg-purple-200",
-                water: "bg-indigo-100 text-fe-blue-900 border-indigo-300 hover:bg-indigo-200",
-                earth: "bg-amber-100 text-fe-blue-900 border-amber-300 hover:bg-amber-200",
-                heaven: "bg-pink-100 text-fe-blue-900 border-pink-300 hover:bg-pink-200",
+                default: "pill-variant-support-default",
+                fire: "pill-variant-affinity-fire",
+                thunder: "pill-variant-affinity-thunder",
+                wind: "pill-variant-affinity-wind",
+                ice: "pill-variant-affinity-ice",
+                dark: "pill-variant-affinity-dark",
+                light: "pill-variant-affinity-light",
+                anima: "pill-variant-affinity-anima",
+                water: "pill-variant-affinity-water",
+                earth: "pill-variant-affinity-earth",
+                heaven: "pill-variant-affinity-heaven",
             },
             size: {
                 default: "h-6 py-1 px-2",
@@ -80,8 +80,9 @@ const AffinityPill: React.FC<AffinityPillProps> = ({
         <>
             <span
                 className={cn(
-                    affinityPillVariants({ variant: finalVariant, size, className }),
-                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default'
+                    affinityPillVariants({ variant: finalVariant, size }),
+                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default',
+                    className
                 )}
                 onClick={isClickable ? handleClick : undefined}
                 role={isClickable ? 'button' : undefined}
@@ -98,17 +99,17 @@ const AffinityPill: React.FC<AffinityPillProps> = ({
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="space-y-3">
-                        <h3 className="text-lg font-bold text-fe-blue-900">
+                        <h3 className="pill-modal-title">
                             {affinityData!.name} Affinity
                         </h3>
-                        <p className="text-sm text-fe-blue-700">
+                        <p className="pill-modal-text">
                             {affinityData!.description}
                         </p>
                         
                         {game && (
                             <div className="space-y-3">
-                                <h4 className="font-semibold text-fe-blue-900">Support Bonuses</h4>
-                                <p className="text-xs text-fe-blue-700">
+                                <h4 className="pill-modal-label">Support Bonuses</h4>
+                                <p className="pill-modal-text">
                                     These bonuses are added per support level when fighting near the supported partner.
                                 </p>
                                 
@@ -118,10 +119,10 @@ const AffinityPill: React.FC<AffinityPillProps> = ({
 
                                     return (
                                         <div key={level} className="border-l-4 border-fe-blue-300 pl-3">
-                                            <h5 className="font-semibold text-fe-blue-900">{level} Support</h5>
+                                            <h5 className="pill-modal-label">{level} Support</h5>
                                             <ul className="mt-1 space-y-1">
                                                 {bonuses.map((bonus, index) => (
-                                                    <li key={index} className="text-sm text-fe-blue-700">
+                                                    <li key={index} className="pill-modal-text">
                                                         {bonus}
                                                     </li>
                                                 ))}

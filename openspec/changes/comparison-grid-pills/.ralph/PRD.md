@@ -136,3 +136,10 @@ The `ComparisonGrid` currently renders Class, Movement Type, and Affinity inform
 
 ## Current Task
 - - [ ] 1.1 Create `components/ui/AffinityPill.tsx` to display affinity icon and name.
+## Completed Tasks for Git Commit
+- [x] 3.1 Update `components/ui/ClassPill.tsx` to embed `MovementTypePill` instead of rendering movement type directly.
+- [x] 3.2 Re-verify `ClassPill.tsx` styles and layout to accommodate the embedded `MovementTypePill`.
+- [x] 4.1 Update `components/features/ComparisonGrid.tsx` to replace the Class column modal trigger with `ClassPill`.
+- [x] 4.2 Update `components/features/ComparisonGrid.tsx` to replace the Movement Type column modal trigger with `MovementTypePill`.
+- [x] 4.3 Update `components/features/ComparisonGrid.tsx` to replace the Affinity column modal trigger with `AffinityPill`.
+- [x] 4.4 Adjust `ComparisonGrid.tsx` CSS/styling to ensure the new pills fit neatly within the grid layout.

@@ -8,13 +8,13 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
 const abilityPillVariants = cva(
-    "inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
+    "pill-base inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
     {
         variants: {
             variant: {
-                default: "bg-fe-gold-100 text-fe-blue-900 border-fe-gold-300 hover:bg-fe-gold-200",
-                stat: "bg-fe-blue-100 text-fe-blue-900 border-fe-blue-300 hover:bg-fe-blue-200",
-                weapon: "bg-fe-green-100 text-fe-blue-900 border-fe-green-300 hover:bg-fe-green-200",
+                default: "pill-variant-ability-default",
+                stat: "pill-variant-ability-stat",
+                weapon: "pill-variant-ability-weapon",
             },
             size: {
                 default: "h-6 py-1 px-2",
@@ -66,8 +66,9 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
         <>
             <span
                 className={cn(
-                    abilityPillVariants({ variant: finalVariant, size, className }),
-                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default'
+                    abilityPillVariants({ variant: finalVariant, size }),
+                    isClickable ? 'cursor-pointer gap-1' : 'cursor-default',
+                    className
                 )}
                 onClick={isClickable ? () => setIsModalOpen(true) : undefined}
                 role={isClickable ? 'button' : undefined}
@@ -84,27 +85,32 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="space-y-3">
-                        <h3 className="text-lg font-bold text-fe-blue-900">
-                            {abilityData!.name}
-                        </h3>
-                        <p className="text-sm text-fe-blue-700">
+                        <div className="flex items-center justify-between border-b pb-2">
+                            <h3 className="pill-modal-title">
+                                {abilityData!.name}
+                            </h3>
+                            <h4 className="pill-modal-subtitle">
+                                {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Ability"}
+                            </h4>
+                        </div>
+                        <p className="pill-modal-text">
                             {abilityData!.description}
                         </p>
                         {abilityData!.procCondition && (
                             <div className="text-sm">
-                                <span className="font-semibold text-fe-blue-900">Condition: </span>
-                                <span className="text-fe-blue-700">{abilityData!.procCondition}</span>
+                                <span className="pill-modal-label">Condition: </span>
+                                <span className="pill-modal-text">{abilityData!.procCondition}</span>
                             </div>
                         )}
                         {abilityData!.procChance && (
                             <div className="text-sm">
-                                <span className="font-semibold text-fe-blue-900">Proc Chance: </span>
-                                <span className="text-fe-blue-700">{abilityData!.procChance}</span>
+                                <span className="pill-modal-label">Proc Chance: </span>
+                                <span className="pill-modal-text">{abilityData!.procChance}</span>
                             </div>
                         )}
                         {game && abilityData!.gameSpecificDetails?.[game] && (
                             <div className="text-sm mt-2 p-2 bg-fe-gold-50 rounded border border-fe-gold-200">
-                                <span className="text-fe-blue-700">{abilityData!.gameSpecificDetails[game]}</span>
+                                <span className="pill-modal-text">{abilityData!.gameSpecificDetails[game]}</span>
                             </div>
                         )}
                     </div>

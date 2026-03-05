@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
@@ -8,15 +9,35 @@ import { Class } from "@/types/unit";
 import AbilityPill from '@/components/ui/AbilityPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
 
-const classPillVariants = "inline-flex items-center gap-1 rounded-full text-xs font-semibold px-2.5 py-1 bg-fe-blue-100 text-fe-blue-900 border border-fe-blue-300 hover:bg-fe-blue-200 cursor-pointer transition-colors duration-200";
+const classPillVariants = cva(
+    "pill-base inline-flex items-center gap-1 rounded-full text-xs font-semibold px-2.5 py-1 cursor-pointer transition-colors duration-200",
+    {
+        variants: {
+            variant: {
+                default: "pill-variant-class-default",
+            },
+            size: {
+                default: "h-6 py-1 px-2",
+                sm: "h-5 px-1.5 text-xs",
+            },
+        },
+        defaultVariants: {
+            variant: "default",
+            size: "default",
+        },
+    }
+);
 
-export interface ClassPillProps {
+export interface ClassPillProps
+    extends React.HTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof classPillVariants> {
     cls: Class;
-    className?: string;
 }
 
 const ClassPill: React.FC<ClassPillProps> = ({
     cls,
+    variant,
+    size,
     className,
     ...props
 }) => {
@@ -30,7 +51,7 @@ const ClassPill: React.FC<ClassPillProps> = ({
         <>
             <span
                 className={cn(
-                    classPillVariants,
+                    classPillVariants({ variant, size }),
                     className
                 )}
                 onClick={handleClick}
@@ -46,34 +67,33 @@ const ClassPill: React.FC<ClassPillProps> = ({
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className="space-y-4 min-w-[300px] sm:min-w-[400px]">
                     <div className="flex items-center justify-between border-b pb-2">
-                        <h2 className="text-2xl font-bold text-foreground">
+                        <h2 className="pill-modal-title">
                             {cls.name}
                         </h2>
+                        <h3 className="pill-modal-subtitle">
+                            {cls.type}
+                        </h3>
                     </div>
                     
                     <div className="space-y-2">
-                        <div>
-                            <h3 className="text-lg font-semibold mb-2 text-foreground">Class Type</h3>
-                            <p className="text-sm text-fe-blue-700 capitalize">{cls.type}</p>
-                        </div>
                         
                         {cls.weapons && cls.weapons.length > 0 && (
                             <div>
-                                <h3 className="text-lg font-semibold mb-2 text-foreground">Weapons</h3>
-                                <p className="text-sm text-fe-blue-700">{cls.weapons.join(', ')}</p>
+                                <h3 className="pill-modal-label mb-2">Weapons</h3>
+                                <p className="pill-modal-text">{cls.weapons.join(', ')}</p>
                             </div>
                         )}
                         
                         {cls.movementType && (
                             <div>
-                                <h3 className="text-lg font-semibold mb-2 text-foreground">Movement Type</h3>
+                                <h3 className="pill-modal-label mb-2">Movement Type</h3>
                                 <MovementTypePill movementType={cls.movementType} game={cls.game} />
                             </div>
                         )}
                         
                         {cls.classAbilities && cls.classAbilities.length > 0 && (
                             <div>
-                                <h3 className="text-lg font-semibold mb-2 text-foreground">Class Abilities</h3>
+                                <h3 className="pill-modal-label mb-2">Class Abilities</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {cls.classAbilities.map((ability, index) => (
                                         <AbilityPill
@@ -88,8 +108,8 @@ const ClassPill: React.FC<ClassPillProps> = ({
                         
                         {cls.description && (
                             <div>
-                                <h3 className="text-lg font-semibold mb-2 text-foreground">Description</h3>
-                                <p className="text-sm text-fe-blue-700">{cls.description}</p>
+                                <h3 className="pill-modal-label mb-2">Description</h3>
+                                <p className="pill-modal-text">{cls.description}</p>
                             </div>
                         )}
                         

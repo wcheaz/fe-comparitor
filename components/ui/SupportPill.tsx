@@ -8,18 +8,18 @@ import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
 const supportPillVariants = cva(
-    "inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
+    "pill-base inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
     {
         variants: {
             variant: {
-                default: "bg-fe-purple-100 text-fe-blue-900 border-fe-purple-300 hover:bg-fe-purple-200",
-                fire: "bg-red-100 text-fe-blue-900 border-red-300 hover:bg-red-200",
-                thunder: "bg-blue-100 text-fe-blue-900 border-blue-300 hover:bg-blue-200",
-                wind: "bg-green-100 text-fe-blue-900 border-green-300 hover:bg-green-200",
-                ice: "bg-cyan-100 text-fe-blue-900 border-cyan-300 hover:bg-cyan-200",
-                dark: "bg-gray-100 text-fe-blue-900 border-gray-300 hover:bg-gray-200",
-                light: "bg-yellow-100 text-fe-blue-900 border-yellow-300 hover:bg-yellow-200",
-                anima: "bg-purple-100 text-fe-blue-900 border-purple-300 hover:bg-purple-200",
+                default: "pill-variant-support-default",
+                fire: "pill-variant-affinity-fire",
+                thunder: "pill-variant-affinity-thunder",
+                wind: "pill-variant-affinity-wind",
+                ice: "pill-variant-affinity-ice",
+                dark: "pill-variant-affinity-dark",
+                light: "pill-variant-affinity-light",
+                anima: "pill-variant-affinity-anima",
             },
             size: {
                 default: "h-6 py-1 px-2",
@@ -66,8 +66,9 @@ const SupportPill: React.FC<SupportPillProps> = ({
         <>
             <span
                 className={cn(
-                    supportPillVariants({ variant, size, className }),
-                    'cursor-pointer gap-1'
+                    supportPillVariants({ variant, size }),
+                    'cursor-pointer gap-1',
+                    className
                 )}
                 onClick={handleClick}
                 role="button"
@@ -79,18 +80,24 @@ const SupportPill: React.FC<SupportPillProps> = ({
                 <Info className="w-3 h-3 opacity-60" />
             </span>
 
-            {/* Basic modal for support info - this will be enhanced later */}
+            {/* Support Partner Modal */}
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className="space-y-3">
-                    <h3 className="text-lg font-bold text-fe-blue-900">
+                    <h3 className="pill-modal-title">
                         Support Partner: {partnerName}
                     </h3>
-                    <p className="text-sm text-fe-blue-700">
-                        Support bonuses information will be displayed here.
+                    <h4 className="pill-modal-subtitle">
+                        Game Information
+                    </h4>
+                    <p className="pill-modal-text">
+                        {game}
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                        Game: {game}
-                    </p>
+                    <div>
+                        <h4 className="pill-modal-label">Support Details</h4>
+                        <p className="pill-modal-text">
+                            Support bonuses information will be displayed here.
+                        </p>
+                    </div>
                 </div>
             </Modal>
         </>
