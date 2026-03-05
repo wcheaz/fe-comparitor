@@ -127,6 +127,7 @@ body {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 50;
+  pointer-events: auto;
 }
 
 .modal-content {
@@ -142,6 +143,11 @@ body {
   overflow-y: auto;
   border-radius: 0.5rem;
   z-index: 51;
+  pointer-events: auto;
+  /* Ensure modal doesn't extend beyond viewport */
+  box-sizing: border-box;
+  /* Add shadow for better visibility */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .modal-close-button {
