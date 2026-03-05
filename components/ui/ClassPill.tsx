@@ -45,34 +45,34 @@ const ClassPill: React.FC<ClassPillProps> = ({
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className="space-y-4 min-w-[300px] sm:min-w-[400px]">
                     <div className="flex items-center justify-between border-b pb-2">
-                        <h3 className="text-lg font-bold text-fe-blue-900">
+                        <h2 className="text-2xl font-bold text-foreground">
                             {cls.name}
-                        </h3>
+                        </h2>
                     </div>
                     
                     <div className="space-y-2">
                         <div>
-                            <h4 className="text-sm font-semibold text-fe-blue-800">Class Type</h4>
+                            <h3 className="text-lg font-semibold mb-2 text-foreground">Class Type</h3>
                             <p className="text-sm text-fe-blue-700 capitalize">{cls.type}</p>
                         </div>
                         
                         {cls.weapons && cls.weapons.length > 0 && (
                             <div>
-                                <h4 className="text-sm font-semibold text-fe-blue-800">Weapons</h4>
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Weapons</h3>
                                 <p className="text-sm text-fe-blue-700">{cls.weapons.join(', ')}</p>
                             </div>
                         )}
                         
                         {cls.movementType && (
                             <div>
-                                <h4 className="text-sm font-semibold text-fe-blue-800">Movement Type</h4>
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Movement Type</h3>
                                 <p className="text-sm text-fe-blue-700">{cls.movementType}</p>
                             </div>
                         )}
                         
                         {cls.classAbilities && cls.classAbilities.length > 0 && (
                             <div>
-                                <h4 className="text-sm font-semibold text-fe-blue-800">Class Abilities</h4>
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Class Abilities</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {cls.classAbilities.map((ability, index) => (
                                         <AbilityPill
@@ -87,7 +87,7 @@ const ClassPill: React.FC<ClassPillProps> = ({
                         
                         {cls.description && (
                             <div>
-                                <h4 className="text-sm font-semibold text-fe-blue-800">Description</h4>
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Description</h3>
                                 <p className="text-sm text-fe-blue-700">{cls.description}</p>
                             </div>
                         )}
