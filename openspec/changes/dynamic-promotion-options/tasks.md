@@ -61,3 +61,10 @@
 - [x] 8.2 Import `AbilityPill` from `@/components/ui/AbilityPill` in `ClassPill.tsx`.
 - [x] 8.3 Inside the `ClassPill` modal's render function, check if the class has `classAbilities`. If `cls.classAbilities?.length > 0`, render an `<AbilityPill>` component for each to display the skill information.
 - [x] 8.4 Verify the updated pill style matches expectations and the new `<AbilityPill>` renders inside the `<Modal>`.
+
+## 9. Fix Nested Modal Scrolling Bug
+
+- [ ] 9.1 Open `components/ui/modal.tsx` or the CSS file where `.modal-backdrop` and `.modal-content` are defined (e.g. `app/globals.css`).
+- [ ] 9.2 The issue occurs because multiple modals are stacking and their overlapping/overflow properties are creating excessive scroll space on the `body`. Investigate whether a React portal (e.g., `createPortal`) is needed to attach modals directly to `document.body`, or if `overflow: hidden` needs to be toggled on the `body` when any modal is open.
+- [ ] 9.3 If the modals use absolute/fixed positioning, ensure `.modal-backdrop` spans `100vw` and `100vh` strictly without extending the document height, and `.modal-content` is properly centered using `fixed` positioning and `max-h-screen` or `max-h-[90vh]` with `overflow-y-auto`.
+- [ ] 9.4 Save changes, trigger a nested modal (e.g., clicking Canto inside Cavalier), and verify the excessive scrolling is resolved.
