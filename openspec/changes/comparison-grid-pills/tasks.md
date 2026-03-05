@@ -1,7 +1,7 @@
 ## 1. Pill Components Creation
 
 - [x] 1.1 Create `components/ui/AffinityPill.tsx` to display affinity icon and name.
-- [ ] 1.2 Format `components/ui/AffinityPill.tsx`:
+- [x] 1.2 Format `components/ui/AffinityPill.tsx`:
   - Setup a `cva` definition mapping affinity variants to their respective global CSS classes (e.g., `fire: "pill-variant-affinity-fire"`, `ice: "pill-variant-affinity-ice"`, etc.).
   - Apply the `.pill-base` CSS class within the cva base string.
   - Add the lucide-react `<Info className="w-3 h-3 opacity-60" />` icon inside the pill span when clickable.
@@ -12,7 +12,7 @@
   - List the detailed stat bonuses in the modal body, using `.pill-modal-label` for label titles.
 
 - [x] 1.3 Create `components/ui/MovementTypePill.tsx` to display movement type icon and name.
-- [ ] 1.4 Format `components/ui/MovementTypePill.tsx`:
+- [x] 1.4 Format `components/ui/MovementTypePill.tsx`:
   - Setup a `cva` definition mapping movement type variants to their global CSS classes (e.g., `infantry: "pill-variant-movement-infantry"`, `armored: "pill-variant-movement-armored"`, etc.).
   - Apply the `.pill-base` CSS class within the cva base string.
   - Include the `<Info className="w-3 h-3 opacity-60" />` icon (like `ClassPill.tsx` line 42).
