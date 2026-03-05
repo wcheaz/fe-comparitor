@@ -42,7 +42,7 @@
 
 ## 6. Edit `ClassPill` Look
 
-- [ ] 6.1 Open `components/ui/ClassPill.tsx`.
-- [ ] 6.2 Increase the size of the pill to make it more visible and easier to read (e.g., using `px-3 py-1.5 text-sm` instead of smaller sizes).
-- [ ] 6.3 Inside the `<Modal>` section of `ClassPill.tsx`, locate and remove any elements displaying the `game` property (e.g. `<p className="text-xs text-muted-foreground">Game: {game}</p>`).
-- [ ] 6.4 Save changes and verify the pill looks appropriately larger and the modal no longer shows the game name.
+- [x] 6.1 Open `components/ui/ClassPill.tsx`.
+- [x] 6.2 Increase the size of the pill to make it more visible and easier to read (e.g., using `px-3 py-1.5 text-sm` instead of smaller sizes).
+- [x] 6.3 Inside the `<Modal>` section of `ClassPill.tsx`, locate and remove any elements displaying the `game` property (e.g. `<p className="text-xs text-muted-foreground">Game: {game}</p>`).
+- [x] 6.4 Save changes and verify the pill looks appropriately larger and the modal no longer shows the game name.
