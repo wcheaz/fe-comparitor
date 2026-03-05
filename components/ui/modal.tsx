@@ -12,9 +12,11 @@ const modalStack: number[] = [];
 
 const updateBodyOverflow = () => {
   if (typeof document !== 'undefined') {
+    // Only apply overflow hidden if there are modals in the stack
     if (modalStack.length > 0) {
       document.body.style.overflow = 'hidden';
     } else {
+      // Restore original overflow only when no modals remain
       document.body.style.overflow = '';
     }
   }
@@ -28,18 +30,23 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       if (isOpen) {
         const newZIndex = modalStack.length > 0 ? Math.max(...modalStack) + 10 : 50;
         setZIndex(newZIndex);
-        modalStack.push(newZIndex);
+        
+        // Prevent duplicate entries in the stack
+        if (!modalStack.includes(newZIndex)) {
+          modalStack.push(newZIndex);
+        }
+        
         updateBodyOverflow();
       }
       
       return () => {
-        if (isOpen) {
-          const index = modalStack.indexOf(zIndex);
-          if (index > -1) {
-            modalStack.splice(index, 1);
-          }
-          updateBodyOverflow();
+        // Always remove from stack regardless of isOpen state
+        // This ensures proper cleanup when component unmounts
+        const index = modalStack.indexOf(zIndex);
+        if (index > -1) {
+          modalStack.splice(index, 1);
         }
+        updateBodyOverflow();
       };
     }, [isOpen, zIndex]);
 
