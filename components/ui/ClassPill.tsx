@@ -42,10 +42,12 @@ const ClassPill: React.FC<ClassPillProps> = ({
             </span>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <div className="space-y-3">
-                    <h3 className="text-lg font-bold text-fe-blue-900">
-                        {cls.name}
-                    </h3>
+                <div className="space-y-4 min-w-[300px] sm:min-w-[400px]">
+                    <div className="flex items-center justify-between border-b pb-2">
+                        <h3 className="text-lg font-bold text-fe-blue-900">
+                            {cls.name}
+                        </h3>
+                    </div>
                     
                     <div className="space-y-2">
                         <div>
