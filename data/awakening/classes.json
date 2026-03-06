@@ -45,9 +45,18 @@
       "def": 25,
       "res": 25
     },
-    "promotesTo": ["grandmaster"],
-    "weapons": ["Swords", "Tomes", "Axes"],
-    "classAbilities": ["Ignis"],
+    "promotesTo": [
+      "grandmaster"
+    ],
+    "weapons": [
+      "Swords",
+      "Tomes",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Veteran (Lv. 1)",
+      "Solidarity (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 35,
@@ -107,9 +116,18 @@
       "def": 35,
       "res": 25
     },
-    "promotesTo": ["paladin", "great_knight"],
-    "weapons": ["Swords", "Lances"],
-    "classAbilities": [],
+    "promotesTo": [
+      "paladin",
+      "great_knight"
+    ],
+    "weapons": [
+      "Swords",
+      "Lances"
+    ],
+    "classAbilities": [
+      "Discipline (Lv. 1)",
+      "Outdoor Fighter (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 70,
       "str": 40,
@@ -169,9 +187,18 @@
       "def": 50,
       "res": 35
     },
-    "promotesTo": ["general", "great_knight"],
-    "weapons": ["Lances", "Axes"],
-    "classAbilities": [],
+    "promotesTo": [
+      "general",
+      "great_knight"
+    ],
+    "weapons": [
+      "Lances",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Defense +2 (Lv. 1)",
+      "Indoor Fighter (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 45,
@@ -231,9 +258,17 @@
       "def": 20,
       "res": 20
     },
-    "promotesTo": ["swordmaster", "assassin"],
-    "weapons": ["Swords"],
-    "classAbilities": ["Critical +10"],
+    "promotesTo": [
+      "swordmaster",
+      "assassin"
+    ],
+    "weapons": [
+      "Swords"
+    ],
+    "classAbilities": [
+      "Avoid +10 (Lv. 1)",
+      "Vantage (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 65,
       "str": 40,
@@ -293,9 +328,18 @@
       "def": 35,
       "res": 25
     },
-    "promotesTo": ["hero", "bow_knight"],
-    "weapons": ["Swords", "Axes"],
-    "classAbilities": [],
+    "promotesTo": [
+      "hero",
+      "bow_knight"
+    ],
+    "weapons": [
+      "Swords",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Armsthrift (Lv. 1)",
+      "Patience (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 70,
       "str": 45,
@@ -356,8 +400,15 @@
       "res": 30
     },
     "promotesTo": [],
-    "weapons": ["Swords", "Tomes", "Axes"],
-    "classAbilities": ["Ignis", "Aether"],
+    "weapons": [
+      "Swords",
+      "Tomes",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Ignis (Lv. 5)",
+      "Rally Spectrum (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 50,
@@ -418,8 +469,14 @@
       "res": 35
     },
     "promotesTo": [],
-    "weapons": ["Swords", "Lances"],
-    "classAbilities": ["Aegis", "Pavise"],
+    "weapons": [
+      "Swords",
+      "Lances"
+    ],
+    "classAbilities": [
+      "Defender (Lv. 5)",
+      "Aegis (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 90,
       "str": 55,
@@ -480,8 +537,15 @@
       "res": 45
     },
     "promotesTo": [],
-    "weapons": ["Swords", "Lances", "Axes"],
-    "classAbilities": ["Aegis", "Pavise"],
+    "weapons": [
+      "Swords",
+      "Lances",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Luna (Lv. 5)",
+      "Dual Guard+ (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 95,
       "str": 60,
@@ -542,8 +606,13 @@
       "res": 25
     },
     "promotesTo": [],
-    "weapons": ["Swords"],
-    "classAbilities": ["Critical +15", "Astra"],
+    "weapons": [
+      "Swords"
+    ],
+    "classAbilities": [
+      "Astra (Lv. 5)",
+      "Swordfaire (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 55,
@@ -604,8 +673,14 @@
       "res": 35
     },
     "promotesTo": [],
-    "weapons": ["Swords", "Axes"],
-    "classAbilities": ["Sol"],
+    "weapons": [
+      "Swords",
+      "Axes"
+    ],
+    "classAbilities": [
+      "Sol (Lv. 5)",
+      "Axebreaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 90,
       "str": 60,

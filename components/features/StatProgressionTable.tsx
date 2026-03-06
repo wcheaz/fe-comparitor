@@ -781,7 +781,97 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           >
                             {shouldShowDash ? (
                               <span className="text-gray-400">-</span>
-) : (
+                            ) : (
+                              <span>
+                                {statValue !== undefined ? statValue : '-'}
+                                {/* Highlight promotion level */}
+                                {row.isPromotionLevel && (
+                                  <button
+                                    onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                                    className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
+                                    title="View promotion details"
+                                  >
+                                    ✨
+                                  </button>
+                                )}
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))
+                ) : (
+                  // --- UNIT GROUPING BODY ---
+                  units.map((unit, unitIndex) => (
+                    <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
+                      {activeStatKeys.map((statKey, statIndex) => {
+                        const unitStats = row.stats[unitIndex];
+                        const unitCappedStats = row.cappedStats[unitIndex];
+
+                        let rawStatValue = unitStats[statKey];
+                        if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
+                          rawStatValue = unitStats['dex'];
+                        }
+
+                        const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
+
+                        let isCapped = unitCappedStats?.[statKey];
+                        if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
+                          isCapped = unitCappedStats?.['dex'];
+                        }
+
+                        const isUnitSkipped = row.unitSkipped[unitIndex];
+                        const shouldShowDash = isUnitSkipped;
+
+                        let isHighest = false;
+                        let isEqual = false;
+
+                        if (!shouldShowDash && statValue !== undefined) {
+                          const allValidValues = units.map((u, i) => {
+                            const eLv = u.isPromoted ? u.level + 20 : u.level;
+                            if (row.internalLevel < eLv) return null;
+                            let rv = row.stats[i]?.[statKey];
+                            if (statKey === 'skl' && (rv === undefined || rv === null)) {
+                              rv = row.stats[i]?.['dex'];
+                            }
+                            return rv !== undefined && rv !== null ? Number(rv.toFixed(2)) : null;
+                          }).filter(v => v !== null) as number[];
+
+                          if (allValidValues.length > 1) {
+                            isHighest = units.every((otherUnit, otherIndex) => {
+                              if (otherIndex === unitIndex) return true;
+                              const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
+                              if (row.internalLevel < otherEffectiveLv) return true;
+                              let otherRaw = row.stats[otherIndex]?.[statKey];
+                              if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
+                                otherRaw = row.stats[otherIndex]?.['dex'];
+                              }
+                              if (otherRaw === undefined || otherRaw === null) return false;
+                              return statValue > Number(otherRaw.toFixed(2));
+                            });
+
+                            isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
+                          }
+                        }
+
+                        let highlightClass = '';
+                        if (isHighest) {
+                          highlightClass = 'bg-green-500/20';
+                        } else if (isEqual) {
+                          highlightClass = 'bg-yellow-500/20';
+                        }
+
+                        const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
+
+                        return (
+                          <td
+                            key={`${row.internalLevel}-${unit.id}-${statKey}`}
+                            className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
+                          >
+                            {shouldShowDash ? (
+                              <span className="text-gray-400">-</span>
+                            ) : (
                               <span>
                                 {statValue !== undefined ? statValue : '-'}
                                 {/* Highlight promotion level */}
@@ -832,7 +922,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
           </div>
         </div>
       </div>
-      
+
       {/* Promotion Details Modal */}
       <Modal
         isOpen={isPromotionModalOpen}

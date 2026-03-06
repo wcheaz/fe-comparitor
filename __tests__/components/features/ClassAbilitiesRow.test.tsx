@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { ClassAbilitiesRow } from '@/components/features/ClassAbilitiesRow';
 import { Unit } from '@/types/unit';
 
@@ -33,7 +34,7 @@ const mockClasses = [
     id: 'paladin',
     name: 'Paladin',
     game: 'test_game',
-    type: 'promoted',
+    type: 'promoted' as const,
     baseStats: { hp: 30, str: 11, skl: 10, spd: 10, lck: 8, def: 10, res: 5, con: 11, mov: 8 },
     promotionBonus: {},
     promotesTo: [],
@@ -43,7 +44,7 @@ const mockClasses = [
     id: 'mercenary',
     name: 'Mercenary',
     game: 'test_game',
-    type: 'unpromoted',
+    type: 'unpromoted' as const,
     baseStats: { hp: 20, str: 6, skl: 8, spd: 7, lck: 5, def: 5, res: 0, con: 7, mov: 5 },
     promotionBonus: { hp: 8, str: 3, skl: 4, spd: 3, lck: 2, def: 3, res: 2, con: 2, mov: 1 },
     promotesTo: ['hero'],
@@ -93,7 +94,7 @@ describe('ClassAbilitiesRow', () => {
           id: 'berserker',
           name: 'Berserker',
           game: 'test_game',
-          type: 'promoted',
+          type: 'promoted' as const,
           baseStats: { hp: 32, str: 14, skl: 8, spd: 6, lck: 5, def: 8, res: 2, con: 12, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
@@ -192,7 +193,7 @@ describe('ClassAbilitiesRow', () => {
           id: 'assassin',
           name: 'Assassin',
           game: 'test_game',
-          type: 'promoted',
+          type: 'promoted' as const,
           baseStats: { hp: 26, str: 6, skl: 11, spd: 11, lck: 0, def: 4, res: 2, con: 6, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
@@ -223,7 +224,7 @@ describe('ClassAbilitiesRow', () => {
           id: 'lord',
           name: 'Lord',
           game: 'test_game',
-          type: 'unpromoted',
+          type: 'unpromoted' as const,
           baseStats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5, con: 7, mov: 5 },
           promotionBonus: {},
           promotesTo: [],
