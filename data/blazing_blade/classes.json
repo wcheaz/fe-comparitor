@@ -33,7 +33,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "lord_hector",
@@ -69,7 +70,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "lord_lyn",
@@ -105,7 +107,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "cavalier_m",
@@ -144,7 +147,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "cavalier_f",
@@ -183,7 +187,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "knight_m",
@@ -219,7 +224,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 1"
     },
     {
         "id": "knight_f",
@@ -255,7 +261,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 1"
     },
     {
         "id": "thief_m",
@@ -294,7 +301,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "thief_f",
@@ -333,7 +341,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "mercenary_m",
@@ -369,7 +378,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "mercenary_f",
@@ -405,7 +415,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "myrmidon_m",
@@ -441,7 +452,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "myrmidon_f",
@@ -477,7 +489,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "archer_m",
@@ -513,7 +526,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "archer_f",
@@ -549,7 +563,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "nomad_m",
@@ -587,7 +602,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "nomad_f",
@@ -625,7 +641,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "fighter",
@@ -661,7 +678,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "brigand",
@@ -699,7 +717,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "pirate",
@@ -737,7 +756,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "corsair",
@@ -775,7 +795,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "pegasus_knight",
@@ -813,7 +834,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Flying"
+        "movementType": "Flying",
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_rider_m",
@@ -851,7 +873,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_rider_f",
@@ -889,7 +912,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 1"
     },
     {
         "id": "mage_m",
@@ -925,7 +949,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "mage_f",
@@ -961,7 +986,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "monk",
@@ -997,7 +1023,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "cleric",
@@ -1033,7 +1060,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "shaman_m",
@@ -1069,7 +1097,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "shaman_f",
@@ -1105,7 +1134,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "troubadour",
@@ -1143,7 +1173,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "soldier",
@@ -1179,7 +1210,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "dancer",
@@ -1213,7 +1245,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "bard",
@@ -1247,7 +1280,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "knight_lord",
@@ -1293,7 +1327,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "great_lord",
@@ -1337,7 +1372,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "blade_lord",
@@ -1382,7 +1418,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "paladin_m",
@@ -1429,7 +1466,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "paladin_f",
@@ -1476,7 +1514,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "general_m",
@@ -1520,7 +1559,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 2"
     },
     {
         "id": "general_f",
@@ -1565,7 +1605,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 2"
     },
     {
         "id": "hero_m",
@@ -1610,7 +1651,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "sniper_f",
@@ -1653,7 +1695,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "nomadic_trooper_m",
@@ -1699,7 +1742,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "nomadic_trooper_f",
@@ -1745,7 +1789,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "warrior",
@@ -1789,7 +1834,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "berserker",
@@ -1835,7 +1881,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "falcon_knight",
@@ -1881,7 +1928,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Flying"
+        "movementType": "Flying",
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_lord_m",
@@ -1927,7 +1975,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_lord_f",
@@ -1973,7 +2022,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 2"
     },
     {
         "id": "sage_m",
@@ -2017,7 +2067,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "sage_f",
@@ -2061,7 +2112,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "bishop_m",
@@ -2105,7 +2157,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "bishop_f",
@@ -2149,7 +2202,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "druid_m",
@@ -2193,7 +2247,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "druid_f",
@@ -2238,7 +2293,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "valkyrie",
@@ -2284,7 +2340,8 @@
             "lck": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "archsage",
@@ -2321,7 +2378,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "dark_druid",
@@ -2356,7 +2414,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "magic_seal",
@@ -2388,7 +2447,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "bramimond",
@@ -2424,7 +2484,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "fire_dragon",
@@ -2458,7 +2519,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Dragon"
+        "movementType": "Dragon",
+        "tier": "Tier 1"
     },
     {
         "id": "transporter_tent",
@@ -2490,7 +2552,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "transporter_wagon",
@@ -2522,7 +2585,8 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "assassin",
@@ -2569,6 +2633,7 @@
             "lck": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     }
 ]

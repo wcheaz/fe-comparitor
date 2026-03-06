@@ -136,7 +136,7 @@ export function ComparisonGrid({
 
     return (
       <>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pr-8">
           <h2 className="text-2xl font-bold">{affinityData.name} Affinity</h2>
         </div>
 
@@ -195,7 +195,7 @@ export function ComparisonGrid({
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b pb-2">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
           <h2 className="text-2xl font-bold">{movementData.name} Movement</h2>
         </div>
 
@@ -236,7 +236,7 @@ export function ComparisonGrid({
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b pb-2">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
           <h2 className="text-2xl font-bold">{selectedClass.name}</h2>
         </div>
 
@@ -268,7 +268,7 @@ export function ComparisonGrid({
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b pb-2">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
           <h2 className="text-2xl font-bold">{weaponData.name}</h2>
           <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
             {weaponData.type} - {weaponData.rank}
@@ -320,7 +320,7 @@ export function ComparisonGrid({
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b pb-2">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
           <h2 className="text-2xl font-bold">{promoClass.name} Promotion Details</h2>
         </div>
 
@@ -454,7 +454,7 @@ export function ComparisonGrid({
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b pb-2">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
           <h2 className="text-2xl font-bold">Support Bonuses</h2>
         </div>
 
@@ -616,7 +616,7 @@ export function ComparisonGrid({
                       ))}
                     </tr>
                   )}
-                
+
                 {units.some(u => u.affinity) && (
                   <tr className="border-b hover:bg-muted/50">
                     <td className="p-2 font-medium">Affinity</td>

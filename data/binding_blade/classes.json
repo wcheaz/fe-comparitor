@@ -39,7 +39,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Defeat results in Game Over. Can Seize."
+        "description": "Defeat results in Game Over. Can Seize.",
+        "tier": "Tier 1"
     },
     {
         "id": "great_lord",
@@ -90,7 +91,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Defeat results in Game Over. Can Seize."
+        "description": "Defeat results in Game Over. Can Seize.",
+        "tier": "Tier 2"
     },
     {
         "id": "mercenary_m",
@@ -131,7 +133,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "mercenary_f",
@@ -172,7 +175,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "hero_m",
@@ -221,7 +225,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "hero_f",
@@ -270,7 +275,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "myrmidon_m",
@@ -311,7 +317,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "myrmidon_f",
@@ -352,7 +359,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "swordmaster_m",
@@ -403,7 +411,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Has an innate +30% critical hit rate bonus."
+        "description": "Has an innate +30% critical hit rate bonus.",
+        "tier": "Tier 2"
     },
     {
         "id": "swordmaster_f",
@@ -454,7 +463,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "description": "Has an innate +30% critical hit rate bonus."
+        "description": "Has an innate +30% critical hit rate bonus.",
+        "tier": "Tier 2"
     },
     {
         "id": "cavalier_m",
@@ -498,7 +508,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "cavalier_f",
@@ -542,7 +553,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 1"
     },
     {
         "id": "paladin_m",
@@ -593,7 +605,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "paladin_f",
@@ -644,7 +657,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "armor_knight_m",
@@ -685,7 +699,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 1"
     },
     {
         "id": "armor_knight_f",
@@ -726,7 +741,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 1"
     },
     {
         "id": "general_m",
@@ -775,7 +791,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 2"
     },
     {
         "id": "general_f",
@@ -824,7 +841,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Armored"
+        "movementType": "Armored",
+        "tier": "Tier 2"
     },
     {
         "id": "archer_m",
@@ -865,7 +883,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "archer_f",
@@ -906,7 +925,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "sniper_m",
@@ -956,7 +976,8 @@
             "cha": 40
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "sniper_f",
@@ -1006,7 +1027,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "pegasus_knight_f",
@@ -1048,7 +1070,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "falcoknight_f",
@@ -1097,7 +1120,8 @@
             "cha": 40
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "mage_m",
@@ -1139,7 +1163,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 1"
     },
     {
         "id": "mage_f",
@@ -1181,7 +1206,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 1"
     },
     {
         "id": "sage_m",
@@ -1232,7 +1258,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "sage_f",
@@ -1283,7 +1310,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "priest_m",
@@ -1324,7 +1352,8 @@
             "cha": 30
         },
         "gender": "M",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "priest_f",
@@ -1365,7 +1394,8 @@
             "cha": 30
         },
         "gender": "F",
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "bishop_m",
@@ -1418,7 +1448,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "bishop_f",
@@ -1471,7 +1502,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "thief_m",
@@ -1499,7 +1531,8 @@
         ],
         "gender": "M",
         "movementType": "Infantry",
-        "description": "Can pick locks, steal items, and have increased vision in Fog of War."
+        "description": "Can pick locks, steal items, and have increased vision in Fog of War.",
+        "tier": "Tier 1"
     },
     {
         "id": "thief_f",
@@ -1542,7 +1575,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "description": "Can pick locks, steal items, and have increased vision in Fog of War."
+        "description": "Can pick locks, steal items, and have increased vision in Fog of War.",
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_rider_m",
@@ -1583,7 +1617,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_rider_f",
@@ -1624,7 +1659,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_lord_m",
@@ -1673,7 +1709,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_lord_f",
@@ -1722,7 +1759,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Wyvern"
+        "movementType": "Wyvern",
+        "tier": "Tier 2"
     },
     {
         "id": "fighter_m",
@@ -1761,7 +1799,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "warrior_m",
@@ -1808,7 +1847,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "brigand_m",
@@ -1849,7 +1889,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "pirate_m",
@@ -1890,7 +1931,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "berserker_m",
@@ -1939,7 +1981,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "nomad_m",
@@ -1981,7 +2024,8 @@
             "cha": 30
         },
         "movementType": "Cavalry",
-        "description": "Can cross rivers."
+        "description": "Can cross rivers.",
+        "tier": "Tier 1"
     },
     {
         "id": "nomad_f",
@@ -2023,7 +2067,8 @@
             "cha": 30
         },
         "movementType": "Cavalry",
-        "description": "Can cross rivers."
+        "description": "Can cross rivers.",
+        "tier": "Tier 1"
     },
     {
         "id": "nomad_trooper_m",
@@ -2073,7 +2118,8 @@
             "cha": 40
         },
         "movementType": "Cavalry",
-        "description": "Can cross rivers."
+        "description": "Can cross rivers.",
+        "tier": "Tier 2"
     },
     {
         "id": "nomad_trooper_f",
@@ -2123,7 +2169,8 @@
             "cha": 40
         },
         "movementType": "Cavalry",
-        "description": "Can cross rivers."
+        "description": "Can cross rivers.",
+        "tier": "Tier 2"
     },
     {
         "id": "shaman_m",
@@ -2163,7 +2210,8 @@
             "cha": 30
         },
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 1"
     },
     {
         "id": "shaman_f",
@@ -2203,7 +2251,8 @@
             "cha": 30
         },
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 1"
     },
     {
         "id": "druid_m",
@@ -2251,7 +2300,8 @@
             "cha": 40
         },
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "druid_f",
@@ -2299,7 +2349,8 @@
             "cha": 40
         },
         "movementType": "Infantry",
-        "description": "Does not face terrain penalties from sand."
+        "description": "Does not face terrain penalties from sand.",
+        "tier": "Tier 2"
     },
     {
         "id": "troubadour_f",
@@ -2338,7 +2389,8 @@
             "bld": 20,
             "cha": 30
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 1"
     },
     {
         "id": "valkyrie_f",
@@ -2387,7 +2439,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Cavalry"
+        "movementType": "Cavalry",
+        "tier": "Tier 2"
     },
     {
         "id": "dancer_f",
@@ -2424,7 +2477,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "bard_m",
@@ -2461,7 +2515,8 @@
             "bld": 20,
             "cha": 40
         },
-        "movementType": "Infantry"
+        "movementType": "Infantry",
+        "tier": "Tier 2"
     },
     {
         "id": "manakete_f",
@@ -2501,6 +2556,7 @@
             "cha": 40
         },
         "movementType": "Infantry",
-        "description": "Weapons treat enemy defense as 0."
+        "description": "Weapons treat enemy defense as 0.",
+        "tier": "Tier 2"
     }
 ]

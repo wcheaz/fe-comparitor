@@ -66,31 +66,31 @@ const ClassPill: React.FC<ClassPillProps> = ({
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <div className="space-y-4 min-w-[300px] sm:min-w-[400px]">
-                    <div className="flex items-center justify-between border-b pb-2">
+                    <div className="flex items-center justify-between border-b pb-2 pr-8">
                         <h2 className="pill-modal-title">
                             {cls.name}
                         </h2>
                         <h3 className="pill-modal-subtitle">
-                            {cls.type}
+                            {cls.tier || cls.type}
                         </h3>
                     </div>
-                    
+
                     <div className="space-y-2">
-                        
+
                         {cls.weapons && cls.weapons.length > 0 && (
                             <div>
                                 <h3 className="pill-modal-label mb-2">Weapons</h3>
                                 <p className="pill-modal-text">{cls.weapons.join(', ')}</p>
                             </div>
                         )}
-                        
+
                         {cls.movementType && (
                             <div>
                                 <h3 className="pill-modal-label mb-2">Movement Type</h3>
                                 <MovementTypePill movementType={cls.movementType} game={cls.game} />
                             </div>
                         )}
-                        
+
                         {cls.classAbilities && cls.classAbilities.length > 0 && (
                             <div>
                                 <h3 className="pill-modal-label mb-2">Class Abilities</h3>
@@ -105,15 +105,15 @@ const ClassPill: React.FC<ClassPillProps> = ({
                                 </div>
                             </div>
                         )}
-                        
+
                         {cls.description && (
                             <div>
                                 <h3 className="pill-modal-label mb-2">Description</h3>
                                 <p className="pill-modal-text">{cls.description}</p>
                             </div>
                         )}
-                        
-                        
+
+
                     </div>
                 </div>
             </Modal>

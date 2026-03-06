@@ -33,7 +33,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "lord_ephraim",
@@ -69,7 +70,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "recruit",
@@ -107,7 +109,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Trainee"
     },
     {
         "id": "recruit_2",
@@ -154,7 +157,8 @@
             "res": 1,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "recruit_3",
@@ -200,7 +204,8 @@
             "res": 1,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "cavalier_m",
@@ -240,7 +245,8 @@
         },
         "gender": "M",
         "movementType": "Cavalry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "cavalier_f",
@@ -290,7 +296,8 @@
             "res": 2,
             "con": 3,
             "mov": 3
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "knight_m",
@@ -327,7 +334,8 @@
         },
         "gender": "M",
         "movementType": "Armored",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "knight_f",
@@ -374,7 +382,8 @@
             "res": 0,
             "con": 4,
             "mov": 0
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "thief",
@@ -414,7 +423,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "mercenary_m",
@@ -451,7 +461,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "mercenary_f",
@@ -488,7 +499,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "myrmidon_m",
@@ -525,7 +537,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "myrmidon_f",
@@ -562,7 +575,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "archer_m",
@@ -599,7 +613,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "archer_f",
@@ -636,7 +651,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "wyvern_rider",
@@ -675,7 +691,8 @@
         },
         "gender": "M",
         "movementType": "Wyvern",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "pupil",
@@ -713,7 +730,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Trainee"
     },
     {
         "id": "pupil_2",
@@ -760,7 +778,8 @@
             "res": 2,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "pupil_3",
@@ -808,7 +827,8 @@
             "res": 3,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "mage_m",
@@ -855,7 +875,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "mage_f",
@@ -892,7 +913,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "shaman",
@@ -939,7 +961,8 @@
             "res": 2,
             "con": 2,
             "mov": 1
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "priest",
@@ -976,7 +999,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "monk",
@@ -1013,7 +1037,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "cleric",
@@ -1050,7 +1075,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "journeyman",
@@ -1088,7 +1114,8 @@
         },
         "gender": "M",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Trainee"
     },
     {
         "id": "journeyman_2",
@@ -1135,7 +1162,8 @@
             "res": 2,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "journeyman_3",
@@ -1181,7 +1209,8 @@
             "res": 2,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Trainee"
     },
     {
         "id": "fighter",
@@ -1228,7 +1257,8 @@
             "res": 1,
             "con": 3,
             "mov": 1
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "pirate",
@@ -1277,7 +1307,8 @@
             "res": 0,
             "con": 2,
             "mov": 1
-        }
+        },
+        "tier": "Tier 1"
     },
     {
         "id": "pegasus_knight",
@@ -1316,7 +1347,8 @@
         },
         "gender": "F",
         "movementType": "Flying",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "troubadour",
@@ -1355,7 +1387,8 @@
         },
         "gender": "F",
         "movementType": "Cavalry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "great_lord_eirika",
@@ -1402,7 +1435,8 @@
             "res": 5,
             "con": 2,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "great_lord_ephraim",
@@ -1447,7 +1481,8 @@
             "res": 5,
             "con": 2,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "paladin_m",
@@ -1495,7 +1530,8 @@
             "res": 1,
             "con": 2,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "paladin_f",
@@ -1543,7 +1579,8 @@
             "res": 2,
             "con": 3,
             "mov": 3
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "great_knight_m",
@@ -1590,7 +1627,8 @@
             "res": 1,
             "con": 0,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "great_knight_f",
@@ -1637,7 +1675,8 @@
             "res": 2,
             "con": 0,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "general_m",
@@ -1685,7 +1724,8 @@
             "res": 3,
             "con": 2,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "general_f",
@@ -1733,7 +1773,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "assassin",
@@ -1781,7 +1822,8 @@
             "res": 1,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "rogue",
@@ -1828,7 +1870,8 @@
             "res": 2,
             "con": 1,
             "mov": 0
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "hero_m",
@@ -1873,7 +1916,8 @@
             "res": 2,
             "con": 3,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "hero_f",
@@ -1918,7 +1962,8 @@
             "res": 2,
             "con": 3,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "swordmaster_m",
@@ -1964,7 +2009,8 @@
             "res": 1,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "swordmaster_f",
@@ -2010,7 +2056,8 @@
             "res": 1,
             "con": 2,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "sniper_m",
@@ -2056,7 +2103,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "sniper_f",
@@ -2102,7 +2150,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "ranger_m",
@@ -2149,7 +2198,8 @@
             "res": 3,
             "con": 2,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "ranger_f",
@@ -2196,7 +2246,8 @@
             "res": 3,
             "con": 2,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_lord",
@@ -2243,7 +2294,8 @@
             "res": 0,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "sage_m",
@@ -2292,7 +2344,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "sage_f",
@@ -2341,7 +2394,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "mage_knight_m",
@@ -2388,7 +2442,8 @@
             "res": 2,
             "con": 2,
             "mov": 2
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "mage_knight_f",
@@ -2435,7 +2490,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "druid",
@@ -2481,7 +2537,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "summoner",
@@ -2528,7 +2585,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "bishop_m",
@@ -2575,7 +2633,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "bishop_f",
@@ -2622,7 +2681,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "valkyrie",
@@ -2669,7 +2729,8 @@
             "res": 3,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "warrior",
@@ -2714,7 +2775,8 @@
             "res": 3,
             "con": 3,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "berserker",
@@ -2761,7 +2823,8 @@
             "res": 2,
             "con": 3,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "falcoknight",
@@ -2808,7 +2871,8 @@
             "res": 2,
             "con": 1,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_knight_m",
@@ -2855,7 +2919,8 @@
             "res": 1,
             "con": 0,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "wyvern_knight_f",
@@ -2902,7 +2967,8 @@
             "res": 1,
             "con": 4,
             "mov": 1
-        }
+        },
+        "tier": "Tier 2"
     },
     {
         "id": "dancer",
@@ -2936,7 +3002,8 @@
         },
         "gender": "F",
         "movementType": "Infantry",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "manakete_m",
@@ -2968,7 +3035,8 @@
         },
         "gender": "M",
         "movementType": "Dragon",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     },
     {
         "id": "manakete_f",
@@ -3000,6 +3068,7 @@
         },
         "gender": "F",
         "movementType": "Dragon",
-        "promotionBonus": {}
+        "promotionBonus": {},
+        "tier": "Tier 1"
     }
 ]

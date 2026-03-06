@@ -99,7 +99,7 @@ const AffinityPill: React.FC<AffinityPillProps> = ({
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                     <div className="space-y-3">
-                        <div className="flex items-center justify-between border-b pb-2">
+                        <div className="flex items-center justify-between border-b pb-2 pr-8">
                             <h3 className="pill-modal-title">
                                 {affinityData!.name} Affinity
                             </h3>
@@ -107,14 +107,14 @@ const AffinityPill: React.FC<AffinityPillProps> = ({
                         <p className="pill-modal-text">
                             {affinityData!.description}
                         </p>
-                        
+
                         {game && (
                             <div className="space-y-3">
                                 <h4 className="pill-modal-label">Support Bonuses</h4>
                                 <p className="pill-modal-text">
                                     These bonuses are added per support level when fighting near the supported partner.
                                 </p>
-                                
+
                                 {(['C', 'B', 'A'] as const).map(level => {
                                     const bonuses = calculateSupportBonuses(affinityData!, game, level);
                                     if (bonuses.length === 0) return null;

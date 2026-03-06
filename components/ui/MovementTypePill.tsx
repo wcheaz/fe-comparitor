@@ -93,16 +93,16 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
 
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between border-b pb-2">
-                            <h3 className="pill-modal-title">
+                    <div className="space-y-4 min-w-[250px] sm:min-w-[300px]">
+                        <div className="flex items-center justify-between border-b pb-2 pr-8">
+                            <h2 className="pill-modal-title">
                                 {movementData!.name} Movement
-                            </h3>
+                            </h2>
                         </div>
                         <p className="pill-modal-text">
                             {movementData!.description}
                         </p>
-                        
+
                         {movementData!.abilities && (
                             <div>
                                 <h4 className="pill-modal-label">Abilities</h4>
@@ -111,7 +111,7 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
                                 </p>
                             </div>
                         )}
-                        
+
                         {movementData!.weaknesses && (
                             <div>
                                 <h4 className="pill-modal-label">Terrain Interactions</h4>
@@ -120,7 +120,7 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
                                 </p>
                             </div>
                         )}
-                        
+
                         {game && movementData!.gameSpecificDetails?.[game] && (
                             <div className="mt-3 pt-3 border-t border-fe-blue-200">
                                 <h4 className="pill-modal-label">Game Specific Details</h4>

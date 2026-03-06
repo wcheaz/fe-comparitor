@@ -84,11 +84,11 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
 
             {isClickable && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between border-b pb-2">
-                            <h3 className="pill-modal-title">
+                    <div className="space-y-4 min-w-[250px] sm:min-w-[300px]">
+                        <div className="flex items-center justify-between border-b pb-2 pr-8">
+                            <h2 className="pill-modal-title">
                                 {abilityData!.name}
-                            </h3>
+                            </h2>
                             <h4 className="pill-modal-subtitle">
                                 {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Ability"}
                             </h4>

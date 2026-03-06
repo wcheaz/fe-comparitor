@@ -63,7 +63,8 @@ export interface Class {
   id: string;
   name: string;
   game: string;
-  type: 'unpromoted' | 'promoted';
+  type: 'unpromoted' | 'promoted' | 'trainee';
+  tier?: string;
   baseStats: UnitStats;
   promotionBonus: UnitStats;
   promotesTo: string[];

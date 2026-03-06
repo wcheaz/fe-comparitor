@@ -206,6 +206,7 @@ function transformJsonToClass(rawClass: any, game: string): Class {
     name: rawClass.name,
     game: rawClass.game || game,
     type: rawClass.type || 'unpromoted',
+    tier: rawClass.tier,
     baseStats,
     promotionBonus,
     promotesTo: rawClass.promotesTo || [],
