@@ -1,6 +1,10 @@
 ## Current Task
-- - [ ] 1.1 Create `components/ui/AffinityPill.tsx` to display affinity icon and name.
+- - [ ] 1.2 Format `components/ui/AffinityPill.tsx`:
 ## Completed Tasks for Git Commit
+- [x] 1.1 Create `components/ui/AffinityPill.tsx` to display affinity icon and name.
+- [x] 1.3 Create `components/ui/MovementTypePill.tsx` to display movement type icon and name.
+- [x] 2.1 Refactor `components/ui/SupportPill.tsx`, `components/ui/ClassPill.tsx`, and `components/ui/AbilityPill.tsx` to use their new `.pill-variant-*` global CSS classes in their `cva` definitions.
+- [x] 2.2 Re-verify all modal pop-ups in those 3 components to use `.pill-modal-title`, `.pill-modal-subtitle`, `.pill-modal-text`, and `.pill-modal-label` with the newer, larger text sizes defined in `app/globals.css`.
 - [x] 3.1 Update `components/ui/ClassPill.tsx` to embed `MovementTypePill` instead of rendering movement type directly.
 - [x] 3.2 Re-verify `ClassPill.tsx` styles and layout to accommodate the embedded `MovementTypePill`.
 - [x] 4.1 Update `components/features/ComparisonGrid.tsx` to replace the Class column modal trigger with `ClassPill`.
