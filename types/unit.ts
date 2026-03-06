@@ -57,6 +57,8 @@ export interface Unit {
   crests?: string[]; // Crests for Three Houses units
   dragonVein?: boolean; // Can use Dragon Veins (Fates)
   prf?: string[]; // Preferred/Unique weapons only this unit can use
+  innateWeaknesses?: string[]; // Awakening-specific innate weaknesses
+  startingSkills?: string[]; // Awakening-specific starting skills
 }
 
 export interface Class {
@@ -74,6 +76,8 @@ export interface Class {
   maxStats?: UnitStats;
   movementType?: string;
   description?: string;
+  growths?: UnitStats; // Awakening-specific class growths
+  statModifiers?: UnitStats; // Awakening-specific class stat modifiers
 }
 
 export interface GameData {

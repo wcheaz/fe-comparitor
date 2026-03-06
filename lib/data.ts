@@ -12,12 +12,13 @@ export async function getAllUnits(): Promise<Unit[]> {
 
   try {
     // Import all JSON data files
-    const [bindingBladeUnits, threeHousesUnits, engageUnits, blazingBladeUnits, sacredStonesUnits] = await Promise.all([
+    const [bindingBladeUnits, threeHousesUnits, engageUnits, blazingBladeUnits, sacredStonesUnits, awakeningUnits] = await Promise.all([
       import('@/data/binding_blade/units.json').then(m => m.default),
       import('@/data/three_houses/units.json').then(m => m.default),
       import('@/data/engage/units.json').then(m => m.default),
       import('@/data/blazing_blade/units.json').then(m => m.default).catch(() => []),
-      import('@/data/sacred_stones/units.json').then(m => m.default).catch(() => [])
+      import('@/data/sacred_stones/units.json').then(m => m.default).catch(() => []),
+      import('@/data/awakening/units.json').then(m => m.default).catch(() => [])
     ]);
 
     // Transform and merge all units
@@ -26,7 +27,8 @@ export async function getAllUnits(): Promise<Unit[]> {
       ...threeHousesUnits.map(transformJsonToUnit),
       ...engageUnits.map(transformJsonToUnit),
       ...blazingBladeUnits.map(transformJsonToUnit),
-      ...sacredStonesUnits.map(transformJsonToUnit)
+      ...sacredStonesUnits.map(transformJsonToUnit),
+      ...awakeningUnits.map(transformJsonToUnit)
     ];
 
     unitsCache = allUnits;
@@ -64,12 +66,13 @@ export async function getAllClasses(): Promise<Class[]> {
 
   try {
     // Import all class JSON data files
-    const [bindingBladeClasses, threeHousesClasses, engageClasses, blazingBladeClasses, sacredStonesClasses] = await Promise.all([
+    const [bindingBladeClasses, threeHousesClasses, engageClasses, blazingBladeClasses, sacredStonesClasses, awakeningClasses] = await Promise.all([
       import('@/data/binding_blade/classes.json').then(m => m.default),
       import('@/data/three_houses/classes.json').then(m => m.default),
       import('@/data/engage/classes.json').then(m => m.default),
       import('@/data/blazing_blade/classes.json').then(m => m.default).catch(() => []),
-      import('@/data/sacred_stones/classes.json').then(m => m.default).catch(() => [])
+      import('@/data/sacred_stones/classes.json').then(m => m.default).catch(() => []),
+      import('@/data/awakening/classes.json').then(m => m.default).catch(() => [])
     ]);
 
     // Transform and merge all classes
@@ -78,7 +81,8 @@ export async function getAllClasses(): Promise<Class[]> {
       ...threeHousesClasses.map((c: any) => transformJsonToClass(c, 'Three Houses')),
       ...engageClasses.map((c: any) => transformJsonToClass(c, 'Engage')),
       ...blazingBladeClasses.map((c: any) => transformJsonToClass(c, 'The Blazing Blade')),
-      ...sacredStonesClasses.map((c: any) => transformJsonToClass(c, 'The Sacred Stones'))
+      ...sacredStonesClasses.map((c: any) => transformJsonToClass(c, 'The Sacred Stones')),
+      ...awakeningClasses.map((c: any) => transformJsonToClass(c, 'Awakening'))
     ];
 
     classesCache = allClasses;
@@ -169,7 +173,9 @@ function transformJsonToUnit(rawUnit: any): Unit {
     baseWeaponRanks: rawUnit.baseWeaponRanks || {},
     crests: rawUnit.crests || [],
     dragonVein: rawUnit.dragonVein || false,
-    prf: rawUnit.prf || []
+    prf: rawUnit.prf || [],
+    innateWeaknesses: rawUnit.innateWeaknesses || [],
+    startingSkills: rawUnit.startingSkills || []
   };
 
   // Apply normalization to standardize stat keys and handle missing stats
@@ -181,6 +187,8 @@ function transformJsonToClass(rawClass: any, game: string): Class {
   // Transform class stats to UnitStats objects
   const baseStats: UnitStats = {};
   const promotionBonus: UnitStats = {};
+  const growths: UnitStats = {};
+  const statModifiers: UnitStats = {};
 
   // Extract base stats
   if (rawClass.baseStats) {
@@ -200,6 +208,24 @@ function transformJsonToClass(rawClass: any, game: string): Class {
     });
   }
 
+  // Extract growths (for Awakening)
+  if (rawClass.growths) {
+    Object.keys(rawClass.growths).forEach(key => {
+      if (rawClass.growths[key] !== undefined) {
+        growths[key] = rawClass.growths[key];
+      }
+    });
+  }
+
+  // Extract stat modifiers (for Awakening)
+  if (rawClass.statModifiers) {
+    Object.keys(rawClass.statModifiers).forEach(key => {
+      if (rawClass.statModifiers[key] !== undefined) {
+        statModifiers[key] = rawClass.statModifiers[key];
+      }
+    });
+  }
+
   // Create class object
   const cls: Class = {
     id: rawClass.id,
@@ -215,7 +241,9 @@ function transformJsonToClass(rawClass: any, game: string): Class {
     gender: rawClass.gender,
     maxStats: rawClass.maxStats,
     movementType: rawClass.movementType,
-    description: rawClass.description
+    description: rawClass.description,
+    growths: Object.keys(growths).length > 0 ? growths : undefined,
+    statModifiers: Object.keys(statModifiers).length > 0 ? statModifiers : undefined
   };
 
   return cls;

@@ -1,1 +1,1 @@
-/home/ncheaz/git/fe-comparator/openspec/changes/comparison-grid-pills/tasks.md
+/home/ncheaz/git/fe-comparator/openspec/changes/import-fe-awakening/tasks.md

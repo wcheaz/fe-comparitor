@@ -4,6 +4,9 @@ import React, { useState, useMemo } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
 import { generateProgressionArray } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
+import AbilityPill from '@/components/ui/AbilityPill';
+import { Modal } from '@/components/ui/modal';
+import { Info } from 'lucide-react';
 
 /**
  * Helper function to detect if a class has branching promotion options
@@ -86,6 +89,12 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
   const [hasInitializedStats, setHasInitializedStats] = useState(false);
+  const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false);
+  const [selectedPromotionInfo, setSelectedPromotionInfo] = useState<{
+    className: string;
+    classAbilities: string[];
+    gameId: string;
+  } | null>(null);
 
   // Load classes data
   React.useEffect(() => {
@@ -254,6 +263,66 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
   };
 
   const activeStatKeys = getVisibleStatKeys();
+
+  // Handle promotion info click
+  const handlePromotionInfoClick = (promotionInfo: { className: string; classAbilities: string[] }, gameId: string) => {
+    setSelectedPromotionInfo({
+      ...promotionInfo,
+      gameId
+    });
+    setIsPromotionModalOpen(true);
+  };
+
+  // Render promotion details modal
+  const renderPromotionDetailsModal = () => {
+    if (!selectedPromotionInfo) return null;
+
+    const { className, classAbilities, gameId } = selectedPromotionInfo;
+    const classData = classes.find(c => c.name === className && c.game === gameId);
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between border-b pb-2 pr-8">
+          <h2 className="text-2xl font-bold">{className} Promotion Details</h2>
+        </div>
+
+        {classData && classData.classAbilities && classData.classAbilities.length > 0 && (
+          <div className="pt-2">
+            <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
+            <div className="flex flex-wrap gap-2">
+              {classData.classAbilities.map((ability, index) => (
+                <AbilityPill
+                  key={index}
+                  ability={ability}
+                  game={gameId}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {classData && classData.weapons && classData.weapons.length > 0 && (
+          <div className="pt-2">
+            <h3 className="text-lg font-semibold mb-1">Weapons</h3>
+            <div className="flex flex-wrap gap-2">
+              {classData.weapons.map(weapon => (
+                <span key={weapon} className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                  {weapon}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {classData && classData.description && (
+          <div className="pt-4 border-t">
+            <h3 className="text-lg font-semibold mb-1">Description & Special Qualities</h3>
+            <p className="text-muted-foreground">{classData.description}</p>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="w-full min-w-0 overflow-hidden">
@@ -712,96 +781,18 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
                           >
                             {shouldShowDash ? (
                               <span className="text-gray-400">-</span>
-                            ) : (
+) : (
                               <span>
                                 {statValue !== undefined ? statValue : '-'}
                                 {/* Highlight promotion level */}
                                 {row.isPromotionLevel && (
-                                  <span className="ml-1 text-xs text-blue-600">✨</span>
-                                )}
-                              </span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </React.Fragment>
-                  ))
-                ) : (
-                  // --- UNIT GROUPING BODY ---
-                  units.map((unit, unitIndex) => (
-                    <React.Fragment key={`${row.internalLevel}-${unit.id}`}>
-                      {activeStatKeys.map((statKey, statIndex) => {
-                        const unitStats = row.stats[unitIndex];
-                        const unitCappedStats = row.cappedStats[unitIndex];
-
-                        let rawStatValue = unitStats[statKey];
-                        if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
-                          rawStatValue = unitStats['dex'];
-                        }
-
-                        const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
-
-                        let isCapped = unitCappedStats?.[statKey];
-                        if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
-                          isCapped = unitCappedStats?.['dex'];
-                        }
-
-                        const isUnitSkipped = row.unitSkipped[unitIndex];
-                        const shouldShowDash = isUnitSkipped || row.internalLevel < unit.level;
-
-                        let isHighest = false;
-                        let isEqual = false;
-
-                        if (!shouldShowDash && statValue !== undefined) {
-                          const allValidValues = units.map((u, i) => {
-                            const eLv = u.isPromoted ? u.level + 20 : u.level;
-                            if (row.internalLevel < eLv) return null;
-                            let rv = row.stats[i]?.[statKey];
-                            if (statKey === 'skl' && (rv === undefined || rv === null)) {
-                              rv = row.stats[i]?.['dex'];
-                            }
-                            return rv !== undefined && rv !== null ? Number(rv.toFixed(2)) : null;
-                          }).filter(v => v !== null) as number[];
-
-                          if (allValidValues.length > 1) {
-                            isHighest = units.every((otherUnit, otherIndex) => {
-                              if (otherIndex === unitIndex) return true;
-                              const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
-                              if (row.internalLevel < otherEffectiveLv) return true;
-                              let otherRaw = row.stats[otherIndex]?.[statKey];
-                              if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
-                                otherRaw = row.stats[otherIndex]?.['dex'];
-                              }
-                              if (otherRaw === undefined || otherRaw === null) return false;
-                              return statValue > Number(otherRaw.toFixed(2));
-                            });
-
-                            isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
-                          }
-                        }
-
-                        let highlightClass = '';
-                        if (isHighest) {
-                          highlightClass = 'bg-green-500/20';
-                        } else if (isEqual) {
-                          highlightClass = 'bg-yellow-500/20';
-                        }
-
-                        const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
-
-                        return (
-                          <td
-                            key={`${row.internalLevel}-${unit.id}-${statKey}`}
-                            className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${statIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
-                          >
-                            {shouldShowDash ? (
-                              <span className="text-gray-400">-</span>
-                            ) : (
-                              <span>
-                                {statValue !== undefined ? statValue : '-'}
-                                {/* Highlight promotion level */}
-                                {row.isPromotionLevel && (
-                                  <span className="ml-1 text-xs text-blue-600">✨</span>
+                                  <button
+                                    onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                                    className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
+                                    title="View promotion details"
+                                  >
+                                    ✨
+                                  </button>
                                 )}
                               </span>
                             )}
@@ -841,6 +832,16 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
           </div>
         </div>
       </div>
+      
+      {/* Promotion Details Modal */}
+      <Modal
+        isOpen={isPromotionModalOpen}
+        onClose={() => setIsPromotionModalOpen(false)}
+      >
+        <div className="space-y-4">
+          {renderPromotionDetailsModal()}
+        </div>
+      </Modal>
     </div>
   );
 }

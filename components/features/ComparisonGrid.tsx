@@ -592,6 +592,36 @@ export function ComparisonGrid({
                   })}
                 </tr>
                 <tr className="border-b hover:bg-muted/50">
+                  <td className="p-2 font-medium">Weaknesses</td>
+                  {units.map((unit) => {
+                    const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
+                    const movType = cls?.movementType || 'Infantry';
+                    const movementData = getMovementByName(movType);
+                    
+                    // Combine innate weaknesses with movement weaknesses and deduplicate
+                    const innateWeaknesses = unit.innateWeaknesses || [];
+                    const movementWeaknesses = movementData?.weaknesses ? [movementData.weaknesses] : [];
+                    const allWeaknesses = [...innateWeaknesses, ...movementWeaknesses];
+                    const uniqueWeaknesses = [...new Set(allWeaknesses)];
+                    
+                    return (
+                      <td key={`weaknesses-${unit.id}`} className="text-center p-2">
+                        {uniqueWeaknesses.length > 0 ? (
+                          <div className="flex flex-wrap gap-1 justify-center">
+                            {uniqueWeaknesses.map((weakness, index) => (
+                              <span key={index} className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-medium">
+                                {weakness}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">None</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+                <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Level</td>
                   {units.map((unit) => (
                     <td key={`level-${unit.id}`} className="text-center p-2">
@@ -672,6 +702,28 @@ export function ComparisonGrid({
                           </div>
                         ) : (
                           <span className="text-muted-foreground">-</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                )}
+                {units.some(u => u.startingSkills && u.startingSkills.length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Starting Skills</td>
+                    {units.map((unit) => (
+                      <td key={`starting-skills-${unit.id}`} className="text-center p-2 align-top">
+                        {unit.startingSkills && unit.startingSkills.length > 0 ? (
+                          <div className="flex flex-wrap gap-2 justify-center">
+                            {unit.startingSkills.map((skill, index) => (
+                              <AbilityPill
+                                key={index}
+                                ability={skill}
+                                game={unit.game}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground">None</span>
                         )}
                       </td>
                     ))}

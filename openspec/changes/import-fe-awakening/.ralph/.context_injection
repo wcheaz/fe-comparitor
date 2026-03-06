@@ -1,0 +1,2 @@
+## Current Task
+- - [ ] 1.1 Update `types/unit.ts` `Unit` interface to include `innateWeaknesses?: string[]` and `startingSkills?: string[]`.

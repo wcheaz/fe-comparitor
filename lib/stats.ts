@@ -328,6 +328,16 @@ export function generateProgressionArray(
     let isSkipped = false;
     let currentClass = baseClass;
     let baseStatForCalc: UnitStats = unit.stats;
+    
+    // For Awakening units, combine unit stats with class stat modifiers
+    if (unit.game === "Awakening" && currentClass?.statModifiers) {
+      baseStatForCalc = { ...unit.stats };
+      Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
+        if (modifier !== undefined) {
+          baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
+        }
+      });
+    }
     let levelDiff = 0;
     let promotionInfo = undefined;
 
@@ -404,6 +414,16 @@ export function generateProgressionArray(
         } else {
           currentClass = baseClass;
           baseStatForCalc = unit.stats;
+          
+          // For Awakening units, combine unit stats with class stat modifiers
+          if (unit.game === "Awakening" && currentClass?.statModifiers) {
+            baseStatForCalc = { ...unit.stats };
+            Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
+              if (modifier !== undefined) {
+                baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
+              }
+            });
+          }
 
           const targetPromoLevel = promoLevels[0] || 20;
           if (displayLevelNum < unit.level || displayLevelNum > targetPromoLevel) {
@@ -488,6 +508,16 @@ export function generateProgressionArray(
         // Pre-promoted unit starts in Tier 2
         currentClass = baseClass;
         baseStatForCalc = unit.stats;
+        
+        // For Awakening units, combine unit stats with class stat modifiers
+        if (unit.game === "Awakening" && currentClass?.statModifiers) {
+          baseStatForCalc = { ...unit.stats };
+          Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
+            if (modifier !== undefined) {
+              baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
+            }
+          });
+        }
         if (displayLevelNum < unit.level) {
           isSkipped = true;
         }
@@ -552,7 +582,13 @@ export function generateProgressionArray(
     if (!isSkipped) {
       const allStatsForLevel = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
       allStatsForLevel.forEach(statKey => {
-        const growthRate = unit.growths[statKey] || 0;
+        let growthRate = unit.growths[statKey] || 0;
+        
+        // For Awakening units, combine unit growths with class growths
+        if (unit.game === "Awakening" && currentClass?.growths) {
+          const classGrowth = currentClass.growths[statKey] || 0;
+          growthRate += classGrowth;
+        }
         const baseStatValue = baseStatForCalc[statKey] || 0;
         const growthAmount = (growthRate * levelDiff) / 100;
         let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
