@@ -10,13 +10,12 @@ export const movementTypes: Record<string, MovementData> = {
     'Infantry': {
         name: 'Infantry',
         description: 'Standard foot soldiers.',
-        weaknesses: 'Standard terrain penalties (e.g., 2 movement cost for forests, 3 cost for sand/deserts). Cannot cross peaks or deep water.',
         gameSpecificDetails: {}
     },
     'Armored': {
         name: 'Armored',
         description: 'Heavily armored foot soldiers.',
-        weaknesses: 'Weak to armor-slaying/heavy weapons. Severe movement penalties on rough terrain (e.g., 3 movement cost for forests).',
+        weaknesses: 'Weak to armor-slaying/heavy weapons.',
         gameSpecificDetails: {
             'Engage': '(Engage) Immune to being broken in combat.',
         }
@@ -25,7 +24,7 @@ export const movementTypes: Record<string, MovementData> = {
         name: 'Cavalry',
         description: 'Mounted units on horseback.',
         abilities: 'High movement range on flat terrain.',
-        weaknesses: 'Weak to horse-slaying/cavalry weapons. High movement penalties on rough terrain (e.g., 3 movement cost for forests). Cannot cross mountains.',
+        weaknesses: 'Weak to horse-slaying/cavalry weapons.',
         gameSpecificDetails: {
             'The Binding Blade': '(Binding Blade) Canto: May use remaining movement after using a staff, item, trading, rescuing, dropping, talking, or visiting. Cannot move after attacking.',
             'Three Houses': '(Three Houses) Canto: May use remaining movement after any action, including attacking.',

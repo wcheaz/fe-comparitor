@@ -4,7 +4,7 @@
     "name": "Chrom",
     "game": "Awakening",
     "class": "lord",
-    "joinChapter": "Premonition",
+    "joinChapter": "Premonition / Prologue",
     "level": 1,
     "stats": {
       "hp": 20,
@@ -40,94 +40,6 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
-    "supports": []
-  },
-  {
-    "id": "robin_m",
-    "name": "Robin",
-    "game": "Awakening",
-    "class": "tactician",
-    "joinChapter": "Premonition",
-    "level": 1,
-    "stats": {
-      "hp": 19,
-      "str": 6,
-      "mag": 5,
-      "skl": 5,
-      "spd": 6,
-      "lck": 4,
-      "def": 6,
-      "res": 4
-    },
-    "growths": {
-      "hp": 40,
-      "str": 40,
-      "mag": 35,
-      "skl": 35,
-      "spd": 35,
-      "lck": 55,
-      "def": 30,
-      "res": 20
-    },
-    "statModifiers": {
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "startingSkills": [
-      "Veteran"
-    ],
-    "innateWeaknesses": [],
-    "gender": "M",
-    "baseWeaponRanks": {},
-    "supports": []
-  },
-  {
-    "id": "robin_f",
-    "name": "Robin",
-    "game": "Awakening",
-    "class": "tactician",
-    "joinChapter": "Premonition",
-    "level": 1,
-    "stats": {
-      "hp": 19,
-      "str": 6,
-      "mag": 5,
-      "skl": 5,
-      "spd": 6,
-      "lck": 4,
-      "def": 6,
-      "res": 4
-    },
-    "growths": {
-      "hp": 40,
-      "str": 40,
-      "mag": 35,
-      "skl": 35,
-      "spd": 35,
-      "lck": 55,
-      "def": 30,
-      "res": 20
-    },
-    "statModifiers": {
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "startingSkills": [
-      "Veteran"
-    ],
-    "innateWeaknesses": [],
-    "gender": "F",
     "baseWeaponRanks": {},
     "supports": []
   },
@@ -573,50 +485,6 @@
     },
     "startingSkills": [
       "Aptitude"
-    ],
-    "innateWeaknesses": [],
-    "gender": "M",
-    "baseWeaponRanks": {},
-    "supports": []
-  },
-  {
-    "id": "lonqu",
-    "name": "Lonqu",
-    "game": "Awakening",
-    "class": "myrmidon",
-    "joinChapter": "4",
-    "level": 4,
-    "stats": {
-      "hp": 20,
-      "str": 6,
-      "mag": 1,
-      "skl": 12,
-      "spd": 13,
-      "lck": 7,
-      "def": 7,
-      "res": 2
-    },
-    "growths": {
-      "hp": 40,
-      "str": 35,
-      "mag": 20,
-      "skl": 50,
-      "spd": 50,
-      "lck": 55,
-      "def": 25,
-      "res": 20
-    },
-    "statModifiers": {
-      "str": 0,
-      "mag": 0,
-      "skl": 3,
-      "spd": 3,
-      "lck": 0,
-      "def": -2,
-      "res": -2
-    },
-    "startingSkills": [
-      "Avoid +10"
     ],
     "innateWeaknesses": [],
     "gender": "M",
@@ -1202,51 +1070,6 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
-    "supports": []
-  },
-  {
-    "id": "sayri",
-    "name": "Sayri",
-    "game": "Awakening",
-    "class": "swordmaster",
-    "joinChapter": "15",
-    "level": 1,
-    "stats": {
-      "hp": 39,
-      "str": 17,
-      "mag": 7,
-      "skl": 23,
-      "spd": 26,
-      "lck": 20,
-      "def": 12,
-      "res": 10
-    },
-    "growths": {
-      "hp": 50,
-      "str": 35,
-      "mag": 20,
-      "skl": 40,
-      "spd": 40,
-      "lck": 45,
-      "def": 35,
-      "res": 30
-    },
-    "statModifiers": {
-      "str": 1,
-      "mag": -1,
-      "skl": 1,
-      "spd": 1,
-      "lck": -1,
-      "def": 0,
-      "res": 1
-    },
-    "startingSkills": [
-      "Avoid +10",
-      "Vantage"
-    ],
-    "innateWeaknesses": [],
-    "gender": "F",
     "baseWeaponRanks": {},
     "supports": []
   },
