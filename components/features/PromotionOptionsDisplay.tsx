@@ -103,7 +103,13 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
     const getReclassInvalidReason = (targetUnit: Unit, targetClass: Class): string => {
       const validOptions = getValidReclassOptions(targetUnit, classes);
       if (!validOptions.includes(targetClass.id) && !validOptions.includes(targetClass.name)) {
-        if (targetUnit.level < 10) {
+        if (targetUnit.class.toLowerCase().replace(/\s+/g, '_') === targetClass.id.toLowerCase().replace(/\s+/g, '_')) {
+          const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
+          const requiredLevel = specialClasses.includes(targetClass.id.toLowerCase().replace(/\s+/g, '_')) ? 30 : 20;
+          if (targetUnit.level < requiredLevel) {
+            return `Must be Level ${requiredLevel} to reset current class`;
+          }
+        } else if (targetUnit.level < 10) {
           return "Must be at least Level 10";
         }
         return "Not a valid reclass target";

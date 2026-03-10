@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
-import { StatProgressionTable } from './StatProgressionTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import AbilityPill from '@/components/ui/AbilityPill';
 import SupportPill from '@/components/ui/SupportPill';
@@ -907,25 +906,6 @@ export function ComparisonGrid({
         </div>
       )}
 
-      {/* Stat Progression Table */}
-      {(showStats || showGrowths) && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Stat Progression</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <StatProgressionTable
-              units={units}
-              promotionEvents={promotionEvents || {}}
-              reclassEvents={reclassEvents || {}}
-              onPromotionEventsChange={onPromotionEventsChange || (() => {})}
-              onReclassEventsChange={onReclassEventsChange || (() => {})}
-              onAddPromotionEvent={undefined}
-              onRemovePromotionEvent={undefined}
-            />
-          </CardContent>
-        </Card>
-      )}
 
       {/* Affinity Details Modal */}
       <Modal

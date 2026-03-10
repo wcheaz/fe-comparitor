@@ -26,3 +26,6 @@ A web application built to allow users to compare different units from the "Fire
 
 ## Future Features
 - Additional features to be determined.
+
+## Implementation Workflow
+- After every major feature implementation, the details of the implementation must be put in `hidden/PROJECT_SUMMARY.md`.

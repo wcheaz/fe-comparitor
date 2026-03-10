@@ -224,8 +224,15 @@ export function isValidReclass(
   const currentTier = getClassTier(currentClassId, classes);
   const targetTier = getClassTier(targetClassId, classes);
   
-  // Can't reclass to the same class
+  // Can reclass to the same class at max level (20 normally, 30 for special classes)
   if (currentClassId.toLowerCase().replace(/\s+/g, '_') === targetClassId.toLowerCase().replace(/\s+/g, '_')) {
+    const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
+    const normalizedId = currentClassId.toLowerCase().replace(/\s+/g, '_');
+    const requiredLevel = specialClasses.includes(normalizedId) ? 30 : 20;
+    
+    if (currentLevel >= requiredLevel) {
+      return true;
+    }
     return false;
   }
   
