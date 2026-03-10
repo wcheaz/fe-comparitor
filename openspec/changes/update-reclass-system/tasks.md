@@ -17,4 +17,4 @@
 
 ## 4. Integration
 - [x] 4.1 Update the `ComparisonGrid` state management to handle both promotion and reclass histories effectively.
-- [ ] 4.2 Verify units from GBA games are not impacted by the new reclass paths.
+- [x] 4.2 Verify units from GBA games are not impacted by the new reclass paths.
