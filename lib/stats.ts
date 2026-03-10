@@ -499,6 +499,7 @@ export function generateProgressionArray(
     // Initialize reclass tracking variables
     let isReclassLevel = false;
     let reclassInfo = undefined;
+    let hasReclassedAtThisLevel = false;
     
     // Handle reclass event
     if (reclassEventAtThisLevel && !isSkipped) {
@@ -509,6 +510,34 @@ export function generateProgressionArray(
       );
       
       if (targetClass) {
+        // Calculate accumulated stats up to the reclass level
+        const accumulatedStats: UnitStats = {};
+        const reclassLevelDiff = internalLevel - unit.level;
+        
+        // Get all stat keys from the unit's stats and growths
+        const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
+        
+        allStatKeys.forEach(statKey => {
+          let growthRate = unit.growths[statKey] || 0;
+          
+          // For Awakening units, combine unit growths with class growths
+          if (unit.game === "Awakening" && currentClass?.growths) {
+            const classGrowth = currentClass.growths[statKey] || 0;
+            growthRate += classGrowth;
+          }
+          
+          const baseStatValue = baseStatForCalc[statKey] || 0;
+          const growthAmount = (growthRate * reclassLevelDiff) / 100;
+          let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
+          
+          // Apply current class caps before reclassing
+          const currentCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+          finalStat = Math.min(finalStat, currentCap);
+          finalStat = Math.max(0, finalStat);
+          
+          accumulatedStats[statKey] = finalStat;
+        });
+        
         // Update current class
         currentClass = targetClass;
         
@@ -518,13 +547,16 @@ export function generateProgressionArray(
         
         // Mark as reclass level
         isReclassLevel = true;
+        hasReclassedAtThisLevel = true;
         reclassInfo = {
           className: targetClass.name
         };
         
-        // For Awakening units, update stat modifiers to the new class's modifiers
+        // Use accumulated stats as the new baseline for the new class
+        baseStatForCalc = { ...accumulatedStats };
+        
+        // For Awakening units, apply the new class's stat modifiers
         if (unit.game === "Awakening" && targetClass.statModifiers) {
-          baseStatForCalc = { ...unit.stats };
           Object.entries(targetClass.statModifiers).forEach(([statKey, modifier]) => {
             if (modifier !== undefined) {
               baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
@@ -532,11 +564,13 @@ export function generateProgressionArray(
           });
         }
         
-        // Note: The actual stats will be calculated by the existing logic below
-        // The key changes are:
-        // 1. Current class is updated
-        // 2. Display level is reset to 1
-        // 3. For Awakening units, stat modifiers are updated
+        // Apply new class's stat caps immediately
+        allStatKeys.forEach(statKey => {
+          const newCap = targetClass.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+          if (baseStatForCalc[statKey] !== undefined) {
+            baseStatForCalc[statKey] = Math.min(baseStatForCalc[statKey], newCap);
+          }
+        });
       }
     }
     
@@ -545,7 +579,9 @@ export function generateProgressionArray(
       if (!isTrainee || unit.isPromoted) {
         isSkipped = true; // Standard units do not have trainee rows
       } else {
-        levelDiff = displayLevelNum - unit.level;
+        if (!hasReclassedAtThisLevel) {
+          levelDiff = displayLevelNum - unit.level;
+        }
         if (displayLevelNum < unit.level || displayLevelNum > (promoLevels[0] || 10)) {
           isSkipped = true;
         }
@@ -578,7 +614,9 @@ export function generateProgressionArray(
           // Fix: For trainees in Tier 1, calculate growth from Level 1 with correct offset
           // The stats should be calculated from the promoted base stats (Level 10 trainee + promotion bonuses)
           // and then grow from Level 1 to current level in the new class
-          levelDiff = displayLevelNum - 1;
+          if (!hasReclassedAtThisLevel) {
+            levelDiff = displayLevelNum - 1;
+          }
 
           // Fix: For trainees in Tier 1, check for the correct promotion index
           // Tier 1 trainees should check for promotion level at index 1 (Tier 1 -> Tier 2)
@@ -611,7 +649,9 @@ export function generateProgressionArray(
           if (displayLevelNum < unit.level || displayLevelNum > targetPromoLevel) {
             isSkipped = true;
           }
-          levelDiff = displayLevelNum - unit.level;
+          if (!hasReclassedAtThisLevel) {
+            levelDiff = displayLevelNum - unit.level;
+          }
 
           const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 0 && lvl === displayLevelNum);
           if (currentPromoIndex >= 0 && baseClass?.promotesTo?.length > 0) {
@@ -637,7 +677,9 @@ export function generateProgressionArray(
             // Use the second promoted class (Tier 2) if available, otherwise fall back
             currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
             baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
-            levelDiff = displayLevelNum - 1;
+            if (!hasReclassedAtThisLevel) {
+              levelDiff = displayLevelNum - 1;
+            }
 
             // Fix: Skip Tier 2 if the first promotion doesn't lead to a promotable class
             // The first promoted class must have promotesTo options to reach Tier 2
@@ -673,7 +715,9 @@ export function generateProgressionArray(
           currentClass = promotedClasses[0] || baseClass;
           baseStatForCalc = promotedStats[0] || unit.stats;
 
-          levelDiff = displayLevelNum - 1;
+          if (!hasReclassedAtThisLevel) {
+            levelDiff = displayLevelNum - 1;
+          }
 
           // Fix: Skip Tier 2 if the base class cannot promote
           if (!baseClass?.promotesTo?.length) {
