@@ -374,9 +374,15 @@ export function ComparisonGrid({
         <div className="pt-4 border-t">
           <h3 className="text-lg font-semibold mb-1">Movement Type</h3>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
-              {promoClass.movementType || 'Infantry'}
-            </span>
+            {promoClass.movementType ? promoClass.movementType.split(',').map(m => m.trim()).map((mov, index) => (
+              <span key={index} className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                {mov}
+              </span>
+            )) : (
+              <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                Infantry
+              </span>
+            )}
           </div>
         </div>
 
@@ -586,7 +592,11 @@ export function ComparisonGrid({
                     const movType = cls?.movementType || 'Infantry';
                     return (
                       <td key={`movement-${unit.id}`} className="text-center p-2">
-                        <MovementTypePill movementType={movType} game={unit.game} />
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {movType.split(',').map(m => m.trim()).map((mov, index) => (
+                            <MovementTypePill key={index} movementType={mov} game={unit.game} />
+                          ))}
+                        </div>
                       </td>
                     );
                   })}
@@ -596,11 +606,11 @@ export function ComparisonGrid({
                   {units.map((unit) => {
                     const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
                     const movType = cls?.movementType || 'Infantry';
-                    const movementData = getMovementByName(movType);
+                    const movTypes = movType.split(',').map(m => m.trim());
                     
                     // Combine innate weaknesses with movement weaknesses and deduplicate
                     const innateWeaknesses = unit.innateWeaknesses || [];
-                    const movementWeaknesses = movementData?.weaknesses ? [movementData.weaknesses] : [];
+                    const movementWeaknesses = movTypes.map(m => getMovementByName(m)?.weaknesses).filter(Boolean) as string[];
                     const allWeaknesses = [...innateWeaknesses, ...movementWeaknesses];
                     const uniqueWeaknesses = [...new Set(allWeaknesses)];
                     

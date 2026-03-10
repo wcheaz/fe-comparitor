@@ -1,0 +1,5 @@
+Row 0: ['Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening', 'Class change options and stat gains in Awakening']
+Row 1: ['Base class', 'Advanced class', 'HP', 'Str', 'Mag', 'Skl', 'Spd', 'Def', 'Res', 'Mov', 'Weapon levels', '']
+Row 2: ['Lord (Chrom)', 'Great Lord (Chrom)', '+5', '+4', '+0', '+2', '+2', '+3', '+3', '+1', '+0  E (+1)', '']
+Row 3: ['Lord (Lucina)', 'Great Lord (Lucina)', '+4', '+3', '+0', '+3', '+3', '+2', '+3', '+1', '+0  E (+1)', '']
+Row 4: ['Tactician', 'Grandmaster', '+4', '+3', '+3', '+2', '+2', '+2', '+2', '+1', '+0  +0', '']

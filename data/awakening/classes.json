@@ -6,24 +6,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 18,
+      "hp": 16,
       "str": 4,
-      "mag": 4,
+      "mag": 3,
       "skl": 5,
-      "spd": 4,
-      "lck": 5,
-      "def": 3,
+      "spd": 5,
+      "lck": 0,
+      "def": 5,
       "res": 3
-    },
-    "promotionBonus": {
-      "hp": 4,
-      "str": 2,
-      "mag": 2,
-      "skl": 2,
-      "spd": 2,
-      "lck": 2,
-      "def": 2,
-      "res": 2
     },
     "statModifiers": {
       "hp": 0,
@@ -77,24 +67,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 20,
-      "str": 7,
+      "hp": 18,
+      "str": 6,
       "mag": 0,
       "skl": 5,
       "spd": 6,
-      "lck": 4,
-      "def": 6,
-      "res": 2
-    },
-    "promotionBonus": {
-      "hp": 4,
-      "str": 3,
-      "mag": 0,
-      "skl": 2,
-      "spd": 2,
-      "lck": 2,
-      "def": 3,
-      "res": 2
+      "lck": 0,
+      "def": 7,
+      "res": 0
     },
     "statModifiers": {
       "hp": 0,
@@ -117,8 +97,8 @@
       "res": 25
     },
     "promotesTo": [
-      "paladin",
-      "great_knight"
+      "great_knight",
+      "paladin"
     ],
     "weapons": [
       "Swords",
@@ -148,24 +128,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 22,
+      "hp": 18,
       "str": 8,
       "mag": 0,
-      "skl": 3,
-      "spd": 3,
-      "lck": 4,
-      "def": 9,
-      "res": 4
-    },
-    "promotionBonus": {
-      "hp": 5,
-      "str": 3,
-      "mag": 0,
-      "skl": 2,
-      "spd": 1,
-      "lck": 2,
-      "def": 4,
-      "res": 3
+      "skl": 4,
+      "spd": 2,
+      "lck": 0,
+      "def": 11,
+      "res": 0
     },
     "statModifiers": {
       "hp": 0,
@@ -188,8 +158,8 @@
       "res": 35
     },
     "promotesTo": [
-      "general",
-      "great_knight"
+      "great_knight",
+      "general"
     ],
     "weapons": [
       "Lances",
@@ -219,23 +189,13 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 18,
-      "str": 5,
-      "mag": 0,
-      "skl": 8,
-      "spd": 8,
-      "lck": 5,
-      "def": 3,
-      "res": 2
-    },
-    "promotionBonus": {
-      "hp": 3,
-      "str": 3,
-      "mag": 0,
-      "skl": 3,
-      "spd": 3,
-      "lck": 2,
-      "def": 2,
+      "hp": 16,
+      "str": 4,
+      "mag": 1,
+      "skl": 9,
+      "spd": 10,
+      "lck": 0,
+      "def": 4,
       "res": 1
     },
     "statModifiers": {
@@ -289,24 +249,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 20,
-      "str": 7,
+      "hp": 18,
+      "str": 5,
       "mag": 0,
-      "skl": 6,
-      "spd": 5,
-      "lck": 4,
+      "skl": 8,
+      "spd": 7,
+      "lck": 0,
       "def": 5,
-      "res": 2
-    },
-    "promotionBonus": {
-      "hp": 4,
-      "str": 3,
-      "mag": 0,
-      "skl": 3,
-      "spd": 2,
-      "lck": 2,
-      "def": 3,
-      "res": 2
+      "res": 0
     },
     "statModifiers": {
       "hp": 0,
@@ -360,24 +310,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 25,
-      "str": 8,
-      "mag": 8,
-      "skl": 9,
+      "hp": 20,
+      "str": 7,
+      "mag": 6,
+      "skl": 7,
       "spd": 7,
-      "lck": 8,
-      "def": 7,
-      "res": 7
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
       "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 7,
+      "res": 5
     },
     "statModifiers": {
       "hp": 2,
@@ -429,24 +369,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 28,
-      "str": 12,
-      "mag": 0,
-      "skl": 9,
-      "spd": 10,
-      "lck": 8,
-      "def": 11,
-      "res": 6
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "hp": 25,
+      "str": 9,
+      "mag": 1,
+      "skl": 7,
+      "spd": 8,
       "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 10,
+      "res": 6
     },
     "statModifiers": {
       "hp": 3,
@@ -497,24 +427,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 30,
-      "str": 14,
+      "hp": 26,
+      "str": 11,
       "mag": 0,
-      "skl": 8,
-      "spd": 7,
-      "lck": 7,
-      "def": 15,
-      "res": 9
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "skl": 6,
+      "spd": 5,
       "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 14,
+      "res": 1
     },
     "statModifiers": {
       "hp": 4,
@@ -556,7 +476,7 @@
       "def": 48,
       "res": 30
     },
-    "movementType": "Armored",
+    "movementType": "Armored, Cavalry",
     "description": "A heavily armored promoted class that can use swords, lances, and axes. They have excellent defense but lower speed."
   },
   {
@@ -566,24 +486,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 24,
-      "str": 10,
-      "mag": 0,
-      "skl": 13,
+      "hp": 20,
+      "str": 7,
+      "mag": 2,
+      "skl": 11,
       "spd": 13,
-      "lck": 9,
-      "def": 7,
-      "res": 5
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
       "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 6,
+      "res": 4
     },
     "statModifiers": {
       "hp": 2,
@@ -633,24 +543,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 28,
-      "str": 13,
-      "mag": 0,
+      "hp": 22,
+      "str": 8,
+      "mag": 1,
       "skl": 11,
-      "spd": 9,
-      "lck": 8,
-      "def": 10,
-      "res": 6
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "spd": 10,
       "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 8,
+      "res": 3
     },
     "statModifiers": {
       "hp": 3,
@@ -701,24 +601,14 @@
     "type": "promoted",
     "tier": "2",
     "baseStats": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "hp": 24,
+      "str": 5,
+      "mag": 5,
+      "skl": 4,
+      "spd": 6,
       "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 6,
+      "res": 6
     },
     "statModifiers": {
       "hp": 0,
@@ -766,24 +656,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 0,
-      "str": 0,
+      "hp": 18,
+      "str": 2,
       "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "skl": 4,
+      "spd": 5,
       "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 3,
+      "res": 2
     },
     "statModifiers": {
       "hp": 0,
@@ -830,24 +710,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 0,
-      "str": 0,
+      "hp": 18,
+      "str": 2,
       "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "skl": 1,
+      "spd": 1,
       "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 2,
+      "res": 2
     },
     "statModifiers": {
       "hp": 0,
@@ -903,16 +773,6 @@
       "def": 5,
       "res": 0
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -933,7 +793,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "sniper",
+      "bow_knight"
+    ],
     "weapons": [
       "Bows"
     ],
@@ -967,16 +830,6 @@
       "def": 4,
       "res": 6
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -997,7 +850,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "dark_flier",
+      "falcon_knight"
+    ],
     "weapons": [
       "Lances"
     ],
@@ -1030,16 +886,6 @@
       "lck": 0,
       "def": 7,
       "res": 3
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "statModifiers": {
       "hp": 0,
@@ -1087,23 +933,13 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 0,
-      "str": 0,
+      "hp": 18,
+      "str": 6,
       "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "skl": 5,
+      "spd": 7,
       "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
+      "def": 7,
       "res": 0
     },
     "statModifiers": {
@@ -1126,7 +962,11 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "lucina",
+      "chrom",
+      "great_lord"
+    ],
     "weapons": [
       "Swords"
     ],
@@ -1160,16 +1000,6 @@
       "def": 8,
       "res": 0
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1190,7 +1020,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "griffon_rider",
+      "wyvern_lord"
+    ],
     "weapons": [
       "Axes"
     ],
@@ -1215,24 +1048,14 @@
     "type": "unpromoted",
     "tier": "1",
     "baseStats": {
-      "hp": 0,
+      "hp": 16,
       "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
+      "mag": 3,
+      "skl": 2,
+      "spd": 4,
       "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
+      "def": 1,
+      "res": 6
     },
     "statModifiers": {
       "hp": 0,
@@ -1288,16 +1111,6 @@
       "def": 1,
       "res": 5
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1318,7 +1131,11 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "war_monk",
+      "valkyrie",
+      "cleric"
+    ],
     "weapons": [
       "Staffs"
     ],
@@ -1350,16 +1167,6 @@
       "spd": 1,
       "lck": 0,
       "def": 1,
-      "res": 0
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "statModifiers": {
@@ -1416,16 +1223,6 @@
       "def": 3,
       "res": 1
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1480,16 +1277,6 @@
       "def": 4,
       "res": 4
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1510,7 +1297,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "dark_knight",
+      "sorcerer"
+    ],
     "weapons": [
       "Tomes"
     ],
@@ -1543,16 +1333,6 @@
       "lck": 0,
       "def": 3,
       "res": 5
-    },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "statModifiers": {
       "hp": 0,
@@ -1609,16 +1389,6 @@
       "def": 2,
       "res": 0
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1639,7 +1409,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "trickster",
+      "assassin"
+    ],
     "weapons": [
       "Swords"
     ],
@@ -1673,16 +1446,6 @@
       "def": 4,
       "res": 0
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1703,7 +1466,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "hero",
+      "warrior"
+    ],
     "weapons": [
       "Axes"
     ],
@@ -1737,16 +1503,6 @@
       "def": 2,
       "res": 3
     },
-    "promotionBonus": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "statModifiers": {
       "hp": 0,
       "str": 0,
@@ -1767,7 +1523,10 @@
       "def": 0,
       "res": 0
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "sage",
+      "dark_knight"
+    ],
     "weapons": [
       "Tomes"
     ],

@@ -174,6 +174,8 @@ export const abilityDefinitions: Record<string, AbilityData> = {
     'Luna': {
         name: 'Luna',
         description: 'Halves enemy\'s Defense or Resistance',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill%',
         gameSpecificDetails: {
             Awakening: 'Halves enemy\'s Defense or Resistance',
         }

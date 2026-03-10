@@ -41,11 +41,16 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "lord",
+      "cavalier",
+      "archer"
+    ]
   },
   {
     "id": "robin_m",
-    "name": "Robin",
+    "name": "Robin (M)",
     "game": "Awakening",
     "class": "tactician",
     "joinChapter": "Premonition",
@@ -85,11 +90,26 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "tactician",
+      "cavalier",
+      "knight",
+      "myrmidon",
+      "mercenary",
+      "fighter",
+      "barbarian",
+      "archer",
+      "thief",
+      "wyvern_rider",
+      "mage",
+      "dark_mage",
+      "priest"
+    ]
   },
   {
     "id": "robin_f",
-    "name": "Robin",
+    "name": "Robin (F)",
     "game": "Awakening",
     "class": "tactician",
     "joinChapter": "Premonition",
@@ -129,7 +149,22 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "tactician",
+      "cavalier",
+      "knight",
+      "myrmidon",
+      "mercenary",
+      "archer",
+      "thief",
+      "pegasus_knight",
+      "wyvern_rider",
+      "mage",
+      "dark_mage",
+      "cleric",
+      "troubadour"
+    ]
   },
   {
     "id": "lissa",
@@ -173,7 +208,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "cleric",
+      "pegasus_knight",
+      "troubadour"
+    ]
   },
   {
     "id": "frederick",
@@ -218,10 +258,16 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {
-      "D": "B",
-      "B": "D"
+      "Swords": "D",
+      "Lances": "B",
+      "Axes": "D"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "cavalier",
+      "knight",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "sully",
@@ -267,7 +313,12 @@
     "baseWeaponRanks": {
       "E": "E"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "cavalier",
+      "myrmidon",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "virion",
@@ -311,7 +362,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "archer",
+      "wyvern_rider",
+      "mage"
+    ]
   },
   {
     "id": "stahl",
@@ -357,7 +413,12 @@
     "baseWeaponRanks": {
       "E": "E"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "cavalier",
+      "archer",
+      "myrmidon"
+    ]
   },
   {
     "id": "vaike",
@@ -401,7 +462,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "fighter",
+      "thief",
+      "barbarian"
+    ]
   },
   {
     "id": "miriel",
@@ -445,7 +511,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "mage",
+      "troubadour",
+      "dark_mage"
+    ]
   },
   {
     "id": "sumia",
@@ -489,7 +560,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "pegasus_knight",
+      "knight",
+      "cleric"
+    ]
   },
   {
     "id": "kellam",
@@ -533,7 +609,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "knight",
+      "thief",
+      "priest"
+    ]
   },
   {
     "id": "donnel",
@@ -577,7 +658,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "villager",
+      "fighter",
+      "mercenary"
+    ]
   },
   {
     "id": "lonqu",
@@ -621,7 +707,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "myrmidon",
+      "thief",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "ricken",
@@ -665,7 +756,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "mage",
+      "cavalier",
+      "archer"
+    ]
   },
   {
     "id": "maribelle",
@@ -709,7 +805,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "troubadour",
+      "pegasus_knight",
+      "mage"
+    ]
   },
   {
     "id": "panne",
@@ -753,7 +854,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "taguel",
+      "thief",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "gaius",
@@ -797,7 +903,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "thief",
+      "fighter",
+      "myrmidon"
+    ]
   },
   {
     "id": "cordelia",
@@ -841,7 +952,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "pegasus_knight",
+      "mercenary",
+      "dark_mage"
+    ]
   },
   {
     "id": "gregor",
@@ -886,7 +1002,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "mercenary",
+      "barbarian",
+      "myrmidon"
+    ]
   },
   {
     "id": "nowi",
@@ -930,7 +1051,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "manakete",
+      "mage",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "libra",
@@ -977,7 +1103,12 @@
     "baseWeaponRanks": {
       "C": "C"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "priest",
+      "mage",
+      "dark_mage"
+    ]
   },
   {
     "id": "tharja",
@@ -1022,7 +1153,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "dark_mage",
+      "knight",
+      "archer"
+    ]
   },
   {
     "id": "anna",
@@ -1069,7 +1205,12 @@
     "baseWeaponRanks": {
       "C": "D"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "thief",
+      "archer",
+      "mage"
+    ]
   },
   {
     "id": "olivia",
@@ -1113,7 +1254,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "dancer",
+      "myrmidon",
+      "pegasus_knight"
+    ]
   },
   {
     "id": "cherche",
@@ -1158,7 +1304,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "wyvern_rider",
+      "troubadour",
+      "cleric"
+    ]
   },
   {
     "id": "henry",
@@ -1203,7 +1354,12 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "dark_mage",
+      "barbarian",
+      "thief"
+    ]
   },
   {
     "id": "sayri",
@@ -1248,7 +1404,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "myrmidon",
+      "pegasus_knight",
+      "wyvern_rider"
+    ]
   },
   {
     "id": "tiki",
@@ -1293,7 +1454,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "manakete",
+      "wyvern_rider",
+      "mage"
+    ]
   },
   {
     "id": "basilio",
@@ -1341,7 +1507,12 @@
     "baseWeaponRanks": {
       "A": "B"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "fighter",
+      "barbarian",
+      "knight"
+    ]
   },
   {
     "id": "flavia",
@@ -1389,6 +1560,11 @@
     "baseWeaponRanks": {
       "A": "B"
     },
-    "supports": []
+    "supports": [],
+    "reclassOptions": [
+      "mercenary",
+      "thief",
+      "knight"
+    ]
   }
 ]

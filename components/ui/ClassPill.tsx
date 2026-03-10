@@ -87,7 +87,11 @@ const ClassPill: React.FC<ClassPillProps> = ({
                         {cls.movementType && (
                             <div>
                                 <h3 className="pill-modal-label mb-2">Movement Type</h3>
-                                <MovementTypePill movementType={cls.movementType} game={cls.game} />
+                                <div className="flex flex-wrap gap-2">
+                                    {cls.movementType.split(',').map(m => m.trim()).map((mov, index) => (
+                                        <MovementTypePill key={index} movementType={mov} game={cls.game} />
+                                    ))}
+                                </div>
                             </div>
                         )}
 
