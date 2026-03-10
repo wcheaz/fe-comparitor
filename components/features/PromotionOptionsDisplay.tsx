@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Unit, Class } from '@/types/unit';
+import { Unit, Class, ReclassEvent } from '@/types/unit';
 import { getAllClasses } from '@/lib/data';
 import { getValidReclassOptions } from '@/lib/stats';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +7,8 @@ import ClassPill from '@/components/ui/ClassPill';
 
 interface PromotionOptionsDisplayProps {
   unit: Unit | null;
+  onReclassEventsChange?: (reclassEvents: Record<string, ReclassEvent[]>) => void;
+  reclassEvents?: Record<string, ReclassEvent[]>;
 }
 
 interface ClassNode {
@@ -37,7 +39,9 @@ const ClassNodeComponent: React.FC<{ node: ClassNode }> = ({ node }) => {
 };
 
 export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = ({
-  unit
+  unit,
+  onReclassEventsChange,
+  reclassEvents = {}
 }) => {
   const [classes, setClasses] = useState<Class[]>([]);
 
@@ -160,26 +164,88 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
               {reclassOptions.map((option, index) => (
                 <div 
                   key={`${option.cls.id}-${index}`}
-                  className={`flex items-center space-x-2 p-2 rounded-md ${
+                  className={`flex items-center justify-between p-2 rounded-md ${
                     option.isValid 
                       ? 'bg-green-50 border border-green-200' 
                       : 'bg-gray-50 border border-gray-200 opacity-60'
                   }`}
                 >
-                  <ClassPill cls={option.cls} />
-                  {!option.isValid && option.reason && (
-                    <span className="text-sm text-gray-500 italic">
-                      ({option.reason})
-                    </span>
+                  <div className="flex items-center space-x-2">
+                    <ClassPill cls={option.cls} />
+                    {!option.isValid && option.reason && (
+                      <span className="text-sm text-gray-500 italic">
+                        ({option.reason})
+                      </span>
+                    )}
+                  </div>
+                  {option.isValid && (
+                    <button
+                      onClick={() => {
+                        if (!unit || !onReclassEventsChange) return;
+                        
+                        const newReclassEvent: ReclassEvent = {
+                          level: unit.level,
+                          selectedClassId: option.cls.id
+                        };
+                        
+                        const currentEvents = reclassEvents[unit.id] || [];
+                        const updatedEvents = [...currentEvents, newReclassEvent];
+                        
+                        onReclassEventsChange({
+                          ...reclassEvents,
+                          [unit.id]: updatedEvents
+                        });
+                      }}
+                      className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      title="Reclass to this class"
+                    >
+                      Reclass Here
+                    </button>
                   )}
                 </div>
               ))}
             </div>
-            {reclassOptions.every(option => !option.isValid) && (
-              <p className="text-sm text-gray-600 mt-2">
-                No reclass options available at current level. Reach Level 10 to unlock reclassing options.
-              </p>
-            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Current Reclass Events Section */}
+      {reclassEvents[unit?.id || ''] && reclassEvents[unit?.id || ''].length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Current Reclass Events - {unit?.name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {reclassEvents[unit?.id || ''].map((event, index) => {
+                const targetClass = classes.find(c => c.id === event.selectedClassId && c.game === unit?.game);
+                return (
+                  <div key={`reclass-${unit?.id}-${index}`} className="flex items-center justify-between p-2 bg-blue-50 border border-blue-200 rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-600">Level {event.level}:</span>
+                      {targetClass && <ClassPill cls={targetClass} />}
+                    </div>
+                    <button
+                      onClick={() => {
+                        if (!unit || !onReclassEventsChange) return;
+                        
+                        const currentEvents = reclassEvents[unit.id] || [];
+                        const updatedEvents = currentEvents.filter((_, i) => i !== index);
+                        
+                        onReclassEventsChange({
+                          ...reclassEvents,
+                          [unit.id]: updatedEvents
+                        });
+                      }}
+                      className="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-xs rounded-md focus:outline-none focus:ring-1 focus:ring-red-500"
+                      title="Remove this reclass event"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </CardContent>
         </Card>
       )}
