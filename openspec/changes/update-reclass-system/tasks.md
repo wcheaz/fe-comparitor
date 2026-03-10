@@ -6,7 +6,7 @@
 
 ## 2. Stat Calculation Logic
 - [x] 2.1 Update `lib/stats.ts` to export standard tier parsing functions if necessary.
-- [ ] 2.2 Modify `generateProgressionArray` in `lib/stats.ts` to sequentially process `reclassEvents` chronologically by level.
+- [x] 2.2 Modify `generateProgressionArray` in `lib/stats.ts` to sequentially process `reclassEvents` chronologically by level.
 - [ ] 2.3 Implement stat retention and cap-resetting logic whenever a unit changes classes horizontally. Level must reset to 1.
 - [ ] 2.4 Ensure Awakening units receive the new class's `statModifiers` when their class changes.
 

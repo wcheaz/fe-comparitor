@@ -1,4 +1,4 @@
-import { Unit, UnitStats, PromotionEvent } from '@/types/unit';
+import { Unit, UnitStats, PromotionEvent, ReclassEvent } from '@/types/unit';
 
 /**
  * Calculate average stats for a unit at a target level based on growth rates
@@ -306,15 +306,20 @@ export function generateProgressionArray(
   startLevel?: number,
   endLevel?: number,
   classes?: any[],
-  promotionEvents: PromotionEvent[] = []
+  promotionEvents: PromotionEvent[] = [],
+  reclassEvents: ReclassEvent[] = []
 ): Array<{
   stats: UnitStats;
   displayLevel: string;
   internalLevel: number;
   isPromotionLevel: boolean;
+  isReclassLevel: boolean;
   promotionInfo?: {
     className: string;
     classAbilities: string[];
+  };
+  reclassInfo?: {
+    className: string;
   };
   cappedStats: Record<string, boolean>;
   isSkipped?: boolean;
@@ -341,6 +346,30 @@ export function generateProgressionArray(
     );
   }
 
+// Combine and sort all events (promotions and reclasses) chronologically by level
+  const allEvents: Array<{type: 'promotion' | 'reclass', level: number, selectedClassId: string}> = [];
+  
+  // Add promotion events
+  promotionEvents.forEach((event) => {
+    allEvents.push({
+      type: 'promotion',
+      level: event.level,
+      selectedClassId: event.selectedClassId
+    });
+  });
+  
+  // Add reclass events
+  reclassEvents.forEach((event) => {
+    allEvents.push({
+      type: 'reclass',
+      level: event.level,
+      selectedClassId: event.selectedClassId
+    });
+  });
+  
+  // Sort all events by level
+  allEvents.sort((a, b) => a.level - b.level);
+  
   // Determine promotion levels and target classes for multi-tier promotions
   const promoLevels: number[] = [];
   const promoTargetIds: string[] = [];
@@ -354,7 +383,7 @@ export function generateProgressionArray(
     promotionEvents.forEach((event, index) => {
       promoLevels.push(event.level);
       promoTargetIds.push(event.selectedClassId ||
-        (index === 0 ? baseClass?.promotesTo?.[0] || '' : ''));
+        (index === 0 ? baseClass?.promotesTo?.[0] : ''));
     });
   }
 
@@ -460,6 +489,57 @@ export function generateProgressionArray(
       }
     }
 
+    // Check for reclass events at current internal level
+    const reclassEventAtThisLevel = allEvents.find(event => 
+      event.type === 'reclass' && 
+      event.level === internalLevel && 
+      !isSkipped
+    );
+    
+    // Initialize reclass tracking variables
+    let isReclassLevel = false;
+    let reclassInfo = undefined;
+    
+    // Handle reclass event
+    if (reclassEventAtThisLevel && !isSkipped) {
+      // Find the target class data
+      const targetClass = classes?.find((cls: any) => 
+        cls.id === reclassEventAtThisLevel.selectedClassId.toLowerCase().replace(/\s+/g, '_') && 
+        cls.game === unit.game
+      );
+      
+      if (targetClass) {
+        // Update current class
+        currentClass = targetClass;
+        
+        // Reset display level to 1 (but keep internal progression)
+        displayLevelNum = 1;
+        displayLevel = `Level ${displayLevelNum} (Reclassed to ${targetClass.name})`;
+        
+        // Mark as reclass level
+        isReclassLevel = true;
+        reclassInfo = {
+          className: targetClass.name
+        };
+        
+        // For Awakening units, update stat modifiers to the new class's modifiers
+        if (unit.game === "Awakening" && targetClass.statModifiers) {
+          baseStatForCalc = { ...unit.stats };
+          Object.entries(targetClass.statModifiers).forEach(([statKey, modifier]) => {
+            if (modifier !== undefined) {
+              baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
+            }
+          });
+        }
+        
+        // Note: The actual stats will be calculated by the existing logic below
+        // The key changes are:
+        // 1. Current class is updated
+        // 2. Display level is reset to 1
+        // 3. For Awakening units, stat modifiers are updated
+      }
+    }
+    
     // Handle tier-specific logic
     if (tier === 0) {
       if (!isTrainee || unit.isPromoted) {
@@ -711,7 +791,9 @@ export function generateProgressionArray(
       displayLevel,
       internalLevel,
       isPromotionLevel,
+      isReclassLevel,
       promotionInfo,
+      reclassInfo,
       cappedStats,
       isSkipped
     });
