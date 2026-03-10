@@ -67,5 +67,20 @@
     "completedTasks": [
       "2.3 Implement stat retention and cap-resetting logic whenever a unit changes classes horizontally. Level must reset to 1."
     ]
+  },
+  {
+    "timestamp": "2026-03-10T20:26:21.161Z",
+    "iteration": 5,
+    "duration": 388832,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [
+      "openspec/changes/update-reclass-system/.ralph/ralph-loop.state.json"
+    ],
+    "exitCode": 0,
+    "completedTasks": [
+      "2.4 Ensure Awakening units receive the new class's `statModifiers` when their class changes."
+    ]
   }
 ]
