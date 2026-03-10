@@ -16,5 +16,5 @@
 - [x] 3.3 Restrict valid reclass targets based on the current level and tier. Unpromoted units must reach Level 10 to reclass.
 
 ## 4. Integration
-- [ ] 4.1 Update the `ComparisonGrid` state management to handle both promotion and reclass histories effectively.
+- [x] 4.1 Update the `ComparisonGrid` state management to handle both promotion and reclass histories effectively.
 - [ ] 4.2 Verify units from GBA games are not impacted by the new reclass paths.

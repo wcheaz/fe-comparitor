@@ -66,6 +66,24 @@ export default function ComparatorPage() {
     });
   };
 
+  const addReclassEvent = (unitId: string, event: ReclassEvent) => {
+    setReclassEvents(prev => ({
+      ...prev,
+      [unitId]: [...(prev[unitId] || []), event]
+    }));
+  };
+
+  const removeReclassEvent = (unitId: string) => {
+    setReclassEvents(prev => {
+      const currentEvents = prev[unitId] || [];
+      if (currentEvents.length <= 1) return prev; // Don't remove if only one or none
+      return {
+        ...prev,
+        [unitId]: currentEvents.slice(0, -1) // Remove last event
+      };
+    });
+  };
+
   // Handler for individual unit promotion changes
   const handleUnit1PromotionChange = (events: PromotionEvent[]) => {
     if (selectedUnits[0]) {
@@ -119,6 +137,9 @@ export default function ComparatorPage() {
             <ComparisonGrid
               units={selectedUnits}
               promotionEvents={promotionEvents}
+              reclassEvents={reclassEvents}
+              onPromotionEventsChange={handlePromotionEventsChange}
+              onReclassEventsChange={handleReclassEventsChange}
               showStats={true}
               showGrowths={true}
             />
