@@ -13,7 +13,7 @@
 ## 3. UI Component Updates
 - [x] 3.1 Update `components/features/PromotionOptionsDisplay.tsx` to handle `reclassOptions` for units that possess them.
 - [x] 3.2 Add UI controls for creating a `ReclassEvent` (similar to existing "Promote Here" flows).
-- [ ] 3.3 Restrict valid reclass targets based on the current level and tier. Unpromoted units must reach Level 10 to reclass.
+- [x] 3.3 Restrict valid reclass targets based on the current level and tier. Unpromoted units must reach Level 10 to reclass.
 
 ## 4. Integration
 - [ ] 4.1 Update the `ComparisonGrid` state management to handle both promotion and reclass histories effectively.
