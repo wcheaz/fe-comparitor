@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Unit, Class } from '@/types/unit';
 import { getAllClasses } from '@/lib/data';
+import { getValidReclassOptions } from '@/lib/stats';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import ClassPill from '@/components/ui/ClassPill';
 
@@ -11,6 +12,12 @@ interface PromotionOptionsDisplayProps {
 interface ClassNode {
   cls: Class;
   promotions: ClassNode[];
+}
+
+interface ReclassOption {
+  cls: Class;
+  isValid: boolean;
+  reason?: string;
 }
 
 // Recursive component to render class nodes
@@ -43,7 +50,7 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
   }, []);
 
   // Recursive helper function to build promotion tree
-  const getPromotionTree = (classId: string, targetUnit: Unit, visited = new Set<string>()): ClassNode | null => {
+  const getPromotionTree = useCallback((classId: string, targetUnit: Unit, visited = new Set<string>()): ClassNode | null => {
     if (visited.has(classId)) {
       return null; // Prevent infinite loops
     }
@@ -72,7 +79,7 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
     }
 
     return node;
-  };
+  }, [classes]);
 
   // Build the promotion tree using useMemo
   const promotionTree = useMemo(() => {
@@ -80,24 +87,102 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
       return null;
     }
     return getPromotionTree(unit.class, unit);
+  }, [classes, unit, getPromotionTree]);
+
+  // Get valid reclass options using useMemo
+  const reclassOptions = useMemo(() => {
+    if (classes.length === 0 || !unit || !unit.reclassOptions || unit.reclassOptions.length === 0) {
+      return [];
+    }
+
+    // Helper function to get reason why reclass is invalid
+    const getReclassInvalidReason = (targetUnit: Unit, targetClass: Class): string => {
+      const validOptions = getValidReclassOptions(targetUnit, classes);
+      if (!validOptions.includes(targetClass.id) && !validOptions.includes(targetClass.name)) {
+        if (targetUnit.level < 10) {
+          return "Must be at least Level 10";
+        }
+        return "Not a valid reclass target";
+      }
+      return "";
+    };
+
+    const validReclassOptions: ReclassOption[] = [];
+    
+    for (const classId of unit.reclassOptions) {
+      const targetClass = classes.find((c: Class) => 
+        (c.id === classId || c.name === classId) && c.game === unit.game
+      );
+      
+      if (targetClass) {
+        // Check if this reclass is valid based on tier rules and level
+        const isValid = getValidReclassOptions(unit, classes).includes(classId);
+        
+        validReclassOptions.push({
+          cls: targetClass,
+          isValid,
+          reason: isValid ? undefined : getReclassInvalidReason(unit, targetClass)
+        });
+      }
+    }
+
+    return validReclassOptions;
   }, [classes, unit]);
 
   if (!unit) return null;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Promotion Options - {unit.name}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        {promotionTree ? (
-          <ul className="space-y-2">
-            <ClassNodeComponent node={promotionTree} />
-          </ul>
-        ) : (
-          <p className="text-gray-600">No promotion options available</p>
-        )}
-      </CardContent>
-    </Card>
+    <div className="space-y-4">
+      {/* Promotion Options Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Promotion Options - {unit.name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {promotionTree ? (
+            <ul className="space-y-2">
+              <ClassNodeComponent node={promotionTree} />
+            </ul>
+          ) : (
+            <p className="text-gray-600">No promotion options available</p>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Reclass Options Section */}
+      {reclassOptions.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Reclass Options - {unit.name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {reclassOptions.map((option, index) => (
+                <div 
+                  key={`${option.cls.id}-${index}`}
+                  className={`flex items-center space-x-2 p-2 rounded-md ${
+                    option.isValid 
+                      ? 'bg-green-50 border border-green-200' 
+                      : 'bg-gray-50 border border-gray-200 opacity-60'
+                  }`}
+                >
+                  <ClassPill cls={option.cls} />
+                  {!option.isValid && option.reason && (
+                    <span className="text-sm text-gray-500 italic">
+                      ({option.reason})
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+            {reclassOptions.every(option => !option.isValid) && (
+              <p className="text-sm text-gray-600 mt-2">
+                No reclass options available at current level. Reach Level 10 to unlock reclassing options.
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      )}
+    </div>
   );
 };

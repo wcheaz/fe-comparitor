@@ -11,7 +11,7 @@
 - [x] 2.4 Ensure Awakening units receive the new class's `statModifiers` when their class changes.
 
 ## 3. UI Component Updates
-- [ ] 3.1 Update `components/features/PromotionOptionsDisplay.tsx` to handle `reclassOptions` for units that possess them.
+- [x] 3.1 Update `components/features/PromotionOptionsDisplay.tsx` to handle `reclassOptions` for units that possess them.
 - [ ] 3.2 Add UI controls for creating a `ReclassEvent` (similar to existing "Promote Here" flows).
 - [ ] 3.3 Restrict valid reclass targets based on the current level and tier. Unpromoted units must reach Level 10 to reclass.
 
