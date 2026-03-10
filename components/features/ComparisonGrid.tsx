@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Unit, Class, PromotionEvent } from '@/types/unit';
+import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
+import { StatProgressionTable } from './StatProgressionTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import AbilityPill from '@/components/ui/AbilityPill';
 import SupportPill from '@/components/ui/SupportPill';
@@ -21,6 +22,9 @@ import { cn } from '@/lib/utils';
 interface ComparisonGridProps {
   units: Unit[];
   promotionEvents?: Record<string, PromotionEvent[]>;
+  reclassEvents?: Record<string, ReclassEvent[]>;
+  onPromotionEventsChange?: (events: Record<string, PromotionEvent[]>) => void;
+  onReclassEventsChange?: (events: Record<string, ReclassEvent[]>) => void;
   showStats?: boolean;
   showGrowths?: boolean;
   className?: string;
@@ -29,6 +33,9 @@ interface ComparisonGridProps {
 export function ComparisonGrid({
   units,
   promotionEvents,
+  reclassEvents,
+  onPromotionEventsChange,
+  onReclassEventsChange,
   showStats = true,
   showGrowths = true,
   className
@@ -898,6 +905,26 @@ export function ComparisonGrid({
             </div>
           )}
         </div>
+      )}
+
+      {/* Stat Progression Table */}
+      {(showStats || showGrowths) && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Stat Progression</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatProgressionTable
+              units={units}
+              promotionEvents={promotionEvents || {}}
+              reclassEvents={reclassEvents || {}}
+              onPromotionEventsChange={onPromotionEventsChange || (() => {})}
+              onReclassEventsChange={onReclassEventsChange || (() => {})}
+              onAddPromotionEvent={undefined}
+              onRemovePromotionEvent={undefined}
+            />
+          </CardContent>
+        </Card>
       )}
 
       {/* Affinity Details Modal */}

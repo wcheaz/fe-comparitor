@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
+import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { generateProgressionArray } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import AbilityPill from '@/components/ui/AbilityPill';
@@ -64,7 +64,9 @@ function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: Promotio
 interface StatProgressionTableProps {
   units: Unit[];
   promotionEvents: Record<string, PromotionEvent[]>;
+  reclassEvents: Record<string, ReclassEvent[]>;
   onPromotionEventsChange: (events: Record<string, PromotionEvent[]>) => void;
+  onReclassEventsChange: (events: Record<string, ReclassEvent[]>) => void;
   onAddPromotionEvent?: (unitId: string, event: PromotionEvent) => void;
   onRemovePromotionEvent?: (unitId: string) => void;
 }
@@ -83,7 +85,7 @@ interface ProgressionRow {
   };
 }
 
-export function StatProgressionTable({ units, promotionEvents, onPromotionEventsChange, onAddPromotionEvent, onRemovePromotionEvent }: StatProgressionTableProps) {
+export function StatProgressionTable({ units, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, onAddPromotionEvent, onRemovePromotionEvent }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
   const [classes, setClasses] = useState<Class[]>([]);
@@ -125,7 +127,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
 
     // Generate progression arrays for all units
     const allProgressions = units.map(unit =>
-      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents[unit.id] ?? [])
+      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents[unit.id] ?? [], reclassEvents[unit.id] ?? [])
     );
 
     // Get all stat keys from all units
@@ -236,7 +238,7 @@ export function StatProgressionTable({ units, promotionEvents, onPromotionEvents
     }
 
     return { rows, statKeys: displayStats, allProgressions };
-  }, [units, expandToLevel100, classes, promotionEvents]);
+  }, [units, expandToLevel100, classes, promotionEvents, reclassEvents]);
 
   if (units.length === 0) {
     return (

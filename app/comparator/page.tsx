@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import { useSearchParams } from 'next/navigation'; // TEMPORARILY DISABLED
-import { Unit, PromotionEvent, Class } from '@/types/unit';
+import { Unit, PromotionEvent, ReclassEvent, Class } from '@/types/unit';
 import { getUnitById, getAllClasses } from '@/lib/data';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
   const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
+  const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
   const [classes, setClasses] = useState<Class[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 4;
@@ -40,6 +41,10 @@ export default function ComparatorPage() {
 
   const handlePromotionEventsChange = (newEvents: Record<string, PromotionEvent[]>) => {
     setPromotionEvents(newEvents);
+  };
+
+  const handleReclassEventsChange = (newEvents: Record<string, ReclassEvent[]>) => {
+    setReclassEvents(newEvents);
   };
 
   // Utility functions for push/pop operations
@@ -137,7 +142,9 @@ export default function ComparatorPage() {
                   <StatProgressionTable
                     units={selectedUnits}
                     promotionEvents={promotionEvents}
+                    reclassEvents={reclassEvents}
                     onPromotionEventsChange={handlePromotionEventsChange}
+                    onReclassEventsChange={handleReclassEventsChange}
                     onAddPromotionEvent={addPromotionEvent}
                     onRemovePromotionEvent={removePromotionEvent}
                   />
