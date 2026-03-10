@@ -517,6 +517,16 @@ export function generateProgressionArray(
         // Get all stat keys from the unit's stats and growths
         const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
         
+        // For Awakening units, create a temporary base with current class statModifiers
+        let tempBaseStats = { ...baseStatForCalc };
+        if (unit.game === "Awakening" && currentClass?.statModifiers) {
+          Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
+            if (modifier !== undefined) {
+              tempBaseStats[statKey] = (tempBaseStats[statKey] || 0) + (modifier as number);
+            }
+          });
+        }
+        
         allStatKeys.forEach(statKey => {
           let growthRate = unit.growths[statKey] || 0;
           
@@ -526,7 +536,7 @@ export function generateProgressionArray(
             growthRate += classGrowth;
           }
           
-          const baseStatValue = baseStatForCalc[statKey] || 0;
+const baseStatValue = tempBaseStats[statKey] || 0;
           const growthAmount = (growthRate * reclassLevelDiff) / 100;
           let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
           

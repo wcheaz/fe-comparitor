@@ -1,5 +1,5 @@
 import { generateProgressionArray } from '@/lib/stats';
-import { Unit, UnitStats, Class, PromotionEvent } from '@/types/unit';
+import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 
 // Mock test data
 const mockClasses: Class[] = [
@@ -432,6 +432,77 @@ describe('Stat Progression Logic', () => {
       // So if Great Knight is selected, STR should be higher
       if (postPromotionLevel?.stats.str) {
         expect(postPromotionLevel.stats.str).toBeGreaterThanOrEqual(11); // Should be at least the Great Knight base
+      }
+    });
+
+    // Test for Task 2.4: Ensure Awakening units receive the new class's statModifiers when their class changes
+    it('should apply statModifiers correctly for Awakening units during reclass', () => {
+      // Create an Awakening unit with reclass options
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 5, skl: 6, spd: 7, lck: 5, def: 4, res: 1 },
+        growths: { hp: 60, str: 40, skl: 50, spd: 45, lck: 30, def: 25, res: 15 },
+        reclassOptions: ['cavalier', 'archer']
+      };
+
+      // Create mock classes with statModifiers for Awakening
+      const awakeningClasses: Class[] = [
+        {
+          id: 'lord',
+          name: 'Lord',
+          game: 'Awakening',
+          type: 'unpromoted',
+          baseStats: { hp: 18, str: 5, skl: 6, spd: 7, lck: 5, def: 4, res: 1 },
+          promotionBonus: {},
+          promotesTo: [],
+          classAbilities: [],
+          statModifiers: { str: 2, def: 1 } // Lord class modifiers
+        },
+        {
+          id: 'cavalier',
+          name: 'Cavalier',
+          game: 'Awakening',
+          type: 'unpromoted',
+          baseStats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2 },
+          promotionBonus: {},
+          promotesTo: [],
+          classAbilities: [],
+          statModifiers: { def: 3, res: 2 } // Cavalier class modifiers
+        }
+      ];
+
+      // Create reclass event at level 10
+      const reclassEvents: ReclassEvent[] = [
+        { level: 10, selectedClassId: 'cavalier' }
+      ];
+
+      const progression = generateProgressionArray(awakeningUnit, 1, 15, awakeningClasses, [], reclassEvents);
+
+      // Find the reclass level
+      const reclassLevel = progression.find(level => level.isReclassLevel);
+      expect(reclassLevel).toBeDefined();
+      expect(reclassLevel?.reclassInfo?.className).toBe('Cavalier');
+
+      // Check that stats before and after reclass reflect different statModifiers
+      const beforeReclassLevel = progression.find(level => level.internalLevel === 9 && !level.isSkipped);
+      const afterReclassLevel = progression.find(level => level.displayLevel === 'Level 1 (Reclassed to Cavalier)');
+
+      expect(beforeReclassLevel).toBeDefined();
+      expect(afterReclassLevel).toBeDefined();
+
+      if (beforeReclassLevel?.stats.def && afterReclassLevel?.stats.def) {
+        // Cavalier has higher DEF modifier (3) than Lord (1), so DEF should be higher after reclass
+        expect(afterReclassLevel.stats.def).toBeGreaterThan(beforeReclassLevel.stats.def);
+      }
+
+      if (beforeReclassLevel?.stats.res && afterReclassLevel?.stats.res) {
+        // Cavalier has RES modifier (2) while Lord has 0, so RES should be higher after reclass
+        expect(afterReclassLevel.stats.res).toBeGreaterThan(beforeReclassLevel.stats.res || 0);
       }
     });
   });

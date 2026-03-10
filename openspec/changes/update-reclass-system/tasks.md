@@ -8,7 +8,7 @@
 - [x] 2.1 Update `lib/stats.ts` to export standard tier parsing functions if necessary.
 - [x] 2.2 Modify `generateProgressionArray` in `lib/stats.ts` to sequentially process `reclassEvents` chronologically by level.
 - [x] 2.3 Implement stat retention and cap-resetting logic whenever a unit changes classes horizontally. Level must reset to 1.
-- [ ] 2.4 Ensure Awakening units receive the new class's `statModifiers` when their class changes.
+- [x] 2.4 Ensure Awakening units receive the new class's `statModifiers` when their class changes.
 
 ## 3. UI Component Updates
 - [ ] 3.1 Update `components/features/PromotionOptionsDisplay.tsx` to handle `reclassOptions` for units that possess them.
