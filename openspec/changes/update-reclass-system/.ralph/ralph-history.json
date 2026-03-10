@@ -1,0 +1,37 @@
+[
+  {
+    "timestamp": "2026-03-10T20:05:31.830Z",
+    "iteration": 1,
+    "duration": 74019,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": [
+      "1.1 Update `types/unit.ts` `Unit` interface to add `reclassEvents?: ReclassEvent[]`.",
+      "1.2 Create `ReclassEvent` interface in `types/unit.ts`."
+    ]
+  },
+  {
+    "timestamp": "2026-03-10T20:07:26.187Z",
+    "iteration": 2,
+    "duration": 114357,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [
+      "openspec/changes/update-reclass-system/tasks.md",
+      "openspec/changes/update-reclass-system/.ralph/.output_dir",
+      "openspec/changes/update-reclass-system/.ralph/PRD.md",
+      "openspec/changes/update-reclass-system/.ralph/prompt-template.md",
+      "openspec/changes/update-reclass-system/.ralph/ralph-history.json",
+      "openspec/changes/update-reclass-system/.ralph/ralph-loop.state.json",
+      "openspec/changes/update-reclass-system/.ralph/"
+    ],
+    "exitCode": 0,
+    "completedTasks": [
+      "2.1 Update `lib/stats.ts` to export standard tier parsing functions if necessary."
+    ]
+  }
+]

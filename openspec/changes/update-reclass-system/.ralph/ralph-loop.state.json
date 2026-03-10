@@ -1,0 +1,16 @@
+{
+  "active": true,
+  "iteration": 2,
+  "minIterations": 1,
+  "maxIterations": 50,
+  "completionPromise": "COMPLETE",
+  "taskPromise": "READY_FOR_NEXT_TASK",
+  "tasksMode": true,
+  "tasksFile": "/home/ncheaz/git/fe-comparator/openspec/changes/update-reclass-system/tasks.md",
+  "promptFile": "/home/ncheaz/git/fe-comparator/openspec/changes/update-reclass-system/.ralph/PRD.md",
+  "promptTemplate": "/home/ncheaz/git/fe-comparator/openspec/changes/update-reclass-system/.ralph/prompt-template.md",
+  "noCommit": false,
+  "model": "",
+  "startedAt": "2026-03-10T20:04:17.809Z",
+  "resumedAt": null
+}
