@@ -177,6 +177,108 @@ export function getMaxLevel(units: Unit[]): number {
 }
 
 /**
+ * Get the tier of a class based on class data
+ * 
+ * @param classId - The ID of the class to check
+ * @param classes - Array of class data
+ * @returns The tier number (0 for trainee, 1 for base, 2 for promoted, etc.)
+ */
+export function getClassTier(classId: string, classes: any[]): number {
+  const normalizedClassId = classId.toLowerCase().replace(/\s+/g, '_');
+  const classData = classes?.find((cls: any) => cls.id === normalizedClassId);
+  
+  if (!classData) {
+    return 1; // Default to tier 1 if class not found
+  }
+  
+  // Trainee classes (tier 0)
+  const traineeClasses = ['recruit', 'recruit_2', 'pupil', 'pupil_2', 'journeyman', 'journeyman_2'];
+  if (traineeClasses.includes(normalizedClassId)) {
+    return 0;
+  }
+  
+  // Promoted classes (tier 2+)
+  if (classData.type === 'promoted') {
+    return 2;
+  }
+  
+  // Base classes (tier 1)
+  return 1;
+}
+
+/**
+ * Check if a reclass is valid based on tier rules and level requirements
+ * 
+ * @param currentClassId - The current class ID
+ * @param targetClassId - The target class ID for reclass
+ * @param currentLevel - The current level of the unit
+ * @param classes - Array of class data
+ * @returns True if the reclass is valid, false otherwise
+ */
+export function isValidReclass(
+  currentClassId: string, 
+  targetClassId: string, 
+  currentLevel: number, 
+  classes: any[]
+): boolean {
+  const currentTier = getClassTier(currentClassId, classes);
+  const targetTier = getClassTier(targetClassId, classes);
+  
+  // Can't reclass to the same class
+  if (currentClassId.toLowerCase().replace(/\s+/g, '_') === targetClassId.toLowerCase().replace(/\s+/g, '_')) {
+    return false;
+  }
+  
+  // Rules for reclassing to Tier 1 classes
+  if (targetTier === 1) {
+    // Can reclass to Tier 1 if currently in Tier 2 (any level)
+    if (currentTier === 2) {
+      return true;
+    }
+    // Can reclass to Tier 1 if currently in Tier 1 and at least level 10
+    if (currentTier === 1 && currentLevel >= 10) {
+      return true;
+    }
+    return false;
+  }
+  
+  // Rules for reclassing to Tier 2 classes
+  if (targetTier === 2) {
+    // Can reclass to Tier 2 if currently in Tier 2 and at least level 10
+    if (currentTier === 2 && currentLevel >= 10) {
+      return true;
+    }
+    return false;
+  }
+  
+  // No reclassing to trainee classes (tier 0)
+  return false;
+}
+
+/**
+ * Get valid reclass options for a unit based on current class and level
+ * 
+ * @param unit - The unit to get reclass options for
+ * @param classes - Array of class data
+ * @returns Array of valid class IDs that the unit can reclass to
+ */
+export function getValidReclassOptions(unit: Unit, classes: any[]): string[] {
+  if (!unit.reclassOptions || unit.reclassOptions.length === 0) {
+    return [];
+  }
+  
+  const validOptions: string[] = [];
+  
+  for (const targetClassId of unit.reclassOptions) {
+    if (isValidReclass(unit.class, targetClassId, unit.level, classes)) {
+      validOptions.push(targetClassId);
+    }
+  }
+  
+  return validOptions;
+}
+
+/**
  * Calculate the minimum base level across all compared units
  * 
  * @param units - Array of units to compare
