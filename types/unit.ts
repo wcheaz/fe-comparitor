@@ -27,7 +27,7 @@ export interface PromotionEvent {
   selectedClassId: string;
 }
 
-export interface PromotionEvent {
+export interface ReclassEvent {
   level: number;
   selectedClassId: string;
 }
@@ -52,6 +52,7 @@ export interface Unit {
   reclassOptions?: string[]; // List of classes unit can reclass into
   promotions?: PromotionOption[]; // Branching promotion paths
   promotionEvents?: PromotionEvent[]; // Multi-tier promotion path history
+  reclassEvents?: ReclassEvent[]; // Multi-tier reclass path history
   affinity?: string; // Support affinity (Fire, Thunder, etc.)
   baseWeaponRanks?: Record<string, string>; // Starting weapon ranks e.g. { Swords: "D", Lances: "E" }
   crests?: string[]; // Crests for Three Houses units

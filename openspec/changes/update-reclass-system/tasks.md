@@ -1,8 +1,8 @@
 # Implementation Tasks: Reclass System
 
 ## 1. Schema Definitions
-- [ ] 1.1 Update `types/unit.ts` `Unit` interface to add `reclassEvents?: ReclassEvent[]`.
-- [ ] 1.2 Create `ReclassEvent` interface in `types/unit.ts`.
+- [x] 1.1 Update `types/unit.ts` `Unit` interface to add `reclassEvents?: ReclassEvent[]`.
+- [x] 1.2 Create `ReclassEvent` interface in `types/unit.ts`.
 
 ## 2. Stat Calculation Logic
 - [ ] 2.1 Update `lib/stats.ts` to export standard tier parsing functions if necessary.
