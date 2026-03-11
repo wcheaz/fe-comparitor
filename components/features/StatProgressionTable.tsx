@@ -425,8 +425,12 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
 
           const currentClass = getCurrentClass();
 
-          // Check if the unit can promote at all
-          const unitCanPromote = (currentClass?.promotesTo?.length ?? 0) > 0;
+          const baseOrReclassedClass = unitReclassEvents.length > 0
+            ? classes.find(c => c.id === unitReclassEvents[unitReclassEvents.length - 1].selectedClassId && c.game === unit.game)
+            : unitClass;
+
+          // Check if the unit's base class can promote, or if it already has existing promotion events
+          const unitCanPromote = (baseOrReclassedClass?.promotesTo?.length ?? 0) > 0 || unitPromotionEvents.length > 0;
 
           // Check if the unit can reclass (based on game and current class)
           const unitCanReclass = unit.game === 'awakening' && currentClass;
@@ -440,12 +444,12 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
                 <div className="flex flex-col space-y-2">
                   <span className="text-xs font-medium text-gray-600">Promotions:</span>
                   {(unitPromotionEvents.length === 0 ? [{
-                    level: isTraineeClass(currentClass?.id || '') ? 10 : 20,
-                    selectedClassId: currentClass?.promotesTo?.[0] || ''
+                    level: isTraineeClass(baseOrReclassedClass?.id || '') ? 10 : 20,
+                    selectedClassId: baseOrReclassedClass?.promotesTo?.[0] || ''
                   }] : unitPromotionEvents).map((event, eventIndex) => {
                     // Resolve the currentTierClass for the dropdown row
                     const currentTierClass = eventIndex === 0
-                      ? currentClass
+                      ? baseOrReclassedClass
                       : classes.find(c => c.id === unitPromotionEvents[eventIndex - 1]?.selectedClassId && c.game === unit.game);
 
                     const tierHasBranchingOptions = hasBranchingPromotions(currentTierClass);
@@ -465,7 +469,7 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
                             if (eventIndex < updatedEvents.length) {
                               updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
                             } else {
-                              updatedEvents.push({ level, selectedClassId: currentClass?.promotesTo?.[0] || '' });
+                              updatedEvents.push({ level, selectedClassId: currentTierClass?.promotesTo?.[0] || '' });
                             }
                             onPromotionEventsChange({
                               ...promotionEvents,
@@ -580,7 +584,7 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
               {/* Management Buttons */}
               <div className="flex items-center space-x-2 ml-6">
                 {/* Add Promotion Button */}
-                {onAddPromotionEvent && unitCanPromote && (
+                {onAddPromotionEvent && (currentClass?.promotesTo?.length ?? 0) > 0 && (
                   <button
                     onClick={() => {
                       const lastEvent = unitPromotionEvents[unitPromotionEvents.length - 1];
