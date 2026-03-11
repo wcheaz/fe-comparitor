@@ -77,6 +77,8 @@ interface ProgressionRow {
   stats: UnitStats[];
   cappedStats: Record<string, boolean>[];
   unitSkipped: boolean[];
+  unitIsPromotionLevel: boolean[];
+  unitPromotionInfo: ({ className: string; classAbilities: string[] } | undefined)[];
   isPromotionLevel: boolean;
   isSkipped?: boolean;
   promotionInfo?: {
@@ -176,6 +178,8 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
         stats: [],
         cappedStats: [],
         unitSkipped: [],
+        unitIsPromotionLevel: [],
+        unitPromotionInfo: [],
         isPromotionLevel: false
       };
 
@@ -216,10 +220,14 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
 
           rowData.stats.push(levelData.stats);
           rowData.cappedStats.push(levelData.cappedStats);
+          rowData.unitIsPromotionLevel.push(levelData.isPromotionLevel ?? false);
+          rowData.unitPromotionInfo.push(levelData.promotionInfo);
         } else {
           // Fallback for missing data
           rowData.stats.push({});
           rowData.cappedStats.push({});
+          rowData.unitIsPromotionLevel.push(false);
+          rowData.unitPromotionInfo.push(undefined);
         }
       }
 
@@ -787,9 +795,9 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
                               <span>
                                 {statValue !== undefined ? statValue : '-'}
                                 {/* Highlight promotion level */}
-                                {row.isPromotionLevel && (
+                                {row.unitIsPromotionLevel[unitIndex] && (
                                   <button
-                                    onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                                    onClick={() => handlePromotionInfoClick(row.unitPromotionInfo[unitIndex] || { className: '', classAbilities: [] }, unit.game)}
                                     className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                                     title="View promotion details"
                                   >
@@ -877,9 +885,9 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
                               <span>
                                 {statValue !== undefined ? statValue : '-'}
                                 {/* Highlight promotion level */}
-                                {row.isPromotionLevel && (
+                                {row.unitIsPromotionLevel[unitIndex] && (
                                   <button
-                                    onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                                    onClick={() => handlePromotionInfoClick(row.unitPromotionInfo[unitIndex] || { className: '', classAbilities: [] }, unit.game)}
                                     className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                                     title="View promotion details"
                                   >
