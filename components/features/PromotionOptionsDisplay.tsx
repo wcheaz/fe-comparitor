@@ -101,20 +101,41 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
 
     // Helper function to get reason why reclass is invalid
     const getReclassInvalidReason = (targetUnit: Unit, targetClass: Class): string => {
-      const validOptions = getValidReclassOptions(targetUnit, classes);
-      if (!validOptions.includes(targetClass.id) && !validOptions.includes(targetClass.name)) {
-        if (targetUnit.class.toLowerCase().replace(/\s+/g, '_') === targetClass.id.toLowerCase().replace(/\s+/g, '_')) {
-          const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
-          const requiredLevel = specialClasses.includes(targetClass.id.toLowerCase().replace(/\s+/g, '_')) ? 30 : 20;
-          if (targetUnit.level < requiredLevel) {
-            return `Must be Level ${requiredLevel} to reset current class`;
-          }
-        } else if (targetUnit.level < 10) {
-          return "Must be at least Level 10";
+      // Find current and target class tiers
+      const getCurrentClassTier = (classId: string): number => {
+        const cls = classes.find(c => 
+          (c.id === classId || c.name === classId) && c.game === targetUnit.game
+        );
+        // Convert tier to number, default to 1 if not available
+        return cls?.tier ? parseInt(cls.tier) : 1;
+      };
+      
+      const currentTier = getCurrentClassTier(targetUnit.class);
+      const targetTier = getCurrentClassTier(targetClass.id);
+      
+      // Same class reclassing (reset)
+      if (targetUnit.class.toLowerCase().replace(/\s+/g, '_') === targetClass.id.toLowerCase().replace(/\s+/g, '_')) {
+        const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
+        const normalizedId = targetClass.id.toLowerCase().replace(/\s+/g, '_');
+        const requiredLevel = specialClasses.includes(normalizedId) ? 30 : 20;
+        
+        if (targetUnit.level < requiredLevel) {
+          return `Must be Level ${requiredLevel}+ to reset current class`;
         }
-        return "Not a valid reclass target";
       }
-      return "";
+      
+      // Horizontal reclassing (same tier)
+      if (currentTier === targetTier) {
+        if (currentTier === 1 && targetUnit.level < 10) {
+          return "Must be Level 10+ to reclass (unpromoted)";
+        }
+        if (currentTier === 2 && targetUnit.level < 10) {
+          return "Must be Level 10+ to reclass (promoted)";
+        }
+      }
+      
+      // If we get here, it's not a valid reclass target according to Awakening rules
+      return "Not a valid reclass target";
     };
 
     const validReclassOptions: ReclassOption[] = [];
