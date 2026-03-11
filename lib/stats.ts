@@ -374,8 +374,14 @@ export function generateProgressionArray(
     });
   });
   
-  // Sort all events by level
-  allEvents.sort((a, b) => a.level - b.level);
+  // Sort all events by level, with reclass events before promotion events at the same level
+  allEvents.sort((a, b) => {
+    if (a.level !== b.level) {
+      return a.level - b.level;
+    }
+    // At the same level, process reclass events before promotion events
+    return a.type === 'reclass' ? -1 : 1;
+  });
   
   // Determine promotion levels and target classes for multi-tier promotions
   const promoLevels: number[] = [];
