@@ -525,31 +525,34 @@ export function generateProgressionArray(
       if (targetClass) {
         // Calculate accumulated stats up to the reclass level
         const accumulatedStats: UnitStats = {};
-        const reclassLevelDiff = internalLevel - unit.level;
+        
+        // Calculate the correct level difference for reclass
+        // This should be the levels gained since the last reclass/promotion or the unit's base level
+        let reclassLevelDiff: number;
+        if (hasReclassedAtThisLevel) {
+          // If this is a subsequent reclass, calculate from level 1
+          reclassLevelDiff = displayLevelNum - 1;
+        } else {
+          // First reclass, calculate from unit's base level
+          reclassLevelDiff = internalLevel - unit.level;
+        }
         
         // Get all stat keys from the unit's stats and growths
         const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
         
-        // For Awakening units, create a temporary base with current class statModifiers
-        let tempBaseStats = { ...baseStatForCalc };
-        if (unit.game === "Awakening" && currentClass?.statModifiers) {
-          Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
-            if (modifier !== undefined) {
-              tempBaseStats[statKey] = (tempBaseStats[statKey] || 0) + (modifier as number);
-            }
-          });
-        }
+        // For accumulated stats, start with the raw unit stats (without current class modifiers)
+        let rawBaseStats = { ...unit.stats };
         
         allStatKeys.forEach(statKey => {
           let growthRate = unit.growths[statKey] || 0;
           
-          // For Awakening units, combine unit growths with class growths
+          // For Awakening units, combine unit growths with current class growths
           if (unit.game === "Awakening" && currentClass?.growths) {
             const classGrowth = currentClass.growths[statKey] || 0;
             growthRate += classGrowth;
           }
           
-const baseStatValue = tempBaseStats[statKey] || 0;
+          const baseStatValue = rawBaseStats[statKey] || 0;
           const growthAmount = (growthRate * reclassLevelDiff) / 100;
           let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
           
@@ -564,7 +567,7 @@ const baseStatValue = tempBaseStats[statKey] || 0;
         // Update current class
         currentClass = targetClass;
         
-        // Reset display level to 1 (but keep internal progression)
+        // Reset display level to 1 for the new class
         displayLevelNum = 1;
         displayLevel = `Level ${displayLevelNum} (Reclassed to ${targetClass.name})`;
         
@@ -594,6 +597,9 @@ const baseStatValue = tempBaseStats[statKey] || 0;
             baseStatForCalc[statKey] = Math.min(baseStatForCalc[statKey], newCap);
           }
         });
+        
+        // Reset levelDiff for the new class progression (starting from level 1)
+        levelDiff = 0;
       }
     }
     
