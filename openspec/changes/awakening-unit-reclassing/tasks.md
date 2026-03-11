@@ -9,5 +9,5 @@
 
 - [x] 2.1 In `components/features/PromotionOptionsDisplay.tsx` (lines 97-141), verify the `reclassOptions` memoized block correctly identifies valid reclass targets for the unit's current level and tier.
 - [x] 2.2 In `components/features/PromotionOptionsDisplay.tsx` (lines 162-216), ensure the "Reclass Options Section" correctly dispatches the `onReclassEventsChange` callback when a user clicks "Reclass Here".
-- [ ] 2.3 In `components/features/PromoOptionsDisplay.tsx` (lines 106-114), ensure the `getReclassInvalidReason` function strictly enforces Awakening's reclass rules (e.g., Unpromoted units must go to level 10+, special classes to level 30 to reset).
+- [x] 2.3 In `components/features/PromotionOptionsDisplay.tsx` (lines 103-139), ensure the `getReclassInvalidReason` function strictly enforces Awakening's reclass rules (e.g., Unpromoted units must go to level 10+, special classes to level 30 to reset).
 - [ ] 2.4 In `components/features/StatProgressionTable.tsx` (lines 402-622), within the "Per-Unit Promotion Configs" map, ensure the table gracefully handles rendering rows when multiple `reclassEvents` result in overlapping or continuous loops of `displayLevelNum` from 1 to 20/30.

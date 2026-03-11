@@ -113,7 +113,7 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
       const currentTier = getCurrentClassTier(targetUnit.class);
       const targetTier = getCurrentClassTier(targetClass.id);
       
-      // Same class reclassing (reset)
+      // Same class reclassing (reset) - strictly enforce Awakening rules
       if (targetUnit.class.toLowerCase().replace(/\s+/g, '_') === targetClass.id.toLowerCase().replace(/\s+/g, '_')) {
         const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
         const normalizedId = targetClass.id.toLowerCase().replace(/\s+/g, '_');
@@ -124,13 +124,10 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
         }
       }
       
-      // Horizontal reclassing (same tier)
+      // Horizontal reclassing (same tier) - unpromoted units must be level 10+
       if (currentTier === targetTier) {
         if (currentTier === 1 && targetUnit.level < 10) {
           return "Must be Level 10+ to reclass (unpromoted)";
-        }
-        if (currentTier === 2 && targetUnit.level < 10) {
-          return "Must be Level 10+ to reclass (promoted)";
         }
       }
       
