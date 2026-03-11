@@ -37,5 +37,18 @@
     "completedTasks": [
       "1.2 In `lib/stats.ts` (lines 356-379), verify the logic that combines and sorts all `promotionEvents` and `reclassEvents` chronologically by level into the `allEvents` array."
     ]
+  },
+  {
+    "timestamp": "2026-03-11T01:11:41.165Z",
+    "iteration": 3,
+    "duration": 116336,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": [
+      "1.3 In `lib/stats.ts` (lines 500-592), refine the `reclassEventAtThisLevel` block. Ensure that when a reclass event fires, the unit's internal level resets to 1 (`displayLevelNum = 1`), and the `baseStatForCalc` accurately captures accumulated stats plus the new class's modifiers/caps."
+    ]
   }
 ]

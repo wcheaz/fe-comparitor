@@ -808,25 +808,51 @@ export function generateProgressionArray(
       }
     }
 
-    // Check maxLevel constraints
-    if (!isSkipped && unit.maxLevel !== undefined && unit.maxLevel !== "infinite") {
-      const maxLevelCap = unit.maxLevel as number;
-
-      // Calculate the effective level considering trainee offsets
-      let effectiveLevel: number;
-      if (tier === 0) {
-        // For trainee levels, they don't count toward the max level cap
-        effectiveLevel = 0;
-      } else if (hasTraineeLevels) {
-        // For units with trainee levels, account for the trainee progression
-        const traineeLevelsCount = Math.abs(traineeOffset);
-        effectiveLevel = internalLevel + traineeLevelsCount;
-      } else {
-        effectiveLevel = internalLevel;
+    // Check maxLevel constraints and class-specific level caps
+    if (!isSkipped) {
+      // Determine the class-specific level cap for the current class
+      let classLevelCap = 20; // Default level cap for most classes
+      
+      // Special classes have a level cap of 30 in Awakening
+      if (unit.game === "Awakening" && currentClass) {
+        const specialClassIds = ["taguel", "manakete", "villager", "dancer"];
+        if (specialClassIds.includes(currentClass.id)) {
+          classLevelCap = 30;
+        }
       }
-
-      // If the effective level exceeds maxLevel, skip this row
-      if (effectiveLevel > maxLevelCap) {
+      
+      // Check if there are more events (reclass/promotion) after the current level
+      const hasMoreEvents = allEvents.some(event => event.level > internalLevel);
+      
+      // For infinite leveling units, skip bounds checking
+      if (unit.maxLevel === "infinite") {
+        // Continue generation - no skipping based on level caps
+      } 
+      // For units with finite maxLevel, check both unit maxLevel and class level cap
+      else if (unit.maxLevel !== undefined) {
+        const maxLevelCap = unit.maxLevel as number;
+        
+        // Calculate the effective level considering trainee offsets
+        let effectiveLevel: number;
+        if (tier === 0) {
+          // For trainee levels, they don't count toward the max level cap
+          effectiveLevel = 0;
+        } else if (hasTraineeLevels) {
+          // For units with trainee levels, account for the trainee progression
+          const traineeLevelsCount = Math.abs(traineeOffset);
+          effectiveLevel = internalLevel + traineeLevelsCount;
+        } else {
+          effectiveLevel = internalLevel;
+        }
+        
+        // Check if we need to skip this row
+        // Skip if: effective level exceeds unit's maxLevel AND display level exceeds class cap AND no more events
+        if (effectiveLevel > maxLevelCap && displayLevelNum > classLevelCap && !hasMoreEvents) {
+          isSkipped = true;
+        }
+      }
+      // For units without explicit maxLevel, only check class level cap and events
+      else if (displayLevelNum > classLevelCap && !hasMoreEvents) {
         isSkipped = true;
       }
     }

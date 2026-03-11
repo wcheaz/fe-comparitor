@@ -3,7 +3,7 @@
 - [x] 1.1 In `lib/stats.ts` (`generateProgressionArray`, lines 311-333), ensure `reclassEvents` are properly typed and accepted as an argument alongside `promotionEvents`.
 - [x] 1.2 In `lib/stats.ts` (lines 356-379), verify the logic that combines and sorts all `promotionEvents` and `reclassEvents` chronologically by level into the `allEvents` array. 
 - [x] 1.3 In `lib/stats.ts` (lines 500-592), refine the `reclassEventAtThisLevel` block. Ensure that when a reclass event fires, the unit's internal level resets to 1 (`displayLevelNum = 1`), and the `baseStatForCalc` accurately captures accumulated stats plus the new class's modifiers/caps.
-- [ ] 1.4 In `lib/stats.ts` (lines 799+), ensure the bounds checking (`isSkipped` and `maxLevel` logic) accounts for the new class's class tier caps (e.g. 20 or 30), preventing infinite UI loops unless the user explicitly added another event or the unit has `maxLevel === "infinite"`.
+- [x] 1.4 In `lib/stats.ts` (lines 799+), ensure the bounds checking (`isSkipped` and `maxLevel` logic) accounts for the new class's class tier caps (e.g. 20 or 30), preventing infinite UI loops unless the user explicitly added another event or the unit has `maxLevel === "infinite"`.
 
 ## 2. UI Updates for Reclassing
 
