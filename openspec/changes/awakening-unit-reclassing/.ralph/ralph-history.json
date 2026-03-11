@@ -81,5 +81,55 @@
     "completedTasks": [
       "2.1 In `components/features/PromotionOptionsDisplay.tsx` (lines 97-141), verify the `reclassOptions` memoized block correctly identifies valid reclass targets for the unit's current level and tier."
     ]
+  },
+  {
+    "timestamp": "2026-03-11T01:18:22.192Z",
+    "iteration": 6,
+    "duration": 87657,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": [
+      "2.2 In `components/features/PromotionOptionsDisplay.tsx` (lines 162-216), ensure the \"Reclass Options Section\" correctly dispatches the `onReclassEventsChange` callback when a user clicks \"Reclass Here\"."
+    ]
+  },
+  {
+    "timestamp": "2026-03-11T01:21:55.848Z",
+    "iteration": 7,
+    "duration": 213656,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": []
+  },
+  {
+    "timestamp": "2026-03-11T01:24:15.079Z",
+    "iteration": 8,
+    "duration": 139230,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": [
+      "2.3 In `components/features/PromotionOptionsDisplay.tsx` (lines 103-139), ensure the `getReclassInvalidReason` function strictly enforces Awakening's reclass rules (e.g., Unpromoted units must go to level 10+, special classes to level 30 to reset)."
+    ]
+  },
+  {
+    "timestamp": "2026-03-11T01:28:34.367Z",
+    "iteration": 9,
+    "duration": 259287,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": 0,
+    "completedTasks": [
+      "2.4 In `components/features/StatProgressionTable.tsx` (lines 402-622), within the \"Per-Unit Promotion Configs\" map, ensure the table gracefully handles rendering rows when multiple `reclassEvents` result in overlapping or continuous loops of `displayLevelNum` from 1 to 20/30."
+    ]
   }
 ]
