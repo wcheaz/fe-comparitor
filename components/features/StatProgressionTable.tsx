@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
-import { generateProgressionArray } from '@/lib/stats';
+import { generateProgressionArray, getValidReclassOptions } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import AbilityPill from '@/components/ui/AbilityPill';
 import { Modal } from '@/components/ui/modal';
@@ -122,9 +122,15 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
       return hasTraineeLevels ? -10 : unit.level;
     }), 1);
 
-    const maxLevelFromUnits = Math.max(...units.map(unit =>
-      unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40)
-    ), 40);
+    const maxLevelFromUnits = Math.max(...units.map(unit => {
+      const allEvents = [...(promotionEvents[unit.id] || []), ...(reclassEvents[unit.id] || [])];
+      let internalLvls = unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40);
+      if (allEvents.length > 0) {
+        // Assume roughly 20-30 internal levels required to process each class change fully
+        internalLvls += allEvents.length * 30;
+      }
+      return Math.max(40, internalLvls);
+    }), 40);
     const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnits, 100) : maxLevelFromUnits;
 
     // Generate progression arrays for all units
@@ -159,9 +165,9 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
 
     // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
-    const totalLevels = maxLevel - minLevel + 1;
+    const maxProgressionLength = Math.max(...allProgressions.map(p => p.length), 0);
 
-    for (let i = 0; i < totalLevels; i++) {
+    for (let i = 0; i < maxProgressionLength; i++) {
       const currentInternalLevel = minLevel + i;
       let displayLevel = `Level ${currentInternalLevel}`;
 
@@ -433,198 +439,375 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
           const unitCanPromote = (baseOrReclassedClass?.promotesTo?.length ?? 0) > 0 || unitPromotionEvents.length > 0;
 
           // Check if the unit can reclass (based on game and current class)
-          const unitCanReclass = unit.game === 'awakening' && currentClass;
+          const unitCanReclass = unit.game?.toLowerCase() === 'awakening' && currentClass;
 
           return (
             <div key={`config-${unit.id}`} className="flex flex-col space-y-3">
               <label className="text-sm font-semibold text-gray-700">{unit.name}:</label>
 
-              {/* Promotion Events Section */}
-              {unitCanPromote && (
+              {/* Unified Class Changes Section */}
+              {(unitCanPromote || unitCanReclass) && (
                 <div className="flex flex-col space-y-2">
-                  <span className="text-xs font-medium text-gray-600">Promotions:</span>
-                  {(unitPromotionEvents.length === 0 ? [{
-                    level: isTraineeClass(baseOrReclassedClass?.id || '') ? 10 : 20,
-                    selectedClassId: baseOrReclassedClass?.promotesTo?.[0] || ''
-                  }] : unitPromotionEvents).map((event, eventIndex) => {
-                    // Resolve the currentTierClass for the dropdown row
-                    const currentTierClass = eventIndex === 0
-                      ? baseOrReclassedClass
-                      : classes.find(c => c.id === unitPromotionEvents[eventIndex - 1]?.selectedClassId && c.game === unit.game);
+                  <span className="text-xs font-medium text-gray-600">Class Changes:</span>
+                  
+                  {(() => {
+                    // Combine and sort events chronologically for UI rendering
+                    const allEvents: Array<{type: 'promotion' | 'reclass', originalIndex: number, level: number, selectedClassId: string, order: number}> = [];
+                    
+                    unitPromotionEvents.forEach((event, idx) => {
+                      allEvents.push({ type: 'promotion', originalIndex: idx, level: event.level, selectedClassId: event.selectedClassId, order: event.order ?? (idx * 2) });
+                    });
+                    unitReclassEvents.forEach((event, idx) => {
+                      allEvents.push({ type: 'reclass', originalIndex: idx, level: event.level, selectedClassId: event.selectedClassId, order: event.order ?? (idx * 2 + 1) });
+                    });
+                    
+                    // Sort by sequential order (same way lib/stats.ts processes them)
+                    allEvents.sort((a, b) => {
+                      if (a.order !== b.order) return a.order - b.order;
+                      if (a.level !== b.level) return a.level - b.level;
+                      return a.type === 'reclass' ? -1 : 1;
+                    });
+                    
+                    // If no events exist but they CAN promote, seed a default empty promotion block for UI interaction
+                    if (allEvents.length === 0 && unitCanPromote) {
+                      allEvents.push({
+                        type: 'promotion',
+                        originalIndex: 0,
+                        level: isTraineeClass(baseOrReclassedClass?.id || '') ? 10 : 20,
+                        selectedClassId: baseOrReclassedClass?.promotesTo?.[0] || '',
+                        order: 0
+                      });
+                    }
 
-                    const tierHasBranchingOptions = hasBranchingPromotions(currentTierClass);
-                    const tierPromotionOptions = getPromotionOptions(currentTierClass, classes);
+                    return allEvents.map((event, eventIndex) => {
+                       // Determine what class the unit was right before this specific event decision
+                      const previousClassId = eventIndex === 0 
+                        ? unitClass?.id 
+                        : allEvents[eventIndex - 1].selectedClassId;
+                      const previousClass = classes.find(c => c.id === previousClassId && c.game === unit.game);
 
-                    return (
-                      <div key={`promo-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
-                        <span className="text-xs text-gray-500">Tier {eventIndex + 1}:</span>
+                      // Gather potential options for this event:
+                      // 1. Promotions from the previous class
+                      const promoOptionIds = previousClass?.promotesTo || [];
+                      
+                      // 2. Reclass options valid at this level and tier
+                      const reclassOptionIds = unitCanReclass 
+                        ? getValidReclassOptions(unit, classes, event.level, previousClass?.id)
+                        : [];
+                      
+                      const validOptionsSet = new Set([...promoOptionIds, ...reclassOptionIds]);
+                      const sortedValidOptions = Array.from(validOptionsSet)
+                        .map(rawId => {
+                          const classId = rawId.toLowerCase().replace(/\s+/g, '_');
+                          return classes.find(c => c.id === classId && c.game === unit.game);
+                        })
+                        .filter(Boolean) as Class[];
 
-                        <select
-                          id={`promo-${unit.id}-${eventIndex}`}
-                          value={event.level}
-                          onChange={(e) => {
-                            const level = Number(e.target.value);
-                            let updatedEvents = [...unitPromotionEvents];
+                      // Sort by Tier (Tier 2 first, then Tier 1), current class last
+                      sortedValidOptions.sort((a, b) => {
+                        // Push current class to bottom
+                        if (a.id === previousClassId && b.id !== previousClassId) return 1;
+                        if (b.id === previousClassId && a.id !== previousClassId) return -1;
+                        const tierA = a.tier ? parseInt(String(a.tier)) : (a.type === 'promoted' ? 2 : 1);
+                        const tierB = b.tier ? parseInt(String(b.tier)) : (b.type === 'promoted' ? 2 : 1);
+                        return tierB - tierA; // Descending
+                      });
 
-                            if (eventIndex < updatedEvents.length) {
-                              updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
-                            } else {
-                              updatedEvents.push({ level, selectedClassId: currentTierClass?.promotesTo?.[0] || '' });
-                            }
-                            onPromotionEventsChange({
-                              ...promotionEvents,
-                              [unit.id]: updatedEvents
-                            });
-                          }}
-                          className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        >
-                          {isTraineeClass(currentTierClass?.id || '') ? (
-                            <option value={10}>10</option>
-                          ) : (
-                            [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                              .filter(level => level >= Math.max(10, unit.level))
-                              .map(level => (
-                                <option key={level} value={level}>{level}</option>
-                              ))
-                          )}
-                        </select>
-
-                        {tierHasBranchingOptions && tierPromotionOptions.length > 0 && (
+                      return (
+                        <div key={`classchange-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
+                          <span className="text-xs text-gray-500">Change {eventIndex + 1}:</span>
+                          
                           <select
-                            id={`promo-class-${unit.id}-${eventIndex}`}
-                            value={event.selectedClassId || tierPromotionOptions[0]?.id || ''}
+                            id={`change-level-${unit.id}-${eventIndex}`}
+                            value={event.level}
                             onChange={(e) => {
-                              const selectedClassId = e.target.value;
-                              let updatedEvents = [...unitPromotionEvents];
-
-                              if (eventIndex < updatedEvents.length) {
-                                updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
-                              } else {
-                                updatedEvents.push({
-                                  level: isTraineeClass(currentTierClass?.id || '') ? 10 : 20,
-                                  selectedClassId
-                                });
+                              const level = Number(e.target.value);
+                              
+                              // Re-evaluate validity at the new level to prevent keeping invalid classes
+                              const newReclassOptions = unitCanReclass ? getValidReclassOptions(unit, classes, level, previousClass?.id) : [];
+                              let newSelectedClassId = event.selectedClassId;
+                              
+                              if (event.type === 'reclass' && !newReclassOptions.includes(event.selectedClassId)) {
+                                newSelectedClassId = newReclassOptions.length > 0 ? newReclassOptions[0] : '';
+                              } else if (event.type === 'promotion' && !promoOptionIds.includes(event.selectedClassId)) {
+                                newSelectedClassId = promoOptionIds.length > 0 ? promoOptionIds[0] : '';
                               }
-                              onPromotionEventsChange({
-                                ...promotionEvents,
-                                [unit.id]: updatedEvents
-                              });
+
+                              if (event.type === 'promotion') {
+                                const updatedEvents = [...unitPromotionEvents];
+                                if (event.originalIndex < updatedEvents.length) {
+                                  updatedEvents[event.originalIndex] = { ...updatedEvents[event.originalIndex], level, selectedClassId: newSelectedClassId };
+                                } else {
+                                  // Seeded empty level from UI being interacted with
+                                  updatedEvents.push({ level, selectedClassId: newSelectedClassId, order: Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1 });
+                                }
+                                onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedEvents });
+                              } else {
+                                const updatedEvents = [...unitReclassEvents];
+                                updatedEvents[event.originalIndex] = { ...updatedEvents[event.originalIndex], level, selectedClassId: newSelectedClassId };
+                                onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedEvents });
+                              }
                             }}
                             className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
                           >
-                            {tierPromotionOptions.map(option => (
-                              <option key={option.id} value={option.id}>
-                                {option.name}
-                              </option>
-                            ))}
+                            {isTraineeClass(previousClass?.id || '') ? (
+                              <option value={10}>10</option>
+                            ) : (
+                              (() => {
+                                const prevTier = typeof previousClass?.tier === 'number' ? previousClass.tier : (previousClass?.type === 'promoted' ? 2 : 1);
+                                const isSpecial = ["taguel", "manakete", "villager", "dancer", "lodestar", "bride", "dread_fighter", "conqueror"].includes(previousClass?.id || '');
+                                const maxLvl = isSpecial ? 30 : 20;
+                                const minLvl = prevTier === 2 ? 1 : 10;
+                                
+                                const options = [];
+                                for (let i = minLvl; i <= maxLvl; i++) {
+                                  if (eventIndex === 0 && i < unit.level) continue;
+                                  options.push(<option key={i} value={i}>{i}</option>);
+                                }
+                                return options;
+                              })()
+                            )}
                           </select>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
 
-              {/* Reclass Events Section */}
-              {unitCanReclass && (
-                <div className="flex flex-col space-y-2">
-                  <span className="text-xs font-medium text-gray-600">Reclasses:</span>
-                  {unitReclassEvents.map((event, eventIndex) => (
-                    <div key={`reclass-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
-                      <span className="text-xs text-gray-500">Reclass {eventIndex + 1}:</span>
-                      
-                      <select
-                        id={`reclass-${unit.id}-${eventIndex}`}
-                        value={event.level}
-                        onChange={(e) => {
-                          const level = Number(e.target.value);
-                          const updatedEvents = [...unitReclassEvents];
-                          updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], level };
-                          onReclassEventsChange({
-                            ...reclassEvents,
-                            [unit.id]: updatedEvents
-                          });
-                        }}
-                        className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      >
-                        {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-                          .filter(level => level >= Math.max(10, unit.level))
-                          .map(level => (
-                            <option key={level} value={level}>{level}</option>
-                          ))}
-                      </select>
+                          {sortedValidOptions.length > 0 && (
+                            <select
+                              id={`change-class-${unit.id}-${eventIndex}`}
+                              value={event.selectedClassId || sortedValidOptions[0]?.id || ''}
+                              onChange={(e) => {
+                                const selectedClassId = e.target.value;
+                                
+                                // To correctly update state, we need to know if the newly selected class is a promotion or a reclass
+                                // It is a promotion if it exists within the generic promotesTo array of the previous class
+                                const isNowPromotion = previousClass?.promotesTo?.includes(selectedClassId);
 
-                      <select
-                        id={`reclass-class-${unit.id}-${eventIndex}`}
-                        value={event.selectedClassId}
-                        onChange={(e) => {
-                          const selectedClassId = e.target.value;
-                          const updatedEvents = [...unitReclassEvents];
-                          updatedEvents[eventIndex] = { ...updatedEvents[eventIndex], selectedClassId };
-                          onReclassEventsChange({
-                            ...reclassEvents,
-                            [unit.id]: updatedEvents
-                          });
-                        }}
-                        className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      >
-                        {classes
-                          .filter(c => c.game === unit.game && c.tier === currentClass?.tier)
-                          .map(option => (
-                            <option key={option.id} value={option.id}>
-                              {option.name}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  ))}
+                                // If the event TYPE changed (i.e. was a promotion line, but user picked a reclass class)
+                                // We have to rip it out of the old state array, and append it to the new state array
+                                if (isNowPromotion && event.type === 'reclass') {
+                                  const updatedReclass = unitReclassEvents.filter((_, i) => i !== event.originalIndex);
+                                  const nextOrder = Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1;
+                                  const updatedPromo = [...unitPromotionEvents, { level: event.level, selectedClassId, order: nextOrder }];
+                                  onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
+                                  onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
+                                } else if (!isNowPromotion && event.type === 'promotion') {
+                                  const updatedPromo = unitPromotionEvents.filter((_, i) => i !== event.originalIndex);
+                                  const nextOrder = Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1;
+                                  const updatedReclass = [...unitReclassEvents, { level: event.level, selectedClassId, order: nextOrder }];
+                                  onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
+                                  onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
+                                } else {
+                                  // The type remained the same, just update the selectedClassId
+                                  if (isNowPromotion) {
+                                    const updatedPromo = [...unitPromotionEvents];
+                                    if (event.originalIndex < updatedPromo.length) {
+                                      updatedPromo[event.originalIndex] = { ...updatedPromo[event.originalIndex], selectedClassId };
+                                    } else {
+                                      updatedPromo.push({ level: event.level, selectedClassId, order: Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1 }); // Was seed
+                                    }
+                                    onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
+                                  } else {
+                                    const updatedReclass = [...unitReclassEvents];
+                                    updatedReclass[event.originalIndex] = { ...updatedReclass[event.originalIndex], selectedClassId };
+                                    onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
+                                  }
+                                }
+                              }}
+                              className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            >
+                              {sortedValidOptions.map(option => (
+                                <option key={option.id} value={option.id}>
+                                  {option.name}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      );
+                    });
+                  })()}
                 </div>
               )}
 
               {/* Management Buttons */}
               <div className="flex items-center space-x-2 ml-6">
-                {/* Add Promotion Button */}
-                {onAddPromotionEvent && (currentClass?.promotesTo?.length ?? 0) > 0 && (
+                {/* Add Class Change Button */}
+                {(unitCanPromote || unitCanReclass) && (
                   <button
                     onClick={() => {
-                      const lastEvent = unitPromotionEvents[unitPromotionEvents.length - 1];
-                      const lastSelectedClass = lastEvent 
-                        ? classes.find(c => c.id === lastEvent.selectedClassId && c.game === unit.game)
-                        : currentClass;
+                      // If no real events exist but the UI shows a seeded default promotion,
+                      // we need to commit that seeded event first, then add the new one on top
+                      const hasNoRealEvents = unitPromotionEvents.length === 0 && unitReclassEvents.length === 0;
 
-                      if (lastSelectedClass?.promotesTo && lastSelectedClass.promotesTo.length > 0) {
-                        const newEvent: PromotionEvent = {
-                          level: isTraineeClass(lastSelectedClass?.id || '') ? 10 : 20,
-                          selectedClassId: lastSelectedClass.promotesTo[0]
+                      if (hasNoRealEvents && baseOrReclassedClass?.promotesTo && baseOrReclassedClass.promotesTo.length > 0) {
+                        // Commit the seeded default promotion
+                        const seededEvent: PromotionEvent = {
+                          level: isTraineeClass(baseOrReclassedClass.id) ? 10 : 20,
+                          selectedClassId: baseOrReclassedClass.promotesTo[0],
+                          order: 0
                         };
-
-                        onPromotionEventsChange({
-                          ...promotionEvents,
-                          [unit.id]: [...unitPromotionEvents, newEvent]
+                        
+                        // Now figure out the next event based on the promoted class
+                        const promotedClass = classes.find(c => c.id === seededEvent.selectedClassId && c.game === unit.game);
+                        
+                        // Gather all valid options from promoted class, sort by tier descending
+                        const promoIds = promotedClass?.promotesTo || [];
+                        const reclassIds = unitCanReclass
+                          ? getValidReclassOptions(unit, classes, 20, promotedClass?.id)
+                          : [];
+                        const allIds = new Set([...promoIds, ...reclassIds]);
+                        const sortedOpts = Array.from(allIds)
+                          .map(rawId => {
+                            const classId = rawId.toLowerCase().replace(/\s+/g, '_');
+                            return classes.find(c => c.id === classId && c.game === unit.game);
+                          })
+                          .filter(Boolean) as Class[];
+                        sortedOpts.sort((a, b) => {
+                          if (a.id === promotedClass?.id && b.id !== promotedClass?.id) return 1;
+                          if (b.id === promotedClass?.id && a.id !== promotedClass?.id) return -1;
+                          const tierA = a.tier ? parseInt(String(a.tier)) : (a.type === 'promoted' ? 2 : 1);
+                          const tierB = b.tier ? parseInt(String(b.tier)) : (b.type === 'promoted' ? 2 : 1);
+                          return tierB - tierA;
                         });
+
+                        if (sortedOpts.length > 0) {
+                          const picked = sortedOpts[0];
+                          const isPromo = promoIds.includes(picked.id);
+
+                          if (isPromo) {
+                            const newEvent: PromotionEvent = { level: 20, selectedClassId: picked.id, order: 1 };
+                            onPromotionEventsChange({
+                              ...promotionEvents,
+                              [unit.id]: [seededEvent, newEvent]
+                            });
+                          } else {
+                            const newEvent: ReclassEvent = { level: 20, selectedClassId: picked.id, order: 1 };
+                            onPromotionEventsChange({
+                              ...promotionEvents,
+                              [unit.id]: [seededEvent]
+                            });
+                            onReclassEventsChange({
+                              ...reclassEvents,
+                              [unit.id]: [newEvent]
+                            });
+                          }
+                        } else {
+                          // No further options, just commit the seeded event
+                          onPromotionEventsChange({
+                            ...promotionEvents,
+                            [unit.id]: [seededEvent]
+                          });
+                        }
+                        return;
+                      }
+
+                      // Normal case: real events already exist
+                      let lastEvent: {type: 'promotion'|'reclass', classId: string, level: number} | null = null;
+                      
+                      const allEvents = [
+                        ...unitPromotionEvents.map(e => ({ type: 'promotion' as const, classId: e.selectedClassId, level: e.level, order: e.order ?? 0 })),
+                        ...unitReclassEvents.map(e => ({ type: 'reclass' as const, classId: e.selectedClassId, level: e.level, order: e.order ?? 0 }))
+                      ].sort((a, b) => {
+                        if (a.order !== b.order) return a.order - b.order;
+                        if (a.level !== b.level) return a.level - b.level;
+                        return a.type === 'reclass' ? -1 : 1;
+                      });
+
+                      if (allEvents.length > 0) {
+                        lastEvent = allEvents[allEvents.length - 1];
+                      }
+
+                      const currentResolvedClassId = lastEvent?.classId || unitClass?.id;
+                      const currentResolvedClass = classes.find(c => c.id === currentResolvedClassId && c.game === unit.game);
+
+                      // Gather all valid options (same as dropdown rendering)
+                      const promoOptionIds = currentResolvedClass?.promotesTo || [];
+                      const reclassOptionIds = unitCanReclass
+                        ? getValidReclassOptions(unit, classes, 20, currentResolvedClassId)
+                        : [];
+                      
+                      const allOptionIds = new Set([...promoOptionIds, ...reclassOptionIds]);
+                      const sortedOptions = Array.from(allOptionIds)
+                        .map(rawId => {
+                          const classId = rawId.toLowerCase().replace(/\s+/g, '_');
+                          return classes.find(c => c.id === classId && c.game === unit.game);
+                        })
+                        .filter(Boolean) as Class[];
+                      
+                      // Sort by tier descending (Tier 2 first), current class last — same order as dropdown
+                      sortedOptions.sort((a, b) => {
+                        if (a.id === currentResolvedClassId && b.id !== currentResolvedClassId) return 1;
+                        if (b.id === currentResolvedClassId && a.id !== currentResolvedClassId) return -1;
+                        const tierA = a.tier ? parseInt(String(a.tier)) : (a.type === 'promoted' ? 2 : 1);
+                        const tierB = b.tier ? parseInt(String(b.tier)) : (b.type === 'promoted' ? 2 : 1);
+                        return tierB - tierA;
+                      });
+
+                      if (sortedOptions.length > 0) {
+                        const selectedClass = sortedOptions[0];
+                        const isPromotion = promoOptionIds.includes(selectedClass.id);
+                        const nextOrder = Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1;
+                        const defaultLevel = isTraineeClass(currentResolvedClass?.id || '') ? 10 : 20;
+
+                        if (isPromotion) {
+                          const newEvent: PromotionEvent = {
+                            level: defaultLevel,
+                            selectedClassId: selectedClass.id,
+                            order: nextOrder
+                          };
+                          onPromotionEventsChange({
+                            ...promotionEvents,
+                            [unit.id]: [...unitPromotionEvents, newEvent]
+                          });
+                        } else {
+                          const newEvent: ReclassEvent = {
+                            level: defaultLevel,
+                            selectedClassId: selectedClass.id,
+                            order: nextOrder
+                          };
+                          onReclassEventsChange({
+                            ...reclassEvents,
+                            [unit.id]: [...unitReclassEvents, newEvent]
+                          });
+                        }
                       }
                     }}
-                    className="w-6 h-6 rounded-full bg-green-500 hover:bg-green-600 text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-green-500"
-                    title="Add promotion tier"
+                    className="w-6 h-6 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    title="Add class change"
                   >
                     +
                   </button>
                 )}
 
-                {/* Remove Promotion Button */}
-                {onRemovePromotionEvent && unitPromotionEvents.length > 0 && (
+                {/* Remove Class Change Button */}
+                {(unitPromotionEvents.length + unitReclassEvents.length > 1) && (
                   <button
                     onClick={() => {
-                      if (unitPromotionEvents.length > 1) {
-                        onPromotionEventsChange({
-                          ...promotionEvents,
-                          [unit.id]: unitPromotionEvents.slice(0, -1)
-                        });
+                      // Figure out what the chronologically last event was
+                      const allEvents = [
+                        ...unitPromotionEvents.map((e, idx) => ({ type: 'promotion' as const, level: e.level, order: e.order ?? 0, idx })),
+                        ...unitReclassEvents.map((e, idx) => ({ type: 'reclass' as const, level: e.level, order: e.order ?? 0, idx }))
+                      ].sort((a, b) => {
+                        if (a.order !== b.order) return a.order - b.order;
+                        if (a.level !== b.level) return a.level - b.level;
+                        return a.type === 'reclass' ? -1 : 1;
+                      });
+
+                      if (allEvents.length > 0) {
+                        const lastEvent = allEvents[allEvents.length - 1];
+                        if (lastEvent.type === 'promotion') {
+                           onPromotionEventsChange({
+                             ...promotionEvents,
+                             [unit.id]: unitPromotionEvents.filter((_, i) => i !== lastEvent.idx)
+                           });
+                        } else {
+                          onReclassEventsChange({
+                            ...reclassEvents,
+                            [unit.id]: unitReclassEvents.filter((_, i) => i !== lastEvent.idx)
+                          });
+                        }
                       }
                     }}
-                    disabled={unitPromotionEvents.length <= 1}
-                    className="w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-red-500"
-                    title="Remove promotion tier"
+                    className="w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 text-white text-xs font-bold flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-red-500"
+                    title="Remove class change"
                   >
                     -
                   </button>

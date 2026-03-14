@@ -154,3 +154,19 @@ The section SHALL render after the "Weapons" section and before the "Description
 #### Scenario: Promotion modal shows multiple abilities as separate pills
 - **WHEN** a promoted class has multiple abilities (e.g., Assassin: Silencer, Locktouch, Steal)
 - **THEN** each ability SHALL be rendered as a separate pill badge
+
+### Requirement: Starting Skills tracking and display
+The `Unit` model SHALL include an optional `startingSkills` string array. These skills SHALL be rendered in the UI using the `AbilityPill` component, similarly to `classAbilities`.
+
+#### Scenario: Unit with starting skills
+- **WHEN** an Awakening unit with starting skills (e.g. Chrom with Dual Strike) is loaded
+- **THEN** `startingSkills` SHALL contain `"Dual Strike"`
+- **AND** the UI components SHALL render this skill as an `AbilityPill`
+
+### Requirement: Starting Skills tracking and display
+The `Unit` model SHALL include an optional `startingSkills` string array. These skills SHALL be rendered in the UI using the `AbilityPill` component, similarly to `classAbilities`.
+
+#### Scenario: Unit with starting skills
+- **WHEN** an Awakening unit with starting skills (e.g. Chrom with Dual Strike) is loaded
+- **THEN** `startingSkills` SHALL contain `"Dual Strike"`
+- **AND** the UI components SHALL render this skill as an `AbilityPill`

@@ -25,11 +25,13 @@ export interface PromotionOption {
 export interface PromotionEvent {
   level: number;
   selectedClassId: string;
+  order?: number;
 }
 
 export interface ReclassEvent {
   level: number;
   selectedClassId: string;
+  order?: number;
 }
 
 export interface Unit {

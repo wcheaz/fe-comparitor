@@ -85,155 +85,78 @@ export const PromotionOptionsDisplay: React.FC<PromotionOptionsDisplayProps> = (
     return node;
   }, [classes]);
 
-  // Build the promotion tree using useMemo
-  const promotionTree = useMemo(() => {
+  // Combine and Sort all valid options
+  const unifiedOptions = useMemo(() => {
     if (classes.length === 0 || !unit) {
-      return null;
-    }
-    return getPromotionTree(unit.class, unit);
-  }, [classes, unit, getPromotionTree]);
-
-  // Get valid reclass options using useMemo
-  const reclassOptions = useMemo(() => {
-    if (classes.length === 0 || !unit || !unit.reclassOptions || unit.reclassOptions.length === 0) {
       return [];
     }
 
-    // Helper function to get reason why reclass is invalid
-    const getReclassInvalidReason = (targetUnit: Unit, targetClass: Class): string => {
-      // Find current and target class tiers
-      const getCurrentClassTier = (classId: string): number => {
-        const cls = classes.find(c => 
-          (c.id === classId || c.name === classId) && c.game === targetUnit.game
-        );
-        // Convert tier to number, default to 1 if not available
-        return cls?.tier ? parseInt(cls.tier) : 1;
-      };
-      
-      const currentTier = getCurrentClassTier(targetUnit.class);
-      const targetTier = getCurrentClassTier(targetClass.id);
-      
-      // Same class reclassing (reset) - strictly enforce Awakening rules
-      if (targetUnit.class.toLowerCase().replace(/\s+/g, '_') === targetClass.id.toLowerCase().replace(/\s+/g, '_')) {
-        const specialClasses = ['taguel', 'manakete', 'villager', 'lodestar', 'bride', 'dancer', 'dread_fighter', 'conqueror'];
-        const normalizedId = targetClass.id.toLowerCase().replace(/\s+/g, '_');
-        const requiredLevel = specialClasses.includes(normalizedId) ? 30 : 20;
-        
-        if (targetUnit.level < requiredLevel) {
-          return `Must be Level ${requiredLevel}+ to reset current class`;
-        }
-      }
-      
-      // Horizontal reclassing (same tier) - unpromoted units must be level 10+
-      if (currentTier === targetTier) {
-        if (currentTier === 1 && targetUnit.level < 10) {
-          return "Must be Level 10+ to reclass (unpromoted)";
-        }
-      }
-      
-      // If we get here, it's not a valid reclass target according to Awakening rules
-      return "Not a valid reclass target";
-    };
+    const optionsMap = new Map<string, Class>();
 
-    const validReclassOptions: ReclassOption[] = [];
-    
-    for (const classId of unit.reclassOptions) {
-      const targetClass = classes.find((c: Class) => 
-        (c.id === classId || c.name === classId) && c.game === unit.game
-      );
-      
-      if (targetClass) {
-        // Check if this reclass is valid based on tier rules and level
-        const isValid = getValidReclassOptions(unit, classes).includes(classId);
-        
-        validReclassOptions.push({
-          cls: targetClass,
-          isValid,
-          reason: isValid ? undefined : getReclassInvalidReason(unit, targetClass)
-        });
+    // Add Promotions
+    const getPromotions = (classId: string, visited = new Set<string>()) => {
+      if (visited.has(classId)) return;
+      visited.add(classId);
+
+      const cls = classes.find(c => c.id === classId && c.game === unit.game);
+      if (!cls) return;
+
+      if (cls.id !== unit.class) { // Don't add base class to options
+        optionsMap.set(cls.id, cls);
       }
+
+      cls.promotesTo.forEach(promoId => getPromotions(promoId, new Set(visited)));
+    };
+    getPromotions(unit.class);
+
+    // Add Reclasses
+    if (unit.game?.toLowerCase() === 'awakening' && unit.reclassOptions) {
+      const validReclasses = getValidReclassOptions(unit, classes);
+      validReclasses.forEach(classId => {
+        const cls = classes.find(c => c.id === classId && c.game === unit.game);
+        if (cls) {
+          optionsMap.set(cls.id, cls);
+        }
+      });
     }
 
-    return validReclassOptions;
+    const sortedOptions = Array.from(optionsMap.values());
+
+    // Sort by Tier (Tier 2 first, then Tier 1)
+    sortedOptions.sort((a, b) => {
+      const tierA = typeof a.tier === 'number' ? a.tier : 1;
+      const tierB = typeof b.tier === 'number' ? b.tier : 1;
+      return tierB - tierA; // Descending
+    });
+
+    return sortedOptions;
   }, [classes, unit]);
 
   if (!unit) return null;
 
   return (
     <div className="space-y-4">
-      {/* Promotion Options Section */}
+      {/* Unified Class Change Options Section */}
       <Card>
         <CardHeader>
-          <CardTitle>Promotion Options - {unit.name}</CardTitle>
+          <CardTitle>Class Change Options - {unit.name}</CardTitle>
         </CardHeader>
         <CardContent>
-          {promotionTree ? (
-            <ul className="space-y-2">
-              <ClassNodeComponent node={promotionTree} />
-            </ul>
-          ) : (
-            <p className="text-gray-600">No promotion options available</p>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Reclass Options Section */}
-      {reclassOptions.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Reclass Options - {unit.name}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {reclassOptions.map((option, index) => (
-                <div 
-                  key={`${option.cls.id}-${index}`}
-                  className={`flex items-center justify-between p-2 rounded-md ${
-                    option.isValid 
-                      ? 'bg-green-50 border border-green-200' 
-                      : 'bg-gray-50 border border-gray-200 opacity-60'
-                  }`}
-                >
-                  <div className="flex items-center space-x-2">
-                    <ClassPill cls={option.cls} />
-                    {!option.isValid && option.reason && (
-                      <span className="text-sm text-gray-500 italic">
-                        ({option.reason})
-                      </span>
-                    )}
-                  </div>
-                  {option.isValid && (
-                    <button
-                      onClick={() => {
-                        if (!unit || !onReclassEventsChange) return;
-                        
-                        const newReclassEvent: ReclassEvent = {
-                          level: unit.level,
-                          selectedClassId: option.cls.id
-                        };
-                        
-                        const currentEvents = reclassEvents[unit.id] || [];
-                        const updatedEvents = [...currentEvents, newReclassEvent];
-                        
-                        onReclassEventsChange({
-                          ...reclassEvents,
-                          [unit.id]: updatedEvents
-                        });
-                      }}
-                      className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      title="Reclass to this class"
-                    >
-                      Reclass Here
-                    </button>
-                  )}
+          {unifiedOptions.length > 0 ? (
+            <div className="flex flex-wrap gap-2">
+              {unifiedOptions.map((cls, index) => (
+                <div key={`${cls.id}-${index}`} className="flex items-center space-x-2">
+                  <ClassPill cls={cls} />
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Current Reclass Events Section */}
+          ) : (
+             <p className="text-gray-600">No class change options available</p>
+          )}
+        </CardContent>
+      </Card>
+      
+      {/* Current Reclass Events Section (Read-Only) */}
       {reclassEvents[unit?.id || ''] && reclassEvents[unit?.id || ''].length > 0 && (
         <Card>
           <CardHeader>

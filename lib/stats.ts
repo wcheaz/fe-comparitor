@@ -269,15 +269,43 @@ export function isValidReclass(
  * @param classes - Array of class data
  * @returns Array of valid class IDs that the unit can reclass to
  */
-export function getValidReclassOptions(unit: Unit, classes: any[]): string[] {
+export function getValidReclassOptions(unit: Unit, classes: any[], currentLevel?: number, currentClassId?: string): string[] {
   if (!unit.reclassOptions || unit.reclassOptions.length === 0) {
     return [];
   }
   
   const validOptions: string[] = [];
+  const levelToCheck = Number(currentLevel ?? unit.level);
+  const classToCheck = currentClassId ?? unit.class;
   
-  for (const targetClassId of unit.reclassOptions) {
-    if (isValidReclass(unit.class, targetClassId, unit.level, classes)) {
+  // Get all expanded reclass class IDs (including promotesTo chains)
+  const expandedClassIds = new Set<string>();
+  
+  for (const baseId of unit.reclassOptions) {
+    expandedClassIds.add(baseId);
+    
+    // Find this base class and add its promotions
+    const baseClass = classes.find((c: any) => c.id === baseId && c.game === unit.game);
+    if (baseClass && baseClass.promotesTo) {
+      for (const promoId of baseClass.promotesTo) {
+        expandedClassIds.add(promoId);
+      }
+    }
+  }
+  
+  // Special case for Tactician -> Grandmaster
+  if (unit.reclassOptions.includes('tactician')) {
+    expandedClassIds.add('grandmaster');
+  }
+  // Special case for Villager
+  if (unit.reclassOptions.includes('villager')) {
+    expandedClassIds.add('fighter');
+    expandedClassIds.add('mercenary');
+  }
+
+  for (const rawTargetClassId of Array.from(expandedClassIds)) {
+    const targetClassId = rawTargetClassId.toLowerCase().replace(/\s+/g, '_');
+    if (isValidReclass(classToCheck, targetClassId, levelToCheck, classes)) {
       validOptions.push(targetClassId);
     }
   }
@@ -353,550 +381,261 @@ export function generateProgressionArray(
     );
   }
 
-// Combine and sort all events (promotions and reclasses) chronologically by level
-  const allEvents: Array<{type: 'promotion' | 'reclass', level: number, selectedClassId: string}> = [];
+// Combine and sort all events (promotions and reclasses) chronologically by order
+  const allEvents: Array<{type: 'promotion' | 'reclass', level: number, selectedClassId: string, order: number}> = [];
   
   // Add promotion events
-  promotionEvents.forEach((event) => {
+  promotionEvents.forEach((event, index) => {
     allEvents.push({
       type: 'promotion',
       level: event.level,
-      selectedClassId: event.selectedClassId
+      selectedClassId: event.selectedClassId,
+      order: event.order ?? (index * 2) // Fallback for legacy events
     });
   });
   
   // Add reclass events
-  reclassEvents.forEach((event) => {
+  reclassEvents.forEach((event, index) => {
     allEvents.push({
       type: 'reclass',
       level: event.level,
-      selectedClassId: event.selectedClassId
+      selectedClassId: event.selectedClassId,
+      order: event.order ?? (index * 2 + 1) // Fallback for legacy events
     });
   });
+
+  // If no explicit events of any kind exist but the base class can promote,
+  // inject a default promotion at level 20 (or 10 for trainees)
+  if (promotionEvents.length === 0 && reclassEvents.length === 0 && baseClass?.promotesTo && baseClass.promotesTo.length > 0) {
+    allEvents.push({
+      type: 'promotion',
+      level: isTrainee ? 10 : 20,
+      selectedClassId: baseClass.promotesTo[0],
+      order: -1 // Default events sort first
+    });
+  }
   
-  // Sort all events by level, with reclass events before promotion events at the same level
+  // Sort all events by order (sequential insertion order)
   allEvents.sort((a, b) => {
+    if (a.order !== b.order) {
+      return a.order - b.order;
+    }
     if (a.level !== b.level) {
       return a.level - b.level;
     }
-    // At the same level, process reclass events before promotion events
+    // At the same order/level, process reclass events before promotion events
     return a.type === 'reclass' ? -1 : 1;
   });
+
+  // State initialization
+  let currentClass = baseClass;
+  let displayLevelNum = unit.level;
+  let tier = unit.isPromoted ? 2 : (isTrainee ? 0 : 1);
+  let baseStatsForCurrentClass = { ...unit.stats };
+  let startLevelForCurrentClass = displayLevelNum;
   
-  // Determine promotion levels and target classes for multi-tier promotions
-  const promoLevels: number[] = [];
-  const promoTargetIds: string[] = [];
-
-  // Default to single promotion at level 20 if no promotion events
-  if (promotionEvents.length === 0) {
-    promoLevels.push(20);
-    promoTargetIds.push(baseClass?.promotesTo?.[0] || '');
-  } else {
-    // Iterate through all promotion events
-    promotionEvents.forEach((event, index) => {
-      promoLevels.push(event.level);
-      promoTargetIds.push(event.selectedClassId ||
-        (index === 0 ? baseClass?.promotesTo?.[0] : ''));
+  let nextEventIndex = 0;
+  
+  // Helper to calculate exact stat accumulation up to the current level within a given class
+  const calculateCurrentStats = (currLevel: number, cls: any, baseStats: UnitStats) => {
+    const levelDiff = Math.max(0, currLevel - startLevelForCurrentClass);
+    const result: UnitStats = {};
+    const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
+    
+    allStatKeys.forEach(statKey => {
+      let growthRate = unit.growths[statKey] || 0;
+      if (unit.game === "Awakening" && cls?.growths) {
+        growthRate += (cls.growths[statKey] || 0);
+      }
+      
+      const baseStatValue = baseStats[statKey] || 0;
+      const growthAmount = (growthRate * levelDiff) / 100;
+      let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
+      
+      const currentCap = unit.maxStats?.[statKey] ?? cls?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+      finalStat = Math.min(finalStat, currentCap);
+      finalStat = Math.max(0, finalStat);
+      
+      result[statKey] = finalStat;
     });
-  }
-
-  // Pre-calculate promoted baseline stats for multi-tier promotions
-  const promotedStats: UnitStats[] = [];
-  const promotedClasses: any[] = [];
-
-  if (!unit.isPromoted && baseClass?.promotesTo?.length > 0) {
-    let currentStats: UnitStats = { ...unit.stats };
-
-    // Process each promotion event sequentially
-    for (let i = 0; i < promoLevels.length; i++) {
-      const promoLevel = promoLevels[i];
-      const promoTargetId = promoTargetIds[i];
-
-      // Calculate stats right at promotion level
-      let levelDiff: number;
-      if (isTrainee && i === 0) {
-        // For trainees' first promotion, always calculate from Level 1 to Level 10
-        levelDiff = Math.max(0, 10 - unit.level);
-      } else {
-        // Standard calculation: first promotion uses unit.level, subsequent promotions use Level 1
-        levelDiff = i === 0 ? Math.max(0, promoLevel - unit.level) : Math.max(0, promoLevel - 1);
+    return result;
+  };
+  
+  const applyAwakeningModifiers = (stats: UnitStats, cls: any) => {
+    if (unit.game !== "Awakening" || !cls?.statModifiers) return stats;
+    const modified = { ...stats };
+    Object.entries(cls.statModifiers).forEach(([statKey, modifier]) => {
+      if (modifier !== undefined) {
+        modified[statKey] = (modified[statKey] || 0) + (modifier as number);
       }
-      const prePromoStats: UnitStats = {};
+    });
+    return modified;
+  };
 
-      // Growth to promotion
-      const allStatKeys = Array.from(new Set([...Object.keys(currentStats), ...Object.keys(unit.growths)]));
-      allStatKeys.forEach(statKey => {
-        const growthRate = unit.growths[statKey] || 0;
-        const baseStat = currentStats[statKey] || 0;
-        const growthAmount = (growthRate * levelDiff) / 100;
-        let calculatedStat = Math.round((baseStat + growthAmount) * 100) / 100;
-        const prePromoCap = unit.maxStats?.[statKey] ?? baseClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-        prePromoStats[statKey] = Math.min(calculatedStat, prePromoCap);
-      });
-
-      // Apply promotion bonuses
-      let promotedClass = classes?.find((cls: any) => cls.id === promoTargetId && cls.game === unit.game);
-      if (!promotedClass && i === 0 && baseClass.promotesTo?.[0]) {
-        promotedClass = classes?.find((cls: any) => cls.id === baseClass.promotesTo[0] && cls.game === unit.game);
-      }
-
-      if (promotedClass) {
-        const newPromotedStats: UnitStats = { ...prePromoStats };
-        if (promotedClass.promotionBonus) {
-          Object.entries(promotedClass.promotionBonus).forEach(([statKey, bonus]) => {
-            if (bonus !== undefined) {
-              newPromotedStats[statKey] = (newPromotedStats[statKey] || 0) + (bonus as number);
-            }
-          });
-        }
-        if (promotedClass.baseStats) {
-          Object.entries(promotedClass.baseStats).forEach(([statKey, classBase]) => {
-            if (newPromotedStats[statKey] !== undefined && classBase !== undefined) {
-              newPromotedStats[statKey] = Math.max(newPromotedStats[statKey] || 0, classBase as number);
-            }
-          });
-        }
-
-        promotedStats.push(newPromotedStats);
-        promotedClasses.push(promotedClass);
-        currentStats = newPromotedStats; // Use these stats for the next promotion
-      }
+  const getLevelCap = (cls: any) => {
+    if (!cls) return 20;
+    if (unit.game === "Awakening") {
+      const specialClassIds = ["taguel", "manakete", "villager", "dancer", "lodestar", "bride", "dread_fighter", "conqueror"];
+      if (specialClassIds.includes(cls.id)) return 30;
     }
-  }
+    return 20;
+  };
+
+  let pendingReclassFlag = false;
+  let reclassTargetName = "";
+  const allRows: any[] = [];
+  const safeClasses = classes || [];
 
   for (let internalLevel = actualStartLevel; internalLevel <= actualEndLevel; internalLevel++) {
-    let tier: number;
-    let displayLevelNum: number;
-    let displayLevel: string;
-    let isPromotionLevel = false;
     let isSkipped = false;
-    let currentClass = baseClass;
-    let baseStatForCalc: UnitStats = unit.stats;
-    
-    // For Awakening units, combine unit stats with class stat modifiers
-    if (unit.game === "Awakening" && currentClass?.statModifiers) {
-      baseStatForCalc = { ...unit.stats };
-      Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
-        if (modifier !== undefined) {
-          baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
-        }
-      });
-    }
-    let levelDiff = 0;
-    let promotionInfo = undefined;
+    let isPromotionLevel = false;
+    let promotionInfo: any = undefined;
+    let isReclassLevel = pendingReclassFlag; // Carried over from the end of the last frame
+    let reclassInfo: any = pendingReclassFlag ? { className: reclassTargetName } : undefined;
 
-    // Handle trainee levels (negative levels and 0)
-    if (internalLevel <= 0) {
-      tier = 0; // Trainee tier
-      displayLevelNum = internalLevel + 10; // -9 becomes 1, 0 becomes 10
-      displayLevel = `Level ${displayLevelNum} (Trainee)`;
-    } else {
-      // Standard level calculation (1-based)
-      tier = Math.floor((internalLevel - 1) / 20) + 1;
-      displayLevelNum = ((internalLevel - 1) % 20) + 1;
+    pendingReclassFlag = false; // reset for next frame
 
-      if (tier === 1) {
-        displayLevel = `Level ${displayLevelNum}`;
-      } else {
-        displayLevel = `Level ${displayLevelNum} (Tier ${tier})`;
-      }
+    // Handle "padding" rows for characters that join late so the UI table lines up correctly
+    if (internalLevel < unit.level && !unit.isPromoted && !isTrainee) {
+       allRows.push({
+         internalLevel,
+         displayLevel: `Level ${internalLevel}`,
+         tier: tier,
+         class: currentClass?.name || 'Unknown',
+         stats: applyAwakeningModifiers(baseStatsForCurrentClass, currentClass),
+         cappedStats: {},
+         isPromotionLevel: false,
+         isSkipped: true
+       });
+       continue;
     }
 
-    // Check for reclass events at current internal level
-    const reclassEventAtThisLevel = allEvents.find(event => 
-      event.type === 'reclass' && 
-      event.level === internalLevel && 
-      !isSkipped
-    );
-    
-    // Initialize reclass tracking variables
-    let isReclassLevel = false;
-    let reclassInfo = undefined;
-    let hasReclassedAtThisLevel = false;
-    
-    // Handle reclass event
-    if (reclassEventAtThisLevel && !isSkipped) {
-      // Find the target class data
-      const targetClass = classes?.find((cls: any) => 
-        cls.id === reclassEventAtThisLevel.selectedClassId.toLowerCase().replace(/\s+/g, '_') && 
-        cls.game === unit.game
-      );
-      
-      if (targetClass) {
-        // Calculate accumulated stats up to the reclass level
-        const accumulatedStats: UnitStats = {};
-        
-        // Calculate the correct level difference for reclass
-        // This should be the levels gained since the last reclass/promotion or the unit's base level
-        let reclassLevelDiff: number;
-        if (hasReclassedAtThisLevel) {
-          // If this is a subsequent reclass, calculate from level 1
-          reclassLevelDiff = displayLevelNum - 1;
-        } else {
-          // First reclass, calculate from unit's base level
-          reclassLevelDiff = internalLevel - unit.level;
-        }
-        
-        // Get all stat keys from the unit's stats and growths
-        const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
-        
-        // For accumulated stats, start with the raw unit stats (without current class modifiers)
-        let rawBaseStats = { ...unit.stats };
-        
-        allStatKeys.forEach(statKey => {
-          let growthRate = unit.growths[statKey] || 0;
-          
-          // For Awakening units, combine unit growths with current class growths
-          if (unit.game === "Awakening" && currentClass?.growths) {
-            const classGrowth = currentClass.growths[statKey] || 0;
-            growthRate += classGrowth;
-          }
-          
-          const baseStatValue = rawBaseStats[statKey] || 0;
-          const growthAmount = (growthRate * reclassLevelDiff) / 100;
-          let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
-          
-          // Apply current class caps before reclassing
-          const currentCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-          finalStat = Math.min(finalStat, currentCap);
-          finalStat = Math.max(0, finalStat);
-          
-          accumulatedStats[statKey] = finalStat;
-        });
-        
-        // Update current class
-        currentClass = targetClass;
-        
-        // Reset display level to 1 for the new class
-        displayLevelNum = 1;
-        displayLevel = `Level ${displayLevelNum} (Reclassed to ${targetClass.name})`;
-        
-        // Mark as reclass level
-        isReclassLevel = true;
-        hasReclassedAtThisLevel = true;
-        reclassInfo = {
-          className: targetClass.name
-        };
-        
-        // Use accumulated stats as the new baseline for the new class
-        baseStatForCalc = { ...accumulatedStats };
-        
-        // For Awakening units, apply the new class's stat modifiers
-        if (unit.game === "Awakening" && targetClass.statModifiers) {
-          Object.entries(targetClass.statModifiers).forEach(([statKey, modifier]) => {
-            if (modifier !== undefined) {
-              baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
-            }
-          });
-        }
-        
-        // Apply new class's stat caps immediately
-        allStatKeys.forEach(statKey => {
-          const newCap = targetClass.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-          if (baseStatForCalc[statKey] !== undefined) {
-            baseStatForCalc[statKey] = Math.min(baseStatForCalc[statKey], newCap);
-          }
-        });
-        
-        // Reset levelDiff for the new class progression (starting from level 1)
-        levelDiff = 0;
-      }
+    // Peek ahead to see if the CURRENT row is the level where the user makes a class change
+    // We attach the ✨ Promotion icon to this row so the user knows this is where the action happens
+    if (nextEventIndex < allEvents.length && allEvents[nextEventIndex].level === displayLevelNum) {
+       const nextEvent = allEvents[nextEventIndex];
+       const targetClass = safeClasses.find(c => c.id === nextEvent.selectedClassId && c.game === unit.game);
+       if (targetClass && nextEvent.type === 'promotion') {
+         isPromotionLevel = true;
+         promotionInfo = {
+           className: targetClass.name,
+           classAbilities: targetClass.classAbilities || []
+         };
+       }
     }
+
+    const currentTrueStats = calculateCurrentStats(displayLevelNum, currentClass, baseStatsForCurrentClass);
+    const displayStats = applyAwakeningModifiers(currentTrueStats, currentClass);
     
-    // Handle tier-specific logic
-    if (tier === 0) {
-      if (!isTrainee || unit.isPromoted) {
-        isSkipped = true; // Standard units do not have trainee rows
-      } else {
-        if (!hasReclassedAtThisLevel) {
-          levelDiff = displayLevelNum - unit.level;
-        }
-        if (displayLevelNum < unit.level || displayLevelNum > (promoLevels[0] || 10)) {
-          isSkipped = true;
-        }
-
-        // Set isPromotionLevel for trainee forced promotion level (Level 10)
-        if (displayLevelNum === 10 && !isSkipped) {
-          isPromotionLevel = true;
-          if (promotedClasses[0]) {
-            promotionInfo = {
-              className: promotedClasses[0].name,
-              classAbilities: promotedClasses[0].classAbilities || []
-            };
-          }
-        }
+    // Check caps
+    const cappedStats: Record<string, boolean> = {};
+    const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
+    allStatKeys.forEach(statKey => {
+      const currentCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
+      let unmodifiedStat = currentTrueStats[statKey] || 0;
+      if (unmodifiedStat >= currentCap) {
+        cappedStats[statKey] = true;
       }
-    } else if (tier === 1) {
-      if (unit.isPromoted) {
-        isSkipped = true;
-      } else {
-        if (isTrainee) {
-          currentClass = promotedClasses[0] || baseClass;
-          // For trainees in Tier 1, use promoted stats from Level 10 as base
-          baseStatForCalc = promotedStats[0] || unit.stats;
+    });
 
-          const targetPromoLevel = promoLevels[1] || 20;
-          if (displayLevelNum < 1 || displayLevelNum > targetPromoLevel) {
-            isSkipped = true;
-          }
+    let displayLevelStr = `Level ${displayLevelNum}`;
+    if (isReclassLevel) {
+      displayLevelStr += ` (Reclassed to ${currentClass?.name || 'Unknown'})`;
+    } else if (tier === 0) {
+      displayLevelStr += ` (Trainee)`;
+    } else if (tier > 1) {
+      displayLevelStr += ` (Tier ${tier})`;
+    }
 
-          // Fix: For trainees in Tier 1, calculate growth from Level 1 with correct offset
-          // The stats should be calculated from the promoted base stats (Level 10 trainee + promotion bonuses)
-          // and then grow from Level 1 to current level in the new class
-          if (!hasReclassedAtThisLevel) {
-            levelDiff = displayLevelNum - 1;
-          }
+    // Skip logic bounds checking
+    const cap = getLevelCap(currentClass);
+    const hasMoreEvents = nextEventIndex < allEvents.length;
+    
+    if (displayLevelNum > cap && !hasMoreEvents && unit.maxLevel !== "infinite") {
+      break; // The unit has reached their final natural level cap; stop generating rows.
+    }
 
-          // Fix: For trainees in Tier 1, check for the correct promotion index
-          // Tier 1 trainees should check for promotion level at index 1 (Tier 1 -> Tier 2)
-          const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 1 && lvl === displayLevelNum);
-          if (currentPromoIndex >= 0 && currentClass?.promotesTo?.length > 0) {
-            isPromotionLevel = true;
-            // Use the promoted class at index 1 for Tier 1 -> Tier 2 transition
-            if (promotedClasses[1]) {
-              promotionInfo = {
-                className: promotedClasses[1].name,
-                classAbilities: promotedClasses[1].classAbilities || []
-              };
-            }
-          }
-        } else {
-          currentClass = baseClass;
-          baseStatForCalc = unit.stats;
-          
-          // For Awakening units, combine unit stats with class stat modifiers
-          if (unit.game === "Awakening" && currentClass?.statModifiers) {
-            baseStatForCalc = { ...unit.stats };
-            Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
-              if (modifier !== undefined) {
-                baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
-              }
+    allRows.push({
+      internalLevel,
+      displayLevel: displayLevelStr,
+      tier,
+      class: currentClass?.name || 'Unknown',
+      stats: displayStats,
+      cappedStats,
+      isPromotionLevel,
+      promotionInfo,
+      isReclassLevel,
+      reclassInfo,
+      isSkipped: false
+    });
+
+    // After rendering the row, we apply any class change triggers sequentially
+    // So the NEXT row is Level 1 of the new class
+    let didChangeClass = false;
+    while (nextEventIndex < allEvents.length) {
+      const nextEvent = allEvents[nextEventIndex];
+      // Note: Because we clamped displayLevelNum to cap above, this relies on the precise equality match
+      if (nextEvent.level === displayLevelNum) {
+        const targetClass = safeClasses.find(c => c.id === nextEvent.selectedClassId && c.game === unit.game);
+        if (!targetClass) {
+          nextEventIndex++;
+          continue;
+        }
+        
+        let isEventValid = true;
+        if (nextEvent.type === 'reclass') {
+          isEventValid = isValidReclass(currentClass?.id || unit.class, targetClass.id, displayLevelNum, safeClasses);
+        } else if (nextEvent.type === 'promotion') {
+          isEventValid = currentClass?.promotesTo?.includes(targetClass.id) ?? false;
+        }
+
+        if (!isEventValid) {
+          nextEventIndex++;
+          continue;
+        }
+
+        // Finalize base stats for transitioning
+        const finalizedStats = calculateCurrentStats(displayLevelNum, currentClass, baseStatsForCurrentClass);
+        
+        if (nextEvent.type === 'promotion') {
+          const newStats = { ...finalizedStats };
+          if (targetClass.promotionBonus) {
+            Object.entries(targetClass.promotionBonus).forEach(([k, v]) => {
+              newStats[k] = (newStats[k] || 0) + (v as number);
             });
           }
-
-          const targetPromoLevel = promoLevels[0] || 20;
-          if (displayLevelNum < unit.level || displayLevelNum > targetPromoLevel) {
-            isSkipped = true;
+          if (targetClass.baseStats) {
+            Object.entries(targetClass.baseStats).forEach(([k, v]) => {
+              newStats[k] = Math.max(newStats[k] || 0, v as number);
+            });
           }
-          if (!hasReclassedAtThisLevel) {
-            levelDiff = displayLevelNum - unit.level;
-          }
-
-          const currentPromoIndex = promoLevels.findIndex((lvl, i) => i === 0 && lvl === displayLevelNum);
-          if (currentPromoIndex >= 0 && baseClass?.promotesTo?.length > 0) {
-            isPromotionLevel = true;
-            if (promotedClasses[currentPromoIndex]) {
-              promotionInfo = {
-                className: promotedClasses[currentPromoIndex].name,
-                classAbilities: promotedClasses[currentPromoIndex].classAbilities || []
-              };
-            }
-          }
+          currentClass = targetClass;
+          tier = isTrainee && tier === 0 ? 1 : 2; 
+          baseStatsForCurrentClass = newStats;
+        } else if (nextEvent.type === 'reclass') {
+          currentClass = targetClass;
+          tier = typeof targetClass.tier === 'number' ? targetClass.tier : (typeof targetClass.tier === 'string' ? parseInt(targetClass.tier) : 1);
+          baseStatsForCurrentClass = { ...finalizedStats };
+          pendingReclassFlag = true;
+          reclassTargetName = targetClass.name;
         }
-      }
-    } else if (tier === 2) {
-      if (!unit.isPromoted) {
-        if (isTrainee) {
-          // Fix: Skip Tier 2 levels until user explicitly adds a second promotion event
-          // Trainees need at least 2 promotion events to reach Tier 2
-          if (promotionEvents.length < 2) {
-            isSkipped = true;
-          } else {
-            // Fix: Ensure proper Tier 2 transition for trainees
-            // Use the second promoted class (Tier 2) if available, otherwise fall back
-            currentClass = promotedClasses[1] || promotedClasses[0] || baseClass;
-            baseStatForCalc = promotedStats[1] || promotedStats[0] || unit.stats;
-            if (!hasReclassedAtThisLevel) {
-              levelDiff = displayLevelNum - 1;
-            }
-
-            // Fix: Skip Tier 2 if the first promotion doesn't lead to a promotable class
-            // The first promoted class must have promotesTo options to reach Tier 2
-            if (!promotedClasses[0]?.promotesTo?.length) {
-              isSkipped = true;
-            }
-
-            // Fix: Skip Tier 2 if we don't have valid promoted stats for the second promotion
-            // This ensures the second promotion event is properly configured
-            if (!promotedStats[1] || !promotedClasses[1]) {
-              isSkipped = true;
-            }
-
-            // Fix: Skip Tier 2 if the second promotion event doesn't have a valid target class
-            // This validates that the second promotion event is properly configured
-            if (promotionEvents[1] && !promotionEvents[1].selectedClassId && !baseClass?.promotesTo?.[1]) {
-              isSkipped = true;
-            }
-          }
-
-          // Add promotion level detection for Tier 2 (Tier 2 -> Tier 3 transition)
-          const tier2PromoIndex = promoLevels.findIndex((lvl, i) => i === 2 && lvl === displayLevelNum);
-          if (tier2PromoIndex >= 0 && currentClass?.promotesTo?.length > 0) {
-            isPromotionLevel = true;
-            if (promotedClasses[tier2PromoIndex]) {
-              promotionInfo = {
-                className: promotedClasses[tier2PromoIndex].name,
-                classAbilities: promotedClasses[tier2PromoIndex].classAbilities || []
-              };
-            }
-          }
-        } else {
-          currentClass = promotedClasses[0] || baseClass;
-          baseStatForCalc = promotedStats[0] || unit.stats;
-
-          if (!hasReclassedAtThisLevel) {
-            levelDiff = displayLevelNum - 1;
-          }
-
-          // Fix: Skip Tier 2 if the base class cannot promote
-          if (!baseClass?.promotesTo?.length) {
-            isSkipped = true;
-          }
-
-          // Fix: Skip Tier 2 if we don't have valid promoted stats for the first promotion
-          // This ensures the first promotion event is properly configured
-          if (!promotedStats[0] || !promotedClasses[0]) {
-            isSkipped = true;
-          }
-        }
-      } else {
-        // Pre-promoted unit starts in Tier 2
-        currentClass = baseClass;
-        baseStatForCalc = unit.stats;
         
-        // For Awakening units, combine unit stats with class stat modifiers
-        if (unit.game === "Awakening" && currentClass?.statModifiers) {
-          baseStatForCalc = { ...unit.stats };
-          Object.entries(currentClass.statModifiers).forEach(([statKey, modifier]) => {
-            if (modifier !== undefined) {
-              baseStatForCalc[statKey] = (baseStatForCalc[statKey] || 0) + (modifier as number);
-            }
-          });
-        }
-        if (displayLevelNum < unit.level) {
-          isSkipped = true;
-        }
-        levelDiff = displayLevelNum - unit.level;
+        displayLevelNum = 0; // will become 1 right below
+        startLevelForCurrentClass = 1;
+        didChangeClass = true;
+        nextEventIndex++;
+      } else {
+        break;
       }
+    }
+
+    // Advance chronological state to next frame
+    if (!didChangeClass) {
+        displayLevelNum++;
     } else {
-      // Handle tier 3+ progression
-      const hasInfiniteLeveling = unit.maxLevel === "infinite";
-
-      if (hasInfiniteLeveling) {
-        // For infinite leveling, allow continuous progression through all tiers
-        // The stat calculation continues using the last known promoted class stats
-        const lastPromotionIndex = Math.max(0, promotedClasses.length - 1);
-        currentClass = promotedClasses[lastPromotionIndex] || baseClass;
-        baseStatForCalc = promotedStats[lastPromotionIndex] || unit.stats;
-
-        // Calculate level difference for continuous leveling
-        // For tiers beyond 2, we accumulate the level differences from previous tiers
-        const previousTiersLevels = (tier - 2) * 20; // 20 levels per previous tier
-        levelDiff = displayLevelNum - 1 + previousTiersLevels;
-
-        // For trainee units, add the trainee levels count to the level difference
-        if (hasTraineeLevels) {
-          const traineeLevelsGained = Math.max(0, (promoLevels[0] || 10) - unit.level);
-          levelDiff += traineeLevelsGained;
-        }
-
-        // Don't skip tiers for infinite leveling
-        isSkipped = false;
-      } else {
-        // Standard behavior: skip tiers 3+ if not infinite leveling
-        isSkipped = true;
-      }
+        displayLevelNum = 1;
     }
-
-    // Check maxLevel constraints and class-specific level caps
-    if (!isSkipped) {
-      // Determine the class-specific level cap for the current class
-      let classLevelCap = 20; // Default level cap for most classes
-      
-      // Special classes have a level cap of 30 in Awakening
-      if (unit.game === "Awakening" && currentClass) {
-        const specialClassIds = ["taguel", "manakete", "villager", "dancer"];
-        if (specialClassIds.includes(currentClass.id)) {
-          classLevelCap = 30;
-        }
-      }
-      
-      // Check if there are more events (reclass/promotion) after the current level
-      const hasMoreEvents = allEvents.some(event => event.level > internalLevel);
-      
-      // For infinite leveling units, skip bounds checking
-      if (unit.maxLevel === "infinite") {
-        // Continue generation - no skipping based on level caps
-      } 
-      // For units with finite maxLevel, check both unit maxLevel and class level cap
-      else if (unit.maxLevel !== undefined) {
-        const maxLevelCap = unit.maxLevel as number;
-        
-        // Calculate the effective level considering trainee offsets
-        let effectiveLevel: number;
-        if (tier === 0) {
-          // For trainee levels, they don't count toward the max level cap
-          effectiveLevel = 0;
-        } else if (hasTraineeLevels) {
-          // For units with trainee levels, account for the trainee progression
-          const traineeLevelsCount = Math.abs(traineeOffset);
-          effectiveLevel = internalLevel + traineeLevelsCount;
-        } else {
-          effectiveLevel = internalLevel;
-        }
-        
-        // Check if we need to skip this row
-        // Skip if: effective level exceeds unit's maxLevel AND display level exceeds class cap AND no more events
-        if (effectiveLevel > maxLevelCap && displayLevelNum > classLevelCap && !hasMoreEvents) {
-          isSkipped = true;
-        }
-      }
-      // For units without explicit maxLevel, only check class level cap and events
-      else if (displayLevelNum > classLevelCap && !hasMoreEvents) {
-        isSkipped = true;
-      }
-    }
-
-    const levelStats: UnitStats = {};
-    const cappedStats: Record<string, boolean> = {};
-
-    if (!isSkipped) {
-      const allStatsForLevel = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
-      allStatsForLevel.forEach(statKey => {
-        let growthRate = unit.growths[statKey] || 0;
-        
-        // For Awakening units, combine unit growths with class growths
-        if (unit.game === "Awakening" && currentClass?.growths) {
-          const classGrowth = currentClass.growths[statKey] || 0;
-          growthRate += classGrowth;
-        }
-        const baseStatValue = baseStatForCalc[statKey] || 0;
-        const growthAmount = (growthRate * levelDiff) / 100;
-        let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
-
-        const cap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-        if (finalStat >= cap) {
-          finalStat = cap;
-          cappedStats[statKey] = true;
-        } else {
-          cappedStats[statKey] = false;
-        }
-        levelStats[statKey] = Math.max(0, finalStat);
-      });
-    }
-
-    progression.push({
-      stats: levelStats,
-      displayLevel,
-      internalLevel,
-      isPromotionLevel,
-      isReclassLevel,
-      promotionInfo,
-      reclassInfo,
-      cappedStats,
-      isSkipped
-    });
   }
 
-  return progression;
+  return allRows;
 }
