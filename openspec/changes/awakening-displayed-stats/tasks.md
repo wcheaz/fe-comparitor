@@ -29,7 +29,7 @@
 
 ## 5. StatTable and Unit Detail Page
 
-- [ ] 5.1 Add optional `classData?: Class` prop to `StatTable` component (`components/features/StatTable.tsx`). When provided for an Awakening unit, display combined bases and growths using `getEffectiveBaseStats` and `getEffectiveGrowths`. When omitted or non-Awakening, behavior unchanged.
+- [x] 5.1 Add optional `classData?: Class` prop to `StatTable` component (`components/features/StatTable.tsx`). When provided for an Awakening unit, display combined bases and growths using `getEffectiveBaseStats` and `getEffectiveGrowths`. When omitted or non-Awakening, behavior unchanged.
   - **Done when:** `<StatTable unit={chromUnit} classData={tacticianClass} />` shows combined bases and growths. `<StatTable unit={nonAwakeningUnit} />` shows unchanged values.
   - **Verify by:** `npx tsc --noEmit` passes.
 

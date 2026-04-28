@@ -1,10 +1,12 @@
 import React from 'react';
-import { Unit } from '@/types/unit';
+import { Unit, Class } from '@/types/unit';
+import { getEffectiveBaseStats, getEffectiveGrowths } from '@/lib/stats';
 
 interface StatTableProps {
   unit: Unit;
   showGrowths?: boolean;
   className?: string;
+  classData?: Class;
 }
 
 const STAT_LABELS: Record<string, string> = {
@@ -27,9 +29,12 @@ const STAT_LABELS: Record<string, string> = {
 export function StatTable({
   unit,
   showGrowths = true,
-  className
+  className,
+  classData
 }: StatTableProps) {
-  // Get all unique stat keys from stats and growths
+  const effectiveBases = getEffectiveBaseStats(unit, classData);
+  const effectiveGrowths = getEffectiveGrowths(unit, classData);
+
   const allStatKeys = new Set([
     ...Object.keys(unit.stats),
     ...Object.keys(unit.growths)
@@ -64,17 +69,15 @@ export function StatTable({
         <tbody>
           {statKeys.map((statKey) => {
             // For combined skl/dex row, we need to pull from either stat
-            let baseValue = unit.stats[statKey] ?? '-';
-            let growthValue = unit.growths[statKey] ?? '-';
+            let baseValue = effectiveBases[statKey] ?? '-';
+            let growthValue = effectiveGrowths[statKey] ?? '-';
 
             if (statKey === 'skl' && hasDex && !allStatKeys.has('skl')) {
-              // If it's a dex-only unit but we're processing 'skl' as the representative key
-              baseValue = unit.stats['dex'] ?? '-';
-              growthValue = unit.growths['dex'] ?? '-';
+              baseValue = effectiveBases['dex'] ?? '-';
+              growthValue = effectiveGrowths['dex'] ?? '-';
             } else if (statKey === 'skl' && hasSkl && hasDex && (unit.stats['skl'] === undefined || unit.stats['skl'] === null)) {
-              // If it's the combined row, but this specific unit only has dex
-              baseValue = unit.stats['dex'] ?? '-';
-              growthValue = unit.growths['dex'] ?? '-';
+              baseValue = effectiveBases['dex'] ?? '-';
+              growthValue = effectiveGrowths['dex'] ?? '-';
             }
 
             return (
