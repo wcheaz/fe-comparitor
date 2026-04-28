@@ -52,7 +52,7 @@ Remove the `groupBy` state variable and the "Group By Stat" / "Group By Unit" to
 - No `groupBy` state, `setGroupBy` call, or group-by toggle UI exists in the component
 - No conditional rendering branches on a group-by value
 
-- [ ] 3.1 Remove `groupBy` state and "Group By" toggle UI
+- [x] 3.1 Remove `groupBy` state and "Group By" toggle UI
 
 ## 4. Table Rendering
 
