@@ -153,24 +153,30 @@ export default function ComparatorPage() {
               </div>
             )}
 
-            {/* Stat Progression Table */}
+            {/* Stat Progression Tables — one per unit */}
             {selectedUnits.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Stat Progression</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <StatProgressionTable
-                    units={selectedUnits}
-                    promotionEvents={promotionEvents}
-                    reclassEvents={reclassEvents}
-                    onPromotionEventsChange={handlePromotionEventsChange}
-                    onReclassEventsChange={handleReclassEventsChange}
-                    onAddPromotionEvent={addPromotionEvent}
-                    onRemovePromotionEvent={removePromotionEvent}
-                  />
-                </CardContent>
-              </Card>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {selectedUnits.map((unit) => (
+                  <Card key={`progression-${unit.id}`}>
+                    <CardHeader>
+                      <CardTitle>{unit.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <StatProgressionTable
+                        unit={unit}
+                        promotionEvents={promotionEvents[unit.id] || []}
+                        reclassEvents={reclassEvents[unit.id] || []}
+                        onPromotionEventsChange={(events) => {
+                          setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                        }}
+                        onReclassEventsChange={(events) => {
+                          setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                        }}
+                      />
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             )}
           </div>
         </div>
