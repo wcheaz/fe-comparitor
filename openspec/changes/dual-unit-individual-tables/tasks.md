@@ -143,7 +143,7 @@ Update `app/comparator/page.tsx` to render two independent `StatProgressionTable
 
 **Stop and hand off if:** `ComparisonGrid` breaks with only 2 units — it should not, but document the issue if it occurs.
 
-- [ ] 7.1 Change `maxUnits` from 4 to 2 in comparator page state and `UnitSelector` prop
+- [x] 7.1 Change `maxUnits` from 4 to 2 in comparator page state and `UnitSelector` prop
 - [ ] 7.2 Replace single shared `StatProgressionTable` with dual independent `Card`-wrapped tables in a `grid grid-cols-2` layout
 - [ ] 7.3 Wire up event management — extract flat arrays per unit, wrap callbacks to update parent `Record<string, ...>` state
 

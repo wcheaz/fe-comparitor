@@ -16,7 +16,7 @@ export default function ComparatorPage() {
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
   const [classes, setClasses] = useState<Class[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const maxUnits = 4;
+  const maxUnits = 2;
 
   // TEMPORARILY DISABLED: Load pre-selected units from URL parameters
   // This was causing build issues with static generation
