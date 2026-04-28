@@ -183,4 +183,4 @@ Run the full verification suite to confirm the refactor is complete.
 
 **Stop and hand off if:** Build errors persist after two fix attempts — document the errors and hand off.
 
-- [ ] 9.1 Run typecheck, lint, and build — confirm all pass with zero errors
+- [x] 9.1 Run typecheck, lint, and build — confirm all pass with zero errors
