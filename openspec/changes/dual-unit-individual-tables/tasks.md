@@ -36,7 +36,7 @@ Rewrite the `useMemo` block (lines ~114–266) to generate progression data for 
 
 **Stop and hand off if:** `generateProgressionArray` returns an unexpected shape for any unit — do not modify `lib/stats.ts`, report the discrepancy.
 
-- [ ] 2.1 Rewrite useMemo to call `generateProgressionArray` once for the single unit and build single-value `ProgressionRow` objects
+- [x] 2.1 Rewrite useMemo to call `generateProgressionArray` once for the single unit and build single-value `ProgressionRow` objects
 - [ ] 2.2 Replace cross-unit stat key resolution with single-unit derivation from `Object.keys(unit.stats)`
 
 ## 3. Component State & Toggles

@@ -106,158 +106,50 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
   // Calculate progression data
   const progressionData = useMemo(() => {
-    if (units.length === 0) return { rows: [], statKeys: [] as string[], allProgressions: [] };
+    if (!unit) return { rows: [] as ProgressionRow[], statKeys: [] as string[] };
 
-    // Calculate dynamic level boundaries based on units
-    const minLevel = Math.min(...units.map(unit => {
-      // For trainee units, we need to start at negative levels
-      // Check if the unit's base class is a trainee class
-      const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
-      const hasTraineeLevels = isTraineeClass(unitClass?.id || '');
-      return hasTraineeLevels ? -10 : unit.level;
-    }), 1);
+    const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
+    const hasTraineeLevels = isTraineeClass(unitClass?.id || '');
+    const minLevel = Math.min(hasTraineeLevels ? -10 : unit.level, 1);
 
-    const maxLevelFromUnits = Math.max(...units.map(unit => {
-      const allEvents = [...(promotionEvents[unit.id] || []), ...(reclassEvents[unit.id] || [])];
-      let internalLvls = unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40);
-      if (allEvents.length > 0) {
-        // Assume roughly 20-30 internal levels required to process each class change fully
-        internalLvls += allEvents.length * 30;
-      }
-      return Math.max(40, internalLvls);
-    }), 40);
-    const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnits, 100) : maxLevelFromUnits;
+    const allEvents = [...promotionEvents, ...reclassEvents];
+    let internalLvls = unit.maxLevel === "infinite" ? 100 : (unit.maxLevel || 40);
+    if (allEvents.length > 0) {
+      internalLvls += allEvents.length * 30;
+    }
+    const maxLevelFromUnit = Math.max(40, internalLvls);
+    const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnit, 100) : maxLevelFromUnit;
 
-    // Generate progression arrays for all units
-    const allProgressions = units.map(unit =>
-      generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents[unit.id] ?? [], reclassEvents[unit.id] ?? [])
-    );
+    const progression = generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents, reclassEvents);
 
-    // Get all stat keys from all units
-    const allStatKeys = new Set<string>();
-    units.forEach(unit => {
-      Object.keys(unit.stats).forEach(key => allStatKeys.add(key));
-    });
-
-    // Define proper stat order and filter display stats
     const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
-    let displayStats = statOrder.filter(key => {
-      // Exclude stats that typically don't progress or aren't relevant
-      if (!allStatKeys.has(key) || ['mov', 'con', 'bld', 'aid'].includes(key)) return false;
-
-      // Filter out stats that are missing for all units
-      const isEveryUnitMissing = units.every(unit =>
-        unit.stats[key] === undefined ||
-        unit.stats[key] === null
-      );
-
-      return !isEveryUnitMissing;
+    const displayStats = statOrder.filter(key => {
+      if (['mov', 'con', 'bld', 'aid'].includes(key)) return false;
+      return unit.stats[key] !== undefined && unit.stats[key] !== null;
     });
 
-    if (displayStats.includes('skl') && displayStats.includes('dex')) {
-      displayStats = displayStats.filter(c => c !== 'dex');
-    }
-
-    // Create rows by aligning progression data from all units
     const rows: ProgressionRow[] = [];
-    const maxProgressionLength = Math.max(...allProgressions.map(p => p.length), 0);
+    for (let i = 0; i < progression.length; i++) {
+      const levelData = progression[i];
 
-    for (let i = 0; i < maxProgressionLength; i++) {
-      const currentInternalLevel = minLevel + i;
-      let displayLevel = `Level ${currentInternalLevel}`;
-
-      // We will only highlight the global row as a "promotion level" if at least one unit promotes at this absolute row index.
-      let isPromotionLevel = false;
-
-      let rowDisplayLevel = `Level ${currentInternalLevel}`;
-      let rowIsPromotionLevel = false;
-      let rowPromotionInfo: { className: string; classAbilities: string[] } | undefined;
-
-      const rowData: ProgressionRow = {
-        internalLevel: currentInternalLevel,
-        displayLevel: rowDisplayLevel,
-        stats: [],
-        cappedStats: [],
-        unitSkipped: [],
-        unitIsPromotionLevel: [],
-        unitPromotionInfo: [],
-        unitDisplayLevels: [],
-        isPromotionLevel: false
-      };
-
-      let allUnitsShowDash = true;
-
-      // Collect data for each unit at this level index
-      for (let unitIndex = 0; unitIndex < units.length; unitIndex++) {
-        const unit = units[unitIndex];
-        const unitProgression = allProgressions[unitIndex];
-        const levelData = unitProgression[i];
-
-        const isUnitSkipped = !levelData || !!levelData.isSkipped;
-        rowData.unitSkipped.push(isUnitSkipped);
-
-        // A unit has valid data for this row if it has progression data that is not skipped
-        // The progression data's isSkipped flag already handles trainee level logic
-        if (levelData && !levelData.isSkipped) {
-          allUnitsShowDash = false;
-        }
-
-        if (levelData) {
-          rowData.unitDisplayLevels.push(levelData.displayLevel || '');
-
-          if (unitIndex === 0 && levelData.displayLevel) {
-            rowDisplayLevel = levelData.displayLevel;
-          }
-
-          if (levelData.isPromotionLevel) {
-            rowIsPromotionLevel = true;
-            rowData.isPromotionLevel = true;
-          }
-          if (levelData.promotionInfo && !rowPromotionInfo) {
-            rowPromotionInfo = levelData.promotionInfo;
-            rowData.promotionInfo = levelData.promotionInfo;
-          }
-
-          if (levelData.isSkipped) {
-            rowData.isSkipped = true;
-          }
-
-          rowData.stats.push(levelData.stats);
-          rowData.cappedStats.push(levelData.cappedStats);
-          rowData.unitIsPromotionLevel.push(levelData.isPromotionLevel ?? false);
-          rowData.unitPromotionInfo.push(levelData.promotionInfo);
-        } else {
-          rowData.unitDisplayLevels.push('');
-
-          rowData.stats.push({});
-          rowData.cappedStats.push({});
-          rowData.unitIsPromotionLevel.push(false);
-          rowData.unitPromotionInfo.push(undefined);
-        }
-      }
-
-      // Update the row display level with the tier information
-      if (rowDisplayLevel === `Level ${currentInternalLevel}`) {
-        const fallbackLevel = rowData.unitDisplayLevels.find(l => l !== '');
-        if (fallbackLevel) {
-          rowDisplayLevel = fallbackLevel;
-        }
-      }
-      rowData.displayLevel = rowDisplayLevel;
-
-      if (!allUnitsShowDash) {
-        rows.push(rowData);
-      }
+      rows.push({
+        internalLevel: levelData.internalLevel,
+        displayLevel: levelData.displayLevel || `Level ${levelData.internalLevel}`,
+        stats: levelData.stats,
+        cappedStats: levelData.cappedStats,
+        isSkipped: !!levelData.isSkipped,
+        isPromotionLevel: levelData.isPromotionLevel,
+        promotionInfo: levelData.promotionInfo,
+      });
     }
 
-    // Initialize visible stats once when progression data first loads
     if (!hasInitializedStats && displayStats.length > 0) {
       setVisibleStats(new Set(displayStats));
       setHasInitializedStats(true);
     }
 
-    return { rows, statKeys: displayStats, allProgressions };
-  }, [units, expandToLevel100, classes, promotionEvents, reclassEvents]);
+    return { rows, statKeys: displayStats };
+  }, [unit, expandToLevel100, classes, promotionEvents, reclassEvents]);
 
   if (units.length === 0) {
     return (
