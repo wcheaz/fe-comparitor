@@ -6,14 +6,14 @@
 
 ## 2. Uncapped Stat Accumulation in generateProgressionArray
 
-- [ ] 2.1 Modify `generateProgressionArray` in `lib/stats.ts` to track uncapped internal stats for Awakening units. Initialize `uncappedBaseStats` to `unit.stats + class.baseStats` for Awakening. The `calculateCurrentStats` helper must return both uncapped and capped values for Awakening (uncapped = base + growth with no cap; capped = min(uncapped, class.maxStats)). Use uncapped values as the carry-forward base on promotion/reclass. Display stats remain capped + statModifiers. Non-Awakening behavior unchanged.
+- [x] 2.1 Modify `generateProgressionArray` in `lib/stats.ts` to track uncapped internal stats for Awakening units. Initialize `uncappedBaseStats` to `unit.stats + class.baseStats` for Awakening. The `calculateCurrentStats` helper must return both uncapped and capped values for Awakening (uncapped = base + growth with no cap; capped = min(uncapped, class.maxStats)). Use uncapped values as the carry-forward base on promotion/reclass. Display stats remain capped + statModifiers. Non-Awakening behavior unchanged.
   - **Done when:** An Awakening unit whose stat exceeds its class cap shows the capped value in the progression row, but after reclassing to a class with a higher cap, the full uncapped value becomes visible.
   - **Verify by:** `npm test` — existing non-Awakening tests still pass. Existing Awakening test at line 444 of `stats.test.ts` may need updated expected values (acceptable per design risk section). `npx tsc --noEmit` passes.
   - **Stop and hand off if:** A non-Awakening test fails after this change — the Awakening guard is leaking.
 
 ## 3. calculateAverageStats Awakening Awareness
 
-- [ ] 3.1 Add optional `classes?: any[]` parameter to `calculateAverageStats` and `calculateAverageStatsAtLevel` in `lib/stats.ts`. When provided for an Awakening unit, look up the unit's starting class, use combined bases and growths, and apply class stat caps. Non-Awakening path and callers omitting `classes` are unchanged.
+- [x] 3.1 Add optional `classes?: any[]` parameter to `calculateAverageStats` and `calculateAverageStatsAtLevel` in `lib/stats.ts`. When provided for an Awakening unit, look up the unit's starting class, use combined bases and growths, and apply class stat caps. Non-Awakening path and callers omitting `classes` are unchanged.
   - **Done when:** `calculateAverageStats(awakeningUnit, 10, classes)` uses `unit.stats + class.baseStats` as base and `unit.growths + class.growths` as growth. `calculateAverageStats(awakeningUnit, 10)` (no classes) returns same value as before. `calculateAverageStats(nonAwakeningUnit, 10, classes)` returns same value as without classes.
   - **Verify by:** `npx tsc --noEmit` passes. `npm test` passes.
 

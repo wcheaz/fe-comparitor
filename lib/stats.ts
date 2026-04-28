@@ -28,8 +28,8 @@ export function getEffectiveGrowths(unit: Unit, classData: Class | undefined): U
  * @param targetLevel - The target level to calculate stats at
  * @returns UnitStats object with calculated average stats
  */
-export function calculateAverageStatsAtLevel(unit: Unit, level: number): UnitStats {
-  return calculateAverageStats(unit, level);
+export function calculateAverageStatsAtLevel(unit: Unit, level: number, classes?: Class[]): UnitStats {
+  return calculateAverageStats(unit, level, classes);
 }
 
 /**
@@ -40,33 +40,37 @@ export function calculateAverageStatsAtLevel(unit: Unit, level: number): UnitSta
  * @param targetLevel - The target level to calculate stats at
  * @returns UnitStats object with calculated average stats
  */
-export function calculateAverageStats(unit: Unit, targetLevel: number): UnitStats {
+export function calculateAverageStats(unit: Unit, targetLevel: number, classes?: Class[]): UnitStats {
   const averageStats: UnitStats = {};
   const levelDiff = targetLevel - unit.level;
 
-  // Get all stat keys from the unit's stats and growths
+  const classData = classes?.find(c => c.id === unit.class && c.game === unit.game);
+  const isAwakening = unit.game === 'Awakening' && classData;
+
+  const baseStats = isAwakening ? getEffectiveBaseStats(unit, classData) : unit.stats;
+  const growths = isAwakening ? getEffectiveGrowths(unit, classData) : unit.growths;
+
   const allStatKeys = new Set([
-    ...Object.keys(unit.stats),
-    ...Object.keys(unit.growths)
+    ...Object.keys(baseStats),
+    ...Object.keys(growths)
   ]);
 
   for (const statKey of allStatKeys) {
-    const baseStat = unit.stats[statKey] || 0;
-    const growthRate = unit.growths[statKey] || 0;
+    const baseStat = baseStats[statKey] || 0;
+    const growthRate = growths[statKey] || 0;
 
-    // Calculate average stat using growth formula
     let calculatedStat = baseStat + (growthRate * levelDiff) / 100;
 
-    // Apply stat caps if maxStats are available
-    if (unit.maxStats && unit.maxStats[statKey] !== undefined) {
+    if (isAwakening && classData!.maxStats && classData!.maxStats[statKey] !== undefined) {
+      const maxStat = classData!.maxStats[statKey] || 0;
+      calculatedStat = Math.min(calculatedStat, maxStat);
+    } else if (unit.maxStats && unit.maxStats[statKey] !== undefined) {
       const maxStat = unit.maxStats[statKey] || 0;
       calculatedStat = Math.min(calculatedStat, maxStat);
     }
 
-    // Ensure stats don't go below 0 (handles negative level differences)
     calculatedStat = Math.max(0, calculatedStat);
 
-    // Round to 2 decimal places for precision
     averageStats[statKey] = Math.round(calculatedStat * 100) / 100;
   }
 
@@ -453,32 +457,39 @@ export function generateProgressionArray(
   let tier = unit.isPromoted ? 2 : (isTrainee ? 0 : 1);
   let baseStatsForCurrentClass = { ...unit.stats };
   let startLevelForCurrentClass = displayLevelNum;
+  const isAwakening = unit.game === "Awakening";
+  let uncappedBaseStats: UnitStats | null = null;
+  if (isAwakening) {
+    uncappedBaseStats = currentClass ? getEffectiveBaseStats(unit, currentClass) : { ...unit.stats };
+  }
   
   let nextEventIndex = 0;
   
   // Helper to calculate exact stat accumulation up to the current level within a given class
-  const calculateCurrentStats = (currLevel: number, cls: any, baseStats: UnitStats) => {
+  const calculateCurrentStats = (currLevel: number, cls: any, baseStats: UnitStats): { capped: UnitStats; uncapped: UnitStats } => {
     const levelDiff = Math.max(0, currLevel - startLevelForCurrentClass);
-    const result: UnitStats = {};
+    const capped: UnitStats = {};
+    const uncapped: UnitStats = {};
     const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
     
     allStatKeys.forEach(statKey => {
       let growthRate = unit.growths[statKey] || 0;
-      if (unit.game === "Awakening" && cls?.growths) {
+      if (isAwakening && cls?.growths) {
         growthRate += (cls.growths[statKey] || 0);
       }
       
       const baseStatValue = baseStats[statKey] || 0;
       const growthAmount = (growthRate * levelDiff) / 100;
-      let finalStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
+      let rawStat = Math.round((baseStatValue + growthAmount) * 100) / 100;
+      rawStat = Math.max(0, rawStat);
+      
+      uncapped[statKey] = rawStat;
       
       const currentCap = unit.maxStats?.[statKey] ?? cls?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-      finalStat = Math.min(finalStat, currentCap);
-      finalStat = Math.max(0, finalStat);
-      
-      result[statKey] = finalStat;
+      capped[statKey] = Math.min(rawStat, currentCap);
     });
-    return result;
+    
+    return { capped, uncapped };
   };
   
   const applyAwakeningModifiers = (stats: UnitStats, cls: any) => {
@@ -522,7 +533,7 @@ export function generateProgressionArray(
          displayLevel: `Level ${internalLevel}`,
          tier: tier,
          class: currentClass?.name || 'Unknown',
-         stats: applyAwakeningModifiers(baseStatsForCurrentClass, currentClass),
+         stats: applyAwakeningModifiers(isAwakening && uncappedBaseStats ? uncappedBaseStats : baseStatsForCurrentClass, currentClass),
          cappedStats: {},
          isPromotionLevel: false,
          isSkipped: true
@@ -544,7 +555,8 @@ export function generateProgressionArray(
        }
     }
 
-    const currentTrueStats = calculateCurrentStats(displayLevelNum, currentClass, baseStatsForCurrentClass);
+    const calcBase = isAwakening && uncappedBaseStats ? uncappedBaseStats : baseStatsForCurrentClass;
+    const { capped: currentTrueStats, uncapped: currentUncappedStats } = calculateCurrentStats(displayLevelNum, currentClass, calcBase);
     const displayStats = applyAwakeningModifiers(currentTrueStats, currentClass);
     
     // Check caps
@@ -552,8 +564,8 @@ export function generateProgressionArray(
     const allStatKeys = Array.from(new Set([...Object.keys(unit.stats), ...Object.keys(unit.growths)]));
     allStatKeys.forEach(statKey => {
       const currentCap = unit.maxStats?.[statKey] ?? currentClass?.maxStats?.[statKey] ?? (statKey === 'hp' ? 99 : 40);
-      let unmodifiedStat = currentTrueStats[statKey] || 0;
-      if (unmodifiedStat >= currentCap) {
+      const uncappedValue = currentUncappedStats[statKey] || 0;
+      if (uncappedValue >= currentCap) {
         cappedStats[statKey] = true;
       }
     });
@@ -615,7 +627,8 @@ export function generateProgressionArray(
         }
 
         // Finalize base stats for transitioning
-        const finalizedStats = calculateCurrentStats(displayLevelNum, currentClass, baseStatsForCurrentClass);
+        const transBase = isAwakening && uncappedBaseStats ? uncappedBaseStats : baseStatsForCurrentClass;
+        const { capped: finalizedStats, uncapped: finalizedUncappedStats } = calculateCurrentStats(displayLevelNum, currentClass, transBase);
         
         if (nextEvent.type === 'promotion') {
           const newStats = { ...finalizedStats };
@@ -632,10 +645,27 @@ export function generateProgressionArray(
           currentClass = targetClass;
           tier = isTrainee && tier === 0 ? 1 : 2; 
           baseStatsForCurrentClass = newStats;
+          if (isAwakening && uncappedBaseStats !== null) {
+            const newUncapped = { ...finalizedUncappedStats };
+            if (targetClass.promotionBonus) {
+              Object.entries(targetClass.promotionBonus).forEach(([k, v]) => {
+                newUncapped[k] = (newUncapped[k] || 0) + (v as number);
+              });
+            }
+            if (targetClass.baseStats) {
+              Object.entries(targetClass.baseStats).forEach(([k, v]) => {
+                newUncapped[k] = Math.max(newUncapped[k] || 0, v as number);
+              });
+            }
+            uncappedBaseStats = newUncapped;
+          }
         } else if (nextEvent.type === 'reclass') {
           currentClass = targetClass;
           tier = typeof targetClass.tier === 'number' ? targetClass.tier : (typeof targetClass.tier === 'string' ? parseInt(targetClass.tier) : 1);
           baseStatsForCurrentClass = { ...finalizedStats };
+          if (isAwakening && uncappedBaseStats !== null) {
+            uncappedBaseStats = { ...finalizedUncappedStats };
+          }
           pendingReclassFlag = true;
           reclassTargetName = targetClass.name;
         }
