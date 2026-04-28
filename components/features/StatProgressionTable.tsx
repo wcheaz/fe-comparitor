@@ -72,14 +72,10 @@ interface StatProgressionTableProps {
 interface ProgressionRow {
   internalLevel: number;
   displayLevel: string;
-  stats: UnitStats[];
-  cappedStats: Record<string, boolean>[];
-  unitSkipped: boolean[];
-  unitIsPromotionLevel: boolean[];
-  unitPromotionInfo: ({ className: string; classAbilities: string[] } | undefined)[];
-  unitDisplayLevels: string[];
+  stats: UnitStats;
+  cappedStats: Record<string, boolean>;
+  isSkipped: boolean;
   isPromotionLevel: boolean;
-  isSkipped?: boolean;
   promotionInfo?: {
     className: string;
     classAbilities: string[];
