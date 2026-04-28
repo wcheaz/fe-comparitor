@@ -145,7 +145,7 @@ Update `app/comparator/page.tsx` to render two independent `StatProgressionTable
 
 - [x] 7.1 Change `maxUnits` from 4 to 2 in comparator page state and `UnitSelector` prop
 - [x] 7.2 Replace single shared `StatProgressionTable` with dual independent `Card`-wrapped tables in a `grid grid-cols-2` layout
-- [ ] 7.3 Wire up event management — extract flat arrays per unit, wrap callbacks to update parent `Record<string, ...>` state
+- [x] 7.3 Wire up event management — extract flat arrays per unit, wrap callbacks to update parent `Record<string, ...>` state
 
 ## 8. Text Updates & Cleanup
 

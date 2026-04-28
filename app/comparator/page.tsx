@@ -47,61 +47,7 @@ export default function ComparatorPage() {
     setReclassEvents(newEvents);
   };
 
-  // Utility functions for push/pop operations
-  const addPromotionEvent = (unitId: string, event: PromotionEvent) => {
-    setPromotionEvents(prev => ({
-      ...prev,
-      [unitId]: [...(prev[unitId] || []), event]
-    }));
-  };
 
-  const removePromotionEvent = (unitId: string) => {
-    setPromotionEvents(prev => {
-      const currentEvents = prev[unitId] || [];
-      if (currentEvents.length <= 1) return prev; // Don't remove if only one or none
-      return {
-        ...prev,
-        [unitId]: currentEvents.slice(0, -1) // Remove last event
-      };
-    });
-  };
-
-  const addReclassEvent = (unitId: string, event: ReclassEvent) => {
-    setReclassEvents(prev => ({
-      ...prev,
-      [unitId]: [...(prev[unitId] || []), event]
-    }));
-  };
-
-  const removeReclassEvent = (unitId: string) => {
-    setReclassEvents(prev => {
-      const currentEvents = prev[unitId] || [];
-      if (currentEvents.length <= 1) return prev; // Don't remove if only one or none
-      return {
-        ...prev,
-        [unitId]: currentEvents.slice(0, -1) // Remove last event
-      };
-    });
-  };
-
-  // Handler for individual unit promotion changes
-  const handleUnit1PromotionChange = (events: PromotionEvent[]) => {
-    if (selectedUnits[0]) {
-      setPromotionEvents(prev => ({
-        ...prev,
-        [selectedUnits[0].id]: events
-      }));
-    }
-  };
-
-  const handleUnit2PromotionChange = (events: PromotionEvent[]) => {
-    if (selectedUnits[1]) {
-      setPromotionEvents(prev => ({
-        ...prev,
-        [selectedUnits[1].id]: events
-      }));
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-fe-blue-50 to-fe-blue-100">
