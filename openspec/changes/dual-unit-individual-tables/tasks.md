@@ -117,7 +117,7 @@ Render an appropriate empty state when `unit` is `null` (no unit selected for th
 - No runtime errors when `unit` is `null`
 - Hooks are called unconditionally
 
-- [ ] 6.1 Render empty state when `unit` is `null`
+- [x] 6.1 Render empty state when `unit` is `null`
 
 ## 7. Comparator Page Integration
 
