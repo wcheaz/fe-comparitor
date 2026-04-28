@@ -153,5 +153,316 @@
     "responseChars": 894,
     "responseTokens": 224,
     "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T17:41:47.031Z",
+    "iteration": 6,
+    "duration": 82495,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 5
+      }
+    ],
+    "filesChanged": [
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 1 — Record quality gate baselines**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 910,
+    "responseChars": 910,
+    "responseTokens": 228,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T17:42:28.526Z",
+    "iteration": 7,
+    "duration": 41474,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 2
+      }
+    ],
+    "filesChanged": [
+      "lib/stats.ts",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 2 — Remove redundant post-increment break guard at line 639 of `generateProgressionArray`**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 776,
+    "responseChars": 772,
+    "responseTokens": 193,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T17:42:51.745Z",
+    "iteration": 8,
+    "duration": 23180,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 3
+      }
+    ],
+    "filesChanged": [
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 3 — Verify the primary break at line 554 is unchanged and correct**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 769,
+    "responseChars": 763,
+    "responseTokens": 191,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T17:44:23.975Z",
+    "iteration": 9,
+    "duration": 92214,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 3
+      }
+    ],
+    "filesChanged": [
+      "components/features/StatProgressionTable.tsx",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 4 — Replace unit-0-only display level selection with per-unit display levels**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 1732,
+    "responseChars": 1730,
+    "responseTokens": 433,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T17:47:29.075Z",
+    "iteration": 10,
+    "duration": 185085,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 3
+      }
+    ],
+    "filesChanged": [
+      "components/features/StatProgressionTable.tsx",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 5 — Mark non-first unit cells as ended when progression data is undefined**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 1333,
+    "responseChars": 1329,
+    "responseTokens": 332,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T18:01:15.008Z",
+    "iteration": 11,
+    "duration": 825929,
+    "completionDetected": false,
+    "taskDetected": false,
+    "toolUsage": [],
+    "filesChanged": [],
+    "exitCode": null,
+    "signal": "SIGTERM",
+    "failureStage": "",
+    "completedTasks": [],
+    "commitAttempted": false,
+    "commitCreated": false,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 736,
+    "promptChars": 736,
+    "promptTokens": 184,
+    "responseBytes": 65,
+    "responseChars": 65,
+    "responseTokens": 16,
+    "truncated": false,
+    "failureReason": "iteration_timeout_idle",
+    "idleMs": 300007,
+    "lastStdoutBytes": "Let me first run the current tests to understand what's failing.\n",
+    "lastStderrBytes": "ats.test.ts:348:33)\n\nTest Suites: 1 failed, 1 total\nTests:       5 failed, 6 passed, 11 total\nSnapshots:   0 total\nTime:        0.318 s, estimated 1 s\nRan all test suites matching /stats.test/i.\n\u001b[0m\n"
+  },
+  {
+    "timestamp": "2026-04-28T18:13:32.917Z",
+    "iteration": 12,
+    "duration": 737906,
+    "completionDetected": false,
+    "taskDetected": false,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 1
+      }
+    ],
+    "filesChanged": [
+      "__tests__/lib/stats.test.ts",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": null,
+    "signal": "SIGTERM",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 6 — Restore original expectations for the 5 failing stats tests**"
+    ],
+    "commitAttempted": false,
+    "commitCreated": false,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 1534,
+    "promptChars": 1517,
+    "promptTokens": 379,
+    "responseBytes": 1182,
+    "responseChars": 1182,
+    "responseTokens": 296,
+    "truncated": false,
+    "failureReason": "iteration_timeout_idle",
+    "idleMs": 300002,
+    "lastStdoutBytes": "Let me read the test file and stats source to understand current state.\nLet me run the current tests to see which ones are failing:\n",
+    "lastStderrBytes": "ats.test.ts:348:33)\n\nTest Suites: 1 failed, 1 total\nTests:       5 failed, 6 passed, 11 total\nSnapshots:   0 total\nTime:        0.309 s, estimated 1 s\nRan all test suites matching /stats.test/i.\n\u001b[0m\n"
+  },
+  {
+    "timestamp": "2026-04-28T18:15:21.371Z",
+    "iteration": 13,
+    "duration": 108439,
+    "completionDetected": false,
+    "taskDetected": true,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 4
+      }
+    ],
+    "filesChanged": [
+      "__tests__/lib/stats.test.ts",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 7 — Add multi-unit ghost-row regression test**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 1592,
+    "promptChars": 1575,
+    "promptTokens": 394,
+    "responseBytes": 374,
+    "responseChars": 374,
+    "responseTokens": 94,
+    "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T18:16:35.438Z",
+    "iteration": 14,
+    "duration": 74051,
+    "completionDetected": true,
+    "taskDetected": false,
+    "toolUsage": [
+      {
+        "tool": "Task",
+        "count": 2
+      }
+    ],
+    "filesChanged": [
+      ".ralph/baselines/",
+      "openspec/changes/fix-level-cap-overflow/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "**Task 8 — Run full test suite, type checks, and lint**"
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 1592,
+    "promptChars": 1575,
+    "promptTokens": 394,
+    "responseBytes": 658,
+    "responseChars": 652,
+    "responseTokens": 163,
+    "truncated": false
   }
 ]
