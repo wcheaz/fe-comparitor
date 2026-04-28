@@ -13,7 +13,7 @@ Update the `StatProgressionTableProps` interface and `ProgressionRow` type in `c
 
 **Stop and hand off if:** The existing interface has hidden consumers outside the known files — search for imports of `StatProgressionTable` or `ProgressionRow` before proceeding.
 
-- [ ] 1.1 Change `StatProgressionTableProps` to accept `unit: Unit | null` and flat event array props
+- [x] 1.1 Change `StatProgressionTableProps` to accept `unit: Unit | null` and flat event array props
 - [ ] 1.2 Simplify `ProgressionRow` type from array fields to single-value fields
 
 ## 2. Row Generation (useMemo)

@@ -62,13 +62,11 @@ function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: Promotio
 }
 
 interface StatProgressionTableProps {
-  units: Unit[];
-  promotionEvents: Record<string, PromotionEvent[]>;
-  reclassEvents: Record<string, ReclassEvent[]>;
-  onPromotionEventsChange: (events: Record<string, PromotionEvent[]>) => void;
-  onReclassEventsChange: (events: Record<string, ReclassEvent[]>) => void;
-  onAddPromotionEvent?: (unitId: string, event: PromotionEvent) => void;
-  onRemovePromotionEvent?: (unitId: string) => void;
+  unit: Unit | null;
+  promotionEvents: PromotionEvent[];
+  reclassEvents: ReclassEvent[];
+  onPromotionEventsChange: (events: PromotionEvent[]) => void;
+  onReclassEventsChange: (events: ReclassEvent[]) => void;
 }
 
 interface ProgressionRow {
@@ -88,7 +86,7 @@ interface ProgressionRow {
   };
 }
 
-export function StatProgressionTable({ units, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, onAddPromotionEvent, onRemovePromotionEvent }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [groupBy, setGroupBy] = useState<'stat' | 'unit'>('stat');
   const [classes, setClasses] = useState<Class[]>([]);
