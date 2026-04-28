@@ -34,7 +34,7 @@ export default function ComparatorPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-fe-blue-50 to-fe-blue-100">
-      <div className="container mx-auto px-4 py-8">
+      <div className="px-4 lg:px-6 py-8">
         {/* Page Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-fe-blue-900 mb-4">
@@ -46,10 +46,10 @@ export default function ComparatorPage() {
           </p>
         </div>
 
-        {/* Main Layout - Horizontal Comparison */}
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+        {/* Main Layout - Full-width sidebar + content */}
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_1fr] gap-6">
           {/* Left Sidebar - Controls */}
-          <div className="xl:col-span-2 space-y-6">
+          <div className="space-y-6">
             {/* Unit Selector */}
             <UnitSelector
               selectedUnits={selectedUnits}
@@ -62,7 +62,7 @@ export default function ComparatorPage() {
           </div>
 
           {/* Main Content - Horizontal Comparison Grid */}
-          <div className="xl:col-span-10 space-y-6">
+          <div className="space-y-6 min-w-0">
             <ComparisonGrid
               units={selectedUnits}
               promotionEvents={promotionEvents}

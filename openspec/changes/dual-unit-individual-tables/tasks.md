@@ -187,10 +187,10 @@ Run the full verification suite to confirm the refactor is complete.
 
 ## 10. Layout & ComparisonGrid Cleanup
 
-Widen the comparator page layout to reduce cramping, and remove the unused Unit Cards grid from `ComparisonGrid.tsx`.
+Redesign the comparator page layout to use nearly the full viewport width, and remove the unused Unit Cards grid from `ComparisonGrid.tsx`.
 
 **Scope:**
-- In `app/comparator/page.tsx`, change the main layout grid from `xl:grid-cols-12` with a 3-col sidebar / 9-col content split to a wider content area. Specifically: change the sidebar from `xl:col-span-3` to `xl:col-span-2` and the main content from `xl:col-span-9` to `xl:col-span-10`. This gives the dual progression tables and ComparisonGrid significantly more horizontal space.
+- In `app/comparator/page.tsx`, replace the current `container mx-auto px-4` wrapper and `grid xl:grid-cols-12` layout with a full-width layout. The unit selector should sit left-aligned with a small margin, and the comparison content should fill the remaining viewport width with only small left/right margins. Use `px-4 lg:px-6` for minimal horizontal padding, remove the `container` max-width constraint, and use a `flex` or `grid` layout where the sidebar (unit selector) takes a fixed narrow width and the content fills the rest (e.g., `xl:grid-cols-[280px_1fr]` or a flex layout with a fixed-width sidebar).
 - In `components/features/ComparisonGrid.tsx`, remove the "Unit Cards Grid" block (lines ~540–548):
   ```tsx
   {/* Unit Cards Grid - Simplified headers */}
@@ -206,13 +206,17 @@ Widen the comparator page layout to reduce cramping, and remove the unused Unit 
   This grid renders `UnitCard` components that duplicate information already visible in the Unit Details table below it. Remove the block and, if `UnitCard` is no longer imported anywhere in this file, remove the import as well.
 
 **Done when:**
-- Comparator page sidebar is 2 columns wide and content area is 10 columns wide on xl+ screens
+- Both the unit selector and comparison content use nearly the full viewport width on desktop
+- Only small margins exist on the left and right edges
+- The unit selector is positioned to the far left with a compact fixed width
+- The comparison content (ComparisonGrid, progression tables) fills the remaining space
 - The Unit Cards grid no longer renders in the ComparisonGrid
 - `UnitCard` import is removed from `ComparisonGrid.tsx` if no longer used there
+- Mobile and tablet layouts remain usable (stacked vertically)
 - `npx tsc --noEmit` passes
-- Visual check: the page is noticeably less cramped on a large monitor
+- Visual check: the page uses the full width of a large monitor without cramping
 
-**Stop and hand off if:** Changing the grid columns breaks mobile or tablet layouts — verify responsive behavior before marking complete.
+**Stop and hand off if:** Removing `container` breaks other pages that share layout components — check that this change is scoped to the comparator page only.
 
-- [x] 10.1 Widen comparator page layout: change sidebar from `xl:col-span-3` to `xl:col-span-2`, content from `xl:col-span-9` to `xl:col-span-10`
-- [x] 10.2 Remove Unit Cards grid block and unused `UnitCard` import from `ComparisonGrid.tsx`
+- [x] 10.1 Replace `container` + 12-col grid with full-width layout: remove max-width constraint, use `xl:grid-cols-[280px_1fr]` or similar fixed-sidebar + fluid-content layout with minimal padding
+- [ ] 10.2 Remove Unit Cards grid block and unused `UnitCard` import from `ComparisonGrid.tsx`
