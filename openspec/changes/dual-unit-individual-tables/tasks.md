@@ -102,7 +102,7 @@ Update the promotion and reclass event configuration section (lines ~400–830) 
 
 **Stop and hand off if:** The config UI has deeply coupled multi-unit logic (e.g., cross-unit event validation) that cannot be simplified — document and hand off.
 
-- [ ] 5.1 Update promotion/reclass config section to reference `unit` directly and use flat event array props
+- [x] 5.1 Update promotion/reclass config section to reference `unit` directly and use flat event array props
 
 ## 6. Empty State & Null Guard
 
