@@ -10,8 +10,15 @@ The system SHALL apply appropriate statistical bonuses when a unit promotes, acc
 #### Scenario: Awakening unit promotes/reclasses
 - **WHEN** an Awakening unit's progression crosses their promotion/reclass level
 - **THEN** their uncapped internal stats SHALL carry forward as the new base for growth accumulation in the new class.
+- **AND** the uncapped internal stats SHALL be adjusted by the difference between the new class's `baseStats` and the old class's `baseStats` (i.e., `uncapped_stat += new_class.baseStats[stat] - old_class.baseStats[stat]` for each stat).
 - **AND** the displayed stats SHALL be capped at the new class's `maxStats`.
-- **AND** the starting displayed stats for the new class SHALL equal `uncapped_internal_stats + promotion_bonus` (if promotion), floored by `new_class.baseStats`, then capped by `new_class.maxStats`.
+- **AND** the starting displayed stats for the new class SHALL equal `adjusted_uncapped_stats + promotion_bonus` (if promotion), capped by `new_class.maxStats`.
+
+#### Scenario: Awakening unit promotes to class with higher class base
+- **WHEN** Cherche (Wyvern Rider, class base HP 19) promotes to Griffon Lord (class base HP 22)
+- **AND** her uncapped internal HP at Wyvern Rider level 20 is 34.4
+- **THEN** her uncapped internal HP after promotion SHALL be 34.4 + (22 - 19) = 37.4
+- **AND** the 3 HP gain reflects the new class's higher base stat
 
 #### Scenario: Unit stats are floored by class bases
 - **WHEN** a unit's stats upon promotion are lower than the new class's base stats
@@ -38,6 +45,7 @@ The `generateProgressionArray` function SHALL track two layers of stat values fo
 #### Scenario: Awakening unit reclasses and carries uncapped stats
 - **WHEN** an Awakening unit reclasses to a new class
 - **THEN** the uncapped internal stats from the previous class SHALL become the base for growth accumulation in the new class
+- **AND** the uncapped internal stats SHALL be adjusted by the difference between the new class's `baseStats` and the old class's `baseStats` (i.e., `uncapped_stat += new_class.baseStats[stat] - old_class.baseStats[stat]` for each stat)
 - **AND** the new class's growths SHALL be added to the unit's personal growths going forward
 - **AND** the displayed stats SHALL be capped at the new class's `maxStats`
 

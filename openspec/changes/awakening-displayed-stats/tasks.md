@@ -11,6 +11,11 @@
   - **Verify by:** `npm test` — existing non-Awakening tests still pass. Existing Awakening test at line 444 of `stats.test.ts` may need updated expected values (acceptable per design risk section). `npx tsc --noEmit` passes.
   - **Stop and hand off if:** A non-Awakening test fails after this change — the Awakening guard is leaking.
 
+- [ ] 2.2 When an Awakening unit promotes or reclasses in `generateProgressionArray`, adjust the uncapped internal stats by the difference between the new class's `baseStats` and the old class's `baseStats`. For each stat: `uncappedBaseStats[stat] += new_class.baseStats[stat] - old_class.baseStats[stat]`. This ensures the unit gains (or loses) the stat delta from the class base change. Non-Awakening behavior unchanged.
+  - **Done when:** Cherche (Wyvern Rider, class base HP 19) at level 20 with uncapped HP 34.4 promotes to Griffon Lord (class base HP 22) and shows HP 37.4 at promoted level 1 (34.4 + 3 from class base delta). Same logic applies for reclass events.
+  - **Verify by:** `npm test` — add a test case for Cherche promoting from Wyvern Rider to Griffon Lord verifying the class base delta is applied. `npx tsc --noEmit` passes.
+  - **Stop and hand off if:** The class base delta causes non-Awakening promotion stats to change — the Awakening guard is leaking.
+
 ## 3. calculateAverageStats Awakening Awareness
 
 - [x] 3.1 Add optional `classes?: any[]` parameter to `calculateAverageStats` and `calculateAverageStatsAtLevel` in `lib/stats.ts`. When provided for an Awakening unit, look up the unit's starting class, use combined bases and growths, and apply class stat caps. Non-Awakening path and callers omitting `classes` are unchanged.
@@ -39,7 +44,7 @@
 
 ## 6. Test Coverage
 
-- [x] 6.1 Add tests to `__tests__/lib/stats.test.ts` for: (a) `getEffectiveBaseStats` returns combined values for Awakening, passthrough for non-Awakening; (b) `getEffectiveGrowths` same; (c) `calculateAverageStats` with `classes` uses combined bases/growths/caps for Awakening; (d) uncapped stat accumulation — Awakening unit exceeds cap, reclasses to higher-cap class, full uncapped value appears. Update the existing Awakening statModifiers reclass test (line 444) expected values if they shift due to uncapped tracking.
+- [x] 6.1 Add tests to `__tests__/lib/stats.test.ts` for: (a) `getEffectiveBaseStats` returns combined values for Awakening, passthrough for non-Awakening; (b) `getEffectiveGrowths` same; (c) `calculateAverageStats` with `classes` uses combined bases/growths/caps for Awakening; (d) uncapped stat accumulation — Awakening unit exceeds cap, reclasses to higher-cap class, full uncapped value appears; (e) Awakening promotion class base delta — Cherche promoting from Wyvern Rider to Griffon Lord gains HP equal to `new_class.baseStats.hp - old_class.baseStats.hp`. Update the existing Awakening statModifiers reclass test (line 444) expected values if they shift due to uncapped tracking.
   - **Done when:** All new tests pass. All existing non-Awakening tests pass. `npm test` exits 0.
   - **Verify by:** `npm test`
   - **Stop and hand off if:** An existing FE6/FE7/FE8/FE3H/Engage test fails — the Awakening guard is leaking into non-Awakening paths.
