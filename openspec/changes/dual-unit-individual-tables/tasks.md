@@ -184,3 +184,35 @@ Run the full verification suite to confirm the refactor is complete.
 **Stop and hand off if:** Build errors persist after two fix attempts — document the errors and hand off.
 
 - [x] 9.1 Run typecheck, lint, and build — confirm all pass with zero errors
+
+## 10. Layout & ComparisonGrid Cleanup
+
+Widen the comparator page layout to reduce cramping, and remove the unused Unit Cards grid from `ComparisonGrid.tsx`.
+
+**Scope:**
+- In `app/comparator/page.tsx`, change the main layout grid from `xl:grid-cols-12` with a 3-col sidebar / 9-col content split to a wider content area. Specifically: change the sidebar from `xl:col-span-3` to `xl:col-span-2` and the main content from `xl:col-span-9` to `xl:col-span-10`. This gives the dual progression tables and ComparisonGrid significantly more horizontal space.
+- In `components/features/ComparisonGrid.tsx`, remove the "Unit Cards Grid" block (lines ~540–548):
+  ```tsx
+  {/* Unit Cards Grid - Simplified headers */}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    {units.map((unit) => (
+      <UnitCard
+        key={unit.id}
+        unit={unit}
+      />
+    ))}
+  </div>
+  ```
+  This grid renders `UnitCard` components that duplicate information already visible in the Unit Details table below it. Remove the block and, if `UnitCard` is no longer imported anywhere in this file, remove the import as well.
+
+**Done when:**
+- Comparator page sidebar is 2 columns wide and content area is 10 columns wide on xl+ screens
+- The Unit Cards grid no longer renders in the ComparisonGrid
+- `UnitCard` import is removed from `ComparisonGrid.tsx` if no longer used there
+- `npx tsc --noEmit` passes
+- Visual check: the page is noticeably less cramped on a large monitor
+
+**Stop and hand off if:** Changing the grid columns breaks mobile or tablet layouts — verify responsive behavior before marking complete.
+
+- [x] 10.1 Widen comparator page layout: change sidebar from `xl:col-span-3` to `xl:col-span-2`, content from `xl:col-span-9` to `xl:col-span-10`
+- [x] 10.2 Remove Unit Cards grid block and unused `UnitCard` import from `ComparisonGrid.tsx`

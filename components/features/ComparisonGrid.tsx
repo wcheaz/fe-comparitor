@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
-import { UnitCard } from './UnitCard';
 import { StatTable } from './StatTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
 import AbilityPill from '@/components/ui/AbilityPill';
@@ -536,16 +535,6 @@ export function ComparisonGrid({
           </div>
         </CardContent>
       </Card>
-
-      {/* Unit Cards Grid - Simplified headers */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {units.map((unit) => (
-          <UnitCard
-            key={unit.id}
-            unit={unit}
-          />
-        ))}
-      </div>
 
       {/* Basic Unit Information - Horizontal */}
       <Card>

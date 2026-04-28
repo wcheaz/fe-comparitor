@@ -49,7 +49,7 @@ export default function ComparatorPage() {
         {/* Main Layout - Horizontal Comparison */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
           {/* Left Sidebar - Controls */}
-          <div className="xl:col-span-3 space-y-6">
+          <div className="xl:col-span-2 space-y-6">
             {/* Unit Selector */}
             <UnitSelector
               selectedUnits={selectedUnits}
@@ -62,7 +62,7 @@ export default function ComparatorPage() {
           </div>
 
           {/* Main Content - Horizontal Comparison Grid */}
-          <div className="xl:col-span-9 space-y-6">
+          <div className="xl:col-span-10 space-y-6">
             <ComparisonGrid
               units={selectedUnits}
               promotionEvents={promotionEvents}
