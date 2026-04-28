@@ -1,4 +1,24 @@
-import { Unit, UnitStats, PromotionEvent, ReclassEvent } from '@/types/unit';
+import { Unit, UnitStats, PromotionEvent, ReclassEvent, Class } from '@/types/unit';
+
+export function getEffectiveBaseStats(unit: Unit, classData: Class | undefined): UnitStats {
+  if (!classData || unit.game !== 'Awakening') return unit.stats;
+  const combined: UnitStats = {};
+  const allKeys = new Set([...Object.keys(unit.stats), ...Object.keys(classData.baseStats || {})]);
+  for (const key of allKeys) {
+    combined[key] = (unit.stats[key] || 0) + (classData.baseStats?.[key] || 0);
+  }
+  return combined;
+}
+
+export function getEffectiveGrowths(unit: Unit, classData: Class | undefined): UnitStats {
+  if (!classData || unit.game !== 'Awakening') return unit.growths;
+  const combined: UnitStats = {};
+  const allKeys = new Set([...Object.keys(unit.growths), ...Object.keys(classData.growths || {})]);
+  for (const key of allKeys) {
+    combined[key] = (unit.growths[key] || 0) + (classData.growths?.[key] || 0);
+  }
+  return combined;
+}
 
 /**
  * Calculate average stats for a unit at a target level based on growth rates

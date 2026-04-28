@@ -1,6 +1,6 @@
 ## 1. Helper Functions
 
-- [ ] 1.1 Add `getEffectiveBaseStats(unit, classData)` and `getEffectiveGrowths(unit, classData)` to `lib/stats.ts`. For Awakening units, return `unit.stats + class.baseStats` and `unit.growths + class.growths`. For non-Awakening units or when `classData` is undefined, return `unit.stats` and `unit.growths` unchanged. Export both functions.
+- [x] 1.1 Add `getEffectiveBaseStats(unit, classData)` and `getEffectiveGrowths(unit, classData)` to `lib/stats.ts`. For Awakening units, return `unit.stats + class.baseStats` and `unit.growths + class.growths`. For non-Awakening units or when `classData` is undefined, return `unit.stats` and `unit.growths` unchanged. Export both functions.
   - **Done when:** Both functions exist, exported from `lib/stats.ts`. `getEffectiveBaseStats(awakeningUnit, tacticianClass).str` equals `unit.stats.str + class.baseStats.str`. `getEffectiveBaseStats(nonAwakeningUnit, anyClass).str` equals `unit.stats.str`.
   - **Verify by:** `npx tsc --noEmit` passes. Write a quick inline test or console assertion with Chrom + Tactician class data: personal str=1, class str=4 → combined str=5.
 
