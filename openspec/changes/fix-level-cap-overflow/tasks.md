@@ -37,7 +37,7 @@
     - `npm test -- --testPathPattern="stats.test"` exits 0
   - Stop and hand off if: the `unpromotedUnit` test fixture has `maxLevel === "infinite"` (it does not — it has no `maxLevel` field), or the mock classes yield a different cap than 20.
 
-- [ ] **Add regression test for multi-unit comparison overflow**
+- [x] **Add regression test for multi-unit comparison overflow**
   - Scope: `__tests__/lib/stats.test.ts`
   - Change: Add a new test case `it('should not overflow past final class cap when unit has fewer events than comparison peer')` that constructs two calls to `generateProgressionArray`: (1) a unit with a single promotion event at level 20, called with `endLevel = 130` (simulating an inflated `maxLevelFromUnits`), and (2) verifies the returned array terminates exactly at the promoted class's level cap with no ghost rows or duplicated level sequences.
   - Done when:

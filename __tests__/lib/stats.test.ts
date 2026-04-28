@@ -194,6 +194,29 @@ describe('Stat Progression Logic', () => {
       expect(lastRow.internalLevel).toBe(40);
     });
 
+    it('should not overflow past final class cap when unit has fewer events than comparison peer', () => {
+      const testUnit: Unit = {
+        ...unpromotedUnit,
+        game: 'test_game',
+      };
+      const promotionEvents: PromotionEvent[] = [
+        { level: 20, selectedClassId: 'hero' }
+      ];
+
+      const progression = generateProgressionArray(testUnit, 1, 130, mockClasses, promotionEvents);
+
+      expect(progression).toHaveLength(40);
+
+      const lastRow = progression[39];
+      expect(lastRow.displayLevel).toBe('Level 20 (Tier 2)');
+      expect(lastRow.internalLevel).toBe(40);
+
+      const promotedRows = progression.filter(row => row.displayLevel.includes('(Tier'));
+      for (let i = 1; i < promotedRows.length; i++) {
+        expect(promotedRows[i].displayLevel).not.toBe(promotedRows[i - 1].displayLevel);
+      }
+    });
+
     it('should handle units with missing class data gracefully', () => {
       const unitWithoutClassData: Unit = {
         ...unpromotedUnit,
