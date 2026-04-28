@@ -41,7 +41,7 @@
 
 ### Part B — Fix `StatProgressionTable.tsx` to accommodate non-first units
 
-- [ ] **Task 4 — Replace unit-0-only display level selection with per-unit display levels**
+- [x] **Task 4 — Replace unit-0-only display level selection with per-unit display levels**
   - Scope: `components/features/StatProgressionTable.tsx` (lines 210–213, `ProgressionRow` type at ~line 62)
   - Change: Line 211 currently reads `if (unitIndex === 0 && levelData.displayLevel) { rowDisplayLevel = levelData.displayLevel; }`, which takes the row label from unit 0 only. When non-first units promote later than unit 0, the row label does not reflect their actual level, and rows past unit 0's progression end show incorrect default labels ("Level 37", "Level 38", etc.). Fix this by storing each unit's display level in the row data (add a `unitDisplayLevels: string[]` field to `ProgressionRow`) and populating it for every unit that has non-undefined `levelData`. The row-level `displayLevel` field should prefer unit 0's level when available but fall back to the first unit that has data for that row. Update the `ProgressionRow` type definition to include the new field.
   - Done when:

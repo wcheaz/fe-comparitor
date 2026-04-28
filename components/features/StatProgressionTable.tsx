@@ -79,6 +79,7 @@ interface ProgressionRow {
   unitSkipped: boolean[];
   unitIsPromotionLevel: boolean[];
   unitPromotionInfo: ({ className: string; classAbilities: string[] } | undefined)[];
+  unitDisplayLevels: string[];
   isPromotionLevel: boolean;
   isSkipped?: boolean;
   promotionInfo?: {
@@ -186,6 +187,7 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
         unitSkipped: [],
         unitIsPromotionLevel: [],
         unitPromotionInfo: [],
+        unitDisplayLevels: [],
         isPromotionLevel: false
       };
 
@@ -207,10 +209,12 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
         }
 
         if (levelData) {
-          // Use displayLevel from progression data for the first unit
+          rowData.unitDisplayLevels.push(levelData.displayLevel || '');
+
           if (unitIndex === 0 && levelData.displayLevel) {
             rowDisplayLevel = levelData.displayLevel;
           }
+
           if (levelData.isPromotionLevel) {
             rowIsPromotionLevel = true;
             rowData.isPromotionLevel = true;
@@ -221,7 +225,7 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
           }
 
           if (levelData.isSkipped) {
-            rowData.isSkipped = true; // Mark global row if ANY unit considers this a skipped virtual offset
+            rowData.isSkipped = true;
           }
 
           rowData.stats.push(levelData.stats);
@@ -229,7 +233,8 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
           rowData.unitIsPromotionLevel.push(levelData.isPromotionLevel ?? false);
           rowData.unitPromotionInfo.push(levelData.promotionInfo);
         } else {
-          // Fallback for missing data
+          rowData.unitDisplayLevels.push('');
+
           rowData.stats.push({});
           rowData.cappedStats.push({});
           rowData.unitIsPromotionLevel.push(false);
@@ -238,6 +243,12 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
       }
 
       // Update the row display level with the tier information
+      if (rowDisplayLevel === `Level ${currentInternalLevel}`) {
+        const fallbackLevel = rowData.unitDisplayLevels.find(l => l !== '');
+        if (fallbackLevel) {
+          rowDisplayLevel = fallbackLevel;
+        }
+      }
       rowData.displayLevel = rowDisplayLevel;
 
       if (!allUnitsShowDash) {
