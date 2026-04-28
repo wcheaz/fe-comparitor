@@ -219,4 +219,4 @@ Redesign the comparator page layout to use nearly the full viewport width, and r
 **Stop and hand off if:** Removing `container` breaks other pages that share layout components — check that this change is scoped to the comparator page only.
 
 - [x] 10.1 Replace `container` + 12-col grid with full-width layout: remove max-width constraint, use `xl:grid-cols-[280px_1fr]` or similar fixed-sidebar + fluid-content layout with minimal padding
-- [ ] 10.2 Remove Unit Cards grid block and unused `UnitCard` import from `ComparisonGrid.tsx`
+- [x] 10.2 Remove Unit Cards grid block and unused `UnitCard` import from `ComparisonGrid.tsx`
