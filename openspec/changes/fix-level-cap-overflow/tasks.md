@@ -16,7 +16,7 @@
 
 ## Implementation
 
-- [ ] **Add redundant break guard after displayLevelNum increment in generateProgressionArray**
+- [x] **Add redundant break guard after displayLevelNum increment in generateProgressionArray**
   - Scope: `lib/stats.ts` (lines 632-638)
   - Change: After the `displayLevelNum++` / `displayLevelNum = 1` block (line 637), add a break guard: `if (displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite") { break; }`. This runs at the end of the loop body, complementing the existing break at line 554 that runs at the top.
   - Done when:
