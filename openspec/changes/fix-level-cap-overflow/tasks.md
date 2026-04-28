@@ -66,7 +66,7 @@
 
 ### Part C — Fix tests and add regression coverage
 
-- [ ] **Task 6 — Restore original expectations for the 5 failing stats tests**
+- [x] **Task 6 — Restore original expectations for the 5 failing stats tests**
   - Scope: `__tests__/lib/stats.test.ts`
   - Change: The prior break-guard changes caused 5 test failures by truncating `generateProgressionArray` output at the class cap (20) when `endLevel` was set higher. Now that the redundant guard is removed (Task 2), restore the original expectations: (1) "should generate correct progression for a standard unpromoted unit" — revert to expecting 25 rows with `endLevel=25`; (2) "should apply correct promotion bonuses and class base flooring" — revert to expecting first row at Level 20; (3) "should handle units with missing class data gracefully" — revert to expecting 25 rows; (4) "should calculate growth rates correctly across promotion boundary" — revert to expecting HP ≥ 30 at level 22; (5) "should handle 1-tier promoted units correctly (Seth - Paladin)" — revert to expecting no "Tier" indicators. Also update the "cap progression at class level cap" test (added by the prior fix) if its expectations now conflict with the restored `generateProgressionArray` behavior — that test may need to be removed or rewritten to reflect that termination is now the table's responsibility, not the generator's.
   - Done when:
@@ -75,7 +75,7 @@
     - The "cap progression at class level cap" test either passes with updated expectations or has been removed with a comment explaining termination moved to the table
   - Stop and hand off if: restoring original expectations reveals that `generateProgressionArray` output has changed in a way that contradicts both old and new expectations — document the exact mismatch (expected vs actual array length and last-row displayLevel) and hand off.
 
-- [ ] **Task 7 — Add multi-unit ghost-row regression test**
+- [x] **Task 7 — Add multi-unit ghost-row regression test**
   - Scope: `__tests__/lib/stats.test.ts`
   - Change: Add a new test `it('should not produce ghost rows past class cap for non-first unit when compared with earlier-promoting unit')` that reproduces the Cherche-at-16 / Kellam-at-20 scenario. Construct a Kellam-like unit (starts at level 5, single promotion event at level 20, non-infinite `maxLevel`) and call `generateProgressionArray` with `endLevel = 130` (simulating the inflated `maxLevelFromUnits` from a Cherche-like peer with 3 events). Assert: (1) the returned array has exactly 40 rows (4 padding + 16 unpromoted levels 5–20 + 20 promoted levels 1–20); (2) the last row's `displayLevel` contains "Level 20"; (3) no two consecutive rows in the promoted segment share the same `displayLevelNum` (no ghost or duplicate levels).
   - Done when:

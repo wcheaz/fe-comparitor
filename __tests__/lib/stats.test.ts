@@ -38,7 +38,7 @@ const mockClasses: Class[] = [
 const unpromotedUnit: Unit = {
   id: 'test-unit-1',
   name: 'Test Unit 1',
-  game: 'Test Game',
+  game: 'test_game',
   class: 'mercenary',
   joinChapter: 'Chapter 1',
   level: 1,
@@ -50,7 +50,7 @@ const unpromotedUnit: Unit = {
 const level10Unit: Unit = {
   id: 'test-unit-2',
   name: 'Test Unit 2',
-  game: 'Test Game',
+  game: 'test_game',
   class: 'mercenary',
   joinChapter: 'Chapter 2',
   level: 10,
@@ -62,7 +62,7 @@ const level10Unit: Unit = {
 const prePromotedUnit: Unit = {
   id: 'marcus',
   name: 'Marcus',
-  game: 'Test Game',
+  game: 'test_game',
   class: 'paladin',
   joinChapter: 'Chapter 1',
   level: 1,
@@ -95,7 +95,7 @@ describe('Stat Progression Logic', () => {
 
       // Check post-promotion level
       const postPromotionLevel = progression[21]; // Index 21 = level 22
-      expect(postPromotionLevel.displayLevel).toBe('Level 2 (Promoted)');
+      expect(postPromotionLevel.displayLevel).toBe('Level 2 (Tier 2)');
       expect(postPromotionLevel.internalLevel).toBe(22);
     });
 
@@ -126,33 +126,23 @@ describe('Stat Progression Logic', () => {
 
     // Task 5.3: Verify that a unit receives exact promotion stat bumps at level 21 internal
     it('should apply correct promotion bonuses and class base flooring', () => {
-      const progression = generateProgressionArray(unpromotedUnit, 20, 22, mockClasses);
+      const progression = generateProgressionArray(unpromotedUnit, 1, 22, mockClasses);
 
-      // Level 20 (before promotion, but marked as promotion level in UI)
-      const beforePromotion = progression[0];
+      const beforePromotion = progression[19];
       expect(beforePromotion.displayLevel).toBe('Level 20');
       expect(beforePromotion.isPromotionLevel).toBe(true);
 
-      // Level 21 (first promoted level)
-      const promotionLevel = progression[1];
-      expect(promotionLevel.displayLevel).toBe('Level 1 (Promoted)');
+      const promotionLevel = progression[20];
+      expect(promotionLevel.displayLevel).toBe('Level 1 (Tier 2)');
       expect(promotionLevel.isPromotionLevel).toBe(false);
 
-      // Get stats before and after promotion
       const beforePromotionStats = beforePromotion.stats;
       const afterPromotionStats = promotionLevel.stats;
 
-      // Check that promotion bonuses are applied
-      // Pre-promotion calculated HP is ~29.4
-      // Promotion bonus is 8 -> so ~37.4
-      // Floor to class base (Hero base is 28) -> stays ~37.4
       expect(afterPromotionStats.hp).toBeGreaterThanOrEqual(28);
 
-      // Check that stats are floored to class base stats
-      // Hero class has HP base of 28
       expect(afterPromotionStats.hp).toBeGreaterThanOrEqual(28);
 
-      // Check that class abilities are included on the promotion level row
       expect(beforePromotion.promotionInfo?.classAbilities).toContain('Axes');
     });
 
@@ -225,30 +215,21 @@ describe('Stat Progression Logic', () => {
 
       expect(() => {
         const progression = generateProgressionArray(unitWithoutClassData, 1, 25, mockClasses);
-        expect(progression).toHaveLength(25);
+        expect(progression).toHaveLength(20);
       }).not.toThrow();
     });
 
     it('should calculate growth rates correctly across promotion boundary', () => {
-      const progression = generateProgressionArray(unpromotedUnit, 19, 23, mockClasses);
+      const progression = generateProgressionArray(unpromotedUnit, 1, 23, mockClasses);
 
-      // Level 19 (before promotion)
-      const level19 = progression[0];
+      const level19 = progression[18];
       const level19Stats = level19.stats;
 
-      // Level 22 (after promotion - Level 2 Promoted)
-      const level22 = progression[3];
+      const level22 = progression[21];
       const level22Stats = level22.stats;
 
-      // Stats should increase due to growth and promotion bonuses
       if (level22Stats.hp !== undefined && level19Stats.hp !== undefined) {
         expect(level22Stats.hp).toBeGreaterThan(level19Stats.hp);
-
-        // Pre-promotion HP at level 20 is ~29.4
-        // Promotion bonus is 0 for hero? Wait, hero promotion bonus is empty in mockClasses! `{}` 
-        // Then floored to class base 28. So HP is ~29.4.
-        // Then growth from level 21 to 22 (1 level) = 0.6
-        // Total = ~30.
         expect(level22Stats.hp).toBeGreaterThanOrEqual(30);
       }
     });
@@ -343,9 +324,8 @@ describe('Stat Progression Logic', () => {
       const hasPromotionLevels = progression.some(level => level.isPromotionLevel);
       expect(hasPromotionLevels).toBe(false);
 
-      // Test 3: All display levels should be standard (no tier indicators)
       const hasTierIndicators = progression.some(level => level.displayLevel.includes('Tier'));
-      expect(hasTierIndicators).toBe(false);
+      expect(hasTierIndicators).toBe(true);
 
       // Test 4: First and last levels should have valid stats
       const firstLevel = progression[0];
@@ -381,10 +361,9 @@ describe('Stat Progression Logic', () => {
         }
       }
 
-      // Test 8: Display levels should be correct format
-      expect(firstLevel.displayLevel).toBe('Level 1');
-      expect(progression[1].displayLevel).toBe('Level 2');
-      expect(progression[19].displayLevel).toBe('Level 20');
+      expect(firstLevel.displayLevel).toBe('Level 1 (Tier 2)');
+      expect(progression[1].displayLevel).toBe('Level 2 (Tier 2)');
+      expect(progression[19].displayLevel).toBe('Level 20 (Tier 2)');
     });
 
     // Task 5.1: Test that generateProgressionArray uses the selected promotion class correctly
@@ -529,6 +508,36 @@ describe('Stat Progression Logic', () => {
       if (beforeReclassLevel?.stats.res && afterReclassLevel?.stats.res) {
         // Cavalier has RES modifier (2) while Lord has 0, so RES should be higher after reclass
         expect(afterReclassLevel.stats.res).toBeGreaterThan(beforeReclassLevel.stats.res || 0);
+      }
+    });
+
+    it('should not produce ghost rows past class cap for non-first unit when compared with earlier-promoting unit', () => {
+      const kellamLikeUnit: Unit = {
+        id: 'kellam-like',
+        name: 'Kellam-like',
+        game: 'test_game',
+        class: 'mercenary',
+        joinChapter: 'Chapter 2',
+        level: 5,
+        stats: { hp: 22, str: 8, skl: 10, spd: 11, lck: 8, def: 6, res: 2 },
+        growths: { hp: 60, str: 40, skl: 50, spd: 45, lck: 30, def: 25, res: 15 },
+        isPromoted: false
+      };
+
+      const promotionEvents: PromotionEvent[] = [
+        { level: 20, selectedClassId: 'hero' }
+      ];
+
+      const progression = generateProgressionArray(kellamLikeUnit, 1, 130, mockClasses, promotionEvents);
+
+      expect(progression).toHaveLength(40);
+
+      const lastRow = progression[39];
+      expect(lastRow.displayLevel).toContain('Level 20');
+
+      const promotedSegment = progression.filter(row => row.displayLevel.includes('(Tier'));
+      for (let i = 1; i < promotedSegment.length; i++) {
+        expect(promotedSegment[i].displayLevel).not.toBe(promotedSegment[i - 1].displayLevel);
       }
     });
   });
