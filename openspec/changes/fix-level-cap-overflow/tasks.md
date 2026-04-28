@@ -29,7 +29,7 @@
     - `npm run lint` exits 0
   - Stop and hand off if: the line numbers have shifted since the proposal was written and the guard cannot be located — in that case, search for the second `if (displayLevelNum > getLevelCap` occurrence in the function and remove that one.
 
-- [ ] **Task 3 — Verify the primary break at line 554 is unchanged and correct**
+- [x] **Task 3 — Verify the primary break at line 554 is unchanged and correct**
   - Scope: `lib/stats.ts` (lines 554–556)
   - Change: Confirm that the original break condition `if (displayLevelNum > cap && !hasMoreEvents && unit.maxLevel !== "infinite") { break; }` is still present and has not been modified by the prior fix. This break is a valid safety net — it prevents the loop from iterating past a unit's natural end when `endLevel` is inflated. No code change is required; this is a verification-only task. If the break HAS been altered, restore its original form.
   - Done when:
