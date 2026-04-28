@@ -53,7 +53,7 @@
 
 ## Quality gate
 
-- [ ] **Run full test suite and type checks**
+- [x] **Run full test suite and type checks**
   - Scope: no code edits
   - Change: Verify that all gates pass after the implementation tasks.
   - Done when:
