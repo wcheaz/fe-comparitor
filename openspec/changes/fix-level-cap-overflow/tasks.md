@@ -2,7 +2,7 @@
 
 ## Pre-flight
 
-- [ ] **Task 1 — Record quality gate baselines**
+- [x] **Task 1 — Record quality gate baselines**
   - Scope: no code edits
   - Change: Capture current state of `npm test`, `npx tsc --noEmit`, and `npm run lint` output.
   - Done when:
