@@ -19,7 +19,7 @@
 
 ## 4. ComparisonGrid Combined Display
 
-- [ ] 4.1 Update base stats section in `components/features/ComparisonGrid.tsx` (~line 800) to use `getEffectiveBaseStats(unit, unitClass)` instead of `unit.stats[statKey]`. Look up each unit's starting class from the existing `classes` state via `classes.find(c => c.id === unit.class && c.game === unit.game)`.
+- [x] 4.1 Update base stats section in `components/features/ComparisonGrid.tsx` (~line 800) to use `getEffectiveBaseStats(unit, unitClass)` instead of `unit.stats[statKey]`. Look up each unit's starting class from the existing `classes` state via `classes.find(c => c.id === unit.class && c.game === unit.game)`.
   - **Done when:** ComparisonGrid shows Chrom's Str as 5 (1 personal + 4 class) instead of 1. Non-Awakening units show unchanged values.
   - **Verify by:** Load `/comparator?units=chrom` in browser, verify base stats match in-game values. `npx tsc --noEmit` passes.
 
