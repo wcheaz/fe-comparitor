@@ -636,9 +636,6 @@ export function generateProgressionArray(
         displayLevelNum = 1;
     }
 
-    if (displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite") {
-      break;
-    }
   }
 
   return allRows;

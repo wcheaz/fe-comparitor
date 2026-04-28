@@ -18,7 +18,7 @@
 
 ### Part A — Remove harmful break guards from `generateProgressionArray`
 
-- [ ] **Task 2 — Remove redundant post-increment break guard at line 639 of `generateProgressionArray`**
+- [x] **Task 2 — Remove redundant post-increment break guard at line 639 of `generateProgressionArray`**
   - Scope: `lib/stats.ts` (lines 639–641)
   - Change: Delete the `if (displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite") { break; }` block and any comment directly above it that was added by the prior fix attempt. This guard is the direct cause of the 5 test failures — it truncates `generateProgressionArray` output at the class cap (20) even when the caller passes a higher `endLevel` and the unit has a valid reason to produce more rows (e.g., promotion events that reset `displayLevelNum` to 1).
   - Done when:
