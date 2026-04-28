@@ -1,0 +1,4 @@
+
+> fire-emblem-unit-comparator@0.1.0 test
+> jest
+

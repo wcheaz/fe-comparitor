@@ -1,77 +1,64 @@
-## Loop Instructions
+# Tasks: fix-level-cap-overflow
 
-This change runs in a Ralph loop. Each iteration:
-1. Read `proposal.md`, `design.md`, `specs/**/spec.md`, and this file.
-2. Implement one task only.
-3. Run the verification commands listed in the task's `Done when:` block.
-4. Mark the task complete only after verification passes.
-5. Stop and hand off if a test fails for an unexpected reason (e.g., the existing break condition has a different root cause than the design assumes).
+## Pre-flight
 
-## 1. Core Fix
+- [x] **Pre-flight: record quality gate baselines**
+  - Scope: no code edits
+  - Change: Capture current state of `npm test`, `npx tsc --noEmit`, and `npm run lint` output.
+  - Done when:
+    - `.ralph/baselines/fix-level-cap-overflow-test.txt` exists with full `npm test` output
+    - `.ralph/baselines/fix-level-cap-overflow-tsc.txt` exists with full `npx tsc --noEmit` output
+    - `.ralph/baselines/fix-level-cap-overflow-lint.txt` exists with full `npm run lint` output
+    - `.ralph/baselines/fix-level-cap-overflow-readme.md` lists passing/failing gates and exact failing test identifiers
+  - Stop and hand off if: any gate is nondeterministic across two runs.
 
-- [ ] 1.1 Add the end-of-loop break guard in `generateProgressionArray`
+---
 
-  **What**: In `lib/stats.ts`, after the `displayLevelNum` increment block at the bottom of the main for-loop body (currently lines 632-637), add a break guard:
+## Implementation
 
-  ```typescript
-  if (displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite") {
-    break;
-  }
-  ```
+- [ ] **Add redundant break guard after displayLevelNum increment in generateProgressionArray**
+  - Scope: `lib/stats.ts` (lines 632-638)
+  - Change: After the `displayLevelNum++` / `displayLevelNum = 1` block (line 637), add a break guard: `if (displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite") { break; }`. This runs at the end of the loop body, complementing the existing break at line 554 that runs at the top.
+  - Done when:
+    - New break guard exists after line 637, before the closing brace of the `for` loop
+    - Guard uses identical predicate logic to the existing break at line 554: `displayLevelNum > getLevelCap(currentClass) && nextEventIndex >= allEvents.length && unit.maxLevel !== "infinite"`
+    - `npx tsc --noEmit` exits 0
+    - `npm run lint` exits 0
+  - Stop and hand off if: `getLevelCap` is not accessible at the insertion point (it is a closure variable, so it should be), or the loop control flow cannot accommodate a second break without restructuring.
 
-  This MUST use the same predicate as the existing pre-push break at line 554. Do NOT remove or weaken the existing pre-push break — both guards are intentional.
+- [ ] **Fix the "expand to level 100" test expectation**
+  - Scope: `__tests__/lib/stats.test.ts` (lines 183-192)
+  - Change: The existing test `it('should handle expand to level 100 correctly')` expects 100 rows and `Level 80 (Promoted)` at row 100 for `unpromotedUnit` (which has `maxLevel !== "infinite"`). After the break guard fix, a non-infinite unit with a single promotion at level 20 will correctly cap at 40 rows (20 unpromoted + 20 promoted). Update the test to assert the correct capped behavior: array length 40, last row displayLevel `Level 20 (Promoted)`, last row internalLevel 40. Rename the test description to reflect the corrected expectation.
+  - Done when:
+    - Test name describes the corrected behavior (e.g., `'should cap progression at class level cap when endLevel exceeds natural progression'`)
+    - Assertion checks `progression.length === 40`
+    - Assertion checks `progression[39].displayLevel === 'Level 20 (Promoted)'`
+    - Assertion checks `progression[39].internalLevel === 40`
+    - `npm test -- --testPathPattern="stats.test"` exits 0
+  - Stop and hand off if: the `unpromotedUnit` test fixture has `maxLevel === "infinite"` (it does not — it has no `maxLevel` field), or the mock classes yield a different cap than 20.
 
-  **Done when:**
-  - `npx tsc --noEmit` passes with no type errors
+- [ ] **Add regression test for multi-unit comparison overflow**
+  - Scope: `__tests__/lib/stats.test.ts`
+  - Change: Add a new test case `it('should not overflow past final class cap when unit has fewer events than comparison peer')` that constructs two calls to `generateProgressionArray`: (1) a unit with a single promotion event at level 20, called with `endLevel = 130` (simulating an inflated `maxLevelFromUnits`), and (2) verifies the returned array terminates exactly at the promoted class's level cap with no ghost rows or duplicated level sequences.
+  - Done when:
+    - New test exists in the `generateProgressionArray` describe block
+    - Test creates a unit with `game: 'Test Game'`, a single promotion event at level 20 (mercenary → hero), and calls `generateProgressionArray` with `endLevel = 130`
+    - Test asserts the returned array length is 40 (20 unpromoted + 20 promoted)
+    - Test asserts the last row has `displayLevel` matching `Level 20 (Promoted)` or equivalent
+    - Test asserts no two consecutive rows in the promoted class segment share the same `displayLevelNum` pattern (no ghost rows)
+    - `npm test -- --testPathPattern="stats.test"` exits 0
+  - Stop and hand off if: the test fixture `unpromotedUnit` or `mockClasses` cannot be reused for this scenario without modification (if so, create inline fixtures within the test).
 
-  **Stop and hand off if:** the existing pre-push break at line 554 already prevents overflow in all testable cases (the new guard has no effect), since that would indicate a different root cause than the design assumes.
+---
 
-- [ ] 1.2 Fix the existing incorrect test "should handle expand to level 100 correctly"
+## Quality gate
 
-  **What**: In `__tests__/lib/stats.test.ts`, the test at line 183 expects `toHaveLength(100)` and `Level 80 (Promoted)`. After the fix from task 1.1, a standard unit with one promotion and `maxLevel !== "infinite"` MUST terminate at 40 rows with the last row being Level 20. Update the assertions to:
-  - `expect(progression).toHaveLength(40)`
-  - Last row `displayLevel` is `'Level 20'`
-
-  **Done when:**
-  - `npx jest __tests__/lib/stats.test.ts -t "should handle expand to level 100 correctly"` passes
-
-## 2. Regression Tests
-
-- [ ] 2.1 Add test "should not overflow past class level cap when endLevel is inflated"
-
-  **What**: In `__tests__/lib/stats.test.ts`, add a test that creates a standard unpromoted unit (level 1, game "Test Game") with a single default promotion. Call `generateProgressionArray(unit, 1, 130, mockClasses)`. Assert:
-  - `progression.length === 40` (20 unpromoted + 20 promoted)
-  - Last row `displayLevel` contains "Level 20"
-  - No row has a display level number exceeding 20 in any class cycle
-
-  **Done when:**
-  - `npx jest __tests__/lib/stats.test.ts -t "should not overflow past class level cap when endLevel is inflated"` passes
-
-- [ ] 2.2 Add test "should terminate correctly for late-joining unit with fewer events"
-
-  **What**: In `__tests__/lib/stats.test.ts`, add a test that creates a unit joining at level 5 with a single promotion event at level 20. Call `generateProgressionArray(unit, 1, 130, mockClasses)`. Assert:
-  - `progression.length === 40` (4 padding + 16 base-class + 20 promoted)
-  - First 4 rows have `isSkipped === true`
-  - No rows appear after the promoted class reaches Level 20
-
-  **Done when:**
-  - `npx jest __tests__/lib/stats.test.ts -t "should terminate correctly for late-joining unit with fewer events"` passes
-
-- [ ] 2.3 Add test "should handle special class level 30 cap with inflated endLevel"
-
-  **What**: In `__tests__/lib/stats.test.ts`, add a test that creates an Awakening unit in a special class (e.g., Manakete, id `'manakete'`). Create a matching class entry with `id: 'manakete', game: 'Awakening'`. Call `generateProgressionArray(unit, 1, 130, awakeningClasses)`. Assert:
-  - Progression terminates at level 30
-  - No extra rows beyond level 30
-
-  **Done when:**
-  - `npx jest __tests__/lib/stats.test.ts -t "should handle special class level 30 cap with inflated endLevel"` passes
-
-## 3. Full Verification
-
-- [ ] 3.1 Run the full test suite and typecheck to confirm everything passes together
-
-  **What**: Run all tests and type checking to confirm the core fix, the corrected existing test, and all three new regression tests pass as a complete set.
-
-  **Done when:**
-  - `npx jest __tests__/lib/stats.test.ts` passes with zero failures
-  - `npx tsc --noEmit` passes with no type errors
+- [ ] **Run full test suite and type checks**
+  - Scope: no code edits
+  - Change: Verify that all gates pass after the implementation tasks.
+  - Done when:
+    - `npm test` exits 0 with all tests passing
+    - `npx tsc --noEmit` exits 0
+    - `npm run lint` exits 0
+    - Output of each command matches or improves upon pre-flight baselines recorded in `.ralph/baselines/fix-level-cap-overflow-readme.md`
+  - Stop and hand off if: a test failure is caused by a pre-existing issue not related to this change (document in `.ralph/baselines/` and hand off).
