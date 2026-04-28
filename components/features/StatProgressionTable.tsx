@@ -123,10 +123,10 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     const progression = generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents, reclassEvents);
 
     const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
-    const displayStats = statOrder.filter(key => {
-      if (['mov', 'con', 'bld', 'aid'].includes(key)) return false;
-      return unit.stats[key] !== undefined && unit.stats[key] !== null;
-    });
+    const excludedStats = new Set(['mov', 'con', 'bld', 'aid']);
+    const displayStats = Object.keys(unit.stats)
+      .filter(key => !excludedStats.has(key) && unit.stats[key] !== undefined && unit.stats[key] !== null)
+      .sort((a, b) => statOrder.indexOf(a) - statOrder.indexOf(b));
 
     const rows: ProgressionRow[] = [];
     for (let i = 0; i < progression.length; i++) {
