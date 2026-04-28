@@ -26,7 +26,7 @@
     - `npm run lint` exits 0
   - Stop and hand off if: `getLevelCap` is not accessible at the insertion point (it is a closure variable, so it should be), or the loop control flow cannot accommodate a second break without restructuring.
 
-- [ ] **Fix the "expand to level 100" test expectation**
+- [x] **Fix the "expand to level 100" test expectation**
   - Scope: `__tests__/lib/stats.test.ts` (lines 183-192)
   - Change: The existing test `it('should handle expand to level 100 correctly')` expects 100 rows and `Level 80 (Promoted)` at row 100 for `unpromotedUnit` (which has `maxLevel !== "infinite"`). After the break guard fix, a non-infinite unit with a single promotion at level 20 will correctly cap at 40 rows (20 unpromoted + 20 promoted). Update the test to assert the correct capped behavior: array length 40, last row displayLevel `Level 20 (Promoted)`, last row internalLevel 40. Rename the test description to reflect the corrected expectation.
   - Done when:

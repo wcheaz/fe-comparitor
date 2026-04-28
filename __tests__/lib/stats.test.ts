@@ -180,15 +180,18 @@ describe('Stat Progression Logic', () => {
     });
 
     // Additional tests for edge cases
-    it('should handle expand to level 100 correctly', () => {
-      const progression = generateProgressionArray(unpromotedUnit, 1, 100, mockClasses);
+    it('should cap progression at class level cap when endLevel exceeds natural progression', () => {
+      const testUnit: Unit = {
+        ...unpromotedUnit,
+        game: 'test_game',
+      };
+      const progression = generateProgressionArray(testUnit, 1, 100, mockClasses);
 
-      expect(progression).toHaveLength(100);
+      expect(progression).toHaveLength(40);
 
-      // Check that level 100 is properly formatted
-      const level100 = progression[99];
-      expect(level100.displayLevel).toBe('Level 80 (Promoted)');
-      expect(level100.internalLevel).toBe(100);
+      const lastRow = progression[39];
+      expect(lastRow.displayLevel).toBe('Level 20 (Tier 2)');
+      expect(lastRow.internalLevel).toBe(40);
     });
 
     it('should handle units with missing class data gracefully', () => {
