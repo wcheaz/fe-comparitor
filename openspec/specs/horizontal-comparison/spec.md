@@ -15,12 +15,21 @@ The system SHALL format unit stats (growths, bases) as horizontal tables for eas
 - **THEN** the growths are displayed in a clean horizontal table format
 
 ### Requirement: Combined Average Stats Table
-The system SHALL combine the average stats for compared units into a single table across all levels. The table SHALL start at the lowest base level among the compared units. If a unit's base level is higher than the table's starting level, its stats for the earlier levels SHALL be displayed as "-".
+The system SHALL render two independent per-unit stat progression tables instead of a single shared combined table. Each table displays one unit's full level-by-level stats in isolation, using only that unit's own stat keys, levels, and promotion/reclass events. The maximum number of selectable units is 2 (down from 4).
 
-#### Scenario: Comparing units with different base levels
-- **WHEN** comparing a level 5 unit and a level 10 unit
-- **THEN** a combined average stats table is displayed starting at level 5
-- **AND** the level 10 unit's stats from level 5 to 9 are displayed as "-"
+#### Scenario: Comparing two units with different base levels
+- **WHEN** a level 1 unit and a level 10 unit are selected
+- **THEN** two independent tables are rendered, one per unit
+- **AND** each table shows all levels from 1 to max, with "-" for pre-join levels
+
+#### Scenario: Comparing units with different stat keys
+- **WHEN** a GBA unit (with `skl`) and a Three Houses unit (with `dex`) are compared
+- **THEN** the GBA unit's table shows a `skl` column and the Three Houses unit's table shows a `dex` column
+- **AND** no cross-unit stat collapsing or merging occurs
+
+#### Scenario: Three or more units cannot be selected
+- **WHEN** the user attempts to select a third unit
+- **THEN** the system prevents the selection and indicates the maximum of 2 has been reached
 
 ### Requirement: Unit Details table shows Class Abilities row
 The Unit Details comparison table in `ComparisonGrid.tsx` SHALL include a "Class Abilities" row. This row SHALL be conditionally rendered — it MUST only appear when at least one selected unit's resolved class has a non-empty `classAbilities` array.

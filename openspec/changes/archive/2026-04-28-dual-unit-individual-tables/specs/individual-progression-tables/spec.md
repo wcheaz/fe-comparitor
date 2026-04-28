@@ -1,0 +1,76 @@
+## ADDED Requirements
+
+### Requirement: Per-Unit Progression Table Component
+The system SHALL provide a `StatProgressionTable` component that accepts a single `Unit` (instead of `Unit[]`) and renders that unit's full level-by-level stat progression in isolation. The component SHALL use only the stat keys present on that unit's `stats` object — no cross-unit stat reconciliation, no `getCommonStats`, no `skl`/`dex` collapsing, and no `str`/`mag` merge logic.
+
+#### Scenario: Table shows only stats the unit has
+- **WHEN** a GBA unit with stats `{ hp, str, skl, spd, lck, def, res }` is rendered in the per-unit table
+- **THEN** the table columns are exactly those 7 stat keys
+- **AND** no `mag`, `dex`, `cha`, `bld`, or `con` columns appear
+
+#### Scenario: Table shows all levels from 1 to max
+- **WHEN** a unit with base level 5 and max level 20 is rendered
+- **THEN** the table displays rows from level 1 to level 20
+- **AND** levels 1–4 show "-" for all stat cells
+
+#### Scenario: Pre-join levels display dash
+- **WHEN** a unit joins at level 10
+- **THEN** levels 1–9 render "-" in every stat cell for that unit's table
+
+#### Scenario: Promotion levels are highlighted within a single unit
+- **WHEN** a unit promotes at level 10 and the table renders the level 10 row
+- **THEN** the row is highlighted as a promotion level (blue background, sparkle icon)
+- **AND** subsequent rows show the promoted class stats
+
+#### Scenario: Reclass events are handled within a single unit
+- **WHEN** an Awakening unit has a reclass event at level 15
+- **THEN** the table renders level 15 as a reclass row with appropriate stat recalculation
+- **AND** subsequent rows use the new class's growths and caps
+
+#### Scenario: Stat caps are displayed per-unit
+- **WHEN** a unit's calculated stat reaches the class or unit max cap
+- **THEN** the capped stat value is displayed in green bold text
+- **AND** the stat does not exceed the cap in subsequent rows
+
+### Requirement: Dual Independent Progression Table Layout
+The comparator page SHALL render two independent `StatProgressionTable` instances side-by-side, one per selected unit, each inside its own `Card`. The two tables do not share row state, alignment, or stat key sets.
+
+#### Scenario: Two units with different stat sets
+- **WHEN** unit A has `{ hp, str, skl, spd, lck, def, res }` and unit B has `{ hp, str, mag, dex, spd, lck, def, res, cha, bld }`
+- **THEN** unit A's table shows 7 columns and unit B's table shows 10 columns
+- **AND** the tables render independently with no shared stat reconciliation
+
+#### Scenario: Two units with different level ranges
+- **WHEN** unit A starts at level 1 and unit B starts at level 10
+- **THEN** unit A's table shows rows from level 1 and unit B's table shows rows from level 1 with "-" for levels 1–9
+- **AND** the tables have independent row counts and no cross-table alignment
+
+#### Scenario: No stat highlighting in per-unit tables
+- **WHEN** two units are selected and their per-unit tables are rendered
+- **THEN** no cell in either table is highlighted green or yellow based on cross-unit comparison
+- **AND** stat highlighting is only present in the `ComparisonGrid` base/growth tables
+
+### Requirement: Maximum Two Unit Selection
+The `UnitSelector` component SHALL enforce a maximum of 2 selected units. The `maxUnits` prop default SHALL be 2 on the comparator page.
+
+#### Scenario: User selects a third unit
+- **WHEN** 2 units are already selected and the user attempts to select a third
+- **THEN** the unit selector does not add the third unit
+- **AND** the UI indicates that the maximum has been reached
+
+#### Scenario: User removes a unit and selects another
+- **WHEN** 2 units are selected, the user removes one, and then selects a new unit
+- **THEN** the new unit is added, bringing the count back to 2
+
+### Requirement: Promotion and Reclass Configuration Per Unit
+Each per-unit table SHALL include its own promotion and reclass event configuration UI (level dropdown, class dropdown, add/remove buttons). Events are scoped to that unit only.
+
+#### Scenario: Changing promotion level for unit A does not affect unit B
+- **WHEN** the user changes unit A's promotion level from 20 to 15
+- **THEN** unit A's table recalculates from level 15 onward
+- **AND** unit B's table and promotion events remain unchanged
+
+#### Scenario: Adding a reclass event for one unit
+- **WHEN** the user adds a reclass event for unit A
+- **THEN** unit A's table adds the reclass row and recalculates subsequent stats
+- **AND** unit B's table is unaffected

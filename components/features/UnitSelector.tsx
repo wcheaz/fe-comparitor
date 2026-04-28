@@ -28,7 +28,7 @@ export function UnitSelector({
   selectedUnits,
   onUnitSelect,
   onUnitRemove,
-  maxUnits = 4,
+  maxUnits = 2,
   className
 }: UnitSelectorProps) {
   const [searchTerm, setSearchTerm] = useState('');
