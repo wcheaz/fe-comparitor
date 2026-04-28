@@ -90,7 +90,7 @@
 
 ## Quality gate
 
-- [ ] **Task 8 — Run full test suite, type checks, and lint**
+- [x] **Task 8 — Run full test suite, type checks, and lint**
   - Scope: no code edits
   - Change: Verify that all gates pass after Tasks 2–7.
   - Done when:
