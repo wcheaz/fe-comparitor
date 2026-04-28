@@ -162,7 +162,7 @@ Update user-facing text and clean up dead code across all touched files.
 - No user-facing text references "4 units" or "up to 4 units"
 - No unused imports or variables in `StatProgressionTable.tsx` or `comparator/page.tsx`
 
-- [ ] 8.1 Update all user-facing description text from "4 units" to "2 units"
+- [x] 8.1 Update all user-facing description text from "4 units" to "2 units"
 - [ ] 8.2 Remove dead imports and unused variables from refactored files
 
 ## 9. Verification

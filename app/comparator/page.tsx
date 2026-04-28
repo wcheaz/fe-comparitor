@@ -58,7 +58,7 @@ export default function ComparatorPage() {
             Unit Comparator
           </h1>
           <p className="text-lg text-fe-blue-700 max-w-2xl mx-auto">
-            Compare up to 4 units side-by-side. Select units, adjust the target level,
+            Compare 2 units side-by-side. Select units, adjust the target level,
             and see detailed statistics and growth rates.
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function ComparatorPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-fe-blue-700">
                 <div>
                   <h3 className="font-semibold mb-2">1. Select Units</h3>
-                  <p>Use the unit selector to choose up to 4 units to compare.
+                  <p>Use the unit selector to choose 2 units to compare.
                     Filter by game or search for specific units.</p>
                 </div>
                 <div>
