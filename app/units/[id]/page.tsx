@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { UnitCard } from '@/components/features/UnitCard';
 import { StatTable } from '@/components/features/StatTable';
 // import { GrowthChart } from '@/components/features/GrowthChart'; // TEMPORARILY DISABLED
-import { getUnitById, getAllUnits } from '@/lib/data';
+import { getUnitById, getAllUnits, getAllClasses } from '@/lib/data';
 import { calculateAverageStats } from '@/lib/stats';
-import { Unit } from '@/types/unit';
+import { Unit, Class } from '@/types/unit';
 
 interface UnitDetailPageProps {
   params: {
@@ -22,9 +22,12 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
     notFound();
   }
 
+  const classes = await getAllClasses();
+  const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+
   // Calculate stats at max level for display
   const calculatedLevel = 20; // Could be game-specific
-  const calculatedStats = calculateAverageStats(unit, calculatedLevel);
+  const calculatedStats = calculateAverageStats(unit, calculatedLevel, classes);
   const unitWithCalculatedStats = { ...unit, stats: calculatedStats };
 
   // Get other units for comparison suggestions
@@ -100,7 +103,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                   <CardTitle>Base Stats (Level {unit.level})</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <StatTable unit={unit} showGrowths={false} />
+                  <StatTable unit={unit} showGrowths={false} classData={unitClass} />
                 </CardContent>
               </Card>
             </div>
@@ -111,7 +114,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
                   <CardTitle>Growth Rates</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <StatTable unit={unit} showGrowths={true} />
+                  <StatTable unit={unit} showGrowths={true} classData={unitClass} />
                 </CardContent>
               </Card>
             </div>
@@ -123,7 +126,7 @@ export default async function UnitDetailPage({ params }: UnitDetailPageProps) {
               <CardTitle>Average Stats at Level {calculatedLevel}</CardTitle>
             </CardHeader>
             <CardContent>
-              <StatTable unit={unitWithCalculatedStats} showGrowths={false} />
+              <StatTable unit={unitWithCalculatedStats} showGrowths={false} classData={unitClass} />
             </CardContent>
           </Card>
 

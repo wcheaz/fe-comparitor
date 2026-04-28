@@ -33,7 +33,7 @@
   - **Done when:** `<StatTable unit={chromUnit} classData={tacticianClass} />` shows combined bases and growths. `<StatTable unit={nonAwakeningUnit} />` shows unchanged values.
   - **Verify by:** `npx tsc --noEmit` passes.
 
-- [ ] 5.2 Update `app/units/[id]/page.tsx` to look up the unit's starting class via `getAllClasses()` and pass it as `classData` to all `StatTable` renders. Also pass `classes` array to `calculateAverageStats` call at line 27.
+- [x] 5.2 Update `app/units/[id]/page.tsx` to look up the unit's starting class via `getAllClasses()` and pass it as `classData` to all `StatTable` renders. Also pass `classes` array to `calculateAverageStats` call at line 27.
   - **Done when:** The unit detail page for an Awakening unit shows combined bases in the "Base Stats" card, combined growths in the "Growth Rates" card, and class-aware calculated stats in the "Average Stats at Level X" card.
   - **Verify by:** Navigate to `/units/chrom` in browser, verify base stats show in-game values. `npx tsc --noEmit` passes. `npm test` passes.
 
