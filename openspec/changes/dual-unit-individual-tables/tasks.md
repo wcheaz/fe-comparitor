@@ -80,8 +80,8 @@ Update the table rendering JSX (lines ~830–1155) to work with single-value `Pr
 
 **Stop and hand off if:** The rendering JSX has deeply nested conditional logic per unit that cannot be simplified mechanically — document the specific patterns and hand off.
 
-- [ ] 4.1 Update table header and body rendering to use single-value `ProgressionRow` fields (no array indexing, no `units.map()`)
-- [ ] 4.2 Remove cross-unit stat highlighting (green/yellow per cell) from the table body
+- [x] 4.1 Update table header and body rendering to use single-value `ProgressionRow` fields (no array indexing, no `units.map()`)
+- [x] 4.2 Remove cross-unit stat highlighting (green/yellow per cell) from the table body
 
 ## 5. Promotion/Reclass Config UI
 
