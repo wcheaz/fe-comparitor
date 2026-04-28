@@ -6,32 +6,6 @@ import { generateProgressionArray, getValidReclassOptions } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import AbilityPill from '@/components/ui/AbilityPill';
 import { Modal } from '@/components/ui/modal';
-import { Info } from 'lucide-react';
-
-/**
- * Helper function to detect if a class has branching promotion options
- */
-function hasBranchingPromotions(classObj: Class | undefined): boolean {
-  if (!classObj) return false;
-  return (classObj.promotesTo?.length ?? 0) > 1;
-}
-
-/**
- * Helper function to get promotion options with their display names
- */
-function getPromotionOptions(classObj: Class | undefined, classes: Class[]): Array<{ id: string, name: string }> {
-  if (!classObj || !classObj.promotesTo || classObj.promotesTo.length === 0) {
-    return [];
-  }
-
-  return classObj.promotesTo.map(classId => {
-    const targetClass = classes.find(c => c.id === classId && c.game === classObj.game);
-    return {
-      id: classId,
-      name: targetClass?.name || classId
-    };
-  });
-}
 
 /**
  * Helper function to check if a class is an FE8 trainee class
@@ -46,19 +20,6 @@ function isTraineeClass(classId: string): boolean {
     'journeyman_2'
   ];
   return traineeClassIds.includes(classId);
-}
-
-/**
- * Helper function to get the current class of a unit at a specific point in their promotion path
- */
-function getCurrentClass(unit: Unit, classes: Class[], promotionEvents: PromotionEvent[]): Class | undefined {
-  if (promotionEvents.length === 0) {
-    return classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
-  }
-
-  // Find the most recent promotion event
-  const latestEvent = promotionEvents[promotionEvents.length - 1];
-  return classes.find(c => c.id === latestEvent.selectedClassId && c.game === unit.game);
 }
 
 interface StatProgressionTableProps {
@@ -150,10 +111,10 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     return { rows, statKeys: displayStats };
   }, [unit, expandToLevel100, classes, promotionEvents, reclassEvents]);
 
-  if (units.length === 0) {
+  if (!unit) {
     return (
       <div className="text-center py-8 text-gray-500">
-        Select units to view stat progression
+        Select a unit to view stat progression
       </div>
     );
   }
@@ -249,8 +210,8 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                 if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
                   label = 'STR/MAG';
                 } else if (statKey === 'skl') {
-                  const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
-                  const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
+                  const hasDex = (unit.stats && unit.stats.dex !== undefined) || (unit.growths && unit.growths.dex !== undefined);
+                  const hasSkl = (unit.stats && unit.stats.skl !== undefined) || (unit.growths && unit.growths.skl !== undefined);
                   if (hasDex && hasSkl) label = 'SKL/DEX';
                   else if (hasDex) label = 'DEX';
                 }
@@ -285,27 +246,22 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
         </div>
       </div>
 
-      {/* Per-Unit Promotion & Reclass Configs */}
       <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion & Reclass Levels:</span>
-        {units.map(unit => {
+        {(() => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
-          const unitReclassEvents = reclassEvents[unit.id] || [];
-          const unitPromotionEvents = promotionEvents[unit.id] || [];
+          const unitReclassEvents = reclassEvents;
+          const unitPromotionEvents = promotionEvents;
 
-          // Get current class based on all events (both promotion and reclass)
           const getCurrentClass = () => {
-            // Check reclass events first (most recent)
             if (unitReclassEvents.length > 0) {
               const lastReclassEvent = unitReclassEvents[unitReclassEvents.length - 1];
               return classes.find(c => c.id === lastReclassEvent.selectedClassId && c.game === unit.game);
             }
-            // Then check promotion events
             if (unitPromotionEvents.length > 0) {
               const lastPromotionEvent = unitPromotionEvents[unitPromotionEvents.length - 1];
               return classes.find(c => c.id === lastPromotionEvent.selectedClassId && c.game === unit.game);
             }
-            // Default to base class
             return unitClass;
           };
 
@@ -315,40 +271,31 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             ? classes.find(c => c.id === unitReclassEvents[unitReclassEvents.length - 1].selectedClassId && c.game === unit.game)
             : unitClass;
 
-          // Check if the unit's base class can promote, or if it already has existing promotion events
           const unitCanPromote = (baseOrReclassedClass?.promotesTo?.length ?? 0) > 0 || unitPromotionEvents.length > 0;
-
-          // Check if the unit can reclass (based on game and current class)
           const unitCanReclass = unit.game?.toLowerCase() === 'awakening' && currentClass;
 
           return (
-            <div key={`config-${unit.id}`} className="flex flex-col space-y-3">
-              <label className="text-sm font-semibold text-gray-700">{unit.name}:</label>
-
-              {/* Unified Class Changes Section */}
+            <div className="flex flex-col space-y-3">
               {(unitCanPromote || unitCanReclass) && (
                 <div className="flex flex-col space-y-2">
                   <span className="text-xs font-medium text-gray-600">Class Changes:</span>
-                  
+
                   {(() => {
-                    // Combine and sort events chronologically for UI rendering
                     const allEvents: Array<{type: 'promotion' | 'reclass', originalIndex: number, level: number, selectedClassId: string, order: number}> = [];
-                    
+
                     unitPromotionEvents.forEach((event, idx) => {
                       allEvents.push({ type: 'promotion', originalIndex: idx, level: event.level, selectedClassId: event.selectedClassId, order: event.order ?? (idx * 2) });
                     });
                     unitReclassEvents.forEach((event, idx) => {
                       allEvents.push({ type: 'reclass', originalIndex: idx, level: event.level, selectedClassId: event.selectedClassId, order: event.order ?? (idx * 2 + 1) });
                     });
-                    
-                    // Sort by sequential order (same way lib/stats.ts processes them)
+
                     allEvents.sort((a, b) => {
                       if (a.order !== b.order) return a.order - b.order;
                       if (a.level !== b.level) return a.level - b.level;
                       return a.type === 'reclass' ? -1 : 1;
                     });
-                    
-                    // If no events exist but they CAN promote, seed a default empty promotion block for UI interaction
+
                     if (allEvents.length === 0 && unitCanPromote) {
                       allEvents.push({
                         type: 'promotion',
@@ -360,21 +307,17 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                     }
 
                     return allEvents.map((event, eventIndex) => {
-                       // Determine what class the unit was right before this specific event decision
-                      const previousClassId = eventIndex === 0 
-                        ? unitClass?.id 
+                      const previousClassId = eventIndex === 0
+                        ? unitClass?.id
                         : allEvents[eventIndex - 1].selectedClassId;
                       const previousClass = classes.find(c => c.id === previousClassId && c.game === unit.game);
 
-                      // Gather potential options for this event:
-                      // 1. Promotions from the previous class
                       const promoOptionIds = previousClass?.promotesTo || [];
-                      
-                      // 2. Reclass options valid at this level and tier
-                      const reclassOptionIds = unitCanReclass 
+
+                      const reclassOptionIds = unitCanReclass
                         ? getValidReclassOptions(unit, classes, event.level, previousClass?.id)
                         : [];
-                      
+
                       const validOptionsSet = new Set([...promoOptionIds, ...reclassOptionIds]);
                       const sortedValidOptions = Array.from(validOptionsSet)
                         .map(rawId => {
@@ -383,30 +326,27 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                         })
                         .filter(Boolean) as Class[];
 
-                      // Sort by Tier (Tier 2 first, then Tier 1), current class last
                       sortedValidOptions.sort((a, b) => {
-                        // Push current class to bottom
                         if (a.id === previousClassId && b.id !== previousClassId) return 1;
                         if (b.id === previousClassId && a.id !== previousClassId) return -1;
                         const tierA = a.tier ? parseInt(String(a.tier)) : (a.type === 'promoted' ? 2 : 1);
                         const tierB = b.tier ? parseInt(String(b.tier)) : (b.type === 'promoted' ? 2 : 1);
-                        return tierB - tierA; // Descending
+                        return tierB - tierA;
                       });
 
                       return (
-                        <div key={`classchange-${unit.id}-${eventIndex}`} className="flex items-center space-x-2">
+                        <div key={`classchange-${eventIndex}`} className="flex items-center space-x-2">
                           <span className="text-xs text-gray-500">Change {eventIndex + 1}:</span>
-                          
+
                           <select
-                            id={`change-level-${unit.id}-${eventIndex}`}
+                            id={`change-level-${eventIndex}`}
                             value={event.level}
                             onChange={(e) => {
                               const level = Number(e.target.value);
-                              
-                              // Re-evaluate validity at the new level to prevent keeping invalid classes
+
                               const newReclassOptions = unitCanReclass ? getValidReclassOptions(unit, classes, level, previousClass?.id) : [];
                               let newSelectedClassId = event.selectedClassId;
-                              
+
                               if (event.type === 'reclass' && !newReclassOptions.includes(event.selectedClassId)) {
                                 newSelectedClassId = newReclassOptions.length > 0 ? newReclassOptions[0] : '';
                               } else if (event.type === 'promotion' && !promoOptionIds.includes(event.selectedClassId)) {
@@ -418,14 +358,13 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                                 if (event.originalIndex < updatedEvents.length) {
                                   updatedEvents[event.originalIndex] = { ...updatedEvents[event.originalIndex], level, selectedClassId: newSelectedClassId };
                                 } else {
-                                  // Seeded empty level from UI being interacted with
                                   updatedEvents.push({ level, selectedClassId: newSelectedClassId, order: Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1 });
                                 }
-                                onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedEvents });
+                                onPromotionEventsChange(updatedEvents);
                               } else {
                                 const updatedEvents = [...unitReclassEvents];
                                 updatedEvents[event.originalIndex] = { ...updatedEvents[event.originalIndex], level, selectedClassId: newSelectedClassId };
-                                onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedEvents });
+                                onReclassEventsChange(updatedEvents);
                               }
                             }}
                             className="border border-gray-300 rounded-md text-sm px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -438,7 +377,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                                 const isSpecial = ["taguel", "manakete", "villager", "dancer", "lodestar", "bride", "dread_fighter", "conqueror"].includes(previousClass?.id || '');
                                 const maxLvl = isSpecial ? 30 : 20;
                                 const minLvl = prevTier === 2 ? 1 : 10;
-                                
+
                                 const options = [];
                                 for (let i = minLvl; i <= maxLvl; i++) {
                                   if (eventIndex === 0 && i < unit.level) continue;
@@ -451,43 +390,38 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
                           {sortedValidOptions.length > 0 && (
                             <select
-                              id={`change-class-${unit.id}-${eventIndex}`}
+                              id={`change-class-${eventIndex}`}
                               value={event.selectedClassId || sortedValidOptions[0]?.id || ''}
                               onChange={(e) => {
                                 const selectedClassId = e.target.value;
-                                
-                                // To correctly update state, we need to know if the newly selected class is a promotion or a reclass
-                                // It is a promotion if it exists within the generic promotesTo array of the previous class
+
                                 const isNowPromotion = previousClass?.promotesTo?.includes(selectedClassId);
 
-                                // If the event TYPE changed (i.e. was a promotion line, but user picked a reclass class)
-                                // We have to rip it out of the old state array, and append it to the new state array
                                 if (isNowPromotion && event.type === 'reclass') {
                                   const updatedReclass = unitReclassEvents.filter((_, i) => i !== event.originalIndex);
                                   const nextOrder = Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1;
                                   const updatedPromo = [...unitPromotionEvents, { level: event.level, selectedClassId, order: nextOrder }];
-                                  onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
-                                  onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
+                                  onReclassEventsChange(updatedReclass);
+                                  onPromotionEventsChange(updatedPromo);
                                 } else if (!isNowPromotion && event.type === 'promotion') {
                                   const updatedPromo = unitPromotionEvents.filter((_, i) => i !== event.originalIndex);
                                   const nextOrder = Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1;
                                   const updatedReclass = [...unitReclassEvents, { level: event.level, selectedClassId, order: nextOrder }];
-                                  onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
-                                  onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
+                                  onPromotionEventsChange(updatedPromo);
+                                  onReclassEventsChange(updatedReclass);
                                 } else {
-                                  // The type remained the same, just update the selectedClassId
                                   if (isNowPromotion) {
                                     const updatedPromo = [...unitPromotionEvents];
                                     if (event.originalIndex < updatedPromo.length) {
                                       updatedPromo[event.originalIndex] = { ...updatedPromo[event.originalIndex], selectedClassId };
                                     } else {
-                                      updatedPromo.push({ level: event.level, selectedClassId, order: Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1 }); // Was seed
+                                      updatedPromo.push({ level: event.level, selectedClassId, order: Math.max(...unitPromotionEvents.map(e => e.order ?? 0), ...unitReclassEvents.map(e => e.order ?? 0), -1) + 1 });
                                     }
-                                    onPromotionEventsChange({ ...promotionEvents, [unit.id]: updatedPromo });
+                                    onPromotionEventsChange(updatedPromo);
                                   } else {
                                     const updatedReclass = [...unitReclassEvents];
                                     updatedReclass[event.originalIndex] = { ...updatedReclass[event.originalIndex], selectedClassId };
-                                    onReclassEventsChange({ ...reclassEvents, [unit.id]: updatedReclass });
+                                    onReclassEventsChange(updatedReclass);
                                   }
                                 }
                               }}
@@ -507,28 +441,21 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                 </div>
               )}
 
-              {/* Management Buttons */}
               <div className="flex items-center space-x-2 ml-6">
-                {/* Add Class Change Button */}
                 {(unitCanPromote || unitCanReclass) && (
                   <button
                     onClick={() => {
-                      // If no real events exist but the UI shows a seeded default promotion,
-                      // we need to commit that seeded event first, then add the new one on top
                       const hasNoRealEvents = unitPromotionEvents.length === 0 && unitReclassEvents.length === 0;
 
                       if (hasNoRealEvents && baseOrReclassedClass?.promotesTo && baseOrReclassedClass.promotesTo.length > 0) {
-                        // Commit the seeded default promotion
                         const seededEvent: PromotionEvent = {
                           level: isTraineeClass(baseOrReclassedClass.id) ? 10 : 20,
                           selectedClassId: baseOrReclassedClass.promotesTo[0],
                           order: 0
                         };
-                        
-                        // Now figure out the next event based on the promoted class
+
                         const promotedClass = classes.find(c => c.id === seededEvent.selectedClassId && c.game === unit.game);
-                        
-                        // Gather all valid options from promoted class, sort by tier descending
+
                         const promoIds = promotedClass?.promotesTo || [];
                         const reclassIds = unitCanReclass
                           ? getValidReclassOptions(unit, classes, 20, promotedClass?.id)
@@ -554,34 +481,20 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
                           if (isPromo) {
                             const newEvent: PromotionEvent = { level: 20, selectedClassId: picked.id, order: 1 };
-                            onPromotionEventsChange({
-                              ...promotionEvents,
-                              [unit.id]: [seededEvent, newEvent]
-                            });
+                            onPromotionEventsChange([seededEvent, newEvent]);
                           } else {
                             const newEvent: ReclassEvent = { level: 20, selectedClassId: picked.id, order: 1 };
-                            onPromotionEventsChange({
-                              ...promotionEvents,
-                              [unit.id]: [seededEvent]
-                            });
-                            onReclassEventsChange({
-                              ...reclassEvents,
-                              [unit.id]: [newEvent]
-                            });
+                            onPromotionEventsChange([seededEvent]);
+                            onReclassEventsChange([newEvent]);
                           }
                         } else {
-                          // No further options, just commit the seeded event
-                          onPromotionEventsChange({
-                            ...promotionEvents,
-                            [unit.id]: [seededEvent]
-                          });
+                          onPromotionEventsChange([seededEvent]);
                         }
                         return;
                       }
 
-                      // Normal case: real events already exist
                       let lastEvent: {type: 'promotion'|'reclass', classId: string, level: number} | null = null;
-                      
+
                       const allEvents = [
                         ...unitPromotionEvents.map(e => ({ type: 'promotion' as const, classId: e.selectedClassId, level: e.level, order: e.order ?? 0 })),
                         ...unitReclassEvents.map(e => ({ type: 'reclass' as const, classId: e.selectedClassId, level: e.level, order: e.order ?? 0 }))
@@ -598,12 +511,11 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                       const currentResolvedClassId = lastEvent?.classId || unitClass?.id;
                       const currentResolvedClass = classes.find(c => c.id === currentResolvedClassId && c.game === unit.game);
 
-                      // Gather all valid options (same as dropdown rendering)
                       const promoOptionIds = currentResolvedClass?.promotesTo || [];
                       const reclassOptionIds = unitCanReclass
                         ? getValidReclassOptions(unit, classes, 20, currentResolvedClassId)
                         : [];
-                      
+
                       const allOptionIds = new Set([...promoOptionIds, ...reclassOptionIds]);
                       const sortedOptions = Array.from(allOptionIds)
                         .map(rawId => {
@@ -611,8 +523,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                           return classes.find(c => c.id === classId && c.game === unit.game);
                         })
                         .filter(Boolean) as Class[];
-                      
-                      // Sort by tier descending (Tier 2 first), current class last — same order as dropdown
+
                       sortedOptions.sort((a, b) => {
                         if (a.id === currentResolvedClassId && b.id !== currentResolvedClassId) return 1;
                         if (b.id === currentResolvedClassId && a.id !== currentResolvedClassId) return -1;
@@ -633,20 +544,14 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                             selectedClassId: selectedClass.id,
                             order: nextOrder
                           };
-                          onPromotionEventsChange({
-                            ...promotionEvents,
-                            [unit.id]: [...unitPromotionEvents, newEvent]
-                          });
+                          onPromotionEventsChange([...unitPromotionEvents, newEvent]);
                         } else {
                           const newEvent: ReclassEvent = {
                             level: defaultLevel,
                             selectedClassId: selectedClass.id,
                             order: nextOrder
                           };
-                          onReclassEventsChange({
-                            ...reclassEvents,
-                            [unit.id]: [...unitReclassEvents, newEvent]
-                          });
+                          onReclassEventsChange([...unitReclassEvents, newEvent]);
                         }
                       }
                     }}
@@ -657,11 +562,9 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                   </button>
                 )}
 
-                {/* Remove Class Change Button */}
                 {(unitPromotionEvents.length + unitReclassEvents.length > 1) && (
                   <button
                     onClick={() => {
-                      // Figure out what the chronologically last event was
                       const allEvents = [
                         ...unitPromotionEvents.map((e, idx) => ({ type: 'promotion' as const, level: e.level, order: e.order ?? 0, idx })),
                         ...unitReclassEvents.map((e, idx) => ({ type: 'reclass' as const, level: e.level, order: e.order ?? 0, idx }))
@@ -674,15 +577,9 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                       if (allEvents.length > 0) {
                         const lastEvent = allEvents[allEvents.length - 1];
                         if (lastEvent.type === 'promotion') {
-                           onPromotionEventsChange({
-                             ...promotionEvents,
-                             [unit.id]: unitPromotionEvents.filter((_, i) => i !== lastEvent.idx)
-                           });
+                           onPromotionEventsChange(unitPromotionEvents.filter((_, i) => i !== lastEvent.idx));
                         } else {
-                          onReclassEventsChange({
-                            ...reclassEvents,
-                            [unit.id]: unitReclassEvents.filter((_, i) => i !== lastEvent.idx)
-                          });
+                          onReclassEventsChange(unitReclassEvents.filter((_, i) => i !== lastEvent.idx));
                         }
                       }
                     }}
@@ -695,55 +592,37 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
               </div>
             </div>
           );
-        })}
+        })()}
       </div>
 
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse border border-gray-300">
           <thead>
-            <>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900" rowSpan={2}>
-                  Level
-                </th>
-                {activeStatKeys.map((statKey) => {
-                  let statLabel = statKey.toUpperCase();
-                  if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
-                    statLabel = 'STR/MAG';
-                  } else if (statKey === 'skl') {
-                    const hasDex = units.some(u => (u.stats && u.stats.dex !== undefined) || (u.growths && u.growths.dex !== undefined));
-                    const hasSkl = units.some(u => (u.stats && u.stats.skl !== undefined) || (u.growths && u.growths.skl !== undefined));
-                    if (hasDex && hasSkl) statLabel = 'SKL/DEX';
-                    else if (hasDex) statLabel = 'DEX';
-                  }
+            <tr className="bg-gray-50">
+              <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900">
+                Level
+              </th>
+              {activeStatKeys.map((statKey) => {
+                let statLabel = statKey.toUpperCase();
+                if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
+                  statLabel = 'STR/MAG';
+                } else if (statKey === 'skl') {
+                  const hasDex = (unit.stats && unit.stats.dex !== undefined) || (unit.growths && unit.growths.dex !== undefined);
+                  const hasSkl = (unit.stats && unit.stats.skl !== undefined) || (unit.growths && unit.growths.skl !== undefined);
+                  if (hasDex && hasSkl) statLabel = 'SKL/DEX';
+                  else if (hasDex) statLabel = 'DEX';
+                }
 
-                  return (
-                    <th
-                      key={`header-${statKey}`}
-                      colSpan={units.length}
-                      className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
-                    >
-                      {statLabel}
-                    </th>
-                  );
-                })}
-              </tr>
-              <tr className="bg-gray-50">
-                {activeStatKeys.map((statKey, statIndex) => (
-                  <React.Fragment key={`subheader-${statKey}`}>
-                    {units.map((unit, unitIndex) => (
-                      <th
-                        key={`${statKey}-${unit.id}`}
-                        className={`border border-gray-300 px-2 py-1 text-center text-xs font-medium text-gray-700 bg-gray-50 truncate max-w-[80px] ${unitIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
-                        title={unit.name}
-                      >
-                        {unit.name}
-                      </th>
-                    ))}
-                  </React.Fragment>
-                ))}
-              </tr>
-            </>
+                return (
+                  <th
+                    key={`header-${statKey}`}
+                    className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
+                  >
+                    {statLabel}
+                  </th>
+                );
+              })}
+            </tr>
           </thead>
           <tbody>
             {progressionData.rows.map((row, rowIndex) => (
@@ -751,94 +630,47 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                 <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
                   {row.displayLevel}
                 </td>
-                {activeStatKeys.map((statKey, statIndex) => (
-                  <React.Fragment key={`${row.internalLevel}-${statKey}`}>
-                    {units.map((unit, unitIndex) => {
-                      const unitStats = row.stats[unitIndex];
-                      const unitCappedStats = row.cappedStats[unitIndex];
+                {activeStatKeys.map((statKey) => {
+                  let rawStatValue = row.stats[statKey];
+                  if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
+                    rawStatValue = row.stats['dex'];
+                  }
 
-                      let rawStatValue = unitStats[statKey];
-                      if (statKey === 'skl' && (rawStatValue === undefined || rawStatValue === null)) {
-                        rawStatValue = unitStats['dex'];
-                      }
+                  const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
 
-                      const statValue = rawStatValue !== undefined ? Number(rawStatValue.toFixed(2)) : undefined;
+                  let isCapped = row.cappedStats?.[statKey];
+                  if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
+                    isCapped = row.cappedStats?.['dex'];
+                  }
 
-                      let isCapped = unitCappedStats?.[statKey];
-                      if (statKey === 'skl' && (isCapped === undefined || isCapped === null)) {
-                        isCapped = unitCappedStats?.['dex'];
-                      }
+                  const shouldShowDash = row.isSkipped;
 
-                      const isUnitSkipped = row.unitSkipped[unitIndex];
-                      const shouldShowDash = isUnitSkipped;
+                  const highlightClass = row.isPromotionLevel ? 'bg-blue-100' : '';
 
-                      let isHighest = false;
-                      let isEqual = false;
-
-                      if (!shouldShowDash && statValue !== undefined) {
-                        const allValidValues = units.map((u, i) => {
-                          const eLv = u.isPromoted ? u.level + 20 : u.level;
-                          if (row.internalLevel < eLv) return null;
-                          let rv = row.stats[i]?.[statKey];
-                          if (statKey === 'skl' && (rv === undefined || rv === null)) {
-                            rv = row.stats[i]?.['dex'];
-                          }
-                          return rv !== undefined && rv !== null ? Number(rv.toFixed(2)) : null;
-                        }).filter(v => v !== null) as number[];
-
-                        if (allValidValues.length > 1) {
-                          isHighest = units.every((otherUnit, otherIndex) => {
-                            if (otherIndex === unitIndex) return true;
-                            const otherEffectiveLv = otherUnit.isPromoted ? otherUnit.level + 20 : otherUnit.level;
-                            if (row.internalLevel < otherEffectiveLv) return true;
-                            let otherRaw = row.stats[otherIndex]?.[statKey];
-                            if (statKey === 'skl' && (otherRaw === undefined || otherRaw === null)) {
-                              otherRaw = row.stats[otherIndex]?.['dex'];
-                            }
-                            if (otherRaw === undefined || otherRaw === null) return false;
-                            return statValue > Number(otherRaw.toFixed(2));
-                          });
-
-                          isEqual = allValidValues.every(v => v === statValue) && statValue !== 0;
-                        }
-                      }
-
-                      let highlightClass = '';
-                      if (isHighest) {
-                        highlightClass = 'bg-green-500/20';
-                      } else if (isEqual) {
-                        highlightClass = 'bg-yellow-500/20';
-                      }
-
-                      const displayColorClass = highlightClass || (row.isPromotionLevel ? 'bg-blue-100' : '');
-
-                      return (
-                        <td
-                          key={`${row.internalLevel}-${statKey}-${unit.id}`}
-                          className={`border border-gray-300 px-2 py-1 text-center text-sm ${displayColorClass} ${isCapped ? 'text-green-600 font-bold' : ''} ${unitIndex === 0 ? 'border-l-4 border-l-gray-400' : ''}`}
-                        >
-                          {shouldShowDash ? (
-                            <span className="text-gray-400">-</span>
-                          ) : (
-                            <span>
-                              {statValue !== undefined ? statValue : '-'}
-                              {/* Highlight promotion level */}
-                              {row.unitIsPromotionLevel[unitIndex] && (
-                                <button
-                                  onClick={() => handlePromotionInfoClick(row.unitPromotionInfo[unitIndex] || { className: '', classAbilities: [] }, unit.game)}
-                                  className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
-                                  title="View promotion details"
-                                >
-                                  ✨
-                                </button>
-                              )}
-                            </span>
+                  return (
+                    <td
+                      key={`${row.internalLevel}-${statKey}`}
+                      className={`border border-gray-300 px-2 py-1 text-center text-sm ${highlightClass} ${isCapped ? 'text-green-600 font-bold' : ''} border-l-4 border-l-gray-400`}
+                    >
+                      {shouldShowDash ? (
+                        <span className="text-gray-400">-</span>
+                      ) : (
+                        <span>
+                          {statValue !== undefined ? statValue : '-'}
+                          {row.isPromotionLevel && row.promotionInfo && (
+                            <button
+                              onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                              className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
+                              title="View promotion details"
+                            >
+                              ✨
+                            </button>
                           )}
-                        </td>
-                      );
-                    })}
-                  </React.Fragment>
-                ))}
+                        </span>
+                      )}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

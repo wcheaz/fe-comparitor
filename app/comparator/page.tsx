@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-// import { useSearchParams } from 'next/navigation'; // TEMPORARILY DISABLED
-import { Unit, PromotionEvent, ReclassEvent, Class } from '@/types/unit';
-import { getUnitById, getAllClasses } from '@/lib/data';
+import React, { useState } from 'react';
+import { Unit, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { StatProgressionTable } from '@/components/features/StatProgressionTable';
@@ -14,22 +12,7 @@ export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
   const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
-  const [classes, setClasses] = useState<Class[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const maxUnits = 2;
-
-  // TEMPORARILY DISABLED: Load pre-selected units from URL parameters
-  // This was causing build issues with static generation
-  useEffect(() => {
-    // Load classes data
-    getAllClasses().then(setClasses).catch(console.error);
-
-    // For now, just set loading to false immediately
-    setIsLoading(false);
-
-    // TODO: Re-enable URL parameter loading when we have a proper solution
-    // for client-side only parameter handling
-  }, []);
 
   const handleUnitSelect = (unit: Unit) => {
     setSelectedUnits(prev => [...prev, unit]);

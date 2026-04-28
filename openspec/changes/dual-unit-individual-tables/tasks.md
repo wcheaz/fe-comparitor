@@ -163,7 +163,7 @@ Update user-facing text and clean up dead code across all touched files.
 - No unused imports or variables in `StatProgressionTable.tsx` or `comparator/page.tsx`
 
 - [x] 8.1 Update all user-facing description text from "4 units" to "2 units"
-- [ ] 8.2 Remove dead imports and unused variables from refactored files
+- [x] 8.2 Remove dead imports and unused variables from refactored files
 
 ## 9. Verification
 
