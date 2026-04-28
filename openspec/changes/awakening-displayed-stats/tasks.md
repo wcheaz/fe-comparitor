@@ -23,7 +23,7 @@
   - **Done when:** ComparisonGrid shows Chrom's Str as 5 (1 personal + 4 class) instead of 1. Non-Awakening units show unchanged values.
   - **Verify by:** Load `/comparator?units=chrom` in browser, verify base stats match in-game values. `npx tsc --noEmit` passes.
 
-- [ ] 4.2 Update growth rates section in `components/features/ComparisonGrid.tsx` (~line 862) to use `getEffectiveGrowths(unit, unitClass)` instead of `unit.growths[statKey]`. Same class lookup as 4.1.
+- [x] 4.2 Update growth rates section in `components/features/ComparisonGrid.tsx` (~line 862) to use `getEffectiveGrowths(unit, unitClass)` instead of `unit.growths[statKey]`. Same class lookup as 4.1.
   - **Done when:** ComparisonGrid shows Chrom's Str growth as 75% (40 personal + 35 class) instead of 40%. Non-Awakening units show unchanged values.
   - **Verify by:** Load `/comparator?units=chrom` in browser, verify growth rates match expected combined values. `npx tsc --noEmit` passes.
 

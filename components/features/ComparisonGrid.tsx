@@ -8,7 +8,7 @@ import SupportPill from '@/components/ui/SupportPill';
 import ClassPill from '@/components/ui/ClassPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
 import AffinityPill from '@/components/ui/AffinityPill';
-import { getMinLevel, getMaxLevel, getEffectiveBaseStats } from '@/lib/stats';
+import { getMinLevel, getMaxLevel, getEffectiveBaseStats, getEffectiveGrowths } from '@/lib/stats';
 import { getAllClasses, getAllUnits } from '@/lib/data';
 import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
@@ -861,9 +861,11 @@ export function ComparisonGrid({
                                 {getStatLabel(statKey, units)}
                               </td>
                               {units.map((unit, unitIndex) => {
-                                let growthValue = unit.growths[statKey] ?? '-';
+                                const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+                                const effectiveGrowths = getEffectiveGrowths(unit, unitClass);
+                                let growthValue = effectiveGrowths[statKey] ?? '-';
                                 if (statKey === 'skl' && growthValue === '-') {
-                                  growthValue = unit.growths['dex'] ?? '-';
+                                  growthValue = effectiveGrowths['dex'] ?? '-';
                                 }
 
                                 const highlight = highlightStats[unitIndex];
