@@ -199,12 +199,12 @@ export function StatProgressionTable({ units, promotionEvents, reclassEvents, on
         const unitProgression = allProgressions[unitIndex];
         const levelData = unitProgression[i];
 
-        const isUnitSkipped = levelData?.isSkipped ?? false;
+        const isUnitSkipped = !levelData || !!levelData.isSkipped;
         rowData.unitSkipped.push(isUnitSkipped);
 
-        // A unit has valid data for this row if it's not marked skipped
+        // A unit has valid data for this row if it has progression data that is not skipped
         // The progression data's isSkipped flag already handles trainee level logic
-        if (!isUnitSkipped) {
+        if (levelData && !levelData.isSkipped) {
           allUnitsShowDash = false;
         }
 

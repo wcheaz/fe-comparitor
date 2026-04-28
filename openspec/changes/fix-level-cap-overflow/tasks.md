@@ -53,7 +53,7 @@
     - `npm run lint` exits 0
   - Stop and hand off if: adding `unitDisplayLevels` to `ProgressionRow` causes type errors in other consumers of the type — document which consumers are affected and hand off.
 
-- [ ] **Task 5 — Mark non-first unit cells as ended when progression data is undefined**
+- [x] **Task 5 — Mark non-first unit cells as ended when progression data is undefined**
   - Scope: `components/features/StatProgressionTable.tsx` (lines 194–237)
   - Change: Currently, when `unitProgression[i]` is `undefined` (the unit's progression array is shorter than `maxProgressionLength`), the fallback at lines 231–236 pushes empty stats `{}` and sets `isUnitSkipped` to `false` (via `levelData?.isSkipped ?? false`). This means `shouldShowDash` is `false` and the cell tries to render a stat value that is `undefined`, showing "-" via the `statValue !== undefined` check — but the comparison/highlight logic at lines 947–972 still runs on the empty stats, which can produce incorrect "highest" highlights for ghost data. Fix: when `levelData` is `undefined` for a unit at a given row, set `isUnitSkipped = true` explicitly so that `shouldShowDash = true` and the comparison logic is bypassed entirely via the `!shouldShowDash` guard at line 947.
   - Done when:
