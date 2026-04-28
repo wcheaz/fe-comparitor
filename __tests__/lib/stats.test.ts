@@ -1,4 +1,4 @@
-import { generateProgressionArray } from '@/lib/stats';
+import { generateProgressionArray, getEffectiveBaseStats, getEffectiveGrowths, calculateAverageStats } from '@/lib/stats';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 
 // Mock test data
@@ -539,6 +539,296 @@ describe('Stat Progression Logic', () => {
       for (let i = 1; i < promotedSegment.length; i++) {
         expect(promotedSegment[i].displayLevel).not.toBe(promotedSegment[i - 1].displayLevel);
       }
+    });
+  });
+
+  describe('getEffectiveBaseStats', () => {
+    it('should return combined personal + class bases for Awakening units', () => {
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+        growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+      };
+      const lordClass: Class = {
+        id: 'lord',
+        name: 'Lord',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: { hp: 18, str: 4, skl: 5, spd: 6, lck: 4, def: 3, res: 1 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+      };
+
+      const result = getEffectiveBaseStats(awakeningUnit, lordClass);
+
+      expect(result.str).toBe(5);
+      expect(result.skl).toBe(7);
+      expect(result.spd).toBe(9);
+      expect(result.lck).toBe(8);
+      expect(result.def).toBe(5);
+      expect(result.res).toBe(1);
+      expect(result.hp).toBe(36);
+    });
+
+    it('should return unit.stats unchanged for non-Awakening units', () => {
+      const fe8Unit: Unit = {
+        id: 'eirika',
+        name: 'Eirika',
+        game: 'The Sacred Stones',
+        class: 'lord_eirika',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 16, str: 4, skl: 8, spd: 9, lck: 5, def: 3, res: 1 },
+        growths: { hp: 70, str: 40, skl: 60, spd: 60, lck: 60, def: 30, res: 30 },
+      };
+      const someClass: Class = {
+        id: 'lord_eirika',
+        name: 'Lord',
+        game: 'The Sacred Stones',
+        type: 'unpromoted',
+        baseStats: { hp: 20, str: 5, skl: 3, spd: 4, lck: 1, def: 2, res: 5 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+      };
+
+      const result = getEffectiveBaseStats(fe8Unit, someClass);
+
+      expect(result.hp).toBe(16);
+      expect(result.str).toBe(4);
+      expect(result.skl).toBe(8);
+    });
+
+    it('should return unit.stats when classData is undefined', () => {
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+        growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+      };
+
+      const result = getEffectiveBaseStats(awakeningUnit, undefined);
+      expect(result).toEqual(awakeningUnit.stats);
+    });
+  });
+
+  describe('getEffectiveGrowths', () => {
+    it('should return combined personal + class growths for Awakening units', () => {
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+        growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+      };
+      const lordClass: Class = {
+        id: 'lord',
+        name: 'Lord',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: {},
+        growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+      };
+
+      const result = getEffectiveGrowths(awakeningUnit, lordClass);
+
+      expect(result.str).toBe(75);
+      expect(result.hp).toBe(80);
+      expect(result.skl).toBe(60);
+    });
+
+    it('should return unit.growths unchanged for non-Awakening units', () => {
+      const fe8Unit: Unit = {
+        id: 'eirika',
+        name: 'Eirika',
+        game: 'The Sacred Stones',
+        class: 'lord_eirika',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 16, str: 4, skl: 8, spd: 9, lck: 5, def: 3, res: 1 },
+        growths: { hp: 70, str: 40, skl: 60, spd: 60, lck: 60, def: 30, res: 30 },
+      };
+      const someClass: Class = {
+        id: 'lord_eirika',
+        name: 'Lord',
+        game: 'The Sacred Stones',
+        type: 'unpromoted',
+        baseStats: {},
+        growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+      };
+
+      const result = getEffectiveGrowths(fe8Unit, someClass);
+      expect(result).toEqual(fe8Unit.growths);
+    });
+
+    it('should return unit.growths when classData is undefined', () => {
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+        growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+      };
+
+      const result = getEffectiveGrowths(awakeningUnit, undefined);
+      expect(result).toEqual(awakeningUnit.growths);
+    });
+  });
+
+  describe('calculateAverageStats with Awakening class awareness', () => {
+    const awakeningUnit: Unit = {
+      id: 'chrom',
+      name: 'Chrom',
+      game: 'Awakening',
+      class: 'lord',
+      joinChapter: 'Chapter 1',
+      level: 1,
+      stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+      growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+    };
+    const lordClass: Class = {
+      id: 'lord',
+      name: 'Lord',
+      game: 'Awakening',
+      type: 'unpromoted',
+      baseStats: { hp: 18, str: 4, skl: 5, spd: 6, lck: 4, def: 3, res: 1 },
+      growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
+      promotionBonus: {},
+      promotesTo: [],
+      classAbilities: [],
+      maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
+    };
+
+    it('should use combined bases and growths when classes provided for Awakening', () => {
+      const result = calculateAverageStats(awakeningUnit, 10, [lordClass]);
+      const personalOnly = calculateAverageStats(awakeningUnit, 10);
+
+      expect(result.str).toBeGreaterThan(personalOnly.str || 0);
+      expect(result.hp).toBeGreaterThan(personalOnly.hp || 0);
+    });
+
+    it('should return same result when classes omitted for Awakening', () => {
+      const withClasses = calculateAverageStats(awakeningUnit, 10, [lordClass]);
+      const withoutClasses = calculateAverageStats(awakeningUnit, 10);
+
+      expect(withClasses.str).not.toBe(withoutClasses.str);
+    });
+
+    it('should return same result with or without classes for non-Awakening', () => {
+      const fe8Unit: Unit = {
+        id: 'eirika',
+        name: 'Eirika',
+        game: 'The Sacred Stones',
+        class: 'lord_eirika',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 16, str: 4, skl: 8, spd: 9, lck: 5, def: 3, res: 1 },
+        growths: { hp: 70, str: 40, skl: 60, spd: 60, lck: 60, def: 30, res: 30 },
+      };
+      const someClass: Class = {
+        id: 'lord_eirika',
+        name: 'Lord',
+        game: 'The Sacred Stones',
+        type: 'unpromoted',
+        baseStats: { hp: 20, str: 5, skl: 3, spd: 4, lck: 1, def: 2, res: 5 },
+        growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+      };
+
+      const withClasses = calculateAverageStats(fe8Unit, 10, [someClass]);
+      const withoutClasses = calculateAverageStats(fe8Unit, 10);
+
+      expect(withClasses).toEqual(withoutClasses);
+    });
+
+    it('should cap Awakening stats at class maxStats', () => {
+      const result = calculateAverageStats(awakeningUnit, 20, [lordClass]);
+      for (const [stat, value] of Object.entries(result)) {
+        if (lordClass.maxStats?.[stat] !== undefined && value !== undefined) {
+          expect(value).toBeLessThanOrEqual(lordClass.maxStats[stat]);
+        }
+      }
+    });
+  });
+
+  describe('uncapped stat accumulation on reclass', () => {
+    it('should preserve uncapped growth past class cap and reveal it on reclass to higher-cap class', () => {
+      const awakeningUnit: Unit = {
+        id: 'test-awakening',
+        name: 'Test Awakening Unit',
+        game: 'Awakening',
+        class: 'low_cap_class',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+        growths: { hp: 100, str: 100, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+      };
+      const classes: Class[] = [
+        {
+          id: 'low_cap_class',
+          name: 'Low Cap',
+          game: 'Awakening',
+          type: 'unpromoted',
+          baseStats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+          growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+          promotionBonus: {},
+          promotesTo: [],
+          classAbilities: [],
+          maxStats: { hp: 99, str: 10, skl: 99, spd: 99, lck: 99, def: 99, res: 99 },
+        },
+        {
+          id: 'high_cap_class',
+          name: 'High Cap',
+          game: 'Awakening',
+          type: 'unpromoted',
+          baseStats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+          growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+          promotionBonus: {},
+          promotesTo: [],
+          classAbilities: [],
+          maxStats: { hp: 99, str: 99, skl: 99, spd: 99, lck: 99, def: 99, res: 99 },
+        },
+      ];
+
+      const reclassEvents: ReclassEvent[] = [
+        { level: 10, selectedClassId: 'high_cap_class' },
+      ];
+
+      const progression = generateProgressionArray(awakeningUnit, 1, 15, classes, [], reclassEvents);
+
+      const level9Row = progression.find(r => r.internalLevel === 9 && !r.isSkipped && !r.isReclassLevel);
+      const reclassRow = progression.find(r => r.isReclassLevel);
+
+      expect(level9Row).toBeDefined();
+      expect(reclassRow).toBeDefined();
+
+      expect(level9Row!.stats.str).toBe(10);
+
+      expect(reclassRow!.stats.str).toBeGreaterThan(10);
     });
   });
 });

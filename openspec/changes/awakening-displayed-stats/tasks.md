@@ -39,7 +39,7 @@
 
 ## 6. Test Coverage
 
-- [ ] 6.1 Add tests to `__tests__/lib/stats.test.ts` for: (a) `getEffectiveBaseStats` returns combined values for Awakening, passthrough for non-Awakening; (b) `getEffectiveGrowths` same; (c) `calculateAverageStats` with `classes` uses combined bases/growths/caps for Awakening; (d) uncapped stat accumulation — Awakening unit exceeds cap, reclasses to higher-cap class, full uncapped value appears. Update the existing Awakening statModifiers reclass test (line 444) expected values if they shift due to uncapped tracking.
+- [x] 6.1 Add tests to `__tests__/lib/stats.test.ts` for: (a) `getEffectiveBaseStats` returns combined values for Awakening, passthrough for non-Awakening; (b) `getEffectiveGrowths` same; (c) `calculateAverageStats` with `classes` uses combined bases/growths/caps for Awakening; (d) uncapped stat accumulation — Awakening unit exceeds cap, reclasses to higher-cap class, full uncapped value appears. Update the existing Awakening statModifiers reclass test (line 444) expected values if they shift due to uncapped tracking.
   - **Done when:** All new tests pass. All existing non-Awakening tests pass. `npm test` exits 0.
   - **Verify by:** `npm test`
   - **Stop and hand off if:** An existing FE6/FE7/FE8/FE3H/Engage test fails — the Awakening guard is leaking into non-Awakening paths.
