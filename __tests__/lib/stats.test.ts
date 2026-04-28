@@ -831,4 +831,124 @@ describe('Stat Progression Logic', () => {
       expect(reclassRow!.stats.str).toBeGreaterThan(10);
     });
   });
+
+  describe('promotion class base delta for Awakening', () => {
+    it('should apply class base delta when Awakening unit promotes to class with different baseStats', () => {
+      const unit: Unit = {
+        id: 'test-promo',
+        name: 'Test Promo',
+        game: 'Awakening',
+        class: 'old_class',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+      };
+      const oldClass: Class = {
+        id: 'old_class',
+        name: 'Old Class',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: { hp: 19, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        promotionBonus: {},
+        promotesTo: ['new_class'],
+        classAbilities: [],
+        maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
+      };
+      const newClass: Class = {
+        id: 'new_class',
+        name: 'New Class',
+        game: 'Awakening',
+        type: 'promoted',
+        baseStats: { hp: 22, str: 8, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        promotionBonus: { hp: 3 },
+        promotesTo: [],
+        classAbilities: [],
+        maxStats: { hp: 80, str: 40, skl: 40, spd: 40, lck: 40, def: 40, res: 40 },
+      };
+
+      const classes = [oldClass, newClass];
+      const promotionEvents: PromotionEvent[] = [
+        { level: 20, selectedClassId: 'new_class' },
+      ];
+
+      const progression = generateProgressionArray(unit, 1, 22, classes, promotionEvents, []);
+
+      const level20Row = progression.find(r => r.displayLevel.includes('Level 20') && !r.displayLevel.includes('Tier'));
+      const promotedLevel1 = progression.find(r => r.displayLevel.includes('Level 1') && r.displayLevel.includes('Tier'));
+
+      expect(level20Row).toBeDefined();
+      expect(promotedLevel1).toBeDefined();
+
+      expect(level20Row!.stats.hp).toBe(19);
+
+      const hpDelta = (newClass.baseStats.hp ?? 0) - (oldClass.baseStats.hp ?? 0);
+      expect(hpDelta).toBe(3);
+      const promoBonus = newClass.promotionBonus.hp ?? 0;
+      expect(promoBonus).toBe(3);
+
+      expect(promotedLevel1!.stats.hp).toBe(19 + promoBonus + hpDelta);
+
+      const strDelta = (newClass.baseStats.str ?? 0) - (oldClass.baseStats.str ?? 0);
+      expect(strDelta).toBe(3);
+      expect(promotedLevel1!.stats.str).toBe(5 + strDelta);
+    });
+
+    it('should apply class base delta on reclass for Awakening units', () => {
+      const unit: Unit = {
+        id: 'test-reclass-delta',
+        name: 'Test Reclass Delta',
+        game: 'Awakening',
+        class: 'reclass_from',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+      };
+      const fromClass: Class = {
+        id: 'reclass_from',
+        name: 'From Class',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+        maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
+      };
+      const toClass: Class = {
+        id: 'reclass_to',
+        name: 'To Class',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: { hp: 25, str: 3, skl: 5, spd: 5, lck: 5, def: 5, res: 5 },
+        growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
+        promotionBonus: {},
+        promotesTo: [],
+        classAbilities: [],
+        maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
+      };
+
+      const classes = [fromClass, toClass];
+      const reclassEvents: ReclassEvent[] = [
+        { level: 10, selectedClassId: 'reclass_to' },
+      ];
+
+      const progression = generateProgressionArray(unit, 1, 12, classes, [], reclassEvents);
+
+      const reclassRow = progression.find(r => r.isReclassLevel);
+      expect(reclassRow).toBeDefined();
+
+      const hpDelta = (toClass.baseStats.hp ?? 0) - (fromClass.baseStats.hp ?? 0);
+      expect(hpDelta).toBe(5);
+      expect(reclassRow!.stats.hp).toBe(20 + hpDelta);
+
+      const strDelta = (toClass.baseStats.str ?? 0) - (fromClass.baseStats.str ?? 0);
+      expect(strDelta).toBe(-2);
+      expect(reclassRow!.stats.str).toBe(5 + strDelta);
+    });
+  });
 });

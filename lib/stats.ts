@@ -630,6 +630,8 @@ export function generateProgressionArray(
         const transBase = isAwakening && uncappedBaseStats ? uncappedBaseStats : baseStatsForCurrentClass;
         const { capped: finalizedStats, uncapped: finalizedUncappedStats } = calculateCurrentStats(displayLevelNum, currentClass, transBase);
         
+        const oldClassBaseStats = currentClass?.baseStats || {};
+
         if (nextEvent.type === 'promotion') {
           const newStats = { ...finalizedStats };
           if (targetClass.promotionBonus) {
@@ -645,26 +647,34 @@ export function generateProgressionArray(
           currentClass = targetClass;
           tier = isTrainee && tier === 0 ? 1 : 2; 
           baseStatsForCurrentClass = newStats;
-          if (isAwakening && uncappedBaseStats !== null) {
-            const newUncapped = { ...finalizedUncappedStats };
-            if (targetClass.promotionBonus) {
-              Object.entries(targetClass.promotionBonus).forEach(([k, v]) => {
-                newUncapped[k] = (newUncapped[k] || 0) + (v as number);
+            if (isAwakening && uncappedBaseStats !== null) {
+              const newUncapped = { ...finalizedUncappedStats };
+              if (targetClass.promotionBonus) {
+                Object.entries(targetClass.promotionBonus).forEach(([k, v]) => {
+                  newUncapped[k] = (newUncapped[k] || 0) + (v as number);
+                });
+              }
+              const newClassBaseStats = targetClass.baseStats || {};
+              const allDeltaKeys = new Set([...Object.keys(oldClassBaseStats), ...Object.keys(newClassBaseStats)]);
+              allDeltaKeys.forEach(k => {
+                const delta = (newClassBaseStats[k] || 0) - (oldClassBaseStats[k] || 0);
+                newUncapped[k] = (newUncapped[k] || 0) + delta;
               });
+              uncappedBaseStats = newUncapped;
             }
-            if (targetClass.baseStats) {
-              Object.entries(targetClass.baseStats).forEach(([k, v]) => {
-                newUncapped[k] = Math.max(newUncapped[k] || 0, v as number);
-              });
-            }
-            uncappedBaseStats = newUncapped;
-          }
         } else if (nextEvent.type === 'reclass') {
           currentClass = targetClass;
           tier = typeof targetClass.tier === 'number' ? targetClass.tier : (typeof targetClass.tier === 'string' ? parseInt(targetClass.tier) : 1);
           baseStatsForCurrentClass = { ...finalizedStats };
           if (isAwakening && uncappedBaseStats !== null) {
-            uncappedBaseStats = { ...finalizedUncappedStats };
+            const newUncapped = { ...finalizedUncappedStats };
+            const newClassBaseStats = targetClass.baseStats || {};
+            const allDeltaKeys = new Set([...Object.keys(oldClassBaseStats), ...Object.keys(newClassBaseStats)]);
+            allDeltaKeys.forEach(k => {
+              const delta = (newClassBaseStats[k] || 0) - (oldClassBaseStats[k] || 0);
+              newUncapped[k] = (newUncapped[k] || 0) + delta;
+            });
+            uncappedBaseStats = newUncapped;
           }
           pendingReclassFlag = true;
           reclassTargetName = targetClass.name;

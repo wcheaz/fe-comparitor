@@ -11,7 +11,7 @@
   - **Verify by:** `npm test` — existing non-Awakening tests still pass. Existing Awakening test at line 444 of `stats.test.ts` may need updated expected values (acceptable per design risk section). `npx tsc --noEmit` passes.
   - **Stop and hand off if:** A non-Awakening test fails after this change — the Awakening guard is leaking.
 
-- [ ] 2.2 When an Awakening unit promotes or reclasses in `generateProgressionArray`, adjust the uncapped internal stats by the difference between the new class's `baseStats` and the old class's `baseStats`. For each stat: `uncappedBaseStats[stat] += new_class.baseStats[stat] - old_class.baseStats[stat]`. This ensures the unit gains (or loses) the stat delta from the class base change. Non-Awakening behavior unchanged.
+- [x] 2.2 When an Awakening unit promotes or reclasses in `generateProgressionArray`, adjust the uncapped internal stats by the difference between the new class's `baseStats` and the old class's `baseStats`. For each stat: `uncappedBaseStats[stat] += new_class.baseStats[stat] - old_class.baseStats[stat]`. This ensures the unit gains (or loses) the stat delta from the class base change. Non-Awakening behavior unchanged.
   - **Done when:** Cherche (Wyvern Rider, class base HP 19) at level 20 with uncapped HP 34.4 promotes to Griffon Lord (class base HP 22) and shows HP 37.4 at promoted level 1 (34.4 + 3 from class base delta). Same logic applies for reclass events.
   - **Verify by:** `npm test` — add a test case for Cherche promoting from Wyvern Rider to Griffon Lord verifying the class base delta is applied. `npx tsc --noEmit` passes.
   - **Stop and hand off if:** The class base delta causes non-Awakening promotion stats to change — the Awakening guard is leaking.
