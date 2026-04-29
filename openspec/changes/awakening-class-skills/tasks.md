@@ -12,7 +12,7 @@
 
 ## 2. Verify ability definitions completeness
 
-- [ ] 2.1 Run a verification that every skill name referenced in all Awakening `classAbilities` (with `(Lv. N)` suffix stripped) has a matching entry in `lib/abilities.ts` `abilityDefinitions`. If any are missing, add them with description, procCondition, procChance, and gameSpecificDetails.Awakening sourced from the Serenes Forest table.
+- [x] 2.1 Run a verification that every skill name referenced in all Awakening `classAbilities` (with `(Lv. N)` suffix stripped) has a matching entry in `lib/abilities.ts` `abilityDefinitions`. If any are missing, add them with description, procCondition, procChance, and gameSpecificDetails.Awakening sourced from the Serenes Forest table.
   - **Done when**: A grep or script confirms every stripped skill name appears as a key in `abilityDefinitions` in `lib/abilities.ts`, and each has a non-empty description and Awakening gameSpecificDetails.
   - **Verify by**: `grep -c "Awakening" lib/abilities.ts` shows count matching expected, and manual spot-check of 5 random skills confirms description and gameSpecificDetails are present.
   - **Stop and hand off if**: A skill name from the table has no corresponding definition and the exact wording is ambiguous — ask for human clarification on the description.
