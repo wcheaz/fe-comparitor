@@ -19,7 +19,7 @@
 
 ## 3. End-to-end validation
 
-- [ ] 3.1 Run the project build and lint to confirm no regressions from the data changes. Verify in the browser that the Awakening class comparison view shows populated Class Abilities pills for all 46 playable classes, and that clicking a pill opens the detail modal with the correct description and proc information.
+- [x] 3.1 Run the project build and lint to confirm no regressions from the data changes. Verify in the browser that the Awakening class comparison view shows populated Class Abilities pills for all 46 playable classes, and that clicking a pill opens the detail modal with the correct description and proc information.
   - **Done when**: `npm run build` completes without errors, `npm run lint` passes, and browser inspection confirms at least 5 spot-checked classes (Lord, Dark Flier, Dread Fighter, Berserker, War Monk) display correct clickable skill pills with accurate detail modals.
   - **Verify by**: `npm run build && npm run lint` both exit 0. Open the browser to the Awakening comparison, select units from diverse classes, confirm Class Abilities row shows 2 pills per playable class and clicking a pill shows the correct ability description.
   - **Stop and hand off if**: Build or lint fails with errors unrelated to this change (pre-existing issues).
