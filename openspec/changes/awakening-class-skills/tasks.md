@@ -5,7 +5,7 @@
   - **Verify by**: `python3 dev/scrape_awakening_skills.py && python3 -c "import json; d=json.load(open('dev/awakening_skills_raw.json')); print(f'{len(d)} entries')"` — expect 50+ entries.
   - **Stop and hand off if**: Serenes Forest returns a different table structure or blocks the request.
 
-- [ ] 1.2 Create `dev/parse_awakening_skills.py` that reads `dev/awakening_skills_raw.json`, maps each row's Class field to the corresponding class ID in `data/awakening/classes.json`, builds `"Skill Name (Lv. N)"` strings using the frozen mapping from `design.md`, updates each class's `classAbilities` field, validates all mapped class IDs exist in the JSON, and writes the updated file back.
+- [x] 1.2 Create `dev/parse_awakening_skills.py` that reads `dev/awakening_skills_raw.json`, maps each row's Class field to the corresponding class ID in `data/awakening/classes.json`, builds `"Skill Name (Lv. N)"` strings using the frozen mapping from `design.md`, updates each class's `classAbilities` field, validates all mapped class IDs exist in the JSON, and writes the updated file back.
   - **Done when**: Script runs without error, all 44 previously-empty classes now have populated `classAbilities`, the 10 already-populated classes are unchanged, and the 8 enemy/special classes remain empty.
   - **Verify by**: `python3 dev/parse_awakening_skills.py && python3 -c "import json; cs=json.load(open('data/awakening/classes.json')); empty=[c['name'] for c in cs if not c.get('classAbilities')]; print(f'Empty: {len(empty)} classes: {empty}')"` — expect exactly 8 enemy/special classes with empty arrays.
   - **Stop and hand off if**: A class ID in the frozen mapping does not exist in `classes.json`, indicating a data schema mismatch that requires human decision.

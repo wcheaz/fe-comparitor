@@ -635,7 +635,10 @@
       "Axes",
       "Staffs"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Luck (Lv. 5)",
+      "Renewal (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 0,
       "str": 0,
@@ -689,7 +692,10 @@
     "weapons": [
       "Beaststones"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Even Rhythm (Lv. 1)",
+      "Beastbane (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 35,
@@ -743,7 +749,10 @@
     "weapons": [
       "Dragonstones"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Odd Rhythm (Lv. 1)",
+      "Wyrmsbane (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
@@ -800,7 +809,10 @@
     "weapons": [
       "Bows"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Skill +2 (Lv. 1)",
+      "Prescience (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 26,
@@ -857,7 +869,10 @@
     "weapons": [
       "Lances"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Speed +2 (Lv. 1)",
+      "Relief (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 24,
@@ -912,7 +927,10 @@
       "Axes",
       "Bows"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Strength (Lv. 5)",
+      "Counter (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 48,
@@ -968,7 +986,10 @@
     "weapons": [
       "Swords"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Dual Strike+ (Lv. 1)",
+      "Charm (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 25,
@@ -1025,7 +1046,10 @@
     "weapons": [
       "Axes"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Strength +2 (Lv. 1)",
+      "Tantivy (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 28,
@@ -1079,7 +1103,10 @@
     "weapons": [
       "Staffs"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Miracle (Lv. 1)",
+      "Healtouch (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 22,
@@ -1137,7 +1164,10 @@
     "weapons": [
       "Staffs"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Resistance +2 (Lv. 1)",
+      "Demoiselle (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 20,
@@ -1191,7 +1221,10 @@
     "weapons": [
       "Lances"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Aptitude (Lv. 1)",
+      "Underdog (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 20,
@@ -1245,7 +1278,10 @@
     "weapons": [
       "Swords"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Luck +4 (Lv. 1)",
+      "Special Dance (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 30,
@@ -1302,7 +1338,10 @@
     "weapons": [
       "Tomes"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Hex (Lv. 1)",
+      "Anathema (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 20,
@@ -1357,7 +1396,10 @@
       "Swords",
       "Staffs"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Lucky Seven (Lv. 5)",
+      "Acrobat (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 35,
@@ -1414,7 +1456,10 @@
     "weapons": [
       "Swords"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Locktouch (Lv. 1)",
+      "Movement +1 (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 22,
@@ -1471,7 +1516,10 @@
     "weapons": [
       "Axes"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "HP +5 (Lv. 1)",
+      "Zeal (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 29,
@@ -1528,7 +1576,10 @@
     "weapons": [
       "Tomes"
     ],
-    "classAbilities": [],
+    "classAbilities": [
+      "Magic +2 (Lv. 1)",
+      "Focus (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 20,
@@ -1580,7 +1631,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Aether (Lv. 5)",
+      "Rightful King (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 43,
@@ -1632,7 +1686,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Defense (Lv. 5)",
+      "Pavise (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 50,
@@ -1687,7 +1744,10 @@
       "warrior"
     ],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Despoil (Lv. 1)",
+      "Gamble (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 30,
@@ -1739,7 +1799,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Wrath (Lv. 5)",
+      "Axefaire (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 50,
@@ -1791,7 +1854,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Skill (Lv. 5)",
+      "Bowbreaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
@@ -1843,7 +1909,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Hit Rate +20 (Lv. 5)",
+      "Bowfaire (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 41,
@@ -1895,7 +1964,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Lethality (Lv. 5)",
+      "Pass (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
@@ -1947,7 +2019,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Speed (Lv. 5)",
+      "Lancefaire (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 38,
@@ -1999,7 +2074,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Movement (Lv. 5)",
+      "Galeforce (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 36,
@@ -2051,7 +2129,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Quick Burn (Lv. 5)",
+      "Swordbreaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 46,
@@ -2103,7 +2184,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Deliverer (Lv. 5)",
+      "Lancebreaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
@@ -2158,7 +2242,10 @@
       "war_monk"
     ],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Miracle (Lv. 1)",
+      "Healtouch (Lv. 10)"
+    ],
     "maxStats": {
       "hp": 60,
       "str": 22,
@@ -2210,7 +2297,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Resistance (Lv. 5)",
+      "Dual Support+ (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 30,
@@ -2262,7 +2352,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Luck (Lv. 5)",
+      "Renewal (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
@@ -2314,7 +2407,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Magic (Lv. 5)",
+      "Tomefaire (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 30,
@@ -2366,7 +2462,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Slow Burn (Lv. 5)",
+      "Lifetaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 38,
@@ -2418,7 +2517,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Vengeance (Lv. 5)",
+      "Tomebreaker (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 30,
@@ -2886,7 +2988,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Resistance +10 (Lv. 1)",
+      "Aggressor (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 42,
@@ -2938,7 +3043,10 @@
     },
     "promotesTo": [],
     "weapons": [],
-    "classAbilities": [],
+    "classAbilities": [
+      "Rally Heart (Lv. 1)",
+      "Bond (Lv. 15)"
+    ],
     "maxStats": {
       "hp": 80,
       "str": 40,
