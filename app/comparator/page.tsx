@@ -30,8 +30,6 @@ export default function ComparatorPage() {
     setReclassEvents(newEvents);
   };
 
-
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-fe-blue-50 to-fe-blue-100">
       <div className="px-4 lg:px-6 py-8">
@@ -46,68 +44,62 @@ export default function ComparatorPage() {
           </p>
         </div>
 
-        {/* Main Layout - Full-width sidebar + content */}
-        <div className="grid grid-cols-1 xl:grid-cols-[280px_1fr] gap-6">
-          {/* Left Sidebar - Controls */}
-          <div className="space-y-6">
-            {/* Unit Selector */}
-            <UnitSelector
-              selectedUnits={selectedUnits}
-              onUnitSelect={handleUnitSelect}
-              onUnitRemove={handleUnitRemove}
-              maxUnits={maxUnits}
-            />
+        {/* Unit Selector */}
+        <div className="mb-8">
+          <UnitSelector
+            selectedUnits={selectedUnits}
+            onUnitSelect={handleUnitSelect}
+            onUnitRemove={handleUnitRemove}
+            maxUnits={maxUnits}
+          />
+        </div>
 
+        {/* Main Content */}
+        <div className="space-y-6">
+          <ComparisonGrid
+            units={selectedUnits}
+            promotionEvents={promotionEvents}
+            reclassEvents={reclassEvents}
+            onPromotionEventsChange={handlePromotionEventsChange}
+            onReclassEventsChange={handleReclassEventsChange}
+            showStats={true}
+            showGrowths={true}
+          />
 
-          </div>
+          {/* Promotion Options Display */}
+          {selectedUnits.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
+              {selectedUnits.map((unit) => (
+                <PromotionOptionsDisplay key={`promo-display-${unit.id}`} unit={unit} />
+              ))}
+            </div>
+          )}
 
-          {/* Main Content - Horizontal Comparison Grid */}
-          <div className="space-y-6 min-w-0">
-            <ComparisonGrid
-              units={selectedUnits}
-              promotionEvents={promotionEvents}
-              reclassEvents={reclassEvents}
-              onPromotionEventsChange={handlePromotionEventsChange}
-              onReclassEventsChange={handleReclassEventsChange}
-              showStats={true}
-              showGrowths={true}
-            />
-
-            {/* Promotion Options Display */}
-            {selectedUnits.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
-                {selectedUnits.map((unit) => (
-                  <PromotionOptionsDisplay key={`promo-display-${unit.id}`} unit={unit} />
-                ))}
-              </div>
-            )}
-
-            {/* Stat Progression Tables — one per unit */}
-            {selectedUnits.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {selectedUnits.map((unit) => (
-                  <Card key={`progression-${unit.id}`}>
-                    <CardHeader>
-                      <CardTitle>{unit.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <StatProgressionTable
-                        unit={unit}
-                        promotionEvents={promotionEvents[unit.id] || []}
-                        reclassEvents={reclassEvents[unit.id] || []}
-                        onPromotionEventsChange={(events) => {
-                          setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
-                        }}
-                        onReclassEventsChange={(events) => {
-                          setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
-                        }}
-                      />
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Stat Progression Tables — one per unit */}
+          {selectedUnits.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {selectedUnits.map((unit) => (
+                <Card key={`progression-${unit.id}`}>
+                  <CardHeader>
+                    <CardTitle>{unit.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <StatProgressionTable
+                      unit={unit}
+                      promotionEvents={promotionEvents[unit.id] || []}
+                      reclassEvents={reclassEvents[unit.id] || []}
+                      onPromotionEventsChange={(events) => {
+                        setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                      }}
+                      onReclassEventsChange={(events) => {
+                        setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                      }}
+                    />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Quick Tips */}

@@ -11,11 +11,11 @@ export function getEffectiveBaseStats(unit: Unit, classData: Class | undefined):
 }
 
 export function getEffectiveGrowths(unit: Unit, classData: Class | undefined): UnitStats {
-  if (!classData || unit.game !== 'Awakening') return unit.growths;
+  if (!classData?.growths) return unit.growths;
   const combined: UnitStats = {};
-  const allKeys = new Set([...Object.keys(unit.growths), ...Object.keys(classData.growths || {})]);
+  const allKeys = new Set([...Object.keys(unit.growths), ...Object.keys(classData.growths)]);
   for (const key of allKeys) {
-    combined[key] = (unit.growths[key] || 0) + (classData.growths?.[key] || 0);
+    combined[key] = (unit.growths[key] || 0) + (classData.growths[key] || 0);
   }
   return combined;
 }

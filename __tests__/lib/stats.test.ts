@@ -653,7 +653,7 @@ describe('Stat Progression Logic', () => {
       expect(result.skl).toBe(60);
     });
 
-    it('should return unit.growths unchanged for non-Awakening units', () => {
+    it('should return combined growths for any game when classData has growths', () => {
       const fe8Unit: Unit = {
         id: 'eirika',
         name: 'Eirika',
@@ -677,7 +677,9 @@ describe('Stat Progression Logic', () => {
       };
 
       const result = getEffectiveGrowths(fe8Unit, someClass);
-      expect(result).toEqual(fe8Unit.growths);
+      expect(result.hp).toBe(80);
+      expect(result.str).toBe(75);
+      expect(result.skl).toBe(70);
     });
 
     it('should return unit.growths when classData is undefined', () => {

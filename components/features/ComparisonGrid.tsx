@@ -49,6 +49,15 @@ export function ComparisonGrid({
   const [classes, setClasses] = React.useState<Class[]>([]);
   const [allUnits, setAllUnits] = React.useState<Unit[]>([]);
 
+  const [showEffectiveGrowths, setShowEffectiveGrowths] = useState(false);
+
+  const hasClassGrowths = React.useMemo(() => {
+    return units.some(unit => {
+      const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+      return unitClass && unitClass.growths && Object.keys(unitClass.growths).length > 0;
+    });
+  }, [units, classes]);
+
   // State for affinity modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAffinity, setSelectedAffinity] = useState<string | null>(null);
@@ -524,18 +533,6 @@ export function ComparisonGrid({
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {/* Header */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Unit Comparison</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-sm text-muted-foreground">
-            Comparing {units.length} unit{units.length !== 1 ? 's' : ''}
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Basic Unit Information - Horizontal */}
       <Card>
         <CardHeader>
@@ -836,7 +833,25 @@ export function ComparisonGrid({
             <div className="w-full md:w-1/2 min-w-0">
               <Card className="h-full">
                 <CardHeader>
-                  <CardTitle>Growth Rates</CardTitle>
+                  <div className="flex items-center justify-between gap-2">
+                    <CardTitle>Growth Rates</CardTitle>
+                    {hasClassGrowths && (
+                      <div className="flex items-center gap-1 text-xs border rounded-lg p-0.5">
+                        <button
+                          onClick={() => setShowEffectiveGrowths(false)}
+                          className={`px-3 py-1 rounded-md font-medium transition-colors ${!showEffectiveGrowths ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                        >
+                          Personal
+                        </button>
+                        <button
+                          onClick={() => setShowEffectiveGrowths(true)}
+                          className={`px-3 py-1 rounded-md font-medium transition-colors ${showEffectiveGrowths ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                        >
+                          Effective
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="overflow-x-auto">
@@ -852,8 +867,34 @@ export function ComparisonGrid({
                         </tr>
                       </thead>
                       <tbody>
-                        {getCommonGrowthStats(units).map((statKey) => {
-                          const highlightStats = getHighlightStats(units, statKey, 'growth');
+                        {getCommonGrowthStats(units, showEffectiveGrowths ? classes : undefined).map((statKey) => {
+                          const growthValues = units.map(unit => {
+                            const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+                            const growths = showEffectiveGrowths ? getEffectiveGrowths(unit, unitClass) : unit.growths;
+                            let value = growths[statKey] ?? '-';
+                            if (statKey === 'skl' && value === '-') {
+                              value = growths['dex'] ?? '-';
+                            }
+                            return value;
+                          });
+
+                          const highlightStats = growthValues.map((currentValue, index) => {
+                            if (currentValue === '-' || currentValue === undefined || currentValue === null) {
+                              return { isHighest: false, isEqual: false };
+                            }
+
+                            const isHighest = units.every((_, otherIndex) => {
+                              if (otherIndex === index) return true;
+                              const otherValue = growthValues[otherIndex];
+                              if (otherValue === '-' || otherValue === undefined || otherValue === null) return false;
+                              return currentValue > otherValue;
+                            });
+
+                            const allValues = growthValues.filter(v => v !== '-' && v !== undefined && v !== null);
+                            const isEqual = allValues.length > 1 && allValues.every(val => val === currentValue) && currentValue !== 0;
+
+                            return { isHighest, isEqual };
+                          });
 
                           return (
                             <tr key={`growth-${statKey}`} className="border-b hover:bg-muted/50">
@@ -861,13 +902,7 @@ export function ComparisonGrid({
                                 {getStatLabel(statKey, units)}
                               </td>
                               {units.map((unit, unitIndex) => {
-                                const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
-                                const effectiveGrowths = getEffectiveGrowths(unit, unitClass);
-                                let growthValue = effectiveGrowths[statKey] ?? '-';
-                                if (statKey === 'skl' && growthValue === '-') {
-                                  growthValue = effectiveGrowths['dex'] ?? '-';
-                                }
-
+                                const growthValue = growthValues[unitIndex];
                                 const highlight = highlightStats[unitIndex];
 
                                 let highlightClass = '';
@@ -1012,7 +1047,7 @@ function getCommonBaseStats(units: Unit[]): string[] {
   return common;
 }
 
-function getCommonGrowthStats(units: Unit[]): string[] {
+function getCommonGrowthStats(units: Unit[], classes?: Class[]): string[] {
   if (units.length < 2) {
     return getCommonStats(units);
   }
@@ -1021,10 +1056,14 @@ function getCommonGrowthStats(units: Unit[]): string[] {
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
 
   statOrder.forEach(statKey => {
-    const hasValidGrowth = units.some(unit =>
-      unit.growths[statKey] !== undefined &&
-      unit.growths[statKey] !== null
-    );
+    const hasValidGrowth = units.some(unit => {
+      if (unit.growths[statKey] !== undefined && unit.growths[statKey] !== null) return true;
+      if (classes) {
+        const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+        if (unitClass?.growths?.[statKey] !== undefined && unitClass.growths[statKey] !== null) return true;
+      }
+      return false;
+    });
 
     if (hasValidGrowth) {
       commonStats.push(statKey);
@@ -1032,8 +1071,22 @@ function getCommonGrowthStats(units: Unit[]): string[] {
   });
 
   let common = commonStats;
-  const hasSkl = units.some(unit => unit.growths['skl'] !== undefined && unit.growths['skl'] !== null);
-  const hasDex = units.some(unit => unit.growths['dex'] !== undefined && unit.growths['dex'] !== null);
+  const hasSkl = units.some(unit => {
+    if (unit.growths['skl'] !== undefined && unit.growths['skl'] !== null) return true;
+    if (classes) {
+      const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+      if (unitClass?.growths?.['skl'] !== undefined) return true;
+    }
+    return false;
+  });
+  const hasDex = units.some(unit => {
+    if (unit.growths['dex'] !== undefined && unit.growths['dex'] !== null) return true;
+    if (classes) {
+      const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+      if (unitClass?.growths?.['dex'] !== undefined) return true;
+    }
+    return false;
+  });
   if (hasSkl && hasDex) {
     common = common.filter((c: string) => c !== 'dex');
   }
