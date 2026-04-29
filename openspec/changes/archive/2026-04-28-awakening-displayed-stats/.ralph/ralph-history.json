@@ -257,5 +257,36 @@
     "responseChars": 1350,
     "responseTokens": 338,
     "truncated": false
+  },
+  {
+    "timestamp": "2026-04-28T23:05:58.147Z",
+    "iteration": 9,
+    "duration": 433957,
+    "completionDetected": true,
+    "taskDetected": false,
+    "toolUsage": [],
+    "filesChanged": [
+      "__tests__/lib/stats.test.ts",
+      "lib/stats.ts",
+      "openspec/changes/awakening-displayed-stats/tasks.md"
+    ],
+    "exitCode": 0,
+    "signal": "",
+    "failureStage": "",
+    "completedTasks": [
+      "2.2 When an Awakening unit promotes or reclasses in `generateProgressionArray`, adjust the uncapped internal stats by the difference between the new class's `baseStats` and the old class's `baseStats`. For each stat: `uncappedBaseStats[stat] += new_class.baseStats[stat] - old_class.baseStats[stat]`. This ensures the unit gains (or loses) the stat delta from the class base change. Non-Awakening behavior unchanged."
+    ],
+    "commitAttempted": true,
+    "commitCreated": true,
+    "commitAnomaly": "",
+    "commitAnomalyType": "",
+    "protectedArtifacts": [],
+    "promptBytes": 739,
+    "promptChars": 739,
+    "promptTokens": 185,
+    "responseBytes": 1212,
+    "responseChars": 1206,
+    "responseTokens": 302,
+    "truncated": false
   }
 ]
