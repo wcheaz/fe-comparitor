@@ -78,7 +78,7 @@ Add the "Possible Skills" row to the ComparisonGrid Unit Details table, rendered
   - Done when: `npx tsc --noEmit` passes. Component renders correctly when given Awakening unit data with reclass options.
   - Stop and hand off if: The `promotesTo` chain contains cycles or references non-existent class IDs.
 
-- [ ] 6.2 Integrate `PossibleSkillsRow` into `components/features/ComparisonGrid.tsx`. Add the row after the "Starting Skills" row (before "Supports"). The row SHALL only render when `units.some(u => u.reclassOptions && u.reclassOptions.length > 0)`. Each unit cell passes `unit` and `classes` to `PossibleSkillsRow`. Units with no possible skills after deduplication render "None" (muted text).
+- [x] 6.2 Integrate `PossibleSkillsRow` into `components/features/ComparisonGrid.tsx`. Add the row after the "Starting Skills" row (before "Supports"). The row SHALL only render when `units.some(u => u.reclassOptions && u.reclassOptions.length > 0)`. Each unit cell passes `unit` and `classes` to `PossibleSkillsRow`. Units with no possible skills after deduplication render "None" (muted text).
   - Done when: Opening the comparator with Awakening units shows a "Possible Skills" row. GBA units without reclass options do not show the row. `npx tsc --noEmit` and `npm test` pass.
   - Stop and hand off if: Integration causes layout or rendering issues with the existing table structure.
 

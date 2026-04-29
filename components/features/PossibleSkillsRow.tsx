@@ -65,7 +65,7 @@ export function PossibleSkillsRow({
   }
 
   if (skillToClassNames.size === 0) {
-    return null;
+    return <span className="text-muted-foreground">None</span>;
   }
 
   const entries = Array.from(skillToClassNames.entries());
