@@ -82,7 +82,7 @@ Add the "Possible Skills" row to the ComparisonGrid Unit Details table, rendered
   - Done when: Opening the comparator with Awakening units shows a "Possible Skills" row. GBA units without reclass options do not show the row. `npx tsc --noEmit` and `npm test` pass.
   - Stop and hand off if: Integration causes layout or rendering issues with the existing table structure.
 
-- [ ] 6.3 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm:
+- [x] 6.3 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm:
   (a) "Possible Skills" row appears after "Starting Skills";
   (b) skills shown include both direct reclass skills AND skills from promoted classes of those reclasses;
   (c) each skill pill shows the originating class name(s) as a label;
