@@ -9,7 +9,7 @@ Rename all "ability"/"abilities" identifiers to "skill"/"skills" in the type def
 - [x] 1.2 Rename all 6 data files `data/*/abilities.json` to `data/*/skills.json` (awakening, binding_blade, blazing_blade, sacred_stones, three_houses, engage). No content changes — only file names.
   - Done when: `ls data/*/skills.json` lists 6 files. `ls data/*/abilities.json` returns nothing. `npm test` passes.
 
-- [ ] 1.3 Rename `classAbilities` to `classSkills` in `types/unit.ts` Class interface. Update `lib/data.ts` transformer to read `rawClass.classSkills` with fallback: `rawClass.classSkills || rawClass.classAbilities || rawClass.hiddenModifiers || []`. Update all references to `classAbilities` in `lib/stats.ts` (progression info, promotion info).
+- [x] 1.3 Rename `classAbilities` to `classSkills` in `types/unit.ts` Class interface. Update `lib/data.ts` transformer to read `rawClass.classSkills` with fallback: `rawClass.classSkills || rawClass.classAbilities || rawClass.hiddenModifiers || []`. Update all references to `classAbilities` in `lib/stats.ts` (progression info, promotion info).
   - Done when: `npx tsc --noEmit` passes. `grep -ri "classAbilities" --include="*.ts" --include="*.tsx"` returns zero results (except the fallback in the transformer).
 
 ## 2. Rename UI Components

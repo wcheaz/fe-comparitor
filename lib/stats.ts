@@ -375,7 +375,7 @@ export function generateProgressionArray(
   isReclassLevel: boolean;
   promotionInfo?: {
     className: string;
-    classAbilities: string[];
+    classSkills: string[];
   };
   reclassInfo?: {
     className: string;
@@ -550,7 +550,7 @@ export function generateProgressionArray(
          isPromotionLevel = true;
          promotionInfo = {
            className: targetClass.name,
-           classAbilities: targetClass.classAbilities || []
+            classSkills: targetClass.classSkills || []
          };
        }
     }

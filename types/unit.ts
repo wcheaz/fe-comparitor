@@ -74,7 +74,7 @@ export interface Class {
   promotionBonus: UnitStats;
   promotesTo: string[];
   weapons?: string[];
-  classAbilities: string[];
+  classSkills: string[];
   gender?: 'M' | 'F';
   maxStats?: UnitStats;
   movementType?: string;
