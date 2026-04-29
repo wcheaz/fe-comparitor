@@ -44,7 +44,7 @@
 
 ## 3. Validate All Changes
 
-- [ ] 3.1 Validate the edited file. Run `node -e "JSON.parse(require('fs').readFileSync('data/awakening/classes.json','utf8'))"` to confirm valid JSON. Then spot-check at least 3 classes from each group: one from the 10 corrected classes (e.g., `knight`), one from the 17 filled classes (e.g., `archer`), and one from the 22 previously-correct classes (e.g., `sniper`) to confirm values match Serenes Forest.
+- [x] 3.1 Validate the edited file. Run `node -e "JSON.parse(require('fs').readFileSync('data/awakening/classes.json','utf8'))"` to confirm valid JSON. Then spot-check at least 3 classes from each group: one from the 10 corrected classes (e.g., `knight`), one from the 17 filled classes (e.g., `archer`), and one from the 22 previously-correct classes (e.g., `sniper`) to confirm values match Serenes Forest.
 
   Done when: JSON parses without error and all 3 spot-checked classes match exactly.
 
