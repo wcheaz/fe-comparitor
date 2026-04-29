@@ -6,7 +6,7 @@ Rename all "ability"/"abilities" identifiers to "skill"/"skills" in the type def
   - Done when: `npx tsc --noEmit` passes with no errors referencing old names. `grep -ri "getAbilitiesByGame\|getAbilityByName\|AbilityData\|abilitiesCache" --include="*.ts" --include="*.tsx"` returns zero results.
   - Stop and hand off if: TypeScript reports errors that cannot be resolved by updating imports alone.
 
-- [ ] 1.2 Rename all 6 data files `data/*/abilities.json` to `data/*/skills.json` (awakening, binding_blade, blazing_blade, sacred_stones, three_houses, engage). No content changes — only file names.
+- [x] 1.2 Rename all 6 data files `data/*/abilities.json` to `data/*/skills.json` (awakening, binding_blade, blazing_blade, sacred_stones, three_houses, engage). No content changes — only file names.
   - Done when: `ls data/*/skills.json` lists 6 files. `ls data/*/abilities.json` returns nothing. `npm test` passes.
 
 - [ ] 1.3 Rename `classAbilities` to `classSkills` in `types/unit.ts` Class interface. Update `lib/data.ts` transformer to read `rawClass.classSkills` with fallback: `rawClass.classSkills || rawClass.classAbilities || rawClass.hiddenModifiers || []`. Update all references to `classAbilities` in `lib/stats.ts` (progression info, promotion info).
