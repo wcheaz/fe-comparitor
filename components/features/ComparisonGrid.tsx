@@ -220,7 +220,7 @@ export function ComparisonGrid({
 
         {movementData.abilities && (
           <div>
-            <h3 className="text-lg font-semibold mb-1">Abilities</h3>
+            <h3 className="text-lg font-semibold mb-1">Skills</h3>
             <p className="text-muted-foreground">{movementData.abilities}</p>
           </div>
         )}
@@ -370,14 +370,14 @@ export function ComparisonGrid({
           </div>
         </div>
 
-        {promoClass.classAbilities && promoClass.classAbilities.length > 0 && (
+        {promoClass.classSkills && promoClass.classSkills.length > 0 && (
           <div className="pt-2">
-            <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
+            <h3 className="text-lg font-semibold mb-2">Class Skills</h3>
             <div className="flex flex-wrap gap-2">
-              {promoClass.classAbilities.map((ability, index) => (
+              {promoClass.classSkills.map((skill, index) => (
                               <SkillPill
                   key={index}
-                  ability={ability}
+                  skill={skill}
                   game={promoClass.game}
                 />
               ))}
@@ -631,15 +631,15 @@ export function ComparisonGrid({
                     </td>
                   ))}
                 </tr>
-                {/* Class Abilities Row */}
+                {/* Class Skills Row */}
                 {units.some(unit => {
                   const cls = classes.find(c => (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game);
-                  return cls && cls.classAbilities && cls.classAbilities.length > 0;
+                  return cls && cls.classSkills && cls.classSkills.length > 0;
                 }) && (
                     <tr className="border-b hover:bg-muted/50">
-                      <td className="p-2 font-medium align-top">Class Abilities</td>
+                      <td className="p-2 font-medium align-top">Class Skills</td>
                       {units.map((unit) => (
-                        <td key={`abilities-${unit.id}`} className="text-center p-2 align-top">
+                        <td key={`skills-${unit.id}`} className="text-center p-2 align-top">
                           <ClassSkillsRow
                             unit={unit}
                             classes={classes}
@@ -719,7 +719,7 @@ export function ComparisonGrid({
                             {unit.startingSkills.map((skill, index) => (
                 <SkillPill
                                 key={index}
-                                ability={skill}
+                                skill={skill}
                                 game={unit.game}
                               />
                             ))}

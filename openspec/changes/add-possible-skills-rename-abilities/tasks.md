@@ -29,7 +29,7 @@ Rename the pill component and the class skills row component, including all inte
 
 Update all remaining "abilities"/"ability" display text and variable references in components that consume the renamed types but were not fully renamed themselves.
 
-- [ ] 3.1 Update `components/features/ComparisonGrid.tsx`: change all references from `AbilityPill` to `SkillPill`, `ClassAbilitiesRow` to `ClassSkillsRow`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, key names from `abilities-` to `skills-`, and the `ability={skill}` prop on SkillPill to `skill={skill}` in the Starting Skills row. Update movement modal label from `"Abilities"` to `"Skills"`.
+- [x] 3.1 Update `components/features/ComparisonGrid.tsx`: change all references from `AbilityPill` to `SkillPill`, `ClassAbilitiesRow` to `ClassSkillsRow`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, key names from `abilities-` to `skills-`, and the `ability={skill}` prop on SkillPill to `skill={skill}` in the Starting Skills row. Update movement modal label from `"Abilities"` to `"Skills"`.
   - Done when: `npx tsc --noEmit` passes. `grep -ri "classAbilities\|ClassAbilitiesRow\|AbilityPill\|\"Class Abilities\"" --include="ComparisonGrid.tsx"` returns zero results.
 
 - [ ] 3.2 Update `components/ui/ClassPill.tsx`: change references from `AbilityPill` to `SkillPill`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, and prop from `ability={ability}` to `skill={skill}`.
