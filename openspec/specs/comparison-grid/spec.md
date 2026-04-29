@@ -1,4 +1,4 @@
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Display Class as Pill in Grid
 The Comparison Grid SHALL render the Class column using the `ClassPill` component instead of text that triggers a modal.
@@ -20,3 +20,19 @@ The Comparison Grid SHALL render the Affinity column using the `AffinityPill` co
 #### Scenario: Viewing affinity in comparison grid
 - **WHEN** a user views the Affinity column for a unit in the Comparison Grid
 - **THEN** they see the `AffinityPill` component corresponding to that unit's affinity
+
+### Requirement: Display Possible Skills row in Unit Details table
+The Comparison Grid SHALL include a "Possible Skills" row in the Unit Details table, rendered after the "Starting Skills" row and before the "Supports" row. For each unit, the row SHALL display all skills obtainable from the unit's `reclassOptions` classes AND their promoted classes (via `promotesTo`) that are not already on the unit's current class's `classSkills`. Each skill SHALL render as a `SkillPill` with an originating class name label.
+
+The row SHALL only render when at least one displayed unit has non-empty `reclassOptions` producing at least one deduplicated possible skill.
+
+Units with no possible skills in a visible row SHALL display "None" as muted text.
+
+#### Scenario: Possible Skills row renders for Awakening units with reclass options
+- **WHEN** the Comparison Grid displays Awakening units with `reclassOptions`
+- **AND** at least one reclass class or its promoted class has skills not on the unit's current class
+- **THEN** the "Possible Skills" row SHALL render with SkillPill components annotated with class names
+
+#### Scenario: Possible Skills row hidden when no units have reclass options
+- **WHEN** the Comparison Grid displays only GBA units without `reclassOptions`
+- **THEN** the "Possible Skills" row SHALL NOT render
