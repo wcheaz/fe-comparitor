@@ -1,0 +1,762 @@
+[
+  {
+    "Icon": NaN,
+    "Skill": "Dual Strike+",
+    "Effect": "Adds 10% to the Dual Strike rate",
+    "Activation": "\u2013",
+    "Class": "Lord",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Charm",
+    "Effect": "Hit rate and Avoid +5 to all allies within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Lord",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Aether",
+    "Effect": "Attack twice consecutively, with the first strike having a Sol effect and the second strike having a Luna effect",
+    "Activation": "Skill/2%",
+    "Class": "Great Lord",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rightful King",
+    "Effect": "Adds 10% to Skill activation rates",
+    "Activation": "\u2013",
+    "Class": "Great Lord",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Veteran",
+    "Effect": "Experience gain x 1.5 when paired up",
+    "Activation": "\u2013",
+    "Class": "Tactician",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Solidarity",
+    "Effect": "Critical and Critical Avoid +10 to adjacent allies",
+    "Activation": "\u2013",
+    "Class": "Tactician",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Ignis",
+    "Effect": "Adds (Magic)/2 to Strength when dealing physical damage and (Strength)/2 to Magic when dealing magical damage",
+    "Activation": "Skill%",
+    "Class": "Grandmaster",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Spectrum",
+    "Effect": "All stats *1 +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Grandmaster",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Discipline",
+    "Effect": "Weapon experience x2",
+    "Activation": "\u2013",
+    "Class": "Cavalier",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Outdoor Fighter",
+    "Effect": "Hit rate and Avoid +10 when fighting outdoors",
+    "Activation": "\u2013",
+    "Class": "Cavalier",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Defender",
+    "Effect": "All stats *1 +1 when paired up",
+    "Activation": "\u2013",
+    "Class": "Paladin",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Aegis",
+    "Effect": "Halves damage from bows, tomes and dragonstones *2",
+    "Activation": "Skill%",
+    "Class": "Paladin",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Luna",
+    "Effect": "Ignores half the enemy\u2019s Defence or Resistance",
+    "Activation": "Skill%",
+    "Class": "Great Knight",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Dual Guard+",
+    "Effect": "Adds 10% to the Dual Guard rate",
+    "Activation": "\u2013",
+    "Class": "Great Knight",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Defence +2",
+    "Effect": "Defence +2",
+    "Activation": "\u2013",
+    "Class": "Knight",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Indoor Fighter",
+    "Effect": "Hit rate and Avoid +10 when fighting indoors",
+    "Activation": "\u2013",
+    "Class": "Knight",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Defence",
+    "Effect": "Defence +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "General",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Pavise",
+    "Effect": "Halves damage from swords, lances, axes (includes magical variants) and beaststones *2",
+    "Activation": "Skill%",
+    "Class": "General",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Avoid +10",
+    "Effect": "Avoid +10",
+    "Activation": "\u2013",
+    "Class": "Myrmidon",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Vantage",
+    "Effect": "When HP under half, always attack first during the enemy\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Myrmidon",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Astra",
+    "Effect": "Deals 5 consecutive hits with half damage",
+    "Activation": "Skill/2%",
+    "Class": "Swordmaster",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Swordfaire",
+    "Effect": "Strength +5 when equipped with a sword (Magic +5 when equipped with the Levin Sword)",
+    "Activation": "\u2013",
+    "Class": "Swordmaster",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Armsthrift",
+    "Effect": "Attack does not reduce weapon usage",
+    "Activation": "Luck*2%",
+    "Class": "Mercenary",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Patience",
+    "Effect": "Hit rate and Avoid +10 during the enemy\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Mercenary",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Sol",
+    "Effect": "Recover HP equal to half the damage dealt to the enemy",
+    "Activation": "Skill%",
+    "Class": "Hero",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Axebreaker",
+    "Effect": "Hit rate and Avoid +50 when the enemy is equipped with an axe",
+    "Activation": "\u2013",
+    "Class": "Hero",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "HP +5",
+    "Effect": "Maximum HP +5",
+    "Activation": "\u2013",
+    "Class": "Fighter",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Zeal",
+    "Effect": "Critical +5",
+    "Activation": "\u2013",
+    "Class": "Fighter",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Strength",
+    "Effect": "Strength +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Warrior",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Counter",
+    "Effect": "Returns damage when attacked by an adjacent enemy (except damage that KOs the user) *2",
+    "Activation": "\u2013",
+    "Class": "Warrior",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Despoil",
+    "Effect": "Obtain Bullion (S) from the enemy if the user defeats the enemy",
+    "Activation": "Luck%",
+    "Class": "Barbarian",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Gamble",
+    "Effect": "Hit rate -5, Critical +10",
+    "Activation": "\u2013",
+    "Class": "Barbarian",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Wrath",
+    "Effect": "Critical +20 when under half HP",
+    "Activation": "\u2013",
+    "Class": "Berserker",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Axefaire",
+    "Effect": "Strength +5 when equipped with an axe (Magic +5 when equipped with the Bolt Axe)",
+    "Activation": "\u2013",
+    "Class": "Berserker",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Skill +2",
+    "Effect": "Skill +2",
+    "Activation": "\u2013",
+    "Class": "Archer",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Prescience",
+    "Effect": "Hit rate and Avoid +15 during the user\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Archer",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Hit Rate +20",
+    "Effect": "Hit rate +20",
+    "Activation": "\u2013",
+    "Class": "Sniper",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Bowfaire",
+    "Effect": "Strength +5 when equipped with a bow",
+    "Activation": "\u2013",
+    "Class": "Sniper",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Skill",
+    "Effect": "Skill +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Bow Knight",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Bowbreaker",
+    "Effect": "Hit rate and Avoid +50 when the enemy is equipped with a bow",
+    "Activation": "\u2013",
+    "Class": "Bow Knight",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Locktouch",
+    "Effect": "Open doors and chests without the need of keys",
+    "Activation": "\u2013",
+    "Class": "Thief",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Movement +1",
+    "Effect": "Movement +1",
+    "Activation": "\u2013",
+    "Class": "Thief",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Lethality",
+    "Effect": "Instantly defeats the enemy",
+    "Activation": "Skill/4%",
+    "Class": "Assassin",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Pass",
+    "Effect": "User can pass through tiles occupied by enemy units",
+    "Activation": "\u2013",
+    "Class": "Assassin",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Lucky Seven",
+    "Effect": "Hit rate and Avoid +20 up to the 7th Turn",
+    "Activation": "\u2013",
+    "Class": "Trickster",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Acrobat",
+    "Effect": "All traversable terrain costs 1 movement point to cross",
+    "Activation": "\u2013",
+    "Class": "Trickster",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Speed +2",
+    "Effect": "Speed +2",
+    "Activation": "\u2013",
+    "Class": "Pegasus Knight",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Relief",
+    "Effect": "Recover 20% HP at the start of the user\u2019s Turn if no units are within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Pegasus Knight",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Speed",
+    "Effect": "Speed +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Falcon Knight",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Lancefaire",
+    "Effect": "Strength +5 when equipped with a lance (Magic +5 when equipped with the Shockstick)",
+    "Activation": "\u2013",
+    "Class": "Falcon Knight",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Movement",
+    "Effect": "Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Dark Flier",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Galeforce",
+    "Effect": "Allows the user another full action after they defeat an enemy during the user\u2019s Turn (only once per Turn)",
+    "Activation": "\u2013",
+    "Class": "Dark Flier",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Strength +2",
+    "Effect": "Strength +2",
+    "Activation": "\u2013",
+    "Class": "Wyvern Rider",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Tantivy",
+    "Effect": "Hit rate and Avoid +10 if no allies within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Wyvern Rider",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Quick Burn",
+    "Effect": "Hit rate and Avoid +15 at the start of the chapter. Effect decreases with each passing Turn",
+    "Activation": "\u2013",
+    "Class": "Wyvern Lord",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Swordbreaker",
+    "Effect": "Hit rate and Avoid +50 when the enemy is equipped with a sword",
+    "Activation": "\u2013",
+    "Class": "Wyvern Lord",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Deliverer",
+    "Effect": "Movement +2 when paired up",
+    "Activation": "\u2013",
+    "Class": "Griffon Rider",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Lancebreaker",
+    "Effect": "Hit rate and Avoid +50 when the enemy is equipped with a lance",
+    "Activation": "\u2013",
+    "Class": "Griffon Rider",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Magic +2",
+    "Effect": "Magic +2",
+    "Activation": "\u2013",
+    "Class": "Mage",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Focus",
+    "Effect": "Critical +10 when no allies within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Mage",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Magic",
+    "Effect": "Magic +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Sage",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Tomefaire",
+    "Effect": "Magic +5 when equipped with a Tome",
+    "Activation": "\u2013",
+    "Class": "Sage",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Hex",
+    "Effect": "Avoid -15 to all adjacent enemies",
+    "Activation": "\u2013",
+    "Class": "Dark Mage",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Anathema",
+    "Effect": "Avoid and Critical Avoid -10 to all enemies within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Dark Mage",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Vengeance",
+    "Effect": "Deals (user\u2019s Max HP \u2013 Current HP)/2 extra damage",
+    "Activation": "Skill*2%",
+    "Class": "Sorcerer",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Tomebreaker",
+    "Effect": "Hit rate and Avoid +50 when the enemy is equipped with a tome",
+    "Activation": "\u2013",
+    "Class": "Sorcerer",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Slow Burn",
+    "Effect": "Hit rate and Avoid increases by 1 each Turn, up to the 15th Turn",
+    "Activation": "\u2013",
+    "Class": "Dark Knight",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Lifetaker",
+    "Effect": "User recovers 50% HP after they defeat an enemy during the user\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Dark Knight",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Miracle",
+    "Effect": "Character survives with 1 HP after receiving an attack that would otherwise KO them (must have over 1 HP)",
+    "Activation": "Luck%",
+    "Class": "Priest, Cleric",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Healtouch",
+    "Effect": "Restores an extra 5 HP when healing allies",
+    "Activation": "\u2013",
+    "Class": "Priest, Cleric",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Luck",
+    "Effect": "Luck +8 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "War Monk, War Cleric",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Renewal",
+    "Effect": "Recover 30% HP at the start of the user\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "War Monk, War Cleric",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Resistance +2",
+    "Effect": "Resistance +2",
+    "Activation": "\u2013",
+    "Class": "Troubadour",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Demoiselle",
+    "Effect": "Avoid and Critical Avoid +10 to all male allies within a 3 tile radius",
+    "Activation": "\u2013",
+    "Class": "Troubadour",
+    "Level": "10"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Resistance",
+    "Effect": "Resistance +4 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Valkyrie",
+    "Level": "5"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Dual Support+",
+    "Effect": "Increases the support bonus effect",
+    "Activation": "\u2013",
+    "Class": "Valkyrie",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Aptitude",
+    "Effect": "Adds 20% to all growth rates during Level Ups",
+    "Activation": "\u2013",
+    "Class": "Villager",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Underdog",
+    "Effect": "Hit rate and Avoid +15 when user\u2019s Level is lower than the enemy (promoted units count as Level +20)",
+    "Activation": "\u2013",
+    "Class": "Villager",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Luck +4",
+    "Effect": "Luck +4",
+    "Activation": "\u2013",
+    "Class": "Dancer",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Special Dance",
+    "Effect": "Strength, Magic, Defence and Resistance +2 for one Turn for the unit who receives the user\u2019s Dance",
+    "Activation": "\u2013",
+    "Class": "Dancer",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Even Rhythm",
+    "Effect": "Hit rate and Avoid +10 during even numbered Turns",
+    "Activation": "\u2013",
+    "Class": "Taguel",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Beastbane",
+    "Effect": "Deals effective damage to (beast *3) units when user is a Taguel",
+    "Activation": "\u2013",
+    "Class": "Taguel",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Odd Rhythm",
+    "Effect": "Hit rate and Avoid +10 during odd numbered Turns",
+    "Activation": "\u2013",
+    "Class": "Manakete",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Wyrmsbane",
+    "Effect": "Deals effective damage to (dragon) units when user is a Manakete",
+    "Activation": "\u2013",
+    "Class": "Manakete",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Shadowgift",
+    "Effect": "Enables usage of Dark Tomes for Tome wielders  (Aversa, Morgan as Aversa\u2019s daughter, DLC Micaiah and DLC Katarina only)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Conquest",
+    "Effect": "Negates user\u2019s (beast *3) and (armour) type weaknesses (Walhart, Morgan as Walhart\u2019s son, Zephiel and DLC Ephraim only)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Resistance +10",
+    "Effect": "Resistance +10",
+    "Activation": "\u2013",
+    "Class": "Dread Fighter *4",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Aggressor",
+    "Effect": "Attack +10 during the user\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Dread Fighter *4",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Rally Heart",
+    "Effect": "All stats *1 +2 and Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used",
+    "Activation": "Command",
+    "Class": "Bride *4",
+    "Level": "1"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Bond",
+    "Effect": "Restores 10 HP to all allies within a 3 tile radius at the beginning of the user\u2019s Turn",
+    "Activation": "\u2013",
+    "Class": "Bride *4",
+    "Level": "15"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "All Stats +2",
+    "Effect": "Strength, Magic, Skill, Speed, Luck, Defence and Resistance +2 (Learned by using the All Stats +2 item *4)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Paragon",
+    "Effect": "Experience gain x2  (Learned by using the Paragon item *4)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Iote\u2019s Shield",
+    "Effect": "Negates user\u2019s (flying) type weakness  (Learned by using the Iote\u2019s Shield item *4)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Limit Breaker",
+    "Effect": "Raises the character\u2019s maximum stats *1 by 10  (Learned by using the Limit Breaker item *4)",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  },
+  {
+    "Icon": NaN,
+    "Skill": "Outrealm Skill",
+    "Effect": "What a DLC Skill looks like without DLC installed *4",
+    "Activation": "\u2013",
+    "Class": "\u2013",
+    "Level": "\u2013"
+  }
+]

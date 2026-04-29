@@ -1,6 +1,6 @@
 ## 1. Scrape and parse skills data from Serenes Forest
 
-- [ ] 1.1 Create `dev/scrape_awakening_skills.py` that fetches the Obtainable Skills table from `https://serenesforest.net/awakening/miscellaneous/skills/` using `pandas.read_html`, extracts rows with Icon/Skill/Effect/Activation/Class/Level columns, and saves to `dev/awakening_skills_raw.json`.
+- [x] 1.1 Create `dev/scrape_awakening_skills.py` that fetches the Obtainable Skills table from `https://serenesforest.net/awakening/miscellaneous/skills/` using `pandas.read_html`, extracts rows with Icon/Skill/Effect/Activation/Class/Level columns, and saves to `dev/awakening_skills_raw.json`.
   - **Done when**: Script runs without error, `dev/awakening_skills_raw.json` exists and contains 50+ skill entries with Skill, Effect, Activation, Class, Level fields.
   - **Verify by**: `python3 dev/scrape_awakening_skills.py && python3 -c "import json; d=json.load(open('dev/awakening_skills_raw.json')); print(f'{len(d)} entries')"` — expect 50+ entries.
   - **Stop and hand off if**: Serenes Forest returns a different table structure or blocks the request.
