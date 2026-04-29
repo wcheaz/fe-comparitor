@@ -65,12 +65,30 @@ Final sweep to confirm no "ability" references remain in source or test code.
 
 ## 6. Add Possible Skills Row
 
-Add the new "Possible Skills" row to the ComparisonGrid Unit Details table, rendered after "Starting Skills" and before "Supports".
+Add the "Possible Skills" row to the ComparisonGrid Unit Details table, rendered after "Starting Skills" and before "Supports". This includes traversing the full reclass + promotion chain and annotating skills with their originating class.
 
-- [x] 6.1 Add a "Possible Skills" row to `components/features/ComparisonGrid.tsx`. Place it after the "Starting Skills" row (after line ~733). The row SHALL: (a) only render when `units.some(u => u.reclassOptions && u.reclassOptions.length > 0)` and at least one unit has possible skills; (b) for each unit, iterate `reclassOptions`, look up each class in `classes`, collect `classSkills`, deduplicate against the unit's current class skills using a `Set`; (c) render each possible skill as a `SkillPill`; (d) render "None" (muted) for units in the grid that have reclass options but no novel skills. Row label: "Possible Skills".
-  - Done when: Opening the comparator with Awakening units shows a "Possible Skills" row containing SkillPills for skills from reclass classes, with no duplicates from the current class. GBA units without reclass options do not show the row. `npx tsc --noEmit` and `npm test` pass.
-  - Stop and hand off if: The reclass options data is missing or incorrectly structured for Awakening units.
+- [x] 6.1 Create `components/features/PossibleSkillsRow.tsx` — a new component that accepts `unit` (Unit), `classes` (Class[]), and optional `className` props. The component SHALL:
+  (a) Build a `Map<string, string[]>` mapping each skill name to its originating class name(s);
+  (b) Iterate `unit.reclassOptions`, for each class ID look up the `Class`, read its `classSkills`, add each skill to the map keyed by this class's `.name`;
+  (c) For each reclass class, also iterate its `promotesTo` array, look up each promoted class, read its `classSkills`, add each skill to the map keyed by the promoted class's `.name`;
+  (d) Build a `Set<string>` from the unit's current class's `classSkills` (found by matching `unit.class` against `classes`);
+  (e) Remove any map entry whose skill key is in the current class set;
+  (f) If the map is empty, return null;
+  (g) Otherwise render each skill as a `SkillPill` with a small label showing the originating class name(s). When a skill maps to multiple classes, show all class names.
+  - Done when: `npx tsc --noEmit` passes. Component renders correctly when given Awakening unit data with reclass options.
+  - Stop and hand off if: The `promotesTo` chain contains cycles or references non-existent class IDs.
 
-- [x] 6.2 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm: (a) "Possible Skills" row appears after "Starting Skills"; (b) skills shown match the union of all reclass class skills minus the current class skills; (c) no duplicate pills; (d) clicking a SkillPill opens the tooltip modal; (e) GBA game units do not show the row.
+- [ ] 6.2 Integrate `PossibleSkillsRow` into `components/features/ComparisonGrid.tsx`. Add the row after the "Starting Skills" row (before "Supports"). The row SHALL only render when `units.some(u => u.reclassOptions && u.reclassOptions.length > 0)`. Each unit cell passes `unit` and `classes` to `PossibleSkillsRow`. Units with no possible skills after deduplication render "None" (muted text).
+  - Done when: Opening the comparator with Awakening units shows a "Possible Skills" row. GBA units without reclass options do not show the row. `npx tsc --noEmit` and `npm test` pass.
+  - Stop and hand off if: Integration causes layout or rendering issues with the existing table structure.
+
+- [ ] 6.3 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm:
+  (a) "Possible Skills" row appears after "Starting Skills";
+  (b) skills shown include both direct reclass skills AND skills from promoted classes of those reclasses;
+  (c) each skill pill shows the originating class name(s) as a label;
+  (d) no duplicate pills — skills shared across multiple classes appear once with all class names listed;
+  (e) no skills from the unit's current class appear;
+  (f) clicking a SkillPill opens the tooltip modal;
+  (g) GBA game units do not show the row.
   - Done when: Visual inspection confirms all behaviors match the spec scenarios in `specs/possible-skills-display/spec.md`.
   - Stop and hand off if: Browser rendering errors or missing data prevent verification.
