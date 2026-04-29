@@ -20,7 +20,7 @@
             "emperor",
             "great_lord"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Crest"
         ],
         "weapons": [],
@@ -70,7 +70,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Crest",
             "Imperial Lineage"
         ],
@@ -123,7 +123,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Crest"
         ],
         "weapons": [
@@ -172,7 +172,7 @@
             "mage",
             "thief"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -212,7 +212,7 @@
             "swordmaster",
             "assassin"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords"
         ],
@@ -262,7 +262,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit",
             "Astra"
         ],
@@ -315,7 +315,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Lethality"
         ],
         "weapons": [
@@ -360,7 +360,7 @@
             "cavalier",
             "armor_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances"
         ],
@@ -402,7 +402,7 @@
             "paladin",
             "fortress_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -453,7 +453,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Aegis"
         ],
         "weapons": [
@@ -506,7 +506,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Pavise"
         ],
         "weapons": [
@@ -550,7 +550,7 @@
             "warrior",
             "grappler"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axes"
         ],
@@ -600,7 +600,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Wrath"
         ],
         "weapons": [
@@ -653,7 +653,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Fierce Iron Fist"
         ],
         "weapons": [
@@ -697,7 +697,7 @@
             "bishop",
             "holy_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Faith",
             "Reason",
@@ -749,7 +749,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Nosferatu"
         ],
         "weapons": [
@@ -802,7 +802,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Faith",
             "Lances"
@@ -845,7 +845,7 @@
             "warlock",
             "dark_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Reason"
         ],
@@ -895,7 +895,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Fiendish Blow"
         ],
         "weapons": [
@@ -947,7 +947,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Reason",
             "Dark Magic"
@@ -990,7 +990,7 @@
             "assassin",
             "trickster"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Locktouch"
         ],
         "weapons": [
@@ -1042,7 +1042,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Steal"
         ],
         "weapons": [
@@ -1086,7 +1086,7 @@
         "promotesTo": [
             "falcoknight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances",
             "Faith"
@@ -1137,7 +1137,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Darting Blow"
         ],
         "weapons": [
@@ -1182,7 +1182,7 @@
             "fortress_knight",
             "general"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances"
         ],
@@ -1232,7 +1232,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Wary Fighter"
         ],
         "weapons": [
@@ -1277,7 +1277,7 @@
             "sniper",
             "bow_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bows"
         ],
@@ -1327,7 +1327,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+20 Hit",
             "Point-Blank Volley"
         ],
@@ -1380,7 +1380,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bows"
         ],

@@ -59,7 +59,7 @@ Update all test files to use the renamed identifiers.
 
 Final sweep to confirm no "ability" references remain in source or test code.
 
-- [ ] 5.1 Run `grep -ri "abilit" --include="*.ts" --include="*.tsx" --include="*.css" --include="*.json" .` (excluding `node_modules`, `openspec/`, and `.next/`) and verify zero hits in application code. The only allowed exceptions are: the fallback read `rawClass.classAbilities` in `lib/data.ts`. Run `npx tsc --noEmit` and `npm test` and confirm both pass cleanly.
+- [x] 5.1 Run `grep -ri "abilit" --include="*.ts" --include="*.tsx" --include="*.css" --include="*.json" .` (excluding `node_modules`, `openspec/`, and `.next/`) and verify zero hits in application code. The only allowed exceptions are: the fallback read `rawClass.classAbilities` in `lib/data.ts`. Run `npx tsc --noEmit` and `npm test` and confirm both pass cleanly.
   - Done when: `npx tsc --noEmit` passes, `npm test` passes, and grep confirms no stale "ability" references.
   - Stop and hand off if: grep finds unexpected "ability" references that cannot be safely renamed without domain knowledge.
 

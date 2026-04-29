@@ -30,11 +30,15 @@ jest.mock('@/data/three_houses/units.json', () => [
 
 jest.mock('@/data/engage/units.json', () => [], { virtual: true });
 jest.mock('@/data/blazing_blade/units.json', () => [], { virtual: true });
+jest.mock('@/data/sacred_stones/units.json', () => [], { virtual: true });
+jest.mock('@/data/awakening/units.json', () => [], { virtual: true });
 
 jest.mock('@/data/binding_blade/classes.json', () => [], { virtual: true });
 jest.mock('@/data/three_houses/classes.json', () => [], { virtual: true });
 jest.mock('@/data/engage/classes.json', () => [], { virtual: true });
 jest.mock('@/data/blazing_blade/classes.json', () => [], { virtual: true });
+jest.mock('@/data/sacred_stones/classes.json', () => [], { virtual: true });
+jest.mock('@/data/awakening/classes.json', () => [], { virtual: true });
 
 describe('Data Service', () => {
   describe('getAllUnits', () => {

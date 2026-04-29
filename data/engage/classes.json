@@ -19,7 +19,7 @@
         "promotesTo": [
             "divine_dragon"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Dragon",
             "Divine Weapon"
         ],
@@ -70,7 +70,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Dragon",
             "Divine Weapon",
             "Emblem"
@@ -114,7 +114,7 @@
             "swordmaster",
             "hero"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -162,7 +162,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Swordmaster",
             "+30 Crit",
             "Lunge"
@@ -214,7 +214,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords",
             "Axes"
@@ -257,7 +257,7 @@
             "paladin",
             "great_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -305,7 +305,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -356,7 +356,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances",
             "Axes"
@@ -399,7 +399,7 @@
             "warrior",
             "hero"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -447,7 +447,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axes",
             "Bows"
@@ -490,7 +490,7 @@
             "sniper",
             "bow_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -538,7 +538,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit",
             "Ceiling Shot"
         ],
@@ -591,7 +591,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bows"
         ],
@@ -633,7 +633,7 @@
             "sage",
             "mystery_knight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Tomes"
         ],
@@ -683,7 +683,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Cantrips"
         ],
         "weapons": [
@@ -736,7 +736,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Tomes"
         ],
@@ -777,7 +777,7 @@
         "promotesTo": [
             "falcoknight"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords",
             "Lances"
@@ -828,7 +828,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Resonance"
         ],
         "weapons": [
@@ -872,7 +872,7 @@
         "promotesTo": [
             "general"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -919,7 +919,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Pavise"
         ],
         "weapons": [
@@ -963,7 +963,7 @@
         "promotesTo": [
             "high_priest"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Staves"
         ],
@@ -1013,7 +1013,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Nosferatu",
             "Warp"
         ],
@@ -1057,7 +1057,7 @@
         "promotesTo": [
             "rogue"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Locktouch",
             "Steal"
         ],
@@ -1108,7 +1108,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Locktouch",
             "Steal",
             "+20 Avoid"

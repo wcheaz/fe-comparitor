@@ -17,7 +17,7 @@
         "promotesTo": [
             "knight_lord"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Sword"
         ],
@@ -54,7 +54,7 @@
         "promotesTo": [
             "great_lord"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axe"
         ],
@@ -91,7 +91,7 @@
         "promotesTo": [
             "blade_lord"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Sword"
         ],
@@ -128,7 +128,7 @@
         "promotesTo": [
             "paladin_m"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -168,7 +168,7 @@
         "promotesTo": [
             "paladin_f"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -208,7 +208,7 @@
         "promotesTo": [
             "general_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances"
         ],
@@ -245,7 +245,7 @@
         "promotesTo": [
             "general_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lances"
         ],
@@ -282,7 +282,7 @@
         "promotesTo": [
             "assassin"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Lockpick",
             "Steal"
         ],
@@ -322,7 +322,7 @@
         "promotesTo": [
             "assassin"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Lockpick",
             "Steal"
         ],
@@ -362,7 +362,7 @@
         "promotesTo": [
             "hero_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords"
         ],
@@ -399,7 +399,7 @@
         "promotesTo": [
             "hero_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords"
         ],
@@ -436,7 +436,7 @@
         "promotesTo": [
             "swordmaster_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords"
         ],
@@ -473,7 +473,7 @@
         "promotesTo": [
             "swordmaster_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Swords"
         ],
@@ -510,7 +510,7 @@
         "promotesTo": [
             "sniper_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bows"
         ],
@@ -547,7 +547,7 @@
         "promotesTo": [
             "sniper_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bows"
         ],
@@ -584,7 +584,7 @@
         "promotesTo": [
             "nomadic_trooper_m"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -623,7 +623,7 @@
         "promotesTo": [
             "nomadic_trooper_f"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -662,7 +662,7 @@
         "promotesTo": [
             "warrior"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axes"
         ],
@@ -699,7 +699,7 @@
         "promotesTo": [
             "assassin"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Mountain Walk"
         ],
         "weapons": [
@@ -738,7 +738,7 @@
         "promotesTo": [
             "berserker"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Water Walk"
         ],
         "weapons": [
@@ -777,7 +777,7 @@
         "promotesTo": [
             "berserker"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Water Walk"
         ],
         "weapons": [
@@ -816,7 +816,7 @@
         "promotesTo": [
             "falcon_knight"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -855,7 +855,7 @@
         "promotesTo": [
             "wyvern_lord_m"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -894,7 +894,7 @@
         "promotesTo": [
             "wyvern_lord_f"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -933,7 +933,7 @@
         "promotesTo": [
             "sage_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Anima"
         ],
@@ -970,7 +970,7 @@
         "promotesTo": [
             "sage_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Anima"
         ],
@@ -1007,7 +1007,7 @@
         "promotesTo": [
             "bishop_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Light"
         ],
@@ -1044,7 +1044,7 @@
         "promotesTo": [
             "bishop_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Staves"
         ],
@@ -1081,7 +1081,7 @@
         "promotesTo": [
             "druid_m"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dark"
         ],
@@ -1118,7 +1118,7 @@
         "promotesTo": [
             "druid_f"
         ],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dark"
         ],
@@ -1155,7 +1155,7 @@
         "promotesTo": [
             "valkyrie"
         ],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1192,7 +1192,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit"
         ],
         "weapons": [
@@ -1229,7 +1229,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Dance"
         ],
         "weapons": [],
@@ -1264,7 +1264,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Play"
         ],
         "weapons": [],
@@ -1308,7 +1308,7 @@
             "mov": 2
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1355,7 +1355,7 @@
             "mov": 0
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axe",
             "Sword"
@@ -1400,7 +1400,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit"
         ],
         "weapons": [
@@ -1446,7 +1446,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1494,7 +1494,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1542,7 +1542,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lance",
             "Axe"
@@ -1587,7 +1587,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Lance",
             "Axe",
@@ -1633,7 +1633,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit"
         ],
         "weapons": [
@@ -1679,7 +1679,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Bow"
         ],
@@ -1723,7 +1723,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1770,7 +1770,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1817,7 +1817,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Axe",
             "Bow"
@@ -1862,7 +1862,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit",
             "Water Walk"
         ],
@@ -1909,7 +1909,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -1956,7 +1956,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -2003,7 +2003,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -2050,7 +2050,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Anima",
             "Staff"
@@ -2095,7 +2095,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Anima",
             "Staff"
@@ -2140,7 +2140,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Light",
             "Staff"
@@ -2185,7 +2185,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Light",
             "Staff"
@@ -2230,7 +2230,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dark",
             "Staff"
@@ -2275,7 +2275,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dark",
             "Anima",
@@ -2321,7 +2321,7 @@
             "mov": 1
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Canto"
         ],
         "weapons": [
@@ -2359,7 +2359,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Anima",
             "Light",
@@ -2397,7 +2397,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dark",
             "Staff"
@@ -2433,7 +2433,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -2466,7 +2466,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "+15 Crit"
         ],
         "weapons": [
@@ -2503,7 +2503,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [
             "Dragonstone"
         ],
@@ -2538,7 +2538,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -2571,7 +2571,7 @@
         },
         "promotionBonus": {},
         "promotesTo": [],
-        "classAbilities": [],
+        "classSkills": [],
         "weapons": [],
         "maxStats": {
             "hp": 60,
@@ -2613,7 +2613,7 @@
             "mov": 0
         },
         "promotesTo": [],
-        "classAbilities": [
+        "classSkills": [
             "Silencer",
             "Lockpick",
             "Steal"
