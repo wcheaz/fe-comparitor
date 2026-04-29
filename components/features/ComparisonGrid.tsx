@@ -218,10 +218,10 @@ export function ComparisonGrid({
           <p className="text-muted-foreground">{movementData.description}</p>
         </div>
 
-        {movementData.abilities && (
+        {movementData.skills && (
           <div>
             <h3 className="text-lg font-semibold mb-1">Skills</h3>
-            <p className="text-muted-foreground">{movementData.abilities}</p>
+            <p className="text-muted-foreground">{movementData.skills}</p>
           </div>
         )}
 

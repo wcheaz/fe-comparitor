@@ -103,11 +103,11 @@ const MovementTypePill: React.FC<MovementTypePillProps> = ({
                             {movementData!.description}
                         </p>
 
-                        {movementData!.abilities && (
+                        {movementData!.skills && (
                             <div>
                                 <h4 className="pill-modal-label">Skills</h4>
                                 <p className="pill-modal-text">
-                                    {movementData!.abilities}
+                                    {movementData!.skills}
                                 </p>
                             </div>
                         )}

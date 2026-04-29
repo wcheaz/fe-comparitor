@@ -1,7 +1,7 @@
 export interface MovementData {
     name: string;
     description: string;
-    abilities?: string;
+    skills?: string;
     weaknesses?: string;
     gameSpecificDetails?: Record<string, string>;
 }
@@ -23,7 +23,7 @@ export const movementTypes: Record<string, MovementData> = {
     'Cavalry': {
         name: 'Cavalry',
         description: 'Mounted units on horseback.',
-        abilities: 'High movement range on flat terrain.',
+        skills: 'High movement range on flat terrain.',
         weaknesses: 'Weak to horse-slaying/cavalry weapons.',
         gameSpecificDetails: {
             'The Binding Blade': '(Binding Blade) Canto: May use remaining movement after using a staff, item, trading, rescuing, dropping, talking, or visiting. Cannot move after attacking.',
@@ -33,7 +33,7 @@ export const movementTypes: Record<string, MovementData> = {
     'Flying': {
         name: 'Flying',
         description: 'Airborne units mounted on pegasi or other flying mounts.',
-        abilities: 'Ignores terrain movement costs. Can fly over mountains, water, and gaps.',
+        skills: 'Ignores terrain movement costs. Can fly over mountains, water, and gaps.',
         weaknesses: 'Weak to bows and anti-air weapons.',
         gameSpecificDetails: {
             'The Binding Blade': '(Binding Blade) Canto: May use remaining movement after using a staff, item, trading, rescuing, dropping, talking, or visiting. Cannot move after attacking.',
@@ -44,7 +44,7 @@ export const movementTypes: Record<string, MovementData> = {
     'Wyvern': {
         name: 'Wyvern',
         description: 'Airborne units mounted on wyverns.',
-        abilities: 'Ignores terrain movement costs. Can fly over mountains, water, and gaps.',
+        skills: 'Ignores terrain movement costs. Can fly over mountains, water, and gaps.',
         weaknesses: 'Weak to bows, dragon-slaying weapons, and sometimes wind magic.',
         gameSpecificDetails: {
             'The Binding Blade': '(Binding Blade) Canto: May use remaining movement after using a staff, item, trading, rescuing, dropping, talking, or visiting. Cannot move after attacking.',
