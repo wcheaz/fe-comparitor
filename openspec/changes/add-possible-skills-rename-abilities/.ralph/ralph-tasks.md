@@ -1,0 +1,1 @@
+/home/ncheaz/git/fe-comparator/openspec/changes/add-possible-skills-rename-abilities/tasks.md

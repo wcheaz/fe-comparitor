@@ -1,0 +1,19 @@
+{
+  "active": false,
+  "iteration": 22,
+  "minIterations": 1,
+  "maxIterations": 50,
+  "completionPromise": "COMPLETE",
+  "taskPromise": "READY_FOR_NEXT_TASK",
+  "tasksMode": true,
+  "tasksFile": "/home/ncheaz/git/fe-comparator/openspec/changes/add-possible-skills-rename-abilities/tasks.md",
+  "promptFile": null,
+  "promptTemplate": null,
+  "noCommit": false,
+  "model": "",
+  "startedAt": "2026-04-29T20:10:11.103Z",
+  "resumedAt": "2026-04-29T20:52:54.717Z",
+  "completedAt": "2026-04-29T20:55:05.043Z",
+  "stoppedAt": null,
+  "exitReason": "completion_promise"
+}

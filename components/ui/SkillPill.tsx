@@ -109,7 +109,7 @@ const SkillPill: React.FC<SkillPillProps> = ({
                                 {skillData!.name}
                             </h2>
                             <h4 className="pill-modal-subtitle">
-                                {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Skill"}
+                                {skillData!.procChance ? "Active" : "Passive"}
                             </h4>
                         </div>
                         <p className="pill-modal-text">
