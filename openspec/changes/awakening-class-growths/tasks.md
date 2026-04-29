@@ -17,7 +17,7 @@
 
 ## 2. Populate All-Zero Class Growths
 
-- [ ] 2.1 Replace the all-zero `growths` objects with correct Serenes Forest class growth rates for the following 17 classes in `data/awakening/classes.json`. Each class `growths` object MUST contain all eight stat keys (`hp`, `str`, `mag`, `skl`, `spd`, `lck`, `def`, `res`).
+- [x] 2.1 Replace the all-zero `growths` objects with correct Serenes Forest class growth rates for the following 17 classes in `data/awakening/classes.json`. Each class `growths` object MUST contain all eight stat keys (`hp`, `str`, `mag`, `skl`, `spd`, `lck`, `def`, `res`).
 
   **Unpromoted classes:**
   - `archer` → `{ hp: 45, str: 15, mag: 0, skl: 30, spd: 15, lck: 0, def: 10, res: 5 }`
