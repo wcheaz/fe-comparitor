@@ -731,6 +731,57 @@ export function ComparisonGrid({
                     ))}
                   </tr>
                 )}
+                {units.some(u => u.reclassOptions && u.reclassOptions.length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Possible Skills</td>
+                    {units.map((unit) => {
+                      if (!unit.reclassOptions || unit.reclassOptions.length === 0) {
+                        return (
+                          <td key={`possible-skills-${unit.id}`} className="text-center p-2 align-top">
+                            <span className="text-muted-foreground">-</span>
+                          </td>
+                        );
+                      }
+
+                      const currentClass = classes.find(c =>
+                        (c.id === unit.class.toLowerCase().replace(/\s+/g, '_') || c.name === unit.class) && c.game === unit.game
+                      );
+                      const currentSkills = new Set(currentClass?.classSkills || []);
+
+                      const possibleSkills: string[] = [];
+                      unit.reclassOptions.forEach(opt => {
+                        const reclassCls = classes.find(c =>
+                          (c.id === opt.toLowerCase().replace(/\s+/g, '_') || c.name === opt) && c.game === unit.game
+                        );
+                        if (reclassCls?.classSkills) {
+                          reclassCls.classSkills.forEach(s => {
+                            if (!currentSkills.has(s) && !possibleSkills.includes(s)) {
+                              possibleSkills.push(s);
+                            }
+                          });
+                        }
+                      });
+
+                      return (
+                        <td key={`possible-skills-${unit.id}`} className="text-center p-2 align-top">
+                          {possibleSkills.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 justify-center">
+                              {possibleSkills.map((skill, index) => (
+                                <SkillPill
+                                  key={index}
+                                  skill={skill}
+                                  game={unit.game}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <span className="text-muted-foreground">None</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )}
                 {units.some(u => u.supports && u.supports.length > 0) && (
                   <tr className="border-b hover:bg-muted/50">
                     <td className="p-2 font-medium align-top">Supports</td>
