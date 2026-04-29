@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { getAbilityByName, type AbilityData } from "@/lib/abilities";
@@ -46,9 +46,22 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
     ...props
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const abilityData = getAbilityByName(ability);
+    const [abilityData, setAbilityData] = useState<AbilityData | undefined>(undefined);
+    const [loading, setLoading] = useState(true);
 
-    // Determine variant based on ability content
+    useEffect(() => {
+        if (!game) {
+            setLoading(false);
+            setAbilityData(undefined);
+            return;
+        }
+        setLoading(true);
+        getAbilityByName(ability, game).then((data) => {
+            setAbilityData(data);
+            setLoading(false);
+        });
+    }, [ability, game]);
+
     let finalVariant = variant;
     if (!variant) {
         if (ability.startsWith('+')) {
@@ -106,11 +119,6 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
                             <div className="text-sm">
                                 <span className="pill-modal-label">Proc Chance: </span>
                                 <span className="pill-modal-text">{abilityData!.procChance}</span>
-                            </div>
-                        )}
-                        {game && abilityData!.gameSpecificDetails?.[game] && (
-                            <div className="text-sm mt-2 p-2 bg-fe-gold-50 rounded border border-fe-gold-200">
-                                <span className="pill-modal-text">{abilityData!.gameSpecificDetails[game]}</span>
                             </div>
                         )}
                     </div>

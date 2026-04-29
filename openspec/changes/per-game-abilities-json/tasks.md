@@ -24,7 +24,7 @@ Replace the current synchronous `abilityDefinitions` export and `getAbilityByNam
 
 Convert `AbilityPill` from synchronous `getAbilityByName(ability)` to async lookup via `useState` + `useEffect` calling the new `getAbilityByName(ability, game)`. While loading, render the ability name as a non-clickable span. Once loaded with data, render as clickable with info icon and modal. If data is `undefined`, remain non-clickable. Remove the `gameSpecificDetails` rendering from the modal — the modal now shows only `description`, `procCondition`, and `procChance` from the game-scoped data.
 
-- [ ] 3.1 Update `components/ui/AbilityPill.tsx` to fetch ability data asynchronously using the new loader
+- [x] 3.1 Update `components/ui/AbilityPill.tsx` to fetch ability data asynchronously using the new loader
   - Done when: AbilityPill calls `getAbilityByName(ability, game)` in a `useEffect`, renders non-clickable while loading, renders clickable with info icon and modal when data is found, renders non-clickable when data is `undefined`, modal shows only `description`/`procCondition`/`procChance` (no `gameSpecificDetails` block), TypeScript compiles cleanly
   - Verify by: `npx tsc --noEmit` passes, `npm run build` succeeds, and no import of `gameSpecificDetails` exists in the file
   - Stop and hand off if: the async loading causes visible rendering issues (flicker, layout shift) that cannot be resolved within this task
