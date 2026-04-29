@@ -33,7 +33,7 @@ Convert `AbilityPill` from synchronous `getAbilityByName(ability)` to async look
 
 Run the full build to confirm no regressions across the data layer, loader, and UI components. Verify that the old `abilityDefinitions` export and `gameSpecificDetails` field are fully removed from the codebase.
 
-- [ ] 4.1 Run build and lint, confirm no references to removed exports remain
+- [x] 4.1 Run build and lint, confirm no references to removed exports remain
   - Done when: `npm run build` succeeds with no errors, `npm run lint` passes, `grep -r "gameSpecificDetails" --include="*.ts" --include="*.tsx"` returns zero results, `grep -r "abilityDefinitions" --include="*.ts" --include="*.tsx"` returns zero results
   - Verify by: running `npm run build && npm run lint && grep -r "gameSpecificDetails\|abilityDefinitions" --include="*.ts" --include="*.tsx"` and confirming clean output
   - Stop and hand off if: build errors reveal consumers of the old API not identified in the proposal
