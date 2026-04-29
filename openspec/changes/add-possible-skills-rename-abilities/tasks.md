@@ -92,3 +92,20 @@ Add the "Possible Skills" row to the ComparisonGrid Unit Details table, rendered
   (g) GBA game units do not show the row.
   - Done when: Visual inspection confirms all behaviors match the spec scenarios in `specs/possible-skills-display/spec.md`.
   - Stop and hand off if: Browser rendering errors or missing data prevent verification.
+
+## 7. Tier/Level-Based Pill Coloring
+
+Add color differentiation to SkillPills in the Possible Skills row based on the originating class's tier (unpromoted/promoted) and the skill's level requirement (parsed from the skill name).
+
+- [x] 7.1 Extend `SkillPill` CVA variants in `components/ui/SkillPill.tsx` and `app/globals.css` with new tier/level variants: `unpromoted-lv1`, `unpromoted-lv5`, `unpromoted-lv10`, `promoted-lv1`, `promoted-lv5`, `promoted-lv10`. Each variant SHALL have a visually distinct background/text color defined in `globals.css`. The implementer chooses the exact colors — the requirement is that each combination is distinguishable at a glance. Existing variants (`default`, `stat`, `weapon`) SHALL remain unchanged.
+  - Done when: `npx tsc --noEmit` passes. All 6 new CSS classes exist in `globals.css` with distinct colors. Existing pill styles are unaffected.
+  - Stop and hand off if: The CVA variant system does not support the number of new variants needed.
+
+- [ ] 7.2 Update `PossibleSkillsRow` to pass tier/level-based variant props to each `SkillPill`. For each skill in the map:
+  (a) Parse the level from the skill name using regex `/\(Lv\.\s*(\d+)\)/` — default to 1 if no match;
+  (b) Determine the originating class's tier from its `type` field (`"unpromoted"` | `"promoted"` | `"trainee"`);
+  (c) Map to the appropriate CVA variant: `${type}-lv${level}` (bucket to nearest defined level: 1, 5, or 10);
+  (d) If the skill appears in multiple classes with different tiers, use the tier from the first class encountered;
+  (e) Pass the resolved variant as the `variant` prop to `SkillPill`.
+  - Done when: `npx tsc --noEmit` passes. Skills from unpromoted classes render in one set of colors, skills from promoted classes render in another, and level-10 skills are visually distinct from level-1 skills.
+  - Stop and hand off if: Skill names use a level format other than `(Lv. X)` for some games.

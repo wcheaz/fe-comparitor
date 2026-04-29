@@ -15,6 +15,12 @@ const skillPillVariants = cva(
                 default: "pill-variant-skill-default",
                 stat: "pill-variant-skill-stat",
                 weapon: "pill-variant-skill-weapon",
+                "unpromoted-lv1": "pill-variant-skill-unpromoted-lv1",
+                "unpromoted-lv5": "pill-variant-skill-unpromoted-lv5",
+                "unpromoted-lv10": "pill-variant-skill-unpromoted-lv10",
+                "promoted-lv1": "pill-variant-skill-promoted-lv1",
+                "promoted-lv5": "pill-variant-skill-promoted-lv5",
+                "promoted-lv10": "pill-variant-skill-promoted-lv10",
             },
             size: {
                 default: "h-6 py-1 px-2",
