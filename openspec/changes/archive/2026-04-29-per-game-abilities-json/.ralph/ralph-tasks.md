@@ -1,0 +1,1 @@
+/home/ncheaz/git/fe-comparator/openspec/changes/per-game-abilities-json/tasks.md
