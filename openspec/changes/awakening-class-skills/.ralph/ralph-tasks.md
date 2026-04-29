@@ -1,0 +1,1 @@
+/home/ncheaz/git/fe-comparator/openspec/changes/awakening-class-skills/tasks.md

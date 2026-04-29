@@ -44,9 +44,9 @@ export const abilityDefinitions: Record<string, AbilityData> = {
     },
     'Locktouch': {
         name: 'Locktouch',
-        description: 'Can open doors and chests without needing keys or lockpicks.',
+        description: 'Open doors and chests without the need of keys',
         gameSpecificDetails: {
-            Awakening: 'Can open doors and chests without needing keys or lockpicks.',
+            Awakening: 'Open doors and chests without the need of keys',
         }
     },
     'Steal': {
@@ -89,523 +89,544 @@ export const abilityDefinitions: Record<string, AbilityData> = {
     },
     'Dual Strike+': {
         name: 'Dual Strike+',
-        description: '+10% to Dual Strike rate',
+        description: 'Adds 10% to the Dual Strike rate',
         gameSpecificDetails: {
-            Awakening: '+10% to Dual Strike rate',
+            Awakening: 'Adds 10% to the Dual Strike rate',
         }
     },
     'Charm': {
         name: 'Charm',
-        description: '+5 Hit rate and +5 Avoid to all allies within a 3 tile radius',
+        description: 'Hit rate and Avoid +5 to all allies within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: '+5 Hit rate and +5 Avoid to all allies within a 3 tile radius',
+            Awakening: 'Hit rate and Avoid +5 to all allies within a 3 tile radius',
         }
     },
     'Aether': {
         name: 'Aether',
-        description: 'Two consecutive strikes; first has Sol effect, second a Luna effect',
+        description: 'Attack twice consecutively, with the first strike having a Sol effect and the second strike having a Luna effect',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill / 2%',
         gameSpecificDetails: {
-            Awakening: 'Two consecutive strikes; first has Sol effect, second a Luna effect',
+            Awakening: 'Attack twice consecutively, with the first strike having a Sol effect and the second strike having a Luna effect',
         }
     },
     'Rightful King': {
         name: 'Rightful King',
-        description: '+10% to skill activation rates',
+        description: 'Adds 10% to Skill activation rates',
         gameSpecificDetails: {
-            Awakening: '+10% to skill activation rates',
+            Awakening: 'Adds 10% to Skill activation rates',
         }
     },
     'Veteran': {
         name: 'Veteran',
-        description: '×1.5 experience gain while paired up',
+        description: 'Experience gain x 1.5 when paired up',
         gameSpecificDetails: {
-            Awakening: '×1.5 experience gain while paired up',
+            Awakening: 'Experience gain x 1.5 when paired up',
         }
     },
     'Solidarity': {
         name: 'Solidarity',
-        description: '+10 Critical and +10 Dodge to all adjacent allies',
+        description: 'Critical and Critical Avoid +10 to adjacent allies',
         gameSpecificDetails: {
-            Awakening: '+10 Critical and +10 Dodge to all adjacent allies',
+            Awakening: 'Critical and Critical Avoid +10 to adjacent allies',
         }
     },
     'Ignis': {
         name: 'Ignis',
-        description: 'Physical attacks: Adds half of the Magic stat to StrengthMagic attacks: Adds half of the Strength stat to Magic',
+        description: 'Adds (Magic)/2 to Strength when dealing physical damage and (Strength)/2 to Magic when dealing magical damage',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill%',
         gameSpecificDetails: {
-            Awakening: 'Physical attacks: Adds half of the Magic stat to StrengthMagic attacks: Adds half of the Strength stat to Magic',
+            Awakening: 'Adds (Magic)/2 to Strength when dealing physical damage and (Strength)/2 to Magic when dealing magical damage',
         }
     },
     'Rally Spectrum': {
         name: 'Rally Spectrum',
-        description: '+4 all stats to all allies within a 3 square radius on command',
+        description: 'All stats +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 all stats to all allies within a 3 square radius on command',
+            Awakening: 'All stats +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Discipline': {
         name: 'Discipline',
-        description: '×2 weapon experience',
+        description: 'Weapon experience x2',
         gameSpecificDetails: {
-            Awakening: '×2 weapon experience',
+            Awakening: 'Weapon experience x2',
         }
     },
     'Outdoor Fighter': {
         name: 'Outdoor Fighter',
-        description: '+10 Hit rate and +10 Avoid while outdoors',
+        description: 'Hit rate and Avoid +10 when fighting outdoors',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid while outdoors',
+            Awakening: 'Hit rate and Avoid +10 when fighting outdoors',
         }
     },
     'Defender': {
         name: 'Defender',
-        description: '+1 all stats while paired up',
+        description: 'All stats +1 when paired up',
         gameSpecificDetails: {
-            Awakening: '+1 all stats while paired up',
+            Awakening: 'All stats +1 when paired up',
         }
     },
     'Aegis': {
         name: 'Aegis',
-        description: 'Halves damage done by bows, tomes, and dragonstones',
+        description: 'Halves damage from bows, tomes and dragonstones',
+        procCondition: 'Upon being attacked.',
+        procChance: 'Skill%',
         gameSpecificDetails: {
-            Awakening: 'Halves damage done by bows, tomes, and dragonstones',
+            Awakening: 'Halves damage from bows, tomes and dragonstones (does not apply for Dual Strikes)',
         }
     },
     'Luna': {
         name: 'Luna',
-        description: 'Halves enemy\'s Defense or Resistance',
+        description: 'Ignores half the enemy\'s Defence or Resistance',
         procCondition: 'Upon attacking.',
         procChance: 'Skill%',
         gameSpecificDetails: {
-            Awakening: 'Halves enemy\'s Defense or Resistance',
+            Awakening: 'Ignores half the enemy\'s Defence or Resistance',
         }
     },
     'Dual Guard+': {
         name: 'Dual Guard+',
-        description: '+10% to Dual Guard rate',
+        description: 'Adds 10% to the Dual Guard rate',
         gameSpecificDetails: {
-            Awakening: '+10% to Dual Guard rate',
+            Awakening: 'Adds 10% to the Dual Guard rate',
         }
     },
     'Defense +2': {
         name: 'Defense +2',
-        description: '+2 Defense',
+        description: 'Defence +2',
         gameSpecificDetails: {
-            Awakening: '+2 Defense',
+            Awakening: 'Defence +2',
         }
     },
     'Indoor Fighter': {
         name: 'Indoor Fighter',
-        description: '+10 Hit rate and +10 Avoid while indoors',
+        description: 'Hit rate and Avoid +10 when fighting indoors',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid while indoors',
+            Awakening: 'Hit rate and Avoid +10 when fighting indoors',
         }
     },
     'Rally Defense': {
         name: 'Rally Defense',
-        description: '+4 Defense to all allies within a 3 square radius on command',
+        description: 'Defence +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Defense to all allies within a 3 square radius on command',
+            Awakening: 'Defence +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Pavise': {
         name: 'Pavise',
-        description: 'Halves damage done by swords, lances, axes, beaststones, and blights',
+        description: 'Halves damage from swords, lances, axes (includes magical variants) and beaststones',
+        procCondition: 'Upon being attacked.',
+        procChance: 'Skill%',
         gameSpecificDetails: {
-            Awakening: 'Halves damage done by swords, lances, axes, beaststones, and blights',
+            Awakening: 'Halves damage from swords, lances, axes (includes magical variants) and beaststones (does not apply for Dual Strikes)',
         }
     },
     'Avoid +10': {
         name: 'Avoid +10',
-        description: '+10 Avoid',
+        description: 'Avoid +10',
         gameSpecificDetails: {
-            Awakening: '+10 Avoid',
+            Awakening: 'Avoid +10',
         }
     },
     'Vantage': {
         name: 'Vantage',
-        description: 'Attack first during enemy phase when HP is half or below',
+        description: 'When HP under half, always attack first during the enemy\'s Turn',
         gameSpecificDetails: {
-            Awakening: 'Attack first during enemy phase when HP is half or below',
+            Awakening: 'When HP under half, always attack first during the enemy\'s Turn',
         }
     },
     'Astra': {
         name: 'Astra',
-        description: '5 consecutive strikes at half damage',
+        description: 'Deals 5 consecutive hits with half damage',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill / 2%',
         gameSpecificDetails: {
-            Awakening: '5 consecutive strikes at half damage',
+            Awakening: 'Deals 5 consecutive hits with half damage',
         }
     },
     'Swordfaire': {
         name: 'Swordfaire',
-        description: '+5 Strength with a sword equipped(+5 Magic with a Levin Sword)',
+        description: 'Strength +5 when equipped with a sword (Magic +5 when equipped with the Levin Sword)',
         gameSpecificDetails: {
-            Awakening: '+5 Strength with a sword equipped(+5 Magic with a Levin Sword)',
+            Awakening: 'Strength +5 when equipped with a sword (Magic +5 when equipped with the Levin Sword)',
         }
     },
     'Armsthrift': {
         name: 'Armsthrift',
-        description: 'Doesn\'t reduce durability',
+        description: 'Attack does not reduce weapon durability',
+        procCondition: 'Upon attacking.',
+        procChance: 'Luck × 2%',
         gameSpecificDetails: {
-            Awakening: 'Doesn\'t reduce durability',
+            Awakening: 'Attack does not reduce weapon durability',
         }
     },
     'Patience': {
         name: 'Patience',
-        description: '+10 Hit rate and +10 Avoid during enemy phase',
+        description: 'Hit rate and Avoid +10 during the enemy\'s Turn',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid during enemy phase',
+            Awakening: 'Hit rate and Avoid +10 during the enemy\'s Turn',
         }
     },
     'Sol': {
         name: 'Sol',
-        description: 'Heal HP equal to half damage',
+        description: 'Recover HP equal to half the damage dealt to the enemy',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill%',
         gameSpecificDetails: {
-            Awakening: 'Heal HP equal to half damage',
+            Awakening: 'Recover HP equal to half the damage dealt to the enemy',
         }
     },
     'Axebreaker': {
         name: 'Axebreaker',
-        description: '+50 Hit rate and +50 Avoid against enemies equipping an axe',
+        description: 'Hit rate and Avoid +50 when the enemy is equipped with an axe',
         gameSpecificDetails: {
-            Awakening: '+50 Hit rate and +50 Avoid against enemies equipping an axe',
+            Awakening: 'Hit rate and Avoid +50 when the enemy is equipped with an axe',
         }
     },
     'HP +5': {
         name: 'HP +5',
-        description: '+5 maximum HP',
+        description: 'Maximum HP +5',
         gameSpecificDetails: {
-            Awakening: '+5 maximum HP',
+            Awakening: 'Maximum HP +5',
         }
     },
     'Zeal': {
         name: 'Zeal',
-        description: '+5 Critical',
+        description: 'Critical +5',
         gameSpecificDetails: {
-            Awakening: '+5 Critical',
+            Awakening: 'Critical +5',
         }
     },
     'Rally Strength': {
         name: 'Rally Strength',
-        description: '+4 Strength to all allies within a 3 square radius on command',
+        description: 'Strength +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Strength to all allies within a 3 square radius on command',
+            Awakening: 'Strength +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Counter': {
         name: 'Counter',
-        description: 'Deals non-lethal damage against holder back against opponent',
+        description: 'Returns damage when attacked by an adjacent enemy (except damage that KOs the user)',
         gameSpecificDetails: {
-            Awakening: 'Deals non-lethal damage against holder back against opponent',
+            Awakening: 'Returns damage when attacked by an adjacent enemy (except damage that KOs the user) (does not apply for Dual Strikes)',
         }
     },
     'Despoil': {
         name: 'Despoil',
-        description: 'Obtain a Bullion (S) upon killing an enemy',
+        description: 'Obtain Bullion (S) from the enemy if the user defeats the enemy',
+        procCondition: 'Upon defeating an enemy.',
+        procChance: 'Luck%',
         gameSpecificDetails: {
-            Awakening: 'Obtain a Bullion (S) upon killing an enemy',
+            Awakening: 'Obtain Bullion (S) from the enemy if the user defeats the enemy',
         }
     },
     'Gamble': {
         name: 'Gamble',
-        description: '-5 Hit rate, +10 Critical',
+        description: 'Hit rate -5, Critical +10',
         gameSpecificDetails: {
-            Awakening: '-5 Hit rate, +10 Critical',
+            Awakening: 'Hit rate -5, Critical +10',
         }
     },
     'Wrath': {
         name: 'Wrath',
-        description: '+20 Critical when HP is at half or below',
+        description: 'Critical +20 when under half HP',
         gameSpecificDetails: {
-            Awakening: '+20 Critical when HP is at half or below',
+            Awakening: 'Critical +20 when under half HP',
         }
     },
     'Axefaire': {
         name: 'Axefaire',
-        description: '+5 Strength with an axe equipped(+5 Magic with a Bolt Axe)',
+        description: 'Strength +5 when equipped with an axe (Magic +5 when equipped with the Bolt Axe)',
         gameSpecificDetails: {
-            Awakening: '+5 Strength with an axe equipped(+5 Magic with a Bolt Axe)',
+            Awakening: 'Strength +5 when equipped with an axe (Magic +5 when equipped with the Bolt Axe)',
         }
     },
     'Skill +2': {
         name: 'Skill +2',
-        description: '+2 Skill',
+        description: 'Skill +2',
         gameSpecificDetails: {
-            Awakening: '+2 Skill',
+            Awakening: 'Skill +2',
         }
     },
     'Prescience': {
         name: 'Prescience',
-        description: '+15 Hit rate and +15 Avoid during player phase',
+        description: 'Hit rate and Avoid +15 during the user\'s Turn',
         gameSpecificDetails: {
-            Awakening: '+15 Hit rate and +15 Avoid during player phase',
+            Awakening: 'Hit rate and Avoid +15 during the user\'s Turn',
         }
     },
     'Hit Rate +20': {
         name: 'Hit Rate +20',
-        description: '+20 Hit rate',
+        description: 'Hit rate +20',
         gameSpecificDetails: {
-            Awakening: '+20 Hit rate',
+            Awakening: 'Hit rate +20',
         }
     },
     'Bowfaire': {
         name: 'Bowfaire',
-        description: '+5 Strength with a bow equipped',
+        description: 'Strength +5 when equipped with a bow',
         gameSpecificDetails: {
-            Awakening: '+5 Strength with a bow equipped',
+            Awakening: 'Strength +5 when equipped with a bow',
         }
     },
     'Rally Skill': {
         name: 'Rally Skill',
-        description: '+4 Skill to all allies within a 3 square radius on command',
+        description: 'Skill +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Skill to all allies within a 3 square radius on command',
+            Awakening: 'Skill +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Bowbreaker': {
         name: 'Bowbreaker',
-        description: '+50 Hit rate and +50 Avoid against enemies equipping a bow',
+        description: 'Hit rate and Avoid +50 when the enemy is equipped with a bow',
         gameSpecificDetails: {
-            Awakening: '+50 Hit rate and +50 Avoid against enemies equipping a bow',
+            Awakening: 'Hit rate and Avoid +50 when the enemy is equipped with a bow',
         }
     },
-
     'Movement +1': {
         name: 'Movement +1',
-        description: '+1 Movement',
+        description: 'Movement +1',
         gameSpecificDetails: {
-            Awakening: '+1 Movement',
+            Awakening: 'Movement +1',
         }
     },
     'Lethality': {
         name: 'Lethality',
         description: 'Instantly defeats the enemy',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill / 4%',
         gameSpecificDetails: {
             Awakening: 'Instantly defeats the enemy',
         }
     },
     'Pass': {
         name: 'Pass',
-        description: 'Pass through enemy-occupied tiles',
+        description: 'User can pass through tiles occupied by enemy units',
         gameSpecificDetails: {
-            Awakening: 'Pass through enemy-occupied tiles',
+            Awakening: 'User can pass through tiles occupied by enemy units',
         }
     },
     'Lucky Seven': {
         name: 'Lucky Seven',
-        description: '+20 Hit rate and +20 Avoid during first seven turns',
+        description: 'Hit rate and Avoid +20 up to the 7th Turn',
         gameSpecificDetails: {
-            Awakening: '+20 Hit rate and +20 Avoid during first seven turns',
+            Awakening: 'Hit rate and Avoid +20 up to the 7th Turn',
         }
     },
     'Acrobat': {
         name: 'Acrobat',
-        description: 'Traverse all traversable terrain as if it were a plain',
+        description: 'All traversable terrain costs 1 movement point to cross',
         gameSpecificDetails: {
-            Awakening: 'Traverse all traversable terrain as if it were a plain',
+            Awakening: 'All traversable terrain costs 1 movement point to cross',
         }
     },
     'Speed +2': {
         name: 'Speed +2',
-        description: '+2 Speed',
+        description: 'Speed +2',
         gameSpecificDetails: {
-            Awakening: '+2 Speed',
+            Awakening: 'Speed +2',
         }
     },
     'Relief': {
         name: 'Relief',
-        description: 'Heal 20% HP at the start of a turn if no units are within three spaces',
+        description: 'Recover 20% HP at the start of the user\'s Turn if no units are within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: 'Heal 20% HP at the start of a turn if no units are within three spaces',
+            Awakening: 'Recover 20% HP at the start of the user\'s Turn if no units are within a 3 tile radius',
         }
     },
     'Rally Speed': {
         name: 'Rally Speed',
-        description: '+4 Speed to all allies within a 3 square radius on command',
+        description: 'Speed +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Speed to all allies within a 3 square radius on command',
+            Awakening: 'Speed +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Lancefaire': {
         name: 'Lancefaire',
-        description: '+5 Strength with a lance equipped(+5 Magic with a Shockstick)',
+        description: 'Strength +5 when equipped with a lance (Magic +5 when equipped with the Shockstick)',
         gameSpecificDetails: {
-            Awakening: '+5 Strength with a lance equipped(+5 Magic with a Shockstick)',
+            Awakening: 'Strength +5 when equipped with a lance (Magic +5 when equipped with the Shockstick)',
         }
     },
     'Rally Movement': {
         name: 'Rally Movement',
-        description: '+1 Movement to all allies within a 3 square radius on command',
+        description: 'Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+1 Movement to all allies within a 3 square radius on command',
+            Awakening: 'Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Galeforce': {
         name: 'Galeforce',
-        description: 'Grants another full action to a unit upon defeating an enemy once per turn',
+        description: 'Allows the user another full action after they defeat an enemy during the user\'s Turn (only once per Turn)',
         gameSpecificDetails: {
-            Awakening: 'Grants another full action to a unit upon defeating an enemy once per turn',
+            Awakening: 'Allows the user another full action after they defeat an enemy during the user\'s Turn (only once per Turn)',
         }
     },
     'Strength +2': {
         name: 'Strength +2',
-        description: '+2 Strength',
+        description: 'Strength +2',
         gameSpecificDetails: {
-            Awakening: '+2 Strength',
+            Awakening: 'Strength +2',
         }
     },
     'Tantivy': {
         name: 'Tantivy',
-        description: '+10 Hit rate and +10 Avoid with no allies within a 3 square radius',
+        description: 'Hit rate and Avoid +10 if no allies within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid with no allies within a 3 square radius',
+            Awakening: 'Hit rate and Avoid +10 if no allies within a 3 tile radius',
         }
     },
     'Quick Burn': {
         name: 'Quick Burn',
-        description: '+15 Hit rate and +15 Avoid at start of chapter-1 to both stats for each successive turn',
+        description: 'Hit rate and Avoid +15 at the start of the chapter. Effect decreases with each passing Turn',
         gameSpecificDetails: {
-            Awakening: '+15 Hit rate and +15 Avoid at start of chapter-1 to both stats for each successive turn',
+            Awakening: 'Hit rate and Avoid +15 at the start of the chapter. Effect decreases with each passing Turn',
         }
     },
     'Swordbreaker': {
         name: 'Swordbreaker',
-        description: '+50 Hit rate and +50 Avoid against enemies equipping a sword',
+        description: 'Hit rate and Avoid +50 when the enemy is equipped with a sword',
         gameSpecificDetails: {
-            Awakening: '+50 Hit rate and +50 Avoid against enemies equipping a sword',
+            Awakening: 'Hit rate and Avoid +50 when the enemy is equipped with a sword',
         }
     },
     'Deliverer': {
         name: 'Deliverer',
-        description: '+2 Movement when paired up',
+        description: 'Movement +2 when paired up',
         gameSpecificDetails: {
-            Awakening: '+2 Movement when paired up',
+            Awakening: 'Movement +2 when paired up',
         }
     },
     'Lancebreaker': {
         name: 'Lancebreaker',
-        description: '+50 Hit rate and +50 Avoid against enemies equipping a lance',
+        description: 'Hit rate and Avoid +50 when the enemy is equipped with a lance',
         gameSpecificDetails: {
-            Awakening: '+50 Hit rate and +50 Avoid against enemies equipping a lance',
+            Awakening: 'Hit rate and Avoid +50 when the enemy is equipped with a lance',
         }
     },
     'Magic +2': {
         name: 'Magic +2',
-        description: '+2 Magic',
+        description: 'Magic +2',
         gameSpecificDetails: {
-            Awakening: '+2 Magic',
+            Awakening: 'Magic +2',
         }
     },
     'Focus': {
         name: 'Focus',
-        description: '+10 Critical with no allies within a 3 square radius',
+        description: 'Critical +10 when no allies within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: '+10 Critical with no allies within a 3 square radius',
+            Awakening: 'Critical +10 when no allies within a 3 tile radius',
         }
     },
     'Rally Magic': {
         name: 'Rally Magic',
-        description: '+4 Magic to all allies within a 3 square radius on command',
+        description: 'Magic +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Magic to all allies within a 3 square radius on command',
+            Awakening: 'Magic +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Tomefaire': {
         name: 'Tomefaire',
-        description: '+5 Magic with a tome equipped',
+        description: 'Magic +5 when equipped with a Tome',
         gameSpecificDetails: {
-            Awakening: '+5 Magic with a tome equipped',
+            Awakening: 'Magic +5 when equipped with a Tome',
         }
     },
     'Hex': {
         name: 'Hex',
-        description: '-15 Avoid to adjacent enemies',
+        description: 'Avoid -15 to all adjacent enemies',
         gameSpecificDetails: {
-            Awakening: '-15 Avoid to adjacent enemies',
+            Awakening: 'Avoid -15 to all adjacent enemies',
         }
     },
     'Anathema': {
         name: 'Anathema',
-        description: '-10 Avoid and -10 Dodge to all enemies within a 3 square radius',
+        description: 'Avoid and Critical Avoid -10 to all enemies within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: '-10 Avoid and -10 Dodge to all enemies within a 3 square radius',
+            Awakening: 'Avoid and Critical Avoid -10 to all enemies within a 3 tile radius',
         }
     },
     'Vengeance': {
         name: 'Vengeance',
-        description: 'Increases damage output by half of damage taken',
+        description: 'Deals (user\'s Max HP – Current HP)/2 extra damage',
+        procCondition: 'Upon attacking.',
+        procChance: 'Skill × 2%',
         gameSpecificDetails: {
-            Awakening: 'Increases damage output by half of damage taken',
+            Awakening: 'Deals (user\'s Max HP – Current HP)/2 extra damage',
         }
     },
     'Tomebreaker': {
         name: 'Tomebreaker',
-        description: '+50 Hit rate and +50 Avoid against enemies equipping a tome',
+        description: 'Hit rate and Avoid +50 when the enemy is equipped with a tome',
         gameSpecificDetails: {
-            Awakening: '+50 Hit rate and +50 Avoid against enemies equipping a tome',
+            Awakening: 'Hit rate and Avoid +50 when the enemy is equipped with a tome',
         }
     },
     'Slow Burn': {
         name: 'Slow Burn',
-        description: '+1 Hit rate and +1 Avoid per turnEffects cap at 15 turns',
+        description: 'Hit rate and Avoid increases by 1 each Turn, up to the 15th Turn',
         gameSpecificDetails: {
-            Awakening: '+1 Hit rate and +1 Avoid per turnEffects cap at 15 turns',
+            Awakening: 'Hit rate and Avoid increases by 1 each Turn, up to the 15th Turn',
         }
     },
     'Lifetaker': {
         name: 'Lifetaker',
-        description: 'Heals 50% HP upon defeating an enemy during player phase',
+        description: 'User recovers 50% HP after they defeat an enemy during the user\'s Turn',
         gameSpecificDetails: {
-            Awakening: 'Heals 50% HP upon defeating an enemy during player phase',
+            Awakening: 'User recovers 50% HP after they defeat an enemy during the user\'s Turn',
         }
     },
     'Miracle': {
         name: 'Miracle',
-        description: 'Survives an otherwise-lethal attack with 1 HP if user didn\'t already have only 1 HP',
+        description: 'Character survives with 1 HP after receiving an attack that would otherwise KO them (must have over 1 HP)',
+        procCondition: 'Upon receiving lethal damage.',
+        procChance: 'Luck%',
         gameSpecificDetails: {
-            Awakening: 'Survives an otherwise-lethal attack with 1 HP if user didn\'t already have only 1 HP',
+            Awakening: 'Character survives with 1 HP after receiving an attack that would otherwise KO them (must have over 1 HP)',
         }
     },
     'Healtouch': {
         name: 'Healtouch',
-        description: '+5 HP healed with a staff',
+        description: 'Restores an extra 5 HP when healing allies',
         gameSpecificDetails: {
-            Awakening: '+5 HP healed with a staff',
+            Awakening: 'Restores an extra 5 HP when healing allies',
         }
     },
     'Rally Luck': {
         name: 'Rally Luck',
-        description: '+8 Luck to all allies within a 3 square radius on command',
+        description: 'Luck +8 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+8 Luck to all allies within a 3 square radius on command',
+            Awakening: 'Luck +8 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Renewal': {
         name: 'Renewal',
-        description: 'Heals 30% HP at the start of a turn',
+        description: 'Recover 30% HP at the start of the user\'s Turn',
         gameSpecificDetails: {
-            Awakening: 'Heals 30% HP at the start of a turn',
+            Awakening: 'Recover 30% HP at the start of the user\'s Turn',
         }
     },
     'Resistance +2': {
         name: 'Resistance +2',
-        description: '+2 Resistance',
+        description: 'Resistance +2',
         gameSpecificDetails: {
-            Awakening: '+2 Resistance',
+            Awakening: 'Resistance +2',
         }
     },
     'Demoiselle': {
         name: 'Demoiselle',
-        description: '+10 Avoid and +10 Dodge to all male allies within 3 spaces',
+        description: 'Avoid and Critical Avoid +10 to all male allies within a 3 tile radius',
         gameSpecificDetails: {
-            Awakening: '+10 Avoid and +10 Dodge to all male allies within 3 spaces',
+            Awakening: 'Avoid and Critical Avoid +10 to all male allies within a 3 tile radius',
         }
     },
     'Rally Resistance': {
         name: 'Rally Resistance',
-        description: '+4 Resistance to all allies within a 3 square radius on command',
+        description: 'Resistance +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+4 Resistance to all allies within a 3 square radius on command',
+            Awakening: 'Resistance +4 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Dual Support+': {
@@ -617,181 +638,184 @@ export const abilityDefinitions: Record<string, AbilityData> = {
     },
     'Aptitude': {
         name: 'Aptitude',
-        description: '+20 to all Growth rates',
+        description: 'Adds 20% to all growth rates during Level Ups',
         gameSpecificDetails: {
-            Awakening: '+20 to all Growth rates',
+            Awakening: 'Adds 20% to all growth rates during Level Ups',
         }
     },
     'Underdog': {
         name: 'Underdog',
-        description: '+15 Hit rate and +15 Avoid when opponent\'s level is higher(Advanced classes: Add 20 to level)',
+        description: 'Hit rate and Avoid +15 when user\'s Level is lower than the enemy (promoted units count as Level +20)',
         gameSpecificDetails: {
-            Awakening: '+15 Hit rate and +15 Avoid when opponent\'s level is higher(Advanced classes: Add 20 to level)',
+            Awakening: 'Hit rate and Avoid +15 when user\'s Level is lower than the enemy (promoted units count as Level +20)',
         }
     },
     'Luck +4': {
         name: 'Luck +4',
-        description: '+4 Luck',
+        description: 'Luck +4',
         gameSpecificDetails: {
-            Awakening: '+4 Luck',
+            Awakening: 'Luck +4',
         }
     },
     'Special Dance': {
         name: 'Special Dance',
-        description: '+2 to each of Strength, Magic, Defense, and Resistance to unit receiving the dance effect',
+        description: 'Strength, Magic, Defence and Resistance +2 for one Turn for the unit who receives the user\'s Dance',
         gameSpecificDetails: {
-            Awakening: '+2 to each of Strength, Magic, Defense, and Resistance to unit receiving the dance effect',
+            Awakening: 'Strength, Magic, Defence and Resistance +2 for one Turn for the unit who receives the user\'s Dance',
         }
     },
     'Even Rhythm': {
         name: 'Even Rhythm',
-        description: '+10 Hit rate and +10 Avoid on even-numbered turns',
+        description: 'Hit rate and Avoid +10 during even numbered Turns',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid on even-numbered turns',
+            Awakening: 'Hit rate and Avoid +10 during even numbered Turns',
         }
     },
     'Beastbane': {
         name: 'Beastbane',
-        description: 'Deals bonus damage to beast units while in the Taguel class',
+        description: 'Deals effective damage to beast units when user is a Taguel',
         gameSpecificDetails: {
-            Awakening: 'Deals bonus damage to beast units while in the Taguel class',
+            Awakening: 'Deals effective damage to beast units when user is a Taguel',
         }
     },
     'Odd Rhythm': {
         name: 'Odd Rhythm',
-        description: '+10 Hit rate and +10 Avoid on odd-numbered turns',
+        description: 'Hit rate and Avoid +10 during odd numbered Turns',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate and +10 Avoid on odd-numbered turns',
+            Awakening: 'Hit rate and Avoid +10 during odd numbered Turns',
         }
     },
     'Wyrmsbane': {
         name: 'Wyrmsbane',
-        description: 'Deals bonus damage to dragon units while in the Manakete class',
+        description: 'Deals effective damage to dragon units when user is a Manakete',
         gameSpecificDetails: {
-            Awakening: 'Deals bonus damage to dragon units while in the Manakete class',
+            Awakening: 'Deals effective damage to dragon units when user is a Manakete',
         }
     },
     'Shadowgift': {
         name: 'Shadowgift',
-        description: 'Allows wielding of dark tomes in any tome-wielding class',
+        description: 'Enables usage of Dark Tomes for Tome wielders',
         gameSpecificDetails: {
-            Awakening: 'Allows wielding of dark tomes in any tome-wielding class',
+            Awakening: 'Enables usage of Dark Tomes for Tome wielders',
         }
     },
     'Conquest': {
         name: 'Conquest',
-        description: 'Negates bonus damage weaknesses when equipped by a beast or armor unit',
+        description: 'Negates user\'s beast and armour type weaknesses',
         gameSpecificDetails: {
-            Awakening: 'Negates bonus damage weaknesses when equipped by a beast or armor unit',
+            Awakening: 'Negates user\'s beast and armour type weaknesses',
         }
     },
     'Resistance +10': {
         name: 'Resistance +10',
-        description: '+10 Resistance',
+        description: 'Resistance +10',
         gameSpecificDetails: {
-            Awakening: '+10 Resistance',
+            Awakening: 'Resistance +10',
         }
     },
     'Aggressor': {
         name: 'Aggressor',
-        description: '+10 Attack during player phase',
+        description: 'Attack +10 during the user\'s Turn',
         gameSpecificDetails: {
-            Awakening: '+10 Attack during player phase',
+            Awakening: 'Attack +10 during the user\'s Turn',
         }
     },
     'Rally Heart': {
         name: 'Rally Heart',
-        description: '+1 Movement and +2 all other stats to all allies within a 3-square radius on command',
+        description: 'All stats +2 and Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         gameSpecificDetails: {
-            Awakening: '+1 Movement and +2 all other stats to all allies within a 3-square radius on command',
+            Awakening: 'All stats +2 and Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used',
         }
     },
     'Bond': {
         name: 'Bond',
-        description: 'Heals 10 HP to all allies within a 3-square radius at the start of the turn',
+        description: 'Restores 10 HP to all allies within a 3 tile radius at the beginning of the user\'s Turn',
         gameSpecificDetails: {
-            Awakening: 'Heals 10 HP to all allies within a 3-square radius at the start of the turn',
+            Awakening: 'Restores 10 HP to all allies within a 3 tile radius at the beginning of the user\'s Turn',
         }
     },
     'All Stats +2': {
         name: 'All Stats +2',
-        description: '+2 All stats',
+        description: 'Strength, Magic, Skill, Speed, Luck, Defence and Resistance +2',
         gameSpecificDetails: {
-            Awakening: '+2 All stats',
+            Awakening: 'Strength, Magic, Skill, Speed, Luck, Defence and Resistance +2',
         }
     },
     'Paragon': {
         name: 'Paragon',
-        description: '×2 experience gain',
+        description: 'Experience gain x2',
         gameSpecificDetails: {
-            Awakening: '×2 experience gain',
+            Awakening: 'Experience gain x2',
         }
     },
     'Iote\'s Shield': {
         name: 'Iote\'s Shield',
-        description: 'Negates bonus damage weakness when equipped by a flying unit',
+        description: 'Negates user\'s flying type weakness',
+        gameSpecificDetails: {
+            Awakening: 'Negates user\'s flying type weakness',
+        }
     },
     'Limit Breaker': {
         name: 'Limit Breaker',
-        description: '+10 to all stat caps',
+        description: 'Raises the character\'s maximum stats by 10',
         gameSpecificDetails: {
-            Awakening: '+10 to all stat caps',
+            Awakening: 'Raises the character\'s maximum stats by 10',
         }
     },
     'Dragonskin': {
         name: 'Dragonskin',
-        description: 'Halves all damage, negates Counter and Lethality',
+        description: 'Halves damage, negates Counter and Lethality',
         gameSpecificDetails: {
-            Awakening: 'Halves all damage, negates Counter and Lethality',
+            Awakening: 'Halves damage, negates Counter and Lethality',
         }
     },
     'Hit Rate +10': {
         name: 'Hit Rate +10',
-        description: '+10 Hit rate',
+        description: 'Hit rate +10',
         gameSpecificDetails: {
-            Awakening: '+10 Hit rate',
+            Awakening: 'Hit rate +10',
         }
     },
     'Rightful God': {
         name: 'Rightful God',
-        description: '+30 to skill activation rates',
+        description: 'Adds 30% to Skill activation rates',
         gameSpecificDetails: {
-            Awakening: '+30 to skill activation rates',
+            Awakening: 'Adds 30% to Skill activation rates',
         }
     },
     'Vantage+': {
         name: 'Vantage+',
-        description: 'Always move before opponent',
+        description: 'Always attack first during the enemy\'s Turn',
         gameSpecificDetails: {
-            Awakening: 'Always move before opponent',
+            Awakening: 'Always attack first during the enemy\'s Turn',
         }
     },
     'Luna+': {
         name: 'Luna+',
-        description: 'All attacks have the Luna effect',
+        description: 'Every attack has a Luna effect',
         gameSpecificDetails: {
-            Awakening: 'All attacks have the Luna effect',
+            Awakening: 'Every attack has a Luna effect',
         }
     },
     'Hawkeye': {
         name: 'Hawkeye',
-        description: 'Attacks strike without fail',
+        description: 'Attacks always strike the enemy',
         gameSpecificDetails: {
-            Awakening: 'Attacks strike without fail',
+            Awakening: 'Attacks always strike the enemy',
         }
     },
     'Pavise+': {
         name: 'Pavise+',
-        description: 'Always halves damage done by swords, lances, axes, and beaststones',
+        description: 'Halves damage from swords, lances, axes (includes magical variants) and beaststones',
         gameSpecificDetails: {
-            Awakening: 'Always halves damage done by swords, lances, axes, and beaststones',
+            Awakening: 'Halves damage from swords, lances, axes (includes magical variants) and beaststones (does not apply for Dual Strikes)',
         }
     },
     'Aegis+': {
         name: 'Aegis+',
-        description: 'Always halves damage done by bows, tomes, and dragonstones',
+        description: 'Halves damage from bows, tomes and dragonstones',
         gameSpecificDetails: {
-            Awakening: 'Always halves damage done by bows, tomes, and dragonstones',
+            Awakening: 'Halves damage from bows, tomes and dragonstones (does not apply for Dual Strikes)',
         }
     },
 };
