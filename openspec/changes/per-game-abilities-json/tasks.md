@@ -15,7 +15,7 @@ Games to create: `awakening`, `sacred_stones`, `binding_blade`, `blazing_blade`,
 
 Replace the current synchronous `abilityDefinitions` export and `getAbilityByName` function with an async loader module mirroring the pattern in `lib/data.ts`. Export new `AbilityData` interface (no `gameSpecificDetails`), `getAbilitiesByGame(game)`, and `getAbilityByName(name, game)`. Include in-memory cache (`Map<string, Record<string, AbilityData>>`), game-to-directory mapping, dynamic imports, and level-suffix stripping.
 
-- [ ] 2.1 Rewrite `lib/abilities.ts` with the new async loader API, removing all old synchronous exports
+- [x] 2.1 Rewrite `lib/abilities.ts` with the new async loader API, removing all old synchronous exports
   - Done when: `getAbilitiesByGame` and `getAbilityByName` are exported as async functions, `AbilityData` has `name`/`description`/optional `procCondition`/optional `procChance` (no `gameSpecificDetails`), game-to-dir mapping covers all 6 games, cache prevents re-imports, `getAbilityByName` strips `(Lv. X)` suffixes, missing game files return empty record
   - Verify by: `npx tsc --noEmit` passes with no errors referencing old exports or `gameSpecificDetails`
   - Stop and hand off if: TypeScript compilation reveals consumers of the old synchronous API that cannot be trivially updated (i.e., callers outside the known components)
