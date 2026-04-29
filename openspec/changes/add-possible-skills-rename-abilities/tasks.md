@@ -71,6 +71,6 @@ Add the new "Possible Skills" row to the ComparisonGrid Unit Details table, rend
   - Done when: Opening the comparator with Awakening units shows a "Possible Skills" row containing SkillPills for skills from reclass classes, with no duplicates from the current class. GBA units without reclass options do not show the row. `npx tsc --noEmit` and `npm test` pass.
   - Stop and hand off if: The reclass options data is missing or incorrectly structured for Awakening units.
 
-- [ ] 6.2 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm: (a) "Possible Skills" row appears after "Starting Skills"; (b) skills shown match the union of all reclass class skills minus the current class skills; (c) no duplicate pills; (d) clicking a SkillPill opens the tooltip modal; (e) GBA game units do not show the row.
+- [x] 6.2 Verify Possible Skills feature end-to-end in the browser. Load the comparator page with Awakening units (e.g., Chrom). Confirm: (a) "Possible Skills" row appears after "Starting Skills"; (b) skills shown match the union of all reclass class skills minus the current class skills; (c) no duplicate pills; (d) clicking a SkillPill opens the tooltip modal; (e) GBA game units do not show the row.
   - Done when: Visual inspection confirms all behaviors match the spec scenarios in `specs/possible-skills-display/spec.md`.
   - Stop and hand off if: Browser rendering errors or missing data prevent verification.
