@@ -95,14 +95,14 @@ const ClassPill: React.FC<ClassPillProps> = ({
                             </div>
                         )}
 
-                        {cls.classAbilities && cls.classAbilities.length > 0 && (
+                        {cls.classSkills && cls.classSkills.length > 0 && (
                             <div>
-                                <h3 className="pill-modal-label mb-2">Class Abilities</h3>
+                                <h3 className="pill-modal-label mb-2">Class Skills</h3>
                                 <div className="flex flex-wrap gap-2">
-                                    {cls.classAbilities.map((ability, index) => (
+                                    {cls.classSkills.map((skill, index) => (
                                         <SkillPill
                                             key={index}
-                                            ability={ability}
+                                            skill={skill}
                                             game={cls.game}
                                         />
                                     ))}

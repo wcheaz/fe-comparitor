@@ -32,7 +32,7 @@ Update all remaining "abilities"/"ability" display text and variable references 
 - [x] 3.1 Update `components/features/ComparisonGrid.tsx`: change all references from `AbilityPill` to `SkillPill`, `ClassAbilitiesRow` to `ClassSkillsRow`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, key names from `abilities-` to `skills-`, and the `ability={skill}` prop on SkillPill to `skill={skill}` in the Starting Skills row. Update movement modal label from `"Abilities"` to `"Skills"`.
   - Done when: `npx tsc --noEmit` passes. `grep -ri "classAbilities\|ClassAbilitiesRow\|AbilityPill\|\"Class Abilities\"" --include="ComparisonGrid.tsx"` returns zero results.
 
-- [ ] 3.2 Update `components/ui/ClassPill.tsx`: change references from `AbilityPill` to `SkillPill`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, and prop from `ability={ability}` to `skill={skill}`.
+- [x] 3.2 Update `components/ui/ClassPill.tsx`: change references from `AbilityPill` to `SkillPill`, `classAbilities` to `classSkills`, display text `"Class Abilities"` to `"Class Skills"`, and prop from `ability={ability}` to `skill={skill}`.
   - Done when: `npx tsc --noEmit` passes. `grep -ri "ability\|AbilityPill\|classAbilities" --include="ClassPill.tsx"` returns zero results.
 
 - [ ] 3.3 Update `components/features/StatProgressionTable.tsx`: change `classAbilities` to `classSkills` in progression row types, state types, and modal rendering. Change display text `"Class Abilities"` to `"Class Skills"` and update `AbilityPill` imports to `SkillPill`.
