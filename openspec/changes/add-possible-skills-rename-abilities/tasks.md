@@ -41,7 +41,7 @@ Update all remaining "abilities"/"ability" display text and variable references 
 - [x] 3.4 Update `components/ui/MovementTypePill.tsx`: change display label from `"Abilities"` to `"Skills"` for the movement abilities section.
   - Done when: `grep -ri "\"Abilities\"" --include="MovementTypePill.tsx"` returns zero results.
 
-- [ ] 3.5 Update `components/features/PromotionOptionsDisplay.tsx`: change any references to `classAbilities` to `classSkills` and `AbilityPill` to `SkillPill`.
+- [x] 3.5 Update `components/features/PromotionOptionsDisplay.tsx`: change any references to `classAbilities` to `classSkills` and `AbilityPill` to `SkillPill`.
   - Done when: `npx tsc --noEmit` passes. `grep -ri "classAbilities\|AbilityPill" --include="PromotionOptionsDisplay.tsx"` returns zero results.
 
 - [ ] 3.6 Update `lib/movements.ts`: rename the `abilities` field to `skills` on the `MovementData` interface and update all references to `movementData.abilities` to `movementData.skills` in consuming components.
