@@ -22,7 +22,7 @@ Rename the pill component and the class skills row component, including all inte
 - [x] 2.2 Rename `components/features/ClassAbilitiesRow.tsx` to `components/features/ClassSkillsRow.tsx`. Inside: rename `ClassAbilitiesRowProps` to `ClassSkillsRowProps`, the component function from `ClassAbilitiesRow` to `ClassSkillsRow`, display text from `"Class Abilities"` to `"Class Skills"`, key from `ability-${index}` to `skill-${index}`, and update the `SkillPill` prop from `ability={ability}` to `skill={skill}`. Update all imports.
   - Done when: `npx tsc --noEmit` passes. `grep -ri "ClassAbilitiesRow\|ClassAbilitiesRowProps" --include="*.ts" --include="*.tsx"` returns zero results.
 
-- [ ] 2.3 Update CSS classes in `app/globals.css`: rename `pill-variant-ability-default` to `pill-variant-skill-default`, `pill-variant-ability-stat` to `pill-variant-skill-stat`, `pill-variant-ability-weapon` to `pill-variant-skill-weapon`. Update the section comment from `/* Ability Variants */` to `/* Skill Variants */`.
+- [x] 2.3 Update CSS classes in `app/globals.css`: rename `pill-variant-ability-default` to `pill-variant-skill-default`, `pill-variant-ability-stat` to `pill-variant-skill-stat`, `pill-variant-ability-weapon` to `pill-variant-skill-weapon`. Update the section comment from `/* Ability Variants */` to `/* Skill Variants */`.
   - Done when: `grep -ri "ability" app/globals.css` returns zero results. App renders without visual regression on skill pills.
 
 ## 3. Update Display Text in All Components
