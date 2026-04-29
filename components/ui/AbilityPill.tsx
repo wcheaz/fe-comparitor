@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { getAbilityByName, type AbilityData } from "@/lib/abilities";
+import { getSkillByName, type SkillData } from "@/lib/skills";
 import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
@@ -46,18 +46,18 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
     ...props
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [abilityData, setAbilityData] = useState<AbilityData | undefined>(undefined);
+    const [skillData, setSkillData] = useState<SkillData | undefined>(undefined);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!game) {
             setLoading(false);
-            setAbilityData(undefined);
+            setSkillData(undefined);
             return;
         }
         setLoading(true);
-        getAbilityByName(ability, game).then((data) => {
-            setAbilityData(data);
+        getSkillByName(ability, game).then((data) => {
+            setSkillData(data);
             setLoading(false);
         });
     }, [ability, game]);
@@ -73,7 +73,7 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
         }
     }
 
-    const isClickable = !!abilityData;
+    const isClickable = !!skillData;
 
     return (
         <>
@@ -100,25 +100,25 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
                     <div className="space-y-4 min-w-[250px] sm:min-w-[300px]">
                         <div className="flex items-center justify-between border-b pb-2 pr-8">
                             <h2 className="pill-modal-title">
-                                {abilityData!.name}
+                                {skillData!.name}
                             </h2>
                             <h4 className="pill-modal-subtitle">
                                 {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Ability"}
                             </h4>
                         </div>
                         <p className="pill-modal-text">
-                            {abilityData!.description}
+                            {skillData!.description}
                         </p>
-                        {abilityData!.procCondition && (
+                        {skillData!.procCondition && (
                             <div className="text-sm">
                                 <span className="pill-modal-label">Condition: </span>
-                                <span className="pill-modal-text">{abilityData!.procCondition}</span>
+                                <span className="pill-modal-text">{skillData!.procCondition}</span>
                             </div>
                         )}
-                        {abilityData!.procChance && (
+                        {skillData!.procChance && (
                             <div className="text-sm">
                                 <span className="pill-modal-label">Proc Chance: </span>
-                                <span className="pill-modal-text">{abilityData!.procChance}</span>
+                                <span className="pill-modal-text">{skillData!.procChance}</span>
                             </div>
                         )}
                     </div>

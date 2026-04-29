@@ -1,4 +1,4 @@
-export interface AbilityData {
+export interface SkillData {
     name: string;
     description: string;
     procCondition?: string;
@@ -21,16 +21,16 @@ const gameDirMap: Record<string, string> = {
     'engage': 'engage',
 };
 
-const abilitiesCache = new Map<string, Record<string, AbilityData>>();
+const skillsCache = new Map<string, Record<string, SkillData>>();
 
 function resolveDir(game: string): string | undefined {
     return gameDirMap[game.toLowerCase()];
 }
 
-function arrayToRecord(arr: { name: string; description: string; procCondition?: string; procChance?: string }[]): Record<string, AbilityData> {
-    const record: Record<string, AbilityData> = {};
+function arrayToRecord(arr: { name: string; description: string; procCondition?: string; procChance?: string }[]): Record<string, SkillData> {
+    const record: Record<string, SkillData> = {};
     for (const entry of arr) {
-        const data: AbilityData = { name: entry.name, description: entry.description };
+        const data: SkillData = { name: entry.name, description: entry.description };
         if (entry.procCondition) data.procCondition = entry.procCondition;
         if (entry.procChance) data.procChance = entry.procChance;
         record[entry.name] = data;
@@ -38,28 +38,28 @@ function arrayToRecord(arr: { name: string; description: string; procCondition?:
     return record;
 }
 
-export async function getAbilitiesByGame(game: string): Promise<Record<string, AbilityData>> {
+export async function getSkillsByGame(game: string): Promise<Record<string, SkillData>> {
     const dir = resolveDir(game);
     if (!dir) return {};
 
-    if (abilitiesCache.has(dir)) {
-        return abilitiesCache.get(dir)!;
+    if (skillsCache.has(dir)) {
+        return skillsCache.get(dir)!;
     }
 
     try {
-        const mod = await import(`@/data/${dir}/abilities.json`);
+        const mod = await import(`@/data/${dir}/skills.json`);
         const record = arrayToRecord(mod.default);
-        abilitiesCache.set(dir, record);
+        skillsCache.set(dir, record);
         return record;
     } catch {
-        const empty: Record<string, AbilityData> = {};
-        abilitiesCache.set(dir, empty);
+        const empty: Record<string, SkillData> = {};
+        skillsCache.set(dir, empty);
         return empty;
     }
 }
 
-export async function getAbilityByName(name: string, game: string): Promise<AbilityData | undefined> {
+export async function getSkillByName(name: string, game: string): Promise<SkillData | undefined> {
     const cleanName = name.replace(/\s*\(Lv\.\s*\d+\)\s*$/, '');
-    const abilities = await getAbilitiesByGame(game);
-    return abilities[cleanName];
+    const skills = await getSkillsByGame(game);
+    return skills[cleanName];
 }
