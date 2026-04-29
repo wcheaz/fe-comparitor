@@ -6,7 +6,7 @@ Each file is a JSON array of objects with `name`, `description`, and optional `p
 
 Games to create: `awakening`, `sacred_stones`, `binding_blade`, `blazing_blade`, `three_houses`, `engage`.
 
-- [ ] 1.1 Create all six `data/{game}/abilities.json` files with correctly distributed ability data extracted from the current `lib/abilities.ts`
+- [x] 1.1 Create all six `data/{game}/abilities.json` files with correctly distributed ability data extracted from the current `lib/abilities.ts`
   - Done when: each file is valid JSON (array of objects), every ability in the current `abilityDefinitions` appears in at least one game's file, no `gameSpecificDetails` field exists in any entry, `procCondition`/`procChance` are omitted when absent
   - Verify by: comparing ability counts — all 60+ Awakening abilities in `awakening/abilities.json`, GBA-era shared abilities (Canto, etc.) in each relevant game's file with game-specific descriptions, game-neutral abilities (Dance, Steal, Lockpick) in each game that uses them
   - Stop and hand off if: an ability in the current file cannot be attributed to any specific game (no `gameSpecificDetails` and no clear game association from classes/units data)

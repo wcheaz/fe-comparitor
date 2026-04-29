@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Canto",
+    "description": "After performing an action, the unit can use any remaining movement. Can move after using items, staves, rescuing, dropping, talking, or visiting. Cannot move after attacking."
+  },
+  {
+    "name": "Lockpick",
+    "description": "Can use Lockpicks to open doors and chests."
+  },
+  {
+    "name": "Steal",
+    "description": "Can take a non-equipped item from an adjacent enemy, provided the thief has a higher Speed stat."
+  },
+  {
+    "name": "Dance",
+    "description": "Refreshes an adjacent ally, allowing them to take another action this turn."
+  },
+  {
+    "name": "Play",
+    "description": "Refreshes an adjacent ally, allowing them to take another action this turn."
+  },
+  {
+    "name": "Mountain Walk",
+    "description": "Can traverse mountain and peak tiles without penalty."
+  },
+  {
+    "name": "Water Walk",
+    "description": "Can traverse water and ocean tiles without penalty."
+  },
+  {
+    "name": "Silencer",
+    "description": "An instant-kill attack that activates when landing a critical hit.",
+    "procCondition": "Critical hit must land.",
+    "procChance": "Skill / 2 %"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Silencer",
+    "description": "An instant-kill attack that activates when landing a critical hit. Activation rate is halved against bosses, and 0% against the final boss.",
+    "procCondition": "Critical hit must land.",
+    "procChance": "Skill / 2 %"
+  },
+  {
+    "name": "Canto",
+    "description": "After performing an action, the unit can use any remaining movement. Can move after using items, staves, rescuing, dropping, talking, or visiting. Cannot move after attacking."
+  },
+  {
+    "name": "Great Shield",
+    "description": "Negates all damage from a single incoming attack.",
+    "procCondition": "Upon being attacked.",
+    "procChance": "Level%"
+  },
+  {
+    "name": "Pierce",
+    "description": "Ignores the enemy's Defense stat entirely for the attack.",
+    "procCondition": "Upon attacking.",
+    "procChance": "Level%"
+  },
+  {
+    "name": "Sure Strike",
+    "description": "Guarantees the attack will hit (100% accuracy).",
+    "procCondition": "Upon attacking.",
+    "procChance": "Level%"
+  },
+  {
+    "name": "Slayer",
+    "description": "Triples effective weapon might against monster-type units."
+  },
+  {
+    "name": "Lockpick",
+    "description": "Can use Lockpicks to open doors and chests."
+  },
+  {
+    "name": "Steal",
+    "description": "Can take a non-equipped item from an adjacent enemy, provided the thief has a higher Speed stat."
+  },
+  {
+    "name": "Pick",
+    "description": "Can open doors and chests without needing keys or lockpicks. Unlike Locktouch, does not consume lockpicks."
+  },
+  {
+    "name": "Summon",
+    "description": "Summons a controllable Phantom unit that fights alongside the caster."
+  },
+  {
+    "name": "Dance",
+    "description": "Refreshes an adjacent ally, allowing them to take another action this turn."
+  },
+  {
+    "name": "Water Walk",
+    "description": "Can traverse water and ocean tiles without penalty."
+  }
+]

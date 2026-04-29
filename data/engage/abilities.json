@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Steal",
+    "description": "Can take a non-equipped item from an adjacent enemy, provided the thief has a higher Speed stat."
+  },
+  {
+    "name": "Locktouch",
+    "description": "Open doors and chests without the need of keys"
+  },
+  {
+    "name": "Pavise",
+    "description": "Halves damage from swords, lances, axes (includes magical variants) and beaststones",
+    "procCondition": "Upon being attacked.",
+    "procChance": "Skill%"
+  }
+]

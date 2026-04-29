@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Locktouch",
+    "description": "Open doors and chests without the need of keys"
+  },
+  {
+    "name": "Dual Strike+",
+    "description": "Adds 10% to the Dual Strike rate"
+  },
+  {
+    "name": "Charm",
+    "description": "Hit rate and Avoid +5 to all allies within a 3 tile radius"
+  },
+  {
+    "name": "Aether",
+    "description": "Attack twice consecutively, with the first strike having a Sol effect and the second strike having a Luna effect",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill / 2%"
+  },
+  {
+    "name": "Rightful King",
+    "description": "Adds 10% to Skill activation rates"
+  },
+  {
+    "name": "Veteran",
+    "description": "Experience gain x 1.5 when paired up"
+  },
+  {
+    "name": "Solidarity",
+    "description": "Critical and Critical Avoid +10 to adjacent allies"
+  },
+  {
+    "name": "Ignis",
+    "description": "Adds (Magic)/2 to Strength when dealing physical damage and (Strength)/2 to Magic when dealing magical damage",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill%"
+  },
+  {
+    "name": "Rally Spectrum",
+    "description": "All stats +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Discipline",
+    "description": "Weapon experience x2"
+  },
+  {
+    "name": "Outdoor Fighter",
+    "description": "Hit rate and Avoid +10 when fighting outdoors"
+  },
+  {
+    "name": "Defender",
+    "description": "All stats +1 when paired up"
+  },
+  {
+    "name": "Aegis",
+    "description": "Halves damage from bows, tomes and dragonstones (does not apply for Dual Strikes)",
+    "procCondition": "Upon being attacked.",
+    "procChance": "Skill%"
+  },
+  {
+    "name": "Luna",
+    "description": "Ignores half the enemy's Defence or Resistance",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill%"
+  },
+  {
+    "name": "Dual Guard+",
+    "description": "Adds 10% to the Dual Guard rate"
+  },
+  {
+    "name": "Defense +2",
+    "description": "Defence +2"
+  },
+  {
+    "name": "Indoor Fighter",
+    "description": "Hit rate and Avoid +10 when fighting indoors"
+  },
+  {
+    "name": "Rally Defense",
+    "description": "Defence +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Pavise",
+    "description": "Halves damage from swords, lances, axes (includes magical variants) and beaststones (does not apply for Dual Strikes)",
+    "procCondition": "Upon being attacked.",
+    "procChance": "Skill%"
+  },
+  {
+    "name": "Avoid +10",
+    "description": "Avoid +10"
+  },
+  {
+    "name": "Vantage",
+    "description": "When HP under half, always attack first during the enemy's Turn"
+  },
+  {
+    "name": "Astra",
+    "description": "Deals 5 consecutive hits with half damage",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill / 2%"
+  },
+  {
+    "name": "Swordfaire",
+    "description": "Strength +5 when equipped with a sword (Magic +5 when equipped with the Levin Sword)"
+  },
+  {
+    "name": "Armsthrift",
+    "description": "Attack does not reduce weapon durability",
+    "procCondition": "Upon attacking.",
+    "procChance": "Luck × 2%"
+  },
+  {
+    "name": "Patience",
+    "description": "Hit rate and Avoid +10 during the enemy's Turn"
+  },
+  {
+    "name": "Sol",
+    "description": "Recover HP equal to half the damage dealt to the enemy",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill%"
+  },
+  {
+    "name": "Axebreaker",
+    "description": "Hit rate and Avoid +50 when the enemy is equipped with an axe"
+  },
+  {
+    "name": "HP +5",
+    "description": "Maximum HP +5"
+  },
+  {
+    "name": "Zeal",
+    "description": "Critical +5"
+  },
+  {
+    "name": "Rally Strength",
+    "description": "Strength +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Counter",
+    "description": "Returns damage when attacked by an adjacent enemy (except damage that KOs the user) (does not apply for Dual Strikes)"
+  },
+  {
+    "name": "Despoil",
+    "description": "Obtain Bullion (S) from the enemy if the user defeats the enemy",
+    "procCondition": "Upon defeating an enemy.",
+    "procChance": "Luck%"
+  },
+  {
+    "name": "Gamble",
+    "description": "Hit rate -5, Critical +10"
+  },
+  {
+    "name": "Wrath",
+    "description": "Critical +20 when under half HP"
+  },
+  {
+    "name": "Axefaire",
+    "description": "Strength +5 when equipped with an axe (Magic +5 when equipped with the Bolt Axe)"
+  },
+  {
+    "name": "Skill +2",
+    "description": "Skill +2"
+  },
+  {
+    "name": "Prescience",
+    "description": "Hit rate and Avoid +15 during the user's Turn"
+  },
+  {
+    "name": "Hit Rate +20",
+    "description": "Hit rate +20"
+  },
+  {
+    "name": "Bowfaire",
+    "description": "Strength +5 when equipped with a bow"
+  },
+  {
+    "name": "Rally Skill",
+    "description": "Skill +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Bowbreaker",
+    "description": "Hit rate and Avoid +50 when the enemy is equipped with a bow"
+  },
+  {
+    "name": "Movement +1",
+    "description": "Movement +1"
+  },
+  {
+    "name": "Lethality",
+    "description": "Instantly defeats the enemy",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill / 4%"
+  },
+  {
+    "name": "Pass",
+    "description": "User can pass through tiles occupied by enemy units"
+  },
+  {
+    "name": "Lucky Seven",
+    "description": "Hit rate and Avoid +20 up to the 7th Turn"
+  },
+  {
+    "name": "Acrobat",
+    "description": "All traversable terrain costs 1 movement point to cross"
+  },
+  {
+    "name": "Speed +2",
+    "description": "Speed +2"
+  },
+  {
+    "name": "Relief",
+    "description": "Recover 20% HP at the start of the user's Turn if no units are within a 3 tile radius"
+  },
+  {
+    "name": "Rally Speed",
+    "description": "Speed +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Lancefaire",
+    "description": "Strength +5 when equipped with a lance (Magic +5 when equipped with the Shockstick)"
+  },
+  {
+    "name": "Rally Movement",
+    "description": "Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Galeforce",
+    "description": "Allows the user another full action after they defeat an enemy during the user's Turn (only once per Turn)"
+  },
+  {
+    "name": "Strength +2",
+    "description": "Strength +2"
+  },
+  {
+    "name": "Tantivy",
+    "description": "Hit rate and Avoid +10 if no allies within a 3 tile radius"
+  },
+  {
+    "name": "Quick Burn",
+    "description": "Hit rate and Avoid +15 at the start of the chapter. Effect decreases with each passing Turn"
+  },
+  {
+    "name": "Swordbreaker",
+    "description": "Hit rate and Avoid +50 when the enemy is equipped with a sword"
+  },
+  {
+    "name": "Deliverer",
+    "description": "Movement +2 when paired up"
+  },
+  {
+    "name": "Lancebreaker",
+    "description": "Hit rate and Avoid +50 when the enemy is equipped with a lance"
+  },
+  {
+    "name": "Magic +2",
+    "description": "Magic +2"
+  },
+  {
+    "name": "Focus",
+    "description": "Critical +10 when no allies within a 3 tile radius"
+  },
+  {
+    "name": "Rally Magic",
+    "description": "Magic +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Tomefaire",
+    "description": "Magic +5 when equipped with a Tome"
+  },
+  {
+    "name": "Hex",
+    "description": "Avoid -15 to all adjacent enemies"
+  },
+  {
+    "name": "Anathema",
+    "description": "Avoid and Critical Avoid -10 to all enemies within a 3 tile radius"
+  },
+  {
+    "name": "Vengeance",
+    "description": "Deals (user's Max HP – Current HP)/2 extra damage",
+    "procCondition": "Upon attacking.",
+    "procChance": "Skill × 2%"
+  },
+  {
+    "name": "Tomebreaker",
+    "description": "Hit rate and Avoid +50 when the enemy is equipped with a tome"
+  },
+  {
+    "name": "Slow Burn",
+    "description": "Hit rate and Avoid increases by 1 each Turn, up to the 15th Turn"
+  },
+  {
+    "name": "Lifetaker",
+    "description": "User recovers 50% HP after they defeat an enemy during the user's Turn"
+  },
+  {
+    "name": "Miracle",
+    "description": "Character survives with 1 HP after receiving an attack that would otherwise KO them (must have over 1 HP)",
+    "procCondition": "Upon receiving lethal damage.",
+    "procChance": "Luck%"
+  },
+  {
+    "name": "Healtouch",
+    "description": "Restores an extra 5 HP when healing allies"
+  },
+  {
+    "name": "Rally Luck",
+    "description": "Luck +8 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Renewal",
+    "description": "Recover 30% HP at the start of the user's Turn"
+  },
+  {
+    "name": "Resistance +2",
+    "description": "Resistance +2"
+  },
+  {
+    "name": "Demoiselle",
+    "description": "Avoid and Critical Avoid +10 to all male allies within a 3 tile radius"
+  },
+  {
+    "name": "Rally Resistance",
+    "description": "Resistance +4 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Dual Support+",
+    "description": "Increases the support bonus effect"
+  },
+  {
+    "name": "Aptitude",
+    "description": "Adds 20% to all growth rates during Level Ups"
+  },
+  {
+    "name": "Underdog",
+    "description": "Hit rate and Avoid +15 when user's Level is lower than the enemy (promoted units count as Level +20)"
+  },
+  {
+    "name": "Luck +4",
+    "description": "Luck +4"
+  },
+  {
+    "name": "Special Dance",
+    "description": "Strength, Magic, Defence and Resistance +2 for one Turn for the unit who receives the user's Dance"
+  },
+  {
+    "name": "Even Rhythm",
+    "description": "Hit rate and Avoid +10 during even numbered Turns"
+  },
+  {
+    "name": "Beastbane",
+    "description": "Deals effective damage to beast units when user is a Taguel"
+  },
+  {
+    "name": "Odd Rhythm",
+    "description": "Hit rate and Avoid +10 during odd numbered Turns"
+  },
+  {
+    "name": "Wyrmsbane",
+    "description": "Deals effective damage to dragon units when user is a Manakete"
+  },
+  {
+    "name": "Shadowgift",
+    "description": "Enables usage of Dark Tomes for Tome wielders"
+  },
+  {
+    "name": "Conquest",
+    "description": "Negates user's beast and armour type weaknesses"
+  },
+  {
+    "name": "Resistance +10",
+    "description": "Resistance +10"
+  },
+  {
+    "name": "Aggressor",
+    "description": "Attack +10 during the user's Turn"
+  },
+  {
+    "name": "Rally Heart",
+    "description": "All stats +2 and Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used"
+  },
+  {
+    "name": "Bond",
+    "description": "Restores 10 HP to all allies within a 3 tile radius at the beginning of the user's Turn"
+  },
+  {
+    "name": "All Stats +2",
+    "description": "Strength, Magic, Skill, Speed, Luck, Defence and Resistance +2"
+  },
+  {
+    "name": "Paragon",
+    "description": "Experience gain x2"
+  },
+  {
+    "name": "Iote's Shield",
+    "description": "Negates user's flying type weakness"
+  },
+  {
+    "name": "Limit Breaker",
+    "description": "Raises the character's maximum stats by 10"
+  },
+  {
+    "name": "Dragonskin",
+    "description": "Halves damage, negates Counter and Lethality"
+  },
+  {
+    "name": "Hit Rate +10",
+    "description": "Hit rate +10"
+  },
+  {
+    "name": "Rightful God",
+    "description": "Adds 30% to Skill activation rates"
+  },
+  {
+    "name": "Vantage+",
+    "description": "Always attack first during the enemy's Turn"
+  },
+  {
+    "name": "Luna+",
+    "description": "Every attack has a Luna effect"
+  },
+  {
+    "name": "Hawkeye",
+    "description": "Attacks always strike the enemy"
+  },
+  {
+    "name": "Pavise+",
+    "description": "Halves damage from swords, lances, axes (includes magical variants) and beaststones (does not apply for Dual Strikes)"
+  },
+  {
+    "name": "Aegis+",
+    "description": "Halves damage from bows, tomes and dragonstones (does not apply for Dual Strikes)"
+  }
+]
