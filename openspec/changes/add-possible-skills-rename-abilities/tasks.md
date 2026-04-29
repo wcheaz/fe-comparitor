@@ -51,7 +51,7 @@ Update all remaining "abilities"/"ability" display text and variable references 
 
 Update all test files to use the renamed identifiers.
 
-- [ ] 4.1 Rename `__tests__/components/features/ClassAbilitiesRow.test.tsx` to `__tests__/components/features/ClassSkillsRow.test.tsx`. Update all internal references: `ClassAbilitiesRow` → `ClassSkillsRow`, `classAbilities` → `classSkills`, `AbilityPill` → `SkillPill`, `ability` → `skill`. Update `__tests__/lib/stats.test.ts`: rename all `classAbilities` references to `classSkills`. Update any other test files that import or reference old names.
+- [x] 4.1 Rename `__tests__/components/features/ClassAbilitiesRow.test.tsx` to `__tests__/components/features/ClassSkillsRow.test.tsx`. Update all internal references: `ClassAbilitiesRow` → `ClassSkillsRow`, `classAbilities` → `classSkills`, `AbilityPill` → `SkillPill`, `ability` → `skill`. Update `__tests__/lib/stats.test.ts`: rename all `classAbilities` references to `classSkills`. Update any other test files that import or reference old names.
   - Done when: `npm test` passes with zero failures. `grep -ri "classAbilities\|AbilityPill\|ClassAbilitiesRow\|getAbilitiesByGame\|getAbilityByName\|AbilityData" --include="*.test.ts" --include="*.test.tsx"` returns zero results.
   - Stop and hand off if: Tests fail due to data structure issues not related to the rename.
 

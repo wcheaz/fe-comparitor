@@ -11,7 +11,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 20, str: 6, skl: 8, spd: 7, lck: 5, def: 5, res: 0, con: 7, mov: 5 },
     promotionBonus: { hp: 8, str: 3, skl: 4, spd: 3, lck: 2, def: 3, res: 2, con: 2, mov: 1 },
     promotesTo: ['hero'],
-    classAbilities: []
+    classSkills: []
   },
   {
     id: 'hero',
@@ -21,7 +21,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 28, str: 9, skl: 12, spd: 10, lck: 7, def: 8, res: 2, con: 9, mov: 6 },
     promotionBonus: {},
     promotesTo: [],
-    classAbilities: ['Axes']
+    classSkills: ['Axes']
   },
   {
     id: 'paladin',
@@ -31,7 +31,7 @@ const mockClasses: Class[] = [
     baseStats: { hp: 30, str: 11, skl: 10, spd: 10, lck: 8, def: 10, res: 5, con: 11, mov: 8 },
     promotionBonus: {},
     promotesTo: [],
-    classAbilities: ['Horse', 'Axes', 'Lances']
+    classSkills: ['Horse', 'Axes', 'Lances']
   }
 ];
 
@@ -143,7 +143,7 @@ describe('Stat Progression Logic', () => {
 
       expect(afterPromotionStats.hp).toBeGreaterThanOrEqual(28);
 
-      expect(beforePromotion.promotionInfo?.classAbilities).toContain('Axes');
+      expect(beforePromotion.promotionInfo?.classSkills).toContain('Axes');
     });
 
     // Task 5.4: Verify that Pre-promoted units start their display properly without throwing errors
@@ -297,7 +297,7 @@ describe('Stat Progression Logic', () => {
         },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
         weapons: ['Sword', 'Lance', 'Axe'],
         maxStats: {
           hp: 60,
@@ -391,7 +391,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2, con: 8, mov: 7 },
           promotionBonus: { hp: 10, str: 4, skl: 3, spd: 3, lck: 2, def: 4, res: 3, con: 2, mov: 1 },
           promotesTo: ['paladin', 'great_knight'], // Branching promotion options
-          classAbilities: []
+          classSkills: []
         },
         {
           id: 'paladin',
@@ -401,7 +401,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 30, str: 10, skl: 10, spd: 11, lck: 7, def: 10, res: 5, con: 10, mov: 8 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: ['Horse', 'Swords', 'Lances']
+          classSkills: ['Horse', 'Swords', 'Lances']
         },
         {
           id: 'great_knight',
@@ -411,7 +411,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 32, str: 12, skl: 8, spd: 7, lck: 7, def: 12, res: 8, con: 12, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: ['Horse', 'Swords', 'Axes', 'Lances']
+          classSkills: ['Horse', 'Swords', 'Axes', 'Lances']
         }
       ];
 
@@ -465,7 +465,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 18, str: 5, skl: 6, spd: 7, lck: 5, def: 4, res: 1 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: [],
+          classSkills: [],
           statModifiers: { str: 2, def: 1 } // Lord class modifiers
         },
         {
@@ -476,7 +476,7 @@ describe('Stat Progression Logic', () => {
           baseStats: { hp: 20, str: 6, skl: 7, spd: 8, lck: 5, def: 6, res: 2 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: [],
+          classSkills: [],
           statModifiers: { def: 3, res: 2 } // Cavalier class modifiers
         }
       ];
@@ -562,7 +562,7 @@ describe('Stat Progression Logic', () => {
         baseStats: { hp: 18, str: 4, skl: 5, spd: 6, lck: 4, def: 3, res: 1 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
       };
 
       const result = getEffectiveBaseStats(awakeningUnit, lordClass);
@@ -595,7 +595,7 @@ describe('Stat Progression Logic', () => {
         baseStats: { hp: 20, str: 5, skl: 3, spd: 4, lck: 1, def: 2, res: 5 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
       };
 
       const result = getEffectiveBaseStats(fe8Unit, someClass);
@@ -643,7 +643,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
       };
 
       const result = getEffectiveGrowths(awakeningUnit, lordClass);
@@ -673,7 +673,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
       };
 
       const result = getEffectiveGrowths(fe8Unit, someClass);
@@ -719,7 +719,7 @@ describe('Stat Progression Logic', () => {
       growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
       promotionBonus: {},
       promotesTo: [],
-      classAbilities: [],
+      classSkills: [],
       maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
     };
 
@@ -758,7 +758,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 10, str: 35, skl: 10, spd: 10, lck: 5, def: 10, res: 5 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
       };
 
       const withClasses = calculateAverageStats(fe8Unit, 10, [someClass]);
@@ -799,7 +799,7 @@ describe('Stat Progression Logic', () => {
           growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: [],
+          classSkills: [],
           maxStats: { hp: 99, str: 10, skl: 99, spd: 99, lck: 99, def: 99, res: 99 },
         },
         {
@@ -811,7 +811,7 @@ describe('Stat Progression Logic', () => {
           growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: [],
+          classSkills: [],
           maxStats: { hp: 99, str: 99, skl: 99, spd: 99, lck: 99, def: 99, res: 99 },
         },
       ];
@@ -855,7 +855,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
         promotionBonus: {},
         promotesTo: ['new_class'],
-        classAbilities: [],
+        classSkills: [],
         maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
       };
       const newClass: Class = {
@@ -867,7 +867,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
         promotionBonus: { hp: 3 },
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
         maxStats: { hp: 80, str: 40, skl: 40, spd: 40, lck: 40, def: 40, res: 40 },
       };
 
@@ -918,7 +918,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
         maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
       };
       const toClass: Class = {
@@ -930,7 +930,7 @@ describe('Stat Progression Logic', () => {
         growths: { hp: 0, str: 0, skl: 0, spd: 0, lck: 0, def: 0, res: 0 },
         promotionBonus: {},
         promotesTo: [],
-        classAbilities: [],
+        classSkills: [],
         maxStats: { hp: 60, str: 30, skl: 30, spd: 30, lck: 30, def: 30, res: 30 },
       };
 

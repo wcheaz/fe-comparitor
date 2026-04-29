@@ -4,8 +4,7 @@ import '@testing-library/jest-dom';
 import { ClassSkillsRow } from '@/components/features/ClassSkillsRow';
 import { Unit } from '@/types/unit';
 
-// Mock test data
-const mockUnitWithAbilities: Unit = {
+const mockUnitWithSkills: Unit = {
   id: 'test-unit-1',
   name: 'Test Unit 1',
   game: 'test_game',
@@ -17,7 +16,7 @@ const mockUnitWithAbilities: Unit = {
   isPromoted: true
 };
 
-const mockUnitWithoutAbilities: Unit = {
+const mockUnitWithoutSkills: Unit = {
   id: 'test-unit-2',
   name: 'Test Unit 2',
   game: 'test_game',
@@ -38,7 +37,7 @@ const mockClasses = [
     baseStats: { hp: 30, str: 11, skl: 10, spd: 10, lck: 8, def: 10, res: 5, con: 11, mov: 8 },
     promotionBonus: {},
     promotesTo: [],
-    classAbilities: ['Horse', 'Axes', 'Lances']
+    classSkills: ['Horse', 'Axes', 'Lances']
   },
   {
     id: 'mercenary',
@@ -48,48 +47,45 @@ const mockClasses = [
     baseStats: { hp: 20, str: 6, skl: 8, spd: 7, lck: 5, def: 5, res: 0, con: 7, mov: 5 },
     promotionBonus: { hp: 8, str: 3, skl: 4, spd: 3, lck: 2, def: 3, res: 2, con: 2, mov: 1 },
     promotesTo: ['hero'],
-    classAbilities: []
+    classSkills: []
   }
 ];
 
-describe('ClassAbilitiesRow', () => {
+describe('ClassSkillsRow', () => {
   describe('Rendering', () => {
-    it('should render class abilities when unit has class abilities', () => {
+    it('should render class skills when unit has class skills', () => {
       render(
-        <ClassAbilitiesRow
-          unit={mockUnitWithAbilities}
+        <ClassSkillsRow
+          unit={mockUnitWithSkills}
           classes={mockClasses}
         />
       );
 
-      // Should render the "Class Abilities" label
-      expect(screen.getByText('Class Abilities')).toBeInTheDocument();
+      expect(screen.getByText('Class Skills')).toBeInTheDocument();
 
-      // Should render each ability as a pill/badge
       expect(screen.getByText('Horse')).toBeInTheDocument();
       expect(screen.getByText('Axes')).toBeInTheDocument();
       expect(screen.getByText('Lances')).toBeInTheDocument();
     });
 
-    it('should not render when unit has no class abilities', () => {
+    it('should not render when unit has no class skills', () => {
       const { container } = render(
-        <ClassAbilitiesRow
-          unit={mockUnitWithoutAbilities}
+        <ClassSkillsRow
+          unit={mockUnitWithoutSkills}
           classes={mockClasses}
         />
       );
 
-      // Should not render anything when there are no class abilities
       expect(container.firstChild).toBeNull();
     });
 
-    it('should render mixed ability types (stat bonuses and named abilities)', () => {
-      const unitWithMixedAbilities: Unit = {
-        ...mockUnitWithAbilities,
+    it('should render mixed skill types (stat bonuses and named skills)', () => {
+      const unitWithMixedSkills: Unit = {
+        ...mockUnitWithSkills,
         class: 'berserker'
       };
 
-      const classesWithMixedAbilities = [
+      const classesWithMixedSkills = [
         {
           id: 'berserker',
           name: 'Berserker',
@@ -98,18 +94,17 @@ describe('ClassAbilitiesRow', () => {
           baseStats: { hp: 32, str: 14, skl: 8, spd: 6, lck: 5, def: 8, res: 2, con: 12, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: ['Slayer', '+15 Crit', 'Axes']
+          classSkills: ['Slayer', '+15 Crit', 'Axes']
         }
       ];
 
       render(
-        <ClassAbilitiesRow
-          unit={unitWithMixedAbilities}
-          classes={classesWithMixedAbilities}
+        <ClassSkillsRow
+          unit={unitWithMixedSkills}
+          classes={classesWithMixedSkills}
         />
       );
 
-      // Should render all types of abilities
       expect(screen.getByText('Slayer')).toBeInTheDocument();
       expect(screen.getByText('+15 Crit')).toBeInTheDocument();
       expect(screen.getByText('Axes')).toBeInTheDocument();
@@ -117,51 +112,47 @@ describe('ClassAbilitiesRow', () => {
   });
 
   describe('Component Structure', () => {
-    it('should render abilities as styled pills/badges', () => {
+    it('should render skills as styled pills/badges', () => {
       render(
-        <ClassAbilitiesRow
-          unit={mockUnitWithAbilities}
+        <ClassSkillsRow
+          unit={mockUnitWithSkills}
           classes={mockClasses}
         />
       );
 
-      // Check that abilities are rendered with pill styling
-      const horseAbility = screen.getByText('Horse');
-      const axesAbility = screen.getByText('Axes');
-      const lancesAbility = screen.getByText('Lances');
+      const horseSkill = screen.getByText('Horse');
+      const axesSkill = screen.getByText('Axes');
+      const lancesSkill = screen.getByText('Lances');
 
-      // Should have pill styling classes
-      expect(horseAbility).toHaveClass('inline-flex');
-      expect(axesAbility).toHaveClass('inline-flex');
-      expect(lancesAbility).toHaveClass('inline-flex');
+      expect(horseSkill).toHaveClass('inline-flex');
+      expect(axesSkill).toHaveClass('inline-flex');
+      expect(lancesSkill).toHaveClass('inline-flex');
     });
 
-    it('should handle empty class abilities array gracefully', () => {
+    it('should handle empty class skills array gracefully', () => {
       const { container } = render(
-        <ClassAbilitiesRow
-          unit={mockUnitWithoutAbilities}
+        <ClassSkillsRow
+          unit={mockUnitWithoutSkills}
           classes={mockClasses}
         />
       );
 
-      // Should not throw errors and should return null
       expect(container.firstChild).toBeNull();
     });
 
     it('should handle missing class data gracefully', () => {
       const unitWithMissingClass: Unit = {
-        ...mockUnitWithAbilities,
+        ...mockUnitWithSkills,
         class: 'non_existent_class'
       };
 
       const { container } = render(
-        <ClassAbilitiesRow
+        <ClassSkillsRow
           unit={unitWithMissingClass}
           classes={mockClasses}
         />
       );
 
-      // Should not throw errors and should return null when class is not found
       expect(container.firstChild).toBeNull();
     });
   });
@@ -169,26 +160,25 @@ describe('ClassAbilitiesRow', () => {
   describe('Accessibility', () => {
     it('should have proper accessibility attributes', () => {
       render(
-        <ClassAbilitiesRow
-          unit={mockUnitWithAbilities}
+        <ClassSkillsRow
+          unit={mockUnitWithSkills}
           classes={mockClasses}
         />
       );
 
-      // The "Class Abilities" label should be properly labeled
-      const classAbilitiesLabel = screen.getByText('Class Abilities');
-      expect(classAbilitiesLabel).toBeInTheDocument();
+      const classSkillsLabel = screen.getByText('Class Skills');
+      expect(classSkillsLabel).toBeInTheDocument();
     });
   });
 
   describe('Edge Cases', () => {
-    it('should handle single ability correctly', () => {
-      const unitWithSingleAbility: Unit = {
-        ...mockUnitWithAbilities,
+    it('should handle single skill correctly', () => {
+      const unitWithSingleSkill: Unit = {
+        ...mockUnitWithSkills,
         class: 'assassin'
       };
 
-      const classesWithSingleAbility = [
+      const classesWithSingleSkill = [
         {
           id: 'assassin',
           name: 'Assassin',
@@ -197,29 +187,28 @@ describe('ClassAbilitiesRow', () => {
           baseStats: { hp: 26, str: 6, skl: 11, spd: 11, lck: 0, def: 4, res: 2, con: 6, mov: 6 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: ['Silencer']
+          classSkills: ['Silencer']
         }
       ];
 
       render(
-        <ClassAbilitiesRow
-          unit={unitWithSingleAbility}
-          classes={classesWithSingleAbility}
+        <ClassSkillsRow
+          unit={unitWithSingleSkill}
+          classes={classesWithSingleSkill}
         />
       );
 
-      // Should render single ability
       expect(screen.getByText('Silencer')).toBeInTheDocument();
-      expect(screen.getByText('Class Abilities')).toBeInTheDocument();
+      expect(screen.getByText('Class Skills')).toBeInTheDocument();
     });
 
-    it('should handle large number of abilities', () => {
-      const unitWithManyAbilities: Unit = {
-        ...mockUnitWithAbilities,
+    it('should handle large number of skills', () => {
+      const unitWithManySkills: Unit = {
+        ...mockUnitWithSkills,
         class: 'lord'
       };
 
-      const classesWithManyAbilities = [
+      const classesWithManySkills = [
         {
           id: 'lord',
           name: 'Lord',
@@ -228,18 +217,17 @@ describe('ClassAbilitiesRow', () => {
           baseStats: { hp: 20, str: 5, skl: 5, spd: 5, lck: 5, def: 5, res: 5, con: 7, mov: 5 },
           promotionBonus: {},
           promotesTo: [],
-          classAbilities: ['Swords', 'Leadership', '+10 Hit', '+5 Crit', 'Locktouch', 'Canto', 'Chart', 'Bond']
+          classSkills: ['Swords', 'Leadership', '+10 Hit', '+5 Crit', 'Locktouch', 'Canto', 'Chart', 'Bond']
         }
       ];
 
       render(
-        <ClassAbilitiesRow
-          unit={unitWithManyAbilities}
-          classes={classesWithManyAbilities}
+        <ClassSkillsRow
+          unit={unitWithManySkills}
+          classes={classesWithManySkills}
         />
       );
 
-      // Should render all abilities
       expect(screen.getByText('Swords')).toBeInTheDocument();
       expect(screen.getByText('Leadership')).toBeInTheDocument();
       expect(screen.getByText('+10 Hit')).toBeInTheDocument();
