@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ClassAbilitiesRow } from '@/components/features/ClassAbilitiesRow';
+import { ClassSkillsRow } from '@/components/features/ClassSkillsRow';
 import { Unit } from '@/types/unit';
 
 // Mock test data

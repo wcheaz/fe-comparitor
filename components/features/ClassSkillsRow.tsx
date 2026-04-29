@@ -3,38 +3,36 @@ import { cn } from "@/lib/utils";
 import { Unit, Class } from '@/types/unit';
 import SkillPill from '@/components/ui/SkillPill';
 
-interface ClassAbilitiesRowProps {
+interface ClassSkillsRowProps {
   unit: Unit;
   classes: Class[];
   className?: string;
 }
 
-export function ClassAbilitiesRow({
+export function ClassSkillsRow({
   unit,
   classes,
   className
-}: ClassAbilitiesRowProps) {
-  // Find the unit's class
+}: ClassSkillsRowProps) {
   const unitClass = classes.find(cls =>
     cls.id === unit.class.toLowerCase().replace(/\s+/g, '_') &&
     cls.game === unit.game
   );
 
-  // If class not found or no class abilities, don't render anything
-  if (!unitClass || !unitClass.classAbilities || unitClass.classAbilities.length === 0) {
+  if (!unitClass || !unitClass.classSkills || unitClass.classSkills.length === 0) {
     return null;
   }
 
   return (
     <div className={cn("flex flex-col items-center space-y-2", className)}>
       <span className="text-sm font-medium text-fe-blue-900">
-        Class Abilities
+        Class Skills
       </span>
       <div className="flex flex-wrap justify-center gap-1.5">
-        {unitClass.classAbilities.map((ability, index) => (
+        {unitClass.classSkills.map((skill, index) => (
           <SkillPill
-            key={`${unitClass.id}-ability-${index}`}
-            ability={ability}
+            key={`${unitClass.id}-skill-${index}`}
+            skill={skill}
             game={unit.game}
           />
         ))}

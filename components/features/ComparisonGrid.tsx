@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { StatTable } from './StatTable';
-import { ClassAbilitiesRow } from './ClassAbilitiesRow';
+import { ClassSkillsRow } from './ClassSkillsRow';
 import SkillPill from '@/components/ui/SkillPill';
 import SupportPill from '@/components/ui/SupportPill';
 import ClassPill from '@/components/ui/ClassPill';
@@ -640,7 +640,7 @@ export function ComparisonGrid({
                       <td className="p-2 font-medium align-top">Class Abilities</td>
                       {units.map((unit) => (
                         <td key={`abilities-${unit.id}`} className="text-center p-2 align-top">
-                          <ClassAbilitiesRow
+                          <ClassSkillsRow
                             unit={unit}
                             classes={classes}
                           />
