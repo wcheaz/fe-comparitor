@@ -9,11 +9,48 @@ interface PossibleSkillsRowProps {
   className?: string;
 }
 
+interface SkillMeta {
+  classNames: string[];
+  tier: 'unpromoted' | 'promoted' | 'trainee';
+}
+
 function findClassById(classes: Class[], id: string, game: string): Class | undefined {
   const normalized = id.toLowerCase().replace(/\s+/g, '_');
   return classes.find(c =>
     (c.id === normalized || c.id === id || c.name === id) && c.game === game
   );
+}
+
+function bucketLevel(level: number): 1 | 5 | 10 {
+  if (level <= 1) return 1;
+  if (level <= 5) return 5;
+  return 10;
+}
+
+function resolveVariant(tier: string, skillName: string): "unpromoted-lv1" | "unpromoted-lv5" | "unpromoted-lv10" | "promoted-lv1" | "promoted-lv5" | "promoted-lv10" {
+  const match = skillName.match(/\(Lv\.\s*(\d+)\)/);
+  const level = match ? parseInt(match[1], 10) : 1;
+  const bucketed = bucketLevel(level);
+  const effectiveTier = tier === 'trainee' ? 'unpromoted' : tier;
+  return `${effectiveTier}-lv${bucketed}` as typeof resolveVariant extends (...args: unknown[]) => infer R ? R : never;
+}
+
+function addSkill(
+  map: Map<string, SkillMeta>,
+  skill: string,
+  cls: Class
+) {
+  const existing = map.get(skill);
+  if (existing) {
+    if (!existing.classNames.includes(cls.name)) {
+      existing.classNames.push(cls.name);
+    }
+  } else {
+    map.set(skill, {
+      classNames: [cls.name],
+      tier: cls.type,
+    });
+  }
 }
 
 export function PossibleSkillsRow({
@@ -28,7 +65,7 @@ export function PossibleSkillsRow({
   const currentClass = findClassById(classes, unit.class, unit.game);
   const currentSkills = new Set(currentClass?.classSkills || []);
 
-  const skillToClassNames = new Map<string, string[]>();
+  const skillMap = new Map<string, SkillMeta>();
 
   for (const reclassId of unit.reclassOptions) {
     const reclassCls = findClassById(classes, reclassId, unit.game);
@@ -36,14 +73,7 @@ export function PossibleSkillsRow({
 
     for (const skill of reclassCls.classSkills || []) {
       if (currentSkills.has(skill)) continue;
-      const existing = skillToClassNames.get(skill);
-      if (existing) {
-        if (!existing.includes(reclassCls.name)) {
-          existing.push(reclassCls.name);
-        }
-      } else {
-        skillToClassNames.set(skill, [reclassCls.name]);
-      }
+      addSkill(skillMap, skill, reclassCls);
     }
 
     for (const promotesToId of reclassCls.promotesTo || []) {
@@ -52,35 +82,29 @@ export function PossibleSkillsRow({
 
       for (const skill of promotedCls.classSkills || []) {
         if (currentSkills.has(skill)) continue;
-        const existing = skillToClassNames.get(skill);
-        if (existing) {
-          if (!existing.includes(promotedCls.name)) {
-            existing.push(promotedCls.name);
-          }
-        } else {
-          skillToClassNames.set(skill, [promotedCls.name]);
-        }
+        addSkill(skillMap, skill, promotedCls);
       }
     }
   }
 
-  if (skillToClassNames.size === 0) {
+  if (skillMap.size === 0) {
     return <span className="text-muted-foreground">None</span>;
   }
 
-  const entries = Array.from(skillToClassNames.entries());
+  const entries = Array.from(skillMap.entries());
 
   return (
     <div className={cn("flex flex-col items-center space-y-1", className)}>
       <div className="flex flex-wrap justify-center gap-1.5">
-        {entries.map(([skill, classNames]) => (
+        {entries.map(([skill, meta]) => (
           <div key={skill} className="flex flex-col items-center gap-0.5">
             <SkillPill
               skill={skill}
               game={unit.game}
+              variant={resolveVariant(meta.tier, skill)}
             />
             <span className="text-[10px] text-muted-foreground leading-tight">
-              {classNames.join(', ')}
+              {meta.classNames.join(', ')}
             </span>
           </div>
         ))}

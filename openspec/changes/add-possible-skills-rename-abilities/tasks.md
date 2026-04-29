@@ -101,7 +101,7 @@ Add color differentiation to SkillPills in the Possible Skills row based on the 
   - Done when: `npx tsc --noEmit` passes. All 6 new CSS classes exist in `globals.css` with distinct colors. Existing pill styles are unaffected.
   - Stop and hand off if: The CVA variant system does not support the number of new variants needed.
 
-- [ ] 7.2 Update `PossibleSkillsRow` to pass tier/level-based variant props to each `SkillPill`. For each skill in the map:
+- [x] 7.2 Update `PossibleSkillsRow` to pass tier/level-based variant props to each `SkillPill`. For each skill in the map:
   (a) Parse the level from the skill name using regex `/\(Lv\.\s*(\d+)\)/` — default to 1 if no match;
   (b) Determine the originating class's tier from its `type` field (`"unpromoted"` | `"promoted"` | `"trainee"`);
   (c) Map to the appropriate CVA variant: `${type}-lv${level}` (bucket to nearest defined level: 1, 5, or 10);
