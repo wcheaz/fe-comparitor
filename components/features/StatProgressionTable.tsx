@@ -39,7 +39,7 @@ interface ProgressionRow {
   isPromotionLevel: boolean;
   promotionInfo?: {
     className: string;
-    classAbilities: string[];
+    classSkills: string[];
   };
 }
 
@@ -51,7 +51,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
   const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false);
   const [selectedPromotionInfo, setSelectedPromotionInfo] = useState<{
     className: string;
-    classAbilities: string[];
+    classSkills: string[];
     gameId: string;
   } | null>(null);
 
@@ -138,7 +138,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
   const activeStatKeys = getVisibleStatKeys();
 
   // Handle promotion info click
-  const handlePromotionInfoClick = (promotionInfo: { className: string; classAbilities: string[] }, gameId: string) => {
+  const handlePromotionInfoClick = (promotionInfo: { className: string; classSkills: string[] }, gameId: string) => {
     setSelectedPromotionInfo({
       ...promotionInfo,
       gameId
@@ -150,7 +150,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
   const renderPromotionDetailsModal = () => {
     if (!selectedPromotionInfo) return null;
 
-    const { className, classAbilities, gameId } = selectedPromotionInfo;
+    const { className, classSkills, gameId } = selectedPromotionInfo;
     const classData = classes.find(c => c.name === className && c.game === gameId);
 
     return (
@@ -159,14 +159,14 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
           <h2 className="text-2xl font-bold">{className} Promotion Details</h2>
         </div>
 
-        {classData && classData.classAbilities && classData.classAbilities.length > 0 && (
+        {classData && classData.classSkills && classData.classSkills.length > 0 && (
           <div className="pt-2">
-            <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
+            <h3 className="text-lg font-semibold mb-2">Class Skills</h3>
             <div className="flex flex-wrap gap-2">
-              {classData.classAbilities.map((ability, index) => (
+              {classData.classSkills.map((skill, index) => (
                 <SkillPill
                   key={index}
-                  ability={ability}
+                  skill={skill}
                   game={gameId}
                 />
               ))}
@@ -659,7 +659,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                           {statValue !== undefined ? statValue : '-'}
                           {row.isPromotionLevel && row.promotionInfo && (
                             <button
-                              onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classAbilities: [] }, unit.game)}
+                              onClick={() => handlePromotionInfoClick(row.promotionInfo || { className: '', classSkills: [] }, unit.game)}
                               className="ml-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                               title="View promotion details"
                             >
