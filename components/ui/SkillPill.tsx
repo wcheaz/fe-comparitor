@@ -7,14 +7,14 @@ import { getSkillByName, type SkillData } from "@/lib/skills";
 import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 
-const abilityPillVariants = cva(
+const skillPillVariants = cva(
     "pill-base inline-flex items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 border",
     {
         variants: {
             variant: {
-                default: "pill-variant-ability-default",
-                stat: "pill-variant-ability-stat",
-                weapon: "pill-variant-ability-weapon",
+                default: "pill-variant-skill-default",
+                stat: "pill-variant-skill-stat",
+                weapon: "pill-variant-skill-weapon",
             },
             size: {
                 default: "h-6 py-1 px-2",
@@ -28,17 +28,17 @@ const abilityPillVariants = cva(
     }
 );
 
-export { abilityPillVariants };
+export { skillPillVariants };
 
-export interface AbilityPillProps
+export interface SkillPillProps
     extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof abilityPillVariants> {
-    ability: string;
+    VariantProps<typeof skillPillVariants> {
+    skill: string;
     game?: string;
 }
 
-const AbilityPill: React.FC<AbilityPillProps> = ({
-    ability,
+const SkillPill: React.FC<SkillPillProps> = ({
+    skill,
     variant,
     size,
     game,
@@ -56,17 +56,17 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
             return;
         }
         setLoading(true);
-        getSkillByName(ability, game).then((data) => {
+        getSkillByName(skill, game).then((data) => {
             setSkillData(data);
             setLoading(false);
         });
-    }, [ability, game]);
+    }, [skill, game]);
 
     let finalVariant = variant;
     if (!variant) {
-        if (ability.startsWith('+')) {
+        if (skill.startsWith('+')) {
             finalVariant = 'stat';
-        } else if (['Swords', 'Lances', 'Axes', 'Bows', 'Light', 'Dark', 'Anima', 'Staves'].includes(ability)) {
+        } else if (['Swords', 'Lances', 'Axes', 'Bows', 'Light', 'Dark', 'Anima', 'Staves'].includes(skill)) {
             finalVariant = 'weapon';
         } else {
             finalVariant = 'default';
@@ -79,7 +79,7 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
         <>
             <span
                 className={cn(
-                    abilityPillVariants({ variant: finalVariant, size }),
+                    skillPillVariants({ variant: finalVariant, size }),
                     isClickable ? 'cursor-pointer gap-1' : 'cursor-default',
                     className
                 )}
@@ -89,7 +89,7 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
                 onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') setIsModalOpen(true); } : undefined}
                 {...props}
             >
-                {ability}
+                {skill}
                 {isClickable && (
                     <Info className="w-3 h-3 opacity-60" />
                 )}
@@ -103,7 +103,7 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
                                 {skillData!.name}
                             </h2>
                             <h4 className="pill-modal-subtitle">
-                                {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Ability"}
+                                {finalVariant === "stat" ? "Stat Bonus" : finalVariant === "weapon" ? "Weapon Type" : "Skill"}
                             </h4>
                         </div>
                         <p className="pill-modal-text">
@@ -128,4 +128,4 @@ const AbilityPill: React.FC<AbilityPillProps> = ({
     );
 };
 
-export default AbilityPill;
+export default SkillPill;

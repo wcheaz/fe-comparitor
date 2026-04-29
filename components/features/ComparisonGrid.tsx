@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { StatTable } from './StatTable';
 import { ClassAbilitiesRow } from './ClassAbilitiesRow';
-import AbilityPill from '@/components/ui/AbilityPill';
+import SkillPill from '@/components/ui/SkillPill';
 import SupportPill from '@/components/ui/SupportPill';
 import ClassPill from '@/components/ui/ClassPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
@@ -375,7 +375,7 @@ export function ComparisonGrid({
             <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
             <div className="flex flex-wrap gap-2">
               {promoClass.classAbilities.map((ability, index) => (
-                <AbilityPill
+                              <SkillPill
                   key={index}
                   ability={ability}
                   game={promoClass.game}
@@ -717,7 +717,7 @@ export function ComparisonGrid({
                         {unit.startingSkills && unit.startingSkills.length > 0 ? (
                           <div className="flex flex-wrap gap-2 justify-center">
                             {unit.startingSkills.map((skill, index) => (
-                              <AbilityPill
+                <SkillPill
                                 key={index}
                                 ability={skill}
                                 game={unit.game}

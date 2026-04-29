@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { generateProgressionArray, getValidReclassOptions } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
-import AbilityPill from '@/components/ui/AbilityPill';
+import SkillPill from '@/components/ui/SkillPill';
 import { Modal } from '@/components/ui/modal';
 
 /**
@@ -164,7 +164,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             <h3 className="text-lg font-semibold mb-2">Class Abilities</h3>
             <div className="flex flex-wrap gap-2">
               {classData.classAbilities.map((ability, index) => (
-                <AbilityPill
+                <SkillPill
                   key={index}
                   ability={ability}
                   game={gameId}

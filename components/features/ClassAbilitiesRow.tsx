@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from "@/lib/utils";
 import { Unit, Class } from '@/types/unit';
-import AbilityPill from '@/components/ui/AbilityPill';
+import SkillPill from '@/components/ui/SkillPill';
 
 interface ClassAbilitiesRowProps {
   unit: Unit;
@@ -32,7 +32,7 @@ export function ClassAbilitiesRow({
       </span>
       <div className="flex flex-wrap justify-center gap-1.5">
         {unitClass.classAbilities.map((ability, index) => (
-          <AbilityPill
+          <SkillPill
             key={`${unitClass.id}-ability-${index}`}
             ability={ability}
             game={unit.game}

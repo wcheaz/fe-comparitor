@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/modal";
 import { Info } from "lucide-react";
 import { Class } from "@/types/unit";
-import AbilityPill from '@/components/ui/AbilityPill';
+import SkillPill from '@/components/ui/SkillPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
 
 const classPillVariants = cva(
@@ -100,7 +100,7 @@ const ClassPill: React.FC<ClassPillProps> = ({
                                 <h3 className="pill-modal-label mb-2">Class Abilities</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {cls.classAbilities.map((ability, index) => (
-                                        <AbilityPill
+                                        <SkillPill
                                             key={index}
                                             ability={ability}
                                             game={cls.game}
