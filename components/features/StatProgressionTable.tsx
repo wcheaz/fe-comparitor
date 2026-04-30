@@ -698,7 +698,26 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
                   const shouldShowDash = row.isSkipped;
 
-                  const highlightClass = row.isPromotionLevel ? 'bg-blue-100' : '';
+                  let highlightClass = row.isPromotionLevel ? 'bg-blue-100' : '';
+
+                  if (otherUnit && !shouldShowDash) {
+                    const otherRow = otherUnitProgressionMap.get(row.internalLevel);
+                    if (otherRow && !otherRow.isSkipped) {
+                      let rawOtherStatValue = otherRow.stats[statKey];
+                      if (statKey === 'skl' && (rawOtherStatValue === undefined || rawOtherStatValue === null)) {
+                        rawOtherStatValue = otherRow.stats['dex'];
+                      }
+                      if (rawStatValue !== undefined && rawStatValue !== null && rawOtherStatValue !== undefined && rawOtherStatValue !== null) {
+                        if (rawStatValue > rawOtherStatValue) {
+                          highlightClass = 'bg-green-500/20';
+                        } else if (rawStatValue === rawOtherStatValue && rawStatValue !== 0) {
+                          highlightClass = 'bg-yellow-500/20';
+                        } else {
+                          highlightClass = '';
+                        }
+                      }
+                    }
+                  }
 
                   return (
                     <td
