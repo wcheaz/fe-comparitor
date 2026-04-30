@@ -78,7 +78,7 @@
     - `npx tsc --noEmit` exits 0
   - Stop and hand off if: The component prop threading requires changes to more than the comparator page, `ComparisonGrid`, and `StatProgressionTable`.
 
-- [ ] **6.2 Add per-unit difficulty selector to ComparisonGrid**
+- [x] **6.2 Add per-unit difficulty selector to ComparisonGrid**
   - Scope: `components/features/ComparisonGrid.tsx`
   - Change: In the unit column headers, render a pill-style difficulty selector (following the existing Personal/Effective toggle pattern at lines 828-841) for each unit that has `baseStatsByDifficulty`. The selector shows Normal plus the available difficulty keys. When toggled, it calls the setter from the parent to update `selectedDifficulties`. The Base Stats card uses the selected difficulty when calling `getEffectiveBaseStats` and when reading `unit.stats` directly.
   - Done when:

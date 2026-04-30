@@ -10,7 +10,7 @@ import SupportPill from '@/components/ui/SupportPill';
 import ClassPill from '@/components/ui/ClassPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
 import AffinityPill from '@/components/ui/AffinityPill';
-import { getMinLevel, getMaxLevel, getEffectiveBaseStats, getEffectiveGrowths, getClassChangeOptions } from '@/lib/stats';
+import { getMinLevel, getMaxLevel, getEffectiveBaseStats, getEffectiveGrowths, getClassChangeOptions, getPersonalBasesForDifficulty } from '@/lib/stats';
 import { getAllClasses, getAllUnits } from '@/lib/data';
 import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
@@ -854,7 +854,37 @@ export function ComparisonGrid({
                         <th className="text-left p-2 font-medium">Stat</th>
                         {units.map((unit) => (
                           <th key={`header-${unit.id}`} className="text-center p-2 font-medium">
-                            {unit.name}
+                            <div>{unit.name}</div>
+                            {unit.baseStatsByDifficulty && onSelectedDifficultiesChange && (
+                              <div className="flex items-center justify-center gap-0.5 mt-1 text-xs border rounded-lg p-0.5">
+                                <button
+                                  onClick={() => {
+                                    const updated = { ...selectedDifficulties };
+                                    delete updated[unit.id];
+                                    onSelectedDifficultiesChange(updated);
+                                  }}
+                                  className={`px-2 py-0.5 rounded-md font-medium transition-colors ${!selectedDifficulties?.[unit.id] ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                                >
+                                  Normal
+                                </button>
+                                {unit.baseStatsByDifficulty.hard && (
+                                  <button
+                                    onClick={() => onSelectedDifficultiesChange({ ...selectedDifficulties, [unit.id]: 'hard' })}
+                                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${selectedDifficulties?.[unit.id] === 'hard' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                                  >
+                                    Hard
+                                  </button>
+                                )}
+                                {unit.baseStatsByDifficulty.lunatic && (
+                                  <button
+                                    onClick={() => onSelectedDifficultiesChange({ ...selectedDifficulties, [unit.id]: 'lunatic' })}
+                                    className={`px-2 py-0.5 rounded-md font-medium transition-colors ${selectedDifficulties?.[unit.id] === 'lunatic' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                                  >
+                                    Lunatic
+                                  </button>
+                                )}
+                              </div>
+                            )}
                           </th>
                         ))}
                       </tr>
@@ -863,7 +893,8 @@ export function ComparisonGrid({
                       {getCommonBaseStats(units, showEffectiveBases ? classes : undefined).map((statKey) => {
                         const baseValues = units.map(unit => {
                           const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
-                          const stats = showEffectiveBases ? getEffectiveBaseStats(unit, unitClass) : unit.stats;
+                          const difficulty = selectedDifficulties?.[unit.id];
+                          const stats = showEffectiveBases ? getEffectiveBaseStats(unit, unitClass, difficulty) : getPersonalBasesForDifficulty(unit, difficulty);
                           let value = stats[statKey] ?? '-';
                           if (statKey === 'skl' && value === '-') {
                             value = stats['dex'] ?? '-';
