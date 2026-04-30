@@ -8,7 +8,7 @@
 
 ## 2. Shared Utility Function
 
-- [ ] 2.1 Export a `getClassChangeOptions(unit: Unit, classes: Class[]): Class[]` function from `lib/stats.ts`. This function extracts the `unifiedOptions` computation currently in `PromotionOptionsDisplay.tsx` (lines 89-133): walk `promotesTo` chains from the unit's base class, add Awakening reclass options via `getValidReclassOptions()`, deduplicate by class ID, exclude the unit's base class, and sort by tier descending. Preserve the existing game gate (`unit.game?.toLowerCase() === 'awakening'`).
+- [x] 2.1 Export a `getClassChangeOptions(unit: Unit, classes: Class[]): Class[]` function from `lib/stats.ts`. This function extracts the `unifiedOptions` computation currently in `PromotionOptionsDisplay.tsx` (lines 89-133): walk `promotesTo` chains from the unit's base class, add Awakening reclass options via `getValidReclassOptions()`, deduplicate by class ID, exclude the unit's base class, and sort by tier descending. Preserve the existing game gate (`unit.game?.toLowerCase() === 'awakening'`).
       **Done when**: The function is exported from `lib/stats.ts`, returns identical results to the current `PromotionOptionsDisplay.unifiedOptions` memo, and TypeScript compiles. Verify by running `npm run build`.
 
 ## 3. ClassChangeOptionsRow Component

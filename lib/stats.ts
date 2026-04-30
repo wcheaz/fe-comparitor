@@ -343,6 +343,44 @@ export function getValidReclassOptions(unit: Unit, classes: any[], currentLevel?
  * @param units - Array of units to compare
  * @returns The minimum level among all units
  */
+export function getClassChangeOptions(unit: Unit, classes: Class[]): Class[] {
+  const optionsMap = new Map<string, Class>();
+
+  const getPromotions = (classId: string, visited = new Set<string>()) => {
+    if (visited.has(classId)) return;
+    visited.add(classId);
+
+    const cls = classes.find(c => c.id === classId && c.game === unit.game);
+    if (!cls) return;
+
+    if (cls.id !== unit.class) {
+      optionsMap.set(cls.id, cls);
+    }
+
+    cls.promotesTo.forEach(promoId => getPromotions(promoId, new Set(visited)));
+  };
+  getPromotions(unit.class);
+
+  if (unit.game?.toLowerCase() === 'awakening' && unit.reclassOptions) {
+    const validReclasses = getValidReclassOptions(unit, classes);
+    validReclasses.forEach(classId => {
+      const cls = classes.find(c => c.id === classId && c.game === unit.game);
+      if (cls) {
+        optionsMap.set(cls.id, cls);
+      }
+    });
+  }
+
+  const sortedOptions = Array.from(optionsMap.values());
+  sortedOptions.sort((a, b) => {
+    const tierA = typeof a.tier === 'number' ? a.tier : 1;
+    const tierB = typeof b.tier === 'number' ? b.tier : 1;
+    return tierB - tierA;
+  });
+
+  return sortedOptions;
+}
+
 export function getMinLevel(units: Unit[]): number {
   if (units.length === 0) return 0;
 
