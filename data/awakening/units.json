@@ -1007,7 +1007,19 @@
       "mercenary",
       "barbarian",
       "myrmidon"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "lunatic": {
+        "hp": 13,
+        "str": 8,
+        "mag": 0,
+        "skl": 6,
+        "spd": 5,
+        "lck": 8,
+        "def": 6,
+        "res": 2
+      }
+    }
   },
   {
     "id": "nowi",
@@ -1056,7 +1068,19 @@
       "manakete",
       "mage",
       "wyvern_rider"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "lunatic": {
+        "hp": 1,
+        "str": 3,
+        "mag": 0,
+        "skl": 2,
+        "spd": 3,
+        "lck": 9,
+        "def": 1,
+        "res": 1
+      }
+    }
   },
   {
     "id": "libra",
@@ -1108,7 +1132,29 @@
       "priest",
       "mage",
       "dark_mage"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 15,
+        "str": 9,
+        "mag": 11,
+        "skl": 9,
+        "spd": 8,
+        "lck": 10,
+        "def": 5,
+        "res": 10
+      },
+      "lunatic": {
+        "hp": 16,
+        "str": 10,
+        "mag": 11,
+        "skl": 9,
+        "spd": 8,
+        "lck": 11,
+        "def": 6,
+        "res": 11
+      }
+    }
   },
   {
     "id": "tharja",
@@ -1158,7 +1204,19 @@
       "dark_mage",
       "knight",
       "archer"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "lunatic": {
+        "hp": 8,
+        "str": 3,
+        "mag": 9,
+        "skl": 3,
+        "spd": 10,
+        "lck": 3,
+        "def": 6,
+        "res": 3
+      }
+    }
   },
   {
     "id": "anna",
@@ -1210,7 +1268,29 @@
       "thief",
       "archer",
       "mage"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 17,
+        "str": 8,
+        "mag": 13,
+        "skl": 13,
+        "spd": 11,
+        "lck": 26,
+        "def": 5,
+        "res": 5
+      },
+      "lunatic": {
+        "hp": 18,
+        "str": 9,
+        "mag": 14,
+        "skl": 13,
+        "spd": 11,
+        "lck": 27,
+        "def": 6,
+        "res": 6
+      }
+    }
   },
   {
     "id": "olivia",
@@ -1309,7 +1389,29 @@
       "wyvern_rider",
       "troubadour",
       "cleric"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 12,
+        "str": 8,
+        "mag": 1,
+        "skl": 7,
+        "spd": 7,
+        "lck": 9,
+        "def": 8,
+        "res": 2
+      },
+      "lunatic": {
+        "hp": 14,
+        "str": 9,
+        "mag": 2,
+        "skl": 8,
+        "spd": 8,
+        "lck": 10,
+        "def": 9,
+        "res": 2
+      }
+    }
   },
   {
     "id": "henry",
@@ -1359,7 +1461,29 @@
       "dark_mage",
       "barbarian",
       "thief"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 11,
+        "str": 5,
+        "mag": 11,
+        "skl": 13,
+        "spd": 6,
+        "lck": 10,
+        "def": 9,
+        "res": 1
+      },
+      "lunatic": {
+        "hp": 13,
+        "str": 6,
+        "mag": 12,
+        "skl": 14,
+        "spd": 7,
+        "lck": 11,
+        "def": 10,
+        "res": 2
+      }
+    }
   },
   {
     "id": "sayri",
@@ -1409,7 +1533,29 @@
       "myrmidon",
       "pegasus_knight",
       "wyvern_rider"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 21,
+        "str": 11,
+        "mag": 5,
+        "skl": 13,
+        "spd": 14,
+        "lck": 21,
+        "def": 7,
+        "res": 7
+      },
+      "lunatic": {
+        "hp": 23,
+        "str": 12,
+        "mag": 6,
+        "skl": 15,
+        "spd": 16,
+        "lck": 22,
+        "def": 8,
+        "res": 8
+      }
+    }
   },
   {
     "id": "tiki",
@@ -1459,7 +1605,29 @@
       "manakete",
       "wyvern_rider",
       "mage"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 26,
+        "str": 18,
+        "mag": 12,
+        "skl": 16,
+        "spd": 18,
+        "lck": 21,
+        "def": 15,
+        "res": 12
+      },
+      "lunatic": {
+        "hp": 31,
+        "str": 21,
+        "mag": 14,
+        "skl": 19,
+        "spd": 21,
+        "lck": 24,
+        "def": 18,
+        "res": 15
+      }
+    }
   },
   {
     "id": "basilio",
@@ -1512,7 +1680,29 @@
       "fighter",
       "barbarian",
       "knight"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 34,
+        "str": 22,
+        "mag": 4,
+        "skl": 20,
+        "spd": 18,
+        "lck": 20,
+        "def": 16,
+        "res": 6
+      },
+      "lunatic": {
+        "hp": 39,
+        "str": 25,
+        "mag": 4,
+        "skl": 23,
+        "spd": 21,
+        "lck": 23,
+        "def": 18,
+        "res": 7
+      }
+    }
   },
   {
     "id": "flavia",
@@ -1565,6 +1755,470 @@
       "mercenary",
       "thief",
       "knight"
-    ]
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 31,
+        "str": 20,
+        "mag": 5,
+        "skl": 21,
+        "spd": 20,
+        "lck": 24,
+        "def": 17,
+        "res": 10
+      },
+      "lunatic": {
+        "hp": 36,
+        "str": 23,
+        "mag": 6,
+        "skl": 24,
+        "spd": 25,
+        "lck": 27,
+        "def": 19,
+        "res": 11
+      }
+    }
+  },
+  {
+    "id": "gangrel",
+    "name": "Gangrel",
+    "game": "Awakening",
+    "class": "trickster",
+    "joinChapter": "Paralogue 18",
+    "level": 15,
+    "stats": {
+      "hp": 30,
+      "str": 17,
+      "mag": 16,
+      "skl": 19,
+      "spd": 22,
+      "lck": 15,
+      "def": 15,
+      "res": 12
+    },
+    "growths": {
+      "hp": 40,
+      "str": 40,
+      "mag": 30,
+      "skl": 50,
+      "spd": 50,
+      "lck": 30,
+      "def": 30,
+      "res": 30
+    },
+    "statModifiers": {
+      "str": -2,
+      "mag": 0,
+      "skl": 3,
+      "spd": 3,
+      "lck": -1,
+      "def": -1,
+      "res": 0
+    },
+    "startingSkills": [
+      "Movement +1",
+      "Locktouch",
+      "Lucky Seven",
+      "Acrobat"
+    ],
+    "innateWeaknesses": [],
+    "gender": "M",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "thief",
+      "barbarian",
+      "dark_mage"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 35,
+        "str": 22,
+        "mag": 21,
+        "skl": 24,
+        "spd": 26,
+        "lck": 17,
+        "def": 17,
+        "res": 14
+      },
+      "lunatic": {
+        "hp": 39,
+        "str": 27,
+        "mag": 25,
+        "skl": 28,
+        "spd": 30,
+        "lck": 19,
+        "def": 19,
+        "res": 17
+      }
+    }
+  },
+  {
+    "id": "walhart",
+    "name": "Walhart",
+    "game": "Awakening",
+    "class": "conqueror",
+    "joinChapter": "Paralogue 19",
+    "level": 30,
+    "stats": {
+      "hp": 47,
+      "str": 29,
+      "mag": 12,
+      "skl": 24,
+      "spd": 24,
+      "lck": 30,
+      "def": 23,
+      "res": 14
+    },
+    "growths": {
+      "hp": 75,
+      "str": 60,
+      "mag": 10,
+      "skl": 30,
+      "spd": 30,
+      "lck": 45,
+      "def": 45,
+      "res": 25
+    },
+    "statModifiers": {
+      "str": 4,
+      "mag": -2,
+      "skl": 0,
+      "spd": -1,
+      "lck": -1,
+      "def": 4,
+      "res": -2
+    },
+    "startingSkills": [
+      "Conquest"
+    ],
+    "innateWeaknesses": [],
+    "gender": "M",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "conqueror",
+      "knight",
+      "wyvern_rider"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 55,
+        "str": 34,
+        "mag": 13,
+        "skl": 27,
+        "spd": 27,
+        "lck": 33,
+        "def": 26,
+        "res": 16
+      },
+      "lunatic": {
+        "hp": 56,
+        "str": 39,
+        "mag": 14,
+        "skl": 29,
+        "spd": 29,
+        "lck": 35,
+        "def": 30,
+        "res": 18
+      }
+    }
+  },
+  {
+    "id": "emmeryn",
+    "name": "Emmeryn",
+    "game": "Awakening",
+    "class": "sage",
+    "joinChapter": "Paralogue 20",
+    "level": 10,
+    "stats": {
+      "hp": 22,
+      "str": 4,
+      "mag": 19,
+      "skl": 18,
+      "spd": 18,
+      "lck": 13,
+      "def": 8,
+      "res": 15
+    },
+    "growths": {
+      "hp": 45,
+      "str": 10,
+      "mag": 55,
+      "skl": 40,
+      "spd": 40,
+      "lck": 70,
+      "def": 25,
+      "res": 35
+    },
+    "statModifiers": {
+      "str": -2,
+      "mag": 4,
+      "skl": 0,
+      "spd": 1,
+      "lck": 0,
+      "def": -2,
+      "res": 1
+    },
+    "startingSkills": [
+      "Magic +2",
+      "Focus",
+      "Rally Magic"
+    ],
+    "innateWeaknesses": [],
+    "gender": "F",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "cleric",
+      "pegasus_knight",
+      "troubadour"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 27,
+        "str": 5,
+        "mag": 24,
+        "skl": 22,
+        "spd": 22,
+        "lck": 17,
+        "def": 10,
+        "res": 18
+      },
+      "lunatic": {
+        "hp": 32,
+        "str": 5,
+        "mag": 28,
+        "skl": 25,
+        "spd": 25,
+        "lck": 21,
+        "def": 12,
+        "res": 20
+      }
+    }
+  },
+  {
+    "id": "yenfay",
+    "name": "Yen’fay",
+    "game": "Awakening",
+    "class": "swordmaster",
+    "joinChapter": "Paralogue 21",
+    "level": 20,
+    "stats": {
+      "hp": 40,
+      "str": 23,
+      "mag": 3,
+      "skl": 28,
+      "spd": 27,
+      "lck": 28,
+      "def": 15,
+      "res": 14
+    },
+    "growths": {
+      "hp": 60,
+      "str": 45,
+      "mag": 10,
+      "skl": 45,
+      "spd": 50,
+      "lck": 60,
+      "def": 30,
+      "res": 20
+    },
+    "statModifiers": {
+      "str": 1,
+      "mag": -2,
+      "skl": 2,
+      "spd": 4,
+      "lck": 0,
+      "def": -1,
+      "res": -2
+    },
+    "startingSkills": [
+      "Avoid +10",
+      "Swordfaire",
+      "Vantage",
+      "Astra"
+    ],
+    "innateWeaknesses": [],
+    "gender": "M",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "myrmidon",
+      "wyvern_rider",
+      "archer"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 46,
+        "str": 27,
+        "mag": 4,
+        "skl": 32,
+        "spd": 32,
+        "lck": 32,
+        "def": 17,
+        "res": 16
+      },
+      "lunatic": {
+        "hp": 52,
+        "str": 31,
+        "mag": 4,
+        "skl": 35,
+        "spd": 36,
+        "lck": 35,
+        "def": 19,
+        "res": 18
+      }
+    }
+  },
+  {
+    "id": "aversa",
+    "name": "Aversa",
+    "game": "Awakening",
+    "class": "dark_flier",
+    "joinChapter": "Paralogue 22",
+    "level": 20,
+    "stats": {
+      "hp": 36,
+      "str": 19,
+      "mag": 25,
+      "skl": 21,
+      "spd": 22,
+      "lck": 26,
+      "def": 16,
+      "res": 19
+    },
+    "growths": {
+      "hp": 45,
+      "str": 25,
+      "mag": 45,
+      "skl": 35,
+      "spd": 40,
+      "lck": 65,
+      "def": 30,
+      "res": 30
+    },
+    "statModifiers": {
+      "str": -1,
+      "mag": 3,
+      "skl": 1,
+      "spd": 1,
+      "lck": -2,
+      "def": 0,
+      "res": 0
+    },
+    "startingSkills": [
+      "Speed +2",
+      "Relief",
+      "Rally Movement",
+      "Galeforce",
+      "Shadowgift"
+    ],
+    "innateWeaknesses": [],
+    "gender": "F",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "pegasus_knight",
+      "wyvern_rider",
+      "dark_mage"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 41,
+        "str": 21,
+        "mag": 29,
+        "skl": 24,
+        "spd": 26,
+        "lck": 30,
+        "def": 18,
+        "res": 21
+      },
+      "lunatic": {
+        "hp": 46,
+        "str": 23,
+        "mag": 32,
+        "skl": 28,
+        "spd": 29,
+        "lck": 34,
+        "def": 20,
+        "res": 24
+      }
+    }
+  },
+  {
+    "id": "priam",
+    "name": "Priam",
+    "game": "Awakening",
+    "class": "hero",
+    "joinChapter": "Paralogue 23",
+    "level": 20,
+    "stats": {
+      "hp": 52,
+      "str": 32,
+      "mag": 2,
+      "skl": 33,
+      "spd": 28,
+      "lck": 35,
+      "def": 31,
+      "res": 22
+    },
+    "growths": {
+      "hp": 80,
+      "str": 60,
+      "mag": 10,
+      "skl": 40,
+      "spd": 30,
+      "lck": 50,
+      "def": 40,
+      "res": 10
+    },
+    "statModifiers": {
+      "str": 3,
+      "mag": -2,
+      "skl": 1,
+      "spd": 0,
+      "lck": 0,
+      "def": 2,
+      "res": -2
+    },
+    "startingSkills": [
+      "Swordbreaker",
+      "Lancebreaker",
+      "Axebreaker",
+      "Sol",
+      "Luna"
+    ],
+    "innateWeaknesses": [],
+    "gender": "M",
+    "baseWeaponRanks": {},
+    "supports": [],
+    "reclassOptions": [
+      "mercenary",
+      "myrmidon",
+      "fighter"
+    ],
+    "baseStatsByDifficulty": {
+      "hard": {
+        "hp": 58,
+        "str": 37,
+        "mag": 3,
+        "skl": 36,
+        "spd": 31,
+        "lck": 38,
+        "def": 34,
+        "res": 23
+      },
+      "lunatic": {
+        "hp": 58,
+        "str": 37,
+        "mag": 3,
+        "skl": 36,
+        "spd": 32,
+        "lck": 41,
+        "def": 34,
+        "res": 24
+      }
+    }
   }
 ]

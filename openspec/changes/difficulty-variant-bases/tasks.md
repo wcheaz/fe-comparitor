@@ -43,7 +43,7 @@
 
 ## 4. Update units.json with difficulty-variant data
 
-- [ ] **4.1 Add `baseStatsByDifficulty` to the 17 variant Awakening units**
+- [x] **4.1 Add `baseStatsByDifficulty` to the 17 variant Awakening units**
   - Scope: `data/awakening/units.json`
   - Change: Each of the 17 variant units gains a `baseStatsByDifficulty` field with computed personal bases. No other fields on any unit change.
   - Done when:
