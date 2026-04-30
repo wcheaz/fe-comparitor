@@ -15,6 +15,8 @@ const classPillVariants = cva(
         variants: {
             variant: {
                 default: "pill-variant-class-default",
+                unpromoted: "pill-variant-class-unpromoted",
+                promoted: "pill-variant-class-promoted",
             },
             size: {
                 default: "h-6 py-1 px-2",
