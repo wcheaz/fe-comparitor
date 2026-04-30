@@ -393,7 +393,7 @@ export function getClassChangeOptions(unit: Unit, classes: Class[]): Class[] {
   sortedOptions.sort((a, b) => {
     const tierA = typeof a.tier === 'number' ? a.tier : 1;
     const tierB = typeof b.tier === 'number' ? b.tier : 1;
-    return tierB - tierA;
+    return tierA - tierB || a.name.localeCompare(b.name);
   });
 
   return sortedOptions;
