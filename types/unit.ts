@@ -62,6 +62,7 @@ export interface Unit {
   prf?: string[]; // Preferred/Unique weapons only this unit can use
   innateWeaknesses?: string[]; // Awakening-specific innate weaknesses
   startingSkills?: string[]; // Awakening-specific starting skills
+  baseStatsByDifficulty?: Record<string, UnitStats>;
 }
 
 export interface Class {

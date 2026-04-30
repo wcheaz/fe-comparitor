@@ -1,6 +1,6 @@
 ## 1. Freeze shared contracts
 
-- [ ] **1.1 Add `baseStatsByDifficulty` to the Unit interface**
+- [x] **1.1 Add `baseStatsByDifficulty` to the Unit interface**
   - Scope: `types/unit.ts`
   - Change: The `Unit` interface gains an optional field `baseStatsByDifficulty?: Record<string, UnitStats>`. No other fields change.
   - Done when:
