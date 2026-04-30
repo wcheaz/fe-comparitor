@@ -18,7 +18,7 @@
 
 ## 4. ComparisonGrid Integration
 
-- [ ] 4.1 Add the "Class Change Options" row to the Unit Details table in `components/features/ComparisonGrid.tsx`. Insert it after the "Class" row (after line 578) and before the "Join Chapter" row (line 579). Import `ClassChangeOptionsRow`. The row label is "Class Change Options". Use the same conditional rendering pattern as other rows: only render when `units.some(u => getClassChangeOptions(u, classes).length > 0)`. For units with no options in a visible row, display "None" as muted text.
+- [x] 4.1 Add the "Class Change Options" row to the Unit Details table in `components/features/ComparisonGrid.tsx`. Insert it after the "Class" row (after line 578) and before the "Join Chapter" row (line 579). Import `ClassChangeOptionsRow`. The row label is "Class Change Options". Use the same conditional rendering pattern as other rows: only render when `units.some(u => getClassChangeOptions(u, classes).length > 0)`. For units with no options in a visible row, display "None" as muted text.
       **Done when**: The row renders in the correct position, shows tier-colored class pills for units with options, shows "None" for units without options, and hides entirely when no units have options. Verify by running the dev server and visually confirming with an Awakening unit (e.g., Chrom) and a GBA unit side by side. Stop and hand off if the row causes layout breakage or the conditional visibility logic is incorrect.
 
 ## 5. Remove PromotionOptionsDisplay

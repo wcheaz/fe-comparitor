@@ -4,12 +4,13 @@ import { Unit, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { StatTable } from './StatTable';
 import { ClassSkillsRow } from './ClassSkillsRow';
 import { PossibleSkillsRow } from './PossibleSkillsRow';
+import { ClassChangeOptionsRow } from './ClassChangeOptionsRow';
 import SkillPill from '@/components/ui/SkillPill';
 import SupportPill from '@/components/ui/SupportPill';
 import ClassPill from '@/components/ui/ClassPill';
 import MovementTypePill from '@/components/ui/MovementTypePill';
 import AffinityPill from '@/components/ui/AffinityPill';
-import { getMinLevel, getMaxLevel, getEffectiveBaseStats, getEffectiveGrowths } from '@/lib/stats';
+import { getMinLevel, getMaxLevel, getEffectiveBaseStats, getEffectiveGrowths, getClassChangeOptions } from '@/lib/stats';
 import { getAllClasses, getAllUnits } from '@/lib/data';
 import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
@@ -576,6 +577,23 @@ export function ComparisonGrid({
                     );
                   })}
                 </tr>
+                {units.some(u => getClassChangeOptions(u, classes).length > 0) && (
+                  <tr className="border-b hover:bg-muted/50">
+                    <td className="p-2 font-medium align-top">Class Change Options</td>
+                    {units.map((unit) => {
+                      const options = getClassChangeOptions(unit, classes);
+                      return (
+                        <td key={`class-change-${unit.id}`} className="text-center p-2 align-top">
+                          {options.length > 0 ? (
+                            <ClassChangeOptionsRow unit={unit} classes={classes} />
+                          ) : (
+                            <span className="text-muted-foreground">None</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )}
                 <tr className="border-b hover:bg-muted/50">
                   <td className="p-2 font-medium">Join Chapter</td>
                   {units.map((unit) => (
