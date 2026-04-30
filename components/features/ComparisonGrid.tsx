@@ -55,8 +55,8 @@ export function ComparisonGrid({
   const [classes, setClasses] = React.useState<Class[]>([]);
   const [allUnits, setAllUnits] = React.useState<Unit[]>([]);
 
-  const [showEffectiveGrowths, setShowEffectiveGrowths] = useState(false);
-  const [showEffectiveBases, setShowEffectiveBases] = useState(false);
+  const [showEffectiveGrowths, setShowEffectiveGrowths] = useState(true);
+  const [showEffectiveBases, setShowEffectiveBases] = useState(true);
 
   const hasClassGrowths = React.useMemo(() => {
     return units.some(unit => {
