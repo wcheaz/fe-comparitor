@@ -8,7 +8,7 @@
     - `npx tsc --noEmit` exits 0
   - Stop and hand off if: `UnitStats` type cannot be used as a `Record` value type.
 
-- [ ] **1.2 Populate `baseStatsByDifficulty` in `transformJsonToUnit`**
+- [x] **1.2 Populate `baseStatsByDifficulty` in `transformJsonToUnit`**
   - Scope: `lib/data.ts`
   - Change: `transformJsonToUnit()` reads `rawUnit.baseStatsByDifficulty` and assigns it to the `Unit` object when present. When absent, the field is not set.
   - Done when:

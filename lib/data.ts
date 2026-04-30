@@ -152,6 +152,17 @@ function transformJsonToUnit(rawUnit: any): Unit {
     });
   }
 
+  let baseStatsByDifficulty: Record<string, UnitStats> | undefined;
+  if (rawUnit.baseStatsByDifficulty) {
+    baseStatsByDifficulty = {};
+    for (const [difficulty, dStats] of Object.entries(rawUnit.baseStatsByDifficulty)) {
+      baseStatsByDifficulty[difficulty] = {};
+      for (const [key, value] of Object.entries(dStats as Record<string, number>)) {
+        (baseStatsByDifficulty[difficulty] as Record<string, number>)[key] = value;
+      }
+    }
+  }
+
   // Create base unit object
   const unit: Unit = {
     id: rawUnit.id,
@@ -175,7 +186,8 @@ function transformJsonToUnit(rawUnit: any): Unit {
     dragonVein: rawUnit.dragonVein || false,
     prf: rawUnit.prf || [],
     innateWeaknesses: rawUnit.innateWeaknesses || [],
-    startingSkills: rawUnit.startingSkills || []
+    startingSkills: rawUnit.startingSkills || [],
+    ...(baseStatsByDifficulty ? { baseStatsByDifficulty } : {})
   };
 
   // Apply normalization to standardize stat keys and handle missing stats
