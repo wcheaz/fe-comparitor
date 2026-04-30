@@ -28,9 +28,11 @@ interface StatProgressionTableProps {
   reclassEvents: ReclassEvent[];
   onPromotionEventsChange: (events: PromotionEvent[]) => void;
   onReclassEventsChange: (events: ReclassEvent[]) => void;
+  selectedDifficulty?: string;
   otherUnit?: Unit;
   otherUnitPromotionEvents?: PromotionEvent[];
   otherUnitReclassEvents?: ReclassEvent[];
+  otherUnitSelectedDifficulty?: string;
   hidePreJoinRows?: boolean;
 }
 
@@ -52,7 +54,7 @@ function effectiveStartLevel(u: Unit): number {
   return u.level;
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, hidePreJoinRows }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
@@ -89,7 +91,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     const maxLevelFromUnit = Math.max(40, internalLvls);
     const maxLevel = expandToLevel100 ? Math.max(maxLevelFromUnit, 100) : maxLevelFromUnit;
 
-    const progression = generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents, reclassEvents);
+    const progression = generateProgressionArray(unit, minLevel, maxLevel, classes, promotionEvents, reclassEvents, selectedDifficulty);
 
     const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];
     const excludedStats = new Set(['mov', 'con', 'bld', 'aid']);
@@ -118,7 +120,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     }
 
     return { rows, statKeys: displayStats };
-  }, [unit, expandToLevel100, classes, promotionEvents, reclassEvents]);
+  }, [unit, expandToLevel100, classes, promotionEvents, reclassEvents, selectedDifficulty]);
 
   const otherUnitProgressionMap = useMemo(() => {
     if (!otherUnit) return new Map<number, ProgressionRow>();
@@ -141,7 +143,8 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
       otherMaxLevel,
       classes,
       otherUnitPromotionEvents || [],
-      otherUnitReclassEvents || []
+      otherUnitReclassEvents || [],
+      otherUnitSelectedDifficulty
     );
 
     const map = new Map<number, ProgressionRow>();
@@ -157,7 +160,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
       });
     }
     return map;
-  }, [otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, classes, expandToLevel100]);
+  }, [otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, classes, expandToLevel100, otherUnitSelectedDifficulty]);
 
   const filteredRows = useMemo(() => {
     if (!unit) return progressionData.rows;

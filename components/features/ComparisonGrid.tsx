@@ -25,6 +25,8 @@ interface ComparisonGridProps {
   reclassEvents?: Record<string, ReclassEvent[]>;
   onPromotionEventsChange?: (events: Record<string, PromotionEvent[]>) => void;
   onReclassEventsChange?: (events: Record<string, ReclassEvent[]>) => void;
+  selectedDifficulties?: Record<string, string>;
+  onSelectedDifficultiesChange?: (difficulties: Record<string, string>) => void;
   showStats?: boolean;
   showGrowths?: boolean;
   className?: string;
@@ -36,6 +38,8 @@ export function ComparisonGrid({
   reclassEvents,
   onPromotionEventsChange,
   onReclassEventsChange,
+  selectedDifficulties,
+  onSelectedDifficultiesChange,
   showStats = true,
   showGrowths = true,
   className

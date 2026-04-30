@@ -68,7 +68,7 @@
 
 ## 6. Add difficulty state and UI selector
 
-- [ ] **6.1 Add per-unit difficulty state to comparator page and pass to child components**
+- [x] **6.1 Add per-unit difficulty state to comparator page and pass to child components**
   - Scope: `app/comparator/page.tsx`
   - Change: Add `selectedDifficulties` state (`Record<string, string>`) to the comparator page. Pass it as a new prop to `ComparisonGrid` and `StatProgressionTable`. Provide a setter callback so children can update the difficulty for a specific unit.
   - Done when:

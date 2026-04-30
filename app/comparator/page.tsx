@@ -12,6 +12,7 @@ export default function ComparatorPage() {
   const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
   const [hidePreJoinRows, setHidePreJoinRows] = useState(false);
+  const [selectedDifficulties, setSelectedDifficulties] = useState<Record<string, string>>({});
   const maxUnits = 2;
 
   const handleUnitSelect = (unit: Unit) => {
@@ -62,6 +63,8 @@ export default function ComparatorPage() {
             reclassEvents={reclassEvents}
             onPromotionEventsChange={handlePromotionEventsChange}
             onReclassEventsChange={handleReclassEventsChange}
+            selectedDifficulties={selectedDifficulties}
+            onSelectedDifficultiesChange={setSelectedDifficulties}
             showStats={true}
             showGrowths={true}
           />
@@ -103,10 +106,12 @@ export default function ComparatorPage() {
                           onReclassEventsChange={(events) => {
                             setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
                           }}
+                          selectedDifficulty={selectedDifficulties[unit.id]}
                           {...(otherUnit ? {
                             otherUnit,
                             otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
                             otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
+                            otherUnitSelectedDifficulty: selectedDifficulties[otherUnit.id],
                             hidePreJoinRows,
                           } : {})}
                         />
