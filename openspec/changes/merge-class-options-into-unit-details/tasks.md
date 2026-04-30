@@ -28,8 +28,8 @@
 
 ## 6. Sort Classes by Tier (Ascending) then Alphabetically
 
-- [x] 6.1 Change the sort order in `getClassChangeOptions` (`lib/stats.ts`) from tier descending to tier ascending (unpromoted first, promoted second), then alphabetically by `cls.name` as a secondary sort. Replace the current sort (`tierB - tierA`) with a two-key sort: primary key `tierA - tierB` (ascending), secondary key `a.name.localeCompare(b.name)`. Trainee classes (tier 0) sort before unpromoted (tier 1) which sorts before promoted (tier 2).
-      **Done when**: For any unit, all unpromoted class pills appear first (alphabetized), followed by all promoted class pills (alphabetized). Verify by running the dev server and confirming the sort order for Chrom (Archer, Cavalier, Lord — unpromoted first; then Bow Knight, Great Knight, Great Lord, Paladin, Sniper — promoted second, each group alphabetized). `npm run build` passes.
+- [x] 6.1 Change the sort order in `getClassChangeOptions` (`lib/stats.ts`) to group classes by tier, sort each tier group alphabetically, then concatenate from lowest tier to highest. Implementation: group classes into a `Map<number, Class[]>` keyed by tier value (0=trainee, 1=unpromoted, 2=promoted, etc.), sort each group's array by `cls.name` via `localeCompare`, then flatten by iterating tier keys in ascending order. This approach generalizes to any number of promotion tiers (e.g., games with trainee→base→promoted or more tiers).
+      **Done when**: For any unit, all trainee class pills appear first (alphabetized), then unpromoted (alphabetized), then promoted (alphabetized). Verify by running the dev server and confirming the sort order for Chrom (Archer, Cavalier — unpromoted; Bow Knight, Great Knight, Great Lord, Paladin, Sniper — promoted, each group alphabetized). `npm run build` passes.
 
 ## 7. Remove PromotionOptionsDisplay
 

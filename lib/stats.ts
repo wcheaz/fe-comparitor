@@ -389,12 +389,24 @@ export function getClassChangeOptions(unit: Unit, classes: Class[]): Class[] {
     });
   }
 
-  const sortedOptions = Array.from(optionsMap.values());
-  sortedOptions.sort((a, b) => {
-    const tierA = typeof a.tier === 'number' ? a.tier : 1;
-    const tierB = typeof b.tier === 'number' ? b.tier : 1;
-    return tierA - tierB || a.name.localeCompare(b.name);
-  });
+  const tierMap = new Map<number, Class[]>();
+  for (const cls of optionsMap.values()) {
+    const tier = cls.type === 'trainee' ? 0 : cls.type === 'promoted' ? 2 : 1;
+    const group = tierMap.get(tier);
+    if (group) {
+      group.push(cls);
+    } else {
+      tierMap.set(tier, [cls]);
+    }
+  }
+
+  const sortedOptions: Class[] = [];
+  const sortedTiers = Array.from(tierMap.keys()).sort((a, b) => a - b);
+  for (const tier of sortedTiers) {
+    const group = tierMap.get(tier)!;
+    group.sort((a, b) => a.name.localeCompare(b.name));
+    sortedOptions.push(...group);
+  }
 
   return sortedOptions;
 }
