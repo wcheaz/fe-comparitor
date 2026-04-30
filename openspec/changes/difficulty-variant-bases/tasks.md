@@ -31,7 +31,7 @@
 
 ## 3. Parse and compute difficulty-variant personal bases
 
-- [ ] **3.1 Create difficulty-variant personal bases parser**
+- [x] **3.1 Create difficulty-variant personal bases parser**
   - Scope: `dev/parse_awakening_difficulty_bases.py`
   - Change: New script reads `dev/awakening_difficulty_bases_raw.json` and `dev/awakening_class_bases_raw.json`, strips ` (H)`/` (L)` suffixes from names, maps to `hard`/`lunatic` keys, strips skill bonuses (split on `+`), subtracts class bases from visible bases per difficulty, writes to `dev/awakening_difficulty_personal_bases.json`. Validates every personal base ≤ visible base. Warns and skips unexpected unit names.
   - Done when:
