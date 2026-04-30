@@ -759,10 +759,12 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             <span className="text-blue-600">✨</span>
             <span>Promotion level</span>
           </div>
-          <div className="flex items-center space-x-1">
-            <span className="text-gray-400">-</span>
-            <span>Unit not yet available at this level</span>
-          </div>
+          {filteredRows.some(r => r.isSkipped) && (
+            <div className="flex items-center space-x-1">
+              <span className="text-gray-400">-</span>
+              <span>Unit not yet available at this level</span>
+            </div>
+          )}
           <div className="flex items-center space-x-1">
             <span className="text-green-600 font-bold">20</span>
             <span>Stat capped</span>
@@ -771,6 +773,18 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             <div className="w-3 h-3 bg-blue-100 border border-blue-300"></div>
             <span>Promotion level row</span>
           </div>
+          {otherUnit && (
+            <>
+              <div className="flex items-center space-x-1">
+                <div className="w-3 h-3 bg-green-500/20 border border-green-400"></div>
+                <span>Higher stat</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <div className="w-3 h-3 bg-yellow-500/20 border border-yellow-400"></div>
+                <span>Equal stats</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

@@ -28,7 +28,7 @@
 
 ## 5. StatProgressionTable — Legend Updates
 
-- [ ] 5.1 Update the legend section (around line 680). Add two conditional entries that render only when `otherUnit` is provided: a green swatch (`bg-green-500/20`) labeled "Higher stat" and a yellow swatch (`bg-yellow-500/20`) labeled "Equal stats". Conditionally render the existing "Unit not yet available at this level" entry only when at least one visible row has `isSkipped: true` (i.e., `filteredRows.some(r => r.isSkipped)`). When filtering removes all skipped rows, this entry disappears.
+- [x] 5.1 Update the legend section (around line 680). Add two conditional entries that render only when `otherUnit` is provided: a green swatch (`bg-green-500/20`) labeled "Higher stat" and a yellow swatch (`bg-yellow-500/20`) labeled "Equal stats". Conditionally render the existing "Unit not yet available at this level" entry only when at least one visible row has `isSkipped: true` (i.e., `filteredRows.some(r => r.isSkipped)`). When filtering removes all skipped rows, this entry disappears.
   - Done when: Two-unit mode shows "Higher stat" and "Equal stats" legend entries. The "Unit not yet available" entry is hidden when filtering removes all skipped rows. Single-unit mode shows only the original legend entries.
   - Verify by: `npm run build` passes. In the browser, confirm legend adapts correctly for one-unit and two-unit modes.
   - Stop and hand off if: The legend is rendered by a shared component that cannot be conditionally modified.
