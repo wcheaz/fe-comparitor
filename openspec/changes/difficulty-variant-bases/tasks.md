@@ -19,7 +19,7 @@
 
 ## 2. Scrape difficulty-variant raw data
 
-- [ ] **2.1 Create difficulty-variant unit bases scraper**
+- [x] **2.1 Create difficulty-variant unit bases scraper**
   - Scope: `dev/scrape_awakening_difficulty_bases.py`
   - Change: New script fetches the same Serenes Forest table as the existing scraper, but extracts only rows with `(H)` or `(L)` in the Name field, saving to `dev/awakening_difficulty_bases_raw.json`. Skill bonuses (e.g. `14+2`) are preserved as-is in raw output.
   - Done when:
