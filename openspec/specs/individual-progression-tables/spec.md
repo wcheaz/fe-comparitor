@@ -9,17 +9,17 @@ The system SHALL provide a `StatProgressionTable` component that accepts a singl
 - **AND** no `mag`, `dex`, `cha`, `bld`, or `con` columns appear
 
 #### Scenario: Table shows all levels from 1 to max
-- **WHEN** a unit with base level 5 and max level 20 is rendered
+- **WHEN** a unit with base level 5 and max level 20 is rendered alone (no `otherUnit`)
 - **THEN** the table displays rows from level 1 to level 20
 - **AND** levels 1–4 show "-" for all stat cells
 
 #### Scenario: Pre-join levels display dash
-- **WHEN** a unit joins at level 10
+- **WHEN** a unit joins at level 10 and is rendered alone (no `otherUnit`)
 - **THEN** levels 1–9 render "-" in every stat cell for that unit's table
 
 #### Scenario: Promotion levels are highlighted within a single unit
 - **WHEN** a unit promotes at level 10 and the table renders the level 10 row
-- **THEN** the row is highlighted as a promotion level (blue background, sparkle icon)
+- **THEN** the row is highlighted as a promotion level (sparkle icon visible)
 - **AND** subsequent rows show the promoted class stats
 
 #### Scenario: Reclass events are handled within a single unit
@@ -33,22 +33,24 @@ The system SHALL provide a `StatProgressionTable` component that accepts a singl
 - **AND** the stat does not exceed the cap in subsequent rows
 
 ### Requirement: Dual Independent Progression Table Layout
-The comparator page SHALL render two independent `StatProgressionTable` instances side-by-side, one per selected unit, each inside its own `Card`. The two tables do not share row state, alignment, or stat key sets.
+The comparator page SHALL render two independent `StatProgressionTable` instances side-by-side, one per selected unit, each inside its own `Card`. When two units are selected, the page SHALL pass each table the other unit and its promotion/reclass events as props so that each table can compute cross-unit stat highlights. The two tables still render their own stat key sets independently and do not share row state or alignment.
 
 #### Scenario: Two units with different stat sets
 - **WHEN** unit A has `{ hp, str, skl, spd, lck, def, res }` and unit B has `{ hp, str, mag, dex, spd, lck, def, res, cha, bld }`
 - **THEN** unit A's table shows 7 columns and unit B's table shows 10 columns
 - **AND** the tables render independently with no shared stat reconciliation
+- **AND** cells at matching levels are highlighted green or yellow based on cross-unit comparison
 
 #### Scenario: Two units with different level ranges
 - **WHEN** unit A starts at level 1 and unit B starts at level 10
-- **THEN** unit A's table shows rows from level 1 and unit B's table shows rows from level 1 with "-" for levels 1–9
-- **AND** the tables have independent row counts and no cross-table alignment
+- **THEN** both tables hide rows below level 10 (valid-level filtering)
+- **AND** rows at level 10 and above are highlighted based on cross-unit stat comparison
 
-#### Scenario: No stat highlighting in per-unit tables
+#### Scenario: Cross-unit stat highlighting in per-unit tables
 - **WHEN** two units are selected and their per-unit tables are rendered
-- **THEN** no cell in either table is highlighted green or yellow based on cross-unit comparison
-- **AND** stat highlighting is only present in the `ComparisonGrid` base/growth tables
+- **THEN** cells where one unit's stat is strictly higher SHALL have `bg-green-500/20`
+- **AND** cells where both units have equal non-zero stats SHALL have `bg-yellow-500/20`
+- **AND** cells where no valid comparison exists (missing stat, skipped row, no matching level) SHALL have no comparison highlight
 
 ### Requirement: Maximum Two Unit Selection
 The `UnitSelector` component SHALL enforce a maximum of 2 selected units. The `maxUnits` prop default SHALL be 2 on the comparator page.
