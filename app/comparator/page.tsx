@@ -5,7 +5,6 @@ import { Unit, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { StatProgressionTable } from '@/components/features/StatProgressionTable';
-import { PromotionOptionsDisplay } from '@/components/features/PromotionOptionsDisplay';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
@@ -66,15 +65,6 @@ export default function ComparatorPage() {
             showStats={true}
             showGrowths={true}
           />
-
-          {/* Promotion Options Display */}
-          {selectedUnits.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
-              {selectedUnits.map((unit) => (
-                <PromotionOptionsDisplay key={`promo-display-${unit.id}`} unit={unit} />
-              ))}
-            </div>
-          )}
 
           {/* Stat Progression Tables — one per unit */}
           {selectedUnits.length > 0 && (

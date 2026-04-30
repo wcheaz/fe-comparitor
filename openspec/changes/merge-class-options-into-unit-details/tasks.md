@@ -23,5 +23,5 @@
 
 ## 5. Remove PromotionOptionsDisplay
 
-- [ ] 5.1 Remove the `PromotionOptionsDisplay` render block from `app/comparator/page.tsx` (lines 71-77, the `<PromotionOptionsDisplay key={...} unit={unit} />` calls). Remove the import of `PromotionOptionsDisplay` from the same file. Do NOT delete the `PromotionOptionsDisplay.tsx` file itself (leave for follow-up cleanup).
+- [x] 5.1 Remove the `PromotionOptionsDisplay` render block from `app/comparator/page.tsx` (lines 71-77, the `<PromotionOptionsDisplay key={...} unit={unit} />` calls). Remove the import of `PromotionOptionsDisplay` from the same file. Do NOT delete the `PromotionOptionsDisplay.tsx` file itself (leave for follow-up cleanup).
       **Done when**: The standalone class change options card no longer appears on the comparator page. The Unit Details table's new "Class Change Options" row is the only place class options appear. Verify by running the dev server and confirming no duplicate display. `npm run build` passes with no errors.
