@@ -55,7 +55,7 @@
 
 ## 5. Thread difficulty through stat calculation functions
 
-- [ ] **5.1 Add `getPersonalBasesForDifficulty` helper and extend stat functions with optional difficulty parameter**
+- [x] **5.1 Add `getPersonalBasesForDifficulty` helper and extend stat functions with optional difficulty parameter**
   - Scope: `lib/stats.ts`
   - Change: Add `getPersonalBasesForDifficulty(unit, difficulty?)` that returns `unit.baseStatsByDifficulty[difficulty]` when present, else `unit.stats`. Add optional `difficulty?` parameter to `getEffectiveBaseStats`, `calculateAverageStats`, `calculateAverageStatsAtLevel`, `generateProgressionArray`, and `compareUnits`. Each function passes difficulty through to the helper. When `difficulty` is undefined, behavior is identical to current behavior.
   - Done when:

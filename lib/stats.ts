@@ -1,11 +1,19 @@
 import { Unit, UnitStats, PromotionEvent, ReclassEvent, Class } from '@/types/unit';
 
-export function getEffectiveBaseStats(unit: Unit, classData: Class | undefined): UnitStats {
-  if (!classData || unit.game !== 'Awakening') return unit.stats;
+export function getPersonalBasesForDifficulty(unit: Unit, difficulty?: string): UnitStats {
+  if (difficulty && unit.baseStatsByDifficulty && unit.baseStatsByDifficulty[difficulty]) {
+    return unit.baseStatsByDifficulty[difficulty];
+  }
+  return unit.stats;
+}
+
+export function getEffectiveBaseStats(unit: Unit, classData: Class | undefined, difficulty?: string): UnitStats {
+  const personalBases = getPersonalBasesForDifficulty(unit, difficulty);
+  if (!classData || unit.game !== 'Awakening') return personalBases;
   const combined: UnitStats = {};
-  const allKeys = new Set([...Object.keys(unit.stats), ...Object.keys(classData.baseStats || {})]);
+  const allKeys = new Set([...Object.keys(personalBases), ...Object.keys(classData.baseStats || {})]);
   for (const key of allKeys) {
-    combined[key] = (unit.stats[key] || 0) + (classData.baseStats?.[key] || 0);
+    combined[key] = (personalBases[key] || 0) + (classData.baseStats?.[key] || 0);
   }
   return combined;
 }
@@ -28,8 +36,8 @@ export function getEffectiveGrowths(unit: Unit, classData: Class | undefined): U
  * @param targetLevel - The target level to calculate stats at
  * @returns UnitStats object with calculated average stats
  */
-export function calculateAverageStatsAtLevel(unit: Unit, level: number, classes?: Class[]): UnitStats {
-  return calculateAverageStats(unit, level, classes);
+export function calculateAverageStatsAtLevel(unit: Unit, level: number, classes?: Class[], difficulty?: string): UnitStats {
+  return calculateAverageStats(unit, level, classes, difficulty);
 }
 
 /**
@@ -40,14 +48,14 @@ export function calculateAverageStatsAtLevel(unit: Unit, level: number, classes?
  * @param targetLevel - The target level to calculate stats at
  * @returns UnitStats object with calculated average stats
  */
-export function calculateAverageStats(unit: Unit, targetLevel: number, classes?: Class[]): UnitStats {
+export function calculateAverageStats(unit: Unit, targetLevel: number, classes?: Class[], difficulty?: string): UnitStats {
   const averageStats: UnitStats = {};
   const levelDiff = targetLevel - unit.level;
 
   const classData = classes?.find(c => c.id === unit.class && c.game === unit.game);
   const isAwakening = unit.game === 'Awakening' && classData;
 
-  const baseStats = isAwakening ? getEffectiveBaseStats(unit, classData) : unit.stats;
+  const baseStats = isAwakening ? getEffectiveBaseStats(unit, classData, difficulty) : getPersonalBasesForDifficulty(unit, difficulty);
   const growths = isAwakening ? getEffectiveGrowths(unit, classData) : unit.growths;
 
   const allStatKeys = new Set([
@@ -85,9 +93,9 @@ export function calculateAverageStats(unit: Unit, targetLevel: number, classes?:
  * @param level - Level to compare stats at
  * @returns Object containing stat differences (unitA - unitB)
  */
-export function compareUnits(unitA: Unit, unitB: Unit, level: number): UnitStats {
-  const statsA = calculateAverageStats(unitA, level);
-  const statsB = calculateAverageStats(unitB, level);
+export function compareUnits(unitA: Unit, unitB: Unit, level: number, difficultyA?: string, difficultyB?: string): UnitStats {
+  const statsA = calculateAverageStats(unitA, level, undefined, difficultyA);
+  const statsB = calculateAverageStats(unitB, level, undefined, difficultyB);
 
   const differences: UnitStats = {};
 
@@ -434,7 +442,8 @@ export function generateProgressionArray(
   endLevel?: number,
   classes?: any[],
   promotionEvents: PromotionEvent[] = [],
-  reclassEvents: ReclassEvent[] = []
+  reclassEvents: ReclassEvent[] = [],
+  difficulty?: string
 ): Array<{
   stats: UnitStats;
   displayLevel: string;
@@ -523,12 +532,12 @@ export function generateProgressionArray(
   let currentClass = baseClass;
   let displayLevelNum = unit.level;
   let tier = unit.isPromoted ? 2 : (isTrainee ? 0 : 1);
-  let baseStatsForCurrentClass = { ...unit.stats };
+  let baseStatsForCurrentClass = { ...getPersonalBasesForDifficulty(unit, difficulty) };
   let startLevelForCurrentClass = displayLevelNum;
   const isAwakening = unit.game === "Awakening";
   let uncappedBaseStats: UnitStats | null = null;
   if (isAwakening) {
-    uncappedBaseStats = currentClass ? getEffectiveBaseStats(unit, currentClass) : { ...unit.stats };
+    uncappedBaseStats = currentClass ? getEffectiveBaseStats(unit, currentClass, difficulty) : { ...getPersonalBasesForDifficulty(unit, difficulty) };
   }
   
   let nextEventIndex = 0;
