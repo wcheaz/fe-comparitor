@@ -14,7 +14,7 @@
 
 ## 3. StatProgressionTable — Valid-Level Filtering
 
-- [ ] 3.1 Implement `effectiveStartLevel(unit)` helper: returns `1` if `unit.isPromoted === true` or `unit.level < 1`, otherwise returns `unit.level`. When `otherUnit` is provided, compute `minVisibleLevel = Math.max(effectiveStartLevel(unit), effectiveStartLevel(otherUnit))`. Apply the filter to `progressionData.rows` to exclude rows where `internalLevel < minVisibleLevel`. Store the filtered rows and use them for all downstream rendering. When `otherUnit` is absent, use unfiltered rows.
+- [x] 3.1 Implement `effectiveStartLevel(unit)` helper: returns `1` if `unit.isPromoted === true` or `unit.level < 1`, otherwise returns `unit.level`. When `otherUnit` is provided, compute `minVisibleLevel = Math.max(effectiveStartLevel(unit), effectiveStartLevel(otherUnit))`. Apply the filter to `progressionData.rows` to exclude rows where `internalLevel < minVisibleLevel`. Store the filtered rows and use them for all downstream rendering. When `otherUnit` is absent, use unfiltered rows.
   - Done when: Selecting a level 5 unit and a level 10 unit hides rows 1–9 from both tables. Selecting a single late-join unit still shows all rows with dashes.
   - Verify by: `npm run build` passes. In the browser, confirm two-unit filtering works and single-unit mode is unchanged.
   - Stop and hand off if: The `internalLevel` field is unreliable for comparison (e.g., negative trainee levels or display-level resets after promotion cause misalignment).

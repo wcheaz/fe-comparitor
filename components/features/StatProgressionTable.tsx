@@ -46,6 +46,11 @@ interface ProgressionRow {
   };
 }
 
+function effectiveStartLevel(u: Unit): number {
+  if (u.isPromoted === true || u.level < 1) return 1;
+  return u.level;
+}
+
 export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
@@ -152,6 +157,12 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     }
     return map;
   }, [otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, classes, expandToLevel100]);
+
+  const filteredRows = useMemo(() => {
+    if (!otherUnit || !unit) return progressionData.rows;
+    const minVisibleLevel = Math.max(effectiveStartLevel(unit), effectiveStartLevel(otherUnit));
+    return progressionData.rows.filter(row => row.internalLevel >= minVisibleLevel);
+  }, [progressionData.rows, otherUnit, unit]);
 
   if (!unit) {
     return (
@@ -667,7 +678,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             </tr>
           </thead>
           <tbody>
-            {progressionData.rows.map((row, rowIndex) => (
+            {filteredRows.map((row, rowIndex) => (
               <tr key={row.internalLevel} className={`${row.isPromotionLevel ? 'bg-blue-50' : ''} hover:bg-gray-50`}>
                 <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
                   {row.displayLevel}
