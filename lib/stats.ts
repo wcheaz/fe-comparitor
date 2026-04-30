@@ -362,8 +362,26 @@ export function getClassChangeOptions(unit: Unit, classes: Class[]): Class[] {
   getPromotions(unit.class);
 
   if (unit.game?.toLowerCase() === 'awakening' && unit.reclassOptions) {
-    const validReclasses = getValidReclassOptions(unit, classes);
-    validReclasses.forEach(classId => {
+    const expandedIds = new Set<string>();
+
+    for (const baseId of unit.reclassOptions) {
+      expandedIds.add(baseId);
+      const baseCls = classes.find(c => c.id === baseId && c.game === unit.game);
+      if (baseCls?.promotesTo) {
+        baseCls.promotesTo.forEach(promoId => expandedIds.add(promoId));
+      }
+    }
+
+    if (unit.reclassOptions.includes('tactician')) {
+      expandedIds.add('grandmaster');
+    }
+    if (unit.reclassOptions.includes('villager')) {
+      expandedIds.add('fighter');
+      expandedIds.add('mercenary');
+    }
+
+    expandedIds.forEach(classId => {
+      if (classId === unit.class) return;
       const cls = classes.find(c => c.id === classId && c.game === unit.game);
       if (cls) {
         optionsMap.set(cls.id, cls);
