@@ -652,11 +652,11 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
         })()}
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse border border-gray-300">
+      <div className="overflow-x-auto overflow-y-auto max-h-[70vh]">
+        <table className="min-w-full border-separate border-spacing-0">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium text-gray-900">
+            <tr>
+              <th className="border-t border-l border-b border-gray-300 px-4 py-2 text-left font-medium text-gray-900 sticky left-0 top-0 z-20 bg-gray-50">
                 Level
               </th>
               {activeStatKeys.map((statKey) => {
@@ -673,7 +673,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                 return (
                   <th
                     key={`header-${statKey}`}
-                    className="border border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400"
+                    className={`border-t border-b border-gray-300 px-4 py-2 text-center font-medium text-gray-900 bg-gray-100 border-l-4 border-l-gray-400 sticky top-0 z-10${statKey === activeStatKeys[activeStatKeys.length - 1] ? ' border-r border-gray-300' : ''}`}
                   >
                     {statLabel}
                   </th>
@@ -684,7 +684,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
           <tbody>
             {filteredRows.map((row, rowIndex) => (
               <tr key={row.internalLevel} className={`${row.isPromotionLevel ? 'bg-blue-50' : ''} hover:bg-gray-50`}>
-                <td className="border border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white">
+                <td className="border-l border-b border-gray-300 px-4 py-2 font-medium text-gray-900 sticky left-0 bg-white z-10">
                   {row.displayLevel}
                 </td>
                 {activeStatKeys.map((statKey) => {
@@ -726,7 +726,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                   return (
                     <td
                       key={`${row.internalLevel}-${statKey}`}
-                      className={`border border-gray-300 px-2 py-1 text-center text-sm ${highlightClass} ${isCapped ? 'text-green-600 font-bold' : ''} border-l-4 border-l-gray-400`}
+                      className={`border-b border-gray-300 px-2 py-1 text-center text-sm ${highlightClass} ${isCapped ? 'text-green-600 font-bold' : ''} border-l-4 border-l-gray-400${statKey === activeStatKeys[activeStatKeys.length - 1] ? ' border-r border-gray-300' : ''}`}
                     >
                       {shouldShowDash ? (
                         <span className="text-gray-400">-</span>
