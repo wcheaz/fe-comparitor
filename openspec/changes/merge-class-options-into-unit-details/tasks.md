@@ -13,7 +13,7 @@
 
 ## 3. ClassChangeOptionsRow Component
 
-- [ ] 3.1 Create `components/features/ClassChangeOptionsRow.tsx` following the pattern of `PossibleSkillsRow.tsx`. The component accepts `{ unit: Unit; classes: Class[] }`, calls `getClassChangeOptions(unit, classes)`, returns `null` if the result is empty, otherwise renders a `flex-wrap` layout of `ClassPill` components. Each pill receives a `variant` prop: `"promoted"` for classes where `cls.type === 'promoted'`, `"unpromoted"` for classes where `cls.type === 'unpromoted'` or `cls.type === 'trainee'`.
+- [x] 3.1 Create `components/features/ClassChangeOptionsRow.tsx` following the pattern of `PossibleSkillsRow.tsx`. The component accepts `{ unit: Unit; classes: Class[] }`, calls `getClassChangeOptions(unit, classes)`, returns `null` if the result is empty, otherwise renders a `flex-wrap` layout of `ClassPill` components. Each pill receives a `variant` prop: `"promoted"` for classes where `cls.type === 'promoted'`, `"unpromoted"` for classes where `cls.type === 'unpromoted'` or `cls.type === 'trainee'`.
       **Done when**: The component file exists, imports `getClassChangeOptions` and `ClassPill`, renders tier-colored pills, and TypeScript compiles. Verify with `npm run build`.
 
 ## 4. ComparisonGrid Integration
