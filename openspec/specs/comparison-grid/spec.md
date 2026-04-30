@@ -36,3 +36,22 @@ Units with no possible skills in a visible row SHALL display "None" as muted tex
 #### Scenario: Possible Skills row hidden when no units have reclass options
 - **WHEN** the Comparison Grid displays only GBA units without `reclassOptions`
 - **THEN** the "Possible Skills" row SHALL NOT render
+
+### Requirement: Display Class Change Options row in Unit Details table
+The ComparisonGrid Unit Details table SHALL include a "Class Change Options" row rendered after the "Class" row and before the "Join Chapter" row. For each unit, the row SHALL display all promotion and reclass target classes as tier-color-coded `ClassPill` components.
+
+Each `ClassPill` in this row SHALL receive a variant prop based on the class's tier:
+- `variant="promoted"` for classes with `type: 'promoted'`
+- `variant="unpromoted"` for classes with `type: 'unpromoted'` or `type: 'trainee'`
+
+The row SHALL only render when at least one displayed unit has at least one class change option. Units with no class change options in a visible row SHALL display "None" as muted text.
+
+#### Scenario: Class Change Options row renders with tier-colored pills
+- **WHEN** the ComparisonGrid displays an Awakening unit with both promotion and reclass options
+- **THEN** the "Class Change Options" row SHALL render between the "Class" row and "Join Chapter" row
+- **AND** each promoted class SHALL render as a `ClassPill` with `variant="promoted"` (purple/violet tones)
+- **AND** each unpromoted class SHALL render as a `ClassPill` with `variant="unpromoted"` (amber/orange tones)
+
+#### Scenario: Class Change Options row hidden when no units have options
+- **WHEN** all displayed units have no `promotesTo` targets and no `reclassOptions`
+- **THEN** the "Class Change Options" row SHALL NOT render

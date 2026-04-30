@@ -1,0 +1,1 @@
+/home/ncheaz/git/fe-comparator/openspec/changes/merge-class-options-into-unit-details/tasks.md

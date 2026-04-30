@@ -4,14 +4,14 @@
 
 Displays all promotion and reclass class options for a unit within the Unit Details table as tier-color-coded `ClassPill` components. This row replaces the standalone `PromotionOptionsDisplay` card.
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Class Change Options row in Unit Details table
 The ComparisonGrid Unit Details table SHALL include a "Class Change Options" row that displays all classes a unit can change into via promotion chains and reclass options. The row SHALL render after the "Class" row and before the "Join Chapter" row.
 
 For each unit column, the system SHALL:
 1. Walk the unit's base class `promotesTo` chain recursively to collect all promotion target classes
-2. If the unit's game is "awakening" and the unit has `reclassOptions`, call `getValidReclassOptions()` to collect valid reclass target classes (including their expanded `promotesTo` chains)
+2. If the unit's game is "awakening" and the unit has `reclassOptions`, expand ALL reclass-reachable classes without level/tier validation: iterate `reclassOptions`, add each base class, then walk each base class's `promotesTo` chain and add those classes too. Do NOT filter through `isValidReclass` — this display is informational and shows every class reachable through any combination of reclass + promotion, regardless of current level or tier.
 3. Merge both sets into a deduplicated collection keyed by class ID
 4. Exclude the unit's current base class from the collection
 5. Sort the result by tier descending (tier 2 first, then tier 1, then tier 0)
@@ -48,11 +48,17 @@ Units with no class change options in a visible row SHALL display "None" as mute
 - **THEN** that class SHALL render as a single ClassPill, not duplicated
 
 ### Requirement: Class Change Options row uses shared utility function
-The class option computation SHALL use a shared utility function `getClassChangeOptions(unit, classes)` exported from `lib/stats.ts`. This function SHALL return the same merged, deduplicated, tier-sorted class list used by the stat progression table's class change dropdown.
+The class option computation SHALL use a shared utility function `getClassChangeOptions(unit, classes)` exported from `lib/stats.ts`. This function SHALL return a merged, deduplicated, tier-sorted class list. Unlike the stat progression table's reclass validation (which uses `getValidReclassOptions` with level/tier checks), this function SHALL expand reclass options without validation to show all reachable classes.
 
-#### Scenario: Shared utility returns identical results to stat progression dropdown
-- **WHEN** `getClassChangeOptions(chrom, allClasses)` is called for an Awakening unit with reclass options
-- **THEN** the returned class list SHALL contain exactly the same classes (by ID) that appear in the stat progression table's class change dropdown for that unit
+#### Scenario: Low-level unit still shows all reclass-reachable classes
+- **WHEN** Chrom (Lord, level 1, `reclassOptions: ["lord", "cavalier", "archer"]`) is processed by `getClassChangeOptions`
+- **THEN** the result SHALL include Cavalier, Archer, and all their promoted classes (Paladin, Great Knight, Sniper, Bow Knight)
+- **AND** the result SHALL NOT be filtered by level or `isValidReclass`
+
+#### Scenario: Unit shows reclass promoted variants even when current tier blocks direct reclass to tier 2
+- **WHEN** Cherche (Wyvern Rider, tier 1, level 12, `reclassOptions: ["wyvern_rider", "troubadour", "cleric"]`) is processed
+- **THEN** the result SHALL include Troubadour, Cleric, and all their promoted classes (e.g., Valkyrie, War Cleric)
+- **AND** the tier 1→tier 2 reclass restriction in `isValidReclass` SHALL NOT apply to this display
 
 #### Scenario: Game gating is preserved
 - **WHEN** `getClassChangeOptions` is called for a non-Awakening unit

@@ -1,0 +1,19 @@
+{
+  "active": false,
+  "iteration": 10,
+  "minIterations": 1,
+  "maxIterations": 50,
+  "completionPromise": "COMPLETE",
+  "taskPromise": "READY_FOR_NEXT_TASK",
+  "tasksMode": true,
+  "tasksFile": "/home/ncheaz/git/fe-comparator/openspec/changes/merge-class-options-into-unit-details/tasks.md",
+  "promptFile": null,
+  "promptTemplate": null,
+  "noCommit": false,
+  "model": "",
+  "startedAt": "2026-04-30T18:08:01.982Z",
+  "resumedAt": "2026-04-30T19:27:25.871Z",
+  "completedAt": "2026-04-30T19:28:39.102Z",
+  "stoppedAt": null,
+  "exitReason": "completion_promise"
+}

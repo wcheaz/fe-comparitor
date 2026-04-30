@@ -37,9 +37,9 @@ The stat progression table (`StatProgressionTable.tsx`) already merges promotion
 
 **Choice**: Move the `unifiedOptions` computation from `PromotionOptionsDisplay` into a new exported function (e.g., `getClassChangeOptions`) in `lib/stats.ts`.
 
-**Rationale**: The same merged list of promotion + reclass targets is needed in two places: the new Unit Details table row and the stat progression table dropdown. Currently this logic is duplicated in `PromotionOptionsDisplay.unifiedOptions` and `StatProgressionTable`'s inline computation. Extracting it eliminates duplication and ensures both surfaces show identical results.
+**Rationale**: The merged list of promotion + reclass targets is needed in two places: the new Unit Details table row and the stat progression table dropdown. However, the two surfaces have different filtering needs. The stat progression table uses `getValidReclassOptions` with level/tier validation (correct for interactive event creation). The informational display should show ALL reachable classes without validation. Extracting the expansion logic into a shared utility ensures the informational display is consistent and testable, while the stat progression table continues to use its own validation.
 
-**Alternative considered**: Inline the logic in both `ComparisonGrid` and keep it in `StatProgressionTable`. Rejected because the two implementations could diverge.
+**Alternative considered**: Have both surfaces call `getValidReclassOptions`. Rejected because the informational display must show all reachable classes regardless of current level/tier. Low-level units like Chrom (level 1) and Robin (level 1) would incorrectly show zero reclass options, and units like Cherche (tier 1) would miss the promoted forms of their reclass targets.
 
 ### Decision 2: ClassPill gets two new CVA variants — `unpromoted` and `promoted`
 
