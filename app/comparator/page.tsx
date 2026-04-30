@@ -78,26 +78,36 @@ export default function ComparatorPage() {
           {/* Stat Progression Tables — one per unit */}
           {selectedUnits.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {selectedUnits.map((unit) => (
-                <Card key={`progression-${unit.id}`}>
-                  <CardHeader>
-                    <CardTitle>{unit.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <StatProgressionTable
-                      unit={unit}
-                      promotionEvents={promotionEvents[unit.id] || []}
-                      reclassEvents={reclassEvents[unit.id] || []}
-                      onPromotionEventsChange={(events) => {
-                        setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
-                      }}
-                      onReclassEventsChange={(events) => {
-                        setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
-                      }}
-                    />
-                  </CardContent>
-                </Card>
-              ))}
+              {selectedUnits.map((unit, index) => {
+                const otherUnit = selectedUnits.length === 2
+                  ? selectedUnits[index === 0 ? 1 : 0]
+                  : undefined;
+                return (
+                  <Card key={`progression-${unit.id}`}>
+                    <CardHeader>
+                      <CardTitle>{unit.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <StatProgressionTable
+                        unit={unit}
+                        promotionEvents={promotionEvents[unit.id] || []}
+                        reclassEvents={reclassEvents[unit.id] || []}
+                        onPromotionEventsChange={(events) => {
+                          setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                        }}
+                        onReclassEventsChange={(events) => {
+                          setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                        }}
+                        {...(otherUnit ? {
+                          otherUnit,
+                          otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
+                          otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
+                        } : {})}
+                      />
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           )}
         </div>

@@ -28,6 +28,9 @@ interface StatProgressionTableProps {
   reclassEvents: ReclassEvent[];
   onPromotionEventsChange: (events: PromotionEvent[]) => void;
   onReclassEventsChange: (events: ReclassEvent[]) => void;
+  otherUnit?: Unit;
+  otherUnitPromotionEvents?: PromotionEvent[];
+  otherUnitReclassEvents?: ReclassEvent[];
 }
 
 interface ProgressionRow {
@@ -43,7 +46,7 @@ interface ProgressionRow {
   };
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());

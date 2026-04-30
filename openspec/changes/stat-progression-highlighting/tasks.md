@@ -1,6 +1,6 @@
 ## 1. Comparator Page — Pass Other Unit Props
 
-- [ ] 1.1 In `app/comparator/page.tsx`, update each `StatProgressionTable` instance to pass `otherUnit`, `otherUnitPromotionEvents`, and `otherUnitReclassEvents` props. When two units are selected, table A receives unit B's data and vice versa. When one unit is selected, omit the props. The page already has access to both units via `selectedUnits` and both event maps via `promotionEvents`/`reclassEvents`.
+- [x] 1.1 In `app/comparator/page.tsx`, update each `StatProgressionTable` instance to pass `otherUnit`, `otherUnitPromotionEvents`, and `otherUnitReclassEvents` props. When two units are selected, table A receives unit B's data and vice versa. When one unit is selected, omit the props. The page already has access to both units via `selectedUnits` and both event maps via `promotionEvents`/`reclassEvents`.
   - Done when: Both tables receive the other unit and its events when two units are selected, and receive nothing when one unit is selected.
   - Verify by: `npm run build` passes. In the browser, select two units — React DevTools shows each table has `otherUnit` pointing to the other unit. Select one unit — `otherUnit` is absent.
   - Stop and hand off if: The `StatProgressionTableProps` interface cannot be extended (e.g., if it's shared with other consumers that break).
