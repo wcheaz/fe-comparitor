@@ -114,6 +114,45 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     return { rows, statKeys: displayStats };
   }, [unit, expandToLevel100, classes, promotionEvents, reclassEvents]);
 
+  const otherUnitProgressionMap = useMemo(() => {
+    if (!otherUnit) return new Map<number, ProgressionRow>();
+
+    const otherUnitClass = classes.find(c => c.id === otherUnit.class.toLowerCase().replace(/\s+/g, '_') && c.game === otherUnit.game);
+    const otherHasTraineeLevels = isTraineeClass(otherUnitClass?.id || '');
+    const otherMinLevel = Math.min(otherHasTraineeLevels ? -10 : otherUnit.level, 1);
+
+    const otherAllEvents = [...(otherUnitPromotionEvents || []), ...(otherUnitReclassEvents || [])];
+    let otherInternalLvls = otherUnit.maxLevel === "infinite" ? 100 : (otherUnit.maxLevel || 40);
+    if (otherAllEvents.length > 0) {
+      otherInternalLvls += otherAllEvents.length * 30;
+    }
+    const otherMaxLevelFromUnit = Math.max(40, otherInternalLvls);
+    const otherMaxLevel = expandToLevel100 ? Math.max(otherMaxLevelFromUnit, 100) : otherMaxLevelFromUnit;
+
+    const otherProgression = generateProgressionArray(
+      otherUnit,
+      otherMinLevel,
+      otherMaxLevel,
+      classes,
+      otherUnitPromotionEvents || [],
+      otherUnitReclassEvents || []
+    );
+
+    const map = new Map<number, ProgressionRow>();
+    for (const levelData of otherProgression) {
+      map.set(levelData.internalLevel, {
+        internalLevel: levelData.internalLevel,
+        displayLevel: levelData.displayLevel || `Level ${levelData.internalLevel}`,
+        stats: levelData.stats,
+        cappedStats: levelData.cappedStats,
+        isSkipped: !!levelData.isSkipped,
+        isPromotionLevel: levelData.isPromotionLevel,
+        promotionInfo: levelData.promotionInfo,
+      });
+    }
+    return map;
+  }, [otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, classes, expandToLevel100]);
+
   if (!unit) {
     return (
       <div className="text-center py-8 text-gray-500">

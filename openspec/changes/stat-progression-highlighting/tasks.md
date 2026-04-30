@@ -7,7 +7,7 @@
 
 ## 2. StatProgressionTable — Extend Props and Compute Other Unit's Progression
 
-- [ ] 2.1 Add `otherUnit?: Unit | null`, `otherUnitPromotionEvents?: PromotionEvent[]`, and `otherUnitReclassEvents?: ReclassEvent[]` to `StatProgressionTableProps` in `components/features/StatProgressionTable.tsx`. Add a new `useMemo` that computes the other unit's progression array (calling `generateProgressionArray` with the same `minLevel`/`maxLevel`/`classes` logic) and returns a `Map<number, ProgressionRow>` keyed by `internalLevel`. When `otherUnit` is null/undefined, return an empty map.
+- [x] 2.1 Add `otherUnit?: Unit | null`, `otherUnitPromotionEvents?: PromotionEvent[]`, and `otherUnitReclassEvents?: ReclassEvent[]` to `StatProgressionTableProps` in `components/features/StatProgressionTable.tsx`. Add a new `useMemo` that computes the other unit's progression array (calling `generateProgressionArray` with the same `minLevel`/`maxLevel`/`classes` logic) and returns a `Map<number, ProgressionRow>` keyed by `internalLevel`. When `otherUnit` is null/undefined, return an empty map.
   - Done when: The component compiles with the new props and builds the lookup map without errors.
   - Verify by: `npm run build` passes with no type errors. The map is populated with correct rows when `otherUnit` is provided.
   - Stop and hand off if: `generateProgressionArray` has side effects or performance issues that prevent it from being called for a second unit within the same component.
