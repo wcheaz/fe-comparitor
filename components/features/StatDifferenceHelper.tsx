@@ -8,13 +8,17 @@ interface StatDifferenceHelperProps {
   unitB: Unit;
   targetLevel?: number;
   className?: string;
+  difficultyA?: string;
+  difficultyB?: string;
 }
 
 export function StatDifferenceHelper({ 
   unitA, 
   unitB, 
   targetLevel, 
-  className 
+  className,
+  difficultyA,
+  difficultyB
 }: StatDifferenceHelperProps) {
   if (!targetLevel) {
     return (
@@ -28,7 +32,7 @@ export function StatDifferenceHelper({
     );
   }
 
-  const differences = compareUnits(unitA, unitB, targetLevel);
+  const differences = compareUnits(unitA, unitB, targetLevel, difficultyA, difficultyB);
 
   return (
     <Card className={className}>

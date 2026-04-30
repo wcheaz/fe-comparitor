@@ -88,7 +88,7 @@
     - `npx tsc --noEmit` exits 0
   - Stop and hand off if: The column header layout cannot accommodate the selector without breaking the existing table structure.
 
-- [ ] **6.3 Thread difficulty through StatProgressionTable**
+- [x] **6.3 Thread difficulty through StatProgressionTable**
   - Scope: `components/features/StatProgressionTable.tsx`
   - Change: Accept `selectedDifficulties` prop. When calling `generateProgressionArray` for each unit, pass the unit's selected difficulty (from `selectedDifficulties[unit.id]`) as the `difficulty` parameter.
   - Done when:
@@ -98,7 +98,7 @@
     - `npx tsc --noEmit` exits 0
   - Stop and hand off if: `generateProgressionArray` signature change from task 5.1 is not compatible with the call site here.
 
-- [ ] **6.4 Thread difficulty through StatDifferenceHelper**
+- [x] **6.4 Thread difficulty through StatDifferenceHelper**
   - Scope: `components/features/StatDifferenceHelper.tsx`
   - Change: Accept `selectedDifficulties` prop (or individual difficulty values for unitA and unitB). Pass both difficulties to `compareUnits(unitA, unitB, level, difficultyA, difficultyB)`.
   - Done when:
@@ -109,7 +109,7 @@
 
 ## 7. Documentation
 
-- [ ] **7.1 Update SCRAPING_SUMMARY.md with new scripts**
+- [x] **7.1 Update SCRAPING_SUMMARY.md with new scripts**
   - Scope: `hidden/SCRAPING_SUMMARY.md`
   - Change: Document `dev/scrape_awakening_difficulty_bases.py` and `dev/parse_awakening_difficulty_bases.py` with their purpose, method, input, and output files. Follow the existing format for the Awakening Personal Bases Scripts section.
   - Done when:
