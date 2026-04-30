@@ -140,6 +140,14 @@
     @apply bg-fe-blue-100 text-fe-blue-900 border-fe-blue-300 hover:bg-fe-blue-200;
   }
 
+  .pill-variant-class-unpromoted {
+    @apply bg-amber-100 text-amber-900 border-amber-300 hover:bg-amber-200;
+  }
+
+  .pill-variant-class-promoted {
+    @apply bg-purple-100 text-purple-900 border-purple-300 hover:bg-purple-200;
+  }
+
   /* Pill modal text styling */
   .pill-modal-title {
     @apply text-2xl font-bold text-black;

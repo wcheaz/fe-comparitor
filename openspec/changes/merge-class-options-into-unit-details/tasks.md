@@ -1,6 +1,6 @@
 ## 1. ClassPill Tier Variants
 
-- [ ] 1.1 Add two new CSS classes (`.pill-variant-class-unpromoted` and `.pill-variant-class-promoted`) to `globals.css` in the "Class Variants" section (after line 141). Unpromoted uses amber/orange tones (`bg-amber-100 text-amber-900 border-amber-300 hover:bg-amber-200`). Promoted uses purple/violet tones (`bg-purple-100 text-purple-900 border-purple-300 hover:bg-purple-200`). Verify by confirming the classes compile and visually match the corresponding skill pill palette when rendered.
+- [x] 1.1 Add two new CSS classes (`.pill-variant-class-unpromoted` and `.pill-variant-class-promoted`) to `globals.css` in the "Class Variants" section (after line 141). Unpromoted uses amber/orange tones (`bg-amber-100 text-amber-900 border-amber-300 hover:bg-amber-200`). Promoted uses purple/violet tones (`bg-purple-100 text-purple-900 border-purple-300 hover:bg-purple-200`). Verify by confirming the classes compile and visually match the corresponding skill pill palette when rendered.
       **Done when**: Both CSS classes exist in `globals.css` and the app builds without errors (`npm run build` or `next build`).
 
 - [ ] 1.2 Add `unpromoted` and `promoted` variant values to the `classPillVariants` CVA config in `components/ui/ClassPill.tsx` (lines 12-29). Map `unpromoted` to `"pill-variant-class-unpromoted"` and `promoted` to `"pill-variant-class-promoted"`. The existing `default` variant and all current `ClassPill` usage without explicit variant remain unchanged.
