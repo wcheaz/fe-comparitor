@@ -550,7 +550,13 @@ export function ComparisonGrid({
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full table-fixed">
+              <colgroup>
+                <col style={{ width: '7rem' }} />
+                {units.map((unit) => (
+                  <col key={`col-${unit.id}`} />
+                ))}
+              </colgroup>
               <thead>
                 <tr className="border-b">
                   <th className="text-left p-2 font-medium">Detail</th>

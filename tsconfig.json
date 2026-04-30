@@ -13,6 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "downlevelIteration": true,
+    "ignoreDeprecations": "6.0",
     "target": "es2015",
     "plugins": [
       {
