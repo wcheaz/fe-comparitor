@@ -12,6 +12,7 @@ export default function ComparatorPage() {
   const [selectedUnits, setSelectedUnits] = useState<Unit[]>([]);
   const [promotionEvents, setPromotionEvents] = useState<Record<string, PromotionEvent[]>>({});
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
+  const [hidePreJoinRows, setHidePreJoinRows] = useState(false);
   const maxUnits = 2;
 
   const handleUnitSelect = (unit: Unit) => {
@@ -77,37 +78,53 @@ export default function ComparatorPage() {
 
           {/* Stat Progression Tables — one per unit */}
           {selectedUnits.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {selectedUnits.map((unit, index) => {
-                const otherUnit = selectedUnits.length === 2
-                  ? selectedUnits[index === 0 ? 1 : 0]
-                  : undefined;
-                return (
-                  <Card key={`progression-${unit.id}`}>
-                    <CardHeader>
-                      <CardTitle>{unit.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <StatProgressionTable
-                        unit={unit}
-                        promotionEvents={promotionEvents[unit.id] || []}
-                        reclassEvents={reclassEvents[unit.id] || []}
-                        onPromotionEventsChange={(events) => {
-                          setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
-                        }}
-                        onReclassEventsChange={(events) => {
-                          setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
-                        }}
-                        {...(otherUnit ? {
-                          otherUnit,
-                          otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
-                          otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
-                        } : {})}
-                      />
-                    </CardContent>
-                  </Card>
-                );
-              })}
+            <div>
+              {selectedUnits.length === 2 && (
+                <div className="flex items-center justify-end mb-2">
+                  <label className="flex items-center space-x-2 whitespace-nowrap text-sm text-gray-700">
+                    <input
+                      type="checkbox"
+                      checked={hidePreJoinRows}
+                      onChange={(e) => setHidePreJoinRows(e.target.checked)}
+                      className="form-checkbox h-4 w-4 text-blue-600"
+                    />
+                    <span>Hide unavailable levels</span>
+                  </label>
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {selectedUnits.map((unit, index) => {
+                  const otherUnit = selectedUnits.length === 2
+                    ? selectedUnits[index === 0 ? 1 : 0]
+                    : undefined;
+                  return (
+                    <Card key={`progression-${unit.id}`}>
+                      <CardHeader>
+                        <CardTitle>{unit.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <StatProgressionTable
+                          unit={unit}
+                          promotionEvents={promotionEvents[unit.id] || []}
+                          reclassEvents={reclassEvents[unit.id] || []}
+                          onPromotionEventsChange={(events) => {
+                            setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                          }}
+                          onReclassEventsChange={(events) => {
+                            setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                          }}
+                          {...(otherUnit ? {
+                            otherUnit,
+                            otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
+                            otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
+                            hidePreJoinRows,
+                          } : {})}
+                        />
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

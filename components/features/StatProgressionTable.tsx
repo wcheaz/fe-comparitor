@@ -31,6 +31,7 @@ interface StatProgressionTableProps {
   otherUnit?: Unit;
   otherUnitPromotionEvents?: PromotionEvent[];
   otherUnitReclassEvents?: ReclassEvent[];
+  hidePreJoinRows?: boolean;
 }
 
 interface ProgressionRow {
@@ -51,7 +52,7 @@ function effectiveStartLevel(u: Unit): number {
   return u.level;
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, hidePreJoinRows }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
@@ -159,10 +160,13 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
   }, [otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, classes, expandToLevel100]);
 
   const filteredRows = useMemo(() => {
-    if (!otherUnit || !unit) return progressionData.rows;
-    const minVisibleLevel = Math.max(effectiveStartLevel(unit), effectiveStartLevel(otherUnit));
-    return progressionData.rows.filter(row => row.internalLevel >= minVisibleLevel);
-  }, [progressionData.rows, otherUnit, unit]);
+    if (!unit) return progressionData.rows;
+    if (hidePreJoinRows && otherUnit) {
+      const minVisibleLevel = Math.max(effectiveStartLevel(unit), effectiveStartLevel(otherUnit));
+      return progressionData.rows.filter(row => row.internalLevel >= minVisibleLevel);
+    }
+    return progressionData.rows;
+  }, [progressionData.rows, otherUnit, unit, hidePreJoinRows]);
 
   if (!unit) {
     return (
