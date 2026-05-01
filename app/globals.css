@@ -164,6 +164,12 @@
   .pill-modal-label {
     @apply font-semibold text-black;
   }
+
+  .stat-alignment-card {
+    @apply rounded-lg border-2 shadow-md p-6;
+    background-color: hsl(220 20% 98.5%);
+    color: hsl(var(--card-foreground));
+  }
 }
 
 :root {

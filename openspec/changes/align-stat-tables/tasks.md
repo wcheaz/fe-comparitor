@@ -81,3 +81,12 @@ The ResizeObserver + min-height approach (tasks 1–3) has proven fragile — me
   - View on a narrow viewport. Confirm cards stack vertically as before.
   - `npm run build` passes with no type errors.
   **Stop and hand off if**: The shared state between the promo section and data table (e.g., `progressionData` computed from promo events) cannot be passed between the two separate grid rows without lifting significant state to the page level. In that case, keep `StatProgressionTable` as a single wrapper component that renders both sub-components internally, and use the two-row grid at the page level with the wrapper component split across both rows via CSS (e.g., the wrapper renders both sections but is placed in a single grid cell spanning both rows, or the page passes refs to position the table section).
+
+- [x] 4.4 Wrap both grid rows in a single unified card with distinct background
+  Wrap the entire two-row grid section (row 1 promo sections + row 2 data tables) in a single container that has the card-like appearance (rounded corners, border, shadow) so the whole stat progression area reads as one unified card, as it did before the split. Use a custom CSS class defined in `app/globals.css` (not inline Tailwind utilities) for the background color, so the styling is centralized and reusable. The background color SHALL be slightly different from the main page background (`bg-gradient-to-b from-fe-blue-50 to-fe-blue-100`) — use a subtle off-white or very light neutral tone that visually separates the card body from the page while remaining cohesive with the existing theme. The class name should follow the existing convention in `globals.css`.
+  **Verify by**:
+  - Both grid rows (promo sections and data tables) appear within a single visually unified card with consistent background color, rounded corners, border, and shadow.
+  - The card background is visually distinct from the page background but harmonious with the FE theme colors.
+  - The `globals.css` file contains the new class rather than having the styles applied inline.
+  - `npm run build` passes.
+  **Stop and hand off if**: The existing `Card` component from `components/ui/card.tsx` can be reused as the outer wrapper without modification — in that case, use it directly and only add the background override class in `globals.css`.
