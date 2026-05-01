@@ -69,7 +69,7 @@ export default function ComparatorPage() {
             showGrowths={true}
           />
 
-          {/* Stat Progression Tables — one per unit */}
+          {/* Stat Progression Tables — two-row grid for table alignment */}
           {selectedUnits.length > 0 && (
             <div>
               {selectedUnits.length === 2 && (
@@ -85,17 +85,50 @@ export default function ComparatorPage() {
                   </label>
                 </div>
               )}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {selectedUnits.map((unit, index) => {
-                  const otherUnit = selectedUnits.length === 2
-                    ? selectedUnits[index === 0 ? 1 : 0]
-                    : undefined;
-                  return (
-                    <Card key={`progression-${unit.id}`}>
-                      <CardHeader>
-                        <CardTitle>{unit.name}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {selectedUnits.map((unit, index) => {
+                    const otherUnit = selectedUnits.length === 2
+                      ? selectedUnits[index === 0 ? 1 : 0]
+                      : undefined;
+                    return (
+                      <Card key={`promo-${unit.id}`}>
+                        <CardHeader>
+                          <CardTitle>{unit.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <StatProgressionTable
+                            unit={unit}
+                            promotionEvents={promotionEvents[unit.id] || []}
+                            reclassEvents={reclassEvents[unit.id] || []}
+                            onPromotionEventsChange={(events) => {
+                              setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                            }}
+                            onReclassEventsChange={(events) => {
+                              setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                            }}
+                            selectedDifficulty={selectedDifficulties[unit.id]}
+                            {...(otherUnit ? {
+                              otherUnit,
+                              otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
+                              otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
+                              otherUnitSelectedDifficulty: selectedDifficulties[otherUnit.id],
+                              hidePreJoinRows,
+                            } : {})}
+                            mode="promo"
+                          />
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {selectedUnits.map((unit, index) => {
+                    const otherUnit = selectedUnits.length === 2
+                      ? selectedUnits[index === 0 ? 1 : 0]
+                      : undefined;
+                    return (
+                      <div key={`table-${unit.id}`}>
                         <StatProgressionTable
                           unit={unit}
                           promotionEvents={promotionEvents[unit.id] || []}
@@ -114,11 +147,12 @@ export default function ComparatorPage() {
                             otherUnitSelectedDifficulty: selectedDifficulties[otherUnit.id],
                             hidePreJoinRows,
                           } : {})}
+                          mode="table"
                         />
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}

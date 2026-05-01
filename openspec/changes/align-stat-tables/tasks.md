@@ -61,7 +61,7 @@ The ResizeObserver + min-height approach (tasks 1–3) has proven fragile — me
   **Verify by**: `npm run build` passes. Rendering two units produces the same visual output as before — the promo section and data table still appear in the same order within each card. No behavior changes.
   **Stop and hand off if**: The state dependencies between the promo section and data table are too tightly coupled to split cleanly (e.g., the data table re-renders when promo events change and needs access to computed progression data). In that case, use the `mode` prop approach instead of full extraction.
 
-- [ ] 4.3 Restructure page layout into two-row grid
+- [x] 4.3 Restructure page layout into two-row grid
   In `app/comparator/page.tsx`, replace the current single `grid grid-cols-1 md:grid-cols-2 gap-6` that wraps both cards with a two-row layout:
   
   **Row 1** — A `grid grid-cols-1 md:grid-cols-2 gap-6` containing one `Card` per unit. Each card has the `CardHeader` (unit name) and `CardContent` containing only the `StatPromoSection` (or `StatProgressionTable` with `mode='promo'`).
