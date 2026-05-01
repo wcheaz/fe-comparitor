@@ -81,7 +81,7 @@ export default function ComparatorPage() {
                       onChange={(e) => setHidePreJoinRows(e.target.checked)}
                       className="form-checkbox h-4 w-4 text-blue-600"
                     />
-                    <span>Hide unavailable levels</span>
+                    <span>Sync to lowest common level</span>
                   </label>
                 </div>
               )}
