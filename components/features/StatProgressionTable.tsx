@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { generateProgressionArray, getValidReclassOptions } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
@@ -67,6 +67,20 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     classSkills: string[];
     gameId: string;
   } | null>(null);
+
+  const promoSectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = promoSectionRef.current;
+    if (!el || !onPromoHeightChange) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        onPromoHeightChange(entry.contentRect.height);
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [onPromoHeightChange]);
 
   // Load classes data
   React.useEffect(() => {
@@ -308,7 +322,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
+      <div ref={promoSectionRef} className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200" style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion & Reclass Levels:</span>
         {(() => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);

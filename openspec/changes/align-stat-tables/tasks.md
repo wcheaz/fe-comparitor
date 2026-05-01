@@ -7,7 +7,7 @@
 
 ## 2. ResizeObserver Measurement and Min-Height Alignment in StatProgressionTable
 
-- [ ] 2.1 Add new props, ResizeObserver, and min-height application in `components/features/StatProgressionTable.tsx`
+- [x] 2.1 Add new props, ResizeObserver, and min-height application in `components/features/StatProgressionTable.tsx`
   Extend the `StatProgressionTableProps` interface (around line 25) to accept optional `minPromoSectionHeight: number | undefined` and `onPromoHeightChange: (height: number) => void`. Destructure them from props. Add a `useRef` for the promotion/reclass section div (the `<div>` at line 309 — `className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200"`). Add a `useEffect` that creates a `ResizeObserver` on that ref, observing the section's height and calling `onPromoHeightChange` on each resize entry (use `entry.contentRect.height`). The effect's cleanup function SHALL call `observer.disconnect()`. Apply `style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}` to the same promotion/reclass section div. Attach the ref to that div.
   **Verify by**:
   - `npm run build` passes with no type errors.
