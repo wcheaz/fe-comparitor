@@ -15,16 +15,6 @@
       "def": 5,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 15,
@@ -40,8 +30,7 @@
     ],
     "weapons": [
       "Swords",
-      "Tomes",
-      "Axes"
+      "Tomes"
     ],
     "classSkills": [
       "Veteran (Lv. 1)",
@@ -58,7 +47,7 @@
       "res": 25
     },
     "movementType": "Infantry",
-    "description": "A versatile class that can use swords, tomes, and axes. Their Ignis skill adds half of their Magic or Strength to their damage when triggering skills."
+    "description": "An aspiring tactician of cryptic origins. Wields swords, tomes."
   },
   {
     "id": "cavalier",
@@ -74,16 +63,6 @@
       "spd": 6,
       "lck": 0,
       "def": 7,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -137,16 +116,6 @@
       "def": 11,
       "res": 0
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 25,
@@ -162,8 +131,7 @@
       "general"
     ],
     "weapons": [
-      "Lances",
-      "Axes"
+      "Lances"
     ],
     "classSkills": [
       "Defense +2 (Lv. 1)",
@@ -180,7 +148,7 @@
       "res": 22
     },
     "movementType": "Armored",
-    "description": "A heavily armored unit that uses lances and axes. They have high defense but lower movement."
+    "description": "A heavily armored knight with high Def. Weak against magic."
   },
   {
     "id": "myrmidon",
@@ -197,16 +165,6 @@
       "lck": 0,
       "def": 4,
       "res": 1
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 40,
@@ -258,16 +216,6 @@
       "def": 5,
       "res": 0
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 20,
@@ -283,8 +231,7 @@
       "bow_knight"
     ],
     "weapons": [
-      "Swords",
-      "Axes"
+      "Swords"
     ],
     "classSkills": [
       "Armsthrift (Lv. 1)",
@@ -301,7 +248,7 @@
       "res": 23
     },
     "movementType": "Infantry",
-    "description": "A balanced fighting class that uses swords and axes. They have solid stats across the board."
+    "description": "A combat professional with high stats all around. Wields swords."
   },
   {
     "id": "grandmaster",
@@ -319,16 +266,6 @@
       "def": 7,
       "res": 5
     },
-    "statModifiers": {
-      "hp": 2,
-      "str": 2,
-      "mag": 2,
-      "skl": 3,
-      "spd": 2,
-      "lck": 2,
-      "def": 2,
-      "res": 2
-    },
     "growths": {
       "hp": 40,
       "str": 15,
@@ -342,8 +279,7 @@
     "promotesTo": [],
     "weapons": [
       "Swords",
-      "Tomes",
-      "Axes"
+      "Tomes"
     ],
     "classSkills": [
       "Ignis (Lv. 5)",
@@ -360,7 +296,7 @@
       "res": 40
     },
     "movementType": "Infantry",
-    "description": "The promoted form of Tactician. A master strategist with balanced stats and powerful skills."
+    "description": "A seasoned tactician upon whom victory hinges."
   },
   {
     "id": "paladin",
@@ -377,16 +313,6 @@
       "lck": 0,
       "def": 10,
       "res": 6
-    },
-    "statModifiers": {
-      "hp": 3,
-      "str": 3,
-      "mag": 0,
-      "skl": 2,
-      "spd": 2,
-      "lck": 2,
-      "def": 4,
-      "res": 2
     },
     "growths": {
       "hp": 45,
@@ -435,16 +361,6 @@
       "lck": 0,
       "def": 14,
       "res": 1
-    },
-    "statModifiers": {
-      "hp": 4,
-      "str": 4,
-      "mag": 0,
-      "skl": 2,
-      "spd": 1,
-      "lck": 2,
-      "def": 5,
-      "res": 3
     },
     "growths": {
       "hp": 50,
@@ -495,16 +411,6 @@
       "def": 6,
       "res": 4
     },
-    "statModifiers": {
-      "hp": 2,
-      "str": 3,
-      "mag": 0,
-      "skl": 4,
-      "spd": 4,
-      "lck": 3,
-      "def": 2,
-      "res": 1
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -551,16 +457,6 @@
       "lck": 0,
       "def": 8,
       "res": 3
-    },
-    "statModifiers": {
-      "hp": 3,
-      "str": 4,
-      "mag": 0,
-      "skl": 3,
-      "spd": 2,
-      "lck": 2,
-      "def": 3,
-      "res": 2
     },
     "growths": {
       "hp": 45,
@@ -610,16 +506,6 @@
       "def": 6,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 15,
@@ -640,17 +526,17 @@
       "Renewal (Lv. 15)"
     ],
     "maxStats": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
+      "hp": 80,
+      "str": 40,
+      "mag": 40,
+      "skl": 38,
+      "spd": 41,
+      "lck": 45,
+      "def": 38,
+      "res": 43
     },
     "movementType": "Infantry",
-    "description": "Promoted healers who can wield axes in combat."
+    "description": "A seasoned cleric/priest who heals with staves and hurts with axes."
   },
   {
     "id": "taguel",
@@ -667,16 +553,6 @@
       "lck": 0,
       "def": 3,
       "res": 2
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 45,
@@ -725,16 +601,6 @@
       "def": 2,
       "res": 2
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 20,
@@ -780,16 +646,6 @@
       "spd": 6,
       "lck": 0,
       "def": 5,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -842,16 +698,6 @@
       "def": 4,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 15,
@@ -902,16 +748,6 @@
       "def": 7,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 25,
@@ -942,7 +778,7 @@
       "res": 35
     },
     "movementType": "Infantry",
-    "description": "Incredibly powerful fighters with staggering HP and Strength."
+    "description": "A seasoned fighter with peerless Str. Wields axes, bows."
   },
   {
     "id": "lord",
@@ -958,16 +794,6 @@
       "spd": 7,
       "lck": 0,
       "def": 7,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -1001,7 +827,7 @@
       "res": 25
     },
     "movementType": "Infantry",
-    "description": "A noble leader fighting for their kingdom."
+    "description": "A youth of royal blood. Wields swords."
   },
   {
     "id": "wyvern_rider",
@@ -1017,16 +843,6 @@
       "spd": 5,
       "lck": 0,
       "def": 8,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -1079,16 +895,6 @@
       "def": 1,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 5,
@@ -1099,7 +905,10 @@
       "def": 5,
       "res": 15
     },
-    "promotesTo": [],
+    "promotesTo": [
+      "sage",
+      "war_cleric"
+    ],
     "weapons": [
       "Staffs"
     ],
@@ -1136,16 +945,6 @@
       "def": 1,
       "res": 5
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 0,
@@ -1157,9 +956,8 @@
       "res": 15
     },
     "promotesTo": [
-      "war_monk",
       "valkyrie",
-      "cleric"
+      "war_cleric"
     ],
     "weapons": [
       "Staffs"
@@ -1195,16 +993,6 @@
       "spd": 1,
       "lck": 0,
       "def": 1,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -1254,16 +1042,6 @@
       "def": 3,
       "res": 1
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 5,
@@ -1310,16 +1088,6 @@
       "lck": 0,
       "def": 4,
       "res": 4
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 50,
@@ -1371,16 +1139,6 @@
       "def": 3,
       "res": 5
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 10,
@@ -1427,16 +1185,6 @@
       "spd": 8,
       "lck": 0,
       "def": 2,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
       "res": 0
     },
     "growths": {
@@ -1489,16 +1237,6 @@
       "def": 4,
       "res": 0
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 25,
@@ -1548,16 +1286,6 @@
       "lck": 0,
       "def": 2,
       "res": 3
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 35,
@@ -1609,16 +1337,6 @@
       "def": 10,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -1630,7 +1348,10 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Lances"
+    ],
     "classSkills": [
       "Aether (Lv. 5)",
       "Rightful King (Lv. 15)"
@@ -1646,7 +1367,7 @@
       "res": 40
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned leader of royal blood. Wields swords, lances."
   },
   {
     "id": "general",
@@ -1664,16 +1385,6 @@
       "def": 15,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 25,
@@ -1685,7 +1396,10 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances",
+      "Axes"
+    ],
     "classSkills": [
       "Rally Defense (Lv. 5)",
       "Pavise (Lv. 15)"
@@ -1700,8 +1414,8 @@
       "def": 50,
       "res": 35
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Armored",
+    "description": "A seasoned knight with superior Atk/Def. Wields lances, axes."
   },
   {
     "id": "barbarian",
@@ -1719,16 +1433,6 @@
       "def": 3,
       "res": 0
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 25,
@@ -1743,7 +1447,9 @@
       "berserker",
       "warrior"
     ],
-    "weapons": [],
+    "weapons": [
+      "Axes"
+    ],
     "classSkills": [
       "Despoil (Lv. 1)",
       "Gamble (Lv. 10)"
@@ -1759,7 +1465,7 @@
       "res": 20
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A savage thug with high Str/Spd, but low Def."
   },
   {
     "id": "berserker",
@@ -1777,16 +1483,6 @@
       "def": 5,
       "res": 1
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 25,
@@ -1798,7 +1494,9 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Axes"
+    ],
     "classSkills": [
       "Wrath (Lv. 5)",
       "Axefaire (Lv. 15)"
@@ -1814,7 +1512,7 @@
       "res": 30
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned barbarian whose axe strikes fear in the enemy."
   },
   {
     "id": "bow_knight",
@@ -1832,16 +1530,6 @@
       "def": 6,
       "res": 2
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 20,
@@ -1853,7 +1541,10 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Bows"
+    ],
     "classSkills": [
       "Rally Skill (Lv. 5)",
       "Bowbreaker (Lv. 15)"
@@ -1868,8 +1559,8 @@
       "def": 35,
       "res": 30
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Cavalry",
+    "description": "A seasoned, mounted archer. Wields swords, bows."
   },
   {
     "id": "sniper",
@@ -1887,16 +1578,6 @@
       "def": 10,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 15,
@@ -1908,7 +1589,9 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Bows"
+    ],
     "classSkills": [
       "Hit Rate +20 (Lv. 5)",
       "Bowfaire (Lv. 15)"
@@ -1924,7 +1607,7 @@
       "res": 31
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned archer with superior Skill who has mastered the bow."
   },
   {
     "id": "assassin",
@@ -1942,16 +1625,6 @@
       "def": 5,
       "res": 1
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -1963,7 +1636,10 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Bows"
+    ],
     "classSkills": [
       "Lethality (Lv. 5)",
       "Pass (Lv. 15)"
@@ -1979,7 +1655,7 @@
       "res": 30
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned and deadly thief or myrmidon. Wields swords, bows."
   },
   {
     "id": "falcon_knight",
@@ -1997,16 +1673,6 @@
       "def": 6,
       "res": 9
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 15,
@@ -2018,7 +1684,10 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances",
+      "Staffs"
+    ],
     "classSkills": [
       "Rally Speed (Lv. 5)",
       "Lancefaire (Lv. 15)"
@@ -2033,8 +1702,8 @@
       "def": 33,
       "res": 40
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Flying",
+    "description": "A seasoned pegasus knight on a new mount. Wields lances, staves."
   },
   {
     "id": "dark_flier",
@@ -2052,16 +1721,6 @@
       "def": 5,
       "res": 9
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 10,
@@ -2073,7 +1732,10 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances",
+      "Tomes"
+    ],
     "classSkills": [
       "Rally Movement (Lv. 5)",
       "Galeforce (Lv. 15)"
@@ -2088,8 +1750,8 @@
       "def": 32,
       "res": 41
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Flying",
+    "description": "A seasoned pegasus knight who wields lances and tomes."
   },
   {
     "id": "wyvern_lord",
@@ -2107,16 +1769,6 @@
       "def": 11,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 30,
@@ -2128,7 +1780,10 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances",
+      "Axes"
+    ],
     "classSkills": [
       "Quick Burn (Lv. 5)",
       "Swordbreaker (Lv. 15)"
@@ -2143,8 +1798,8 @@
       "def": 46,
       "res": 30
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Flying",
+    "description": "A seasoned wyvern rider who wields axes and lances."
   },
   {
     "id": "griffon_rider",
@@ -2162,16 +1817,6 @@
       "def": 8,
       "res": 3
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 25,
@@ -2183,7 +1828,9 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Axes"
+    ],
     "classSkills": [
       "Deliverer (Lv. 5)",
       "Lancebreaker (Lv. 15)"
@@ -2198,8 +1845,8 @@
       "def": 40,
       "res": 30
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Flying",
+    "description": "A seasoned and well-balanced wyvern rider on a new mount."
   },
   {
     "id": "priest",
@@ -2217,16 +1864,6 @@
       "def": 1,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 5,
@@ -2241,7 +1878,9 @@
       "sage",
       "war_monk"
     ],
-    "weapons": [],
+    "weapons": [
+      "Staffs"
+    ],
     "classSkills": [
       "Miracle (Lv. 1)",
       "Healtouch (Lv. 10)"
@@ -2257,7 +1896,7 @@
       "res": 27
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A male healer who uses staves. Cannot attack."
   },
   {
     "id": "valkyrie",
@@ -2275,16 +1914,6 @@
       "def": 3,
       "res": 8
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 0,
@@ -2296,7 +1925,10 @@
       "res": 15
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Tomes",
+      "Staffs"
+    ],
     "classSkills": [
       "Rally Resistance (Lv. 5)",
       "Dual Support+ (Lv. 15)"
@@ -2311,8 +1943,8 @@
       "def": 30,
       "res": 45
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Cavalry",
+    "description": "A seasoned, hardy troubadour. Uses staves, tomes."
   },
   {
     "id": "war_cleric",
@@ -2330,16 +1962,6 @@
       "def": 6,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 15,
@@ -2351,7 +1973,10 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Axes",
+      "Staffs"
+    ],
     "classSkills": [
       "Rally Luck (Lv. 5)",
       "Renewal (Lv. 15)"
@@ -2367,7 +1992,7 @@
       "res": 43
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned cleric who heals with staves and hurts with axes."
   },
   {
     "id": "sage",
@@ -2385,16 +2010,6 @@
       "def": 4,
       "res": 5
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 35,
       "str": 0,
@@ -2406,7 +2021,10 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Tomes",
+      "Staffs"
+    ],
     "classSkills": [
       "Rally Magic (Lv. 5)",
       "Tomefaire (Lv. 15)"
@@ -2422,7 +2040,7 @@
       "res": 40
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned mage or healer with high Mag. Wields tomes, staves."
   },
   {
     "id": "dark_knight",
@@ -2440,16 +2058,6 @@
       "def": 9,
       "res": 5
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 50,
       "str": 15,
@@ -2461,7 +2069,10 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Tomes"
+    ],
     "classSkills": [
       "Slow Burn (Lv. 5)",
       "Lifetaker (Lv. 15)"
@@ -2476,8 +2087,8 @@
       "def": 42,
       "res": 38
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Cavalry",
+    "description": "A seasoned, mounted mage who wields tomes and swords."
   },
   {
     "id": "sorcerer",
@@ -2495,16 +2106,6 @@
       "def": 7,
       "res": 7
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 45,
       "str": 0,
@@ -2516,7 +2117,9 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Tomes"
+    ],
     "classSkills": [
       "Vengeance (Lv. 5)",
       "Tomebreaker (Lv. 15)"
@@ -2532,7 +2135,7 @@
       "res": 44
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A seasoned dark mage with fearsome Mag."
   },
   {
     "id": "soldier",
@@ -2550,16 +2153,6 @@
       "def": 3,
       "res": 0
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 10,
@@ -2571,7 +2164,9 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances"
+    ],
     "classSkills": [],
     "maxStats": {
       "hp": 80,
@@ -2584,7 +2179,7 @@
       "res": 30
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "An ordinary soldier. Wields a lance."
   },
   {
     "id": "merchant",
@@ -2601,16 +2196,6 @@
       "lck": 0,
       "def": 4,
       "res": 1
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 0,
@@ -2636,7 +2221,7 @@
       "res": 20
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A traveling merchant. Save her and it may pay off..."
   },
   {
     "id": "revenant",
@@ -2647,16 +2232,6 @@
     "baseStats": {
       "hp": 18,
       "str": 3,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
       "mag": 0,
       "skl": 0,
       "spd": 0,
@@ -2688,7 +2263,7 @@
       "res": 30
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A Risen minion with sharp claws and high Str."
   },
   {
     "id": "entombed",
@@ -2705,16 +2280,6 @@
       "lck": 0,
       "def": 2,
       "res": 1
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 0,
@@ -2740,14 +2305,14 @@
       "res": 30
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A noble Risen with high Str and hatred for the living."
   },
   {
     "id": "conqueror",
     "name": "Conqueror",
     "game": "Awakening",
-    "type": "unpromoted",
-    "tier": "1",
+    "type": "promoted",
+    "tier": "2",
     "baseStats": {
       "hp": 24,
       "str": 10,
@@ -2757,16 +2322,6 @@
       "lck": 0,
       "def": 12,
       "res": 5
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 50,
@@ -2779,7 +2334,11 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Lances",
+      "Axes"
+    ],
     "classSkills": [],
     "maxStats": {
       "hp": 80,
@@ -2791,8 +2350,8 @@
       "def": 45,
       "res": 35
     },
-    "movementType": "Infantry",
-    "description": ""
+    "movementType": "Cavalry",
+    "description": "The dauntless emperor of Valm. Wields swords, lances, axes."
   },
   {
     "id": "lodestar",
@@ -2810,16 +2369,6 @@
       "def": 8,
       "res": 4
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -2831,7 +2380,9 @@
       "res": 5
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords"
+    ],
     "classSkills": [],
     "maxStats": {
       "hp": 80,
@@ -2844,7 +2395,7 @@
       "res": 40
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "The Hero-King from the sagas said to have saved the world."
   },
   {
     "id": "grima",
@@ -2861,16 +2412,6 @@
       "lck": 0,
       "def": 15,
       "res": 10
-    },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
     },
     "growths": {
       "hp": 0,
@@ -2896,7 +2437,7 @@
       "res": 50
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "The fell dragon who seeks to usher in a dark future."
   },
   {
     "id": "mirage",
@@ -2906,16 +2447,6 @@
     "tier": "1",
     "baseStats": {
       "hp": 1,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
-    "statModifiers": {
-      "hp": 0,
       "str": 0,
       "mag": 0,
       "skl": 0,
@@ -2948,7 +2479,7 @@
       "res": 20
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "The Wellspring's reflection of one who stands before it."
   },
   {
     "id": "dread_fighter",
@@ -2966,16 +2497,6 @@
       "def": 7,
       "res": 10
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -2987,7 +2508,11 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Swords",
+      "Axes",
+      "Tomes"
+    ],
     "classSkills": [
       "Resistance +10 (Lv. 1)",
       "Aggressor (Lv. 15)"
@@ -3003,7 +2528,7 @@
       "res": 43
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "An enigma with superior resistance. Wields swords, axes, and tomes."
   },
   {
     "id": "bride",
@@ -3021,16 +2546,6 @@
       "def": 7,
       "res": 6
     },
-    "statModifiers": {
-      "hp": 0,
-      "str": 0,
-      "mag": 0,
-      "skl": 0,
-      "spd": 0,
-      "lck": 0,
-      "def": 0,
-      "res": 0
-    },
     "growths": {
       "hp": 40,
       "str": 20,
@@ -3042,7 +2557,11 @@
       "res": 10
     },
     "promotesTo": [],
-    "weapons": [],
+    "weapons": [
+      "Lances",
+      "Bows",
+      "Staffs"
+    ],
     "classSkills": [
       "Rally Heart (Lv. 1)",
       "Bond (Lv. 15)"
@@ -3058,6 +2577,6 @@
       "res": 40
     },
     "movementType": "Infantry",
-    "description": ""
+    "description": "A woman blessed by Lady Luck. Wields lances, bows, and staves."
   }
 ]

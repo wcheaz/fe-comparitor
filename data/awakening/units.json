@@ -40,7 +40,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "lord",
@@ -89,7 +91,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "E",
+      "Tomes": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "tactician",
@@ -148,7 +153,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "E",
+      "Tomes": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "tactician",
@@ -207,7 +215,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Staves": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "cleric",
@@ -311,7 +321,8 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {
-      "E": "E"
+      "Swords": "E",
+      "Lances": "E"
     },
     "supports": [],
     "reclassOptions": [
@@ -361,7 +372,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Bows": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "archer",
@@ -411,7 +424,8 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {
-      "E": "E"
+      "Swords": "E",
+      "Lances": "E"
     },
     "supports": [],
     "reclassOptions": [
@@ -461,7 +475,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Axes": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "fighter",
@@ -510,7 +526,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Tomes": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "mage",
@@ -559,7 +577,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Lances": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "pegasus_knight",
@@ -608,7 +628,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Lances": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "knight",
@@ -657,7 +679,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Lances": "E"
+    },
     "supports": [],
     "reclassOptions": [
       "villager",
@@ -706,7 +730,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "myrmidon",
@@ -755,7 +781,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Tomes": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "mage",
@@ -804,7 +832,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Staves": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "troubadour",
@@ -902,7 +932,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "thief",
@@ -951,7 +983,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Lances": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "pegasus_knight",
@@ -1001,7 +1035,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "mercenary",
@@ -1125,7 +1161,8 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {
-      "C": "C"
+      "Axes": "C",
+      "Staves": "C"
     },
     "supports": [],
     "reclassOptions": [
@@ -1198,7 +1235,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Tomes": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "dark_mage",
@@ -1261,7 +1300,8 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {
-      "C": "D"
+      "Swords": "C",
+      "Staves": "D"
     },
     "supports": [],
     "reclassOptions": [
@@ -1333,7 +1373,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "D"
+    },
     "supports": [],
     "reclassOptions": [
       "dancer",
@@ -1383,7 +1425,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Axes": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "wyvern_rider",
@@ -1455,7 +1499,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Tomes": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "dark_mage",
@@ -1527,7 +1573,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "B"
+    },
     "supports": [],
     "reclassOptions": [
       "myrmidon",
@@ -1673,7 +1721,8 @@
     "innateWeaknesses": [],
     "gender": "M",
     "baseWeaponRanks": {
-      "A": "B"
+      "Axes": "A",
+      "Bows": "B"
     },
     "supports": [],
     "reclassOptions": [
@@ -1748,7 +1797,8 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {
-      "A": "B"
+      "Swords": "A",
+      "Axes": "B"
     },
     "supports": [],
     "reclassOptions": [
@@ -1823,7 +1873,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "B",
+      "Staves": "C"
+    },
     "supports": [],
     "reclassOptions": [
       "thief",
@@ -1894,7 +1947,11 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "A",
+      "Lances": "A",
+      "Axes": "A"
+    },
     "supports": [],
     "reclassOptions": [
       "conqueror",
@@ -1967,7 +2024,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Tomes": "C",
+      "Staves": "A"
+    },
     "supports": [],
     "reclassOptions": [
       "cleric",
@@ -2041,7 +2101,9 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "A"
+    },
     "supports": [],
     "reclassOptions": [
       "myrmidon",
@@ -2116,7 +2178,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "F",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Lances": "B",
+      "Tomes": "A"
+    },
     "supports": [],
     "reclassOptions": [
       "pegasus_knight",
@@ -2191,7 +2256,10 @@
     ],
     "innateWeaknesses": [],
     "gender": "M",
-    "baseWeaponRanks": {},
+    "baseWeaponRanks": {
+      "Swords": "A",
+      "Axes": "B"
+    },
     "supports": [],
     "reclassOptions": [
       "mercenary",
