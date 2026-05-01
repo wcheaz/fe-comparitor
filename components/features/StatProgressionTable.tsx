@@ -275,7 +275,8 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
   return (
     <div className="w-full min-w-0 overflow-hidden">
-      <div ref={promoSectionRef} style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
+      <div style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
+      <div ref={promoSectionRef}>
         <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
           <div className="flex flex-col gap-2 min-w-0">
             <h2 className="text-xl font-semibold">Average Stats</h2>
@@ -671,6 +672,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
           );
         })()}
         </div>
+      </div>
       </div>
 
       <div className="overflow-x-auto overflow-y-auto max-h-[70vh]">

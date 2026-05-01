@@ -27,3 +27,16 @@
   - Add/remove class-change events and confirm alignment holds after each change.
   - Compare screenshots of both cards at the same viewport — the `<thead>` rows should overlap perfectly when placed side-by-side.
   **Stop and hand off if**: The misalignment is caused by something outside the `StatProgressionTable` component (e.g., `CardHeader` height differences due to unit name length). In that case, document the finding and hand off for a design decision on whether to also synchronize `CardHeader` heights.
+
+- [x] 3.2 Fix ResizeObserver measurement inflation when min-height is applied
+  The current implementation observes the same div that receives the `min-height` inline style. This means `entry.contentRect.height` reports the inflated `min-height` value rather than the natural content height. When unit A has a taller promotion section, unit B's reported height inflates to match, so both report the same value and `Math.max` can never correctly track the true maximum as content changes.
+  
+  **Fix**: Move the `ref` and `ResizeObserver` to an inner wrapper div (with no `min-height`) that wraps only the natural content — both the stat toggle header and the promotion/reclass section. The outer div keeps the `style={{ minHeight }}` and the `ref` moves to the inner div. Alternatively, observe a child element whose height is not affected by `min-height` — such as the promotion/reclass section's content container directly. The `min-height` must remain on the outermost measured div to push the data table down.
+  
+  **Verify by**:
+  - Select two units where one can promote and one cannot. Confirm both data table headers align.
+  - Add multiple class-change events to one unit via the "+" button. Confirm the other unit's `min-height` increases to match and alignment holds.
+  - Remove class-change events from the unit that had more. Confirm the `min-height` shrinks to the new max and alignment holds.
+  - Swap units (remove one, select a different one). Confirm alignment re-establishes correctly.
+  - `npm run build` passes with no type errors.
+  **Stop and hand off if**: Moving the ref to an inner wrapper breaks the measurement because the inner wrapper's height does not include elements outside it. In that case, consider using `scrollHeight` or `offsetHeight` of the outer div instead of `contentRect.height`, which report natural content height regardless of `min-height`.
