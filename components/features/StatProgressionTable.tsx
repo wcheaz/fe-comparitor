@@ -34,6 +34,8 @@ interface StatProgressionTableProps {
   otherUnitReclassEvents?: ReclassEvent[];
   otherUnitSelectedDifficulty?: string;
   hidePreJoinRows?: boolean;
+  minPromoSectionHeight?: number;
+  onPromoHeightChange?: (height: number) => void;
 }
 
 interface ProgressionRow {
@@ -54,7 +56,7 @@ function effectiveStartLevel(u: Unit): number {
   return u.level;
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows, minPromoSectionHeight, onPromoHeightChange }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
