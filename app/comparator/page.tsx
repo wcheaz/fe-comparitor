@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Unit, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
@@ -13,25 +13,7 @@ export default function ComparatorPage() {
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
   const [hidePreJoinRows, setHidePreJoinRows] = useState(false);
   const [selectedDifficulties, setSelectedDifficulties] = useState<Record<string, string>>({});
-  const [promoSectionHeights, setPromoSectionHeights] = useState<Record<string, number>>({});
   const maxUnits = 2;
-
-  const handlePromoHeightChange = useCallback((unitId: string, height: number) => {
-    setPromoSectionHeights(prev => {
-      const next = { ...prev, [unitId]: height };
-      const activeIds = new Set(selectedUnits.map(u => u.id));
-      for (const id of Object.keys(next)) {
-        if (!activeIds.has(id)) {
-          delete next[id];
-        }
-      }
-      return next;
-    });
-  }, [selectedUnits]);
-
-  const minPromoSectionHeight = selectedUnits.length === 2
-    ? Math.max(...Object.values(promoSectionHeights), 0)
-    : undefined;
 
   const handleUnitSelect = (unit: Unit) => {
     setSelectedUnits(prev => [...prev, unit]);
@@ -125,8 +107,6 @@ export default function ComparatorPage() {
                             setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
                           }}
                           selectedDifficulty={selectedDifficulties[unit.id]}
-                          minPromoSectionHeight={minPromoSectionHeight}
-                          onPromoHeightChange={(height: number) => handlePromoHeightChange(unit.id, height)}
                           {...(otherUnit ? {
                             otherUnit,
                             otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],

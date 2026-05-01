@@ -40,3 +40,44 @@
   - Swap units (remove one, select a different one). Confirm alignment re-establishes correctly.
   - `npm run build` passes with no type errors.
   **Stop and hand off if**: Moving the ref to an inner wrapper breaks the measurement because the inner wrapper's height does not include elements outside it. In that case, consider using `scrollHeight` or `offsetHeight` of the outer div instead of `contentRect.height`, which report natural content height regardless of `min-height`.
+
+## 4. Two-Row Grid Layout (replaces ResizeObserver approach)
+
+The ResizeObserver + min-height approach (tasks 1–3) has proven fragile — measurement inflation and varying content heights cause persistent misalignment. Replace it with a two-row CSS grid layout at the page level that guarantees alignment by construction, with zero JS coordination needed.
+
+- [x] 4.1 Remove ResizeObserver and coordination state
+  Revert all code added in tasks 1.1–3.2: remove `promoSectionHeights` state, `handlePromoHeightChange`, `minPromoSectionHeight` computation, and `onPromoHeightChange` prop passing from `app/comparator/page.tsx`. Remove `minPromoSectionHeight`, `onPromoHeightChange`, `promoSectionRef`, the ResizeObserver `useEffect`, and the `min-height` inline style from `components/features/StatProgressionTable.tsx`. Restore the component's props interface and JSX to its original structure (single root div with the stat toggle header, promo section, and data table all in one flow).
+  **Verify by**: `npm run build` passes. The stat progression tables render identically to before this change (no alignment, no console errors).
+
+- [ ] 4.2 Split StatProgressionTable into PromoSection and DataTable sub-components
+  Extract two new components from `StatProgressionTable.tsx`:
+  - `StatPromoSection` — renders the stat toggle header (Average Stats title, visible stat buttons, "Expand to Level 100" checkbox) and the promotion/reclass configuration section (class-change dropdowns, add/remove buttons). Accepts all relevant props: `unit`, `promotionEvents`, `reclassEvents`, `onPromotionEventsChange`, `onReclassEventsChange`, `selectedDifficulty`, `visibleStats`, `toggleStatVisibility`, `expandToLevel100`, `setExpandToLevel100`, `progressionData`, `classes`, and any other state the promo section needs.
+  - `StatDataTable` — renders the scrollable data table (`<table>` with `<thead>` and `<tbody>`) and the legend. Accepts: `unit`, `progressionData`, `filteredRows`, `activeStatKeys`, `visibleStats`, `otherUnit`, `otherUnitProgressionMap`, `hidePreJoinRows`, and any other state the data table needs.
+  
+  The parent `StatProgressionTable` component remains as a wrapper that manages shared state (e.g., `expandToLevel100`, `visibleStats`, `classes`, `progressionData`) and renders both sub-components. This preserves the single-component abstraction for callers while enabling the page to render the two sections in separate grid rows if desired.
+  
+  Alternatively, if extracting sub-components is too invasive, the parent can accept a `mode` prop (`'full'` | `'promo'` | `'table'`) and conditionally render only the relevant section, with shared state managed via the existing component internals.
+  
+  **Verify by**: `npm run build` passes. Rendering two units produces the same visual output as before — the promo section and data table still appear in the same order within each card. No behavior changes.
+  **Stop and hand off if**: The state dependencies between the promo section and data table are too tightly coupled to split cleanly (e.g., the data table re-renders when promo events change and needs access to computed progression data). In that case, use the `mode` prop approach instead of full extraction.
+
+- [ ] 4.3 Restructure page layout into two-row grid
+  In `app/comparator/page.tsx`, replace the current single `grid grid-cols-1 md:grid-cols-2 gap-6` that wraps both cards with a two-row layout:
+  
+  **Row 1** — A `grid grid-cols-1 md:grid-cols-2 gap-6` containing one `Card` per unit. Each card has the `CardHeader` (unit name) and `CardContent` containing only the `StatPromoSection` (or `StatProgressionTable` with `mode='promo'`).
+  
+  **Row 2** — A `grid grid-cols-1 md:grid-cols-2 gap-6` containing one container per unit. Each container renders only the `StatDataTable` (or `StatProgressionTable` with `mode='table'`). These containers do NOT need cards — they render the data table directly so the table headers are at the exact same Y position.
+  
+  The two grids use the same `gap-6` and column structure so the columns align vertically. The data table row starts at a uniform Y position regardless of how tall each unit's promo section is.
+  
+  On mobile (`grid-cols-1`), each unit's promo section and data table stack naturally — no visual change from current behavior.
+  
+  **Verify by**:
+  - Select two units where one can promote and one cannot (e.g., Roy and Perceval from FE6). Confirm both data table headers are at the same Y position.
+  - Add multiple class-change events to one unit. Confirm the data tables remain aligned regardless of promo section height differences.
+  - Remove class-change events. Confirm alignment holds.
+  - Swap units. Confirm alignment re-establishes.
+  - Select two units with different stat key counts (e.g., 7 vs 10 stats). Confirm the stat toggle buttons wrapping to different lines does NOT break alignment (the stat toggle is in row 1 with the promo section, so its variable height is absorbed there).
+  - View on a narrow viewport. Confirm cards stack vertically as before.
+  - `npm run build` passes with no type errors.
+  **Stop and hand off if**: The shared state between the promo section and data table (e.g., `progressionData` computed from promo events) cannot be passed between the two separate grid rows without lifting significant state to the page level. In that case, keep `StatProgressionTable` as a single wrapper component that renders both sub-components internally, and use the two-row grid at the page level with the wrapper component split across both rows via CSS (e.g., the wrapper renders both sections but is placed in a single grid cell spanning both rows, or the page passes refs to position the table section).

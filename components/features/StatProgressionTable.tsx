@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { generateProgressionArray, getValidReclassOptions } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
@@ -34,8 +34,6 @@ interface StatProgressionTableProps {
   otherUnitReclassEvents?: ReclassEvent[];
   otherUnitSelectedDifficulty?: string;
   hidePreJoinRows?: boolean;
-  minPromoSectionHeight?: number;
-  onPromoHeightChange?: (height: number) => void;
 }
 
 interface ProgressionRow {
@@ -56,7 +54,7 @@ function effectiveStartLevel(u: Unit): number {
   return u.level;
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows, minPromoSectionHeight, onPromoHeightChange }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
@@ -67,20 +65,6 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     classSkills: string[];
     gameId: string;
   } | null>(null);
-
-  const promoSectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = promoSectionRef.current;
-    if (!el || !onPromoHeightChange) return;
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        onPromoHeightChange(entry.contentRect.height);
-      }
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [onPromoHeightChange]);
 
   // Load classes data
   React.useEffect(() => {
@@ -275,8 +259,6 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
   return (
     <div className="w-full min-w-0 overflow-hidden">
-      <div style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
-      <div ref={promoSectionRef}>
         <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
           <div className="flex flex-col gap-2 min-w-0">
             <h2 className="text-xl font-semibold">Average Stats</h2>
@@ -672,8 +654,6 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
           );
         })()}
         </div>
-      </div>
-      </div>
 
       <div className="overflow-x-auto overflow-y-auto max-h-[70vh]">
         <table className="min-w-full border-separate border-spacing-0">
