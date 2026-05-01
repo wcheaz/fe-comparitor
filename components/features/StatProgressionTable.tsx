@@ -275,54 +275,55 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
 
   return (
     <div className="w-full min-w-0 overflow-hidden">
-      <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
-        <div className="flex flex-col gap-2 min-w-0">
-          <h2 className="text-xl font-semibold">Average Stats</h2>
-          {progressionData.statKeys.length > 0 && (
-            <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-sm text-gray-600 font-medium mr-1">Visible Stats:</span>
-              {progressionData.statKeys.map((statKey) => {
-                let label = statKey.toUpperCase();
-                if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
-                  label = 'STR/MAG';
-                } else if (statKey === 'skl') {
-                  const hasDex = (unit.stats && unit.stats.dex !== undefined) || (unit.growths && unit.growths.dex !== undefined);
-                  const hasSkl = (unit.stats && unit.stats.skl !== undefined) || (unit.growths && unit.growths.skl !== undefined);
-                  if (hasDex && hasSkl) label = 'SKL/DEX';
-                  else if (hasDex) label = 'DEX';
-                }
+      <div ref={promoSectionRef} style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
+        <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
+          <div className="flex flex-col gap-2 min-w-0">
+            <h2 className="text-xl font-semibold">Average Stats</h2>
+            {progressionData.statKeys.length > 0 && (
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-sm text-gray-600 font-medium mr-1">Visible Stats:</span>
+                {progressionData.statKeys.map((statKey) => {
+                  let label = statKey.toUpperCase();
+                  if (statKey === 'str' && !progressionData.statKeys.includes('mag')) {
+                    label = 'STR/MAG';
+                  } else if (statKey === 'skl') {
+                    const hasDex = (unit.stats && unit.stats.dex !== undefined) || (unit.growths && unit.growths.dex !== undefined);
+                    const hasSkl = (unit.stats && unit.stats.skl !== undefined) || (unit.growths && unit.growths.skl !== undefined);
+                    if (hasDex && hasSkl) label = 'SKL/DEX';
+                    else if (hasDex) label = 'DEX';
+                  }
 
-                const isActive = visibleStats.has(statKey);
-                return (
-                  <button
-                    key={`toggle-${statKey}`}
-                    onClick={() => toggleStatVisibility(statKey)}
-                    className={`px-2 py-1 text-xs rounded-full border transition-colors ${isActive
-                      ? 'bg-blue-100 border-blue-300 text-blue-800 hover:bg-blue-200'
-                      : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100'
-                      }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
+                  const isActive = visibleStats.has(statKey);
+                  return (
+                    <button
+                      key={`toggle-${statKey}`}
+                      onClick={() => toggleStatVisibility(statKey)}
+                      className={`px-2 py-1 text-xs rounded-full border transition-colors ${isActive
+                        ? 'bg-blue-100 border-blue-300 text-blue-800 hover:bg-blue-200'
+                        : 'bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100'
+                        }`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <label className="flex items-center space-x-2 whitespace-nowrap">
+              <input
+                type="checkbox"
+                checked={expandToLevel100}
+                onChange={(e) => setExpandToLevel100(e.target.checked)}
+                className="form-checkbox h-4 w-4 text-blue-600"
+              />
+              <span className="text-sm text-gray-700">Expand to Level 100</span>
+            </label>
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <label className="flex items-center space-x-2 whitespace-nowrap">
-            <input
-              type="checkbox"
-              checked={expandToLevel100}
-              onChange={(e) => setExpandToLevel100(e.target.checked)}
-              className="form-checkbox h-4 w-4 text-blue-600"
-            />
-            <span className="text-sm text-gray-700">Expand to Level 100</span>
-          </label>
-        </div>
-      </div>
 
-      <div ref={promoSectionRef} className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200" style={{ minHeight: minPromoSectionHeight != null ? minPromoSectionHeight : undefined }}>
+        <div className="flex flex-wrap gap-4 mb-4 p-3 bg-gray-50 rounded border border-gray-200">
         <span className="text-sm font-semibold text-gray-700 w-full mb-1">Promotion & Reclass Levels:</span>
         {(() => {
           const unitClass = classes.find(c => c.id === unit.class.toLowerCase().replace(/\s+/g, '_') && c.game === unit.game);
@@ -669,6 +670,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
             </div>
           );
         })()}
+        </div>
       </div>
 
       <div className="overflow-x-auto overflow-y-auto max-h-[70vh]">

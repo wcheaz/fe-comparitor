@@ -16,3 +16,14 @@
   - Remove one unit from selection. Confirm the remaining card's promotion section loses its `min-height` override.
   - View on a narrow viewport (below `md` breakpoint). Confirm both cards stack vertically and `min-height` has no visual effect.
   **Stop and hand off if**: The `ResizeObserver` callback causes an infinite loop (observation triggers resize which triggers observation). The design doc notes this should not happen because `min-height` only expands the element without reflowing children — if it does happen, debounce the callback.
+
+## 3. Alignment Tuning
+
+- [x] 3.1 Reevaluate and fix remaining vertical misalignment between tables
+  If the two data tables are still slightly offset after tasks 1.1 and 2.1, investigate and fix the root cause. Possible issues include: the stat toggle header section (lines 262–307) differing in height between the two tables (e.g., different numbers of stat toggle buttons wrapping to multiple lines), or the `min-height` measurement not accounting for margins/padding/borders on the promotion section. Measure the full distance from the top of `CardContent` to the top of the data table in both cards using DevTools, identify which element introduces the mismatch, and apply the same ResizeObserver + min-height coordination pattern to that element as well (or extend the existing measurement to cover the full pre-table region).
+  **Verify by**:
+  - Select two units with different stat key counts (e.g., a GBA unit with 7 stats and a Three Houses unit with 10 stats). Confirm the data table headers are at the same Y position.
+  - Select two units where one has promotion/reclass options and the other does not. Confirm alignment holds.
+  - Add/remove class-change events and confirm alignment holds after each change.
+  - Compare screenshots of both cards at the same viewport — the `<thead>` rows should overlap perfectly when placed side-by-side.
+  **Stop and hand off if**: The misalignment is caused by something outside the `StatProgressionTable` component (e.g., `CardHeader` height differences due to unit name length). In that case, document the finding and hand off for a design decision on whether to also synchronize `CardHeader` heights.
