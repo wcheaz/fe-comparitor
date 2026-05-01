@@ -13,6 +13,7 @@ export default function ComparatorPage() {
   const [reclassEvents, setReclassEvents] = useState<Record<string, ReclassEvent[]>>({});
   const [hidePreJoinRows, setHidePreJoinRows] = useState(false);
   const [selectedDifficulties, setSelectedDifficulties] = useState<Record<string, string>>({});
+  const [unitVisibleStats, setUnitVisibleStats] = useState<Record<string, Set<string>>>({});
   const maxUnits = 2;
 
   const handleUnitSelect = (unit: Unit) => {
@@ -117,6 +118,9 @@ export default function ComparatorPage() {
                                 hidePreJoinRows,
                               } : {})}
                               mode="promo"
+                              onVisibleStatsChange={(stats) => {
+                                setUnitVisibleStats(prev => ({ ...prev, [unit.id]: stats }));
+                              }}
                             />
                           </CardContent>
                         </Card>
@@ -131,25 +135,26 @@ export default function ComparatorPage() {
                       return (
                         <div key={`table-${unit.id}`}>
                           <StatProgressionTable
-                            unit={unit}
-                            promotionEvents={promotionEvents[unit.id] || []}
-                            reclassEvents={reclassEvents[unit.id] || []}
-                            onPromotionEventsChange={(events) => {
-                              setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
-                            }}
-                            onReclassEventsChange={(events) => {
-                              setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
-                            }}
-                            selectedDifficulty={selectedDifficulties[unit.id]}
-                            {...(otherUnit ? {
-                              otherUnit,
-                              otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
-                              otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
-                              otherUnitSelectedDifficulty: selectedDifficulties[otherUnit.id],
-                              hidePreJoinRows,
-                            } : {})}
-                            mode="table"
-                          />
+                              unit={unit}
+                              promotionEvents={promotionEvents[unit.id] || []}
+                              reclassEvents={reclassEvents[unit.id] || []}
+                              onPromotionEventsChange={(events) => {
+                                setPromotionEvents(prev => ({ ...prev, [unit.id]: events }));
+                              }}
+                              onReclassEventsChange={(events) => {
+                                setReclassEvents(prev => ({ ...prev, [unit.id]: events }));
+                              }}
+                              selectedDifficulty={selectedDifficulties[unit.id]}
+                              {...(otherUnit ? {
+                                otherUnit,
+                                otherUnitPromotionEvents: promotionEvents[otherUnit.id] || [],
+                                otherUnitReclassEvents: reclassEvents[otherUnit.id] || [],
+                                otherUnitSelectedDifficulty: selectedDifficulties[otherUnit.id],
+                                hidePreJoinRows,
+                              } : {})}
+                              mode="table"
+                              controlledVisibleStats={unitVisibleStats[unit.id]}
+                            />
                         </div>
                       );
                     })}

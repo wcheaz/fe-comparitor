@@ -35,6 +35,8 @@ interface StatProgressionTableProps {
   otherUnitSelectedDifficulty?: string;
   hidePreJoinRows?: boolean;
   mode?: 'full' | 'promo' | 'table';
+  controlledVisibleStats?: Set<string>;
+  onVisibleStatsChange?: (stats: Set<string>) => void;
 }
 
 interface ProgressionRow {
@@ -55,7 +57,7 @@ function effectiveStartLevel(u: Unit): number {
   return u.level;
 }
 
-export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows, mode = 'full' }: StatProgressionTableProps) {
+export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onPromotionEventsChange, onReclassEventsChange, selectedDifficulty, otherUnit, otherUnitPromotionEvents, otherUnitReclassEvents, otherUnitSelectedDifficulty, hidePreJoinRows, mode = 'full', controlledVisibleStats, onVisibleStatsChange }: StatProgressionTableProps) {
   const [expandToLevel100, setExpandToLevel100] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
   const [visibleStats, setVisibleStats] = useState<Set<string>>(new Set());
@@ -66,6 +68,8 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
     classSkills: string[];
     gameId: string;
   } | null>(null);
+
+  const effectiveVisibleStats = controlledVisibleStats !== undefined ? controlledVisibleStats : visibleStats;
 
   // Load classes data
   React.useEffect(() => {
@@ -181,19 +185,18 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
   }
 
   const toggleStatVisibility = (statKey: string) => {
-    setVisibleStats(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(statKey)) {
-        newSet.delete(statKey);
-      } else {
-        newSet.add(statKey);
-      }
-      return newSet;
-    });
+    const newSet = new Set(effectiveVisibleStats);
+    if (newSet.has(statKey)) {
+      newSet.delete(statKey);
+    } else {
+      newSet.add(statKey);
+    }
+    setVisibleStats(newSet);
+    onVisibleStatsChange?.(newSet);
   };
 
   const getVisibleStatKeys = () => {
-    return progressionData.statKeys.filter(key => visibleStats.has(key));
+    return progressionData.statKeys.filter(key => effectiveVisibleStats.has(key));
   };
 
   const activeStatKeys = getVisibleStatKeys();
@@ -282,7 +285,7 @@ export function StatProgressionTable({ unit, promotionEvents, reclassEvents, onP
                     else if (hasDex) label = 'DEX';
                   }
 
-                  const isActive = visibleStats.has(statKey);
+                  const isActive = effectiveVisibleStats.has(statKey);
                   return (
                     <button
                       key={`toggle-${statKey}`}
