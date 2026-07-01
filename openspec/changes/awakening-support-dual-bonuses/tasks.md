@@ -52,7 +52,7 @@
 
 ## 4. Final Quality Gates
 
-- [ ] **Final quality gate: all pre-flight gates pass or match baseline**
+- [x] **Final quality gate: all pre-flight gates pass or match baseline**
   - Scope: full repository; no code edits in this task
   - Change: All repository quality gates are verified clean.
   - Done when:
