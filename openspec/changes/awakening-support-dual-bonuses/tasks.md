@@ -28,7 +28,7 @@
   - Stop and hand off if:
     - details of the class mappings or formulas have unresolved conflicts with `hidden/AWAKENING_SUPPORTS_ADDITION.md`
 
-- [ ] **Add unit tests for Awakening support formulas**
+- [x] **Add unit tests for Awakening support formulas**
   - Scope: `__tests__/lib/supports-awakening.test.ts` (new)
   - Change: A set of automated unit tests covers edge cases for Pair Up bonuses (including stats, classes, support rank modifiers), Dual Support bonuses, and Dual Strike/Guard rates (including skill additions).
   - Done when:
