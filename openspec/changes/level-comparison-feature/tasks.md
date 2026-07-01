@@ -32,7 +32,7 @@
 
 ## 3. Integration
 
-- [ ] **Mount LevelComparison component in comparator page**
+- [x] **Mount LevelComparison component in comparator page**
   - Scope: `app/comparator/page.tsx`
   - Change: Mount the `LevelComparison` component right above the progression stats table on the comparator page when exactly 2 units are selected.
   - Done when:

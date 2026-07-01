@@ -5,6 +5,7 @@ import { Unit, PromotionEvent, ReclassEvent } from '@/types/unit';
 import { UnitSelector } from '@/components/features/UnitSelector';
 import { ComparisonGrid } from '@/components/features/ComparisonGrid';
 import { StatProgressionTable } from '@/components/features/StatProgressionTable';
+import { LevelComparison } from '@/components/features/LevelComparison';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComparatorPage() {
@@ -69,6 +70,19 @@ export default function ComparatorPage() {
             showStats={true}
             showGrowths={true}
           />
+
+          {selectedUnits.length === 2 && (
+            <LevelComparison
+              unitA={selectedUnits[0]}
+              unitB={selectedUnits[1]}
+              promotionEventsA={promotionEvents[selectedUnits[0].id] || []}
+              promotionEventsB={promotionEvents[selectedUnits[1].id] || []}
+              reclassEventsA={reclassEvents[selectedUnits[0].id] || []}
+              reclassEventsB={reclassEvents[selectedUnits[1].id] || []}
+              selectedDifficultyA={selectedDifficulties[selectedUnits[0].id]}
+              selectedDifficultyB={selectedDifficulties[selectedUnits[1].id]}
+            />
+          )}
 
           {/* Stat Progression Tables — two-row grid for table alignment */}
           {selectedUnits.length > 0 && (
