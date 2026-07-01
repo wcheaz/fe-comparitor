@@ -4,6 +4,22 @@ import '@testing-library/jest-dom';
 import { LevelComparison } from '@/components/features/LevelComparison';
 import { Unit, Class } from '@/types/unit';
 
+jest.mock('@/components/ui/SkillPill', () => {
+  const React = jest.requireActual('react');
+  const MockSkillPill = (props: { skill: string; game?: string; variant?: string }) =>
+    React.createElement(
+      'span',
+      {
+        'data-testid': 'skill-pill',
+        'data-skill': props.skill,
+        'data-game': props.game ?? '',
+        'data-variant': props.variant ?? '',
+      },
+      props.skill
+    );
+  return { __esModule: true, default: MockSkillPill };
+});
+
 const mockClasses: Class[] = [
   {
     id: 'lord',
@@ -224,6 +240,112 @@ describe('LevelComparison', () => {
       const hasContainer = screen.getByTestId(`has-skills-${robin.id}`);
       expect(within(hasContainer).getByText('Veteran')).toBeInTheDocument();
       expect(within(hasContainer).queryByText('Solidarity')).toBeNull();
+    });
+  });
+
+  describe('Growth rate section', () => {
+    it('renders the Effective Growth Rates section below the stats table', () => {
+      render(
+        <LevelComparison unitA={unitStrong} unitB={unitWeak} classes={mockClasses} />
+      );
+
+      const section = screen.getByTestId('growth-rates-section');
+      expect(section).toBeInTheDocument();
+      expect(within(section).getByText('Effective Growth Rates')).toBeInTheDocument();
+      expect(section.querySelector('[data-growth="hp"]')).not.toBeNull();
+      expect(section.querySelector('[data-growth="str"]')).not.toBeNull();
+    });
+
+    it('highlights the higher growth rate in each row with a green background', () => {
+      const { container } = render(
+        <LevelComparison unitA={unitStrong} unitB={unitWeak} classes={mockClasses} />
+      );
+
+      // hp: Strong 50% vs Weak 60% -> B (Weak) higher
+      const hpRow = container.querySelector('[data-growth="hp"]');
+      expect(hpRow).not.toBeNull();
+      const hpCells = hpRow!.querySelectorAll('td');
+      expect(hpCells[1]).not.toHaveClass('bg-green-500/20');
+      expect(hpCells[2]).toHaveClass('bg-green-500/20');
+
+      // str: Strong 40% vs Weak 30% -> A (Strong) higher
+      const strRow = container.querySelector('[data-growth="str"]');
+      expect(strRow).not.toBeNull();
+      const strCells = strRow!.querySelectorAll('td');
+      expect(strCells[1]).toHaveClass('bg-green-500/20');
+      expect(strCells[2]).not.toHaveClass('bg-green-500/20');
+    });
+
+    it('shows the percentage-point difference between both units', () => {
+      const { container } = render(
+        <LevelComparison unitA={unitStrong} unitB={unitWeak} classes={mockClasses} />
+      );
+
+      // str: 40 - 30 = +10
+      const strRow = container.querySelector('[data-growth="str"]');
+      expect(strRow!.querySelectorAll('td')[3].textContent).toBe('+10%');
+
+      // hp: 50 - 60 = -10
+      const hpRow = container.querySelector('[data-growth="hp"]');
+      expect(hpRow!.querySelectorAll('td')[3].textContent).toBe('-10%');
+    });
+
+    it('computes Awakening effective growths including class modifiers', () => {
+      const { container } = render(
+        <LevelComparison unitA={robin} unitB={secondAwakening} classes={mockClasses} />
+      );
+
+      // Robin (Tactician) mag: personal 35 + class 15 = 50%
+      const magRow = container.querySelector('[data-growth="mag"]');
+      expect(magRow).not.toBeNull();
+      const cells = magRow!.querySelectorAll('td');
+      expect(cells[1].textContent).toBe('50%');
+      // Sully has no mag growth -> em dash
+      expect(cells[2].textContent).toBe('—');
+    });
+  });
+
+  describe('Skill pill interactivity and variant resolution', () => {
+    it('passes the resolved game prop to each SkillPill', () => {
+      render(
+        <LevelComparison unitA={robin} unitB={unitWeak} classes={mockClasses} />
+      );
+
+      const hasContainer = screen.getByTestId(`has-skills-${robin.id}`);
+      const veteranPill = hasContainer.querySelector('[data-skill="Veteran"]');
+      expect(veteranPill).not.toBeNull();
+      expect(veteranPill!).toHaveAttribute('data-game', 'Awakening');
+    });
+
+    it('resolves the variant prop from class tier and skill unlock level', () => {
+      render(
+        <LevelComparison unitA={robin} unitB={unitWeak} classes={mockClasses} />
+      );
+
+      const hasContainer = screen.getByTestId(`has-skills-${robin.id}`);
+
+      // Default level 1: Veteran (Lv.1) in Tactician (unpromoted) -> unpromoted-lv1
+      const veteranPill = hasContainer.querySelector('[data-skill="Veteran"]');
+      expect(veteranPill).not.toBeNull();
+      expect(veteranPill!).toHaveAttribute('data-variant', 'unpromoted-lv1');
+      expect(veteranPill!).toHaveAttribute('data-game', 'Awakening');
+
+      // Select level 20 -> Solidarity (Lv.10) added to Has Skills
+      const selectA = screen.getByTestId('level-select-a');
+      const level20Option = within(selectA).getByRole('option', {
+        name: 'Level 20 (Tactician)',
+      }) as HTMLOptionElement;
+      fireEvent.change(selectA, { target: { value: level20Option.value } });
+
+      const solidarityPill = hasContainer.querySelector('[data-skill="Solidarity"]');
+      expect(solidarityPill).not.toBeNull();
+      expect(solidarityPill!).toHaveAttribute('data-variant', 'unpromoted-lv10');
+
+      // Ignis from Grandmaster (promoted, Lv.5) -> promoted-lv5 in Possible Skills
+      const possibleContainer = screen.getByTestId(`possible-skills-${robin.id}`);
+      const ignisPill = possibleContainer.querySelector('[data-skill="Ignis"]');
+      expect(ignisPill).not.toBeNull();
+      expect(ignisPill!).toHaveAttribute('data-variant', 'promoted-lv5');
     });
   });
 });

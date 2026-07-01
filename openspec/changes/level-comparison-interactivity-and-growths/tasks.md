@@ -29,7 +29,7 @@
   - Stop and hand off if:
     - `npx tsc --noEmit` reports compilation errors originating in files outside the scope of this task (e.g. in `lib/stats.ts`) that were not present in the pre-flight baseline
 
-- [ ] **Add unit tests for interactive skill pills and growth rates table in LevelComparison.test.tsx**
+- [x] **Add unit tests for interactive skill pills and growth rates table in LevelComparison.test.tsx**
   - Scope: `__tests__/components/features/LevelComparison.test.tsx`
   - Change: Add unit tests verifying growth rates table rendering, high growth highlights, difference calculations, and interactive skill pills behavior.
   - Done when:
