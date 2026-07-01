@@ -18,7 +18,7 @@
 
 ## 2. Core Implementation
 
-- [ ] **Implement Awakening support calculation library**
+- [x] **Implement Awakening support calculation library**
   - Scope: `lib/supports-awakening.ts` (new)
   - Change: The library correctly implements class lookup maps, Pair Up formulas, Dual Support lookup maps, and Dual Strike/Guard rate formulas, conforming to Awakening specifications.
   - Done when:
