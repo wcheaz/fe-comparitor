@@ -13,7 +13,8 @@
       "spd": 5,
       "lck": 0,
       "def": 5,
-      "res": 3
+      "res": 3,
+      "mov": 5
     },
     "growths": {
       "hp": 40,
@@ -44,7 +45,8 @@
       "spd": 25,
       "lck": 30,
       "def": 25,
-      "res": 25
+      "res": 25,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "An aspiring tactician of cryptic origins. Wields swords, tomes."
@@ -63,7 +65,8 @@
       "spd": 6,
       "lck": 0,
       "def": 7,
-      "res": 0
+      "res": 0,
+      "mov": 7
     },
     "growths": {
       "hp": 45,
@@ -95,7 +98,8 @@
       "spd": 25,
       "lck": 30,
       "def": 26,
-      "res": 26
+      "res": 26,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "A mounted unit that uses swords and lances. They have balanced stats and good movement range."
@@ -114,7 +118,8 @@
       "spd": 2,
       "lck": 0,
       "def": 11,
-      "res": 0
+      "res": 0,
+      "mov": 4
     },
     "growths": {
       "hp": 50,
@@ -145,7 +150,8 @@
       "spd": 23,
       "lck": 30,
       "def": 30,
-      "res": 22
+      "res": 22,
+      "mov": 15
     },
     "movementType": "Armored",
     "description": "A heavily armored knight with high Def. Weak against magic."
@@ -164,7 +170,8 @@
       "spd": 10,
       "lck": 0,
       "def": 4,
-      "res": 1
+      "res": 1,
+      "mov": 5
     },
     "growths": {
       "hp": 40,
@@ -195,7 +202,8 @@
       "spd": 28,
       "lck": 30,
       "def": 22,
-      "res": 24
+      "res": 24,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A sword specialist with high skill and speed. They have a natural bonus to critical hit rate."
@@ -214,7 +222,8 @@
       "spd": 7,
       "lck": 0,
       "def": 5,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 45,
@@ -245,7 +254,8 @@
       "spd": 26,
       "lck": 30,
       "def": 25,
-      "res": 23
+      "res": 23,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A combat professional with high stats all around. Wields swords."
@@ -264,7 +274,8 @@
       "spd": 7,
       "lck": 0,
       "def": 7,
-      "res": 5
+      "res": 5,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -293,7 +304,8 @@
       "spd": 40,
       "lck": 45,
       "def": 40,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned tactician upon whom victory hinges."
@@ -312,7 +324,8 @@
       "spd": 8,
       "lck": 0,
       "def": 10,
-      "res": 6
+      "res": 6,
+      "mov": 8
     },
     "growths": {
       "hp": 45,
@@ -341,7 +354,8 @@
       "spd": 40,
       "lck": 45,
       "def": 42,
-      "res": 42
+      "res": 42,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "A promoted Cavalier with balanced stats and defensive skills."
@@ -360,7 +374,8 @@
       "spd": 5,
       "lck": 0,
       "def": 14,
-      "res": 1
+      "res": 1,
+      "mov": 7
     },
     "growths": {
       "hp": 50,
@@ -390,7 +405,8 @@
       "spd": 37,
       "lck": 45,
       "def": 48,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Armored, Cavalry",
     "description": "A heavily armored promoted class that can use swords, lances, and axes. They have excellent defense but lower speed."
@@ -409,7 +425,8 @@
       "spd": 13,
       "lck": 0,
       "def": 6,
-      "res": 4
+      "res": 4,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -437,7 +454,8 @@
       "spd": 46,
       "lck": 45,
       "def": 33,
-      "res": 38
+      "res": 38,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A master of swordplay with incredibly high skill and speed. They have excellent critical hit rates."
@@ -456,7 +474,8 @@
       "spd": 10,
       "lck": 0,
       "def": 8,
-      "res": 3
+      "res": 3,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -485,7 +504,8 @@
       "spd": 42,
       "lck": 45,
       "def": 40,
-      "res": 36
+      "res": 36,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A balanced promoted class that uses swords and axes. They have solid stats and the Sol skill for healing."
@@ -504,7 +524,8 @@
       "spd": 6,
       "lck": 0,
       "def": 6,
-      "res": 6
+      "res": 6,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -533,7 +554,8 @@
       "spd": 41,
       "lck": 45,
       "def": 38,
-      "res": 43
+      "res": 43,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned cleric/priest who heals with staves and hurts with axes."
@@ -552,7 +574,8 @@
       "spd": 5,
       "lck": 0,
       "def": 3,
-      "res": 2
+      "res": 2,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -580,7 +603,8 @@
       "spd": 40,
       "lck": 45,
       "def": 35,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Shape-shifting beasts with high speed and skill."
@@ -599,7 +623,8 @@
       "spd": 1,
       "lck": 0,
       "def": 2,
-      "res": 2
+      "res": 2,
+      "mov": 6
     },
     "growths": {
       "hp": 50,
@@ -627,7 +652,8 @@
       "spd": 35,
       "lck": 45,
       "def": 40,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Dragon",
     "description": "Ancient dragons with incredible lifespan and defensive stats."
@@ -646,7 +672,8 @@
       "spd": 6,
       "lck": 0,
       "def": 5,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 45,
@@ -677,7 +704,8 @@
       "spd": 25,
       "lck": 30,
       "def": 25,
-      "res": 21
+      "res": 21,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Ranged fighters that strike from afar using bows. Vulnerable up close."
@@ -696,7 +724,8 @@
       "spd": 8,
       "lck": 0,
       "def": 4,
-      "res": 6
+      "res": 6,
+      "mov": 7
     },
     "growths": {
       "hp": 40,
@@ -727,7 +756,8 @@
       "spd": 27,
       "lck": 30,
       "def": 22,
-      "res": 25
+      "res": 25,
+      "mov": 15
     },
     "movementType": "Flying",
     "description": "High-mobility flyers with great resistance, but vulnerable to bows."
@@ -746,7 +776,8 @@
       "spd": 7,
       "lck": 0,
       "def": 7,
-      "res": 3
+      "res": 3,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -775,7 +806,8 @@
       "spd": 40,
       "lck": 45,
       "def": 40,
-      "res": 35
+      "res": 35,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned fighter with peerless Str. Wields axes, bows."
@@ -794,7 +826,8 @@
       "spd": 7,
       "lck": 0,
       "def": 7,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 40,
@@ -824,7 +857,8 @@
       "spd": 28,
       "lck": 30,
       "def": 25,
-      "res": 25
+      "res": 25,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A youth of royal blood. Wields swords."
@@ -843,7 +877,8 @@
       "spd": 5,
       "lck": 0,
       "def": 8,
-      "res": 0
+      "res": 0,
+      "mov": 7
     },
     "growths": {
       "hp": 45,
@@ -874,7 +909,8 @@
       "spd": 24,
       "lck": 30,
       "def": 28,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Wyvern",
     "description": "Heavily armored airborne units with immense physical stats."
@@ -893,7 +929,8 @@
       "spd": 4,
       "lck": 0,
       "def": 1,
-      "res": 6
+      "res": 6,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -924,7 +961,8 @@
       "spd": 25,
       "lck": 30,
       "def": 22,
-      "res": 27
+      "res": 27,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Dedicated healers supporting the army from the backlines."
@@ -943,7 +981,8 @@
       "spd": 5,
       "lck": 0,
       "def": 1,
-      "res": 5
+      "res": 5,
+      "mov": 7
     },
     "growths": {
       "hp": 35,
@@ -974,7 +1013,8 @@
       "spd": 26,
       "lck": 30,
       "def": 20,
-      "res": 28
+      "res": 28,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "Mounted healers who offer excellent mobility and support."
@@ -993,7 +1033,8 @@
       "spd": 1,
       "lck": 0,
       "def": 1,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -1021,7 +1062,8 @@
       "spd": 20,
       "lck": 30,
       "def": 20,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Inexperienced fighters with extremely high growth potentials."
@@ -1040,7 +1082,8 @@
       "spd": 8,
       "lck": 0,
       "def": 3,
-      "res": 1
+      "res": 1,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -1068,7 +1111,8 @@
       "spd": 40,
       "lck": 45,
       "def": 30,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Performers whose graceful dances allow an ally to move again."
@@ -1087,7 +1131,8 @@
       "spd": 3,
       "lck": 0,
       "def": 4,
-      "res": 4
+      "res": 4,
+      "mov": 5
     },
     "growths": {
       "hp": 50,
@@ -1118,7 +1163,8 @@
       "spd": 25,
       "lck": 30,
       "def": 25,
-      "res": 27
+      "res": 27,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Spellcasters who dabble in the forbidden dark arts."
@@ -1137,7 +1183,8 @@
       "spd": 11,
       "lck": 0,
       "def": 3,
-      "res": 5
+      "res": 5,
+      "mov": 6
     },
     "growths": {
       "hp": 35,
@@ -1166,7 +1213,8 @@
       "spd": 43,
       "lck": 45,
       "def": 30,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Agile rogues who have picked up healing utility."
@@ -1185,7 +1233,8 @@
       "spd": 8,
       "lck": 0,
       "def": 2,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -1216,7 +1265,8 @@
       "spd": 28,
       "lck": 30,
       "def": 21,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Nimble units capable of unlocking doors and chests."
@@ -1235,7 +1285,8 @@
       "spd": 5,
       "lck": 0,
       "def": 4,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 45,
@@ -1266,7 +1317,8 @@
       "spd": 25,
       "lck": 30,
       "def": 25,
-      "res": 23
+      "res": 23,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Reckless axe wielders boasting incredibly high Health and Strength."
@@ -1285,7 +1337,8 @@
       "spd": 4,
       "lck": 0,
       "def": 2,
-      "res": 3
+      "res": 3,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -1316,7 +1369,8 @@
       "spd": 26,
       "lck": 30,
       "def": 21,
-      "res": 25
+      "res": 25,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "Anima magic users striking enemies with elemental tomes."
@@ -1335,7 +1389,8 @@
       "spd": 9,
       "lck": 0,
       "def": 10,
-      "res": 3
+      "res": 3,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -1364,7 +1419,8 @@
       "spd": 41,
       "lck": 45,
       "def": 42,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned leader of royal blood. Wields swords, lances."
@@ -1383,7 +1439,8 @@
       "spd": 4,
       "lck": 0,
       "def": 15,
-      "res": 3
+      "res": 3,
+      "mov": 5
     },
     "growths": {
       "hp": 50,
@@ -1412,7 +1469,8 @@
       "spd": 35,
       "lck": 45,
       "def": 50,
-      "res": 35
+      "res": 35,
+      "mov": 15
     },
     "movementType": "Armored",
     "description": "A seasoned knight with superior Atk/Def. Wields lances, axes."
@@ -1431,7 +1489,8 @@
       "spd": 8,
       "lck": 0,
       "def": 3,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 50,
@@ -1462,7 +1521,8 @@
       "spd": 27,
       "lck": 30,
       "def": 22,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A savage thug with high Str/Spd, but low Def."
@@ -1481,7 +1541,8 @@
       "spd": 11,
       "lck": 0,
       "def": 5,
-      "res": 1
+      "res": 1,
+      "mov": 6
     },
     "growths": {
       "hp": 50,
@@ -1509,7 +1570,8 @@
       "spd": 44,
       "lck": 45,
       "def": 34,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned barbarian whose axe strikes fear in the enemy."
@@ -1528,7 +1590,8 @@
       "spd": 10,
       "lck": 0,
       "def": 6,
-      "res": 2
+      "res": 2,
+      "mov": 8
     },
     "growths": {
       "hp": 50,
@@ -1557,7 +1620,8 @@
       "spd": 41,
       "lck": 45,
       "def": 35,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "A seasoned, mounted archer. Wields swords, bows."
@@ -1576,7 +1640,8 @@
       "spd": 9,
       "lck": 0,
       "def": 10,
-      "res": 3
+      "res": 3,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -1604,7 +1669,8 @@
       "spd": 40,
       "lck": 45,
       "def": 40,
-      "res": 31
+      "res": 31,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned archer with superior Skill who has mastered the bow."
@@ -1623,7 +1689,8 @@
       "spd": 12,
       "lck": 0,
       "def": 5,
-      "res": 1
+      "res": 1,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -1652,7 +1719,8 @@
       "spd": 46,
       "lck": 45,
       "def": 31,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned and deadly thief or myrmidon. Wields swords, bows."
@@ -1671,7 +1739,8 @@
       "spd": 11,
       "lck": 0,
       "def": 6,
-      "res": 9
+      "res": 9,
+      "mov": 8
     },
     "growths": {
       "hp": 40,
@@ -1700,7 +1769,8 @@
       "spd": 44,
       "lck": 45,
       "def": 33,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Flying",
     "description": "A seasoned pegasus knight on a new mount. Wields lances, staves."
@@ -1719,7 +1789,8 @@
       "spd": 10,
       "lck": 0,
       "def": 5,
-      "res": 9
+      "res": 9,
+      "mov": 8
     },
     "growths": {
       "hp": 40,
@@ -1748,7 +1819,8 @@
       "spd": 42,
       "lck": 45,
       "def": 32,
-      "res": 41
+      "res": 41,
+      "mov": 15
     },
     "movementType": "Flying",
     "description": "A seasoned pegasus knight who wields lances and tomes."
@@ -1767,7 +1839,8 @@
       "spd": 7,
       "lck": 0,
       "def": 11,
-      "res": 3
+      "res": 3,
+      "mov": 8
     },
     "growths": {
       "hp": 45,
@@ -1796,7 +1869,8 @@
       "spd": 38,
       "lck": 45,
       "def": 46,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Flying",
     "description": "A seasoned wyvern rider who wields axes and lances."
@@ -1815,7 +1889,8 @@
       "spd": 9,
       "lck": 0,
       "def": 8,
-      "res": 3
+      "res": 3,
+      "mov": 8
     },
     "growths": {
       "hp": 45,
@@ -1843,7 +1918,8 @@
       "spd": 41,
       "lck": 45,
       "def": 40,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Flying",
     "description": "A seasoned and well-balanced wyvern rider on a new mount."
@@ -1862,7 +1938,8 @@
       "spd": 4,
       "lck": 0,
       "def": 1,
-      "res": 6
+      "res": 6,
+      "mov": 5
     },
     "growths": {
       "hp": 35,
@@ -1893,7 +1970,8 @@
       "spd": 25,
       "lck": 30,
       "def": 22,
-      "res": 27
+      "res": 27,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A male healer who uses staves. Cannot attack."
@@ -1912,7 +1990,8 @@
       "spd": 8,
       "lck": 0,
       "def": 3,
-      "res": 8
+      "res": 8,
+      "mov": 8
     },
     "growths": {
       "hp": 35,
@@ -1941,7 +2020,8 @@
       "spd": 43,
       "lck": 45,
       "def": 30,
-      "res": 45
+      "res": 45,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "A seasoned, hardy troubadour. Uses staves, tomes."
@@ -1960,7 +2040,8 @@
       "spd": 6,
       "lck": 0,
       "def": 6,
-      "res": 6
+      "res": 6,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -1989,7 +2070,8 @@
       "spd": 41,
       "lck": 45,
       "def": 38,
-      "res": 43
+      "res": 43,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned cleric who heals with staves and hurts with axes."
@@ -2008,7 +2090,8 @@
       "spd": 7,
       "lck": 0,
       "def": 4,
-      "res": 5
+      "res": 5,
+      "mov": 6
     },
     "growths": {
       "hp": 35,
@@ -2037,7 +2120,8 @@
       "spd": 42,
       "lck": 45,
       "def": 31,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned mage or healer with high Mag. Wields tomes, staves."
@@ -2056,7 +2140,8 @@
       "spd": 5,
       "lck": 0,
       "def": 9,
-      "res": 5
+      "res": 5,
+      "mov": 8
     },
     "growths": {
       "hp": 50,
@@ -2085,7 +2170,8 @@
       "spd": 40,
       "lck": 45,
       "def": 42,
-      "res": 38
+      "res": 38,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "A seasoned, mounted mage who wields tomes and swords."
@@ -2104,7 +2190,8 @@
       "spd": 4,
       "lck": 0,
       "def": 7,
-      "res": 7
+      "res": 7,
+      "mov": 6
     },
     "growths": {
       "hp": 45,
@@ -2132,7 +2219,8 @@
       "spd": 40,
       "lck": 45,
       "def": 41,
-      "res": 44
+      "res": 44,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A seasoned dark mage with fearsome Mag."
@@ -2151,7 +2239,8 @@
       "spd": 3,
       "lck": 0,
       "def": 3,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 40,
@@ -2176,7 +2265,8 @@
       "spd": 30,
       "lck": 45,
       "def": 30,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "An ordinary soldier. Wields a lance."
@@ -2195,7 +2285,8 @@
       "spd": 2,
       "lck": 0,
       "def": 4,
-      "res": 1
+      "res": 1,
+      "mov": 5
     },
     "growths": {
       "hp": 0,
@@ -2218,7 +2309,8 @@
       "spd": 20,
       "lck": 30,
       "def": 20,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A traveling merchant. Save her and it may pay off..."
@@ -2237,7 +2329,8 @@
       "spd": 0,
       "lck": 0,
       "def": 0,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 0,
@@ -2260,7 +2353,8 @@
       "spd": 25,
       "lck": 30,
       "def": 30,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A Risen minion with sharp claws and high Str."
@@ -2279,7 +2373,8 @@
       "spd": 2,
       "lck": 0,
       "def": 2,
-      "res": 1
+      "res": 1,
+      "mov": 6
     },
     "growths": {
       "hp": 0,
@@ -2302,7 +2397,8 @@
       "spd": 35,
       "lck": 45,
       "def": 35,
-      "res": 30
+      "res": 30,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A noble Risen with high Str and hatred for the living."
@@ -2321,7 +2417,8 @@
       "spd": 8,
       "lck": 0,
       "def": 12,
-      "res": 5
+      "res": 5,
+      "mov": 8
     },
     "growths": {
       "hp": 50,
@@ -2348,7 +2445,8 @@
       "spd": 40,
       "lck": 45,
       "def": 45,
-      "res": 35
+      "res": 35,
+      "mov": 15
     },
     "movementType": "Cavalry",
     "description": "The dauntless emperor of Valm. Wields swords, lances, axes."
@@ -2367,7 +2465,8 @@
       "spd": 10,
       "lck": 0,
       "def": 8,
-      "res": 4
+      "res": 4,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -2392,7 +2491,8 @@
       "spd": 43,
       "lck": 45,
       "def": 41,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "The Hero-King from the sagas said to have saved the world."
@@ -2411,7 +2511,8 @@
       "spd": 15,
       "lck": 0,
       "def": 15,
-      "res": 10
+      "res": 10,
+      "mov": 0
     },
     "growths": {
       "hp": 0,
@@ -2434,7 +2535,8 @@
       "spd": 45,
       "lck": 45,
       "def": 50,
-      "res": 50
+      "res": 50,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "The fell dragon who seeks to usher in a dark future."
@@ -2453,7 +2555,8 @@
       "spd": 0,
       "lck": 0,
       "def": 0,
-      "res": 0
+      "res": 0,
+      "mov": 5
     },
     "growths": {
       "hp": 0,
@@ -2476,7 +2579,8 @@
       "spd": 20,
       "lck": 30,
       "def": 20,
-      "res": 20
+      "res": 20,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "The Wellspring's reflection of one who stands before it."
@@ -2495,7 +2599,8 @@
       "spd": 9,
       "lck": 0,
       "def": 7,
-      "res": 10
+      "res": 10,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -2525,7 +2630,8 @@
       "spd": 41,
       "lck": 45,
       "def": 39,
-      "res": 43
+      "res": 43,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "An enigma with superior resistance. Wields swords, axes, and tomes."
@@ -2544,7 +2650,8 @@
       "spd": 10,
       "lck": 0,
       "def": 7,
-      "res": 6
+      "res": 6,
+      "mov": 6
     },
     "growths": {
       "hp": 40,
@@ -2574,7 +2681,8 @@
       "spd": 42,
       "lck": 45,
       "def": 41,
-      "res": 40
+      "res": 40,
+      "mov": 15
     },
     "movementType": "Infantry",
     "description": "A woman blessed by Lady Luck. Wields lances, bows, and staves."

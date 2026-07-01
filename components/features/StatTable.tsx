@@ -36,8 +36,8 @@ export function StatTable({
   const effectiveGrowths = getEffectiveGrowths(unit, classData);
 
   const allStatKeys = new Set([
-    ...Object.keys(unit.stats),
-    ...Object.keys(unit.growths)
+    ...Object.keys(effectiveBases),
+    ...Object.keys(effectiveGrowths)
   ]);
 
   const statOrder = ['hp', 'str', 'mag', 'skl', 'dex', 'spd', 'lck', 'def', 'res', 'cha', 'con', 'bld', 'mov', 'aid'];

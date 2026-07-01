@@ -576,6 +576,32 @@ describe('Stat Progression Logic', () => {
       expect(result.hp).toBe(36);
     });
 
+    it('should include mov in combined bases for Awakening units', () => {
+      const awakeningUnit: Unit = {
+        id: 'chrom',
+        name: 'Chrom',
+        game: 'Awakening',
+        class: 'lord',
+        joinChapter: 'Chapter 1',
+        level: 1,
+        stats: { hp: 18, str: 1, skl: 2, spd: 3, lck: 4, def: 2, res: 0 },
+        growths: { hp: 70, str: 40, skl: 50, spd: 45, lck: 60, def: 30, res: 25 },
+      };
+      const lordClass: Class = {
+        id: 'lord',
+        name: 'Lord',
+        game: 'Awakening',
+        type: 'unpromoted',
+        baseStats: { hp: 18, str: 4, skl: 5, spd: 6, lck: 4, def: 3, res: 1, mov: 5 },
+        promotionBonus: {},
+        promotesTo: [],
+        classSkills: [],
+      };
+
+      const result = getEffectiveBaseStats(awakeningUnit, lordClass);
+      expect(result.mov).toBe(5);
+    });
+
     it('should return unit.stats unchanged for non-Awakening units', () => {
       const fe8Unit: Unit = {
         id: 'eirika',

@@ -1275,13 +1275,19 @@ export function ComparisonGrid({
   );
 }
 
-// Helper functions
-function getCommonStats(units: Unit[]): string[] {
+function getCommonStats(units: Unit[], classes?: Class[]): string[] {
   const statSet = new Set<string>();
 
   units.forEach(unit => {
     Object.keys(unit.stats).forEach(stat => statSet.add(stat));
     Object.keys(unit.growths).forEach(stat => statSet.add(stat));
+    if (classes) {
+      const unitClass = classes.find(c => c.id === unit.class && c.game === unit.game);
+      if (unitClass) {
+        Object.keys(unitClass.baseStats || {}).forEach(stat => statSet.add(stat));
+        Object.keys(unitClass.growths || {}).forEach(stat => statSet.add(stat));
+      }
+    }
   });
 
   // Return stats in a logical order
@@ -1296,7 +1302,7 @@ function getCommonStats(units: Unit[]): string[] {
 
 function getCommonBaseStats(units: Unit[], classes?: Class[]): string[] {
   if (units.length < 2) {
-    return getCommonStats(units);
+    return getCommonStats(units, classes);
   }
 
   const commonStats: string[] = [];
@@ -1343,7 +1349,7 @@ function getCommonBaseStats(units: Unit[], classes?: Class[]): string[] {
 
 function getCommonGrowthStats(units: Unit[], classes?: Class[]): string[] {
   if (units.length < 2) {
-    return getCommonStats(units);
+    return getCommonStats(units, classes);
   }
 
   const commonStats: string[] = [];
