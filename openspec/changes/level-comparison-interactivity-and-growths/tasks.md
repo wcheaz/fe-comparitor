@@ -18,7 +18,7 @@
 
 ## 2. Implementation
 
-- [ ] **Implement interactive skill pills and effective growth rates comparison table in LevelComparison**
+- [x] **Implement interactive skill pills and effective growth rates comparison table in LevelComparison**
   - Scope: `components/features/LevelComparison.tsx`
   - Change: Modify `LevelComparison` component to resolve and pass `game` and `variant` props to `SkillPill` components inside the skill lists, and render a side-by-side growth rates comparison table comparing the effective growth rates of both units at their chosen steps.
   - Done when:

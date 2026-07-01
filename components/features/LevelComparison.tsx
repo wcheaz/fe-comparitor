@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { Unit, UnitStats, Class, PromotionEvent, ReclassEvent } from '@/types/unit';
-import { generateProgressionArray } from '@/lib/stats';
+import { generateProgressionArray, getEffectiveGrowths } from '@/lib/stats';
 import { getAllClasses } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import SkillPill from '@/components/ui/SkillPill';
@@ -60,6 +60,39 @@ function cleanSkillName(skill: string): string {
 function extractSkillLevel(skill: string): number | null {
   const match = skill.match(/\(Lv\.\s*(\d+)\)/);
   return match ? parseInt(match[1], 10) : null;
+}
+
+function bucketLevel(level: number): 1 | 5 | 10 {
+  if (level <= 1) return 1;
+  if (level <= 5) return 5;
+  return 10;
+}
+
+type SkillTierVariant =
+  | 'unpromoted-lv1'
+  | 'unpromoted-lv5'
+  | 'unpromoted-lv10'
+  | 'promoted-lv1'
+  | 'promoted-lv5'
+  | 'promoted-lv10';
+
+function getSkillVariant(
+  skillName: string,
+  game: string,
+  classes: Class[]
+): SkillTierVariant | undefined {
+  for (const cls of classes) {
+    if (cls.game !== game || !cls.classSkills) continue;
+    for (const raw of cls.classSkills) {
+      if (cleanSkillName(raw) === skillName) {
+        const level = extractSkillLevel(raw) ?? 1;
+        const bucketed = bucketLevel(level);
+        const tier = cls.type === 'trainee' ? 'unpromoted' : cls.type;
+        return `${tier}-lv${bucketed}` as SkillTierVariant;
+      }
+    }
+  }
+  return undefined;
 }
 
 function parseDisplayLevelNum(displayLevel: string): number {
@@ -263,6 +296,15 @@ export function LevelComparison({
     ? computePossibleSkills(unitB, new Set(hasSkillsB), classes)
     : [];
 
+  const classA = findClassByName(classes, stepA.class, unitA.game);
+  const growthsA = isAwakeningA ? getEffectiveGrowths(unitA, classA) : unitA.growths;
+  const classB = findClassByName(classes, stepB.class, unitB.game);
+  const growthsB = isAwakeningB ? getEffectiveGrowths(unitB, classB) : unitB.growths;
+
+  const growthKeys = PRIMARY_STAT_ORDER.filter(
+    k => growthsA[k] !== undefined || growthsB[k] !== undefined
+  );
+
   const renderStatRow = (key: string) => {
     const valA = statsA[key];
     const valB = statsB[key];
@@ -292,6 +334,38 @@ export function LevelComparison({
           }`}
         >
           {aHas && bHas ? (diff > 0 ? `+${diff.toFixed(2)}` : diff.toFixed(2)) : '—'}
+        </td>
+      </tr>
+    );
+  };
+
+  const renderGrowthRow = (key: string) => {
+    const valA = growthsA[key];
+    const valB = growthsB[key];
+    const aHas = valA !== undefined;
+    const bHas = valB !== undefined;
+    const numA = aHas ? (valA as number) : 0;
+    const numB = bHas ? (valB as number) : 0;
+    const diff = numA - numB;
+    const aHigher = aHas && (!bHas || numA > numB);
+    const bHigher = bHas && (!aHas || numB > numA);
+    const label = STAT_LABELS[key] || key;
+
+    return (
+      <tr key={key} data-growth={key}>
+        <td className="px-3 py-2 text-sm font-medium text-gray-700">{label}</td>
+        <td className={`px-3 py-2 text-sm text-center ${aHigher ? 'bg-green-500/20' : ''}`}>
+          {aHas ? `${numA}%` : '—'}
+        </td>
+        <td className={`px-3 py-2 text-sm text-center ${bHigher ? 'bg-green-500/20' : ''}`}>
+          {bHas ? `${numB}%` : '—'}
+        </td>
+        <td
+          className={`px-3 py-2 text-sm text-center font-mono ${
+            diff > 0 ? 'text-green-600' : diff < 0 ? 'text-red-600' : 'text-gray-400'
+          }`}
+        >
+          {aHas && bHas ? (diff > 0 ? `+${diff}%` : `${diff}%`) : '—'}
         </td>
       </tr>
     );
@@ -368,13 +442,52 @@ export function LevelComparison({
           </table>
         </div>
 
+        <div data-testid="growth-rates-section" className="overflow-x-auto">
+          <h4 className="mb-2 text-sm font-semibold text-fe-blue-900">Effective Growth Rates</h4>
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b">
+                <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">Stat</th>
+                <th className="px-3 py-2 text-center text-sm font-semibold text-fe-blue-700">
+                  {unitA.name}
+                </th>
+                <th className="px-3 py-2 text-center text-sm font-semibold text-fe-blue-700">
+                  {unitB.name}
+                </th>
+                <th className="px-3 py-2 text-center text-sm font-semibold text-gray-700">Diff</th>
+              </tr>
+            </thead>
+            <tbody>
+              {growthKeys.length === 0 ? (
+                <tr key="__no-growth__">
+                  <td colSpan={4} className="px-3 py-2 text-center text-xs text-muted-foreground">
+                    No growth rate data available.
+                  </td>
+                </tr>
+              ) : (
+                growthKeys.map(k => renderGrowthRow(k))
+              )}
+            </tbody>
+          </table>
+        </div>
+
         {(isAwakeningA || isAwakeningB) && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {isAwakeningA && (
-              <SkillList unit={unitA} hasSkills={hasSkillsA} possibleSkills={possibleSkillsA} />
+              <SkillList
+                unit={unitA}
+                classes={classes}
+                hasSkills={hasSkillsA}
+                possibleSkills={possibleSkillsA}
+              />
             )}
             {isAwakeningB && (
-              <SkillList unit={unitB} hasSkills={hasSkillsB} possibleSkills={possibleSkillsB} />
+              <SkillList
+                unit={unitB}
+                classes={classes}
+                hasSkills={hasSkillsB}
+                possibleSkills={possibleSkillsB}
+              />
             )}
           </div>
         )}
@@ -385,11 +498,12 @@ export function LevelComparison({
 
 interface SkillListProps {
   unit: Unit;
+  classes: Class[];
   hasSkills: string[];
   possibleSkills: string[];
 }
 
-function SkillList({ unit, hasSkills, possibleSkills }: SkillListProps) {
+function SkillList({ unit, classes, hasSkills, possibleSkills }: SkillListProps) {
   return (
     <div data-testid={`skills-${unit.id}`} className="space-y-3">
       <h4 className="text-sm font-semibold text-fe-blue-900">{unit.name} — Skills</h4>
@@ -400,7 +514,14 @@ function SkillList({ unit, hasSkills, possibleSkills }: SkillListProps) {
             {hasSkills.length === 0 ? (
               <span className="text-xs text-muted-foreground">None</span>
             ) : (
-              hasSkills.map(s => <SkillPill key={s} skill={s} />)
+              hasSkills.map(s => (
+                <SkillPill
+                  key={s}
+                  skill={s}
+                  game={unit.game}
+                  variant={getSkillVariant(s, unit.game, classes)}
+                />
+              ))
             )}
           </div>
         </div>
@@ -410,7 +531,14 @@ function SkillList({ unit, hasSkills, possibleSkills }: SkillListProps) {
             {possibleSkills.length === 0 ? (
               <span className="text-xs text-muted-foreground">None</span>
             ) : (
-              possibleSkills.map(s => <SkillPill key={s} skill={s} />)
+              possibleSkills.map(s => (
+                <SkillPill
+                  key={s}
+                  skill={s}
+                  game={unit.game}
+                  variant={getSkillVariant(s, unit.game, classes)}
+                />
+              ))
             )}
           </div>
         </div>
