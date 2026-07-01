@@ -40,7 +40,7 @@
 
 ## 3. UI Integration
 
-- [ ] **Integrate Awakening support bonuses display in ComparisonGrid**
+- [x] **Integrate Awakening support bonuses display in ComparisonGrid**
   - Scope: `components/features/ComparisonGrid.tsx`
   - Change: The support details modal (`renderSupportBonusesModal`) displays Awakening-specific Pair Up, Dual Support, Dual Strike, and Dual Guard stats when units belong to the game "Awakening", and hides the "Affinities" line when neither unit has an affinity.
   - Done when:

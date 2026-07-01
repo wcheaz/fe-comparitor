@@ -15,6 +15,7 @@ import { getAllClasses, getAllUnits } from '@/lib/data';
 import { Info } from 'lucide-react';
 import { Modal } from '@/components/ui/modal';
 import { getAffinityByName, calculateSupportBonuses } from '@/lib/affinities';
+import { calculatePairUpBonuses, getDualSupportBonuses, calculateDualStrikeRate, calculateDualGuardRate, getSupportRankValue } from '@/lib/supports-awakening';
 import { getMovementByName } from '@/lib/movements';
 import { getWeaponByName } from '@/lib/weapons';
 import { cn } from '@/lib/utils';
@@ -477,6 +478,141 @@ export function ComparisonGrid({
     return combinedBonuses;
   };
 
+  // Render Awakening Dual System support details (Pair Up, Dual Support, Dual Strike, Dual Guard)
+  const renderAwakeningSupportDetails = (leadUnit: Unit, supportUnit: Unit) => {
+    const leadClass = classes.find(c => c.id === leadUnit.class && c.game === leadUnit.game);
+    const supportClass = classes.find(c => c.id === supportUnit.class && c.game === supportUnit.game);
+
+    const leadStats = getEffectiveBaseStats(leadUnit, leadClass);
+    const supportStats = getEffectiveBaseStats(supportUnit, supportClass);
+    const supportClassName = supportClass?.name ?? supportUnit.class;
+
+    const collectSkills = (unit: Unit): string[] => [
+      ...(unit.skills ?? []),
+      ...(unit.startingSkills ?? []),
+    ];
+    const allSkills = [...collectSkills(leadUnit), ...collectSkills(supportUnit)];
+    const hasDualStrikePlus = allSkills.some(s => s.includes('Dual Strike+'));
+    const hasDualGuardPlus = allSkills.some(s => s.includes('Dual Guard+'));
+    const hasDualSupportPlus = allSkills.some(s => s.includes('Dual Support+'));
+
+    const awakeningLevels: Array<'C' | 'B' | 'A' | 'S'> = ['C', 'B', 'A', 'S'];
+
+    const PAIR_UP_STAT_LABELS: Record<string, string> = {
+      str: 'Str', mag: 'Mag', skl: 'Skl', spd: 'Spd', lck: 'Lck', def: 'Def', res: 'Res', mov: 'Mov',
+    };
+
+    const leadSkl = leadStats.skl ?? 0;
+    const supportSkl = supportStats.skl ?? 0;
+    const leadDef = leadStats.def ?? 0;
+    const supportDef = supportStats.def ?? 0;
+    const leadRes = leadStats.res ?? 0;
+    const supportRes = supportStats.res ?? 0;
+
+    return (
+      <div className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Awakening uses the <strong>Dual System</strong> instead of elemental affinities.
+          Lead: <strong>{leadUnit.name}</strong> · Support: <strong>{supportUnit.name}</strong> ({supportClassName}).
+        </p>
+
+        {/* Pair Up Bonuses */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold">Pair Up Bonuses</h3>
+          <p className="text-sm text-muted-foreground">
+            Stat bonuses granted to the lead unit by the paired support unit ({supportUnit.name}, {supportClassName}).
+          </p>
+          <div className="grid gap-2">
+            {awakeningLevels.map(level => {
+              const bonuses = calculatePairUpBonuses(supportStats, supportClassName, level);
+              const entries = Object.entries(bonuses);
+              return (
+                <div key={level} className="border-l-4 border-primary pl-3">
+                  <h4 className="font-semibold text-primary">{level} Support</h4>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {entries.length === 0 ? (
+                      <span className="text-sm text-muted-foreground">No bonuses</span>
+                    ) : entries.map(([stat, value]) => (
+                      <span key={stat} className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                        {PAIR_UP_STAT_LABELS[stat] ?? stat} +{value}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dual Support */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold">Dual Support{hasDualSupportPlus ? ' (Dual Support+)' : ''}</h3>
+          <p className="text-sm text-muted-foreground">
+            Bonuses while fighting adjacent to or paired with this support unit.
+          </p>
+          <div className="grid gap-2">
+            {awakeningLevels.map(level => {
+              const rank = getSupportRankValue(level);
+              const bonus = getDualSupportBonuses(rank, hasDualSupportPlus);
+              const effectiveRank = Math.min(rank + (hasDualSupportPlus ? 4 : 0), 12);
+              return (
+                <div key={level} className="border-l-4 border-primary pl-3">
+                  <h4 className="font-semibold text-primary">
+                    {level} Support (Rank {rank}{hasDualSupportPlus ? ` \u2192 ${effectiveRank}` : ''})
+                  </h4>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">Hit +{bonus.hit}</span>
+                    <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">Avoid +{bonus.avoid}</span>
+                    <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">Crit +{bonus.critical}</span>
+                    <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">Dodge +{bonus.dodge}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dual Strike */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold">Dual Strike Rate{hasDualStrikePlus ? ' (Dual Strike+)' : ''}</h3>
+          <p className="text-sm text-muted-foreground">
+            Chance for the support unit to follow-up attack when the lead attacks. Based on Lead Skl ({leadSkl}) + Support Skl ({supportSkl}).
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {awakeningLevels.map(level => (
+              <span key={level} className="text-sm bg-primary/10 text-primary px-3 py-1 rounded">
+                {level}: {calculateDualStrikeRate(leadSkl, supportSkl, level, hasDualStrikePlus)}%
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Dual Guard */}
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold">Dual Guard Rate{hasDualGuardPlus ? ' (Dual Guard+)' : ''}</h3>
+          <p className="text-sm text-muted-foreground">
+            Chance for the support unit to block all damage when the enemy attacks the lead. Uses Def (physical) or Res (magical).
+          </p>
+          <div className="grid gap-2">
+            {awakeningLevels.map(level => (
+              <div key={level} className="border-l-4 border-primary pl-3">
+                <h4 className="font-semibold text-primary">{level} Support</h4>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                    Physical (Def): {calculateDualGuardRate(leadDef, supportDef, level, hasDualGuardPlus)}%
+                  </span>
+                  <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                    Magical (Res): {calculateDualGuardRate(leadRes, supportRes, level, hasDualGuardPlus)}%
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Render support bonuses modal content
   const renderSupportBonusesModal = () => {
     if (!selectedSupportUnit || !selectedSupportPartner) return null;
@@ -484,6 +620,8 @@ export function ComparisonGrid({
     const partnerUnit = findPartnerUnit(selectedSupportPartner, selectedSupportUnit.game);
     if (!partnerUnit) return null;
 
+    const isAwakening = selectedSupportUnit.game === 'Awakening';
+    const hasAffinity = !!(selectedSupportUnit.affinity || partnerUnit.affinity);
     const supportLevels: Array<'C' | 'B' | 'A'> = ['C', 'B', 'A'];
 
     return (
@@ -494,35 +632,41 @@ export function ComparisonGrid({
 
         <div className="text-sm text-muted-foreground">
           <p><strong>{selectedSupportUnit.name}</strong> + <strong>{selectedSupportPartner}</strong></p>
-          <p>Affinities: {selectedSupportUnit.affinity || 'None'} + {partnerUnit.affinity || 'None'}</p>
+          {hasAffinity && (
+            <p>Affinities: {selectedSupportUnit.affinity || 'None'} + {partnerUnit.affinity || 'None'}</p>
+          )}
         </div>
 
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Combined Support Bonuses</h3>
-          <p className="text-sm text-muted-foreground">
-            These bonuses are applied to both units when fighting near each other.
-          </p>
+        {isAwakening ? (
+          renderAwakeningSupportDetails(selectedSupportUnit, partnerUnit)
+        ) : (
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold">Combined Support Bonuses</h3>
+            <p className="text-sm text-muted-foreground">
+              These bonuses are applied to both units when fighting near each other.
+            </p>
 
-          <div className="grid gap-3">
-            {supportLevels.map(level => {
-              const bonuses = calculateCombinedSupportBonuses(selectedSupportUnit, partnerUnit, level);
-              if (bonuses.length === 0) return null;
+            <div className="grid gap-3">
+              {supportLevels.map(level => {
+                const bonuses = calculateCombinedSupportBonuses(selectedSupportUnit, partnerUnit, level);
+                if (bonuses.length === 0) return null;
 
-              return (
-                <div key={level} className="border-l-4 border-primary pl-3">
-                  <h4 className="font-semibold text-primary">{level} Support</h4>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {bonuses.map((bonus, index) => (
-                      <span key={index} className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
-                        {bonus}
-                      </span>
-                    ))}
+                return (
+                  <div key={level} className="border-l-4 border-primary pl-3">
+                    <h4 className="font-semibold text-primary">{level} Support</h4>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {bonuses.map((bonus, index) => (
+                        <span key={index} className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                          {bonus}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   };
