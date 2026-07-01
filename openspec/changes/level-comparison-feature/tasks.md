@@ -18,7 +18,7 @@
 
 ## 2. Component Implementation
 
-- [ ] **Implement LevelComparison component with unit tests**
+- [x] **Implement LevelComparison component with unit tests**
   - Scope: `components/features/LevelComparison.tsx`, `__tests__/components/features/LevelComparison.test.tsx`
   - Change: Create the new component displaying dropdown selectors for both selected units populated from their progression array levels, a side-by-side stats comparison table highlighting higher/capped stats with difference deltas, and Awakening skill categorization split into "Has Skills" and "Possible Skills" with zero overlap.
   - Done when:
