@@ -9,34 +9,34 @@
   },
   {
     "name": "Aegis",
-    "description": "Halves damage from bows, tomes and dragonstones",
+    "description": "Halves damage from bows, tomes and dragonstones.",
     "procCondition": "Upon being attacked.",
     "procChance": "Skill%"
   },
   {
     "name": "Astra",
-    "description": "Deals 5 consecutive hits with half damage",
+    "description": "Deals 5 consecutive hits with half damage.",
     "procCondition": "Upon attacking.",
     "procChance": "Skill / 2%"
   },
   {
     "name": "Lethality",
-    "description": "Instantly defeats the enemy",
+    "description": "Instantly defeats the enemy.",
     "procCondition": "Upon attacking.",
     "procChance": "Skill / 4%"
   },
   {
     "name": "Locktouch",
-    "description": "Open doors and chests without the need of keys"
+    "description": "Open doors and chests without the need of keys."
   },
   {
     "name": "Pavise",
-    "description": "Halves damage from swords, lances, axes (includes magical variants) and beaststones",
+    "description": "Halves damage from swords, lances, axes (includes magical variants) and beaststones.",
     "procCondition": "Upon being attacked.",
     "procChance": "Skill%"
   },
   {
     "name": "Wrath",
-    "description": "Critical +20 when under half HP"
+    "description": "Critical +20 when under half HP."
   }
 ]

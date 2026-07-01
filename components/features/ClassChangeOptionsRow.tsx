@@ -21,17 +21,30 @@ export function ClassChangeOptionsRow({
     return null;
   }
 
+  // Group options by tier: trainee, unpromoted, promoted
+  const traineeOptions = options.filter(cls => cls.type === 'trainee');
+  const unpromotedOptions = options.filter(cls => cls.type === 'unpromoted');
+  const promotedOptions = options.filter(cls => cls.type === 'promoted');
+
+  const groups = [
+    { key: 'trainee', items: traineeOptions },
+    { key: 'unpromoted', items: unpromotedOptions },
+    { key: 'promoted', items: promotedOptions }
+  ].filter(group => group.items.length > 0);
+
   return (
-    <div className={cn("flex flex-col items-center space-y-1", className)}>
-      <div className="flex flex-wrap justify-center gap-1.5">
-        {options.map(cls => (
-          <ClassPill
-            key={cls.id}
-            cls={cls}
-            variant={cls.type === 'promoted' ? 'promoted' : 'unpromoted'}
-          />
-        ))}
-      </div>
+    <div className={cn("flex flex-col items-center space-y-2", className)}>
+      {groups.map(group => (
+        <div key={group.key} className="flex flex-wrap justify-center gap-1.5">
+          {group.items.map(cls => (
+            <ClassPill
+              key={cls.id}
+              cls={cls}
+              variant={cls.type === 'promoted' ? 'promoted' : 'unpromoted'}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 }

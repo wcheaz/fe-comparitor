@@ -496,7 +496,10 @@ export function ComparisonGrid({
     const hasDualGuardPlus = allSkills.some(s => s.includes('Dual Guard+'));
     const hasDualSupportPlus = allSkills.some(s => s.includes('Dual Support+'));
 
-    const awakeningLevels: Array<'C' | 'B' | 'A' | 'S'> = ['C', 'B', 'A', 'S'];
+    const canS = canSSupport(leadUnit, supportUnit);
+    const awakeningLevels: Array<'C' | 'B' | 'A' | 'S'> = canS
+      ? ['C', 'B', 'A', 'S']
+      : ['C', 'B', 'A'];
 
     const PAIR_UP_STAT_LABELS: Record<string, string> = {
       str: 'Str', mag: 'Mag', skl: 'Skl', spd: 'Spd', lck: 'Lck', def: 'Def', res: 'Res', mov: 'Mov',
@@ -512,7 +515,6 @@ export function ComparisonGrid({
     return (
       <div className="space-y-4">
         <p className="text-sm text-muted-foreground">
-          Awakening uses the <strong>Dual System</strong> instead of elemental affinities.
           Lead: <strong>{leadUnit.name}</strong> · Support: <strong>{supportUnit.name}</strong> ({supportClassName}).
         </p>
 
@@ -630,10 +632,14 @@ export function ComparisonGrid({
           <h2 className="text-2xl font-bold">Support Bonuses</h2>
         </div>
 
-        <div className="text-sm text-muted-foreground">
-          <p><strong>{selectedSupportUnit.name}</strong> + <strong>{selectedSupportPartner}</strong></p>
+        <div className="space-y-1">
+          <h3 className="text-xl font-semibold">
+            {selectedSupportUnit.name} + {selectedSupportPartner}
+          </h3>
           {hasAffinity && (
-            <p>Affinities: {selectedSupportUnit.affinity || 'None'} + {partnerUnit.affinity || 'None'}</p>
+            <p className="text-sm text-muted-foreground">
+              Affinities: {selectedSupportUnit.affinity || 'None'} + {partnerUnit.affinity || 'None'}
+            </p>
           )}
         </div>
 
@@ -1475,4 +1481,32 @@ function getHighlightStats(units: Unit[], statKey: string, statType: 'base' | 'g
 
     return { isHighest, isEqual };
   });
+}
+
+function canSSupport(unit1: Unit, unit2: Unit): boolean {
+  if (!unit1.gender || !unit2.gender) return false;
+  if (unit1.gender.toLowerCase() === unit2.gender.toLowerCase()) return false;
+
+  const name1 = unit1.name;
+  const name2 = unit2.name;
+
+  if (
+    (name1 === 'Chrom' && name2 === 'Lissa') ||
+    (name1 === 'Lissa' && name2 === 'Chrom')
+  ) {
+    return false;
+  }
+
+  if (
+    (name1 === 'Basilio' && name2 === 'Flavia') ||
+    (name1 === 'Flavia' && name2 === 'Basilio')
+  ) {
+    return false;
+  }
+
+  if (name1.startsWith('Robin') && name2.startsWith('Robin')) {
+    return false;
+  }
+
+  return true;
 }

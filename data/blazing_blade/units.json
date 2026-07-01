@@ -44,7 +44,7 @@
       "Durandal"
     ],
     "supports": [
-      "Marcus",
+      "Marcus (FE7)",
       "Lowen",
       "Hector",
       "Lyn",
@@ -204,7 +204,13 @@
     },
     "promotions": [],
     "prf": [],
-    "supports": []
+    "supports": [
+      "Eliwood",
+      "Merlinus (FE7)",
+      "Lowen",
+      "Isadora",
+      "Harken"
+    ]
   },
   {
     "id": "sain",
@@ -318,7 +324,7 @@
       "16H"
     ],
     "level": 3,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Light",
     "isPromoted": false,
     "stats": {
@@ -447,7 +453,7 @@
     "promotions": [],
     "prf": [],
     "supports": [
-      "Bartre",
+      "Bartre (FE7)",
       "Geitz",
       "Oswin",
       "Vaida",
@@ -465,7 +471,7 @@
       "12H"
     ],
     "level": 1,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Thunder",
     "isPromoted": false,
     "stats": {
@@ -732,7 +738,7 @@
       "Priscilla",
       "Raven",
       "Renault",
-      "Karel"
+      "Karel (FE7)"
     ]
   },
   {
@@ -809,7 +815,7 @@
     "prf": [],
     "supports": [
       "Eliwood",
-      "Marcus",
+      "Marcus (FE7)",
       "Isadora",
       "Harken",
       "Rebecca"
@@ -825,7 +831,7 @@
       "12H"
     ],
     "level": 1,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Fire",
     "isPromoted": false,
     "stats": {
@@ -903,7 +909,13 @@
     },
     "promotions": [],
     "prf": [],
-    "supports": []
+    "supports": [
+      "Dorcas",
+      "Raven",
+      "Canas",
+      "Karla",
+      "Renault"
+    ]
   },
   {
     "id": "oswin",
@@ -996,7 +1008,7 @@
     "supports": [
       "Matthew",
       "Rath",
-      "Karel",
+      "Karel (FE7)",
       "Priscilla",
       "Louise"
     ]
@@ -1038,7 +1050,11 @@
     "baseWeaponRanks": {},
     "promotions": [],
     "prf": [],
-    "supports": []
+    "supports": [
+      "Marcus (FE7)",
+      "Nino",
+      "Vaida"
+    ]
   },
   {
     "id": "priscilla",
@@ -1050,7 +1066,7 @@
       "15H"
     ],
     "level": 3,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Wind",
     "isPromoted": false,
     "stats": {
@@ -1130,7 +1146,7 @@
     "prf": [],
     "supports": [
       "Rebecca",
-      "Bartre",
+      "Bartre (FE7)",
       "Priscilla",
       "Wil",
       "Lucius"
@@ -1176,7 +1192,7 @@
     "promotions": [],
     "prf": [],
     "supports": [
-      "Bartre",
+      "Bartre (FE7)",
       "Pent",
       "Nino",
       "Renault",
@@ -1227,7 +1243,7 @@
       "Wil",
       "Farina",
       "Geitz",
-      "Karel"
+      "Karel (FE7)"
     ]
   },
   {
@@ -1240,7 +1256,7 @@
       "19H"
     ],
     "level": 7,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Wind",
     "isPromoted": false,
     "stats": {
@@ -1336,7 +1352,7 @@
       "21H"
     ],
     "level": 1,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Ice",
     "isPromoted": false,
     "stats": {
@@ -1379,7 +1395,7 @@
       "22H"
     ],
     "level": 1,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Dark",
     "isPromoted": true,
     "stats": {
@@ -1411,7 +1427,7 @@
     "promotions": [],
     "prf": [],
     "supports": [
-      "Marcus",
+      "Marcus (FE7)",
       "Lowen",
       "Sain",
       "Legault",
@@ -1557,7 +1573,7 @@
       "Dart",
       "Fiora",
       "Isadora",
-      "Karel"
+      "Karel (FE7)"
     ]
   },
   {
@@ -1617,7 +1633,7 @@
       "25H"
     ],
     "level": 12,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Anima",
     "isPromoted": false,
     "stats": {
@@ -1714,7 +1730,7 @@
       "26H"
     ],
     "level": 4,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Light",
     "isPromoted": true,
     "stats": {
@@ -1794,7 +1810,13 @@
     "prf": [
       "Wo Dao (FE7)"
     ],
-    "supports": []
+    "supports": [
+      "Guy",
+      "Lucius",
+      "Dart",
+      "Geitz",
+      "Karla"
+    ]
   },
   {
     "id": "harken",
@@ -1838,7 +1860,7 @@
     "prf": [],
     "supports": [
       "Eliwood",
-      "Marcus",
+      "Marcus (FE7)",
       "Lowen",
       "Isadora",
       "Vaida"
@@ -1854,7 +1876,7 @@
       "28H"
     ],
     "level": 5,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Fire",
     "isPromoted": false,
     "stats": {
@@ -1885,7 +1907,7 @@
     "prf": [],
     "supports": [
       "Rebecca",
-      "Merlinus",
+      "Merlinus (FE7)",
       "Erk",
       "Florina",
       "Canas",
@@ -1948,7 +1970,7 @@
       "29H"
     ],
     "level": 9,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Fire",
     "isPromoted": true,
     "stats": {
@@ -1980,7 +2002,7 @@
     "prf": [],
     "supports": [
       "Dorcas",
-      "Merlinus",
+      "Merlinus (FE7)",
       "Canas",
       "Heath",
       "Wallace",
@@ -1997,7 +2019,7 @@
       "31xH"
     ],
     "level": 5,
-    "gender": "male",
+    "gender": "female",
     "affinity": "Dark",
     "isPromoted": true,
     "stats": {
@@ -2029,9 +2051,9 @@
       "Wo Dao (FE7)"
     ],
     "supports": [
-      "Bartre",
+      "Bartre (FE7)",
       "Farina",
-      "Karel",
+      "Karel (FE7)",
       "Vaida"
     ]
   },
@@ -2076,7 +2098,7 @@
     "promotions": [],
     "prf": [],
     "supports": [
-      "Bartre",
+      "Bartre (FE7)",
       "Lucius",
       "Canas",
       "Isadora",

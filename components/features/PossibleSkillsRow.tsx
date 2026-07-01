@@ -93,22 +93,34 @@ export function PossibleSkillsRow({
 
   const entries = Array.from(skillMap.entries());
 
+  const traineeSkills = entries.filter(([_, meta]) => meta.tier === 'trainee');
+  const unpromotedSkills = entries.filter(([_, meta]) => meta.tier === 'unpromoted');
+  const promotedSkills = entries.filter(([_, meta]) => meta.tier === 'promoted');
+
+  const groups = [
+    { key: 'trainee', items: traineeSkills },
+    { key: 'unpromoted', items: unpromotedSkills },
+    { key: 'promoted', items: promotedSkills }
+  ].filter(group => group.items.length > 0);
+
   return (
-    <div className={cn("flex flex-col items-center space-y-1", className)}>
-      <div className="flex flex-wrap justify-center gap-1.5">
-        {entries.map(([skill, meta]) => (
-          <div key={skill} className="flex flex-col items-center gap-0.5">
-            <SkillPill
-              skill={skill}
-              game={unit.game}
-              variant={resolveVariant(meta.tier, skill)}
-            />
-            <span className="text-[10px] text-muted-foreground leading-tight">
-              {meta.classNames.join(', ')}
-            </span>
-          </div>
-        ))}
-      </div>
+    <div className={cn("flex flex-col items-center space-y-2", className)}>
+      {groups.map(group => (
+        <div key={group.key} className="flex flex-wrap justify-center gap-1.5">
+          {group.items.map(([skill, meta]) => (
+            <div key={skill} className="flex flex-col items-center gap-0.5">
+              <SkillPill
+                skill={skill}
+                game={unit.game}
+                variant={resolveVariant(meta.tier, skill)}
+              />
+              <span className="text-[10px] text-muted-foreground leading-tight">
+                {meta.classNames.join(', ')}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
