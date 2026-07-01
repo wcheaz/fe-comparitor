@@ -43,7 +43,18 @@
     "baseWeaponRanks": {
       "Swords": "E"
     },
-    "supports": [],
+    "supports": [
+      "Frederick",
+      "Lissa",
+      "Sully",
+      "Vaike",
+      "Sumia",
+      "Maribelle",
+      "Gaius",
+      "Olivia",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "lord",
       "cavalier",
@@ -95,7 +106,44 @@
       "Swords": "E",
       "Tomes": "E"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Robin (F)",
+      "Lissa",
+      "Frederick",
+      "Sully",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Miriel",
+      "Sumia",
+      "Kellam",
+      "Donnel",
+      "Lonqu",
+      "Ricken",
+      "Maribelle",
+      "Panne",
+      "Gaius",
+      "Cordelia",
+      "Gregor",
+      "Nowi",
+      "Libra",
+      "Tharja",
+      "Anna",
+      "Olivia",
+      "Cherche",
+      "Henry",
+      "Sayri",
+      "Tiki",
+      "Basilio",
+      "Flavia",
+      "Gangrel",
+      "Walhart",
+      "Emmeryn",
+      "Yen’fay",
+      "Aversa",
+      "Priam"
+    ],
     "reclassOptions": [
       "tactician",
       "cavalier",
@@ -157,7 +205,44 @@
       "Swords": "E",
       "Tomes": "E"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Robin (M)",
+      "Lissa",
+      "Frederick",
+      "Sully",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Miriel",
+      "Sumia",
+      "Kellam",
+      "Donnel",
+      "Lonqu",
+      "Ricken",
+      "Maribelle",
+      "Panne",
+      "Gaius",
+      "Cordelia",
+      "Gregor",
+      "Nowi",
+      "Libra",
+      "Tharja",
+      "Anna",
+      "Olivia",
+      "Cherche",
+      "Henry",
+      "Sayri",
+      "Tiki",
+      "Basilio",
+      "Flavia",
+      "Gangrel",
+      "Walhart",
+      "Emmeryn",
+      "Yen’fay",
+      "Aversa",
+      "Priam"
+    ],
     "reclassOptions": [
       "tactician",
       "cavalier",
@@ -218,7 +303,24 @@
     "baseWeaponRanks": {
       "Staves": "E"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Maribelle",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "cleric",
       "pegasus_knight",
@@ -272,7 +374,24 @@
       "Lances": "B",
       "Axes": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Virion",
+      "Sumia",
+      "Henry",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "cavalier",
       "knight",
@@ -324,7 +443,25 @@
       "Swords": "E",
       "Lances": "E"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Miriel",
+      "Sumia",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "cavalier",
       "myrmidon",
@@ -375,7 +512,22 @@
     "baseWeaponRanks": {
       "Bows": "D"
     },
-    "supports": [],
+    "supports": [
+      "Frederick",
+      "Libra",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "archer",
       "wyvern_rider",
@@ -427,7 +579,22 @@
       "Swords": "E",
       "Lances": "E"
     },
-    "supports": [],
+    "supports": [
+      "Kellam",
+      "Donnel",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "cavalier",
       "archer",
@@ -478,7 +645,22 @@
     "baseWeaponRanks": {
       "Axes": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Lonqu",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "fighter",
       "thief",
@@ -529,7 +711,24 @@
     "baseWeaponRanks": {
       "Tomes": "E"
     },
-    "supports": [],
+    "supports": [
+      "Sully",
+      "Cherche",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "mage",
       "troubadour",
@@ -580,7 +779,16 @@
     "baseWeaponRanks": {
       "Lances": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Frederick",
+      "Sully",
+      "Gaius",
+      "Cordelia",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "pegasus_knight",
       "knight",
@@ -631,7 +839,22 @@
     "baseWeaponRanks": {
       "Lances": "D"
     },
-    "supports": [],
+    "supports": [
+      "Stahl",
+      "Donnel",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "knight",
       "thief",
@@ -682,7 +905,22 @@
     "baseWeaponRanks": {
       "Lances": "E"
     },
-    "supports": [],
+    "supports": [
+      "Stahl",
+      "Kellam",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "villager",
       "fighter",
@@ -733,7 +971,22 @@
     "baseWeaponRanks": {
       "Swords": "C"
     },
-    "supports": [],
+    "supports": [
+      "Vaike",
+      "Gregor",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "myrmidon",
       "thief",
@@ -784,7 +1037,22 @@
     "baseWeaponRanks": {
       "Tomes": "D"
     },
-    "supports": [],
+    "supports": [
+      "Gregor",
+      "Henry",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "mage",
       "cavalier",
@@ -835,7 +1103,25 @@
     "baseWeaponRanks": {
       "Staves": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Lissa",
+      "Olivia",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "troubadour",
       "pegasus_knight",
@@ -884,7 +1170,24 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": [],
+    "supports": [
+      "Cordelia",
+      "Olivia",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "taguel",
       "thief",
@@ -935,7 +1238,23 @@
     "baseWeaponRanks": {
       "Swords": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Sumia",
+      "Libra",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "thief",
       "fighter",
@@ -986,7 +1305,24 @@
     "baseWeaponRanks": {
       "Lances": "C"
     },
-    "supports": [],
+    "supports": [
+      "Sumia",
+      "Panne",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "pegasus_knight",
       "mercenary",
@@ -1038,7 +1374,22 @@
     "baseWeaponRanks": {
       "Swords": "C"
     },
-    "supports": [],
+    "supports": [
+      "Lonqu",
+      "Ricken",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "mercenary",
       "barbarian",
@@ -1099,7 +1450,24 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": [],
+    "supports": [
+      "Tharja",
+      "Cherche",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "manakete",
       "mage",
@@ -1164,7 +1532,22 @@
       "Axes": "C",
       "Staves": "C"
     },
-    "supports": [],
+    "supports": [
+      "Virion",
+      "Gaius",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "priest",
       "mage",
@@ -1238,7 +1621,23 @@
     "baseWeaponRanks": {
       "Tomes": "D"
     },
-    "supports": [],
+    "supports": [
+      "Nowi",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "dark_mage",
       "knight",
@@ -1303,7 +1702,11 @@
       "Swords": "C",
       "Staves": "D"
     },
-    "supports": [],
+    "supports": [
+      "Tiki",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "thief",
       "archer",
@@ -1376,7 +1779,25 @@
     "baseWeaponRanks": {
       "Swords": "D"
     },
-    "supports": [],
+    "supports": [
+      "Chrom",
+      "Maribelle",
+      "Panne",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "dancer",
       "myrmidon",
@@ -1428,7 +1849,24 @@
     "baseWeaponRanks": {
       "Axes": "C"
     },
-    "supports": [],
+    "supports": [
+      "Miriel",
+      "Nowi",
+      "Frederick",
+      "Virion",
+      "Stahl",
+      "Vaike",
+      "Kellam",
+      "Lonqu",
+      "Ricken",
+      "Gaius",
+      "Donnel",
+      "Gregor",
+      "Libra",
+      "Henry",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "wyvern_rider",
       "troubadour",
@@ -1502,7 +1940,23 @@
     "baseWeaponRanks": {
       "Tomes": "C"
     },
-    "supports": [],
+    "supports": [
+      "Frederick",
+      "Sumia",
+      "Ricken",
+      "Lissa",
+      "Sully",
+      "Miriel",
+      "Maribelle",
+      "Panne",
+      "Cordelia",
+      "Nowi",
+      "Tharja",
+      "Olivia",
+      "Cherche",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "dark_mage",
       "barbarian",
@@ -1576,7 +2030,11 @@
     "baseWeaponRanks": {
       "Swords": "B"
     },
-    "supports": [],
+    "supports": [
+      "Tiki",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "myrmidon",
       "pegasus_knight",
@@ -1648,7 +2106,12 @@
     "innateWeaknesses": [],
     "gender": "F",
     "baseWeaponRanks": {},
-    "supports": [],
+    "supports": [
+      "Anna",
+      "Sayri",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "manakete",
       "wyvern_rider",
@@ -1724,7 +2187,11 @@
       "Axes": "A",
       "Bows": "B"
     },
-    "supports": [],
+    "supports": [
+      "Flavia",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "fighter",
       "barbarian",
@@ -1800,7 +2267,11 @@
       "Swords": "A",
       "Axes": "B"
     },
-    "supports": [],
+    "supports": [
+      "Basilio",
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "mercenary",
       "thief",
@@ -1877,7 +2348,10 @@
       "Swords": "B",
       "Staves": "C"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "thief",
       "barbarian",
@@ -1952,7 +2426,10 @@
       "Lances": "A",
       "Axes": "A"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "conqueror",
       "knight",
@@ -2028,7 +2505,10 @@
       "Tomes": "C",
       "Staves": "A"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "cleric",
       "pegasus_knight",
@@ -2104,7 +2584,10 @@
     "baseWeaponRanks": {
       "Swords": "A"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "myrmidon",
       "wyvern_rider",
@@ -2182,7 +2665,10 @@
       "Lances": "B",
       "Tomes": "A"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "pegasus_knight",
       "wyvern_rider",
@@ -2260,7 +2746,10 @@
       "Swords": "A",
       "Axes": "B"
     },
-    "supports": [],
+    "supports": [
+      "Robin (M)",
+      "Robin (F)"
+    ],
     "reclassOptions": [
       "mercenary",
       "myrmidon",
